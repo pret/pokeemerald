@@ -1,0 +1,67 @@
+key	english	dutch	notes
+FallarborTown_BattleTentLobby_Text_WelcomeToBattleTent	I welcome you to the BATTLE TENT\nFALLARBOR SITE!\pI am your guide to the Set KO Tourney!		
+FallarborTown_BattleTentLobby_Text_TakeChallenge	Now, do you wish to take the challenge\nof a Set KO Tourney?		
+FallarborTown_BattleTentLobby_Text_AwaitAnotherChallenge	We await your challenge on\nanother occasion!		
+FallarborTown_BattleTentLobby_Text_ExplainFallarborTent	In the FALLARBOR BATTLE TENT,\nwe undertake the Set KO Tourney.\pAll participants enter with a team of\nthree POKéMON.\pThe three POKéMON must be lined up\nin the order that they are to appear in.\pDuring battle, the POKéMON will appear\none at a time in the preset order.\pOnce a POKéMON enters battle, it must\nremain out until the match is decided.\pIf a match remains undecided in\nthree turns, it goes to judging.\pIf you wish to interrupt your challenge,\nplease save the game.\pIf you don't save, you will not be able\nto continue with your challenge.\pIf you pull off the feat of beating\nthree TRAINERS in succession,\lwe will present you with a fine prize.		
+FallarborTown_BattleTentLobby_Text_SaveBeforeChallenge	Before showing you to the BATTLE\nTENT, I must save. Is that okay?		
+FallarborTown_BattleTentLobby_Text_WhichLevelMode	We offer two levels of challenge,\nLevel 50 and Open Level.\lWhich is your choice?		
+FallarborTown_BattleTentLobby_Text_SelectThreeMons	Very well, now select your\nthree POKéMON, please.		
+FallarborTown_BattleTentLobby_Text_NotEnoughValidMonsLv50	My dear challenger!\pYou do not have the three POKéMON\nrequired for entry.\pThey also must not hold the same\nkinds of items.\pEGGS{STR_VAR_1} ineligible.\pWhen you have made your preparations,\nplease do return.		
+FallarborTown_BattleTentLobby_Text_NotEnoughValidMonsLvOpen	My dear challenger!\pYou do not have the three POKéMON\nrequired for entry.\pTo qualify, you must bring three\ndifferent kinds of POKéMON.\pThey also must not hold the same\nkinds of items.\pEGGS{STR_VAR_1} ineligible.\pWhen you have made your preparations,\nplease do return.		
+FallarborTown_BattleTentLobby_Text_GuideYouToBattleTent	I shall now guide you to\nthe BATTLE TENT.		
+FallarborTown_BattleTentLobby_Text_DidntSaveBeforeQuitting	My dear challenger!\pYou did not save the game before\nshutting down, did you?\pIt is unfortunate, but that has\nresulted in your disqualification\lfrom your challenge.\pYou may, of course, start with a fresh\nchallenge.		
+FallarborTown_BattleTentLobby_Text_BeatThreeTrainers	How splendid! You have beaten\nthree TRAINERS in succession!		
+FallarborTown_BattleTentLobby_Text_WaitWhileSaveGame	Please wait while I save the game.		
+FallarborTown_BattleTentLobby_Text_PresentYouWithPrize	In commemoration of your 3-win streak,\nwe present you with this prize.		
+FallarborTown_BattleTentLobby_Text_ReceivedPrize	{PLAYER} received the prize\n{STR_VAR_1}.		
+FallarborTown_BattleTentLobby_Text_BagFullReturnForPrize	Oh?\nYour BAG seems to be full.\pI urge you to clear space and\nreturn for your prize.		
+FallarborTown_BattleTentLobby_Text_ThankYouWaitWhileSaving	Thank you so much for participating!\pPlease wait while I save the game.		
+FallarborTown_BattleTentLobby_Text_AwaitAnotherChallenge2	We await your challenge on\nanother occasion!		
+FallarborTown_BattleTentLobby_Text_LookingForwardToArrival	We have been looking forward to\nyour arrival.\pBefore I show you to the BATTLE TENT,\nI must save the game. Please wait.		
+VerdanturfTown_BattleTentLobby_Text_WelcomeToBattleTent	I welcome you to the BATTLE TENT\nVERDANTURF SITE!\pHere, the TRAINER's trust toward\nPOKéMON is tested.		
+VerdanturfTown_BattleTentLobby_Text_TakeChallenge	Do you wish to take the VERDANTURF\nBATTLE TENT challenge?		
+VerdanturfTown_BattleTentLobby_Text_ExplainVerdanturfTent	In the VERDANTURF BATTLE TENT,\nthere is one crucial rule that must\lbe obeyed.\pTRAINERS are permitted only to switch\ntheir POKéMON in and out.\pTRAINERS are otherwise forbidden to\ncommand their POKéMON.\pThe POKéMON are to behave according\nto their nature and battle on their own.\pYou must put your trust in your\nPOKéMON and watch over them.\pIf you achieve the honor of beating\nthree TRAINERS in succession,\lwe will present you with a prize.\pIf you want to interrupt your\nchallenge, please save the game.\pIf you don't save before interrupting,\nyou will be disqualified.		
+VerdanturfTown_BattleTentLobby_Text_ReturnFortified	When you have fortified your heart\nand POKéMON, you must return.		
+VerdanturfTown_BattleTentLobby_Text_WhichLevelMode	There are two levels of difficulty,\nLevel 50 and Open Level.\lWhich is your choice of a challenge?		
+VerdanturfTown_BattleTentLobby_Text_NotEnoughValidMonsLv50	Sigh…\pYou do not have the three POKéMON\nrequired for the challenge.\pTo enter, you must provide three\ndifferent kinds of POKéMON.\pThey also must not be holding\nthe same kinds of items.\pEGGS{STR_VAR_1} ineligible.\pCome back when you have made\nyour preparations.		
+VerdanturfTown_BattleTentLobby_Text_NotEnoughValidMonsLvOpen	Sigh…\pYou do not have the three POKéMON\nrequired for the challenge.\pTo enter, you must provide three\ndifferent kinds of POKéMON.\pThey also must not be holding\nthe same kinds of items.\pEGGS{STR_VAR_1} ineligible.\pCome back when you have made\nyour preparations.		
+VerdanturfTown_BattleTentLobby_Text_SelectThreeMons	Good. Now, you must select your\nthree POKéMON.		
+VerdanturfTown_BattleTentLobby_Text_SaveBeforeChallenge	I must save before I show you to\nthe BATTLE TENT. Is that okay?		
+VerdanturfTown_BattleTentLobby_Text_NowFollowMe	Good.\nNow, follow me.		
+VerdanturfTown_BattleTentLobby_Text_ResultsWillBeRecorded	I feel privileged for having seen\nyour POKéMON's exploits.\pThe results will be recorded.\nI must ask you to briefly wait.		
+VerdanturfTown_BattleTentLobby_Text_AchievedThreeWinStreak	To achieve a 3-win streak…\pThe bonds that bind your heart with\nyour POKéMON seem firm and true.		
+VerdanturfTown_BattleTentLobby_Text_FeatWillBeRecorded	Your feat will be recorded.\nI must ask you to briefly wait.		
+VerdanturfTown_BattleTentLobby_Text_PresentYouWithPrize	For the feat of your 3-win streak,\nwe present you with this prize.		
+SlateportCity_BattleTentLobby_Text_WelcomeToBattleTent	Welcome to the BATTLE TENT\nSLATEPORT SITE!\pI am your guide to the Battle Swap\nTournament.		
+SlateportCity_BattleTentLobby_Text_TakeChallenge	Would you like to take the Battle\nSwap challenge?		
+SlateportCity_BattleTentLobby_Text_ExplainSlateportTent	Here at the SLATEPORT BATTLE TENT,\nwe hold Battle Swap events\lusing rental POKéMON.\pFirst, you will be loaned three\nPOKéMON specifically for this event.\pUsing the supplied rental POKéMON,\nyou must conduct a SINGLE BATTLE.\pIf you win, you are permitted to trade\none of your rental POKéMON.\pRepeat this cycle of battling and\ntrading--if you win three times in\la row, you will earn a fine prize.\pIf you want to interrupt your\nchallenge, please save the game.\pIf you don't save before interrupting,\nyou will be disqualified.		
+SlateportCity_BattleTentLobby_Text_LookForwardToNextVisit	We look forward to your next visit.		
+SlateportCity_BattleTentLobby_Text_WhichLevelMode	Which level do you wish to challenge?\nLevel 50 or Level 100?		
+SlateportCity_BattleTentLobby_Text_SaveBeforeChallenge	Before you begin your challenge,\nI need to save data. Is that okay?		
+SlateportCity_BattleTentLobby_Text_HoldMonsForSafekeeping	Okay, I will hold your POKéMON for\nsafekeeping while you compete.		
+SlateportCity_BattleTentLobby_Text_StepThisWay	Please step this way.		
+SlateportCity_BattleTentLobby_Text_ReturnRentalMonsSaveResults	Thank you for participating!\pI will return your POKéMON in exchange\nfor our rental POKéMON.\pI must also save your event results.\nPlease wait.		
+SlateportCity_BattleTentLobby_Text_ReturnMonsExchangeRentals	I will return your POKéMON in exchange\nfor our rental POKéMON.		
+SlateportCity_BattleTentLobby_Text_WonThreeMatchesReturnMons	Congratulations!\nYou've won three straight matches!\pI will return your POKéMON in exchange\nfor our rental POKéMON.\pI must also save your event results.\nPlease wait.		
+SlateportCity_BattleTentLobby_Text_AwardYouThisPrize	In recognition of your 3-win streak,\nwe award you this prize.		
+SlateportCity_BattleTentLobby_Text_NoRoomInBagMakeRoom	Oh?\nYou seem to have no room for this.\pPlease make room in your BAG and\nlet me know.		
+SlateportCity_BattleTentLobby_Text_BeenWaitingForYou	We've been waiting for you!\pBefore we resume your challenge,\nI must save the game.		
+SlateportCity_BattleTentLobby_Text_DidntSaveBeforeQuitting	I'm sorry to say this, but you didn't\nsave before you quit playing last time.\pAs a result, you have been disqualified\nfrom your challenge.		
+SlateportCity_BattleTentLobby_Text_ReturnPersonalMons	We'll return your personal POKéMON.		
+SlateportCity_BattleTentLobby_Text_ReceivedPrize	{PLAYER} received the prize\n{STR_VAR_1}.		
+SlateportCity_BattleTentLobby_Text_RulesAreListed	The Battle Swap rules are listed.		
+SlateportCity_BattleTentLobby_Text_ReadWhichHeading	Which heading do you want to read?		
+SlateportCity_BattleTentLobby_Text_ExplainBasicRules	In a Battle Swap event, you may use\nonly three POKéMON.\pWhether you are renting or swapping,\nyour team may not have two or more\lof the same POKéMON.		
+SlateportCity_BattleTentLobby_Text_ExplainSwapPartnerRules	You may swap POKéMON only with\nthe TRAINER you have just defeated.\pYou may swap for only those POKéMON\nused by the beaten TRAINER.		
+SlateportCity_BattleTentLobby_Text_ExplainSwapNumberRules	After every battle you win, you may\nswap for one of your defeated\lopponent's POKéMON.\pYou will not be able to swap POKéMON\nwith the third TRAINER in the event.		
+SlateportCity_BattleTentLobby_Text_ExplainSwapNotes	There are two key points to be aware\nof when swapping POKéMON.\pFirst, when swapping, you can't check\nthe stats of the POKéMON you are\labout to receive.\pSecond, the POKéMON on your team\nare lined up in sequence, depending on\lthe order in which you rented them.\pThis sequence remains unchanged\neven when swaps are made.		
+SlateportCity_BattleTentLobby_Text_ExplainMonRules	The POKéMON of the SLATEPORT\nBATTLE TENT are all rentals.\pAll rental POKéMON are kept at\nLevel 30.		
+VerdanturfTown_BattleTentLobby_Text_RulesAreListed2	The VERDANTURF BATTLE TENT\nrules are listed.		
+VerdanturfTown_BattleTentLobby_Text_ReadWhichHeading	Which heading do you want to read?		
+VerdanturfTown_BattleTentLobby_Text_ExplainBasicRules	Here at the VERDANTURF BATTLE TENT,\nPOKéMON are required to think and\lbattle by themselves.\pUnlike in the wild, POKéMON that live\nwith people behave differently\ldepending on their nature.		
+VerdanturfTown_BattleTentLobby_Text_ExplainNatureRules	Depending on its nature, a POKéMON\nmay prefer to attack no matter what.\pAnother POKéMON may prefer to protect\nitself from any harm.\pYet another may enjoy vexing or\nconfounding its foes.\pDepending on its nature, a POKéMON\nwill have favorite moves that it is good\lat using.\pIt may also dislike certain moves that\nit has trouble using.		
+VerdanturfTown_BattleTentLobby_Text_ExplainMoveRules	There are offensive moves that inflict\ndirect damage on the foe.\pThere are defensive moves that are\nused to prepare for enemy attacks or\lused to heal HP and so on.\pThere are also other somewhat-odd\nmoves that may enfeeble the foes with\lstat problems including poison and \lparalysis.\pPOKéMON will consider using moves in\nthese three categories.		
+VerdanturfTown_BattleTentLobby_Text_ExplainUnderpoweredRules	When not under command by its TRAINER,\na POKéMON may be unable to effectively\luse certain moves.\pA POKéMON is not good at using any\nmove that it dislikes.\pIf a POKéMON only knows moves that\ndo not match its nature, it will often\lbe unable to live up to its potential.		
+VerdanturfTown_BattleTentLobby_Text_ExplainWhenInDangerRules	Depending on its nature, a POKéMON may\nstart using moves that don't match its\lnature when it is in trouble.\pIf a POKéMON begins behaving oddly\nin a pinch, watch it carefully.		
+BattleTentLobby_Text_ExplainLevelRules	At this BATTLE TENT, the levels of\nyour opponents will be adjusted to\lmatch the levels of your POKéMON.\pHowever, no TRAINER you face will\nhave any POKéMON below Level 30.		
+VerdanturfTown_BattleTentLobby_Text_RulesAreListed	The VERDANTURF BATTLE TENT\nrules are listed.		

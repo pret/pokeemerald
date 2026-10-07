@@ -1,0 +1,15 @@
+key	english	dutch	notes
+RustboroCity_Flat1_2F_Text_ComingUpWithMealsIsHard	Oh, it's so hard every day…\pWhat's hard?\nYou need to ask?\pIt's trying to figure out what to\nmake for meals every day.\pIt really isn't easy coming up with\nmeals every day.		
+RustboroCity_Flat1_2F_Text_HelloDoYouKnowFunnyPhrase	Oh, hello!\nWelcome to the PEPPER household.\pI have a question for you.\nHave you ever baby-sat?\pYou see, I'm a new father, so raising\na child is all new to me.\pAnd I have a problem. My daughter\nWALDA doesn't laugh enough.\pI think she'd laugh for me if I told\nher something funny.\pDo you know of a funny word or\nphrase you can tell me?		
+RustboroCity_Flat1_2F_Text_BeenSayingXDoYouKnowBetterPhrase	I've been saying “{STR_VAR_1}”\nto amuse her lately.\pDo you know of a better word or\na phrase that might work?		
+RustboroCity_Flat1_2F_Text_WonderfulLetsHearSuggestion	Oh, that's wonderful.\nSo, let's hear it, your suggestion.		
+RustboroCity_Flat1_2F_Text_OhIsThatRight	Oh, is that right?\pWell, if you come up with a good\nsuggestion, I'm all ears.		
+RustboroCity_Flat1_2F_Text_LetsGiveItATry2	Ah, I see.\nWell, let's give it a try, shall we?		
+RustboroCity_Flat1_2F_Text_OhShesLaughing	{STR_VAR_1}.\n{STR_VAR_1}.\pOh, yes! She's laughing!\nOh, I am as delighted as she!		
+RustboroCity_Flat1_2F_Text_LetsGiveItATry	Ah, I see.\nWell, let's give it a try, shall we?		
+RustboroCity_Flat1_2F_Text_ShesNotSmilingAtAll	{STR_VAR_1}.\n{STR_VAR_1}.\pHmmm… She's not smiling at all.\nMaybe WALDA is one serious child…		
+RustboroCity_Flat1_2F_Text_ThinkOfMyOwnPhrase	Oh, so you don't know any good words.\nI'd better think for myself, then.\pHmm…\nHow about “{STR_VAR_1}”?\lLet's see if that will work.		
+RustboroCity_Flat1_2F_Text_ShesNotSmilingAtAll2	{STR_VAR_1}.\n{STR_VAR_1}.\pHmmm… She's not smiling at all.\nMaybe WALDA is one serious child…		
+RustboroCity_Flat1_2F_Text_OhYouDontKnowAny	Oh, so you don't know any good words.\nI guess I'll try to amuse her with\lthe saying I used before.\pAnyways, if you have a good suggestion,\ndon't hesitate in telling me, okay?		
+RustboroCity_Flat1_2F_Text_ThankYouIllGiveYouWallpaper	Thank you!\pThanks to you, my darling WALDA\nlaughed for me!\pActually, I may not look all that\nspecial, but I'm one of DEVON\lCORPORATION's top researchers.\pSo, how about I do something in return\nfor you?\pI know, I'll add some new wallpaper\npatterns for the BOXES in the PC\lPOKéMON Storage System.\pIn the wallpaper pattern menu,\nselect “FRIENDS.”\pThat will give you access to the new\nwallpaper patterns.		
+RustboroCity_Flat1_2F_Text_ItsAPokemonPlushDoll	It's a POKéMON plush DOLL!		

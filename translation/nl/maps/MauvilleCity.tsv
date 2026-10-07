@@ -1,0 +1,32 @@
+key	english	dutch	notes
+MauvilleCity_Text_UncleHesTooPeppy	UNCLE: It's because of POKéMON that\nthis boy's got more pep, I suppose…\lBut he's become a bit too peppy…		
+MauvilleCity_Text_WallyWantToChallengeGym	WALLY: Aww, UNCLE, please?\pI want to challenge this GYM and see\nhow much better I've become.\pPlease? May I, please?		
+MauvilleCity_Text_UncleYourePushingIt	UNCLE: Now hold on, WALLY.\pSince you started living with POKéMON,\nyou have grown quite a lot stronger.\pBut don't you think you're pushing it\nto suddenly challenge a GYM?		
+MauvilleCity_Text_WallyWeCanBeatAnyone	WALLY: I'm not pushing it.\pIf I combine forces with RALTS,\nwe can beat anyone!		
+MauvilleCity_Text_WallyWillYouBattleMe	WALLY: Oh! Hi, {PLAYER}!\pI've gotten a lot stronger since\nwe met.\p{PLAYER}, I want you and my UNCLE to\nunderstand that.\p{PLAYER}, please, will you have\na battle with me?		
+MauvilleCity_Text_WallyMyUncleWontKnowImStrong	WALLY: Oh… If you won't battle me,\n{PLAYER}, my UNCLE won't know that I've\lbecome really strong.		
+MauvilleCity_Text_UncleCanYouBattleWally	UNCLE: {PLAYER}{KUN}, was it?\nOn WALLY's behalf, can I ask you to\lbattle with him just this once?\pI don't think he's going to listen to\nany reason the way he is now.		
+MauvilleCity_Text_WallyPleaseBattleMe	WALLY: {PLAYER}, please!\nBattle with me, please.		
+MauvilleCity_Text_WallyHereICome	WALLY: {PLAYER}, thank you.\pOkay… Here I come!		
+MauvilleCity_Text_WallyDefeat	WALLY: … … … … … … …\p… … … … … … … …\pI lost…		
+MauvilleCity_Text_WallyIllGoBackToVerdanturf	WALLY: UNCLE…\nI'll go back to VERDANTURF…		
+MauvilleCity_Text_ThankYouNotEnoughToBattle	{PLAYER}, thank you.\nBeing a TRAINER is tough, isn't it?\pIt's not enough just to have POKéMON\nand make them battle. That isn't what\lbeing a real TRAINER is about.		
+MauvilleCity_Text_UncleNoNeedToBeDown	UNCLE: WALLY, there's no need to be so\ndown on yourself.\pWhy, what's keeping you from becoming\nstronger and stronger?\pCome on, let's go home.\nEveryone's waiting for you.		
+MauvilleCity_Text_UncleVisitUsSometime	UNCLE: {PLAYER}{KUN}, it just dawned on me\nthat you must be the TRAINER who kept\lan eye out for WALLY when he caught\lhis POKéMON.\pWhy don't you visit us in VERDANTURF\nsometime?\lI'm sure WALLY would enjoy it.		
+MauvilleCity_Text_WallyPokenavCall	… … … … … …\n… … … … … Beep!\pWALLY: Oh, hello, {PLAYER}!\pI just wanted to tell you that\nmy uncle bought me a POKéNAV!\pNow I can get in touch with you\nanytime, {PLAYER}!\p… … … … … …\n… … … … … Click!		
+MauvilleCity_Text_RegisteredWally	Registered WALLY\nin the POKéNAV.		
+MauvilleCity_Text_ScottYouDidntHoldBack	SCOTT: Hehe…\nI was watching that match!\pYou're friends with that boy WALLY,\naren't you?\pBut you didn't hold anything back\nand beat him impressively.\pYeah! That's what a real POKéMON\nbattle is all about!\pI idolize TRAINERS like that!\p… … … … … …\nI'll be cheering for you!		
+MauvilleCity_Text_WattsonNeedFavorTakeKey	WATTSON: Oh, {PLAYER}{KUN}!\nYou look like you have a lot of zip!\lThat's a good thing, wahahahaha!\pFine! I've decided!\nI need a favor, {PLAYER}{KUN}!\pMAUVILLE CITY has an underground\nsector called NEW MAUVILLE.\p{PLAYER}{KUN}, I'd like you to go there and\nswitch off the GENERATOR.\pThe GENERATOR has been running a bit\nhaywire. It's getting unsafe.\pHere, this is the KEY to get into\nNEW MAUVILLE.		
+MauvilleCity_Text_WattsonWontBeChallenge	WATTSON: Don't you worry about it.\nIt won't be a challenge to you.\pThe entrance to NEW MAUVILLE is just\na short SURF away from ROUTE 110.\pThat's it, then, you have my trust!\nWahahahaha!		
+MauvilleCity_Text_WattsonThanksTakeTM	WATTSON: Wahahahaha!\pI knew it, {PLAYER}{KUN}! I knew I'd made\nthe right choice asking you!\pThis is my thanks--a TM containing\nTHUNDERBOLT!\pGo on, you've earned it!		
+MauvilleCity_Text_WattsonYoungTakeCharge	WATTSON: Wahahahaha!\pIt pleases me to no end to see\nthe young step up and take charge!		
+MauvilleCity_Text_NurseHurtMonBackToHealth	You know, it's cool to have POKéMON\nbattles and stuff…\pBut if your POKéMON gets hurt,\nyou have to nurse it back to health.		
+MauvilleCity_Text_AllSortsOfPeopleComeThrough	The roads of this town stretch north\nand south, and east and west.\pBecause of that, we get all sorts of\npeople coming through.		
+MauvilleCity_Text_RydelVeryGenerous	Have you been to RYDEL'S CYCLES yet?\pRYDEL, the owner, is a very generous\nman.		
+MauvilleCity_Text_PokemonCanJumpYouOnBike	Even if you're riding a BIKE,\nwild POKéMON could jump you.		
+MauvilleCity_Text_CitySign	MAUVILLE CITY\n“The bright and shiny city of fun!”		
+MauvilleCity_Text_GymSign	MAUVILLE CITY POKéMON GYM\nLEADER: WATTSON\l“The cheerfully electrifying man!”		
+MauvilleCity_Text_BikeShopSign	“Ride in gravel and shake up your\nsoul!”\lRYDEL'S CYCLES		
+MauvilleCity_Text_GameCornerSign	“The play spot for all!”\nMAUVILLE GAME CORNER		
+MauvilleCity_Text_ExplainTV	Hi, do you check out TV at all?\pThey've added a bunch of cool new\nshows recently.\pTV is so cool. I've seen my friends on\nTV just out of the blue.\pAnd, sometimes, they even put you on TV\nwithout telling you.\pI wish I would be on TV sometime.\pThat's why I think you should check\nout TVs whenever you can.		
+MauvilleCity_Text_BeenCheckingOutTV	Hi, have you been checking out TVs?		

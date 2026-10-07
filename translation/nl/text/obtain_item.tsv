@@ -1,0 +1,10 @@
+key	english	dutch	notes
+gText_ObtainedTheItem	Obtained the {STR_VAR_2}!		
+gText_TheBagIsFull	The BAG is full…		
+gText_PutItemInPocket	{PLAYER} put away the {STR_VAR_2}\nin the {STR_VAR_3} POCKET.		
+gText_PlayerFoundOneItem	{PLAYER} found one {STR_VAR_2}!		
+gText_TooBadBagIsFull	Too bad!\nThe BAG is full…		
+gText_PlayerPutItemInBag	{PLAYER} put away the {STR_VAR_2}\nin the BAG.		
+gText_ObtainedTheDecor	Obtained the {STR_VAR_2}!		
+gText_NoRoomLeftForAnother	Too bad! There's no room left for\nanother {STR_VAR_2}…		
+gText_TheDecorWasTransferredToThePC	The {STR_VAR_2} was transferred\nto the PC.		

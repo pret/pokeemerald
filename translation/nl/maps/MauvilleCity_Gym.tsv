@@ -1,0 +1,32 @@
+key	english	dutch	notes
+MauvilleCity_Gym_Text_GymGuideAdvice	Hey, how's it going, CHAMPION-\nbound {PLAYER}?\pWATTSON, the LEADER of MAUVILLE\nGYM, uses ELECTRIC-type POKéMON.\pIf you challenge him with WATER-type\nPOKéMON, he'll zap them! Bzzt!\pAnd, he's put in switch-controlled\ndoors all over his GYM! Eccentric!\pHey, go for it!		
+MauvilleCity_Gym_Text_GymGuidePostVictory	Whoa, you're electrifying!\nYou've powered the door open!		
+MauvilleCity_Gym_Text_KirkIntro	My electric soul, it'll shatter your\ndreams whole, whoa-yeahah!		
+MauvilleCity_Gym_Text_KirkDefeat	That was plugged in, amped up,\nover-driven electric, man!		
+MauvilleCity_Gym_Text_KirkPostBattle	POKéMON and rock, it's all about heart,\nwhoa-yeah!		
+MauvilleCity_Gym_Text_ShawnIntro	I trained under WATTSON!\nThere ain't no way I'll lose easily!		
+MauvilleCity_Gym_Text_ShawnDefeat	Unplugged and turned off…		
+MauvilleCity_Gym_Text_ShawnPostBattle	WATTSON, our GYM LEADER, has been\naround for a long, long time.\pHe was battling even before your\ndaddy was born, that tough coot.		
+MauvilleCity_Gym_Text_BenIntro	This GYM's got puzzles!\nIsn't it fun?		
+MauvilleCity_Gym_Text_BenDefeat	It's no fun to lose…		
+MauvilleCity_Gym_Text_BenPostBattle	WATTSON says he likes setting up\nlittle traps with switches.		
+MauvilleCity_Gym_Text_VivianIntro	With my charm and my POKéMON's moves,\nyou'll be shocked!		
+MauvilleCity_Gym_Text_VivianDefeat	I'm shocked by your power!		
+MauvilleCity_Gym_Text_VivianPostBattle	I've heard that MAUVILLE was founded\nby WATTSON.\pHe was a TRAINER long before we\nbecame TRAINERS.\lHe must know all sorts of things!		
+MauvilleCity_Gym_Text_AngeloIntro	I love shiny things!		
+MauvilleCity_Gym_Text_AngeloDefeat	Oh…\nMy eyes are frazzled…		
+MauvilleCity_Gym_Text_AngeloPostBattle	MAUVILLE GYM's WATTSON has a shiny\nforehead. It makes me happy!		
+MauvilleCity_Gym_Text_WattsonIntro	I've given up on my plans to convert\nthe city, I have.\pAnd so, I put my time into making\ndoor traps in my GYM.\pOh? Now, what are you doing here?\pWhat's that? You say you've gotten\npast all my rigged doors?\pWahahahah!\nNow, that is amusing!\pThen, I, WATTSON, the LEADER of\nMAUVILLE GYM, shall electrify you!		
+MauvilleCity_Gym_Text_WattsonDefeat	Wahahahah!\nFine, I lost!\pYou ended up giving me a thrill!\nTake this BADGE!		
+MauvilleCity_Gym_Text_ReceivedDynamoBadge	{PLAYER} received the DYNAMO BADGE\nfrom WATTSON.		
+MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis	With the DYNAMO BADGE, POKéMON can\nuse ROCK SMASH out of battle.\pAnd, it will make your POKéMON a little\nbit faster, too.\pHmm…\nYou should take this, too!		
+MauvilleCity_Gym_Text_ExplainShockWave	That TM34 there contains SHOCK WAVE.\pIt's a trustworthy move that never\nmisses! You can count on it!\p… … … … … …		
+MauvilleCity_Gym_Text_RegisteredWattson	Registered GYM LEADER WATTSON\nin the POKéNAV.		
+MauvilleCity_Gym_Text_WattsonPostBattle	I swell with optimism, seeing a promising\nyoung TRAINER like you!		
+MauvilleCity_Gym_Text_WattsonGoForthAndEndeavor	Wahahahah!\nGo forth and endeavor, youngster!		
+MauvilleCity_Gym_Text_GymStatue	MAUVILLE CITY POKéMON GYM		
+MauvilleCity_Gym_Text_GymStatueCertified	MAUVILLE CITY POKéMON GYM\pWATTSON'S CERTIFIED TRAINERS:\n{PLAYER}		
+MauvilleCity_Gym_Text_WattsonPreRematch	WATTSON: Ah-ha! Here at last!\nI know what you want.\lYou want to battle my POKéMON!\pWahahahaha!\pI'll make sparks fly from you!\nDon't say I didn't warn you!		
+MauvilleCity_Gym_Text_WattsonRematchDefeat	Oof…\nOur batteries ran dry…		
+MauvilleCity_Gym_Text_WattsonPostRematch	WATTSON: We'll have to recharge our\nbatteries again.\pWhen we're fully charged up, we'll\ngladly accept your challenge.\pSo, come back again sometime,\nwon't you?		
+MauvilleCity_Gym_Text_WattsonRematchNeedTwoMons	WATTSON: Ah-ha! Here at last!\nI know what you want.\lYou want to battle my POKéMON!\pWahahahaha!\pOops! Wait!\nYou've only one POKéMON with you!\pCome see me with two or more\nPOKéMON, all right?		

@@ -1,0 +1,92 @@
+key	english	dutch	notes
+CableClub_Text_WelcomeWhichCableClubService	Welcome to the POKéMON CABLE\nCLUB.\pWhich of our services do you wish\nto use?		
+CableClub_Text_WhichService	Which of our services do you wish\nto use?		
+CableClub_Text_TradeUsingLinkCable	Trade POKéMON with another player\nusing a GBA Game Link cable.		
+CableClub_Text_BattleUsingLinkCable	You may battle another TRAINER\nusing a GBA Game Link cable.		
+CableClub_Text_RecordCornerUsingLinkCable	You can use the RECORD CORNER with\nothers using a GBA Game Link cable.		
+CableClub_Text_CloseThisMenu	Close this menu.		
+CableClub_Text_NeedTwoMonsForDoubleBattle	For a DOUBLE BATTLE, you must\nhave at least two POKéMON.		
+CableClub_Text_NeedTwoMonsToTrade	For trading, you must have at\nleast two POKéMON with you.		
+CableClub_Text_CantTradeEnigmaBerry	A POKéMON holding the {STR_VAR_1}\nBERRY can't be traded.		
+gText_PleaseWaitForLink	Please wait.\n… … B Button: Cancel		
+gText_ConfirmLinkWhenPlayersReady	When all players are ready…\nA Button: Confirm\lB Button: Cancel		
+gText_ConfirmStartLinkWithXPlayers	Start link with {STR_VAR_1} players.\nA Button: Confirm\lB Button: Cancel		
+gText_AwaitingLinkup	Awaiting linkup…\n… … B Button: Cancel		
+CableClub_Text_OkayToSaveProgress	Your progress must be saved before\nlinking. Is it okay to save?		
+CableClub_Text_PleaseEnter	Please enter.		
+CableClub_Text_DirectYouToYourRoom	I'll direct you to your room now.		
+Text_SomeoneIsNotReadyToLink	Someone is not ready to link.\pPlease come back after everyone\nhas made preparations.		
+Text_LinkErrorPleaseReset	Sorry, we have a link error…\nPlease reset and try again.		
+Text_PlayersMadeDifferentSelections	The link partners appear to have\nmade different selections.		
+CableClub_Text_PleaseVisitAgain	Please do visit again.		
+CableClub_Text_IncorrectNumberOfParticipants	The number of participants is\nincorrect.		
+CableClub_Text_CantSingleBattleWithXPlayers	The SINGLE BATTLE Mode can't be\nplayed by {STR_VAR_1} players.		
+CableClub_Text_CantDoubleBattleWithXPlayers	The DOUBLE BATTLE Mode can't be\nplayed by {STR_VAR_1} players.		
+CableClub_Text_NeedFourPlayers	There must be four players to play\nthis Battle Mode.		
+CableClub_Text_PleaseConfirmNumberAndRestart	Please confirm the number of\nplayers and start again.		
+Text_TerminateLinkConfirmation	The link will be terminated if you\nleave the room. Is that okay?		
+Text_TerminateLinkPleaseWait	Terminating link…\nYou will be escorted out of\lthe room. Please wait.		
+CableClub_Text_TooBusyToNotice	This TRAINER is too busy to\nnotice…		
+CableClub_Text_GotToLookAtTrainerCard	Score! Got to look at {STR_VAR_1}'s\nTRAINER CARD!		
+CableClub_Text_GotToLookAtColoredTrainerCard	Score! Got to look at {STR_VAR_1}'s\nTRAINER CARD!\pIt's a {STR_VAR_2} card!		
+BattleColosseum_2P_Text_TakePlaceStartBattle	Please take your place and start\nyour battle.		
+TradeCenter_Text_TakeSeatStartTrade	Please take your seat and start\nyour trade.		
+RecordCorner_Text_ThanksForComing	Thanks for coming.		
+CableClub_Text_TrainerCardDataOverwritten	The TRAINER CARD data will\nbe overwritten.		
+CableClub_Text_HopeToSeeYouAgain	I hope to see you again!		
+CableClub_Text_NotSetUpForFarAwayRegion	I'm awfully sorry.\pWe're not set up to conduct trades\nwith TRAINERS far away in another\lregion yet…		
+CableClub_Text_OtherTrainerNotReady	The other TRAINER is not ready.		
+CableClub_Text_YouHaveAMonThatCantBeTaken	You have at least one POKéMON\nthat can't be taken.		
+RecordCorner_Text_TakeSeatAndWait	Please take your seat and wait.		
+RecordCorner_Text_PlayerSentOverOneX	{STR_VAR_1} sent over one\n{STR_VAR_2}.		
+CableClub_Text_CantMixWithJapaneseGame	Sorry, there is a transmission error.\pYou may not mix records with  \nJapanese Ruby or Sapphire games.\pAlso, you can't mix records with\nJapanese Emerald and overseas Ruby\lor Sapphire games at the same time.		
+CableClub_Text_AdapterNotConnected	The Wireless Adapter is not\nconnected properly.		
+CableClub_Text_ParticipantsStepUpToCounter	Participants are asked to step up\nto the reception counter.		
+CableClub_Text_Hello	Hello!		
+CableClub_Text_PleaseWait	Please wait.		
+CableClub_Text_YouMayTradeHere	You may trade your POKéMON here\nwith another TRAINER.		
+CableClub_Text_YouMayBattleHere	You may battle with your friends\nhere.		
+CableClub_Text_CanMakeBerryPowder	Two to five TRAINERS can make\nBERRY POWDER together.		
+CableClub_Text_CanMixRecords	The records of two to four players\ncan be mixed together.		
+CableClub_Text_GuideToVariousServices	A guide to the WIRELESS CLUB's\nvarious services.		
+CableClub_Text_CancelSelectedItem	Cancels the selected MENU item.		
+CableClub_Text_WhichBattleMode	Which battle mode would you like?		
+CableClub_Text_ReturnsToPreviousStep	Returns to the previous step.		
+CableClub_Text_NeedBerryForBerryCrush	To use the BERRY CRUSH service,\nyou must have at least one BERRY.		
+CableClub_Text_NeedTwoMonsForUnionRoom	To enter the UNION ROOM, you must\nhave at least two POKéMON.		
+CableClub_Text_NoEnigmaBerryInUnionRoom	No POKéMON holding the {STR_VAR_1}\nBERRY may enter the UNION ROOM.		
+CableClub_Text_UnionRoomAdapterNotConnected	This is the POKéMON WIRELESS CLUB\nUNION ROOM.\pUnfortunately, your Wireless\nAdapter is not connected properly.\pPlease do come again.		
+CableClub_Text_OhExcuseMe	Oh…\nExcuse me!		
+CableClub_Text_PlayerIsWaiting	It appears as if {STR_VAR_1} is playing\nright now.\lGo for it!		
+MossdeepCity_GameCorner_1F_Text_DescribeWhichGame	I can explain game rules to you,\nif you'd like.\pWhich game should I describe?		
+MossdeepCity_GameCorner_1F_Text_PokemonJumpInfo	“POKéMON JUMP”\pMake your POKéMON skip the VINE WHIP\nrope with the A Button.\pOnly mini POKéMON around 28 inches\nor less may participate.\pPOKéMON that only swim, burrow,\nor fly are not good at jumping.\pAs a result, those POKéMON may not\nparticipate.\pGood things happen if everyone\njumps in time.		
+MossdeepCity_GameCorner_1F_Text_DodrioBerryPickingInfo	“DODRIO BERRY-PICKING”\pCommand DODRIO's three heads to\ncatch falling BERRIES.\pPress right, up, or left on the\n{PLUS} Control Pad to move the heads.\pTo play this game, you must have\na DODRIO.		
+MossdeepCity_GameCorner_1F_Text_TalkToOldManToPlay	If you want to play a game,\nplease tell the old man beside me.		
+MossdeepCity_GameCorner_1F_Text_WelcomeCanYouWait	Hi, welcome!\nAre you here to play games using\lWireless Communication?\pCan you wait just a little bit?		
+MossdeepCity_GameCorner_1F_Text_ComeAgain	All right, come again!		
+MossdeepCity_GameCorner_1F_Text_AdapterNotConnected	The Wireless Adapter isn't connected.\nCome back when it's hooked up!		
+MossdeepCity_GameCorner_1F_Text_PlayWhichGame	All right, which game did you want\nto play?		
+MossdeepCity_GameCorner_1F_Text_EnterWhichPokemon	Which POKéMON would you like to\nenter?		
+MossdeepCity_GameCorner_1F_Text_AllGoodToGo	Okay, you're all good to go.\nDon't let the others beat you!		
+MossdeepCity_GameCorner_1F_Text_LeavingDoComeAgain	Are you leaving now?\nDo come again!		
+MossdeepCity_GameCorner_1F_Text_ExplainRequiredMon	It doesn't look like you have any\nPOKéMON that you can enter…\pWould you like me to explain what\nkinds of POKéMON can enter?		
+MossdeepCity_GameCorner_1F_Text_ShortJumpingPokemonAllowed	“POKéMON JUMP” is open to POKéMON\naround 28 inches or less.\pWhat you can't enter are those\nPOKéMON that can't jump.\pYou know, like POKéMON that only\nswim, burrow, or fly.\pThat's all you need to know.		
+MossdeepCity_GameCorner_1F_Text_OnlyDodrioAllowed	DODRIO BERRY-PICKING is a game that \nonly DODRIO may enter.		
+MossdeepCity_GameCorner_1F_Text_RetryPlease	Could you retry this from the start\nagain, please?		
+CableClub_Text_WelcomeWhichDirectCornerRoom	Welcome to the POKéMON WIRELESS\nCLUB DIRECT CORNER.\pYou may interact directly with\nyour friends here.\pWhich room would you like to\nenter?		
+CableClub_Text_TradePokemon	Would you like to trade POKéMON?		
+CableClub_Text_PlayWhichBattleMode	Which Battle Mode would you like\nto play?		
+CableClub_Text_AccessRecordCorner	Would you like to access\nthe RECORD CORNER?		
+CableClub_Text_UseBerryCrush	Would you like to use the\nBERRY CRUSH System?		
+CableClub_Text_ExplainBattleModes	There are three Battle Modes.\pSINGLE BATTLE is for two TRAINERS\nwith one or more POKéMON each.\pEach TRAINER can have one POKéMON\nin battle at a time.\pDOUBLE BATTLE is for two TRAINERS\nwith two or more POKéMON each.\pEach TRAINER will send out two\nPOKéMON in battle at a time.\pMULTI BATTLE is for four TRAINERS\nwith one or more POKéMON each.\pEach TRAINER can have one POKéMON\nin battle at a time.		
+CableClub_Text_ChooseGroupLeaderOfTwo	Please decide which of you two\nwill become the LEADER.\pThe other player must then choose\n“JOIN GROUP.”		
+CableClub_Text_ChooseGroupLeaderOfFour	Please decide which of you four\nwill become the GROUP LEADER.\pThe other players must then choose\n“JOIN GROUP.”		
+CableClub_Text_ChooseGroupLeader	Please decide which of you will\nbecome the GROUP LEADER.\pThe other players must then choose\n“JOIN GROUP.”		
+CableClub_Text_WelcomeUnionRoomEnter	Welcome to the POKéMON WIRELESS\nCLUB UNION ROOM.\pYou may interact directly with\nother TRAINERS here, some of\lwhom you may not even know.\pWould you like to enter the ROOM?		
+CableClub_Text_UnionRoomInfo	The TRAINERS in the UNION ROOM\nwill be those players around you\lwho have also entered the ROOM.\pYou may do all sorts of things\nhere, such as exchanging greetings.\pYou may enter two POKéMON up to\nLv. 30 for a one-on-one battle.\pYou may take part in a chat with\ntwo to five people.\pOr, you may register a POKéMON for\ntrade.\pWould you like to enter the ROOM?		
+CableClub_Text_EnjoyUnionRoom	I hope you enjoy your time in\nthe UNION ROOM.		
+CableClub_Text_FirstTimeRightThisWay	Hello!\nMy name is TEALA.\pThis must be your first time\nup here.\pI'll show you how the Wireless\nCommunication System works.\pFirst, I need to show you this\nfloor of our POKéMON CENTER.\pRight this way, please.		
+CableClub_Text_ExplainWirelessClubFirstTime	On the top floor, there are two\nrooms.\pFirst, the room on the left.\nIt's the UNION ROOM.\pYou may link up with TRAINERS\naround you who have also entered\lthe UNION ROOM.\pWith them, you may do things like\nchat, battle, and trade.\pSecond, the room on the right is\nthe DIRECT CORNER.\pYou may trade or battle POKéMON\nwith your friends in this room.\pIf the Wireless Adapter isn't\nconnected, you may still link up\lusing a GBA Game Link cable.\pIf that is the case, you must go\nto the DIRECT CORNER.\pI hope you enjoy the Wireless \nCommunication System.		
+CableClub_Text_AskAboutLinking	Hello, {PLAYER}!\pIt's me, TEALA, the POKéMON\nCENTER 2F attendant.\pIs there something you needed to\nask me about linking?		
+CableClub_Text_ExplainWirelessClub	Let me explain how the POKéMON\nWIRELESS CLUB works.\pOn this, the top floor, there are\ntwo rooms.\pFirst, the room on the left.\nIt's the UNION ROOM.\pYou may link up with TRAINERS\naround you who have also entered\lthe UNION ROOM.\pWith them, you may do things like\nchat, battle, and trade.\pSecond, the room on the right is\nthe DIRECT CORNER.\pYou may trade or battle POKéMON\nwith your friends in this room.\pSometimes, you may not be able to\nfind your friends in the UNION ROOM\lor the DIRECT CORNER.\pIn that case, please move closer\nto your friends.\pIf the Wireless Adapter isn't\nconnected, you may still link up\lusing a GBA Game Link cable.\pIf that is the case, you must go\nto the DIRECT CORNER.\pI hope you enjoy the Wireless \nCommunication System.		
+CableClub_Text_HopeYouEnjoyWirelessSystem	I hope you enjoy the Wireless\nCommunication System.		

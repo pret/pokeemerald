@@ -1,0 +1,9 @@
+key	english	dutch	notes
+Questionnaire_Text_FillOut	There is a questionnaire.\nWould you like to fill it out?		
+Questionnaire_Text_ThankYou	Thank you for taking the time to\nfill out our questionnaire.\pYour feedback will be used for\nfuture reference.		
+Questionnaire_Text_YouKnowThoseWordsGift	Oh, hello!\nYou know those words?\pThat means you must know about\nthe MYSTERY GIFT.\pFrom now on, you should be\nreceiving MYSTERY GIFTS!		
+Questionnaire_Text_YouCanAccessMysteryGift	Once you save your game, you can\naccess the MYSTERY GIFT.		
+Questionnaire_Text_YouKnowThoseWordsEvent	Oh, hello!\nYou know those words?\pThat means you must know about\nthe MYSTERY EVENT.		
+Questionnaire_Text_YouCanAccessMysteryEvent	Once you save your game, you can\naccess the MYSTERY EVENT.		
+MysteryGift_Text_TheresATicketForYou	Thank you for using the MYSTERY\nEVENT System.\pYou must be {PLAYER}.\nThere is a ticket here for you.		
+MysteryGift_Text_TryUsingItAtLilycovePort	It appears to be for use at\nthe LILYCOVE CITY port.\pWhy not give it a try and see what\nit is about?		

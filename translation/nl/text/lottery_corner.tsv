@@ -1,0 +1,16 @@
+key	english	dutch	notes
+LilycoveCity_DepartmentStore_1F_Text_LotteryCornerDrawTicket	This is the POKéMON LOTTERY CORNER.\pAll shoppers at our DEPARTMENT STORE\nget to draw a POKéMON LOTO TICKET.\pIf the LOTO TICKET's number matches\nthe ID number of any of your POKéMON,\lyou will receive a fabulous gift.\pWould you like to draw a POKéMON\nLOTO TICKET?		
+LilycoveCity_DepartmentStore_1F_Text_ComeBackTomorrow	Please come back tomorrow.		
+LilycoveCity_DepartmentStore_1F_Text_PleaseVisitAgain	Please do visit again.		
+LilycoveCity_DepartmentStore_1F_Text_PleasePickTicket	Please pick a LOTO TICKET.\n…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}		
+LilycoveCity_DepartmentStore_1F_Text_TicketNumberIsXPleaseWait	The LOTO TICKET number is {STR_VAR_1}.\pI need to run a check on this number\nto see if it matches any of your\lPOKéMON's ID numbers. Please wait.		
+LilycoveCity_DepartmentStore_1F_Text_TicketMatchesPartyMon	Congratulations!\pThe ID number of your team's\n{STR_VAR_1} matches your\lLOTO TICKET's number!		
+LilycoveCity_DepartmentStore_1F_Text_TicketMatchesPCMon	Congratulations!\pThe ID number of your PC-boxed\n{STR_VAR_1} matches your\lLOTO TICKET's number!		
+LilycoveCity_DepartmentStore_1F_Text_NoNumbersMatched	I'm sorry.\nNone of the numbers matched.		
+LilycoveCity_DepartmentStore_1F_Text_TwoDigitsMatched	Two digits matched, so you win the\nthird prize!\lYou've won the {STR_VAR_1}!		
+LilycoveCity_DepartmentStore_1F_Text_ThreeDigitsMatched	Three digits matched, so you win the\nsecond prize!\lYou've won the {STR_VAR_1}!		
+LilycoveCity_DepartmentStore_1F_Text_FourDigitsMatched	Four digits matched, so you win the\nfirst prize!\lYou've won the {STR_VAR_1}!		
+LilycoveCity_DepartmentStore_1F_Text_AllFiveDigitsMatched	Oh, my goodness, all five digits\nmatched!\pYou've won the jackpot prize!\nYou've won the {STR_VAR_1}!		
+LilycoveCity_DepartmentStore_1F_Text_NoRoomForThis	Oh?\nYou seem to have no room for this.\pPlease make room in your BAG and\nlet me know.		
+LilycoveCity_DepartmentStore_1F_Text_PrizeWeveBeenHolding	{PLAYER}?\nYes, I've been expecting you.\pThis is the prize we've been holding\nfor you.		
+LilycoveCity_DepartmentStore_1F_Text_PleaseVisitAgain2	Please do visit again.		

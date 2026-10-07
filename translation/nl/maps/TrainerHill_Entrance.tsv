@@ -1,0 +1,28 @@
+key	english	dutch	notes
+TrainerHill_Entrance_Text_StillGettingReady	This is the TRAINER HILL where\nyou may enjoy tag battles with many\lTRAINERS.\pUnfortunately, we're still getting\nthings ready. Please come back later!		
+TrainerHill_Entrance_Text_WelcomeToTrainerHill	Welcome!\pThis is the TRAINER HILL where\nyou may enjoy tag battles with many\lTRAINERS!		
+TrainerHill_Entrance_Text_SaveGameBeforeEnter	Is this your first visit here?\pBefore you enter, please save\nyour game.		
+TrainerHill_Entrance_Text_TrainersUpToFloorX	Let's see…\nThe TRAINERS here now are…\pUp to floor no. {STR_VAR_1}.		
+TrainerHill_Entrance_Text_TrainersInEveryRoom	Let's see…\nThe TRAINERS here now are…\pThere appear to be TRAINERS gathered\nin every room.		
+TrainerHill_Entrance_Text_LikeToChallengeTrainers	Would you like to challenge the\nwaiting TRAINERS?		
+TrainerHill_Entrance_Text_TimeProgessGetSetGo	I will time your progress.\nBest of luck!\pOn your marks…\pGet set…\pGo!		
+TrainerHill_Entrance_Text_PleaseVisitUsAgain	Please do visit us again!		
+TrainerHill_Entrance_Text_TooBadTremendousEffort	That was too bad.\pI think you put in a tremendous\neffort in your battling.\pPlease come back and try again!		
+TrainerHill_Entrance_Text_HopeYouGiveItYourBest	I hope you give it your best.		
+TrainerHill_Entrance_Text_MovedReceptionHereForSwitch	When the TRAINERS switch places,\nthe movement can be hectic.\pTo avoid the stampede, we moved\nthe reception counter here.\pI'm sorry for the inconvenience.		
+TrainerHill_Entrance_Text_ThankYouForPlaying	Thank you for playing!		
+TrainerHill_Entrance_Text_ExplainTrainerHill	Here at the TRAINER HILL, we conduct\nan event called the Time Attack.\pIt is a race that measures how long\nyou take to reach our owner on\lthe rooftop from this counter.\pThe fastest times are posted on\nthe Time Board--try competing with\lyour friends.\pIn TRAINER battles along the way,\nneither Exp. Points nor money will\lbe awarded.		
+TrainerHill_Entrance_Text_NeedAtLeastTwoPokemon	Oh, I'm sorry, but you appear to have\nonly one POKéMON with you.\pYou will need at least two POKéMON\nto enter this event.		
+TrainerHill_Roof_Text_YouFinallyCameBravo	Hm! Hm!\pYou finally came!\nYes, you have arrived!\pWait! Don't say it!\nI know why you came all the way\lhere by yourself!\pYou wanted to see me, the owner\nof the TRAINER HILL, because…\pYou want to form a tag team with me!\nWa-hoo!\p…Uh?\nThat's not it?\pAnyway, I watched you on your way up.\nMarvelous battling! Bravo, indeed!		
+TrainerHill_Roof_Text_HaveTheMostMarvelousGift	For a marvelous someone like you,\nI have the most marvelous gift!		
+TrainerHill_Roof_Text_FullUpBeBackLaterForThis	Oh, no, full up with things!\nYou'll be back later for this!		
+TrainerHill_Roof_Text_GotHereMarvelouslyQuickly	Oh, hold on here! Did you possibly get\nhere marvelously quickly?\pHow splendid! You needn't have\nhurried so to see me!\pThat is so delightful. I'll have the Time\nBoard at the reception updated!		
+TrainerHill_Roof_Text_YouWerentVeryQuick	But, oh…\nYou weren't very quick getting here.		
+TrainerHill_Roof_Text_ArriveZippierNextTime	Perhaps it would please me more if you\narrived zippier next time.\pThen, I should be pleased to form\na tag team with you!\pUntil we meet again, amigo!		
+TrainerHill_Roof_Text_BuiltTrainerHillToFindPartner	I had the TRAINER HILL built for but\none reason and one only!\pTo find the most suitable partner\nwith whom I may form a tag team!		
+TrainerHill_Entrance_Text_ChallengeTime	{STR_VAR_1} min. {STR_VAR_2}.{STR_VAR_3} sec.		
+TrainerHill_Entrance_Text_WhatSortOfTrainersAreAhead	Who knows what sort of TRAINERS\nand POKéMON combos are ahead?\pAll I know is that I'll knock aside\nanyone that stands in my way!		
+TrainerHill_Entrance_Text_CantWaitToTestTheWaters	I heard tough TRAINERS come to this\nTRAINER HILL from all over.\pI can't wait to test the waters!\pI'll knock aside anyone that stands\nin my way!		
+TrainerHill_Entrance_Text_FriendsTryingToReachTimeBoardTop	Do you see the Time Board over there?\pMy friends and I are trying to see who\ncan reach the top in the least time.		
+TrainerHill_Entrance_Text_DoYouKnowWhenTheyOpen	Do you know when they're opening\nthis place up?\pI'm waiting here to be the first\nchallenger ever!		
+TrainerHill_Elevator_Text_ReturnToReception	Would you like to return to\nthe reception counter?		

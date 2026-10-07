@@ -9,12 +9,14 @@ from common import ROOT, SPECS, read_tsv, scan, text_to_body
 
 def main():
     by_path = {}
+    tsvs = {}
     for spec in SPECS:
-        rows = {r["key"]: r for r in read_tsv(spec.tsv)}
         for e in scan(spec):
-            r = rows.get(e.key)
+            if e.tsv not in tsvs:
+                tsvs[e.tsv] = {r["key"]: r for r in read_tsv(e.tsv)}
+            r = tsvs[e.tsv].get(e.key)
             if r:
-                by_path.setdefault(spec.path, []).append((e, r["dutch"] or r["english"]))
+                by_path.setdefault(e.path, []).append((e, r["dutch"] or r["english"]))
 
     for path, items in by_path.items():
         file = ROOT / path
@@ -28,7 +30,8 @@ def main():
             changed += 1
         if changed:
             file.write_text(src, encoding="utf-8")
-        print(f"{path}: {changed} strings updated")
+        if changed:
+            print(f"{path}: {changed} strings updated")
 
 
 if __name__ == "__main__":

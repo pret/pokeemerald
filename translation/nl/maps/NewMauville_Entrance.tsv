@@ -1,0 +1,4 @@
+key	english	dutch	notes
+NewMauville_Entrance_Text_DoorIsLocked	The door is locked.		
+NewMauville_Entrance_Text_UseBasementKey	Use the BASEMENT KEY?		
+NewMauville_Entrance_Text_UsedBasementKey	{PLAYER} used the BASEMENT KEY.\pThe door opened!		

@@ -1,0 +1,12 @@
+key	english	dutch	notes
+Route103_Text_MayRoute103Pokemon	MAY: Let's see… The POKéMON found\non ROUTE 103 include…		
+Route103_Text_MayLetsBattle	Oh, hi, {PLAYER}{KUN}!\p…Oh, I see, my dad gave you\na POKéMON as a gift.\pSince we're here, let's have a quick\nbattle!\pI'll give you a taste of what being\na TRAINER is like.		
+Route103_Text_MayDefeated	Wow! That's great!\n{PLAYER}{KUN}, you're pretty good!		
+Route103_Text_MayTimeToHeadBack	MAY: I think I know why my dad has\nan eye out for you now.\pI mean, you just got that POKéMON,\nbut it already likes you.\pYou might be able to befriend any\nkind of POKéMON easily.\pWell, it's time to head back to\nthe LAB.		
+Route103_Text_BrendanRoute103Pokemon	BRENDAN: Okay, so it's this one and\nthat one that live on ROUTE 103…		
+Route103_Text_BrendanLetsBattle	Hey, it's {PLAYER}!\p…Oh, yeah, Dad gave you a POKéMON.\pSince we're here, how about a little\nbattle?\pI'll teach you what being a TRAINER's\nabout!		
+Route103_Text_BrendanDefeated	Huh, {PLAYER}, you're not too shabby.		
+Route103_Text_BrendanTimeToHeadBack	BRENDAN: I think I get it.\nI think I know why my dad has his eye\lout for you now.\pLook, your POKéMON already likes you,\neven though you just got it.\p{PLAYER}, I get the feeling that you\ncould befriend any POKéMON with ease.\pWe should head back to the LAB.		
+Route103_Text_ShouldHaveBroughtPotion	My POKéMON is staggeringly tired…\nI should have brought a POTION…		
+Route103_Text_ShortcutToOldale	If you cross the sea from here,\nit'll be a shortcut to OLDALE TOWN.\pFufufu, that's useful, isn't it?		
+Route103_Text_RouteSign	ROUTE 103\n{DOWN_ARROW} OLDALE TOWN		

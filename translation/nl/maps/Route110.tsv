@@ -1,0 +1,44 @@
+key	english	dutch	notes
+Route110_Text_WeCantTalkAboutAquaActivities	TEAM AQUA's activities…\nWe can't talk about them yet.		
+Route110_Text_KickUpARuckus	I want to get going to SLATEPORT and\nkick up a ruckus!		
+Route110_Text_MyFirstJobInAqua	This is my first job after joining\nTEAM AQUA. It's a little scary.		
+Route110_Text_AquaActionsBringSmiles	TEAM AQUA's actions should bring\nsmiles to people's faces!		
+Route110_Text_MayLetsBattle	MAY: Hi, {PLAYER}{KUN}, long time no see!\pWhile I was searching for other\nPOKéMON, my POKéMON grew stronger.\pSo…\nHow about a little battle?		
+Route110_Text_MayDefeated	Yikes!\nYou're better than I expected!		
+Route110_Text_MayTakeThis	MAY: {PLAYER}{KUN}, you've been busy\ntraining, too, haven't you?\pI think you deserve a reward!\nThis is from me!		
+Route110_Text_MayExplainItemfinder	MAY: That's an ITEMFINDER.\pTry it out. If there is an item that's\nnot visible, it emits a sound.\pOkay, {PLAYER}{KUN}, let's meet again!\pI know it's a little silly coming from\nme, but I think you should train a lot\lharder for the next time.		
+Route110_Text_BrendanLetsBattle	BRENDAN: Hey, {PLAYER}.\nSo this is where you were.\lHow's it going?\pHave you been raising your POKéMON?\nI'll check for you.		
+Route110_Text_BrendanDefeated	Hmm…\nYou're pretty good.		
+Route110_Text_BrendanTakeThis	BRENDAN: {PLAYER}, you've trained\nwithout me noticing…\pGood enough!\nHere, take this.		
+Route110_Text_BrendanExplainItemfinder	BRENDAN: That's an ITEMFINDER.\pUse it to root around for items that\naren't visible.\pIf it senses something, it emits\na sound.\pAnyway, I'm off to look for new\nPOKéMON.		
+Route110_Text_RideBikeAtFullSpeed	Wouldn't it be great to ride a BIKE\nat full speed on CYCLING ROAD?		
+Route110_Text_HairStreamsBehindMe	How do you like the way my raven-\ncolored hair streams behind me?\pI grew my hair out just for that.		
+Route110_Text_YouGotBikeFromRydel	Oh, hey, you got that BIKE from RYDEL!\pOh, it's glaringly obvious.\nIt says right on your bike…\pRYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\nRYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\pRYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\nRYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\pRYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\nRYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\pRYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\nRYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\pRYDEL, RYDEL, RYDEL, RYDEL, RYDEL…\nThat name's everywhere.\pYou should ride it around all over\nthe place--it's good advertising!		
+Route110_Text_TwoRoads	The two roads, one above, one below…\pA road each for people and POKéMON.\nPerhaps that is right and fair.		
+Route110_Text_WalkOnTheLowRoad	I don't have a BIKE, so I'll take\na leisurely walk on the low road.		
+Route110_Text_BikeTechniques	Learning techniques will make BIKE\nriding even more fun.\pThere are some places that you can\nreach only by using a BIKE technique.		
+Route110_Text_WhichShouldIChoose	Which should I choose?\pMake a beeline for MAUVILLE on\nCYCLING ROAD, or take the low road\land look for POKéMON?		
+Route110_Text_CyclingChallengeResultSummary	Number of collisions:\n… … {STR_VAR_1}!\pTotal time:\n… … {STR_VAR_2}!		
+Route110_Text_ChallengeReactionBest	Bravo! Splendid showing!\pYour love of cycling comes from deep\nwithin your heart.\lYou've shaken me to my very soul!		
+Route110_Text_ChallengeReactionGood	Your technique is remarkable.\pI suggest you speed up a bit while\nstill avoiding collisions.		
+Route110_Text_ChallengeReactionOk	I would consider you a work in\nprogress.\pStill, I hope you don't forget the\nsheer pleasure of cycling.		
+Route110_Text_ChallengeReactionBad	My word… Your cycling skills border\non terrifying.\pMost certainly, you need much more\npractice riding.		
+Route110_Text_ChallengeReactionWorst	…I am aghast…\pYou're perhaps not cut out for this\nunfortunate cycling business.\pYou ought to give serious thought to\nreturning that BIKE to RYDEL.		
+Route110_Text_RatedForNumberOfCollisions	This is CYCLING ROAD.\pIf you were to ride from MAUVILLE to\nSLATEPORT on a MACH BIKE, you would\lbe rated for the number of collisions\land your total time.		
+Route110_Text_AlwaysAimHigher	Regardless of the results, I count on\nseeing more challenges from you.\lAlways aim higher!		
+Route110_Text_AcroBikesDoNotQualify	On this CYCLING ROAD, those riding\nMACH BIKES are rated for their number\lof collisions and their total times.\pACRO BIKES do not qualify for rating.\nThey are easy to turn, so it's not fair.		
+Route110_Text_SlateportCitySign	ROUTE 110\n{DOWN_ARROW} SLATEPORT CITY		
+Route110_Text_CyclingRoadSign	SEASIDE CYCLING ROAD		
+Route110_Text_AquaWasHere	“TEAM AQUA was here!”\pSomeone painted that onto this sign,\nbut then someone else painted over it.\p“TEAM MAGMA rules!” is what it\nsays now.		
+Route110_Text_Route103Sign	ROUTE 110\n{LEFT_ARROW} ROUTE 103		
+Route110_Text_SeasideParkingSign	SEASIDE PARKING		
+Route110_Text_MauvilleCitySign	ROUTE 110\n{UP_ARROW} MAUVILLE CITY		
+Route110_Text_TrainerTipsPrlzSleep	TRAINER TIPS\pThe foe can be made helpless by\nparalyzing it or causing it to sleep.\pIt is an important technique for\nPOKéMON battles.		
+Route110_Text_TrainerTipsRegisterItems	TRAINER TIPS\pThe items in the BAG can be reorganized\nby pressing SELECT.		
+Route110_Text_TrickHouseSign	“Three steps {RIGHT_ARROW} and two steps {UP_ARROW}\nto reach the wondrous TRICK HOUSE.”		
+Route110_Text_BestRecord	THE BEST RECORD TO DATE…\pNo. of collisions: {STR_VAR_1}\pElapsed time: {STR_VAR_2}		
+Route110_Text_ThereIsNoRecord	THE BEST RECORD TO DATE…\pNo one seems to have taken the\nchallenge. There is no record…		
+Route110_Text_ImagineSeeingYouHere	PROF. BIRCH: Oh, {PLAYER}{KUN}!\nImagine seeing you here!\pAnd where might my {RIVAL} be?		
+Route110_Text_HeardYouInstallMatchCall	Oh, I see!\nYou two are running separately.\lWell, that's fine.\pOh, yes, I heard that your POKéNAV\nhad the MATCH CALL system installed.\pWell, then, I should register you in\nmy POKéNAV as well.\pThat way, even when we're apart,\nI can rate your POKéDEX anytime.\p… … … … … …		
+Route110_Text_RegisteredBirchInPokenav	Registered PROF. BIRCH\nin the POKéNAV.		
+Route110_Text_KeepAnEyeOutForRival	PROF. BIRCH: {PLAYER}{KUN}…\pPlease keep an eye out for my {RIVAL}.\n… … … … … …\pWell, I had better get going.\nSee you again, {PLAYER}{KUN}!		

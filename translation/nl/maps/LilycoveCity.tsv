@@ -1,0 +1,55 @@
+key	english	dutch	notes
+LilycoveCity_Text_MayShoppingLetsBattle	MAY: Oh, hey?\n{PLAYER}{KUN}, are you shopping, too?\pI bought a whole bunch of DOLLS and\nPOSTERS.\pOf course, I've also caught a lot of\nPOKéMON, and I'm raising them\lproperly, too.\pActually, I'm more worried if you're\nraising POKéMON properly, {PLAYER}{KUN}.\pI'll battle with you, so you can show\nme your POKéMON, {PLAYER}{KUN}.		
+LilycoveCity_Text_MayNotRaisingPokemon	MAY: Oh, why? {PLAYER}{KUN}, haven't you\nbeen raising your POKéMON?\pThat's not a very good showing as a\nTRAINER…		
+LilycoveCity_Text_MayBattleMe	MAY: Come on, battle with me, so I can\ncheck out your POKéMON!		
+LilycoveCity_Text_MayWontBeBeaten	MAY: The POKéMON I raised won't be\nbeaten by your POKéMON, {PLAYER}{KUN}!		
+LilycoveCity_Text_MayDefeat	… … … … … … … …\pI remember the battle I had with you,\n{PLAYER}{KUN}, on ROUTE 103.\pThat battle helped you become this\nstrong, {PLAYER}{KUN}, didn't it?		
+LilycoveCity_Text_MayGoingBackToLittleroot	MAY: I'm thinking of going back to\nLITTLEROOT soon.\pI've caught a decent group of POKéMON,\nand my POKéDEX is coming along, so\lI'm going home to show my dad.		
+LilycoveCity_Text_MayYouGoingToCollectBadges	{PLAYER}{KUN}, what are you going to do?\pCollect all the GYM BADGES and take\nthe POKéMON LEAGUE challenge?\pWell, while you're collecting BADGES,\n{PLAYER}{KUN}, I'm going to work on my\lPOKéDEX. I'll complete it before you!\pSee you!		
+LilycoveCity_Text_MayYouGoingToPokemonLeague	{PLAYER}{KUN}, what are you going to do?\pAre you taking the POKéMON LEAGUE\nchallenge?\pOr, are you going to complete your\nPOKéDEX?\pI might've lost to you in battling,\nbut I'll finish my POKéDEX before you!\pSee you!		
+LilycoveCity_Text_MayYouGoingToBattleFrontier	{PLAYER}{KUN}, what are you going to do?\pAre you taking the BATTLE FRONTIER\nchallenge?\pOr, are you going to complete your\nPOKéDEX?\pI might've lost to you in battling,\nbut I'll finish my POKéDEX before you!\pSee you!		
+LilycoveCity_Text_BrendanShoppingLetsBattle	BRENDAN: Oh, hey, it's {PLAYER}.\pI'm running an errand for my dad.\nNo, I'm not buying any DOLLS.\pAnyways, it's been a while.\pWant to have a battle to see who's been\nraising POKéMON better?		
+LilycoveCity_Text_BrendanNoConfidence	BRENDAN: Oh, what's the matter?\nDon't have the confidence?		
+LilycoveCity_Text_BrendanBattleMe	BRENDAN: Want to battle to see who's\nbeen raising POKéMON better?		
+LilycoveCity_Text_BrendanWontBeBeaten	BRENDAN: Aww, but you know I'm not\ngoing to lose to no {PLAYER}.		
+LilycoveCity_Text_BrendanDefeat	Humph…\nYou've done a lot of raising.\pThat stings a bit--I had a head start\non you as a TRAINER…		
+LilycoveCity_Text_BrendanGoingBackToLittleroot	BRENDAN: I…\nI plan on going home to LITTLEROOT.\pYou know I'm helping out my dad on his\nPOKéDEX. It's coming together pretty\ldecently, so I should go show him.		
+LilycoveCity_Text_BrendanYouGoingToCollectBadges	{PLAYER}, what are you going to do?\pCollect all the GYM BADGES and take\nthe POKéMON LEAGUE challenge?\pMaybe I'll do that, too…\pWell, anyway, hang in there!		
+LilycoveCity_Text_BrendanYouGoingToPokemonLeague	{PLAYER}, what are you going to do?\pSince you're that strong, are you\ntaking the POKéMON LEAGUE challenge?\pHeh, even me--if I trained my POKéMON\na bit more, I should be stronger than\lyou, {PLAYER}.\pWell, anyway, hang in there!		
+LilycoveCity_Text_BrendanYouGoingToBattleFrontier	{PLAYER}, what are you going to do?\pAre you taking the BATTLE FRONTIER\nchallenge?\pOr, are you going to complete your\nPOKéDEX?\pSince you're that strong, you should\nconsider the BATTLE FRONTIER.\pHeh, if I train my POKéMON a bit more,\nI'll get stronger than you, {PLAYER}.\pMaybe I should go to the BATTLE\nFRONTIER.\pWell, anyway, hang in there!		
+LilycoveCity_Text_MovedLootIntoHideoutToday	Fufufu…\pWe moved more loot into our secret\nHIDEOUT today…\pWh-who are you?!\nI was just talking to myself!		
+LilycoveCity_Text_ChanceToDoBigThings	I'm just a GRUNT, so I don't know what\nthe BOSS is thinking…\pBut being on TEAM AQUA, I know I'll get\nthe chance to do big things!\pWh-who are you?!\nI was just talking to myself!		
+LilycoveCity_Text_DontGoNearCaveInCove	Hey, you!\pDon't go near the cave in the cove!\pWhy? You don't need a reason why!\nI'm an adult, so you just listen to me!		
+LilycoveCity_Text_IfWorldBecomesOurs	If this whole wide world becomes ours,\nTEAM AQUA's, it will be a happier\lplace for POKéMON, too.		
+LilycoveCity_Text_WailmerLeapOutOfWater	There! WAILMER!\nLeap out of the water now!		
+LilycoveCity_Text_GetLostMessingUpTraining	Hunh? What do you want?\pYou're messing up our training,\nso can you, like, get lost?		
+LilycoveCity_Text_ContestHallInTown	There's a POKéMON CONTEST HALL\nright in this here town. \pThat means well-raised POKéMON will\ncome from all over the country.\pMy heart swells with excitement!		
+LilycoveCity_Text_StrangeCaveInCove	Have you seen that strange cave in\nthe cove at the edge of town?		
+LilycoveCity_Text_GoingToMoveDeleterForHMs	I'm going to teach my POKéMON some new\nmoves for entering a CONTEST.\pSo, I'm going to see the MOVE DELETER\nand make it forget HM moves.		
+LilycoveCity_Text_ImFromKanto	I came from KANTO.\pThe HOENN region is beautiful with\nall its water and verdant nature.\pHunh? Wait a second…\pCould there be rare POKéMON that live\nonly in this area?		
+LilycoveCity_Text_TeamAquaBeenTrainingWailmer	TEAM AQUA's been training their\nWAILMER in the cove.\pWe SAILORS can't get our boats out\nto sea with them in the way!		
+LilycoveCity_Text_SomeonePuntedTeamAquaOut	Ahoy, did you know?\pSomeone punted TEAM AQUA out of\nthe way for us!\pThat got the WAILMER out of the cove,\nso we can get our boats out again.		
+LilycoveCity_Text_SomeoneStoleMyPokemon	I was taking a relaxing snooze at the\nseaside inn to the sound of waves…\pWhen someone stole my POKéMON!\pWho's the abductor?\nTEAM AQUA? Is it TEAM AQUA?		
+LilycoveCity_Text_MissingPokemonCameBack	My missing POKéMON…\nIt came back without me noticing!		
+LilycoveCity_Text_ImArtDealer	I'm an ART DEALER.\pI am a buyer and seller of fine art,\nespecially paintings.\pI've heard that the MUSEUM here has\nmagnificent works on exhibit…		
+LilycoveCity_Text_SeaRemainsForeverYoung	Even as we grow old and wrinkled,\nthe sea remains forever young with\lthe vivid brilliance of life…\pFwohoho fwohohohoho…		
+LilycoveCity_Text_SixtyYearsAgoHusbandProposed	It was sixty years ago that my husband\nproposed to me here.\lThe sea remains as beautiful as ever.\pMufufufu mufufufufufu…		
+LilycoveCity_Text_TeamAquaRenovatedCavern	Hm, you know of the peculiar cavern\nin this cove?\pThat had been a natural formation,\nbut then that TEAM AQUA lot came\lalong and made their renovations.\pThey call themselves\nthe “nature-loving TEAM AQUA”!\pBut what they do and what they say\ndon't match at all!		
+LilycoveCity_Text_TeamAquaLotGoneForGood	That cave in the cove…\pI didn't notice it right away,\nbut it's completely empty now.\pThat TEAM AQUA lot, they must\nhave gone away for good.		
+LilycoveCity_Text_CitySign	LILYCOVE CITY\p“Where the land ends and the\nsea begins.”		
+LilycoveCity_Text_ContestHallSign	POKéMON CONTEST HALL\n“The gathering place for TRAINERS!”		
+LilycoveCity_Text_MotelSign	COVE LILY MOTEL\p“Remember us as COVE LILY of\nLILYCOVE.”		
+LilycoveCity_Text_MuseumSign	LILYCOVE MUSEUM\p“POKéMON Masterpiece Collection\non exhibit!”		
+LilycoveCity_Text_MuseumSignPlayersExhibit	LILYCOVE MUSEUM\p“{PLAYER}'s POKéMON Collection\non exhibit!”		
+LilycoveCity_Text_HarborSignUnderConstruction	LILYCOVE CITY HARBOR\p“The ferry S.S. TIDAL is under\nconstruction in SLATEPORT CITY.\p“Service is scheduled to begin\nshortly.”		
+LilycoveCity_Text_HarborSign	LILYCOVE CITY HARBOR\p“Enjoy a delightful cruise on\nthe ferry S.S. TIDAL.”		
+LilycoveCity_Text_TrainerFanClubSign	POKéMON TRAINER FAN CLUB\pThe names of TRAINERS are scribbled\nall over the sign…		
+LilycoveCity_Text_DepartmentStoreSign	LILYCOVE DEPARTMENT STORE\p“Overflowing with great merchandise\nand excitement!\p“A great place to find that something\nyou need!”		
+LilycoveCity_Text_MoveDeletersHouseSign	MOVE DELETER'S HOUSE\p“Unwanted POKéMON moves deleted.”		
+LilycoveCity_Text_DoYouKnowAboutBerryBlender	Do you know about the machine\nBERRY BLENDER?		
+LilycoveCity_Text_FasterSpinBetterPokeblocks	People have to work together to get it\nto spin faster.\pThe faster you can make it spin, the\nbetter {POKEBLOCK}S you can get, I've heard.		
+LilycoveCity_Text_ExplainBerryBlender	It's used for making a kind of candy\ncalled a {POKEBLOCK}.\pIf you give a good {POKEBLOCK} to a POKéMON,\nits condition will improve by a lot.		
+LilycoveCity_Text_HeardTowerCalledSkyPillar	I heard there's a tower somewhere out\non the sea routes.\pIt's called the SKY PILLAR, I hear.		
+LilycoveCity_Text_SawTallTowerOnRoute131	I saw this tall tower somewhere\naround ROUTE 131.\pCould that possibly be…?		
+LilycoveCity_Text_JustArrivedAndSawRarePokemon	We just arrived here on our\nhoneymoon vacation.\pWe happened to see a DRAGON-type\nPOKéMON flying way up in the sky.\pDo cool POKéMON like that live in\nthe HOENN region?		
+LilycoveCity_Text_HoneymoonVowToSeeRarePokemon	On our honeymoon, we vowed to see as\nmany rare POKéMON as we can.\pSo we were delighted to see a rare\nPOKéMON as soon as we arrived.\pI mean, we are totally happy!		

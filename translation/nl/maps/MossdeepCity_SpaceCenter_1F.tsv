@@ -1,0 +1,29 @@
+key	english	dutch	notes
+MossdeepCity_SpaceCenter_1F_Text_RocketLaunchImminent	The rocket's launch is imminent!		
+MossdeepCity_SpaceCenter_1F_Text_SuccessfulLaunchNumber	The rocket launched safely!\nThat's successful launch no. {STR_VAR_1}!		
+MossdeepCity_SpaceCenter_1F_Text_HaywireButRocketLaunchImminent	I know that things are a little\nhaywire right now, but…\pThe rocket's launch is imminent!		
+MossdeepCity_SpaceCenter_1F_Text_HaywireButSuccessfulLaunchNumber	I know that things are a little\nhaywire right now, but…\pThe rocket launched safely!\nThat's successful launch no. {STR_VAR_1}!		
+MossdeepCity_SpaceCenter_1F_Text_RocketLaunchDemandsPerfection	A rocket launch demands perfection.\nNot even a 1% margin of error is allowed.\pEven if it's 99% okay, the whole thing\nis useless if 1% happens to be no good.\pDespite that, we never stop trying.\nWhy? It's a dream that never ends.		
+MossdeepCity_SpaceCenter_1F_Text_MagmaHaveSightsOnSpaceCenter	Those MAGMA thugs have their sights\nset on our SPACE CENTER.\pBut we can't allow anything that minor\nto interfere with our rocket launch!		
+MossdeepCity_SpaceCenter_1F_Text_FoundThisYouCanHaveIt	I was taking a stroll down the beach\nwhen I found this.\pIt's not anything I need, so you can\nhave it.		
+MossdeepCity_SpaceCenter_1F_Text_HoennFamousForMeteorShowers	The HOENN region has been famous for \nits meteor showers for a long time.		
+MossdeepCity_SpaceCenter_1F_Text_MagmaCantStealFuelTakeThis	TEAM MAGMA can't be allowed to steal\nthe rocket fuel.\pOh, by the way, you can have this stone\nI found on the beach.		
+MossdeepCity_SpaceCenter_1F_Text_CantStrollOnBeachWithMagma	With TEAM MAGMA around, I guess\nstrolls on the beach aren't safe.		
+MossdeepCity_SpaceCenter_1F_Text_DidPokemonComeFromSpace	Some people claim that POKéMON came\nfrom space. Could it be true?		
+MossdeepCity_SpaceCenter_1F_Text_AquaShouldBeatMagma	TEAM AQUA should take care of\nTEAM MAGMA!\pBut if they did that, TEAM AQUA will\nbecome bold and brazen, won't they?		
+MossdeepCity_SpaceCenter_1F_Text_RocketsBoggleMyMind	A giant chunk of metal bursts through\nthe skies and flies into space…\pIt boggles my mind!		
+MossdeepCity_SpaceCenter_1F_Text_MagmaWantsToSpoilMyDream	A giant chunk of metal bursts through\nthe skies and flies into space…\pBut TEAM MAGMA wants to spoil\nthat dream of mine!\pI'm not having any of that!		
+MossdeepCity_SpaceCenter_1F_Text_StevenMagmaCantBeAllowedToTakeFuel	STEVEN: {PLAYER}{KUN}, have you read that\nproclamation already?\pTEAM MAGMA is coming after the rocket\nfuel on this island.\pI don't know what they'd need it for,\nbut they can't be allowed to take it.\pI'll keep an eye on things for\na while longer.\pIn the meantime, why don't you go\ncheck out the town?		
+MossdeepCity_SpaceCenter_1F_Text_Grunt3Intro	As promised, we've come for\nthe rocket fuel!		
+MossdeepCity_SpaceCenter_1F_Text_Grunt3Defeat	Ran out of fuel…		
+MossdeepCity_SpaceCenter_1F_Text_Grunt3PostBattle	Don't think you're on a roll just\nbecause you've beaten me!		
+MossdeepCity_SpaceCenter_1F_Text_Grunt1Intro	We gave you fair warning!\nThere's nothing sneaky about us!		
+MossdeepCity_SpaceCenter_1F_Text_Grunt1Defeat	Grrr…\nWe should've used sneaky treachery…		
+MossdeepCity_SpaceCenter_1F_Text_Grunt1PostBattle	Okay, I get it already! The next time,\nwe'll come unannounced.		
+MossdeepCity_SpaceCenter_1F_Text_Grunt4Intro	The rocket fuel the SPACE CENTER has\nin storage--that's what we're after.\pWe mean to take every last bit of it!		
+MossdeepCity_SpaceCenter_1F_Text_Grunt4Defeat	Please, can you spare some fuel?\nEven a chintzy cup will do!		
+MossdeepCity_SpaceCenter_1F_Text_Grunt4PostBattle	What are we going to do with\nthe rocket fuel?\pHow would I know?\nAsk our leader upstairs!		
+MossdeepCity_SpaceCenter_1F_Text_Grunt2Intro	Our leader said no one, but no one,\ngets past me!		
+MossdeepCity_SpaceCenter_1F_Text_Grunt2Defeat	Ack! Ack! Aaack!		
+MossdeepCity_SpaceCenter_1F_Text_Grunt2PostBattle	Please, tell our leader that\nI never abandoned my post.\lThat I stayed to the bitter end…		
+MossdeepCity_SpaceCenter_1F_Text_MagmaIntentToStealNotice	This is…\nAn intent-to-steal notice?\p“To the staff of the SPACE CENTER:\nHow are you? We are doing fine.\p“We will soon visit you to take your\nrocket fuel.\p“Please don't try to stop us.\nWe will take the fuel no matter what.\p“Let there be more land!\n                                          TEAM MAGMA”		

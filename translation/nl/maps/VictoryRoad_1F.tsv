@@ -1,0 +1,22 @@
+key	english	dutch	notes
+VictoryRoad_1F_Text_WallyNotGoingToLoseAnymore	WALLY: Hi! {PLAYER}!\pI bet you're surprised to see me here!\pI made it all the way here, and it's\nall thanks to you!\p{PLAYER}, losing to you that time\nmade me stronger!\pBut I'm not going to lose anymore!\pI'm going to win! For the POKéMON who\ngave me courage and strength!\pOkay… Here I come!		
+VictoryRoad_1F_Text_WallyEntranceDefeat	Wow!\n{PLAYER}, you are strong, after all!		
+VictoryRoad_1F_Text_WallyPostEntranceBattle	WALLY: I couldn't beat you today,\n{PLAYER}, but one of these days, I'll\lcatch up to you!		
+VictoryRoad_1F_Text_WallyIntro	WALLY: Hi! {PLAYER}!\pI've gotten stronger since that last\ntime! I wanted to show you, {PLAYER}!\pOkay… Here I come!		
+VictoryRoad_1F_Text_WallyDefeat	Wow!\n{PLAYER}, you are strong, after all!		
+VictoryRoad_1F_Text_WallyPostBattle	WALLY: I couldn't beat you this time,\ntoo… But one of these days, {PLAYER},\lI'm going to catch up to you…\pAnd challenge the POKéMON LEAGUE!		
+VictoryRoad_1F_Text_EdgarIntro	I've made it this far a couple times,\nbut the last stretch is so long…		
+VictoryRoad_1F_Text_EdgarDefeat	My dream ends here again…		
+VictoryRoad_1F_Text_EdgarPostBattle	You've made it this far. Keep the\nmomentum going and become the\lCHAMPION! If anyone can, it's you!		
+VictoryRoad_1F_Text_AlbertIntro	I didn't come all this way to lose now.\nThat possibility doesn't exist!		
+VictoryRoad_1F_Text_AlbertDefeat	Impossible…\nI lost?		
+VictoryRoad_1F_Text_AlbertPostBattle	I lost here…\pThat means I lack the qualifications\nto become the CHAMPION…		
+VictoryRoad_1F_Text_HopeIntro	This seemingly infinite and harsh road\nlives up to its name of VICTORY.		
+VictoryRoad_1F_Text_HopeDefeat	Your battle style is fantastic…		
+VictoryRoad_1F_Text_HopePostBattle	You seem to have the potential for\nbecoming the CHAMPION.		
+VictoryRoad_1F_Text_QuincyIntro	What is the VICTORY ROAD?\nI'll tell you if you win!		
+VictoryRoad_1F_Text_QuincyDefeat	Okay!\nWell done!		
+VictoryRoad_1F_Text_QuincyPostBattle	Getting through here safely--that's\nthe final test for any TRAINER aiming\lto become the POKéMON CHAMPION.\pThat's why it's called the VICTORY\nROAD.		
+VictoryRoad_1F_Text_KatelynnIntro	I have nothing to say to anyone\nthat's come this far. Come on!		
+VictoryRoad_1F_Text_KatelynnDefeat	This is a disgrace…		
+VictoryRoad_1F_Text_KatelynnPostBattle	Humph, go right on ahead.\nSee if I care.		

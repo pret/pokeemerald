@@ -1,0 +1,26 @@
+key	english	dutch	notes
+Route110_TrickHouseEntrance_Text_YoureBeingWatched	You're being watched…		
+Route110_TrickHouseEntrance_Text_ConcealedBeneathDesk	Hah? Grrr…\pHow did you know I concealed myself\nbeneath this desk? You're sharp!		
+Route110_TrickHouseEntrance_Text_ConcealedBehindTree	Hah? Grrr…\pHow did you know I concealed myself\nbehind this tree? You're sharp!		
+Route110_TrickHouseEntrance_Text_ConcealedInDresser	Hah? Grrr…\pHow did you know I concealed myself\nin this dresser? You're sharp!		
+Route110_TrickHouseEntrance_Text_ConealedBeyondWindow	Hah? Grrr…\pHow did you know I concealed myself\nbeyond this window? You're sharp!		
+Route110_TrickHouseEntrance_Text_ConcealedInPlanter	Hah? Grrr…\pHow did you know I concealed myself\nin this planter? You're sharp!		
+Route110_TrickHouseEntrance_Text_ConcealedInCupboard	Hah? Grrr…\pHow did you know I concealed myself\nin this cupboard? You're sharp!		
+Route110_TrickHouseEntrance_Text_ConcealedBehindWindow	Hah? Grrr…\pHow did you know I concealed myself\nbehind this window? You're sharp!		
+Route110_TrickHouseEntrance_Text_ConcealedBeneathCushion	Hah? Grrr…\pHow did you know I concealed myself\nbeneath this cushion? You're sharp!		
+Route110_TrickHouseEntrance_Text_TheyCallMeTrickMaster	Behold!\pFor I am the greatest living mystery\nof a man in all of HOENN!\lThey call me…\pThe TRICK MASTER!\nWahahaha! Glad to meet you!		
+Route110_TrickHouseEntrance_Text_ComeToChallengeTrickHouse	You, you've come to challenge\nmy TRICK HOUSE, haven't you?\pThat's why you're here, isn't it?\nYes, it is!\pConsider your challenge accepted!\pEnter through the scroll there,\nand let your challenge commence!\pI shall be waiting in the back!		
+Route110_TrickHouseEntrance_Text_ItsAScroll	It's a scroll.		
+Route110_TrickHouseEntrance_Text_GoInHoleBehindScroll	There is a big hole behind the scroll!\pWant to go in?		
+Route110_TrickHouseEntrance_Text_LeavingOnJourneyNote	There is a note affixed to the scroll…\p“I am leaving on a journey.\nDon't look for me. TRICK MASTER”		
+Route110_TrickHouseEntrance_Text_NextTimeUseThisTrick	For the next time, I'll use this trick,\nand that scheme, and those ruses…\pMufufufu… If I may say so, it's\nbrilliantly difficult, even for me!		
+Route110_TrickHouseEntrance_Text_InMidstOfDevisingNewChallenges	Hah? What?!\nOh, it's you!\pI'm in the midst of devising new tricky\nchallenges!\pIt's not too much to ask for a bit more\ntime for me to think, is it now?\lYou wouldn't begrudge me that?\lCome back in a little while!		
+Route110_TrickHouseEntrance_Text_YoureHereToAcceptReward	Ah, it's you! You're here to accept the\nreward from before, isn't that right?\lYes, right I am!\pHere!\nI'll give it to you now!		
+Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward	Hah?\nDid you not come to claim your reward?		
+Route110_TrickHouseEntrance_Text_MechadollWhichTent	MECHADOLL 5 I AM!\nIF REWARD IS NOT TAKEN BY YOU,\lTHEN TRICK MASTER YOU CANNOT FOLLOW.\pRED TENT OR BLUE TENT,\nWHICH DO YOU PREFER?		
+Route110_TrickHouseEntrance_Text_ThenFarewell	THEN FAREWELL.		
+Route110_TrickHouseEntrance_Text_PCFullAgain	YOUR PC STATUS: FULL AGAIN.\nMEAN, YOU ARE.		
+Route110_TrickHousePuzzle_Text_FoundAScroll	{PLAYER} found a scroll.		
+Route110_TrickHousePuzzle_Text_MemorizedSecretCode	{PLAYER} memorized the secret code\nwritten on the scroll.		
+Route110_TrickHousePuzzle_Text_SecretCodeWrittenOnIt	A secret code is written on it.		
+Route110_TrickHouseEntrance_Text_DoorLockedWriteSecretCodeHere	The door is locked.\p…On closer inspection, this is written\non it: “Write the secret code here.”		

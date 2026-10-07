@@ -1,0 +1,10 @@
+key	english	dutch	notes
+LilycoveCity_MoveDeletersHouse_Text_ICanMakeMonForgetMove	Uh…\nOh, yes, I'm the MOVE DELETER.\pI can make POKéMON forget their moves.\pWould you like me to do that?		
+LilycoveCity_MoveDeletersHouse_Text_WhichMonShouldForget	Which POKéMON should forget a move?		
+LilycoveCity_MoveDeletersHouse_Text_WhichMoveShouldBeForgotten	Which move should be forgotten?		
+LilycoveCity_MoveDeletersHouse_Text_MonOnlyKnowsOneMove	{STR_VAR_1} knows only one move\nso it can't be forgotten…		
+LilycoveCity_MoveDeletersHouse_Text_MonsMoveShouldBeForgotten	Hm! {STR_VAR_1}'s {STR_VAR_2}?\nThat move should be forgotten?		
+LilycoveCity_MoveDeletersHouse_Text_MonHasForgottenMove	It worked to perfection!\p{STR_VAR_1} has forgotten\n{STR_VAR_2} completely.		
+LilycoveCity_MoveDeletersHouse_Text_ComeAgain	Come again if there are moves that\nneed to be forgotten.		
+LilycoveCity_MoveDeletersHouse_Text_EggCantForgetMoves	What?\nNo EGG should know any moves.		
+LilycoveCity_MoveDeletersHouse_Text_CantForgetSurf	Hm!\pYour {STR_VAR_1} doesn't seem willing\nto forget SURF.		

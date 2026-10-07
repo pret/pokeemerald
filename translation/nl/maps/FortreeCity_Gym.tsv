@@ -1,0 +1,34 @@
+key	english	dutch	notes
+FortreeCity_Gym_Text_GymGuideAdvice	Yo, how's it going, CHAMPION-\nbound {PLAYER}?\pFORTREE GYM LEADER WINONA is\na master of FLYING-type POKéMON.\pShe's waiting at the back of this GYM,\nbehind the rotating doors.\pShe's waiting for new challengers\nwho are trying to take wing!\pOkay, go for it!		
+FortreeCity_Gym_Text_GymGuidePostVictory	You did it!\nYou've achieved liftoff!		
+FortreeCity_Gym_Text_JaredIntro	Behold the elegant battle style of\nBIRD POKéMON!		
+FortreeCity_Gym_Text_JaredDefeat	You…\nYou're strong…		
+FortreeCity_Gym_Text_JaredPostBattle	A TRAINER has to be smart to keep\nup with unexpected turns of events.\pDo you have the smarts to get to\nour LEADER?		
+FortreeCity_Gym_Text_EdwardoIntro	The lovers of BIRD POKéMON aspire\nto join this GYM.\pAs a member of the FORTREE GYM,\nI'm not allowed to lose!		
+FortreeCity_Gym_Text_EdwardoDefeat	It was too much of a load for me\nto bear…		
+FortreeCity_Gym_Text_EdwardoPostBattle	The world is huge, and there are\ncountless tough TRAINERS.\pI'm going to keep training and make\nmyself even stronger.		
+FortreeCity_Gym_Text_FlintIntro	There's no need for WINONA, our GYM\nLEADER, to deal with you!\pI'm plenty good enough for you!		
+FortreeCity_Gym_Text_FlintDefeat	WINONA, I…\nI lost!		
+FortreeCity_Gym_Text_FlintPostBattle	WINONA is cute and she's strong.\nShe's the ultimate LEADER!\pBlush…		
+FortreeCity_Gym_Text_AshleyIntro	WINONA taught me personally!\nYou can't beat me easily!		
+FortreeCity_Gym_Text_AshleyDefeat	I was beaten…		
+FortreeCity_Gym_Text_AshleyPostBattle	Thanks to WINONA, the people of\nFORTREE can live without fear.		
+FortreeCity_Gym_Text_HumbertoIntro	When WINONA takes to battle, her face\nshines with beautiful determination…\pI'm not letting you witness that\nlovely sight!		
+FortreeCity_Gym_Text_HumbertoDefeat	Urk!\nI couldn't stop you.		
+FortreeCity_Gym_Text_HumbertoPostBattle	You'd better watch it!\nDon't get distracted staring at WINONA\lor you'll go crashing down in a heap!		
+FortreeCity_Gym_Text_DariusIntro	You'd better know that there are all\nsorts of FLYING-type POKéMON.\pYou do know that, right?		
+FortreeCity_Gym_Text_DariusDefeat	You seem to know your stuff!		
+FortreeCity_Gym_Text_DariusPostBattle	Sure, you beat me all right.\nBut you'd better watch it! Our LEADER\lWINONA's POKéMON are all business.		
+FortreeCity_Gym_Text_WinonaIntro	I am WINONA. I am the LEADER of\nthe FORTREE POKéMON GYM.\pI have become one with BIRD POKéMON\nand have soared the skies…\pHowever grueling the battle, we have\ntriumphed with grace…\pWitness the elegant choreography\nof BIRD POKéMON and I!		
+FortreeCity_Gym_Text_WinonaDefeat	Never before have I seen a TRAINER\ncommand POKéMON with more grace\lthan I…\pIn recognition of your prowess,\nI present to you this GYM BADGE.		
+FortreeCity_Gym_Text_ReceivedFeatherBadge	{PLAYER} received the FEATHER BADGE\nfrom WINONA.		
+FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis	With the FEATHER BADGE, all POKéMON up\nto LV 70, even those received through\ltrades, will obey your every command.\pYou will also be able to use\nthe HM move FLY outside of battle.\pAnd this…\nThis is a gift from me.		
+FortreeCity_Gym_Text_ExplainAerialAce	TM40 contains AERIAL ACE.\pIts speed…\nNo POKéMON should be able to avoid it.\p… … … … … …		
+FortreeCity_Gym_Text_RegisteredWinona	Registered GYM LEADER WINONA\nin the POKéNAV.		
+FortreeCity_Gym_Text_WinonaPostBattle	Though I fell to you, I will remain\ndevoted to BIRD POKéMON.		
+FortreeCity_Gym_Text_GymStatue	FORTREE CITY POKéMON GYM		
+FortreeCity_Gym_Text_GymStatueCertified	FORTREE CITY POKéMON GYM\pWINONA'S CERTIFIED TRAINERS:\n{PLAYER}		
+FortreeCity_Gym_Text_WinonaPreRematch	WINONA: We humans can never escape\ngravity's pull on the ground.\pBut by striving for excellence,\nwe have the power to soar!\pYou have scaled the pinnacle as\nthe reigning CHAMPION.\pPlease, allow me to see your power\nat full flight!		
+FortreeCity_Gym_Text_WinonaRematchDefeat	I failed to reach your height again…		
+FortreeCity_Gym_Text_WinonaPostRematch	WINONA: Even though I have lost,\nthe wings of my heart remain unbroken.\pI can rise and soar again and\nyet again.\pI am convinced of it!		
+FortreeCity_Gym_Text_WinonaRematchNeedTwoMons	WINONA: We humans can never escape\ngravity's pull on the ground.\pBut by striving for excellence,\nwe have the power to soar!\pYou have scaled the pinnacle as\nthe reigning CHAMPION.\pPlease, allow me to see your power\nat full flight!\pOh, no… Do you have but one\nPOKéMON with you?\pPlease return with two POKéMON\nat the very least.		

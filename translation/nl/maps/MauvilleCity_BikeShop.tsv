@@ -1,0 +1,23 @@
+key	english	dutch	notes
+MauvilleCity_BikeShop_Text_RydelGreeting	Well, well, what have we here?\nA most energetic customer!\pMe? You may call me RYDEL.\nI'm the owner of this cycle shop.		
+MauvilleCity_BikeShop_Text_DidYouComeFromFarAway	RYDEL: Your RUNNING SHOES…\nThey're awfully filthy.\pDid you come from far away?		
+MauvilleCity_BikeShop_Text_GuessYouDontNeedBike	RYDEL: Is that right?\pThen, I guess you have no need for\nany of my BIKES.		
+MauvilleCity_BikeShop_Text_ExplainBikesChooseWhichOne	RYDEL: Hm, hm… … … … …\pYou're saying that you came all this\nway from LITTLEROOT?\pMy goodness!\nThat's ridiculously far!\pIf you had one of my BIKES, you could\ngo anywhere easily while feeling the\lgentle caress of the wind!\pI'll tell you what!\nI'll give you a BIKE!\pOh, wait a second!\pI forgot to tell you that there are\ntwo kinds of BIKES!\pThey are the MACH BIKE and\nthe ACRO BIKE!\pThe MACH BIKE is for cyclists who want\nto feel the wind with their bodies!\pAnd an ACRO BIKE is for those who\nprefer technical rides!\pI'm a real sweetheart, so you can\nhave whichever one you like!\pWhich one will you choose?		
+MauvilleCity_BikeShop_Text_ChoseMachBike	{PLAYER} chose the MACH BIKE.		
+MauvilleCity_BikeShop_Text_ChoseAcroBike	{PLAYER} chose the ACRO BIKE.		
+MauvilleCity_BikeShop_Text_ComeBackToSwitchBikes	RYDEL: If you get the urge to switch\nBIKES, just come see me!		
+MauvilleCity_BikeShop_Text_WantToSwitchBikes	RYDEL: Oh? Were you thinking about\nswitching BIKES?		
+MauvilleCity_BikeShop_Text_IllSwitchBikes	RYDEL: Okay, no problem!\nI'll switch BIKES for you!		
+MauvilleCity_BikeShop_Text_ExchangedMachForAcro	{PLAYER} got the MACH BIKE exchanged\nfor an ACRO BIKE.		
+MauvilleCity_BikeShop_Text_ExchangedAcroForMach	{PLAYER} got the ACRO BIKE exchanged\nfor a MACH BIKE.		
+MauvilleCity_BikeShop_Text_HappyYouLikeIt	RYDEL: Good, good!\nI'm happy that you like it!		
+MauvilleCity_BikeShop_Text_OhYourBikeIsInPC	Oh? What happened to that BIKE\nI gave you?\pOh, I get it, you stored it using your PC.\pWell, take it out of PC storage,\nand I'll be happy to exchange it!\pMay the wind always be at your back\non your adventure!		
+MauvilleCity_BikeShop_Text_HandbooksAreInBack	I'm learning about BIKES while\nI work here.\pIf you need advice on how to ride your\nBIKE, there're a couple handbooks in\lthe back.		
+MauvilleCity_BikeShop_Text_MachHandbookWhichPage	It's a handbook on the MACH BIKE.\pWhich page do you want to read?		
+MauvilleCity_BikeShop_Text_HowToRideMachBike	A BIKE moves in the direction that\nthe + Control Pad is pressed.\pIt will speed up once it gets rolling.\pTo stop, release the + Control Pad.\nThe BIKE will slow to a stop.\pWant to read a different page?		
+MauvilleCity_BikeShop_Text_HowToTurnMachBike	A MACH BIKE is speedy, but it can't\nstop very quickly.\pIt gets a little tricky to get around\na corner.\pRelease the + Control Pad a little\nbefore the corner and slow down.\pWant to read a different page?		
+MauvilleCity_BikeShop_Text_SandySlopes	There are small sandy slopes\nthroughout the HOENN region.\pThe loose, crumbly sand makes it\nimpossible to climb normally.\pBut if you have a MACH BIKE, you can\nzip up a sandy slope.\pWant to read a different page?		
+MauvilleCity_BikeShop_Text_AcroHandbookWhichPage	It's a handbook on the ACRO BIKE.\pWhich page do you want to read?		
+MauvilleCity_BikeShop_Text_Wheelies	Press the B Button while riding,\nand the front wheel lifts up.\pYou can zip around with the front\nwheel up using the + Control Pad.\pThis technique is called a wheelie.\pWant to read a different page?		
+MauvilleCity_BikeShop_Text_BunnyHops	Keeping the B Button pressed,\nyour BIKE can hop on the spot.\pThis technique is called a bunny hop.\pYou can ride while hopping, too.\pWant to read a different page?		
+MauvilleCity_BikeShop_Text_Jumps	Press the B Button and the + Control\nPad at the same time to jump.\pPress the + Control Pad to the side\nto jump sideways.\pPress it backwards to make the BIKE\nchange directions while jumping.\pWant to read a different page?		

@@ -1,0 +1,40 @@
+key	english	dutch	notes
+LavaridgeTown_Gym_1F_Text_GymGuideAdvice	Hey, how's it going, CHAMPION-\nbound {PLAYER}?\pLAVARIDGE's GYM LEADER FLANNERY\nuses FIRE-type POKéMON.\pHer passion for POKéMON burns stronger\nand hotter than a volcano.\pDon't get too close to her--you'll burn!\nHose her down with water and then\lgo for it!		
+LavaridgeTown_Gym_1F_Text_GymGuidePostVictory	Yow! That was a scorching-hot battle!		
+LavaridgeTown_Gym_1F_Text_ColeIntro	Owowowowow!\nYikes, it's hot!		
+LavaridgeTown_Gym_1F_Text_ColeDefeat	I'm blinded by sweat in my eyes…		
+LavaridgeTown_Gym_1F_Text_ColePostBattle	Being buried in hot sand promotes\ncirculation.\pIt's effective for healing pain in\nyour joints.		
+LavaridgeTown_Gym_1F_Text_AxleIntro	I'm trying to relieve my stress.\nDon't come along and stress me out!		
+LavaridgeTown_Gym_1F_Text_AxleDefeat	I hope FLANNERY flames you good!		
+LavaridgeTown_Gym_1F_Text_AxlePostBattle	Haaah… Whew…\pIf you spend too much time buried in\nhot sand, it tuckers you out…		
+LavaridgeTown_Gym_B1F_Text_KeeganIntro	You must be getting tired by now.\nYou'd like to rest in the hot sand,\lwouldn't you?\pBut you should know that maintaining\nyour willpower is an important ability\lfor all TRAINERS.		
+LavaridgeTown_Gym_B1F_Text_KeeganDefeat	Play with fire, and be burned…		
+LavaridgeTown_Gym_B1F_Text_KeeganPostBattle	Your skill is real…\nBut our LEADER FLANNERY is strong.\pIf you don't watch yourself, you'll be\nburned seriously.		
+LavaridgeTown_Gym_1F_Text_GeraldIntro	Can your POKéMON withstand\n392-degree heat?		
+LavaridgeTown_Gym_1F_Text_GeraldDefeat	It didn't burn hotly enough…		
+LavaridgeTown_Gym_1F_Text_GeraldPostBattle	The temperature of magma is\n392 degrees.\pYour POKéMON beat me, so they should\neasily survive in magma.		
+LavaridgeTown_Gym_1F_Text_DanielleIntro	Um…\nOkay, I'll battle with you.		
+LavaridgeTown_Gym_1F_Text_DanielleDefeat	Oh, but you're too strong.		
+LavaridgeTown_Gym_1F_Text_DaniellePostBattle	I'm going to be a pretty and strong\nTRAINER just like FLANNERY.		
+LavaridgeTown_Gym_B1F_Text_JaceIntro	Come on, get with it!\nLet's go before my feelings cool!		
+LavaridgeTown_Gym_B1F_Text_JaceDefeat	It's so hot, and yet my heart is\nclutched by ice…		
+LavaridgeTown_Gym_B1F_Text_JacePostBattle	The way the battling spirit burns\nwithin you, you may stand a chance\lagainst our LEADER.		
+LavaridgeTown_Gym_B1F_Text_JeffIntro	See how the flames blaze wildly?\nThey flare in anticipation of my win!		
+LavaridgeTown_Gym_B1F_Text_JeffDefeat	Something didn't go right.		
+LavaridgeTown_Gym_B1F_Text_JeffPostBattle	Well, so what? I say so what?\nI can walk on hot coals barefoot!\p…Don't even think about trying it!		
+LavaridgeTown_Gym_B1F_Text_EliIntro	As much as I love mountains,\nI especially love volcanoes.		
+LavaridgeTown_Gym_B1F_Text_EliDefeat	Well, it seems to me I lost without\never being in control.		
+LavaridgeTown_Gym_B1F_Text_EliPostBattle	I stay here because I became a fan\nof FLANNERY's power.\pHehehehe.		
+LavaridgeTown_Gym_1F_Text_FlanneryIntro	Welcome… No, wait.\pPuny TRAINER, how good to see you've\nmade it here!\pI have been entrusted with the…\nNo, wait.\pI am FLANNERY, and I'm the GYM\nLEADER here!\pUh…\nDare not underestimate me, though\lI have been LEADER only a short time!\pWith skills inherited from my grand-\nfather, I shall, uh…demonstrate the\lhot moves we have honed on this land!		
+LavaridgeTown_Gym_1F_Text_FlanneryDefeat	Oh…\nI guess I was trying too hard…\pI… I've only recently become\na GYM LEADER.\pI tried too hard to be someone\nI'm not.\pI have to do things my natural way. If\nI don't, my POKéMON will be confused.\pThanks for teaching me that.\nFor that, you deserve this.		
+LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge	{PLAYER} received the HEAT BADGE\nfrom FLANNERY.		
+LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis	If you have a HEAT BADGE, all POKéMON\nup to Level 50, even those you get in\ltrades from other people, will obey\lyou completely.\pAnd, it lets POKéMON use the HM move\nSTRENGTH outside of battle.\pThis is a token of my appreciation.\nDon't be shy about taking it!		
+LavaridgeTown_Gym_1F_Text_ExplainOverheat	That TM50 contains OVERHEAT.\pThat move inflicts serious damage on\nthe opponent.\pBut it also sharply cuts the SP. ATK\nof the POKéMON using it. It might not\lbe suitable for longer battles.		
+LavaridgeTown_Gym_1F_Text_RegisteredFlannery	Registered GYM LEADER FLANNERY\nin the POKéNAV.		
+LavaridgeTown_Gym_1F_Text_FlanneryPostBattle	Your power reminds me of someone…\pOh! I know! You battle like NORMAN,\nthe GYM LEADER of PETALBURG.		
+LavaridgeTown_Gym_1F_Text_GymStatue	LAVARIDGE TOWN POKéMON GYM		
+LavaridgeTown_Gym_1F_Text_GymStatueCertified	LAVARIDGE TOWN POKéMON GYM\pFLANNERY'S CERTIFIED TRAINERS:\n{PLAYER}		
+LavaridgeTown_Gym_1F_Text_FlanneryPreRematch	FLANNERY: Losing a battle isn't going\nto deflate me.\pI love POKéMON.\nI love to battle.\lAnd… I love this GYM!\pLet's exchange superhot moves\nin another battle!		
+LavaridgeTown_Gym_1F_Text_FlanneryRematchDefeat	Whew!\nOn the verge of eruption!		
+LavaridgeTown_Gym_1F_Text_FlanneryPostRematch	FLANNERY: I lost the match,\nbut I'm completely satisfied.\pIt's not often I get to enjoy a battle\nthis heated.\pLet's have another one like this\nagain sometime!		
+LavaridgeTown_Gym_1F_Text_FlanneryRematchNeedTwoMons	FLANNERY: Losing a battle isn't going\nto deflate me.\pI love POKéMON.\nI love to battle.\lAnd… I love this GYM!\pLet's exchange superhot moves\nin another battle!\pOh, wait. Do you only have one POKéMON\nthat can battle?\pI hate to say this, but when you come\nsee me, bring at least two POKéMON.		

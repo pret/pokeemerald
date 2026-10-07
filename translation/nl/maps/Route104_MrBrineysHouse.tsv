@@ -1,0 +1,10 @@
+key	english	dutch	notes
+Route104_MrBrineysHouse_Text_WaitUpPeeko	MR. BRINEY: Hold on, lass!\nWait up, PEEKO!		
+Route104_MrBrineysHouse_Text_ItsYouLetsSailToDewford	Hm? You're {PLAYER}{KUN}!\nYou saved my darling PEEKO!\lWe owe so much to you!\pWhat's that?\nYou want to sail with me?\pHmhm…\pYou have a LETTER bound for DEWFORD\nand a package for SLATEPORT, then?\pQuite the busy life you must lead!\pBut, certainly, what you're asking is\nno problem at all.\pYou've come to the right man!\nWe'll set sail for DEWFORD.		
+Route104_MrBrineysHouse_Text_SetSailForDewford	MR. BRINEY: DEWFORD it is, then!\pAnchors aweigh!\nPEEKO, we're setting sail, my darling!		
+Route104_MrBrineysHouse_Text_DeclineDeliverySail	MR. BRINEY: Is that so?\nYour deliveries can wait?\pYou just go on and tell me whenever\nyou want to set sail!		
+Route104_MrBrineysHouse_Text_NeedToMakeDeliveriesSailToDewford	MR. BRINEY: Ahoy!\nI know exactly what you want to say!\pYou're to deliver a LETTER to DEWFORD\nand a package to SLATEPORT.\pWhat you need me to do is no problem\nat all--I'm the man for the job!\pFirst, we'll set sail for DEWFORD.		
+Route104_MrBrineysHouse_Text_NeedToDeliverPackageSailToDewford	MR. BRINEY: Ahoy!\nI know exactly what you want to say!\pYou're to deliver a package to\nCAPT. STERN in SLATEPORT.\pWhat you need me to do is no problem\nat all--I'm the man for the job!\pFirst, we'll set sail for DEWFORD.		
+Route104_MrBrineysHouse_Text_WhereAreWeBound	MR. BRINEY: Ahoy!\nFor you, I'll go out to sea anytime!\pNow, my friend, where are we bound?		
+Route104_MrBrineysHouse_Text_TellMeWheneverYouWantToSail	MR. BRINEY: Is that so?\nWell, PEEKO owes her life to you.\pYou just go on and tell me whenever\nyou want to set sail!		
+Route104_MrBrineysHouse_Text_Peeko	PEEKO: Pii piihyoro!		

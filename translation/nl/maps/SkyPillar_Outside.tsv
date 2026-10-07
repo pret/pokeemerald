@@ -1,0 +1,6 @@
+key	english	dutch	notes
+SkyPillar_Outside_Text_DoorIsClosed	The door is closed.		
+SkyPillar_Outside_Text_OpenedDoorToSkyPillar	WALLACE: Oh, my, I'm terribly sorry!\pIn my haste, I didn't notice that\nI'd left you behind!\pI've opened the locked door of\nthe SKY PILLAR.\p{PLAYER}{KUN}, let's be on our way!		
+SkyPillar_Outside_Text_EarthquakeNotMomentToWaste	WALLACE: It's an earthquake!\pThere's not a moment to waste!\nWe've got to hurry!		
+SkyPillar_Outside_Text_SituationGettingWorse	WALLACE: Hmm…\nThe situation is getting worse…		
+SkyPillar_Outside_Text_GotToGoBackForSootopolis	WALLACE: This isn't good…\pThe weather distortion is spreading\neven here…\p{PLAYER}{KUN}.\pRAYQUAZA should be farther up\nfrom here.\pI'm worried about SOOTOPOLIS.\nI've got to go back.\pEverything is in your hands now.\nDon't fail us!		

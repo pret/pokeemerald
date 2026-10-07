@@ -1,0 +1,14 @@
+key	english	dutch	notes
+Roulette_Text_PlayMinimumWagerIsX	The minimum wager at this table\nis {STR_VAR_1}. Do you want to play?		
+Roulette_Text_NotEnoughCoins	You don't have enough COINS.		
+Roulette_Text_SpecialRateTable	Special rate table right now!		
+Roulette_Text_ControlsInstruction	Place your wager with the + Control\nPad, then press the A Button.		
+Roulette_Text_ItsAHit	It's a hit!		
+Roulette_Text_Jackpot	Jackpot!		
+Roulette_Text_NothingDoing	Nothing doing!		
+Roulette_Text_YouveWonXCoins	You've won {STR_VAR_1} COINS!		
+Roulette_Text_NoCoinsLeft	No COINS left…		
+Roulette_Text_KeepPlaying	Keep playing?		
+Roulette_Text_BoardWillBeCleared	The ROULETTE board will be cleared.		
+Roulette_Text_YouDontHaveACoinCase	You don't have a COIN CASE.		
+Roulette_Text_CoinCaseIsFull	Your COIN CASE is full!\nCoins can be exchanged for prizes.		

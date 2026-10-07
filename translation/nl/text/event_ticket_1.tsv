@@ -1,0 +1,9 @@
+key	english	dutch	notes
+EventTicket_Text_ShowOldSeaMap	The ferry to SLATEPORT is…\pI beg your pardon?\nCan we sail to this place on the map?\pI know someone who will help you better.\nPlease wait.		
+EventTicket_Text_ThatPass	The ferry to SLATEPORT is…\pOh?\nThat PASS…		
+EventTicket_Text_ShowEonTicket	Aye, mate, are you the one who brought\nthat mighty odd PASS?\pI'll tell you, you're trying to reach a\ntiny spit of an island far in the south.\pThere's no telling what we'll encounter\nonce we reach there, aye.\lThat shivers my timbers!\pAll aboard!		
+EventTicket_Text_SouthernIslandSailBack	Aye, mate, there's nothing here to\nsee or do on this forgettable island.\pWhat say we sail back to LILYCOVE?		
+EventTicket_Text_SailHome	Aye, right, then!\nSail home we will!		
+EventTicket_Text_AsYouLike	Aye, right, as you like, then.		
+SouthernIsland_Interior_Text_Sign	“All dreams are but another reality.\nNever forget…”		
+SouthernIsland_Exterior_Text_Sign	“Those whose memories fade seek to\ncarve them in their hearts…”		

@@ -1,0 +1,33 @@
+key	english	dutch	notes
+Route104_Text_BrineyLivesInSeasideCottage	That seaside cottage is where\nMR. BRINEY lives.\pHe was once a mighty sailor who never\nfeared the sea, however stormy.		
+Route104_Text_WhatsItLikeAtBottomOfSea	The sea, huh?\pI wonder what it's like at the bottom\nof the sea?		
+Route104_Text_ThrowBallAtWeakenedPokemon	If you're going to throw a POKé BALL,\nweaken the wild POKéMON first.\pIt will be easier to catch if it's been\npoisoned, burned, or lulled to sleep.		
+Route104_Text_OnlyThrowBallAtWildPokemon	You're a thief if you try to steal\nsomeone else's POKéMON.\pYou should throw POKé BALLS only at\nwild POKéMON.		
+Route104_Text_ImNotATrainer	Oh, no, I'm not a TRAINER.\pBut that's right, if TRAINERS lock eyes,\nit's a challenge to battle.\pIf you don't want to battle, stay out\nof their sight.		
+Route104_Text_LikeFillingMouthWithSeedsTakeThis	I like filling my mouth with seeds,\nthen spitting them out fast!\pYou can have this, so you try it out!\pUse it on a POKéMON, and it will learn\na move for firing seeds rapidly.		
+Route104_Text_TMsAreOneTimeUse	A word of advice!\pA TM, TECHNICAL MACHINE, is good only\nfor one-time use.\pOnce you use it, it's gone.\nThink twice before using it!		
+Route104_Text_DontNeedThisTakeIt	This FLOWER SHOP started selling\nsaplings recently.\pIt made me so happy, I went overboard\nshopping.\pI don't need this WHITE HERB anymore.\nWould you take it, please?		
+Route104_Text_FlowerShopSellingSaplings	This FLOWER SHOP started selling\nsaplings recently.\pIt made me so happy, I went overboard\nshopping. Where should I put them?		
+Route104_Text_MrBrineysCottage	MR. BRINEY'S COTTAGE		
+Route104_Text_RouteSignPetalburg	ROUTE 1O4\n{RIGHT_ARROW} PETALBURG CITY		
+Route104_Text_RouteSignRustboro	ROUTE 1O4\n{UP_ARROW} RUSTBORO CITY		
+Route104_Text_PrettyPetalFlowShop	PRETTY PETAL FLOWER SHOP		
+Route104_Text_TrainerTipsDoubleBattles	TRAINER TIPS\pIn the HOENN region there are pairs\nof TRAINERS who challenge others\lfor 2-on-2 POKéMON battles called\lDOUBLE BATTLES.\pIn a DOUBLE BATTLE, the TRAINER must\nsend out two POKéMON, the one at the\lleft of the list and the top one.\lWatch how POKéMON are lined up.		
+Route104_Text_MayWeShouldRegister	MAY: Oh, hi, {PLAYER}{KUN}!\pDEVON upgraded your POKéNAV with\nthe MATCH CALL system, huh?\pWe should register each other so we\ncan get in contact anytime.		
+Route104_Text_RegisteredMay	{PLAYER} registered MAY\nin the POKéNAV.		
+Route104_Text_MayHowsYourPokedex	MAY: Oh, by the way, {PLAYER}{KUN},\nhow's your POKéDEX coming along?		
+Route104_Text_MayMinesDecentLetsBattle	Mine's looking pretty decent.\nSo…\lHow about a little battle?		
+Route104_Text_MayHaventRaisedPokemon	MAY: Oh, what's the matter?\pHaven't you caught or raised your\nPOKéMON very much?\pThat's not very good for a TRAINER!		
+Route104_Text_MayLetsBattle	MAY: So, what do you think?\nHow about a little battle here?		
+Route104_Text_MayIntro	MAY: You just became a TRAINER,\n{PLAYER}{KUN}. I'm not going to lose!		
+Route104_Text_MayDefeat	Yikes!\nYou're better than I expected!		
+Route104_Text_MayPostBattle	MAY: I can tell you've gotten pretty\ngood with the way you handle POKéMON.\pBut instead of only making them\nbattle, you should be like MR. BRINEY.\pIt's important to become friends with\nPOKéMON, too.		
+Route104_Text_BrendanWeShouldRegister	BRENDAN: Oh, hey, {PLAYER}!\pCool, you had DEVON install the MATCH\nCALL system on your POKéNAV!\pLet's register each other in our\nPOKéNAVS so we can keep in touch.		
+Route104_Text_RegisteredBrendan	{PLAYER} registered BRENDAN\nin the POKéNAV.		
+Route104_Text_BrendanHowsYourPokedex	BRENDAN: {PLAYER}, how's your POKéDEX?\nHave you filled in any pages yet?		
+Route104_Text_BrendanDoingGreatLetsBattle	Me, I'm doing great!\pWant to check out how good I am with\na battle?		
+Route104_Text_BrendanNoConfidence	BRENDAN: What's the matter? Don't have\nany confidence in your POKéMON?		
+Route104_Text_BrendanLetsBattle	BRENDAN: What's up?\nWant to have a battle with me?		
+Route104_Text_BrendanIntro	BRENDAN: I know you just became\na TRAINER, but I won't go easy!		
+Route104_Text_BrendanDefeat	Hmm…\nYou're pretty good.		
+Route104_Text_BrendanPostBattle	BRENDAN: You've gotten pretty decent\nat handling POKéMON.\pBut, you know, you shouldn't just be\nmaking POKéMON battle.\pLike MR. BRINEY, it's important to\nbecome friends with your POKéMON.		

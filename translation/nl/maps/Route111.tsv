@@ -1,0 +1,31 @@
+key	english	dutch	notes
+Route111_Text_BattleOurFamily	Hello! I take it you're a traveler.\pHow's this? What do you say to taking\non our family of four in a series of\lPOKéMON battles?		
+Route111_Text_IsThatSo	Is that so?\nDrop in, if you change your mind!		
+Route111_Text_VictorIntro	That's the spirit! I like you!		
+Route111_Text_VictorDefeat	Aiyah!\nYou're a lot tougher than I expected!		
+Route111_Text_VictorPostBattle	Hey, all!\nI've found a pretty strong TRAINER!		
+Route111_Text_VictoriaIntro	Oh, my goodness! Aren't you young?\pYou must be quite the TRAINER to beat\nmy husband, though.\pIt's my turn to battle now!		
+Route111_Text_VictoriaDefeat	Oh, gosh!\nI can't get over how strong you are!		
+Route111_Text_VictoriaPostBattle	There's a strong TRAINER here!\nThis one's really strong!		
+Route111_Text_ViviIntro	You're stronger than Mommy? Wow!\pBut I'm strong, too!\nReally! Honestly!		
+Route111_Text_ViviDefeat	Huh? Did I just lose?		
+Route111_Text_ViviPostBattle	This stinks…\p…Snivel… Grandma!		
+Route111_Text_VickyIntro	How dare you make my granddaughter\ncry!\pFor that, I'm going to smack you!\nPrepare to lose!		
+Route111_Text_VickyDefeat	Kwah! You are strong…\nMy granddaughter was right…		
+Route111_Text_VickyPostBattle	If you're not in any hurry,\nvisit with us awhile.		
+Route111_Text_ToughToKeepWinningUpTheRanks	If you don't raise your POKéMON some\nmore, it could be tough to keep winning\lup through the ranks.\pI've heard the POKéMON LEAGUE's\nELITE FOUR are far stronger than\lany GYM LEADER.		
+Route111_Text_WinstrateFamilyDestroyedMe	I challenged the WINSTRATE family,\nbut four matches in a row is tough\lgoing… They destroyed me.		
+Route111_Text_RouteSignMauville	ROUTE 111\n{DOWN_ARROW} MAUVILLE CITY		
+Route111_Text_WinstrateHouseSign	“Our family's hearts beat as one!”\nTHE WINSTRATE'S HOUSE		
+Route111_Text_RouteSign112	ROUTE 111\n{LEFT_ARROW} ROUTE 112		
+Route111_Text_RouteSign113	ROUTE 111\n{LEFT_ARROW} ROUTE 113		
+Route111_Text_OldLadysRestStopSign	OLD LADY'S REST STOP\n“Come in and rest your tired bones.”		
+Route111_Text_TrainerTipsSpAtkSpDef	TRAINER TIPS\pOne of the indicators of a POKéMON's\npowerfulness is SP. ATK. It stands for\l“SPECIAL ATTACK.”\pLikewise, SP. DEF stands for “SPECIAL\nDEFENSE.”		
+Route111_Text_ShouldBeMirageTowerAroundHere	There should be a tower made of sand\naround here somewhere.\pBut for some reason, it can be seen\nsometimes, and sometimes not.\pThat's why I call it the MIRAGE TOWER.		
+Route111_Text_MirageTowerClearlyVisible	I see it!\nThe tower of sand!\pThe sand tower they called a mirage\nis clearly visible!\pBut it looks so fragile…\nIt could crumble away anytime…\pI want to go inside it, but I can't\nget my courage up for it…		
+Route111_Text_ThatWasShockingSandRainedDown	Whoa…\nThat was shocking.\pSand rained down in chunks all of\na sudden.\pWhat was it like inside?\nWere there sandy ghosts and such?		
+Route111_Text_MirageTowerHasntBeenSeenSince	Since I spoke to you, the tower of sand\nhasn't been seen.\pPerhaps it really was\nthe MIRAGE TOWER…		
+Route111_Text_ClawFossilDisappeared	The CLAW FOSSIL disappeared into\nthe sand…		
+Route111_Text_RootFossilDisappeared	The ROOT FOSSIL disappeared into\nthe sand…		
+Route111_Text_MauvilleUncleToldMeToTakeRockSmash	Oh, no!\pMy uncle in MAUVILLE told me to take\nROCK SMASH with me if I was going to\lROUTE 111!\pMy uncle? He lives across from\nthe bike shop in MAUVILLE.		
+Route111_Text_TrainerHillSign	{RIGHT_ARROW} TRAINER HILL ENTRANCE\p“Scale the heights, you hot-blooded\nTRAINERS!”		

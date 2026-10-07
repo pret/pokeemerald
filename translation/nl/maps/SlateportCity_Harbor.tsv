@@ -1,0 +1,27 @@
+key	english	dutch	notes
+SlateportCity_Harbor_Text_FerryServiceUnavailable	I beg your pardon?\nYou're looking for a ship?\pI'm sorry, the ferry service isn't\navailable at present…		
+SlateportCity_Harbor_Text_MayISeeYourTicket	Hello, are you here for the ferry?\nMay I see your TICKET?		
+SlateportCity_Harbor_Text_YouMustHaveTicket	{PLAYER} doesn't have the TICKET…\pI'm terribly sorry.\pYou must have a TICKET to board\nthe ferry.		
+SlateportCity_Harbor_Text_FlashedTicketWhereTo	{PLAYER} flashed the TICKET.\pPerfect! That's all you need!\pAnd where would you like to go?		
+SlateportCity_Harbor_Text_SailAnotherTime	Please sail with us another time!		
+SlateportCity_Harbor_Text_LilycoveItIs	LILYCOVE CITY it is, then!		
+SlateportCity_Harbor_Text_BattleFrontierItIs	BATTLE FRONTIER it is, then!		
+SlateportCity_Harbor_Text_PleaseBoardFerry	Please board the ferry and wait for\ndeparture.		
+SlateportCity_Harbor_Text_WhereWouldYouLikeToGo	Then, where would you like to go?		
+SlateportCity_Harbor_Text_LoveToGoDeepUnderwaterSomeday	A journey to the bottom of the sea…\nI wonder what it'd be like?\pI'd love to go deep underwater like\nthat someday.		
+SlateportCity_Harbor_Text_AbnormalWeather	For a ship to sail safely, we need to\nknow about the weather!\pSpeaking of weather, I heard something\nfrom a guy at the WEATHER INSTITUTE.\pHe was saying abnormal weather has\nbeen reported all over the place!\pYou should visit the WEATHER INSTITUTE\nand ask around!		
+SlateportCity_Harbor_Text_SubTooSmallForMe	I wanted to go with CAPT. STERN on\nthe ocean floor exploration.\pBut the sub's too small for me.\pIf I squeezed in, there wouldn't be\nany room for the CAPTAIN…		
+SlateportCity_Harbor_Text_SameThugsTriedToRobAtMuseum	CAPT. STERN: Those thugs…\pThey're the same lot who tried to rob\nthe DEVON GOODS at the MUSEUM.		
+SlateportCity_Harbor_Text_ArchieYouAgainHideoutInLilycove	ARCHIE: Oh?\nNot you again…\pYou are tenacious to track us here,\nthat much I will give you.\pBut now…\nNo one can stop us! No one!\pOr, will you follow us back to our\nHIDEOUT in LILYCOVE CITY?\pFwahahahaha…		
+SlateportCity_Harbor_Text_CaptSternWhyStealMySubmarine	CAPT. STERN: Why…\pWhy would TEAM AQUA steal my\nSUBMARINE EXPLORER 1?\pThey can't be after the slumbering\nPOKéMON at the bottom of the sea…\pBut even if I were to chase them,\nI don't stand a chance against them…		
+SlateportCity_Harbor_Text_TeamAquaLeftNeedDive	CAPT. STERN: Oh, {PLAYER}{KUN}…\pOkay… So TEAM AQUA left before you\ncould stop them…\pOh, no, don't blame yourself.\nYou're not responsible for this.\pTrying to catch a submarine…\nIt's impossible for most people.\pYou would need a POKéMON that knows\nhow to DIVE…\pPerhaps if you went out to\nMOSSDEEP CITY…\pA lot of divers live out there, so\nsomeone might teach you…		
+SlateportCity_Harbor_Text_NeedDiveToCatchSub	CAPT. STERN: Trying to catch a\nsubmarine… It's impossible.\pYou would need a POKéMON that knows\nhow to DIVE…\pPerhaps if you went out to\nMOSSDEEP CITY…\pA lot of divers live out there, so\nsomeone might teach you…		
+SlateportCity_Harbor_Text_WontBeLongBeforeWeFinishFerry	CAPT. STERN: Oh, yes.\nMR. BRINEY came to our SHIPYARD.\pIt won't be long now before we finish\nmaking the ferry!		
+SlateportCity_Harbor_Text_FinishedMakingFerry	CAPT. STERN: {PLAYER}{KUN}!\pWe finally finished making the ferry\nS.S. TIDAL!\pWe couldn't have done it without\nyour friend MR. BRINEY.\pPlease go for a short cruise on it!		
+SlateportCity_Harbor_Text_WouldYouTradeScanner	CAPT. STERN: Oh?\n{PLAYER}{KUN}, that item you have…\pThat's a SCANNER! That would sure\nhelp us on our explorations.\p{PLAYER}{KUN}, would you trade your\nSCANNER for something?\pLike, say, a DEEPSEATOOTH or\na DEEPSEASCALE that I have?		
+SlateportCity_Harbor_Text_IfYouWantToTradeLetMeKnow	CAPT. STERN: Are you certain?\nIt's useless to you, {PLAYER}{KUN}…\pWell, okay, then. If you want to trade\nyour SCANNER, let me know.		
+SlateportCity_Harbor_Text_TradeForDeepSeaTooth	CAPT. STERN: So you'll trade it for\nmy DEEPSEATOOTH?		
+SlateportCity_Harbor_Text_TradeForDeepSeaScale	CAPT. STERN: So you'll trade it for\nmy DEEPSEASCALE?		
+SlateportCity_Harbor_Text_WhichOneDoYouWant	CAPT. STERN: Which one do you want?		
+SlateportCity_Harbor_Text_HandedScannerToStern	{PLAYER} handed the SCANNER to\nCAPT. STERN.		
+SlateportCity_Harbor_Text_ThisWillHelpResearch	CAPT. STERN: Thanks, {PLAYER}{KUN}!\nThis will help our research a lot!		

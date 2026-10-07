@@ -1,0 +1,8 @@
+key	english	dutch	notes
+gText_ConfirmSave	Would you like to save the game?		
+gText_AlreadySavedFile	There is already a saved file.\nIs it okay to overwrite it?		
+gText_SavingDontTurnOff	SAVING…\nDON'T TURN OFF THE POWER.		
+gText_PlayerSavedGame	{PLAYER} saved the game.		
+gText_DifferentSaveFile	WARNING!\pThere is a different game file that\nis already saved.\pIf you save now, the other file's\nadventure, including items and\lPOKéMON, will be entirely lost.\pAre you sure you want to save now\nand overwrite the other save file?		
+gText_SaveError	Save error.\pPlease exchange the\nbackup memory.		
+gText_SavingDontTurnOffPower	SAVING…\nDON'T TURN OFF THE POWER.		

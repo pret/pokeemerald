@@ -1,0 +1,12 @@
+key	english	dutch	notes
+Route124_DivingTreasureHuntersHouse_Text_Greeting	I'm the DIVING TREASURE HUNTER!\pI'm the awesome dude who makes\ndeep-sea dives to gather treasures\lresting at the bottom.		
+Route124_DivingTreasureHuntersHouse_Text_HaveYouSeenAnyShards	Tell me, have you seen any SHARDS of\ntools made in ancient times?		
+Route124_DivingTreasureHuntersHouse_Text_YouHaventGotAnyShards	You haven't got any treasures\nfor me…\pIf you see any SHARDS, like the RED\nSHARD, you've got to trade it with me!		
+Route124_DivingTreasureHuntersHouse_Text_ThatsAShardIllTradeYou	Oh, hey! That…\nThat's a SHARD! I'm looking for those!\pOh, man, you've got to trade that\nwith me! I'll give you something good!		
+Route124_DivingTreasureHuntersHouse_Text_WhatDoYouWantToTrade	What do you want to trade?		
+Route124_DivingTreasureHuntersHouse_Text_YoullTradeShardForStone	You'll trade your {STR_VAR_1} for\nmy {STR_VAR_2}, then?		
+Route124_DivingTreasureHuntersHouse_Text_ItsADeal	It's a done deal!\nUse that wisely!		
+Route124_DivingTreasureHuntersHouse_Text_TradeSomethingElse	Do you want to trade something else?		
+Route124_DivingTreasureHuntersHouse_Text_BagFull	Whoops, your BAG's full.\nGet rid of some items, friend!		
+Route124_DivingTreasureHuntersHouse_Text_ComeBackIfYouChangeMind	No? That's a downer.\nWell, if you change your mind, come back.		
+Route124_DivingTreasureHuntersHouse_Text_ShardTradeBoard	{CLEAR_TO 10}Wanted item{CLEAR_TO 124}Trade item\n{CLEAR_TO 15}RED SHARD{CLEAR_TO 89}{LEFT_ARROW}{RIGHT_ARROW}{CLEAR_TO 123}FIRE STONE{CLEAR_TO 200}\p{CLEAR_TO 10}Wanted item{CLEAR_TO 124}Trade item\n{CLEAR_TO 6}YELLOW SHARD{CLEAR_TO 89}{LEFT_ARROW}{RIGHT_ARROW}{CLEAR_TO 115}THUNDERSTONE{CLEAR_TO 200}\p{CLEAR_TO 10}Wanted item{CLEAR_TO 124}Trade item\n{CLEAR_TO 12}BLUE SHARD{CLEAR_TO 89}{LEFT_ARROW}{RIGHT_ARROW}{CLEAR_TO 121}WATER STONE{CLEAR_TO 200}\p{CLEAR_TO 10}Wanted item{CLEAR_TO 124}Trade item\n{CLEAR_TO 8}GREEN SHARD{CLEAR_TO 89}{LEFT_ARROW}{RIGHT_ARROW}{CLEAR_TO 123}LEAF STONE		

@@ -1,0 +1,8 @@
+key	english	dutch	notes
+Route101_Text_HelpMe	H-help me!		
+Route101_Text_PleaseHelp	Hello! You over there!\nPlease! Help!\pIn my BAG!\nThere's a POKé BALL!		
+Route101_Text_DontLeaveMe	Wh-Where are you going?!\nDon't leave me like this!		
+Route101_Text_YouSavedMe	PROF. BIRCH: Whew…\pI was in the tall grass studying wild\nPOKéMON when I was jumped.\pYou saved me.\nThanks a lot!\pOh?\pHi, you're {PLAYER}{KUN}!\pThis is not the place to chat, so come\nby my POKéMON LAB later, okay?		
+Route101_Text_TakeTiredPokemonToPokeCenter	If POKéMON get tired, take them to\na POKéMON CENTER.\pThere's a POKéMON CENTER in OLDALE\nTOWN right close by.		
+Route101_Text_WildPokemonInTallGrass	Wild POKéMON will jump out at you in\ntall grass.\pIf you want to catch POKéMON, you have\nto go into the tall grass and search.		
+Route101_Text_RouteSign	ROUTE 101\n{UP_ARROW} OLDALE TOWN		

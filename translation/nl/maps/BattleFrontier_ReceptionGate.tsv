@@ -1,0 +1,33 @@
+key	english	dutch	notes
+BattleFrontier_ReceptionGate_Text_FirstTimeHereThisWay	Is it your first time here?\nPlease step this way!		
+BattleFrontier_ReceptionGate_Text_WelcomeToBattleFrontier	The front lines of POKéMON battling!\nWelcome to the BATTLE FRONTIER!		
+BattleFrontier_ReceptionGate_Text_IssueFrontierPass	For a first-time visitor, we issue\nthe FRONTIER PASS.\pIt's for use at all the facilities\nin the BATTLE FRONTIER.\pHere you are!		
+BattleFrontier_ReceptionGate_Text_ObtainedFrontierPass	{PLAYER} obtained\nthe FRONTIER PASS.		
+BattleFrontier_ReceptionGate_Text_PlacedTrainerCardInFrontierPass	{PLAYER} placed the TRAINER CARD\nin the FRONTIER PASS.		
+BattleFrontier_ReceptionGate_Text_EnjoyBattleFrontier	We hope you enjoy all that the BATTLE\nFRONTIER has to offer!		
+BattleFrontier_ReceptionGate_Text_IfItIsntPlayerYouCame	???: Well, if it isn't {PLAYER}{KUN}!\nYou came out here!		
+BattleFrontier_ReceptionGate_Text_OhMrScottGoodDay	GUIDE: Oh! MR. SCOTT, sir!\nGood day to you, sir!		
+BattleFrontier_ReceptionGate_Text_ScottGreatToSeeYouHere	SCOTT: It's great to see you here,\nit really is!\pI hope you'll take your time and\nexplore everywhere.\pNaturally, I hope you'll also experience\nthe pure essence of battling.\pI also have my quarters here, so feel\nfree to visit if you have time.		
+BattleFrontier_ReceptionGate_Text_YourGuideToFacilities	I'm your guide to the various facilities\nhere in the BATTLE FRONTIER.		
+BattleFrontier_ReceptionGate_Text_LearnAboutWhich2	Which would you like to learn about?		
+BattleFrontier_ReceptionGate_Text_BattleTowerInfo	It is the gigantic tower considered\nto be the BATTLE FRONTIER's symbol.\pThere are four kinds of BATTLE ROOMS\nin the tower for SINGLE, DOUBLE, MULTI,\land LINK MULTI BATTLES.		
+BattleFrontier_ReceptionGate_Text_BattleDomeInfo	The BATTLE DOME is the large building\nshaped like a huge egg.\pEvents named Battle Tourneys are held\nin this facility.\pThe Battle Tourneys are offered in\ntwo courses--for SINGLE and DOUBLE\lBATTLES.		
+BattleFrontier_ReceptionGate_Text_BattlePalaceInfo	The BATTLE PALACE is the red building\non the right of the BATTLE FRONTIER.\pThere are two kinds of BATTLE HALLS\nfor SINGLE and DOUBLE BATTLES.		
+BattleFrontier_ReceptionGate_Text_BattleArenaInfo	The BATTLE ARENA is the dojo-like\nbuilding at the center-right of\lthe BATTLE FRONTIER.\pAn event called the Set KO Tourney\ntakes place at the BATTLE ARENA.		
+BattleFrontier_ReceptionGate_Text_BattleFactoryInfo	The BATTLE FACTORY is the large\nbuilding that is the closest to us.\pAn event called the Battle Swap\nis conducted there.\pThe Battle Swap event is offered in\ntwo courses for SINGLE and DOUBLE\lBATTLES.		
+BattleFrontier_ReceptionGate_Text_BattlePikeInfo	The BATTLE PIKE is the building shaped\nlike a POKéMON at the center-left of\lthe BATTLE FRONTIER.\pAn event called the Battle Choice\nis conducted there.		
+BattleFrontier_ReceptionGate_Text_BattlePyramidInfo	The BATTLE PYRAMID is the enormous\npyramid.\pAn event called the Battle Quest\nis conducted there.		
+BattleFrontier_ReceptionGate_Text_RankingHallInfo	The RANKING HALL is located near\nthe BATTLE TOWER.\pThere, you may see the most fantastic\nrecords left by the TRAINERS that\ltook on the many challenges of\lthe BATTLE FRONTIER.		
+BattleFrontier_ReceptionGate_Text_ExchangeCornerInfo	The EXCHANGE SERVICE CORNER is near\nthe BATTLE TOWER.\pThe Battle Points you have earned in\nthe BATTLE FRONTIER may be exchanged\lfor fabulous prizes there.		
+BattleFrontier_ReceptionGate_Text_YourGuideToRules	I'm your guide to the basic rules that\nare common to all the challenges\loffered by the facilities in the BATTLE\lFRONTIER.		
+BattleFrontier_ReceptionGate_Text_LearnAboutWhat	What would you like to learn about?		
+BattleFrontier_ReceptionGate_Text_LevelModeInfo	All the challenges at the BATTLE\nFRONTIER's facilities come in\ltwo courses--Level 50 and Open Level.		
+BattleFrontier_ReceptionGate_Text_Level50Info	The Level 50 course is open to POKéMON\nup to and including Level 50.\pPlease keep in mind, however, that\nno TRAINER you face will have any\lPOKéMON below Level 50.\pThis course is the entry level for\nbattles at the BATTLE FRONTIER.\pTo begin, we hope you will challenge\nthis course.		
+BattleFrontier_ReceptionGate_Text_OpenLevelInfo	The Open Level course places no limit\non the levels of POKéMON entering\lchallenges.\pThe levels of your opponents will\nbe adjusted to match the levels of\lyour POKéMON.\pHowever, no TRAINER you face will\nhave any POKéMON below Level 60.		
+BattleFrontier_ReceptionGate_Text_MonEntryInfo	Virtually any kind of POKéMON may take\non the challenges at all facilities.\pEGGS and certain kinds of POKéMON,\nhowever, are not permitted.\pThe numbers of POKéMON required for\nchallenges will depend on the facility.\pAt all facilities, however, two or more\nof the same kind of POKéMON are not\lpermitted.		
+BattleFrontier_ReceptionGate_Text_HoldItemsInfo	When entering a challenge at a BATTLE\nFRONTIER facility, POKéMON may not\lbe holding the same kind of item.\pPlease make sure that all POKéMON\nentering a challenge are holding\ldifferent items.		
+BattleFrontier_ReceptionGate_Text_YourGuideToFrontierPass	I'm your guide to the FRONTIER PASS.		
+BattleFrontier_ReceptionGate_Text_LearnAboutWhich1	Which would you like to learn about?		
+BattleFrontier_ReceptionGate_Text_SymbolsInfo	There are seven facilities at\nthe BATTLE FRONTIER.\pTRAINERS who gain recognition for\ntheir abilities may be rewarded with\lsymbols from each of the facilities.\pTo earn a symbol, TRAINERS may need\nto defeat other TRAINERS in a row,\land may need to win events repeatedly.\pIt's certainly not easy to win symbols.\nI wish you the best of luck!		
+BattleFrontier_ReceptionGate_Text_RecordedBattleInfo	It is possible to record one battle\non your FRONTIER PASS.\pYou may record a battle you had with\na friend or friends.\pOr you may record a battle conducted\nat the BATTLE FRONTIER excluding\lmatches at the BATTLE PIKE or\lthe BATTLE PYRAMID.\pYou may choose to record your match\nat the end of a battle.		
+BattleFrontier_ReceptionGate_Text_BattlePointsInfo	Battle Points are rewards given to\nTRAINERS who battled outstandingly\lat the BATTLE FRONTIER.\pYou may trade in your Battle Points\nfor prizes at the EXCHANGE SERVICE\lCORNER.		

@@ -37,6 +37,7 @@ KINDS = {
     "berry_desc": Kind("berry_desc", None, 1, [("normal", 200, "berry tag")]),
     "contest_desc": Kind("contest_desc", None, 2, [("normal", 154, "summary move description")]),
     "battle_msg": Kind("battle_msg", None, 99, [("normal", 208, "battle text box")]),
+    "dialogue": Kind("dialogue", None, 99, [("normal", 208, "text box")]),
     "ui": Kind("ui", None, 99, [("normal", 208, "text box")]),
     "type_name": Kind("type_name", 6, 1, [("normal", 36, "TYPE/ in battle menu")]),
     "trainer_class": Kind("trainer_class", 12, 1, [("normal", 78, "trainer class in messages")]),
@@ -57,9 +58,12 @@ class Spec:
     key_fmt: str = "{}"
     style: str = "c"  # "c" for _("...") strings, "inc" for `.string "...$"` lines
     section_end: str | None = None  # only scan the file up to this marker
+    exclude: tuple = ()  # file paths a glob `path` must skip
 
 
 INC_ENTRY = rf'^(?P<key>gText_\w+)::\n(?P<body>(?:\t\.string {LIT}\n)+)'
+# any label (`Foo:` or `Foo::`) directly followed by .string lines
+INC_LABEL = rf'^(?P<key>\w+)::?\n(?P<body>(?:\t\.string {LIT}\n)+)'
 
 
 SPECS = [
@@ -90,6 +94,10 @@ SPECS = [
          rf'\[(?P<key>TYPE_\w+)\] = _\((?P<body>(?:\s*{LIT})+\s*)\)', "TYPENAME_{}"),
     Spec("strings", "ui", "src/strings.c",
          rf'^(?:ALIGNED\(4\) )?(?:static )?const u8 (?P<key>(?!gJPText)\w+)\[\] = _\((?P<body>(?:\s*{LIT})+\s*)\)'),
+    Spec("maps/{name}", "dialogue", "data/maps/*/scripts.inc", INC_LABEL, style="inc"),
+    Spec("text/{name}", "dialogue", "data/text/*.inc", INC_LABEL, style="inc",
+         exclude=("data/text/contest_strings.inc",)),
+    Spec("scripts/{name}", "dialogue", "data/scripts/*.inc", INC_LABEL, style="inc"),
     Spec("battle", "battle_type_move", "src/battle_message.c",
          rf'\[(?P<key>TYPE_\w+)\]\s*= _\((?P<body>(?:\s*{LIT})+\s*)\)', "MOVETYPE_{}"),
 ]
@@ -102,6 +110,8 @@ class Entry:
     spec: Spec
     start: int  # span of the body inside the file
     end: int
+    path: str = ""  # source file, relative to ROOT
+    tsv: str = ""  # TSV name this entry belongs to
 
 
 def body_to_text(body, style="c"):
@@ -123,15 +133,30 @@ def text_to_body(text, old_body, style="c"):
     return "".join(f"\n{indent}{l}" for l in lits)
 
 
-def scan(spec):
-    src = (ROOT / spec.path).read_text(encoding="utf-8")
-    if spec.section_end:
-        src = src[:src.index(spec.section_end)]
+def spec_files(spec):
+    """(relative path, tsv name) for every file a spec covers."""
+    if "*" not in spec.path:
+        return [(spec.path, spec.tsv)]
     out = []
-    for m in re.finditer(spec.pattern, src, re.M):
-        key = spec.key_fmt.format(m["key"])
-        text = body_to_text(m["body"], spec.style)
-        out.append(Entry(key, text, spec, m.start("body"), m.end("body")))
+    for f in sorted(ROOT.glob(spec.path)):
+        rel = f.relative_to(ROOT).as_posix()
+        if rel in spec.exclude:
+            continue
+        name = f.parent.name if f.name == "scripts.inc" else f.stem
+        out.append((rel, spec.tsv.format(name=name)))
+    return out
+
+
+def scan(spec):
+    out = []
+    for rel, tsv in spec_files(spec):
+        src = (ROOT / rel).read_text(encoding="utf-8")
+        if spec.section_end:
+            src = src[:src.index(spec.section_end)]
+        for m in re.finditer(spec.pattern, src, re.M):
+            key = spec.key_fmt.format(m["key"])
+            text = body_to_text(m["body"], spec.style)
+            out.append(Entry(key, text, spec, m.start("body"), m.end("body"), rel, tsv))
     return out
 
 
@@ -145,7 +170,7 @@ def read_tsv(name):
 
 
 def write_tsv(name, rows):
-    TSV_DIR.mkdir(parents=True, exist_ok=True)
+    (TSV_DIR / f"{name}.tsv").parent.mkdir(parents=True, exist_ok=True)
     with (TSV_DIR / f"{name}.tsv").open("w", encoding="utf-8", newline="") as f:
         w = csv.DictWriter(f, TSV_FIELDS, delimiter="\t", quoting=csv.QUOTE_NONE,
                            quotechar=None, lineterminator="\n")

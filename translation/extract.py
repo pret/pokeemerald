@@ -11,7 +11,8 @@ from common import SPECS, read_tsv, scan, write_tsv
 def main():
     by_tsv = {}
     for spec in SPECS:
-        by_tsv.setdefault(spec.tsv, []).extend(scan(spec))
+        for e in scan(spec):
+            by_tsv.setdefault(e.tsv, []).append(e)
 
     for name, entries in by_tsv.items():
         old = {r["key"]: r for r in read_tsv(name)}
@@ -27,7 +28,9 @@ def main():
             })
         write_tsv(name, rows)
         done = sum(1 for r in rows if r["dutch"])
-        print(f"{name}.tsv: {len(rows)} rows, {done} translated")
+        if "/" not in name or done:
+            print(f"{name}.tsv: {len(rows)} rows, {done} translated")
+    print(f"{len(by_tsv)} TSV files")
 
 
 if __name__ == "__main__":

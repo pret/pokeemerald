@@ -1,0 +1,27 @@
+key	english	dutch	notes
+BattleFrontier_BattleTowerBattleRoom_Text_RestoreMonsToFullHealth	We will restore your POKéMON to\nfull health.		
+BattleFrontier_BattleTowerBattleRoom_Text_ReadyForOpponent	You will be facing opponent no. {STR_VAR_1}.\nAre you ready?		
+BattleFrontier_BattleTowerBattleRoom_Text_ReadyFor2ndOpponent	You will be facing opponent no. 2.\nAre you ready?		
+BattleFrontier_BattleTowerBattleRoom_Text_ReadyFor3rdOpponent	You will be facing opponent no. 3.\nAre you ready?		
+BattleFrontier_BattleTowerBattleRoom_Text_ReadyFor4thOpponent	You will be facing opponent no. 4.\nAre you ready?		
+BattleFrontier_BattleTowerBattleRoom_Text_ReadyFor5thOpponent	You will be facing opponent no. 5.\nAre you ready?		
+BattleFrontier_BattleTowerBattleRoom_Text_ReadyFor6thOpponent	You will be facing opponent no. 6.\nAre you ready?		
+BattleFrontier_BattleTowerBattleRoom_Text_ReadyFor7thOpponent	You will be facing opponent no. 7.\nAre you ready?		
+BattleFrontier_BattleTowerBattleRoom_Text_RecordYourBattle	Record your battle on your\nFRONTIER PASS?		
+BattleFrontier_BattleTowerLobby_Text_BattleRecordedOnPass	{PLAYER}'s battle was recorded\non the FRONTIER PASS.		
+BattleFrontier_BattleTowerBattleRoom_Text_SaveAndQuitGame	Would you like to save and\nquit the game?		
+BattleFrontier_BattleTowerBattleRoom_Text_SavingPleaseWait	Saving your battle data.\nPlease wait.		
+BattleFrontier_BattleTowerBattleRoom_Text_CancelYourChallenge	Would you like to cancel your BATTLE\nROOM challenge?		
+BattleFrontier_BattleTowerBattleRoom_Text_RecordCouldntBeSaved	There was an error of some sort.\nYour record could not be saved.		
+BattleFrontier_BattleTowerBattleRoom_Text_SalonMaidenOnHerWay	Excuse me, but…\pOur leader, the SALON MAIDEN, is on\nher way here in hopes of battling you.\pShe should be arriving very shortly.		
+BattleFrontier_BattleTowerBattleRoom_Text_ReadyForSalonMaiden	You will be facing the SALON MAIDEN.\nAre you prepared?		
+BattleFrontier_BattleTowerBattleRoom_Text_GreetingsImAnabel	Greetings…\nMy name is ANABEL.\pI am the SALON MAIDEN, and I am in\ncharge of running the BATTLE TOWER…\pI have heard several rumors\nabout you…\pIn all honesty, what I have heard does\nnot seem attractive in any way…\pThe reason I've come to see you…\nWell, there is but one reason…		
+BattleFrontier_BattleTowerBattleRoom_Text_LetMeSeeYourTalent	Let me see your talent in\nits entirety…		
+BattleFrontier_BattleTowerBattleRoom_Text_AnabelTalentShallBeRecognized	ANABEL: Fufufu, nicely done…\pYour FRONTIER PASS, please…\nYour talent shall be recognized.		
+BattleFrontier_BattleTowerBattleRoom_Text_ReceivedAbilitySymbol	The Ability Symbol was embossed on\nthe FRONTIER PASS!		
+BattleFrontier_BattleTowerBattleRoom_Text_UntilNextTime	… … … … … …\pYou have confidence in your POKéMON\nbattling talent, don't you?\pI urge you to keep battling and\nkeep on winning.\pI will be waiting for you.\nUntil the next time we meet…		
+BattleFrontier_BattleTowerBattleRoom_Text_AnabelYouCameBack	ANABEL: You really did come back to\nsee me…\p… … … … … …\pYou've won straight matches to see me…\nI won't have to hold back against you…\pIt's been too long now…\pToo long since I've been able to battle\nwithout thinking about anything…		
+BattleFrontier_BattleTowerBattleRoom_Text_LetsBeginShallWe	Let's begin, shall we?		
+BattleFrontier_BattleTowerBattleRoom_Text_AnabelCongratsYourPassPlease	ANABEL: Fufu, congratulations…\nYour FRONTIER PASS, please…		
+BattleFrontier_BattleTowerBattleRoom_Text_AbilitySymbolTookGoldenShine	The Ability Symbol took on\na golden shine!		
+BattleFrontier_BattleTowerBattleRoom_Text_WishICouldBattleYouAgain	That was fun…\pI have never had a POKéMON battle\nso enjoyable before…\pI wish I could battle with you again…		

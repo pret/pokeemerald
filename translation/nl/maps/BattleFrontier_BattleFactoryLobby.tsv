@@ -1,0 +1,37 @@
+key	english	dutch	notes
+BattleFrontier_BattleFactoryLobby_Text_WelcomeForSingleBattle	Where the intelligence of TRAINERS\nis put to the test!\pWelcome to the BATTLE FACTORY!\pI am your guide to the Battle Swap\nSingle Tournament.		
+BattleFrontier_BattleFactoryLobby_Text_TakeSinglesChallenge	Would you like to take the Battle\nSwap Single challenge?		
+BattleFrontier_BattleFactoryLobby_Text_ExplainSinglesChallenge	The Battle Swap Single Tournament\nis a SINGLE BATTLE competition using\lonly rental POKéMON.\pFirst, you will be loaned three\nPOKéMON specifically for this event.\pUsing the supplied rental POKéMON,\nyou must conduct a SINGLE BATTLE.\pIf you win, you are permitted to trade\none of your rental POKéMON.\pRepeat this cycle of battling and\ntrading--if you win seven times in\la row, you will earn Battle Points.\pIf you want to interrupt your\nchallenge, please save the game.\pIf you don't save, you will be\ndisqualified from your challenge.		
+BattleFrontier_BattleFactoryLobby_Text_LookForwardToNextVisit	We look forward to your next visit.		
+BattleFrontier_BattleFactoryLobby_Text_WhichLevelMode	Which level do you wish to challenge?\nLevel 50 or Open Level?		
+BattleFrontier_BattleFactoryLobby_Text_OkayToSaveBeforeChallenge	Before you begin your challenge,\nI need to save the game. Is that okay?		
+BattleFrontier_BattleFactoryLobby_Text_WillHoldMonsForSafekeeping	Okay, I will hold your POKéMON for\nsafekeeping while you compete.		
+BattleFrontier_BattleFactoryLobby_Text_StepThisWay	Please step this way.		
+BattleFrontier_BattleFactoryLobby_Text_ReturnMonsSaveResults	Thank you for participating!\pI will return your POKéMON in exchange\nfor our rental POKéMON.\pI must also save the event results.\nPlease wait.		
+BattleFrontier_BattleFactoryLobby_Text_ReturnMons	I will return your POKéMON in exchange\nfor our rental POKéMON.		
+BattleFrontier_BattleFactoryLobby_Text_CongratsSevenWins	Congratulations! You've won seven\nstraight Battle Swap matches!		
+BattleFrontier_BattleFactoryLobby_Text_AwardBattlePointsForStreak	In recognition of your 7-win streak,\nwe award you these Battle Point(s).		
+BattleFrontier_BattleFactoryLobby_Text_MaxBattlePoints	Oh, oh, oh!\pYour Battle Points are maxed.\pPlease come back after using\nsome Battle Points.		
+BattleFrontier_BattleFactoryLobby_Text_WaitingForYouToResume	We've been waiting for you!\pBefore we resume your challenge,\nI must save the game.		
+BattleFrontier_BattleFactoryLobby_Text_DidntSaveBeforeQuitting	I'm sorry to say this, but you didn't\nsave before you quit playing last time.\pAs a result, you have been disqualified\nfrom your challenge.		
+BattleFrontier_BattleFactoryLobby_Text_WellReturnMons	We'll return your personal POKéMON.		
+BattleFrontier_BattleFactoryLobby_Text_ReceivedPrizeItem	{PLAYER} received the prize\n{STR_VAR_1}.		
+BattleFrontier_BattleFactoryLobby_Text_WelcomeForDoubleBattle	Where the intelligence of TRAINERS\nis put to the test!\pWelcome to the BATTLE FACTORY!\pI am your guide to the Battle Swap\nDouble Tournament.		
+BattleFrontier_BattleFactoryLobby_Text_TakeDoublesChallenge	Would you like to take the Battle\nSwap Double challenge?		
+BattleFrontier_BattleFactoryLobby_Text_ExplainDoublesChallenge	The Battle Swap Double Tournament\nis a DOUBLE BATTLE competition using\lonly rental POKéMON.\pFirst, you will be loaned three\nPOKéMON specifically for this event.\pUsing the supplied rental POKéMON,\nyou must conduct a DOUBLE BATTLE.\pIf you win, you are permitted to trade\none of your rental POKéMON.\pRepeat this cycle of battling and\ntrading--if you win seven times in\la row, you will earn Battle Points.\pIf you want to interrupt your\nchallenge, please save the game.\pIf you don't save before interrupting,\nyou will be disqualified.		
+BattleFrontier_BattleFactoryLobby_Text_CongratsForDefeatingHead	Congratulations for defeating\nthe FACTORY HEAD and winning\lseven matches in a row!		
+BattleFrontier_BattleFactoryLobby_Text_AwardBattlePoints	In recognition of your wealth of\nknowledge and keen intelligence,\lwe award you these Battle Point(s).		
+BattleFrontier_BattleFactoryLobby_Text_ExchangeMonsAndSave	Let me exchange your POKéMON\nfor our rental POKéMON.\pI need to save the battle data,\nso please wait.		
+BattleFrontier_BattleFactoryLobby_Text_RecordLastMatch	Would you like to record your last\nBATTLE FACTORY match on your\lFRONTIER PASS?		
+BattleFrontier_BattleFactoryLobby_Text_NeedKnowledgeOfMonsMoves	Hi!\nYou, there!\pAre you thinking that the events here\nare easy since you don't need to have\la raised team of POKéMON?\pI wouldn't be too sure about winning\nthat easily.\pIf you don't have thorough knowledge\nabout POKéMON and their moves,\lit will be tough to keep winning.		
+BattleFrontier_BattleFactoryLobby_Text_SwappedForWeakMon	I swapped for a weak POKéMON…\nI thought it was a good kind to have…\pThey wiped the floor with us…		
+BattleFrontier_BattleFactoryLobby_Text_NeedToCheckOpponentsMons	Things haven't been going my way\nat all.\pYou need to check your opponent's\nPOKéMON during battle to see if\lthey're any good.		
+BattleFrontier_BattleFactoryLobby_Text_CantFigureOutStaffHints	You know how the staff here give you\na few hints about your next opponent?\pWell, I'm a full-grown man, but I have\ntrouble figuring out their hints.		
+BattleFrontier_BattleFactoryLobby_Text_RentalMonsAreVaried	Like, I'm really tough, but I get bored\nreally easily, so I just kept swapping\land battling over and over.\pSo anyway, when I kept entering\nBattle Swap events, I noticed they\lvaried the rental POKéMON.		
+BattleFrontier_BattleFactoryLobby_Text_RulesAreListed	The Battle Swap rules are listed.		
+BattleFrontier_BattleFactoryLobby_Text_ReadWhichHeading	Which heading do you want to read?		
+BattleFrontier_BattleFactoryLobby_Text_ExplainBasicRules	In a Battle Swap event, you may use\nonly three POKéMON.\pWhether you are renting or swapping,\nyour team may not have two or more\lof the same POKéMON.		
+BattleFrontier_BattleFactoryLobby_Text_ExplainSwapPartnerRules	You may swap POKéMON only with\nthe TRAINER you have just defeated.\pYou may swap for only those POKéMON\nused by the beaten TRAINER.		
+BattleFrontier_BattleFactoryLobby_Text_ExplainSwapNumberRules	After every battle you win, you may\nswap for one of your defeated\lopponent's POKéMON.\pYou will not be able to swap POKéMON\nwith the seventh TRAINER in the event.		
+BattleFrontier_BattleFactoryLobby_Text_ExplainSwapNotesRules	There are two key points to be aware\nof when swapping POKéMON.\pFirst, when swapping, you can't check\nthe stats of the POKéMON you are\labout to receive.\pSecond, the POKéMON on your team\nare lined up in sequence, depending on\lthe order in which you rented them.\pThis sequence remains unchanged\neven when swaps are made.		
+BattleFrontier_BattleFactoryLobby_Text_ExplainOpenLvRules	In the Open Level, the rental POKéMON\nand the opposing TRAINERS' POKéMON\lare all Level 100.		

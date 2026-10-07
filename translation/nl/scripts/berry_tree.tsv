@@ -1,0 +1,20 @@
+key	english	dutch	notes
+BerryTree_Text_ItsSoftLoamySoil	It's soft, loamy soil.		
+BerryTree_Text_WantToPlant	It's soft, loamy soil.\nWant to plant a BERRY?		
+BerryTree_Text_PlantedOneBerry	{PLAYER} planted one {STR_VAR_1} in\nthe soft, loamy soil.		
+BerryTree_Text_BerryGrowthStage1	One {STR_VAR_1} was planted here.		
+BerryTree_Text_BerryGrowthStage2	{STR_VAR_1} has sprouted.		
+BerryTree_Text_BerryGrowthStage3	This {STR_VAR_1} plant is growing taller.		
+BerryTree_Text_BerryGrowthStage4	These {STR_VAR_1} flowers are blooming\n{STR_VAR_2}.		
+BerryTree_Text_CareAdverbGreat	very beautifully		
+BerryTree_Text_CareAdverbPoor	cutely		
+BerryTree_Text_CareAdverbGood	prettily		
+BerryTree_Text_WantToPick	You found {STR_VAR_2} {STR_VAR_1}!\pDo you want to pick the\n{STR_VAR_1}?		
+BerryTree_Text_PickedTheBerry	{PLAYER} picked the {STR_VAR_2} {STR_VAR_1}.		
+BerryTree_Text_PutAwayBerry	{PLAYER} put away the {STR_VAR_1}\nin the BAG's BERRIES POCKET.\pThe soil returned to its soft and\nloamy state.		
+BerryTree_Text_BerryPocketFull	The BAG's BERRIES POCKET is full.\pThe {STR_VAR_1} couldn't be taken.		
+BerryTree_Text_BerryLeftUnpicked	{PLAYER} left the {STR_VAR_1}\nunpicked.		
+BerryTree_Text_WantToWater	Want to water the {STR_VAR_1} with the\nWAILMER PAIL?		
+BerryTree_Text_WateredTheBerry	{PLAYER} watered the {STR_VAR_1}.		
+BerryTree_Text_PlantIsDelighted	The plant seems to be delighted.		
+BerryTree_Text_ExclamationPoint	!		

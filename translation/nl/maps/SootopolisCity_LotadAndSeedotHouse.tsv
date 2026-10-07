@@ -1,0 +1,17 @@
+key	english	dutch	notes
+SootopolisCity_LotadAndSeedotHouse_Text_PleaseShowMeBigSeedot	Do you know the POKéMON SEEDOT?\nIt's hardly ever seen in SOOTOPOLIS.\pAnyway, I love big SEEDOT.\nThe bigger the better.\pBut my younger brother, he says that\nLOTAD is bigger.\pThat's silly.\nSEEDOT has to be bigger than that!\pHuh? Do you have a SEEDOT with you?\nP-p-please, show me!		
+SootopolisCity_LotadAndSeedotHouse_Text_GoshMightBeBiggerThanLotad	{STR_VAR_2} inches!\nOh, my gosh, this is a big one!\pIt might even beat the big LOTAD\nmy younger brother saw!\pThanks for showing me.\nThis is my thanks!		
+SootopolisCity_LotadAndSeedotHouse_Text_ReceivedPotion1	{PLAYER} received a POTION.		
+SootopolisCity_LotadAndSeedotHouse_Text_BagCrammedFull1	Hunh?\nYour BAG is crammed full.		
+SootopolisCity_LotadAndSeedotHouse_Text_SeenBiggerSeedot	{STR_VAR_2} inches, is it?\pHmm… I've seen a bigger SEEDOT\nthan this one.		
+SootopolisCity_LotadAndSeedotHouse_Text_ThatsNotSeedot	Oh, now this is quite something…\nBut it's not a SEEDOT!		
+SootopolisCity_LotadAndSeedotHouse_Text_DontHaveBigSeedot	You don't have a big SEEDOT?\nThat's too bad…\pIf you get a big SEEDOT, please\ncome show me.		
+SootopolisCity_LotadAndSeedotHouse_Text_BiggestSeedotInHistory	The biggest SEEDOT in history!\n{STR_VAR_2}'s {STR_VAR_3}-inch giant!\pA SEEDOT bigger than a LOTAD\nalways wanted!		
+SootopolisCity_LotadAndSeedotHouse_Text_PleaseShowMeBigLotad	Do you know the POKéMON LOTAD?\nIt's rarely seen in SOOTOPOLIS.\pI love, I mean love, big LOTAD!\pMy big brother says that SEEDOT is\nbigger.\pBut that's wrong! Everyone knows that\nLOTAD is a lot bigger.\pHunh? Do you have a LOTAD?\nP-p-please show me!		
+SootopolisCity_LotadAndSeedotHouse_Text_WowMightBeBiggerThanSeedot	{STR_VAR_2} inches!\nWow, that is big!\pIt might be even bigger than the huge\nSEEDOT my big brother saw.\pThanks for showing me!\nThis is my thanks!		
+SootopolisCity_LotadAndSeedotHouse_Text_ReceivedPotion2	{PLAYER} received a POTION.		
+SootopolisCity_LotadAndSeedotHouse_Text_BagCrammedFull2	Hunh?\nYour BAG is crammed full.		
+SootopolisCity_LotadAndSeedotHouse_Text_SeenBiggerLotad	{STR_VAR_2} inches?\pHmm… I've seen a bigger LOTAD\nthan this one here.		
+SootopolisCity_LotadAndSeedotHouse_Text_ThatsNotLotad	Well, isn't this something!\nBut it's no LOTAD!		
+SootopolisCity_LotadAndSeedotHouse_Text_DontHaveBigLotad	Don't you have a big LOTAD?\nHow disappointing…\pIf you get a big LOTAD, please\ncome show me!		
+SootopolisCity_LotadAndSeedotHouse_Text_BiggestLotadInHistory	The biggest LOTAD in history!\n{STR_VAR_2}'s {STR_VAR_3}-inch colossus!\pA LOTAD bigger than a SEEDOT\nalways wanted!		

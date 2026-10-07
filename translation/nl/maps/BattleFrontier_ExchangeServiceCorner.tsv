@@ -1,0 +1,70 @@
+key	english	dutch	notes
+BattleFrontier_ExchangeServiceCorner_Text_WelcomePleaseChoosePrize	Hello, this is the EXCHANGE SERVICE\nCORNER.\pWe exchange the Battle Points you\nhave collected for lovely prizes.\pPlease choose a prize from this list.		
+BattleFrontier_ExchangeServiceCorner_Text_PleaseChoosePrize	Please choose a prize from this list.		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmKissPoster	You've chosen the KISS POSTER.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmKissCushion	You've chosen the KISS CUSHION.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmSmoochumDoll	You've chosen the SMOOCHUM DOLL.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmTogepiDoll	You've chosen the TOGEPI DOLL.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmMeowthDoll	You've chosen the MEOWTH DOLL.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmClefairyDoll	You've chosen the CLEFAIRY DOLL.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmDittoDoll	You've chosen the DITTO DOLL.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmCyndaquilDoll	You've chosen the CYNDAQUIL DOLL.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmChikoritaDoll	You've chosen the CHIKORITA DOLL.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmTotodileDoll	You've chosen the TOTODILE DOLL.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmLaprasDoll	You've chosen the LAPRAS DOLL.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmSnorlaxDoll	You've chosen the SNORLAX DOLL.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmVenusaurDoll	You've chosen the VENUSAUR DOLL.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmCharizardDoll	You've chosen the CHARIZARD DOLL.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmBlastoiseDoll	You've chosen the BLASTOISE DOLL.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmProtein	You've chosen the PROTEIN.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmCalcium	You've chosen the CALCIUM.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmIron	You've chosen the IRON.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmZinc	You've chosen the ZINC.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmCarbos	You've chosen the CARBOS.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmHPUp	You've chosen the HP UP.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmBrightpowder	You've chosen the BRIGHTPOWDER.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmWhiteHerb	You've chosen the WHITE HERB.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmQuickClaw	You've chosen the QUICK CLAW.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmMentalHerb	You've chosen the MENTAL HERB.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmChoiceBand	You've chosen the CHOICE BAND.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmKingsRock	You've chosen the KING'S ROCK.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmFocusBand	You've chosen the FOCUS BAND.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmScopeLens	You've chosen the SCOPE LENS.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmLeftovers	You've chosen the LEFTOVERS.\nIs that correct?		
+BattleFrontier_ExchangeServiceCorner_Text_WellSendItToPC	Thank you!\nWe'll send it to your PC at home.		
+BattleFrontier_ExchangeServiceCorner_Text_HereIsYourPrize	Here is your prize!		
+BattleFrontier_ExchangeServiceCorner_Text_DontHaveEnoughPoints	I'm so sorry…\nYou don't have enough Battle Points…		
+BattleFrontier_ExchangeServiceCorner_Text_PCIsFull	I'm so sorry…\nYour PC appears to be full…		
+BattleFrontier_ExchangeServiceCorner_Text_DontHaveSpaceToHoldIt	I'm so sorry…\nYou don't have space to hold it…		
+BattleFrontier_ExchangeServiceCorner_Text_ThankYouVisitWithPoints	Thank you very much.\pPlease visit us when you have\nsaved up Battle Points.		
+BattleFrontier_ExchangeServiceCorner_Text_WishIHadAllDolls	Oh, they're so nice!\nI wish I had them!\lCute cushions!\lBig plush DOLLS!\lLittle plush DOLLS!\lI wish I had them all!		
+BattleFrontier_ExchangeServiceCorner_Text_GetYouAnythingYouWant	Leave it to your mommy!\pIf it's anything you want, I'll go\nthrough anything to get it, honey!		
+BattleFrontier_ExchangeServiceCorner_Text_ItemsWillGetMonTougher	If I can get hold of the items here,\nmy POKéMON will get tougher.\pYou bet they will!\nNo question about it!		
+BattleFrontier_ExchangeServiceCorner_Text_GoGetYourOwnDoll	Hah?\nWhat are you gawking at?\pI don't like you staring at my plush\ndoll like that.\pIf you want it, go get one yourself!\nIsn't that right, SMOOCHUM?		
+BattleFrontier_ExchangeServiceCorner_Text_MoreBattlePointsForRecord	Did you know?\pIf you stretch your record at any of\nthe BATTLE facilities, they start\lgiving you more and more Battle Points.		
+BattleFrontier_ExchangeServiceCorner_Text_KissPosterDesc	A large poster with a SMOOCHUM print.		
+BattleFrontier_ExchangeServiceCorner_Text_KissCushionDesc	A SMOOCHUM cushion.\nPlace it on a mat or a desk.		
+BattleFrontier_ExchangeServiceCorner_Text_SmoochumDollDesc	A SMOOCHUM DOLL.\nPlace it on a mat or a desk.		
+BattleFrontier_ExchangeServiceCorner_Text_TogepiDollDesc	A TOGEPI DOLL.\nPlace it on a mat or a desk.		
+BattleFrontier_ExchangeServiceCorner_Text_MeowthDollDesc	A MEOWTH DOLL.\nPlace it on a mat or a desk.		
+BattleFrontier_ExchangeServiceCorner_Text_ClefairyDollDesc	A CLEFAIRY DOLL.\nPlace it on a mat or a desk.		
+BattleFrontier_ExchangeServiceCorner_Text_DittoDollDesc	A DITTO DOLL.\nPlace it on a mat or a desk.		
+BattleFrontier_ExchangeServiceCorner_Text_CyndaquilDollDesc	A CYNDAQUIL DOLL.\nPlace it on a mat or a desk.		
+BattleFrontier_ExchangeServiceCorner_Text_ChikoritaDollDesc	A CHIKORITA DOLL.\nPlace it on a mat or a desk.		
+BattleFrontier_ExchangeServiceCorner_Text_TotodileDollDesc	A TOTODILE DOLL.\nPlace it on a mat or a desk.		
+BattleFrontier_ExchangeServiceCorner_Text_LargeDollDesc	A large DOLL.\nPlace it on a mat or a desk.		
+BattleFrontier_ExchangeServiceCorner_Text_ProteinDesc	Raises the stat ATTACK of one\nPOKéMON.		
+BattleFrontier_ExchangeServiceCorner_Text_CalciumDesc	Raises the stat SP. ATK of one\nPOKéMON.		
+BattleFrontier_ExchangeServiceCorner_Text_IronDesc	Raises the stat DEFENSE of one\nPOKéMON.		
+BattleFrontier_ExchangeServiceCorner_Text_ZincDesc	Raises the stat SP. DEF of one\nPOKéMON.		
+BattleFrontier_ExchangeServiceCorner_Text_CarbosDesc	Raises the stat SPEED of one\nPOKéMON.		
+BattleFrontier_ExchangeServiceCorner_Text_HPUpDesc	Raises the HP of one POKéMON.		
+BattleFrontier_ExchangeServiceCorner_Text_LeftoversDesc	A hold item that gradually restores\nHP in battle.		
+BattleFrontier_ExchangeServiceCorner_Text_WhiteHerbDesc	A hold item that restores any\nlowered stat.		
+BattleFrontier_ExchangeServiceCorner_Text_QuickClawDesc	A hold item that occasionally allows\nthe first strike.		
+BattleFrontier_ExchangeServiceCorner_Text_MentalHerbDesc	A hold item that snaps POKéMON out\nof infatuation.		
+BattleFrontier_ExchangeServiceCorner_Text_BrightpowderDesc	A hold item that casts a glare to\nreduce accuracy.		
+BattleFrontier_ExchangeServiceCorner_Text_ChoiceBandDesc	Raises a move's power, but permits\nonly that move.		
+BattleFrontier_ExchangeServiceCorner_Text_KingsRockDesc	A hold item that may cause flinching\nwhen the foe is hit.		
+BattleFrontier_ExchangeServiceCorner_Text_FocusBandDesc	A hold item that occasionally\nprevents fainting.		
+BattleFrontier_ExchangeServiceCorner_Text_ScopeLensDesc	A hold item that raises the\ncritical-hit rate.		

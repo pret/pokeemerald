@@ -1,0 +1,12 @@
+key	english	dutch	notes
+LilycoveCity_Harbor_Text_FerryUnavailable	I beg your pardon?\nYou're looking for a ship?\pI'm sorry, the ferry service isn't\navailable at present…		
+LilycoveCity_Harbor_Text_MayISeeYourTicket	Hello, are you here for the ferry?\nMay I see your TICKET?		
+LilycoveCity_Harbor_Text_NoTicket	{PLAYER} doesn't have the TICKET…\pI'm terribly sorry.\pYou must have a TICKET to board\nthe ferry.		
+LilycoveCity_Harbor_Text_FlashTicketWhereTo	{PLAYER} flashed the TICKET.\pPerfect! That's all you need!\pAnd where would you like to go?		
+LilycoveCity_Harbor_Text_SailAnotherTime	Please sail with us another time!		
+LilycoveCity_Harbor_Text_SlateportItIs	SLATEPORT CITY it is, then!		
+LilycoveCity_Harbor_Text_BattleFrontierItIs	BATTLE FRONTIER it is, then!		
+LilycoveCity_Harbor_Text_PleaseBoard	Please board the ferry and wait for\ndeparture.		
+LilycoveCity_Harbor_Text_WhereWouldYouLikeToGo	Then, where would you like to go?		
+LilycoveCity_Harbor_Text_SailorFerryUnavailable	Until they finish making the ferry,\nwe sailors have nothing to do…\pI wish they'd get a move on, the folks\nat the SHIPYARD in SLATEPORT.		
+LilycoveCity_Harbor_Text_SailorFerryAvailable	The ferry S.S. TIDAL is finally in\noperation.\pThe folks at the SHIPYARD in SLATEPORT\nmust've worked extra hard.\pWell, it's my turn to get busy now!		

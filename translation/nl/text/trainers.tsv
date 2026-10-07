@@ -1,0 +1,1143 @@
+key	english	dutch	notes
+Route102_Text_CalvinIntro	If you have POKéMON with you, then\nyou're an official POKéMON TRAINER!\lYou can't say no to my challenge!		
+Route102_Text_CalvinDefeated	Arrgh, I lost…\nI should have trained mine more…		
+Route102_Text_CalvinPostBattle	Listen, you. If you're strong,\nyou should have told me before!		
+Route102_Text_CalvinRegister	I've been working hard at this since\nI saw you before.\pI'd like to battle you again, so can\nyou register me in your POKéNAV?		
+Route102_Text_CalvinRegisterShort	I'd like to battle you again, so can\nyou register me in your POKéNAV?		
+Route102_Text_CalvinRematchIntro	Ever since I lost to you, I desperately\ntrained my POKéMON.\lYou can't say no to my challenge!		
+Route102_Text_CalvinRematchDefeated	Arrgh, I lost…\nIs my training method not right?		
+Route102_Text_CalvinRematchPostBattle	If you're going to get stronger,\nI'll get stronger, too.		
+Route102_Text_AllenIntro	Did you just become a TRAINER?\nWe're both beginners!		
+Route102_Text_AllenDefeated	I called you because I thought\nI could beat you…		
+Route102_Text_AllenPostBattle	I haven't won once yet…\nI wish I would win soon…		
+Route102_Text_RickIntro	Hahah! Our eyes met!\nI'll take you on with my BUG POKéMON!		
+Route102_Text_RickDefeated	Ow! Down and out!		
+Route102_Text_RickPostBattle	If you lock eyes with a TRAINER,\nyou have to challenge! It's a rule!		
+Route102_Text_TianaIntro	I'm going to keep winning and aim\nto be the best TRAINER.\pHelp me further my career!		
+Route102_Text_TianaDefeated	I ended up furthering your career…		
+Route102_Text_TianaPostBattle	To keep winning my way up, I see that\nI have to catch more POKéMON.		
+Route103_Text_DaisyIntro	Did you feel the tug of our\nsoul-soothing fragrance?		
+Route103_Text_DaisyDefeated	You weren't led astray by our aroma…		
+Route103_Text_DaisyPostBattle	Aromatherapy is a form of mental\nhealing that works with fragrances.		
+Route103_Text_AmyIntro	AMY: I'm AMY.\nAnd this is my little sister LIV.\lWe battle together!		
+Route103_Text_AmyDefeated	AMY: Uh-oh, we lost.		
+Route103_Text_AmyPostBattle	AMY: You have to think about all\nkinds of things when you're battling\lagainst two TRAINERS.		
+Route103_Text_AmyNotEnoughPokemon	AMY: Uh-oh, you have only one\nPOKéMON with you.\lYou can't battle us like that.		
+Route103_Text_LivIntro	LIV: We battle together as one\nteam.		
+Route103_Text_LivDefeated	LIV: Oh, we lost, big sister…		
+Route103_Text_LivPostBattle	LIV: We work perfectly together,\nme and my big sister…\pBut we still lost…		
+Route103_Text_AmyLivRegister	LIV: Really, we're a lot better…\nIt's true! We'll show you next time!		
+Route103_Text_LivNotEnoughPokemon	LIV: If you want to battle us,\nyou have to have two POKéMON!\lIt's not fair if you don't!		
+Route103_Text_AmyRematchIntro	AMY: I'm AMY.\nAnd this is my little sister LIV.\lWe battle together!		
+Route103_Text_AmyRematchDefeated	AMY: Aww, boo!\nWe couldn't win again…		
+Route103_Text_AmyRematchPostBattle	AMY: You have to think about all\nkinds of things when you're battling\lagainst two TRAINERS.		
+Route103_Text_AmyRematchNotEnoughPokemon	AMY: Uh-oh, you have only one\nPOKéMON with you.\lYou can't battle us like that.		
+Route103_Text_LivRematchIntro	LIV: We battle together as one\nteam.		
+Route103_Text_LivRematchDefeated	LIV: Awww, we lost again…\nBig sister…		
+Route103_Text_LivRematchPostBattle	LIV: We work perfectly together,\nme and my big sister…\pBut why did we lose again?		
+Route103_Text_LivRematchNotEnoughPokemon	LIV: If you want to battle us, you\nhave to have two POKéMON!\lIt's not fair if you don't!		
+Route103_Text_AndrewIntro	Gah! My fishing line's all snarled up!\nI'm getting frustrated and mean!\lThat's it! Battle me!		
+Route103_Text_AndrewDefeated	Gah! Lost it!\nI'm even more annoyed now!		
+Route103_Text_AndrewPostBattle	Gah, I'm still boiling mad…\nGrrrrr…		
+Route103_Text_MiguelIntro	My POKéMON is delightfully adorable!\nDon't be shy--I'll show you!		
+Route103_Text_MiguelDefeated	Oh, my gosh!\nMy darling POKéMON!		
+Route103_Text_MiguelPostBattle	My delightful POKéMON looks darling\neven when it's fainted!		
+Route103_Text_MiguelRegister	I'll get you to come out and look in\non my delightful POKéMON again!		
+Route103_Text_MiguelRematchIntro	Hi, you! My delightfully adorable\nPOKéMON has become more darling!		
+Route103_Text_MiguelRematchDefeated	Oh!\nMy darling POKéMON!		
+Route103_Text_MiguelRematchPostBattle	The more I spend time with it,\nthe more adorable my POKéMON becomes.		
+Route103_Text_PeteIntro	This sort of distance…\nYou should just swim it!		
+Route103_Text_PeteDefeated	Oh, that's good going!		
+Route103_Text_PetePostBattle	Oh, I understand where you're coming\nfrom now.\pIf I had a POKéMON that trusty,\nI'd want to SURF on it, too!		
+Route103_Text_IsabelleIntro	Watch where you're going!\nWe're going to crash!		
+Route103_Text_IsabelleDefeated	Groan…		
+Route103_Text_IsabellePostBattle	I'm a poor swimmer so I was practicing…\nSorry for almost crashing into you.		
+Route103_Text_RhettIntro	Whoa!\nHow'd you get into a space this small?		
+Route103_Text_RhettDefeated	Whoa!\nThe kid can rock!		
+Route103_Text_RhettPostBattle	Do you like cramped quarters\nlike this?		
+Route103_Text_MarcosIntro	Did my guitar's wailing draw you in?		
+Route103_Text_MarcosDefeated	My one-man show is ruined…		
+Route103_Text_MarcosPostBattle	I was playing my guitar where few\npeople were around, but a lot of fans\lhave gathered.\pHeh, maybe I should turn pro.		
+Route104_Text_GinaIntro	GINA: Okay, let's battle with our\nPOKéMON!		
+Route104_Text_GinaDefeat	GINA: Losing upsets me!		
+Route104_Text_GinaPostBattle	GINA: You are strong!\nWe have to train lots more!		
+Route104_Text_GinaNotEnoughMons	GINA: Oh? Only one POKéMON?\nThen, we don't battle with you.\pIf there's only one POKéMON, it will\nbe lonesome. That's not nice.		
+Route104_Text_MiaIntro	MIA: We are twins, so we battle\nPOKéMON together.		
+Route104_Text_MiaDefeat	MIA: We battled together, but we\nboth lost…		
+Route104_Text_MiaPostBattle	MIA: We will train our POKéMON more\nand be strong like you.		
+Route104_Text_MiaNotEnoughMons	MIA: You want to battle with us?\pIt's a big no-no if you don't have two\nPOKéMON with you.\lWe're too strong for you!		
+Route104_Text_IvanIntro	Why keep it a secret?\nI'm the WATER POKéMON expert!\pHuh?\nYou don't know me?		
+Route104_Text_IvanDefeat	I thought I wasn't too bad, if I may\nsay so, but I guess not… Bleah…		
+Route104_Text_IvanPostBattle	I got too into fishing.\nI forgot I had to raise my POKéMON…		
+Route104_Text_BillyIntro	Leaving footprints in the sand is\nso fun!		
+Route104_Text_BillyDefeat	Waah! I got sand in my runners!\nThey're all gritty!		
+Route104_Text_BillyPostBattle	I want to leave my footprints in\nthe sand everywhere, but they\ldisappear quickly…		
+Route104_Text_HaleyIntro	Should I…\nOr shouldn't I?\pOkay, sure, I will battle!		
+Route104_Text_HaleyDefeat	I shouldn't have battled…		
+Route104_Text_HaleyPostBattle	If you're faced with a decision and\nyou let someone else choose for you,\lyou will regret it, however things\lturn out.		
+Route104_Text_HaleyRegister1	You're strong, but should I register\nyou in my POKéNAV?\lMaybe I shouldn't…\pOkay, sure, I will register you!		
+Route104_Text_HaleyRegister2	You're strong, but should I register\nyou in my POKéNAV?\lMaybe I shouldn't…\pOkay, sure, I will register you!		
+Route104_Text_HaleyRematchIntro	Come on, battle with me!		
+Route104_Text_HaleyRematchDefeat	Ohh…\nI thought I could win…		
+Route104_Text_HaleyPostRematch	I made the decision to battle, so\nI can accept this loss with grace.\pI am still upset about losing!		
+Route104_Text_WinstonIntro	Oh, sure, I'll accept your challenge.\nI have a lot of money.		
+Route104_Text_WinstonDefeat	Why couldn't I win?		
+Route104_Text_WinstonPostBattle	There are some things money can't buy.\nThat's POKéMON…		
+Route104_Text_WinstonRegister1	Hm?\nAh, you've obtained a POKéNAV.\pI will gladly register you.\nAfter all, I have plenty of money.		
+Route104_Text_WinstonRegister2	Hm?\nAh, you've obtained a POKéNAV.\pI will gladly register you.\nAfter all, I have plenty of money.		
+Route104_Text_WinstonRematchIntro	After I lost to you, I learned a bunch\nof things about POKéMON.		
+Route104_Text_WinstonRematchDefeat	I lost again?\nWhy couldn't I win?		
+Route104_Text_WinstonPostRematch	I'm fabulously wealthy, but I can't\nseem to win at POKéMON…\pIt's so deep, the world of POKéMON…		
+Route104_Text_CindyIntro	We must have been fated to meet.\nMay I ask you for a battle?		
+Route104_Text_CindyDefeat	Oh, my!		
+Route104_Text_CindyPostBattle	“Hello” is the beginning of “good-bye.”\nI hope we meet again.		
+Route104_Text_CindyRegister1	Hello, we meet again.\pWe seem to be drawn together. Let's\nregister each other in our POKéNAVS.		
+Route104_Text_CindyRegister2	We should commemorate how we seem\nto be drawn to each other.\pLet's register each other in our\nPOKéNAVS.		
+Route104_Text_CindyRematchIntro	Hello, we meet again.\nMay I ask you for a battle?		
+Route104_Text_CindyRematchDefeat	Oh, my…\nI did the best that I could…		
+Route104_Text_CindyPostRematch	“Hello” is the beginning of “good-bye.”\nI hope we meet again.		
+Route104_Text_DarianIntro	I fished up a tough-looking POKéMON!\pIt has this magical quality to it!\nIt surely looks tough, yes it does!		
+Route104_Text_DarianDefeat	What the…		
+Route104_Text_DarianPostBattle	Hey, MAGIKARP, you sure don't live up\nto your name, do you?		
+Route105_Text_FosterIntro	There's supposed to be a mystical\nrock around here.\lDo you know anything about it?		
+Route105_Text_FosterDefeated	I was thinking too much about that\nrock, while my POKéMON remained weak…		
+Route105_Text_FosterPostBattle	I can spend hours and hours staring\nat a nice rock without growing bored.		
+Route105_Text_LuisIntro	Whew! I was worried that a kid was\ndrowning when I saw you.\pYou seem to be okay, so what do you\nsay to a battle?		
+Route105_Text_LuisDefeated	Glub… Glub…		
+Route105_Text_LuisPostBattle	If you are drowning, the signal is to\nwave one arm toward the beach.		
+Route105_Text_DominikIntro	Swimming the deep blue sea…\nIt feels the greatest!		
+Route105_Text_DominikDefeated	I lost…\nNow I'm feeling blue…		
+Route105_Text_DominikPostBattle	Why is the sea blue?\pI learned about that at the MUSEUM in\nSLATEPORT, but I forgot.		
+Route105_Text_BeverlyIntro	My body feels lighter in the water.\nIt's as if I've gotten slimmer!		
+Route105_Text_BeverlyDefeated	I'm floating…		
+Route105_Text_PostBattle	Your body weight is reduced to just\none tenth in the water.\pThat would make me…\nWhoops! I'm not telling you my weight!		
+Route105_Text_ImaniIntro	The blue, blue sky…\nThe vast sea…\lIt's so peaceful…		
+Route105_Text_ImaniDefeated	I lost while I was lounging!		
+Route105_Text_ImaniPostBattle	I want to be told I'm relaxing to be\nwith. Giggle.		
+Route105_Text_AndresIntro	I'm convinced that the sea keeps\nsecrets from us.		
+Route105_Text_AndresDefeated	Yes…\nI am no good at battling…		
+Route105_Text_AndresPostBattle	I'm sure there are many secrets to be\ndiscovered in the world's seas.\pI mean to find them all!		
+Route105_Text_AndresRegister	Huh? I'm so weak, but you're willing\nto register me in your POKéNAV?		
+Route105_Text_AndresRematchIntro	I've told you that I'm weak…\nAre you sure you want to do this?		
+Route105_Text_AndresRematchDefeated	Yes…\nI didn't think I could win.		
+Route105_Text_AndresRematchPostBattle	I may be weak at battling, but my\ndrive to explore can't be bested.\pI will travel the seas all around\nthe world!		
+Route105_Text_JosueIntro	I'm exhausted from swimming.\nI'm just not used to it.\pI need a battle for a change of pace!		
+Route105_Text_JosueDefeated	I lost because I battled at sea.		
+Route105_Text_JosuePostBattle	Yeah, for me, the sky is a much better\nmatch than the sea.		
+Route106_Text_ElliotIntro	Which do you prefer, fishing in the\nsea or a stream?		
+Route106_Text_ElliotDefeated	Like in deep-sea fishing, I lost\nspectacularly!		
+Route106_Text_ElliotPostBattle	Fishing is the greatest whether it's\nin the sea or a stream.\lYou agree with me, right?		
+Route106_Text_ElliotRegister	Fishing's great, but so is battling.\nIf you don't mind, can we meet again?		
+Route106_Text_ElliotRematchIntro	I caught a bunch of POKéMON fishing.\nI'll show you an impressive battle!		
+Route106_Text_ElliotRematchDefeated	I lost again spectacularly!		
+Route106_Text_ElliotRematchPostBattle	Win or lose, POKéMON are the greatest!\nYou agree with me, right?		
+Route106_Text_NedIntro	What do people do if they need to go\nto a washroom?\pWhat if my ROD hooks a big one while\nI'm in the washroom? I just can't go…		
+Route106_Text_NedDefeated	I lost because I'm trying to not go\nto the washroom…		
+Route106_Text_NedPostBattle	Oh, no! I've got this feeling I'll hook\na big one!		
+Route106_Text_DouglasIntro	Hahahah! I'm a lousy runner, but in\nthe water you can't catch me!		
+Route106_Text_DouglasDefeated	I give up!		
+Route106_Text_DouglasPostBattle	I wouldn't lose in a swim race…		
+Route106_Text_KylaIntro	The sea is my backyard. I'm not going\nto take it easy because you're a kid!		
+Route106_Text_KylaDefeated	Did you take it easy on me by any\nchance?		
+Route106_Text_KylaPostBattle	Drifting along with the waves…\nI love it! Why don't you give it a try?		
+Route107_Text_DarrinIntro	Yawn…\pI must have drifted off to sleep while\nI was drifting in the waves.		
+Route107_Text_DarrinDefeated	Ahaha, I lost…\nI'll take a snooze, I think…		
+Route107_Text_DarrinPostBattle	Floating and being rocked by\nthe waves--it's like sleeping in\la plush, comfy bed.		
+Route107_Text_TonyIntro	The sea is like my backyard.\nLet's battle!		
+Route107_Text_TonyDefeated	I lost on my home field…\nI'm in shock!		
+Route107_Text_TonyPostBattle	I swim the seas with a heart full of\ndreams…\pIt's a song!\nAnyways, I'm swimming some more.		
+Route107_Text_TonyRegister	You've shocked me to the bone!\nWell, so you won't forget me…		
+Route107_Text_TonyRematchIntro	Swimming in the big, wide sea,\nmy POKéMON has grown stronger!		
+Route107_Text_TonyRematchDefeated	What a shock!\pMy POKéMON has gotten stronger, but\nI stayed weak as a TRAINER!		
+Route107_Text_TonyRematchPostBattle	What you learn in battle makes you\na stronger TRAINER.\lThe waves taught me that.		
+Route107_Text_DeniseIntro	Do you know a little town called\nDEWFORD?		
+Route107_Text_DeniseDefeated	I hate this!		
+Route107_Text_DenisePostBattle	A weird saying is getting really\ntrendy at DEWFORD HALL.		
+Route107_Text_BethIntro	Did you want to battle me?\nSure, I'll go with you!		
+Route107_Text_BethDefeated	I wasn't good enough for you.		
+Route107_Text_BethPostBattle	I think you're going to keep getting\nbetter. I'll go for it, too!		
+Route107_Text_LisaIntro	LISA: We challenge you as a sister\nand brother!		
+Route107_Text_LisaDefeated	LISA: Awesome.\nYou're in a different class of tough.		
+Route107_Text_LisaPostBattle	LISA: Do you have any friends who\nwould go to the beach with you?		
+Route107_Text_LisaNotEnoughPokemon	LISA: If you want to battle with us,\nbring more POKéMON.		
+Route107_Text_RayIntro	RAY: We always battle POKéMON,\nme and my sister.\pI always lose, but we can beat you\n2-on-2!		
+Route107_Text_RayDefeated	RAY: Wowee, you're at a higher level\nthan us!		
+Route107_Text_RayPostBattle	RAY: My sister gave me my POKéMON.\nI raised it, and now it's my important\lpartner!		
+Route107_Text_RayNotEnoughPokemon	RAY: If you want to battle us,\ngo bring some more POKéMON!		
+Route107_Text_CamronIntro	I'm in the middle of a triathlon,\nbut I'm nowhere near tired!		
+Route107_Text_CamronDefeated	That exhausted me…		
+Route107_Text_CamronPostBattle	I still have swimming and running left\nto do after this.\pAm I going to be okay?		
+Route108_Text_JeromeIntro	My dream is to swim the world's seven\nseas!		
+Route108_Text_JeromeDefeated	I won't be able to swim the seven seas\nlike this…		
+Route108_Text_JeromePostBattle	Playing with marine POKéMON is one of\nthe pleasures of swimming!		
+Route108_Text_MatthewIntro	Ahoy, there! Are you going out to\nthe ABANDONED SHIP, too?		
+Route108_Text_MatthewDefeated	I'm sinking!\nGlub… Glub…		
+Route108_Text_MatthewPostBattle	Some people even go inside that\nABANDONED SHIP.		
+Route108_Text_TaraIntro	My liar of a boyfriend told me that\nI look great in a bikini…		
+Route108_Text_TaraDefeated	Oh, boo!		
+Route108_Text_TaraPostBattle	Even if it's a lie, I love being told\nI look great…\lWe girls are so complex…		
+Route108_Text_MissyIntro	I love the sea!\nI forget all my worries when I swim!		
+Route108_Text_MissyDefeated	When I lose a battle, I get all\nstressed out!		
+Route108_Text_MissyPostBattle	Work off your stress by swimming!\nIt's so healthy!		
+Route108_Text_CoryIntro	I love WATER-type POKéMON.\nI love other POKéMON, too!		
+Route108_Text_CoryDefeated	Waaah! I lost!\nWaaah! Waaah!		
+Route108_Text_CoryPostBattle	Shouting is good for me!\nIt uplifts me!		
+Route108_Text_CoryRegister	I love tough TRAINERS, too!\nRegister me in your POKéNAV!		
+Route108_Text_CoryRematchIntro	Win or lose, I love battling at sea!		
+Route108_Text_CoryRematchDefeated	Waaah! I lost again!\nWaaah! Waaah!		
+Route108_Text_CoryRematchPostBattle	If you're faced with a challenge,\ntry shouting at the sea!		
+Route108_Text_CarolinaIntro	I take huge pride in my POKéMON.\nWe'll show you one speedy battle!		
+Route108_Text_CarolinaDefeated	That wasn't cute at all.		
+Route108_Text_CarolinaPostBattle	Since I'm at sea like this, I wouldn't\nmind putting on a pink, frilly swimsuit…		
+Route109_Text_DavidIntro	Hiyah! Look at my chiseled abs!\nThis is what you call “cut”!		
+Route109_Text_DavidDefeated	Aiyah!\nFlubbed out!		
+Route109_Text_DavidPostBattle	Hiyah!\pMy sculpted abs have nothing to do\nwith POKéMON battles!		
+Route109_Text_AliceIntro	Are you properly protected against\nthe sun?		
+Route109_Text_AliceDefeated	Ouch, ouch, ouch!		
+Route109_Text_AlicePostBattle	Cheeks are the most prone to burning!		
+Route109_Text_HueyIntro	I've laid anchor in ports around\nthe world, but SLATEPORT's the best.		
+Route109_Text_HueyDefeated	You're the best!		
+Route109_Text_HueyPostBattle	In the best port was the best\nTRAINER…		
+Route109_Text_EdmondIntro	Urrrrppp…\nBattle? With me?		
+Route109_Text_EdmondDefeated	Urp… Ooooooohhhhhh…\nUrrrrpppp…		
+Route109_Text_EdmondPostBattle	I'm usually stronger than this!\nI'm just seasick as a dog!\pI'm a SAILOR, but…		
+Route109_Text_RickyIntro	I'm thirsty… I could go for a SODA POP\nat the SEASHORE HOUSE…		
+Route109_Text_RickyDefeated	Groan…		
+Route109_Text_RickyPostBattle	I'm getting famished… My inner tube\nlooks like a giant doughnut…		
+Route109_Text_RickyRegister	Will you have another match with me\nwhen I'm not all thirsty?		
+Route109_Text_RickyRematchIntro	I'm hungry, but I've got enough pep in\nme for a battle!		
+Route109_Text_RickyRematchDefeated	I lost…\nIt's because I'm hungry…		
+Route109_Text_RickyRematchPostBattle	When you eat on a beach, everything\nseems to taste a little better.		
+Route109_Text_LolaIntro	Doesn't a beach umbrella look like\na giant flower?		
+Route109_Text_LolaDefeated	Mommy!		
+Route109_Text_LolaPostBattle	If you look at the beach from the sky,\nit looks like a big flower garden!		
+Route109_Text_LolaRegister	Me?\nI'm here every day!		
+Route109_Text_LolaRematchIntro	I'm not losing to you again!\nThat's why I have my inner tube!		
+Route109_Text_LolaRematchDefeated	Mommy!		
+Route109_Text_LolaRematchPostBattle	If I have an inner tube, me and my\nPOKéMON's cuteness goes way up!		
+Route109_Text_AustinaIntro	I can't swim without my inner tube,\nbut I won't lose at POKéMON!		
+Route109_Text_AustinaDefeated	Did I lose because I have an inner\ntube?		
+Route109_Text_AustinaPostBattle	My inner tube is a fashion item.\nI can't be seen without it.		
+Route109_Text_GwenIntro	Hi, big TRAINER.\nWill you battle with me?		
+Route109_Text_GwenDefeated	Oh, you're strong.		
+Route109_Text_GwenPostBattle	How did you get to be so strong?		
+Route109_Text_CarterIntro	Wahahah! This dude's going to catch\nhimself a big one!		
+Route109_Text_CarterDefeated	This dude just lost one…		
+Route109_Text_CarterPostBattle	This dude thinks you're a big one.\nNo, you're a big-one-to-be!		
+Route109_Text_PaulIntro	PAUL: Well, this is a mood-breaker.\pI wish you wouldn't disturb our\nprecious time together.		
+Route109_Text_PaulDefeated	PAUL: Well, I give up.		
+Route109_Text_PaulPostBattle	PAUL: Well, don't tell anyone that\nwe're here.\lThis is just our private world of two!		
+Route109_Text_PaulNotEnoughPokemon	PAUL: We're totally, deeply in love.\nThat's why we make our POKéMON battle\ltogether.		
+Route109_Text_MelIntro	MEL: We're, like, totally in love.\nOur romance is heating up all of HOENN!		
+Route109_Text_MelDefeated	MEL: We lost, and it's my fault!\nPAUL will hate me!		
+Route109_Text_MelPostBattle	MEL: Um, PAUL, are you angry with me?\nPlease don't be angry.		
+Route109_Text_MelNotEnoughPokemon	MEL: We're, like, deeply and truly in love.\nThat's why we make our POKéMON\lbattle together.		
+Route109_Text_ChandlerIntro	Tadaah! See?\nMy inner tube's round!		
+Route109_Text_ChandlerDefeated	Oh, oh!\nToo bad!		
+Route109_Text_ChandlerPostBattle	After I showed you my round inner\ntube, too…		
+Route109_Text_HaileyIntro	I can't swim, so I'm pretending\nto swim.		
+Route109_Text_HaileyDefeated	I thought so!\nI didn't think we could win.		
+Route109_Text_HaileyPostBattle	When I learn how to swim, I think\nmy POKéMON will become tougher.		
+Route109_Text_ElijahIntro	For a guy as macho as me, this kind\nof POKéMON is the perfect match!		
+Route109_Text_ElijahDefeated	I'm cool even in defeat, hey?		
+Route109_Text_ElijahPostBattle	For a guy as macho as me, a port\nis the perfect setting!\pI guess I'll head for SLATEPORT.		
+Route110_Text_JacobIntro	Whoa! Watch it!\nI guess you're not used to BIKE racing.		
+Route110_Text_JacobDefeated	Whoa!\nMy brakes failed!		
+Route110_Text_JacobPostBattle	Flat tires and brake problems can\ncause serious injury!\lInspect your BIKE for problems!		
+Route110_Text_AnthonyIntro	Yo, you!\nCan you keep up with my speed?		
+Route110_Text_AnthonyDefeated	Crash and burn!		
+Route110_Text_AnthonyPostBattle	Speed alone won't let me win at POKéMON.\nI need to reconsider this…		
+Route110_Text_BenjaminIntro	Don't panic if your BIKE's going fast!		
+Route110_Text_BenjaminDefeated	I shouldn't panic during POKéMON\nbattles…		
+Route110_Text_BenjaminPostBattle	There's no need to panic or stress.\nTake it easy. There's plenty of time.		
+Route110_Text_BenjaminRegister	I'll keep chugging on without stressing.\nGive me a shout if you're up to it.		
+Route110_Text_BenjaminRematchIntro	Aren't you going a little too fast?\nTake it easy and let's battle.		
+Route110_Text_BenjaminRematchDefeated	I didn't panic, but I still lost…		
+Route110_Text_BenjaminRematchPostBattle	There's no need to panic or stress.\nTake it easy. There's plenty of time.		
+Route110_Text_AbigailIntro	The triathlon is hard in the extreme.\pYou have to complete the three events\nof swimming, cycling, and running.		
+Route110_Text_AbigailDefeated	POKéMON battles are hard, too!		
+Route110_Text_AbigailPostBattle	I'm exhausted, so I need a break.\nIt's important to get proper rest.		
+Route110_Text_AbigailRegister	You know, I like you!\nLet's have a rematch on CYCLING ROAD.		
+Route110_Text_AbigailRematchIntro	Isn't it neat to hold a battle while\ncycling?		
+Route110_Text_AbigailRematchDefeated	Wow…\nHow could you be so strong?		
+Route110_Text_AbigailRematchPostBattle	Were you going after a record?\pI'm sorry if I held you up!		
+Route110_Text_JasmineIntro	I've been riding without stopping.\nMy thighs are like rocks!		
+Route110_Text_JasmineDefeated	I'm worried about muscle cramps…		
+Route110_Text_JasminePostBattle	Oh, you have some GYM BADGES?\nNo wonder you're so strong!		
+Route110_Text_EdwardIntro	I have foreseen your intentions!\nI cannot possibly lose!		
+Route110_Text_EdwardDefeated	I failed to prophesize my own demise!		
+Route110_Text_EdwardPostBattle	I see your future…\pHmm…\nI see a shining light…		
+Route110_Text_JaclynIntro	Ahahahaha!\nI'll dazzle you with my wonders!		
+Route110_Text_JaclynDefeated	I wondrously lost!		
+Route110_Text_JaclynPostBattle	You managed to win only because it was\na wonder! Yes, a wonder!\lDon't think you can win all the time!		
+Route110_Text_EdwinIntro	Could I see your POKéMON?\nJust one look, please?		
+Route110_Text_EdwinDefeated	I wanted to complete\nmy collection…		
+Route110_Text_EdwinPostBattle	When I see a POKéMON that I don't know,\nmy passion as a collector is ignited!		
+Route110_Text_EdwinRegister	I like collecting MATCH CALL\nregistrations, too…		
+Route110_Text_EdwinRematchIntro	Hi, have you caught any new POKéMON?\pCould I see your POKéMON?\nJust one look, please?		
+Route110_Text_EdwinRematchDefeated	Your POKéMON…\nI envy you.		
+Route110_Text_EdwinRematchPostBattle	Oh, I long to make all rare POKéMON\nmine!		
+Route110_Text_DaleIntro	Hey!\nDon't sneak up behind me like that!		
+Route110_Text_DaleDefeated	I lost!\nDrat!		
+Route110_Text_DalePostBattle	Fishing is all about concentration.\nYou have to focus on the floater.		
+Route110_Text_IsabelIntro	Ahahaha! I would go anywhere to show\noff my delightful POKéMON.		
+Route110_Text_IsabelDefeated	Oh, dear, this won't do.		
+Route110_Text_IsabelPostBattle	Rather than battling, perhaps I should\nshow off my POKéMON at the FAN CLUB.		
+Route110_Text_IsabelRegister	That wasn't close to what I could\ndo to show off my POKéMON.\pI'll have you as my captive audience\nas often as possible!		
+Route110_Text_IsabelRematchIntro	Ahahahaha! I would be happy to show\noff my POKéMON as often as you like!		
+Route110_Text_IsabelRematchDefeated	Oh, dear, this won't do.		
+Route110_Text_IsabelRematchPostBattle	I don't think that I could ever stop\nfrom showing off my POKéMON.\pBut I like to battle, too!		
+Route110_Text_TimmyIntro	I found some cool POKéMON in the grass\naround here!		
+Route110_Text_TimmyDefeated	Being cool isn't enough to win…		
+Route110_Text_TimmyPostBattle	It's hard to battle with POKéMON you\njust caught.		
+Route110_Text_AlyssaIntro	I fell off CYCLING ROAD…\pI'll get over my embarrassment by\nbattling with you!		
+Route110_Text_AlyssaDefeated	Oops!\nI ended up losing!		
+Route110_Text_AlyssaPostBattle	Falling… Losing…\nThis is so humiliating for me!		
+Route110_Text_JosephIntro	Okay! Full-throttle time! If you can't\ngroove, you get left behind!		
+Route110_Text_JosephDefeated	You got into the groove all right…		
+Route110_Text_JosephPostBattle	This isn't going to bring me down!\nLosing has made me a better man!		
+Route110_Text_KalebIntro	When cute POKéMON help each other…\nYou won't see a more adorable sight!		
+Route110_Text_KalebDefeated	Have you no compassion or pity?		
+Route110_Text_KalebPostBattle	Okay, okay, you've done the best you\ncould, my pretties.		
+Route111_Text_DrewIntro	Oh, hey! Those GO-GOGGLES suit you.\nBut I think they look better on me.\pLet's decide who they look better on\nwith a battle!		
+Route111_Text_DrewDefeat	I couldn't see what was happening at\nmy sides because of the GO-GOGGLES.		
+Route111_Text_DrewPostBattle	The GO-GOGGLES make it possible to\nget through sandstorms.\lThat makes me happy!		
+Route111_Text_HeidiIntro	I'm having a picnic in the desert.\pYou can always find a TRAINER,\nso I can enjoy a battle here, too!		
+Route111_Text_HeidiDefeat	Ohhh! You're mean!		
+Route111_Text_HeidiPostBattle	When you're battling in a sandstorm,\nwatch out for your POKéMON's HP.\pIt can faint if you don't keep\nan eye on it!		
+Route111_Text_BeauIntro	Wearing these GO-GOGGLES makes me\nfeel like a superhero.\lRight now, nobody can beat me!		
+Route111_Text_BeauDefeat	I can't win on spirit alone…		
+Route111_Text_BeauPostBattle	I'm going to be a real hero one day.\nI'm going to work harder to make me\land my POKéMON stronger.		
+Route111_Text_BeckyIntro	I heard there are fossils to be found\nin the desert. Where could they be?		
+Route111_Text_BeckyDefeat	I came up short…		
+Route111_Text_BeckyPostBattle	If they can find fossils in the desert,\nit must have been a sea before.		
+Route111_Text_DustyIntro	For thirty years I have searched for\nancient ruins!\lI am to be challenged?		
+Route111_Text_DustyDefeat	While I have searched for ruins,\nI've not searched for strong POKéMON.		
+Route111_Text_DustyPostBattle	For thirty years I have searched for\nancient ruins!\pNo, wait, was that forty years?\nWhich was it now?		
+Route111_Text_DustyRegister	I haven't been searching for any\ntough POKéMON.\pBut, for some reason, I sure do like\nPOKéNAVS.		
+Route111_Text_DustyRematchIntro	For thirty years I have searched for\nancient ruins!\pNo, wait, was that forty years?\nAnyway, am I to be challenged?		
+Route111_Text_DustyRematchDefeat	I've found no ruins, nor have I found\nany strong POKéMON…		
+Route111_Text_DustyPostRematch	For thirty years I have searched for\nancient ruins!\pNo, wait, was that forty years\nI've searched?\pHmm… It could even be fifty…\nHow long have I been at this?		
+Route111_Text_TravisIntro	I'm full of pep!\nAnd my POKéMON is peppy, too!		
+Route111_Text_TravisDefeat	My POKéMON lost its pep…		
+Route111_Text_TravisPostBattle	When I see a TRAINER with a lot of pep,\nI can't help looking.		
+Route111_Text_IreneIntro	I don't know where you're going,\nbut would you like to battle?		
+Route111_Text_IreneDefeat	Oh, you're disgustingly good!		
+Route111_Text_IrenePostBattle	I'm thinking that I should go to\nMT. CHIMNEY, but the view around\lhere is very nice, too.		
+Route111_Text_DaisukeIntro	To train myself, I challenge all\nwhom I meet!		
+Route111_Text_DaisukeDefeat	Uncle! I give up!		
+Route111_Text_DaisukePostBattle	All I can do is keep training until\nI can defeat strong TRAINERS such\las yourself.		
+Route111_Text_WiltonIntro	Show me how much you've toughened\nyour POKéMON.		
+Route111_Text_WiltonDefeat	I see, you've toughened them\nconsiderably.		
+Route111_Text_WiltonPostBattle	POKéMON and TRAINERS learn much\nthrough battling.\pWhat's important is to never give up\neven if you lose.		
+Route111_Text_WiltonRegister	There is much to be learned from\nyour training style.\pI request a rematch if it\nbehooves you.		
+Route111_Text_WiltonRematchIntro	We're training here to elevate our\ngame to the next level.\lStay and train with us!		
+Route111_Text_WiltonRematchDefeat	Ooh, you're decent!		
+Route111_Text_WiltonPostRematch	Since you're that strong, you should\naim for the POKéMON LEAGUE.		
+Route111_Text_BrookeIntro	Oh, your POKéMON look like serious\nactors.\lI have to ask you for an engagement.		
+Route111_Text_BrookeDefeat	They didn't just look strong,\nthey are strong!		
+Route111_Text_BrookePostBattle	I thought I was raising my POKéMON\ndiligently, but, oh no, there is still\lmuch to be done.		
+Route111_Text_BrookeRegister	I wish I could become friends with\nmore strong people like you!		
+Route111_Text_BrookeRematchIntro	You can make POKéMON stronger or\nweaker depending on the moves you\lteach them.\pWhat kinds of moves do your POKéMON\nknow?		
+Route111_Text_BrookeRematchDefeat	You've taught them good moves!		
+Route111_Text_BrookePostRematch	Maybe I should have stopped my\nPOKéMON from evolving until they\llearned better moves…		
+Route111_Text_CeliaIntro	I shouldn't have come to a place like\nthis for a picnic!		
+Route111_Text_CeliaDefeat	Aww!\nI really shouldn't have come!		
+Route111_Text_CeliaPostBattle	In a sandstorm like this, I can't set\nthe places for a picnic even with my\lGO-GOGGLES on…		
+Route111_Text_BryanIntro	How tough are you?\nWe shall expose that secret!		
+Route111_Text_BryanDefeat	Oh! Your strength!\nIt is shrouded in mystery!		
+Route111_Text_BryanPostBattle	This desert hoards mysteries in\nits shifting sands!		
+Route111_Text_BrandenIntro	I'll give you some of my sandwich\nif you'll lose.		
+Route111_Text_BrandenDefeat	Tch! I thought a sandwich would be\nenough of a bribe…		
+Route111_Text_BrandenPostBattle	My SANDSHREW loves eating\nmy sandwiches.		
+Route111_Text_TyronIntro	This is my favorite kind of POKéMON!		
+Route111_Text_TyronDefeat	Wait!\nDid you get a good look at my POKéMON?		
+Route111_Text_TyronPostBattle	When having a battle, I get a kick out\nof showing off my POKéMON.\pI bet everyone feels that way when\nthey enter a battle!		
+Route111_Text_CelinaIntro	Show me how to put a little excitement\ninto my life.		
+Route111_Text_CelinaDefeat	Oh… My…\nThat was too much excitement.		
+Route111_Text_CelinaPostBattle	My pulse is still racing.\nYou're one fabulous TRAINER.		
+Route111_Text_HaydenIntro	When you're as famished as I am,\nthere is no room for pity!		
+Route111_Text_HaydenDefeat	Groan…		
+Route111_Text_HaydenPostBattle	My stomach is grumbling!\nMaybe I can grill some BERRIES…		
+Route111_Text_BiancaIntro	Did you come from MAUVILLE?\nThen you should be full of energy!		
+Route111_Text_BiancaDefeat	Ooh lala!\nThat's a lot to take!		
+Route111_Text_BiancaPostBattle	This road here…\nYou have quite a ways to travel.		
+Route112_Text_BriceIntro	Hahahaha!\nHow about we have a battle?\lYou and me!\lHahahaha!		
+Route112_Text_BriceDefeat	I lost!\nHahahaha!		
+Route112_Text_BricePostBattle	Hahahahaha! Something flew up my nose!\nHahahaha-hatchoo!		
+Route112_Text_TrentIntro	My legs are solid from pounding up\nand down the mountains.\pThey're not going to buckle easily,\nfriend!		
+Route112_Text_TrentDefeat	Ouch! My legs cramped up!		
+Route112_Text_TrentPostBattle	Try hiking, and I mean really\npounding, on these mountain trails\lwith a heavy pack weighing dozens of\lpounds.\pThat, my friend, will get your body\ninto serious shape.		
+Route112_Text_TrentRegister	Ow, my legs have cramped up.\nCan you grab me some bandages from\lmy backpack?\pNo, that's my POKéNAV!\nOh, fine, I'll register you.		
+Route112_Text_TrentRematchIntro	I've been keeping fit by hiking.\nPower, I have in spades!		
+Route112_Text_TrentRematchDefeat	I got trumped in power?		
+Route112_Text_TrentRematchPostBattle	I hear there are some seriously tough\nTRAINERS on top of MT. CHIMNEY.\pI intend to get up there and give them\na challenge!		
+Route112_Text_LarryIntro	I'm strong.\nI won't cry if I lose.		
+Route112_Text_LarryDefeat	Waaaah!		
+Route112_Text_LarryPostBattle	I'm not crying because I miss my mommy!\nSnivel…		
+Route112_Text_CarolIntro	When you're out on a picnic, why,\nyou simply have to sing!\lCome on, sing with me!		
+Route112_Text_CarolDefeat	Oh, you're so strong!		
+Route112_Text_CarolPostBattle	It doesn't matter if you're good or bad\nat singing or POKéMON.\pIf you have the most fun, you win!		
+Route112_Text_BryantIntro	I caught hot POKéMON in FIERY PATH!\nTake a look!		
+Route112_Text_BryantDefeat	What a bumpy ride that was!		
+Route112_Text_BryantPostBattle	I like the way you battle.\nIt has a certain flair to it.		
+Route112_Text_ShaylaIntro	Oh, aren't you an adorable TRAINER!\nPlease, I need a romantic battle!\lI'm somewhat decent!		
+Route112_Text_ShaylaDefeat	Oh, how strong you are!\nYou've given me quite a shock!		
+Route112_Text_ShaylaPostBattle	Are you busy right now?\nI was thinking that maybe we can have\la rematch right now…\lBut it's all right if you're busy.		
+Route113_Text_JaylenIntro	Can you guess why it's so cool\naround here?		
+Route113_Text_JaylenDefeat	Peeuuw!\nThat stinks!		
+Route113_Text_JaylenPostBattle	The volcanic ash blocks the sun,\nso it doesn't get very warm.\pThat's good for me--I can't stand heat!		
+Route113_Text_DillonIntro	The volcano's eruption is proof that\nthe earth is alive.		
+Route113_Text_DillonDefeat	You're some kind of strong!		
+Route113_Text_DillonPostBattle	Ouch! Owww! I can't see!\nI got ashes in my eyelashes!\pGet it? Ashes and eyelashes?\pOkay, that was bad, sorry…		
+Route113_Text_MadelineIntro	I use this parasol to ward off this\nfilthy, yucky volcanic ash from\lmy dear NUMEL.		
+Route113_Text_MadelineDefeat	Huff, huff…\nI am exhausted…		
+Route113_Text_MadelinePostBattle	You're very good at this.\nI must say I'm impressed!		
+Route113_Text_MadelineRegister	Here, slide under my parasol.\nLet me register you in my POKéNAV.		
+Route113_Text_MadelineRematchIntro	Oh, hello, hasn't it been a while?\nMay I invite you to battle?		
+Route113_Text_MadelineRematchDefeat	Oh, how super!		
+Route113_Text_MadelinePostRematch	You've remained very good at this.\nI must say I'm impressed!		
+Route113_Text_LaoIntro	From out of the ashes I leap! Hiyah!\nI challenge thee!		
+Route113_Text_LaoDefeat	With honor I admit defeat!		
+Route113_Text_LaoPostBattle	I must refine the art of concealment.\nI bid thee farewell.		
+Route113_Text_LaoRegister	Yiiyaah! Witness the ancient ninja\ntechnique of POKéNAV registration!		
+Route113_Text_LaoRematchIntro	From out of the ashes I leap! Hiyah!\nI challenge thee!		
+Route113_Text_LaoRematchDefeat	With honor I admit defeat!		
+Route113_Text_LaoPostRematch	My flawless concealment was let down\nby my immature battle skills…\pI bid thee farewell.		
+Route113_Text_LungIntro	Thanks for finding me!\nBut we still have to battle!		
+Route113_Text_LungDefeat	I'll use my ninjutsu on you…\n“VOLCANIC ASH SWIRL CLOAK”!\p…What?\nIt's already over?		
+Route113_Text_LungPostBattle	You know what's crummy about hiding?\nIt's lonely if no one comes along.		
+Route113_Text_ToriIntro	TORI: Both of us, we collect ashes.\nWe battle POKéMON, too.		
+Route113_Text_ToriDefeat	TORI: We lost… It's boring, so I'm going\nto get some more ashes.		
+Route113_Text_ToriPostBattle	TORI: How much ash do we have?\nEnough for a WHITE FLUTE, I hope.		
+Route113_Text_ToriNotEnoughMons	TORI: We want to battle 2-on-2.\nIf we didn't, we would lose!		
+Route113_Text_TiaIntro	TIA: Both of us, we collect ashes.\nWe battle POKéMON, too.		
+Route113_Text_TiaDefeat	TIA: We couldn't win… It's boring,\nso I'm getting some more ashes.		
+Route113_Text_TiaPostBattle	TIA: We have a lot of ashes!\nI think enough for a WHITE FLUTE!		
+Route113_Text_TiaNotEnoughMons	TIA: We want to battle 2-on-2.\nIf we don't, we won't win!		
+Route113_Text_CobyIntro	Pfft, with these wings I can\nflick you away!		
+Route113_Text_CobyDefeat	A… What?		
+Route113_Text_CobyPostBattle	I don't know what to say when I get\nbeaten so easily…		
+Route113_Text_SophieIntro	The warmth here is making me drowsy.\nBattle with me so I can stay awake.		
+Route113_Text_SophieDefeat	This is a dream.\nI'm sure of it…		
+Route113_Text_SophiePostBattle	Losing burns me up…\nI'm just going to sleep right here!\lZzz!		
+Route113_Text_LawrenceIntro	Were you maybe in the middle\nof gathering volcanic ashes?		
+Route113_Text_LawrenceDefeat	Ehehe.\nWe got beaten cleanly.		
+Route113_Text_LawrencePostBattle	I ought to hide under the ashes, too.		
+Route113_Text_WyattIntro	Y-you want to battle with me?\nEven though I just caught my POKéMON?		
+Route113_Text_WyattDefeat	Y-you're all happy to win?\nEven though it's only me?		
+Route113_Text_WyattPostBattle	Oh, so now you want to say a word to\nthe loser?\pAren't you just the coolest?\nHumph!		
+Route114_Text_LennyIntro	Yodelayhihoo!\p… …\pYou're supposed to shout\n“yodelayhihoo” since it doesn't\lecho here!		
+Route114_Text_LennyDefeat	Yodelayhihoo!		
+Route114_Text_LennyPostBattle	When I was a wee tyke, I believed there\nwas someone copying me and shouting\lback, “Yodelayhihoo.”		
+Route114_Text_LucasIntro	If you're not prepared, you shouldn't\nbe up in the mountains!		
+Route114_Text_LucasDefeat	The mountains are unforgiving…		
+Route114_Text_LucasPostBattle	In the winter, mountains turn deadly\nwith blizzards and avalanches.		
+Route114_Text_ShaneIntro	Camping's fun! You can fish, roast\nmarshmallows, and tell spooky stories!\pBut the best of all are the POKéMON\nbattles!		
+Route114_Text_ShaneDefeat	Way too strong!		
+Route114_Text_ShanePostBattle	I think it's great that I can go\ncamping with my POKéMON.		
+Route114_Text_NancyIntro	I need to exercise after a meal.\nLet's have a match!		
+Route114_Text_NancyDefeat	Oh, no!		
+Route114_Text_NancyPostBattle	I just had a tasty meal.\nI'm getting drowsy…		
+Route114_Text_SteveIntro	Ufufufufufu…\nWant to battle against my POKéMON?		
+Route114_Text_SteveDefeat	M-My POKéMON…		
+Route114_Text_StevePostBattle	A big body that's all lumpy and hard,\nenormous horns, and vicious fangs…\pUfufufufu…\nI wish I had a POKéMON like that…		
+Route114_Text_SteveRegister	Don't forget what you've done to me!\nI'll make it so you can't forget!		
+Route114_Text_SteveRematchIntro	Ufufufufufu…\nCome on, battle my POKéMON…		
+Route114_Text_SteveRematchDefeat	I feel so lucky getting to see your\nPOKéMON…		
+Route114_Text_StevePostRematch	Ufufufufufu…\pWhen I see POKéMON battling, I get all\nshivery and shaky…		
+Route114_Text_BernieIntro	If you're lighting a campfire,\nmake sure you have water handy.		
+Route114_Text_BernieDefeat	Thanks for dousing my fire!		
+Route114_Text_BerniePostBattle	You really do have to be careful with\nany sort of fire in a forest.\pDon't ever underestimate the power\nof fire.		
+Route114_Text_BernieRegister	You set my spirit on fire.\nLet's register each other!		
+Route114_Text_BernieRematchIntro	Have you learned to keep water handy\nfor campfires?		
+Route114_Text_BernieRematchDefeat	I got hosed down before I could\nflare up, I guess.		
+Route114_Text_BerniePostRematch	You really do have to be careful with\nany sort of fire in a forest.\pDon't ever underestimate the power\nof fire.		
+Route114_Text_ClaudeIntro	If we were fishing, you wouldn't stand\na chance against me.\lSo, bring on your POKéMON!		
+Route114_Text_ClaudeDefeat	If we were fishing, I would've won…		
+Route114_Text_ClaudePostBattle	I think I'll try my luck at landing\na big one at METEOR FALLS.\pThere has to be something in there.\nI just know it.		
+Route114_Text_NolanIntro	I like to fish. But I also like to\nbattle!\pIf anyone challenges me, I'm there,\neven if I'm fishing.		
+Route114_Text_NolanDefeat	I like to battle, but that doesn't\nmean I'm good at it…		
+Route114_Text_NolanPostBattle	This time I'll do it!\pI always think that, so I can't walk\naway from fishing or POKéMON.		
+Route114_Text_TyraIntro	TYRA: Well, sure.\nI'm in the mood for it.\lI'll teach you a little about POKéMON.		
+Route114_Text_TyraDefeat	TYRA: What an amazing battle style!		
+Route114_Text_TyraPostBattle	TYRA: I was teaching my junior IVY\nabout POKéMON.		
+Route114_Text_TyraNotEnoughMons	TYRA: Giggle…\nIf you want to battle with us, just one\lPOKéMON isn't enough!		
+Route114_Text_IvyIntro	IVY: Who taught you about POKéMON?		
+Route114_Text_IvyDefeat	IVY: What an amazing battle style!		
+Route114_Text_IvyPostBattle	IVY: I started training POKéMON\nbecause TYRA, my student mentor,\ltaught me!		
+Route114_Text_IvyNotEnoughMons	IVY: Do you only have one POKéMON?\nI think it must feel lonesome.		
+Route114_Text_KaiIntro	I landed a big one!\nA huge one, I tell you!		
+Route114_Text_KaiDefeat	What was that about?\nDid mine lose in size?		
+Route114_Text_KaiPostBattle	Okay!\nI'll just fish me a bigger one!		
+Route114_Text_CharlotteIntro	Me!\nI'm not just a pretty face!		
+Route114_Text_CharlotteDefeat	That wasn't cute in the least!		
+Route114_Text_CharlottePostBattle	I don't want a POKéMON that's\njust cute.\pI adore cute ones that have a quirk\nor two!		
+Route114_Text_AngelinaIntro	Have you made your POKéMON evolve\nvery much?		
+Route114_Text_AngelinaDefeat	Oh, I see.\nThat's good to know.		
+Route114_Text_AngelinaPostBattle	Some POKéMON change so much when\nthey evolve, it's startling!		
+Route115_Text_TimothyIntro	Hm…\nYou seem rather capable…\lLet me keep you company!		
+Route115_Text_TimothyDefeat	You're much stronger than\nI'd imagined!		
+Route115_Text_TimothyPostBattle	There is no such thing as a born genius.\nIt all depends on effort!\lThat is what I believe…		
+Route115_Text_TimothyRegister	Hmm… A loss this thorough has been\na distant memory.\pIf you would allow it, I wish for\nanother opportunity to do battle.		
+Route115_Text_TimothyRematchIntro	Hm… As always, your agility speaks\nfor itself.\lCome, keep me company!		
+Route115_Text_TimothyRematchDefeat	As strong as ever!		
+Route115_Text_TimothyPostRematch	All it takes is effort!\pI lost because I haven't put in enough\neffort!		
+Route115_Text_KoichiIntro	You!\pMy MACHOP!\pDemand a battle!		
+Route115_Text_KoichiDefeat	Ouch, ouch, ouch!		
+Route115_Text_KoichiPostBattle	My MACHOP crew!\pSo long as they seek power, I will\ngrow strong with them!		
+Route115_Text_NobIntro	My strongest skill is busting bricks\nwith my forehead!		
+Route115_Text_NobDefeat	Ugwaaaah!\nMy head is busted!		
+Route115_Text_NobPostBattle	I've been teaching my POKéMON karate.\pIt looks like they'll get a lot better\nthan me. I'm excited about that.		
+Route115_Text_NobRegister	You impress me! Give me a rematch\nafter I redo my training!		
+Route115_Text_NobRematchIntro	After you beat me, we trained hard to\nimprove our skills.\lCome on, give us a rematch!		
+Route115_Text_NobRematchDefeat	Ugwaaah!\nWe lost again!		
+Route115_Text_NobPostRematch	My POKéMON will grow stronger!\nI'll redouble my training!		
+Route115_Text_CyndyIntro	This beach is my secret training spot!\nDon't come butting in!		
+Route115_Text_CyndyDefeat	I haven't trained enough!		
+Route115_Text_CyndyPostBattle	The sand acts as a cushion to reduce\nimpact and prevent injury.\lThis is the perfect place to train.		
+Route115_Text_CyndyRegister	Okay, fine, you're free to come here.\nIn return, I'd like to battle you again.		
+Route115_Text_CyndyRematchIntro	Okay, let's get this battle on!		
+Route115_Text_CyndyRematchDefeat	I can battle but my POKéMON…		
+Route115_Text_CyndyPostRematch	Even when I lose, I still get some\nenjoyment out of it.\lIt must be that I love POKéMON.		
+Route115_Text_HectorIntro	I have a rare POKéMON!\nWould you like me to show you?		
+Route115_Text_HectorDefeat	You…\nYou want my POKéMON, don't you?		
+Route115_Text_HectorPostBattle	I have this rare POKéMON.\nIt's enough to keep me satisfied.		
+Route115_Text_KyraIntro	I'll battle while I'm running!\nTry to keep up with me!		
+Route115_Text_KyraDefeat	Gasp, gasp…		
+Route115_Text_KyraPostBattle	I made the mistake of trying to battle\nwhile running!\pI should take a run to calm down…		
+Route115_Text_JaidenIntro	Take that!\nUltra POKéMON ninja attack!		
+Route115_Text_JaidenDefeat	Waaah!\nOur strategy failed!		
+Route115_Text_JaidenPostBattle	But my POKéMON were ultra,\nweren't they?		
+Route115_Text_HeleneIntro	My POKéMON have black belt-level\nstrength!		
+Route115_Text_HeleneDefeat	This is too humiliating!		
+Route115_Text_HelenePostBattle	I rarely meet anyone who's better\nthan me…\pI get it now!\nYou're a GYM LEADER, aren't you?		
+Route115_Text_AlixIntro	Our eyes met!\nThere's no getting away now!		
+Route115_Text_AlixDefeat	Gah!\nNot bad!		
+Route115_Text_AlixPostBattle	Oh, well.\nI think I will TELEPORT home.		
+Route115_Text_MarleneIntro	You've disturbed my meditation…\nYou'll be punished for it.		
+Route115_Text_MarleneDefeat	You've broken my concentration!		
+Route115_Text_MarlenePostBattle	I was meditating with my POKéMON.\nBut this place isn't very peaceful…		
+Route116_Text_ClarkIntro	If the tunnel doesn't go through, then\nI'll just go over the top.		
+Route116_Text_ClarkDefeat	Gasp… Gasp…\nLosing made me tired…		
+Route116_Text_ClarkPostBattle	It's no big deal if there's no tunnel.\nTo a HIKER, mountains are roads!		
+Route116_Text_JoeyIntro	My POKéMON rule!\nCheck them out!		
+Route116_Text_JoeyDefeat	Ouch! A scrape!\nI have to put on a bandage!		
+Route116_Text_JoeyPostBattle	Bandages are signs of toughness!\nI've got another one!		
+Route116_Text_JoseIntro	My BUG POKéMON are tough!\nLet's battle!		
+Route116_Text_JoseDefeat	I lost!\nI thought I had you!		
+Route116_Text_JosePostBattle	BUG POKéMON evolve quickly.\nSo they get strong quickly, too.		
+Route116_Text_JaniceIntro	Let me teach you how strong my\nadorable POKéMON is!		
+Route116_Text_JaniceDefeat	You're a notch above me…		
+Route116_Text_JanicePostBattle	POKéMON that possess cuteness and\npower, that's ideal, I think.		
+Route116_Text_JerryIntro	We learn all sorts of things at the\nTRAINER'S SCHOOL.\pI want to test things out for real!		
+Route116_Text_JerryDefeat	I slacked off in school…\nThat's why I lost.		
+Route116_Text_JerryPostBattle	I'll have to redo some courses at\nthe TRAINER'S SCHOOL.\lIf I don't, ROXANNE will be steamed.		
+Route116_Text_JerryRegister1	I learned at the TRAINER'S SCHOOL\nthat a POKéNAV can register TRAINERS.\pI don't really get what that means,\nso can I just try it?		
+Route116_Text_JerryRegister2	I learned at the TRAINER'S SCHOOL\nthat a POKéNAV can register TRAINERS.\pI don't really get what that means,\nso can I just try it?		
+Route116_Text_JerryRematchIntro	I've been studying seriously at the\nTRAINER'S SCHOOL.\lI won't lose like I did last time.		
+Route116_Text_JerryRematchDefeat	Hunh?\nI studied diligently.		
+Route116_Text_JerryPostRematch	I'll have to redo some courses at\nthe TRAINER'S SCHOOL.\lIf I don't, ROXANNE will be steamed.		
+Route116_Text_KarenIntro	I study at school, and I study on\nthe way home, too!		
+Route116_Text_KarenDefeat	I'm in shock--I lost?		
+Route116_Text_KarenPostBattle	Awww, I'll never become an elegant\nTRAINER like ROXANNE this way!		
+Route116_Text_KarenRegister1	Oh, wow! Isn't that a POKéNAV?\nI have one, too! Please register me!		
+Route116_Text_KarenRegister2	Oh, wow! Isn't that a POKéNAV?\nI have one, too! Please register me!		
+Route116_Text_KarenRematchIntro	I studied a whole lot since I saw you.\nYou must see my achievements!		
+Route116_Text_KarenRematchDefeat	I'm in shock.\nI lost again?		
+Route116_Text_KarenPostRematch	You've beaten ROXANNE?\nI can't beat you, then. Not yet.		
+Route116_Text_SarahIntro	Just so you know, I've never once been\nbested by anyone at anything.		
+Route116_Text_SarahDefeat	Oh, my goodness.\nThis is a new experience for me.		
+Route116_Text_SarahPostBattle	My life of luxury affords me all that\nI could possibly desire.\pHowever, when it comes to POKéMON,\nmy wealth has no meaning.		
+Route116_Text_DawsonIntro	When you lay your eyes on my POKéMON's\ngorgeous fur, their beauty will render\lyou helpless!		
+Route116_Text_DawsonDefeat	Oh, baby, say it isn't so!		
+Route116_Text_DawsonPostBattle	Oh, no, no, no!\nYou've mussed up my POKéMON's fur!\lYou've ruined my hairdo, too!\lI'll have to call my stylist now!		
+Route116_Text_DevanIntro	We'll rock you hard!		
+Route116_Text_DevanDefeat	Aiyiyi!\nNo contest at all!		
+Route116_Text_DevanPostBattle	I should try different POKéMON\ntypes, that's what I ought to do.		
+Route116_Text_JohnsonIntro	It's a dead end up here.\nI'm bored, so can we battle?		
+Route116_Text_JohnsonDefeat	That was fun even though I lost.		
+Route116_Text_JohnsonPostBattle	Want to stay here and keep\nme company?		
+Route117_Text_IsaacIntro	Listen, could I get you to battle\nthe POKéMON I'm raising?		
+Route117_Text_IsaacDefeat	You've raised yours superbly…		
+Route117_Text_IsaacPostBattle	POKéMON isn't all about power.\pPolishing a unique aspect of one's\ncharacter is another way of enjoying\lPOKéMON.		
+Route117_Text_IsaacRegister	I'm going to redouble my training.\nWould you come look in on us?		
+Route117_Text_IsaacRematchIntro	The POKéMON I've been raising are\nlooking good, just like before.		
+Route117_Text_IsaacRematchDefeat	You know how to raise them properly.\nYou might have DAY CARE skills…		
+Route117_Text_IsaacPostRematch	Your POKéMON are growing good!\nYou should enter them in CONTESTS.		
+Route117_Text_LydiaIntro	Please, allow me to evaluate if you\nhave raised your POKéMON properly.		
+Route117_Text_LydiaDefeat	Yes, they are growing properly.		
+Route117_Text_LydiaPostBattle	Try raising POKéMON with more\nattention to their character traits.		
+Route117_Text_LydiaRegister	I'm glad I met a superb TRAINER in you.\nI hope to see you again.		
+Route117_Text_LydiaRematchIntro	Allow me to reevaluate if you have\nraised your POKéMON properly.		
+Route117_Text_LydiaRematchDefeat	They are growing admirably.		
+Route117_Text_LydiaPostRematch	POKéMON seem to like different kinds\nof {POKEBLOCK}S, depending on their nature.		
+Route117_Text_DylanIntro	I'm in the middle of a triathlon, but,\nwhatever, let's have a battle!		
+Route117_Text_DylanDefeat	I ran out of energy!		
+Route117_Text_DylanPostBattle	I may have blown it…\pI might have dropped to last during\nthat battle…		
+Route117_Text_DylanRegister	POKéMON have to be strong, too?\nI'd like you to train me!		
+Route117_Text_DylanRematchIntro	I'm smack in the middle of a triathlon,\nbut I'm comfortably ahead.\lLet's make this a quick battle!		
+Route117_Text_DylanRematchDefeat	I ran out of energy again!		
+Route117_Text_DylanPostRematch	I was tops in swimming and cycling,\nbut I'm not quite that confident with\lPOKéMON yet.		
+Route117_Text_MariaIntro	I do my triathlon training with POKéMON,\nso I'm pretty confident about my speed.		
+Route117_Text_MariaDefeat	I need to get more practices in,\nI guess.		
+Route117_Text_MariaPostBattle	Training is meaningful only if you\nkeep it up regularly.\pOkay! I'll resume my training!\nTomorrow!		
+Route117_Text_MariaRegister	You appear to be training properly…\nIf you'd like, I'll battle you later!		
+Route117_Text_MariaRematchIntro	Are you keeping up with your training?\nI sure am!\lLet me show you the evidence!		
+Route117_Text_MariaRematchDefeat	I need to get more practices in,\nI guess.		
+Route117_Text_MariaPostRematch	I'll resume training tomorrow.\nLet's battle again sometime!		
+Route117_Text_DerekIntro	Once a BUG CATCHER!\nAnd now a BUG MANIAC!\pBut my love for POKéMON remains\nunchanged!		
+Route117_Text_DerekDefeat	My ineptitude also remains\nunchanged…		
+Route117_Text_DerekPostBattle	All I did was follow my heart, and now\nthey call me a BUG MANIAC…\pStill, I am an expert on BUG POKéMON,\nso it's only natural that they call me\la BUG MANIAC.		
+Route117_Text_AnnaIntro	ANNA: I'm with my pretty junior student\npartner. I have to do good!		
+Route117_Text_AnnaDefeat	ANNA: I'm with my pretty junior student\npartner! Let me win!		
+Route117_Text_AnnaPostBattle	ANNA: Your POKéMON have some good\ncombinations.\pI'd say you're second only to us!		
+Route117_Text_AnnaAndMegRegister	ANNA: We can't take this lying down!\nYou will come back, won't you?		
+Route117_Text_AnnaNotEnoughMons	ANNA: If you want to battle us,\nbring two POKéMON with you.		
+Route117_Text_MegIntro	MEG: I'm going to tag up with my super\nsenior student partner and beat you!		
+Route117_Text_MegDefeat	MEG: Oh, no!\nI'm sorry, ANNA! I let you down…		
+Route117_Text_MegPostBattle	MEG: I dragged ANNA down…\nIf I didn't, she would have won!		
+Route117_Text_MegNotEnoughMons	MEG: Do you only have one POKéMON?\nWe can't battle with you, then.\pWe want to have a 2-on-2 battle.		
+Route117_Text_AnnaRematchIntro	ANNA: I can't keep losing in front of\nmy junior partner, right?		
+Route117_Text_AnnaRematchDefeat	ANNA: I couldn't get into the groove.		
+Route117_Text_AnnaPostRematch	ANNA: Your POKéMON have some good\ncombinations.\pI'd say you're second only to us!		
+Route117_Text_AnnaRematchNotEnoughMons	ANNA: If you want to battle us,\nbring two POKéMON with you.		
+Route117_Text_MegRematchIntro	MEG: I'm going to tag up with my\nsenior partner and win this time!		
+Route117_Text_MegRematchDefeat	MEG: Too strong!		
+Route117_Text_MegPostRematch	MEG: I battled together with my\nsenior partner, but we lost…\pThat's so discouraging…		
+Route117_Text_MegRematchNotEnoughMons	MEG: Do you only have one POKéMON?\nWe can't battle with you, then.\pWe want to have a 2-on-2 battle.		
+Route117_Text_MelinaIntro	Isn't it nice? To battle while looking\nat pretty flowers?		
+Route117_Text_MelinaDefeat	Oh, that's quite impressive!		
+Route117_Text_MelinaPostBattle	It feels wonderful to go for a jog\nwhile looking at flowers.		
+Route117_Text_BrandiIntro	Let me demonstrate the power\nhidden within a PSYCHIC POKéMON!		
+Route117_Text_BrandiDefeat	Astonishing!		
+Route117_Text_BrandiPostBattle	PSYCHIC POKéMON are complex.\nYou should try catching some.		
+Route117_Text_AishaIntro	Concentrate on getting the win.\nThat's how I battle!		
+Route117_Text_AishaDefeat	I don't waste any time being angry\nover a loss--I would rather train.		
+Route117_Text_AishaPostBattle	I think that if you worry about losing,\nyou're more likely to lose.		
+Route118_Text_RoseIntro	The aroma of flowers has a magical\npower. It cleanses us body and soul.		
+Route118_Text_RoseDefeat	Oh, dear me.\nI seem to have lost.		
+Route118_Text_RosePostBattle	Flowers, POKéMON…\nI love whatever smells nice.\pStinky things…\nI'll pass.		
+Route118_Text_RoseRegister	Sniff… That odor--it's a POKéNAV!\nWe must register each other!		
+Route118_Text_RoseRematchIntro	Were you drawn here by the sweet\naroma?		
+Route118_Text_RoseRematchDefeat	The power of aroma…\nIt didn't seem to do much.		
+Route118_Text_RosePostRematch	If you use a sweet aroma properly,\nPOKéMON will be attracted by it.		
+Route118_Text_PerryIntro	BIRD POKéMON that FLY elegantly in\nthe sky… They're the best!		
+Route118_Text_PerryDefeat	Urgh…\nI crashed…		
+Route118_Text_PerryPostBattle	You've got great POKéMON.\nI'll have to train mine better.		
+Route118_Text_ChesterIntro	Take flight!\nMy BIRD POKéMON!		
+Route118_Text_ChesterDefeat	They did take flight…		
+Route118_Text_ChesterPostBattle	If they'd get stronger, they'd be able\nto fly more freely…		
+Route118_Text_BarnyIntro	I'm a FISHERMAN, but also a TRAINER.\nI'm raising the POKéMON I caught.		
+Route118_Text_BarnyDefeat	I thought I was doing okay in my\ntraining…		
+Route118_Text_BarnyPostBattle	I couldn't win by training POKéMON\nwhile I fished…\pWas I doing things in half measures?		
+Route118_Text_WadeIntro	For FISHERMEN, equipment is the key.\pBut for TRAINERS, the key ingredients\nare POKéMON and heart, of course!		
+Route118_Text_WadeDefeat	I was beaten in heart?		
+Route118_Text_WadePostBattle	Come to think of it, fishing is a battle\nbetween a FISHERMAN and a POKéMON.		
+Route118_Text_DaltonIntro	Let my melody rock your soul!		
+Route118_Text_DaltonDefeat	La-lalala…		
+Route118_Text_DaltonPostBattle	An electric guitar doesn't always\nhave to be noisy…\pIt can be strummed to squeeze out\nthis heart-stirring melody…		
+Route118_Text_DaltonRegister	When I compose better melodies,\nyou have to come listen, okay?		
+Route118_Text_DaltonRematchIntro	A melody from my POKéMON and me…\nLet us deliver it to your soul.		
+Route118_Text_DaltonRematchDefeat	La-lalala…		
+Route118_Text_DaltonPostRematch	When I play, my emotions should reach\nyou through my electric guitar…		
+Route118_Text_DeandreIntro	Go, go, go!\nPOKéMON 1, 2, and 3!		
+Route118_Text_DeandreDefeat	Come in, POKéMON! Are you okay?\nPOKéMON 1, 2, and 3?!		
+Route118_Text_DeandrePostBattle	Isn't it cool that I have a POKéMON\nbattle team?\pYou can copy me--I don't mind!		
+Route119_Text_BrentIntro	We're the MIMIC CIRCLE!\nWe MIMIC what you do!		
+Route119_Text_BrentDefeat	Whoopsie!\nI lost!		
+Route119_Text_BrentPostBattle	What's so good about mimicry?\pFufufu…\nYou'll never understand…		
+Route119_Text_DonaldIntro	So, we finally meet!\nMy BUG POKéMON will keep you company!		
+Route119_Text_DonaldDefeat	I wish we'd never met…		
+Route119_Text_DonaldPostBattle	I want to MIMIC you some more.\nCan you hurry up and move?		
+Route119_Text_TaylorIntro	If you step forward, we step forward.\pIf you turn right, we turn, too…		
+Route119_Text_TaylorDefeat	But if you win, I lose…		
+Route119_Text_TaylorPostBattle	I can't MIMIC you winning the match.\nThat's just impossible…\lIt's burning me up…		
+Route119_Text_DougIntro	Yep, you've finally caught me!\nOr were you trying to avoid me?		
+Route119_Text_DougDefeat	Whoop, that was a great match!		
+Route119_Text_DougPostBattle	We're the MIMIC CIRCLE!\nI hope you enjoyed our performance.		
+Route119_Text_GregIntro	You don't know who I am, do you?\pBut, I also don't know you.\nSo, we'll battle!		
+Route119_Text_GregDefeat	You're pretty strong!		
+Route119_Text_GregPostBattle	Until you go away somewhere, we'll\nkeep on mimicking your every move.		
+Route119_Text_KentIntro	The MIMIC CIRCLE was formed by people\nwho like to MIMIC.\pA battle starts the instant we meet!		
+Route119_Text_KentDefeat	I give up!		
+Route119_Text_KentPostBattle	Won't you join our MIMIC CIRCLE?		
+Route119_Text_JacksonIntro	Who has the knowledge and\nthe technique for survival?\pPOKéMON RANGERS, that's who!		
+Route119_Text_JacksonDefeat	I didn't have enough POKéMON\nknow-how…		
+Route119_Text_JacksonPostBattle	To break away from civilization and\nawaken the wild spirit within!\pThat's our vision.		
+Route119_Text_JacksonRegister	I hope you'll give me a rematch without\nmocking my lack of knowledge.		
+Route119_Text_JacksonRematchIntro	I'm going to regain my wild spirit by\nbeing together with POKéMON.		
+Route119_Text_JacksonRematchDefeat	You've remained strong!		
+Route119_Text_JacksonPostRematch	Believe in your POKéMON.\nBelieve in yourself.\pThe road will reveal itself to you.		
+Route119_Text_CatherineIntro	Oh? Look at you.\pFor someone on an adventure,\nyou're traveling awfully light.		
+Route119_Text_CatherineDefeat	Accidents happen when you're not\nprepared!		
+Route119_Text_CatherinePostBattle	You're traveling light but you have\neverything you need.\pYou're on top of things mentally and\nphysically, too.		
+Route119_Text_CatherineRegister	Do you have a POKéNAV?\nIt's a must-have tool for any TRAINER.\pOh, you do have one!\nLet's register each other, then!		
+Route119_Text_CatherineRematchIntro	How's your journey with POKéMON\ngoing?		
+Route119_Text_CatherineRematchDefeat	I'm still missing something…		
+Route119_Text_CatherinePostRematch	In the same way that you, as a TRAINER,\nrely on your POKéMON, your POKéMON\lrely on you.		
+Route119_Text_HughIntro	The vast sky holds untold promise!\pNothing can compare to the sheer\nexhilaration of flight!		
+Route119_Text_HughDefeat	Down and out!		
+Route119_Text_HughPostBattle	My BIRD POKéMON made my dreams of\nflying come true!		
+Route119_Text_PhilIntro	I'll show you the true potential of me\nand my BIRD POKéMON!		
+Route119_Text_PhilDefeat	We lacked potential…		
+Route119_Text_PhilPostBattle	Ever since I was a little kid, I always\nadmired BIRD POKéMON…		
+Route119_Text_YasuIntro	To lurk in shadows, and live in\ndarkness… That is my destiny.\pI emerge to challenge you!		
+Route119_Text_YasuDefeat	I admit defeat!		
+Route119_Text_YasuPostBattle	Those defeated in battle withdraw\nquietly back into the shadows.\lThat, too, is destiny…		
+Route119_Text_TakashiIntro	If you're not on your guard,\nyou're in for some pain!		
+Route119_Text_TakashiDefeat	You're surprisingly good!		
+Route119_Text_TakashiPostBattle	My surprise attack ended in\nfailure…		
+Route119_Text_HideoIntro	To hide a tree, use a forest!		
+Route119_Text_HideoDefeat	I bow to your superiority.		
+Route119_Text_HideoPostBattle	To hide a tree, use a forest!\nTo hide a POKéMON, use a POKéMON!\pThere is no deep, hidden meaning\nto that.		
+Route119_Text_ChrisIntro	You spoke to me…\nSo you want to challenge me!\pSure! I'll try out the POKéMON I caught\nwhile SURFING!		
+Route119_Text_ChrisDefeat	I don't have a clue about what it\ntakes to win.		
+Route119_Text_ChrisPostBattle	Go for a SURF on my POKéMON…\pThen fish off its back…\pIt's an indescribably luxuriant moment!		
+Route119_Text_FabianIntro	Hit me with a power chord!\nVictory is mine!\lIt's our time to shine, whoa, yeah!		
+Route119_Text_FabianDefeat	You showed me who's the boss!\nWe'll have to take the loss, oh, no!		
+Route119_Text_FabianPostBattle	Hit me with another power chord!\nLeave me alone!\lYour win you have to atone!		
+Route119_Text_DaytonIntro	Hohoho!\nI like kid TRAINERS!\lLet's have a good one!		
+Route119_Text_DaytonDefeat	You're pretty amazing!\nHohoho!		
+Route119_Text_DaytonPostBattle	Hohoho!\nI'll try emulating the pep of kid\lTRAINERS like you!		
+Route119_Text_RachelIntro	Wherever and whenever I may be,\nI always have my parasol in hand.		
+Route119_Text_RachelDefeat	Oh, but…\nThat's not fair.		
+Route119_Text_RachelPostBattle	You're asking if my parasol is heavy?\nYour BAG is filled with more junk than\lI ever carry around.		
+Route120_Text_ColinIntro	Do you have any moves that can strike\na flying POKéMON?		
+Route120_Text_ColinDefeat	You soared above me!		
+Route120_Text_ColinPostBattle	The move FLY is convenient,\ndon't you think?\pWhile the POKéMON is flying,\nalmost no moves can strike it.		
+Route120_Text_RobertIntro	My POKéMON is strong!\nHow about yours?		
+Route120_Text_RobertDefeat	Your POKéMON were stronger…		
+Route120_Text_RobertPostBattle	A POKéMON that grows steadily is one\nyou can count on.		
+Route120_Text_RobertRegister	You can be counted on to get better.\nI'd like to register you in my POKéNAV!		
+Route120_Text_RobertRematchIntro	A POKéMON that grows steadily is one\nyou can count on.		
+Route120_Text_RobertRematchDefeat	Your POKéMON are seriously strong.		
+Route120_Text_RobertPostRematch	My POKéMON are growing stronger.\nI have to grow stronger, too.		
+Route120_Text_LorenzoIntro	I'll check your POKéMON and see if\nthey're fit for the outdoors.		
+Route120_Text_LorenzoDefeat	With POKéMON that strong, you're in\nno danger of needing rescue!		
+Route120_Text_LorenzoPostBattle	To travel wherever your heart desires\nwith POKéMON…\lThat's the joy of being a TRAINER.		
+Route120_Text_JennaIntro	How's your physical fitness?\nIf you're not fit, you could have a\lrough time in critical situations.		
+Route120_Text_JennaDefeat	I'm totally fit, but…		
+Route120_Text_JennaPostBattle	Fitness training is in my routine.\nI always run with my POKéMON.		
+Route120_Text_JeffreyIntro	… … … … … …\n… … … … … …\lWant to battle?		
+Route120_Text_JeffreyDefeat	Lost it…		
+Route120_Text_JeffreyPostBattle	… … … … … …\n… … … … … …\lI'll try harder…		
+Route120_Text_JeffreyRegister	… … … … … …\n… … … … … …\lDo you have a POKéNAV…?		
+Route120_Text_JeffreyRematchIntro	… … … … … …\n… … … … … …\lWant to battle again?		
+Route120_Text_JeffreyRematchDefeat	… … … … … …\nI lost again…		
+Route120_Text_JeffreyPostRematch	… … … … … …\n… … … … … …\lI'll try harder…\lFor my precious BUG POKéMON…		
+Route120_Text_JenniferIntro	POKéMON have many special abilities.\nIf you want to become a first-class\lTRAINER, learn about them.		
+Route120_Text_JenniferDefeat	You're obviously thinking.		
+Route120_Text_JenniferPostBattle	The special abilities of POKéMON\nwill make battle styles change.		
+Route120_Text_ChipIntro	Who might you be?\pAre you perhaps searching for ancient\nruins that are rumored to possibly\lexist according to legend?		
+Route120_Text_ChipDefeat	What a disgraceful setback…		
+Route120_Text_ChipPostBattle	That giant rock… I would like to\nbelieve it may indeed contain ancient\lruins. But I see no entrance.		
+Route120_Text_ClarissaIntro	Why am I carrying this parasol?\pI'll tell you if you can win against me.		
+Route120_Text_ClarissaDefeat	A parasol can't ward off POKéMON\nattacks…		
+Route120_Text_ClarissaPostBattle	I don't think strong sunlight is good\nfor my POKéMON.\lSo I shield them with my parasol.		
+Route120_Text_AngelicaIntro	Me, POKéMON, and my parasol…\pIf any one of them is missing,\nthe picture of beauty will be ruined.		
+Route120_Text_AngelicaDefeat	You've completely ruined my beauty…		
+Route120_Text_AngelicaPostBattle	A parasol wouldn't suit you at all.\pWhy, something like this would only\nget in your way.		
+Route120_Text_KeigoIntro	I will adopt the movements of POKéMON\nand create new ninja techniques.		
+Route120_Text_KeigoDefeat	The creation of new ninja techniques\nis but a distant dream…		
+Route120_Text_KeigoPostBattle	Perhaps I ought to apprentice under\na ninja sensei.		
+Route120_Text_RileyIntro	We ninja conceal ourselves under our\ncamouflage cloaks.\lI bet you didn't know where I was!		
+Route120_Text_RileyDefeat	I lost!\nI should camouflage my shame!		
+Route120_Text_RileyPostBattle	Our camouflage cloaks are all\nhandmade.		
+Route120_Text_CallieIntro	If you don't pay attention,\nyou could get hurt!		
+Route120_Text_CallieDefeat	Ouch!\nI was the one to get hurt.		
+Route120_Text_CalliePostBattle	I wonder… Should I evolve my POKéMON?\nThey're cute the way they are, though.		
+Route120_Text_LeonelIntro	Your party POKéMON…\nDo you have different types?		
+Route120_Text_LeonelDefeat	I've seen your policy in action!		
+Route120_Text_LeonelPostBattle	I think it's awesome you're so strong\nbattling with your favorite POKéMON.		
+Route121_Text_VanessaIntro	Will you play with my delightfully\npretty POKéMON?		
+Route121_Text_VanessaDefeat	This isn't what I meant!		
+Route121_Text_VanessaPostBattle	I'm going to a CONTEST in LILYCOVE.\pMy POKéMON should have no problem\nsweeping the MASTER CLASS.		
+Route121_Text_WalterIntro	With my POKéMON, I have traveled\nto the world's four corners.\pYou might say I have some confidence\nin my abilities.		
+Route121_Text_WalterDefeat	Ah, well played.		
+Route121_Text_WalterPostBattle	I would like to circle the globe once\nagain with my POKéMON.		
+Route121_Text_WalterRegister	Your POKéMON prowess is remarkable.\nAllow me to register you as a memento.		
+Route121_Text_WalterRematchIntro	With my POKéMON, I have traveled\nto the world's four corners.\pYou might say I have some confidence\nin my abilities.		
+Route121_Text_WalterRematchDefeat	Ah, well played.		
+Route121_Text_WalterPostRematch	Your POKéMON and you…\pYour prowess together will be\nconsidered strong, even overseas.		
+Route121_Text_TammyIntro	There are powers beyond our\nunderstanding in the world…		
+Route121_Text_TammyDefeat	I have lost…		
+Route121_Text_TammyPostBattle	MT. PYRE…\nThere is a mysterious power\lat work there…		
+Route121_Text_KateIntro	KATE: Together, we're fearless!\nWe'll demonstrate how tough we are!		
+Route121_Text_KateDefeat	KATE: I blew it in front of my junior\nstudent partner…		
+Route121_Text_KatePostBattle	KATE: When someone's relying on me,\nI get this urge to look cool in front\lof them…		
+Route121_Text_KateNotEnoughMons	KATE: If you've only got one POKéMON,\nwe can't battle with you.\pThat would be bullying.		
+Route121_Text_JoyIntro	JOY: Together, we're fearless!\nWe'll demonstrate how tough we are!		
+Route121_Text_JoyDefeat	JOY: Please forgive me, KATE!		
+Route121_Text_JoyPostBattle	JOY: Ehehe, I'll have to train with KATE,\nmy senior student partner, again.		
+Route121_Text_JoyNotEnoughMons	JOY: You need at least two POKéMON\nif you're going to challenge us!		
+Route121_Text_JessicaIntro	Stop! Have a good look at my precious\nPOKéMON!		
+Route121_Text_JessicaDefeat	Oh, how dare you!\nDon't take it so seriously!		
+Route121_Text_JessicaPostBattle	Maybe I'll go catch more POKéMON at\nthe SAFARI.		
+Route121_Text_JessicaRegister	I took it easy on you this time!\nIt won't be that way the next time!		
+Route121_Text_JessicaRematchIntro	My precious POKéMON grew!\nHave a good look!		
+Route121_Text_JessicaRematchDefeat	Oh, how dare you!\nYou still won't take it easy!		
+Route121_Text_JessicaPostRematch	Maybe I'll go catch more POKéMON at\nthe SAFARI.		
+Route121_Text_CristinIntro	I have this routine.\nDefeat five TRAINERS a day.\lGuess what? You're number five!		
+Route121_Text_CristinDefeat	No!\nYou're horrid!		
+Route121_Text_CristinPostBattle	I didn't expect to lose this easily…\nI'll win next time!		
+Route121_Text_CristinRegister	That was total humiliation!\nI won't forget you…\lHand over your POKéNAV!		
+Route121_Text_CristinRematchIntro	I have this new routine.\nDefeat ten TRAINERS a day.\lGuess what? You're number ten!		
+Route121_Text_CristinRematchDefeat	Wait! That's nasty!\nI demand a rematch!		
+Route121_Text_CristinPostRematch	An opponent I just can't beat…\nSnivel…\lI can't believe this is happening…		
+Route121_Text_CaleIntro	Can't you see that I have all this\nstuff with me?\pDespite that, you still insist that\nwe battle?		
+Route121_Text_CaleDefeat	Of course I lost!\nI'm holding stuff in both hands!		
+Route121_Text_CalePostBattle	I bought too much stuff at\nthe LILYCOVE DEPT. STORE.\pIt's up the road from here.\nI wish I had a BAG like yours.		
+Route121_Text_MylesIntro	There's nothing I love more than\nchecking out other people's POKéMON!		
+Route121_Text_MylesDefeat	Super awesome!		
+Route121_Text_MylesPostBattle	They're great, your POKéMON!\nHow do you raise them?		
+Route121_Text_PatIntro	I want everybody to see the POKéMON\nI've raised!		
+Route121_Text_PatDefeat	Wow!\nSpectacular!		
+Route121_Text_PatPostBattle	I raise every POKéMON with the same\nlove and care--I don't pick favorites.		
+Route121_Text_MarcelIntro	My POKéMON have never tasted defeat!\nOn their next win, I'm entering them\lin CONTESTS.		
+Route121_Text_MarcelDefeat	Oh, now what happened here?		
+Route121_Text_MarcelPostBattle	I may have to train my gang some more\nbefore entering any CONTEST.		
+Route123_Text_WendyIntro	Want to determine how strong you are?\nI'll be the test!		
+Route123_Text_WendyDefeat	You passed with flying colors!		
+Route123_Text_WendyPostBattle	To best even me…\nYour strength is marvelous!		
+Route123_Text_BraxtonIntro	You seem to have a big collection\nof GYM BADGES.\pLet me see if you're actually worthy of\nthose BADGES!		
+Route123_Text_BraxtonDefeat	Oh, you're worthy, all right!		
+Route123_Text_BraxtonPostBattle	You did your BADGES proud in that\nmatch!		
+Route123_Text_VioletIntro	They say that good times are filled\nwith good aromas.		
+Route123_Text_VioletDefeat	Oh…\nI smell the bitter scent of misery…		
+Route123_Text_VioletPostBattle	The BERRY MASTER's garden is filled\nwith uplifting fragrances.		
+Route123_Text_CameronIntro	Being a psychic is about willpower.\pI've willed myself not to lose to\nanyone. That makes me strong!		
+Route123_Text_CameronDefeat	I feel sad…		
+Route123_Text_CameronPostBattle	Being a psychic is about willpower.\nI thought I wouldn't lose to you…		
+Route123_Text_CameronRegister	I sense it!\nYou and I shall battle again!\lI can't tell if I'll win, though…\pLet's see your POKéNAV.		
+Route123_Text_CameronRematchIntro	I've convinced myself that I won't\nlose anymore. That makes me strong!		
+Route123_Text_CameronRematchDefeat	I feel sad…		
+Route123_Text_CameronPostRematch	I should train at MT. PYRE…\nI'll never beat you this way…		
+Route123_Text_JackiIntro	Don't be too happy if your POKéMON\ndevelop psychic powers.\pYou need to refine those powers to\nmake them really useful.		
+Route123_Text_JackiDefeat	Overwhelmed!		
+Route123_Text_JackiPostBattle	We all have psychic powers.\nWe've just forgotten how to use them.		
+Route123_Text_JackiRegister	I would like to face you again.\nIs that okay with you?		
+Route123_Text_JackiRematchIntro	Have you awoken the psychic powers\nwithin you?		
+Route123_Text_JackiRematchDefeat	Astounding!		
+Route123_Text_JackiPostRematch	Your power with POKéMON…\nThat could be a psychic power, too.		
+Route123_Text_MiuIntro	MIU: Hello, TRAINER. I hope your\nPOKéMON won't cry when they lose.		
+Route123_Text_MiuDefeat	MIU: Uh-oh, we lost.		
+Route123_Text_MiuPostBattle	MIU: TRAINER, your POKéMON are\nstrong because you are friends.		
+Route123_Text_MiuNotEnoughMons	MIU: It's no fun to battle if you\ndon't have two POKéMON.		
+Route123_Text_YukiIntro	YUKI: Okay!\nWe're beating the TRAINER's POKéMON!		
+Route123_Text_YukiDefeat	YUKI: Uh-oh, we lost.		
+Route123_Text_YukiPostBattle	YUKI: Why are you so strong?\nWe've never lost before.		
+Route123_Text_YukiNotEnoughMons	YUKI: It's no fun to battle if you\ndon't have two POKéMON.		
+Route123_Text_KindraIntro	MT. PYRE…\nWhere the spirits of POKéMON sleep…\lWill your POKéMON sleep?		
+Route123_Text_KindraDefeat	Overflowing with vitality…		
+Route123_Text_KindraPostBattle	MT. PYRE…\nWhere the spirits of POKéMON sleep…\pIt must overflow with a power that\nsoothes spirits…		
+Route123_Text_FernandoIntro	I'll turn your lights out while\nI rip through this tune!		
+Route123_Text_FernandoDefeat	Hey, hold it!\nI was still playing the intro!		
+Route123_Text_FernandoPostBattle	You're rock steady.\nI'd like to write a tune about you.		
+Route123_Text_FernandoRegister	The next time, lend your ears to\nthe full tune, will you?		
+Route123_Text_FernandoRematchIntro	Today's the day I'm going to do it!\nI'll turn out your lights before\lI finish singing my song!		
+Route123_Text_FernandoRematchDefeat	Hey, hold it!\nI haven't even hit the chorus!		
+Route123_Text_FernandoPostRematch	I thought you'd be so enthralled\nby my tune, you'd lose.		
+Route123_Text_DavisIntro	This is my awesome BUG POKéMON!\nMy big brother got it for me.		
+Route123_Text_DavisDefeat	Waaaah!\nYou meanie!		
+Route123_Text_DavisPostBattle	Don't tell my brother I lost.\nYou have to keep it a secret!		
+Route123_Text_JazmynIntro	My confidence will get a boost by\nbeating someone obviously strong!		
+Route123_Text_JazmynDefeat	There goes my confidence…		
+Route123_Text_JazmynPostBattle	They say that you can't judge a person\nby their appearance.\pBut often, their looks don't lie…		
+Route123_Text_FrederickIntro	Hello, child!\nCan you spare some time?		
+Route123_Text_FrederickDefeat	Ah, a mighty capable child!\nLet me contribute to your allowance.		
+Route123_Text_FrederickPostBattle	Contribute to your allowance?\nWasn't the prize money enough?		
+Route123_Text_AlbertoIntro	I have to tell you, BIRD POKéMON\nare my obsession!\pBirds are cool!\nThey're the best!		
+Route123_Text_AlbertoDefeat	Even in defeat, BIRD POKéMON are cool!		
+Route123_Text_AlbertoPostBattle	I gather BIRD POKéMON feathers that\nscatter during battles.\pI'm going to make a hat with\nBIRD POKéMON feathers.		
+Route123_Text_EdIntro	When there are no TRAINERS around,\nI let my POKéMON battle each other.\lI watch them.		
+Route123_Text_EdDefeat	I kind of like your POKéMON.		
+Route123_Text_EdPostBattle	Hehe, I'm swiping your battling ideas!\nI think they'll make me better.		
+Route123_Text_JonasIntro	I lay in ambush, and a TRAINER has\nlanded in my trap!		
+Route123_Text_JonasDefeat	If you don't lose, how am I supposed\nto have fun playing ninja?		
+Route123_Text_JonasPostBattle	I'm going to ambush a weaker-looking\nTRAINER next time.		
+Route123_Text_KayleyIntro	I just bought this parasol.\nMy cuteness should be up by a third!		
+Route123_Text_KayleyDefeat	You're better than me by about\nfive times!		
+Route123_Text_KayleyPostBattle	Using accessories effectively is\nthe secret behind fashion appeal.		
+Route124_Text_SpencerIntro	Hey, are you lost at sea?\pIf you can beat my POKéMON,\nI can serve as your pilot.		
+Route124_Text_SpencerDefeat	I lost my bearings in battle!		
+Route124_Text_SpencerPostBattle	Many people lose their bearings at sea.\pIf you're that sort, you should refer\nto the POKéNAV's MAP.		
+Route124_Text_RolandIntro	Hm! You're riding a POKéMON instead\nof swimming yourself…\pI am envious!		
+Route124_Text_RolandDefeat	Oh!\nI can't…		
+Route124_Text_RolandPostBattle	I'm getting chilled…\nI've been in the water too long…\pI wish I could ride a POKéMON like you…		
+Route124_Text_JennyIntro	If you just float in the sea like\nthis, POKéMON come around to play.		
+Route124_Text_JennyDefeat	Oh, darn.\nI've gone and lost.		
+Route124_Text_JennyPostBattle	While swimming, I noticed that some\nPOKéMON attack, and some just watch.\pI guess POKéMON have personalities\nof their own.		
+Route124_Text_JennyRegister	It's only on a whim, but maybe I'll get\nyou to register me in your POKéNAV.		
+Route124_Text_JennyRematchIntro	If you just float in the sea like this,\nTRAINERS challenge you!		
+Route124_Text_JennyRematchDefeat	That's strange…\nI lost again…		
+Route124_Text_JennyPostRematch	This has nothing to do with anything,\nbut maybe I'll visit the TRICK HOUSE.		
+Route124_Text_GraceIntro	I'm growing bored of swimming…\nHow about a battle?		
+Route124_Text_GraceDefeat	I had no idea that you were\nthis strong!		
+Route124_Text_GracePostBattle	All the effort you put in must have\nmade you this strong.		
+Route124_Text_ChadIntro	Fufufufu… I dive deep underwater\nto go deep under cover.\lPlumbing the depths is where I excel!		
+Route124_Text_ChadDefeat	Glub, glub, glub…\nI'm sinking…		
+Route124_Text_ChadPostBattle	I have it on good authority that\nthere's a DIVE spot around here.\pIt gives me the urge to go deep\nagain…		
+Route124_Text_LilaIntro	LILA: Sigh…\pHere I am in the sea, but who's with me?\nMy little brother!\pLet's battle so I won't have to dwell\non that!		
+Route124_Text_LilaDefeat	LILA: ROY! It's your fault we lost!\nYou're in for it later!		
+Route124_Text_LilaPostBattle	LILA: Sigh…\pIf only it wasn't my little brother\nnext to me, but a nice boyfriend…		
+Route124_Text_LilaNotEnoughMons	LILA: You're planning to battle us?\nNot unless you have two POKéMON.		
+Route124_Text_RoyIntro	ROY: My big sister is tough at POKéMON!\pDon't cry when you lose!		
+Route124_Text_RoyDefeat	ROY: Uh-oh…\nMy big sister will chew me out…		
+Route124_Text_RoyPostBattle	ROY: My big sister is really scary\nwhen she gets angry.\pThat's why she doesn't have a\nboyfriend.		
+Route124_Text_LilaRoyRegister	ROY: Will you battle with us again?\nBut take it easy next time, okay?		
+Route124_Text_RoyNotEnoughMons	ROY: Did you want to battle us?\nBring two POKéMON, then.		
+Route124_Text_LilaRematchIntro	LILA: Sigh…\pHere I am in the sea, but who's with me?\nMy little brother!\pOh, hi, it's been a while. Let's battle\nso I won't have to dwell on things!		
+Route124_Text_LilaRematchDefeat	LILA: ROY!\nIt's your fault we lost again!\pWe're having a training session later!		
+Route124_Text_LilaPostRematch	LILA: Sigh…\pIf I had a nice boyfriend, we'd beat\nanyone with lovely combinations…		
+Route124_Text_LilaRematchNotEnoughMons	LILA: You're planning to battle us?\nNot unless you have two POKéMON.		
+Route124_Text_RoyRematchIntro	ROY: If we lose, I'll catch heck.\nI'm going to go totally all out!		
+Route124_Text_RoyRematchDefeat	ROY: Uh-oh…\nMy big sister will chew me out again.		
+Route124_Text_RoyPostRematch	ROY: My big sister is really scary\nwhen she gets angry.\pShe's going to make me train really\nhard with POKéMON later…		
+Route124_Text_RoyRematchNotEnoughMons	ROY: Did you want to battle us?\nBring two POKéMON, then.		
+Route124_Text_DeclanIntro	Here I am swimming by my lonesome\non this wide, beautiful sea.\pThere's no other word for it.\nThis is pathetic!		
+Route124_Text_DeclanDefeat	I'm feeling blue.\nBlue as the sky…		
+Route124_Text_DeclanPostBattle	I should chat up lady SWIMMERS\nand invite them on a long swim.		
+Route124_Text_IsabellaIntro	I'm not going to lose to some\nsurfer TRAINER.		
+Route124_Text_IsabellaDefeat	I've only got sweat in my eyes!\nI am not crying!		
+Route124_Text_IsabellaPostBattle	You can find pretty colored shards\nof things around here.		
+Route125_Text_NolenIntro	I heard you approaching, so I hung\naround for you!		
+Route125_Text_NolenDefeat	I surrender!		
+Route125_Text_NolenPostBattle	Sound travels faster in water than\nit does through air.		
+Route125_Text_StanIntro	Hey, there!\nCheck out my sweet POKéMON!		
+Route125_Text_StanDefeat	I floundered…		
+Route125_Text_StanPostBattle	I was blown away by HORSEA's charm,\nso I started swimming, too.		
+Route125_Text_TanyaIntro	I'm tired of swimming.\nAre you up for a battle with me?		
+Route125_Text_TanyaDefeat	You're too much!		
+Route125_Text_TanyaPostBattle	Whew…\nWhich way is it to MOSSDEEP CITY?		
+Route125_Text_SharonIntro	How would you like to take on the\nWATER-type POKéMON I raised?		
+Route125_Text_SharonDefeat	Lost it…		
+Route125_Text_SharonPostBattle	Your power… You're the real deal.\nI'm amazed!		
+Route125_Text_ErnestIntro	Ahoy! I'm a buff, tough SAILOR!\nI've braved the world's seas!		
+Route125_Text_ErnestDefeat	Gwrroooar!\nI couldn't win!		
+Route125_Text_ErnestPostBattle	The tide ebbs and flows inside the\nSHOAL CAVE.\pBy the way, it's about six hours from\nhigh tide to low tide. Did you know?		
+Route125_Text_ErnestRegister	Register me in your POKéNAV,\nand I'll tell you something good.		
+Route125_Text_ErnestRematchIntro	It's high time I get my payback\nfrom you! Come on, we're battling!		
+Route125_Text_ErnestRematchDefeat	I couldn't win!\nI flat out couldn't win!		
+Route125_Text_ErnestRematchPostBattle	The SHOAL CAVE…\pThere are places you can and can't\nget to depending on the rise and fall\lof the tide.\pBy the way, it's about six hours from\nhigh tide to low tide. Don't forget!		
+Route125_Text_KimIntro	KIM: A funny old man lives in the\nSHOAL CAVE. Someone told me.\lAre you going to see him, too?		
+Route125_Text_KimDefeat	KIM: I thought we would win.		
+Route125_Text_KimPostBattle	KIM: A funny old man lives in the\nSHOAL CAVE, doesn't he?\pLet's go see him, IRIS!		
+Route125_Text_KimNotEnoughMons	KIM: No, no, no! You need two POKéMON,\nor it's just no good!		
+Route125_Text_IrisIntro	IRIS: KIM, can you tell me what we're\nlooking for out here?		
+Route125_Text_IrisDefeat	IRIS: Oh, we came sort of close.		
+Route125_Text_IrisPostBattle	IRIS: KIM, are we really going into\nthe SHOAL CAVE?\lWe'll get all wet.		
+Route125_Text_IrisNotEnoughMons	IRIS: Oh, we could never, ever do\nanything like a 2-on-1 battle.		
+Route125_Text_PresleyIntro	Why would a BIRDKEEPER like me\ncome out to the sea?		
+Route125_Text_PresleyDefeat	Okay.\nI'll tell you why I'm here.		
+Route125_Text_PresleyPostBattle	I put a message in a bottle and put\nit out to sea.\pI'm sure that a girl SWIMMER will\nfind it!		
+Route125_Text_AuronIntro	Hey! Was it you throwing garbage\ninto the sea?		
+Route125_Text_AuronDefeat	Oh, you weren't throwing trash into\nthe sea.		
+Route125_Text_AuronPostBattle	I found an unsightly bottle bobbing\nin the waves earlier.\pIt angers me that someone would\npollute the sea!		
+Route126_Text_BarryIntro	Swimming is a full-body workout!\nYou will get fit!		
+Route126_Text_BarryDefeat	I admit it!\nYou win!		
+Route126_Text_BarryPostBattle	Thanks to my daily swimming routine…\nLook! Feast your eyes on this physique!		
+Route126_Text_DeanIntro	This towering white mountain of rock\nis SOOTOPOLIS CITY.		
+Route126_Text_DeanDefeat	I was done in?		
+Route126_Text_DeanPostBattle	I can't find the entrance to\nSOOTOPOLIS. Where could it be?		
+Route126_Text_NikkiIntro	Ufufufufu!\nI'm a mermaid!		
+Route126_Text_NikkiDefeat	My fantasy burst as if it were a bubble!\nBlub, blub, blub…		
+Route126_Text_NikkiPostBattle	You thrashed me… I want to\ndisappear in a wave of despair…		
+Route126_Text_BrendaIntro	Hello, kiddo!\nWant a battle with me?		
+Route126_Text_BrendaDefeat	Oh, noooooh!		
+Route126_Text_BrendaPostBattle	I love frolicking with POKéMON in\nthe sea like this!		
+Route126_Text_PabloIntro	Check out this sculpted body!\nI'm more cut than a BLACK BELT!		
+Route126_Text_PabloDefeat	Whoops! Too strong!\nNot bad! Not bad at all!		
+Route126_Text_PabloPostBattle	Losing to you stimulated my senses!\nI'll train myself and POKéMON harder!		
+Route126_Text_PabloRegister	Yep, you're not bad at all!\nI'd like to get to know you more!		
+Route126_Text_PabloRematchIntro	Check out this beautiful body!\nI'm more shapely than a SWIMMER!		
+Route126_Text_PabloRematchDefeat	Whoops! Really too strong!\nNot bad! Not bad at all!		
+Route126_Text_PabloPostRematch	I'm going to train even harder!\nYou're a great motivator!\lYou have to come back again!		
+Route126_Text_LeonardoIntro	I couldn't even swim last year,\nbut now I'm a decent SWIMMER.\pI think I'm capable of anything now.		
+Route126_Text_LeonardoDefeat	Sheesh, getting greedy didn't do\na thing for me.		
+Route126_Text_LeonardoPostBattle	If you practice at something,\nyou will get better at it.\pYou're young--don't be afraid to\ntry all sorts of things!		
+Route126_Text_IsobelIntro	If seawater gets up your nose,\ndoesn't it feel terrible?		
+Route126_Text_IsobelDefeat	Ack! Why, you…\nGlub!		
+Route126_Text_IsobelPostBattle	Ooh, I choked on some water!\nIt's bitter! It's salty!!		
+Route126_Text_SiennaIntro	I'm throwing my whole heart\ninto this!		
+Route126_Text_SiennaDefeat	You had more heart!		
+Route126_Text_SiennaPostBattle	I need to cool down now…\nI think I'll go for a dive.		
+Route127_Text_CamdenIntro	I can see it in your face.\nYou want to challenge me.		
+Route127_Text_CamdenDefeat	Awawawawawa…		
+Route127_Text_CamdenPostBattle	A well-played match leaves me feeling\nrefreshed and serene.		
+Route127_Text_DonnyIntro	Do you have a rival whom you just\nhate to lose against?		
+Route127_Text_DonnyDefeat	Arrrgh!\nI hate losing!		
+Route127_Text_DonnyPostBattle	If you have a rival, don't you get the\nfeeling that you have to keep getting\lbetter?		
+Route127_Text_JonahIntro	Through fishing, I have attained a\nstate of becalmed serenity…\pPlease, allow me to demonstrate…		
+Route127_Text_JonahDefeat	Though I have lost, my heart remains\ncalm…		
+Route127_Text_JonahPostBattle	It matters not that I catch nothing.\nThe line remains in the water…		
+Route127_Text_HenryIntro	Whoops! Don't tell me I snagged\na SURFING POKéMON?		
+Route127_Text_HenryDefeat	I can't keep up!		
+Route127_Text_HenryPostBattle	It'd be a handful if I hooked\nyour tough POKéMON!		
+Route127_Text_RogerIntro	Well, hey! This is a match between\na POKéMON fan and a fishing buff!		
+Route127_Text_RogerDefeat	No! My line's all tangled!\nThe party's over!		
+Route127_Text_RogerPostBattle	My fishing line's doing a dance!\nThe tangle tango! Hahaha, snarl!		
+Route127_Text_AidanIntro	BIRD POKéMON have excellent vision.\nThey spot prey from great heights.		
+Route127_Text_AidanDefeat	Whew… I give up.		
+Route127_Text_AidanPostBattle	There're lots of diving spots in\nthe sea around here.\pYou can spot them easily from the sky\nbecause of their darker color.		
+Route127_Text_KojiIntro	Run in your bare feet.\nThat will toughen up your soles!		
+Route127_Text_KojiDefeat	Yowch!\nI got a pebble under a toenail!		
+Route127_Text_KojiPostBattle	Going barefoot feels great.\nBut your RUNNING SHOES are cool, too.		
+Route127_Text_KojiRegister	This is what I do to people who beat me!\nI hope we can do this again.		
+Route127_Text_KojiRematchIntro	I still run in my bare feet daily.\nMy soles are tough!		
+Route127_Text_KojiRematchDefeat	Yowch!\nPebbles dug into my arches!		
+Route127_Text_KojiPostRematch	Want to go barefoot for a while?\nSo I can try your RUNNING SHOES?		
+Route127_Text_AthenaIntro	We should have a slow and methodical\nmatch.		
+Route127_Text_AthenaDefeat	You didn't give me the chance to\ndo any strategizing.		
+Route127_Text_AthenaPostBattle	When I'm surrounded by the blue sea\nand sky, it feels as if time slows down.		
+Route128_Text_IsaiahIntro	EVER GRANDE CITY is still a long ways\naway…		
+Route128_Text_IsaiahDefeat	My first victory seems to be far\naway, too…		
+Route128_Text_IsaiahPostBattle	My whole life has been about losing,\nbut I will never give up!		
+Route128_Text_IsaiahRegister	I know I'm not good now, but I think\nI can win eventually.\pPlease register me in your POKéNAV.		
+Route128_Text_IsaiahRematchIntro	I'm still feeling good. I'll keep on\nswimming to EVER GRANDE CITY.		
+Route128_Text_IsaiahRematchDefeat	I've yet to taste my first victory…		
+Route128_Text_IsaiahPostRematch	I'll eventually reach EVER GRANDE CITY\nwhere I can eventually win…		
+Route128_Text_KatelynIntro	You have to swim, cycle, and then run\na marathon in a triathlon.\pIt's a grueling race that consists\nof three events.		
+Route128_Text_KatelynDefeat	A POKéMON battle is grueling, too…		
+Route128_Text_KatelynPostBattle	I have to ride a BIKE next, but…\nI'm about to throw in the towel…		
+Route128_Text_KatelynRegister	Well, I may as well make the best\nof this. I'd like a rematch sometime.		
+Route128_Text_KatelynRematchIntro	A triathlon is long. But I guess the\nroad to become the POKéMON CHAMPION\lis also a long and grueling one.		
+Route128_Text_KatelynRematchDefeat	A POKéMON battle really is harsh\nand unforgiving…		
+Route128_Text_KatelynPostRematch	You should give serious thought to\nchallenges on VICTORY ROAD.		
+Route128_Text_AlexaIntro	We've been working so hard to mount\na POKéMON LEAGUE challenge…\pWe can't afford to lose now!		
+Route128_Text_AlexaDefeat	Oh!\nHow could this happen?!		
+Route128_Text_AlexaPostBattle	After all I've done to get here,\nI won't give up after one setback.		
+Route128_Text_RubenIntro	There is no stronger TRAINER than I!		
+Route128_Text_RubenDefeat	This can't be!		
+Route128_Text_RubenPostBattle	There probably is no stronger TRAINER\nthan you!		
+Route128_Text_WayneIntro	I want to visit EVER GRANDE, so I\ncaught myself a POKéMON that knows\lthe move WATERFALL to crest the falls.		
+Route128_Text_WayneDefeat	I'm crestfallen!		
+Route128_Text_WaynePostBattle	Awww, phooey!\pMy POKéMON knows WATERFALL, but\nI don't have the SOOTOPOLIS GYM BADGE!		
+Route128_Text_HarrisonIntro	You're looking awfully tough.\nI wonder if I can win?		
+Route128_Text_HarrisonDefeat	Ouch!\nI guess it was impossible to win.		
+Route128_Text_HarrisonPostBattle	There are tough TRAINERS galore\naround EVER GRANDE.\pDo you think I may be out\nof my league?		
+Route128_Text_CarleeIntro	The sunlight seems to be more harsh\nin this area.		
+Route128_Text_CarleeDefeat	I couldn't see very well because of\nthe sun's glare.		
+Route128_Text_CarleePostBattle	I should go back soon.\nI need to reapply my sunscreen.		
+Route129_Text_ChaseIntro	This is my first triathlon.\nI'm all tense and nervous!		
+Route129_Text_ChaseDefeat	Wroooaaar!\nI failed to win!		
+Route129_Text_ChasePostBattle	If I'm all tensed up, I won't be able to\ngive it my all.		
+Route129_Text_AllisonIntro	I'm in the middle of a triathlon,\nbut, sure, why don't we battle?		
+Route129_Text_AllisonDefeat	I was sure I'd win!		
+Route129_Text_AllisonPostBattle	Do you know what's the greatest thing\nabout triathlons?\pTesting the limits of your own\nstrength and endurance against\lMother Nature!		
+Route129_Text_ReedIntro	Say hey, hey!\nLet's get on with it!		
+Route129_Text_ReedDefeat	Beat, I'm beaten.\nThat's it, done!		
+Route129_Text_ReedPostBattle	There's nothing for a loser.\nTime for me to beat it home.		
+Route129_Text_TishaIntro	What's the hurry?\nLet's take it slow and easy.		
+Route129_Text_TishaDefeat	Oh, my.\nI wanted to relax a little more…		
+Route129_Text_TishaPostBattle	Don't you hate making mistakes when\nyou're in a rush?\pThat's why I try to take things\nslowly.		
+Route129_Text_ClarenceIntro	Surfing isn't as easy as it seems,\nisn't that right?		
+Route129_Text_ClarenceDefeat	Winning sure isn't easy.		
+Route129_Text_ClarencePostBattle	You have your sights on the POKéMON\nLEAGUE? Keep at it!		
+Route130_Text_RodneyIntro	What a surprise! I didn't expect to\nsee a TRAINER out in the sea.\pI think we should battle!		
+Route130_Text_RodneyDefeat	This kid's awfully tough…		
+Route130_Text_RodneyPostBattle	Your eyes have that look of someone\nwho's experienced harsh challenges\land won. It suits you well!		
+Route130_Text_KatieIntro	In the deep blue sea,\nmy shattered blue heart finds\lcomfort among waves.		
+Route130_Text_KatieDefeat	Like the vast blue sea,\nthe world of POKéMON spans\ldepths beyond belief.		
+Route130_Text_KatiePostBattle	The world's children dream\nof one day becoming\lthe POKéMON CHAMPION.		
+Route130_Text_SantiagoIntro	Floating on the open sea like this…\nIt's peaceful.		
+Route130_Text_SantiagoDefeat	I needed to be a little less peaceful!		
+Route130_Text_SantiagoPostBattle	Swimming and battling like this…\nI'm one happy guy…		
+Route131_Text_RichardIntro	The sea is teeming with POKéMON.\nIt's not easy swimming, I tell you.		
+Route131_Text_RichardDefeat	POKéMON raised by TRAINERS are\nseriously tough…		
+Route131_Text_RichardPostBattle	Gasp… Gasp…\nI'm wiped out…\pThe going's easy. It's the leaving\nthat's the hard part.\pWill I have any energy left to make\nthe return trip?		
+Route131_Text_HermanIntro	The sea… The sea… The sea…\nThe sea as far as these eyes can see!\lI'm sick and tired of the sea!		
+Route131_Text_HermanDefeat	Bleah!		
+Route131_Text_HermanPostBattle	Bored I am by the sea, but swim I must.\pI'm a born swimmer!\nThat's what I am.		
+Route131_Text_SusieIntro	Hi, sweetie, wait!\nWe should battle, you and I!		
+Route131_Text_SusieDefeat	You're tough in spite of the way\nyou look!		
+Route131_Text_SusiePostBattle	Did you see a guy over there who whines\nthat he's bored of the sea?\pThat's all talk.\nHe's hopelessly in love with the sea!		
+Route131_Text_KaraIntro	Why do men love bathing suits so much?\pThey all ogle me!		
+Route131_Text_KaraDefeat	I'm out of my depth!		
+Route131_Text_KaraPostBattle	Maybe it's not my bathing suit that\nmakes men look. It must be my beauty!		
+Route131_Text_ReliIntro	RELI: We'll work together as siblings\nto take you on!		
+Route131_Text_ReliDefeat	RELI: We couldn't win even though we\nworked together…		
+Route131_Text_ReliPostBattle	RELI: The people of PACIFIDLOG are\ntogether with the sea and POKéMON from\lthe time they are born.		
+Route131_Text_ReliNotEnoughMons	RELI: You don't have two POKéMON?\nWe can't enjoy a battle, then.		
+Route131_Text_IanIntro	IAN: I'm doing my best together with\nmy sis!		
+Route131_Text_IanDefeat	IAN: I did my best with my sis,\nbut we still couldn't win…		
+Route131_Text_IanPostBattle	IAN: You know how PACIFIDLOG is\na floating town?\pSo, wherever there is the sea,\nthat's a part of PACIFIDLOG!		
+Route131_Text_IanNotEnoughMons	IAN: If you have two POKéMON,\nwe'll take you on!		
+Route131_Text_TaliaIntro	If you can beat me, I'll give you some\ngreat information!		
+Route131_Text_TaliaDefeat	Oh?\nDid I lose?		
+Route131_Text_TaliaPostBattle	There is an odd place nearby.\nThere's a huge tower there.\lWhy don't you go take a look?		
+Route131_Text_KevinIntro	The people of PACIFIDLOG are\na peaceful bunch.\pThey never get angry.\nThat goes for me, too.		
+Route131_Text_KevinDefeat	Oops!		
+Route131_Text_KevinPostBattle	Tch! …Oh, wait.\nI'm not angry. Honestly!\pBut, boy, you're strong!\nHahaha!		
+Route132_Text_GilbertIntro	I used to catch colds all the time as\na kid, but I became totally fit after\lI started swimming.		
+Route132_Text_GilbertDefeat	I crave more power…		
+Route132_Text_GilbertPostBattle	TRAINERS travel the fields and\nmountains, so they must be fit, too.		
+Route132_Text_DanaIntro	I try not to swim where the currents\nare too strong.		
+Route132_Text_DanaDefeat	Oh, please, no!		
+Route132_Text_DanaPostBattle	If I get swept away, I'll lose all my\nsense of place…		
+Route132_Text_RonaldIntro	Win or lose, you'll never know until\nyou try!		
+Route132_Text_RonaldDefeat	Waah!\nI sank in defeat!		
+Route132_Text_RonaldPostBattle	I never battle when I know I'll win.\nI like to battle at the razor's edge of\lvictory and defeat!		
+Route132_Text_KiyoIntro	I contemplate POKéMON 24 hours a day.\nHow could you possibly beat me?		
+Route132_Text_KiyoDefeat	I lose.\nI will concede defeat.		
+Route132_Text_KiyoPostBattle	Urggh…\nYou're a POKéMON fanatic, aren't you?\pYou must contemplate POKéMON 24 hours\na day, don't you?		
+Route132_Text_MakaylaIntro	I'm always with my husband,\nbut I can win even without him.		
+Route132_Text_MakaylaDefeat	Oh, I guess I wasn't good enough.		
+Route132_Text_MakaylaPostBattle	That young man over there looks just\nlike my husband when he was young.\pHe's making me blush!		
+Route132_Text_JonathanIntro	Someone's been watching me intently.\nWas it you?		
+Route132_Text_JonathanDefeat	Wow!\nThat's pretty strong, all right!		
+Route132_Text_JonathanPostBattle	I can't shake this feeling that\nsomeone's watching me.\pI can't concentrate!		
+Route132_Text_PaxtonIntro	Now where could my wife have gone?\nI'm always with her.\lI wonder if I can win on my own.		
+Route132_Text_PaxtonDefeat	Ah, I see that I couldn't manage\nto win on my own after all.		
+Route132_Text_PaxtonPostBattle	My wife must be looking for me.\nI'd best go find her right away.		
+Route132_Text_DarcyIntro	I liked training here by myself.\nIt's awful that all these people came!		
+Route132_Text_DarcyDefeat	Okay! I won't complain about other\npeople being here.		
+Route132_Text_DarcyPostBattle	I suppose I can partner up with that\nold man and challenge that other team.		
+Route133_Text_FranklinIntro	Did the currents carry you here, too?\nThis must have been fated.\lLet's battle!		
+Route133_Text_FranklinDefeat	Strong!\nToo much so!		
+Route133_Text_FranklinPostBattle	It's just my luck that a tough TRAINER\nlike you would drift here…\lI must be cursed…		
+Route133_Text_DebraIntro	I've led a life of woe and misery…\nI've been cast away, and this is where\lI've drifted…		
+Route133_Text_DebraDefeat	Another loss…		
+Route133_Text_DebraPostBattle	A life adrift…\nI don't want it anymore!		
+Route133_Text_LindaIntro	Welcome!\nI've been expecting you!		
+Route133_Text_LindaDefeat	No! Please!		
+Route133_Text_LindaPostBattle	A strong child TRAINER…\nThat's so annoying!		
+Route133_Text_WarrenIntro	I want to win like everyone else, but I\nwon't raise POKéMON like everyone else.		
+Route133_Text_WarrenDefeat	Darn it!\nMy way is still too slack!		
+Route133_Text_WarrenPostBattle	It's way more fun to do things the way\nI want than to be like everybody else.\lI mean, that's obvious!		
+Route133_Text_BeckIntro	I came all the way out here with my\nBIRD POKéMON.		
+Route133_Text_BeckDefeat	You…\nYou're stunningly cool!		
+Route133_Text_BeckPostBattle	I'd like to go back to FORTREE,\nbut I've grown to like this place, too.		
+Route133_Text_MollieIntro	I must have battled thousands\nof times. I've lost count.		
+Route133_Text_MollieDefeat	I may have lost thousands of times,\nbut a loss still stings.		
+Route133_Text_MolliePostBattle	Keep at this, youngster. So you can\nbecome like my husband and me.		
+Route133_Text_ConorIntro	Young people are too happy to go with\nthe flow. They're without direction.		
+Route133_Text_ConorDefeat	You have a firm sense of purpose.		
+Route133_Text_ConorPostBattle	Don't let others lead you astray.\nDon't lose direction as you grow older.		
+Route134_Text_JackIntro	Even those POKéMON that can swim are\ncarried along by the rapid currents.		
+Route134_Text_JackDefeat	Aiyeeeeh!		
+Route134_Text_JackPostBattle	I think POKéMON enjoy the fast-running\ncurrents around these parts.		
+Route134_Text_LaurelIntro	My LUVDISC are looking for a fun\nmatch. Will you join us?		
+Route134_Text_LaurelDefeat	Oopsie!		
+Route134_Text_LaurelPostBattle	There's a collector who's after\nthe SCALES of LUVDISC.		
+Route134_Text_AlexIntro	Okeydokey! That's enough rest, gang!\nIt's time for a match!		
+Route134_Text_AlexDefeat	Tuckered out again…		
+Route134_Text_AlexPostBattle	My BIRD POKéMON get tired quickly after\na long flight…		
+Route134_Text_HitoshiIntro	You're a POKéMON TRAINER.\nNo need for words. We battle now.		
+Route134_Text_HitoshiDefeat	… … … … … …\n… … … … … …		
+Route134_Text_HitoshiPostBattle	It was I who challenged you, and yet\nI lost. I am deeply shamed…		
+Route134_Text_AaronIntro	The savage tide in this area serves to\nmake us stronger than ever.		
+Route134_Text_AaronDefeat	I willingly concede defeat.		
+Route134_Text_AaronPostBattle	We will return for more training at\nMETEOR FALLS.\pIf you'd like, you should go, too.\nIt will definitely toughen you up!		
+Route134_Text_KelvinIntro	O-our boat!\nThe tide carried it away!		
+Route134_Text_KelvinDefeat	Awawawawah!\nPlease, stop! Please!		
+Route134_Text_KelvinPostBattle	If we can't SURF, how are we supposed\nto get home?\pActually, I know a fainted POKéMON\ncan still SURF, but it feels wrong.		
+Route134_Text_MarleyIntro	Can your POKéMON dodge our\nlightning-quick attacks?		
+Route134_Text_MarleyDefeat	I never knew such a technique existed!\nYou've defeated us thoroughly.		
+Route134_Text_MarleyPostBattle	I haven't lost my passion for speed.\nI will try harder.		
+Route134_Text_ReynaIntro	My POKéMON can't be taken down\neasily!		
+Route134_Text_ReynaDefeat	You're kidding!\nExplain how I lost!		
+Route134_Text_ReynaPostBattle	Haha!\nYou won, all right!\pI'll work my way back up by taking on\nTRAINERS I happen to meet!		
+Route134_Text_HudsonIntro	Listen, have you seen another SAILOR\naround here?		
+Route134_Text_HudsonDefeat	Now, that's something!		
+Route134_Text_HudsonPostBattle	Our boat drifted out to sea.\pMy buddy's a timid fellow, so I'm\nworried about him.		

@@ -1,0 +1,45 @@
+key	english	dutch	notes
+SafariZone_Text_WouldYouLikeToExit	Would you like to exit the SAFARI\nZONE right now?		
+SafariZone_Text_TimesUp	Ding-dong! Time's up!\nYour SAFARI Game is over.		
+SafariZone_Text_OutOfBalls	You've run out of SAFARI BALLS.\nYour SAFARI Game is over.		
+SafariZone_Text_PlacePokeblockOnFeeder	Would you like to place a {POKEBLOCK}\non the {POKEBLOCK} FEEDER?		
+SafariZone_Text_PokeblockStillHere	The {STR_VAR_1} you left\nbefore is still here.		
+SafariZone_Text_PokeblockWasPlaced	The {STR_VAR_1} was placed\non the {POKEBLOCK} FEEDER.		
+Route121_SafariZoneEntrance_Text_WelcomeToSafariZone	Welcome to the SAFARI ZONE!\pHere, you may witness many kinds of\nPOKéMON rarely seen in HOENN.\pAnd, you'll see them in their wild,\nuntamed state in natural habitats.\pWhat's more, we've thrown open the\ngates to POKéMON TRAINERS.\pYou're encouraged to catch POKéMON\nfor keeps!\pCome in and enjoy the SAFARI ZONE!		
+Route121_SafariZoneEntrance_Text_WelcomeFirstTime	Welcome to the SAFARI ZONE!\nIs it your first time here?		
+Route121_SafariZoneEntrance_Text_ComeInAndEnjoy	Come in and enjoy the SAFARI ZONE!		
+Route121_SafariZoneEntrance_Text_FirstTimeInfo	When you enter the SAFARI ZONE, you\nstart with 30 SAFARI BALLS for\lcatching POKéMON.\pThe SAFARI Game is over when you run\nout of SAFARI BALLS, or when you've\lwalked 500 steps.\pCome in and enjoy the SAFARI ZONE!		
+Route121_SafariZoneEntrance_Text_WouldYouLikeToPlay	Welcome to the SAFARI ZONE!\pAll you can catch for just ¥500!\nWould you like to play a SAFARI Game?		
+Route121_SafariZoneEntrance_Text_PlayAnotherTime	Okay.\nPlease play another time!		
+Route121_SafariZoneEntrance_Text_NotEnoughMoney	You don't have enough money.\nSorry.		
+Route121_SafariZoneEntrance_Text_ThatWillBe500Please	That will be ¥500, please.		
+Route121_SafariZoneEntrance_Text_HereAreYourSafariBalls	Here are your SAFARI BALLS.		
+Route121_SafariZoneEntrance_Text_Received30SafariBalls	{PLAYER} received 30 SAFARI BALLS.		
+Route121_SafariZoneEntrance_Text_PleaseEnjoyYourself	We'll let you know when your game\nis over.\pSo, until then, enjoy yourself, please!\nOff you go on your wild excursion!		
+Route121_SafariZoneEntrance_Text_PCIsFull	Excuse me!\nYour PC BOX is full.		
+Route121_SafariZoneEntrance_Text_YouNeedPokeblockCase	Excuse me!\nYou seem to be without a {POKEBLOCK} CASE.\pYour SAFARI Game will be much more\nfruitful if you use {POKEBLOCK}S.\pPlease come back with a {POKEBLOCK} CASE.\pYou may obtain a {POKEBLOCK} CASE from\nthe LILYCOVE CONTEST HALL.		
+SafariZone_South_Text_StillHaveTimeExit	You still have time left. Would you like\nto exit the SAFARI ZONE now?		
+SafariZone_South_Text_EnjoyTheRestOfYourAdventure	Please enjoy the rest of your wild\nadventure!		
+SafariZone_South_Text_ExitEarlyThankYouForPlaying	Okay.\pI'll take back your remaining SAFARI\nBALLS.\pThank you for playing.\nWe hope to see you again.		
+SafariZone_South_Text_GoodLuck	Good luck!\pIf you need anything, don't hesitate\nto tell me, please!		
+SafariZone_South_Text_Boy	Did you know?\pIf you put a {POKEBLOCK} in that square box,\nPOKéMON gather around.		
+SafariZone_South_Text_Man	I want to keep going deeper, but I\nforgot to bring a BIKE.\pSomething tells me that rare POKéMON\nlive in the outlying areas.		
+SafariZone_Southwest_Text_Woman	Sometimes, when I toss a {POKEBLOCK} at \nPOKéMON, it gets ignored.\pDo POKéMON have likes and dislikes\nabout what they eat?		
+SafariZone_Northwest_Text_Man	Gasp… Gasp…\nI…made it out here…but…\pI'm exhausted… I don't have the\nenergy to catch POKéMON…		
+SafariZone_North_Text_Fisherman	I'm on a mission to find WATER POKéMON\nyou don't see in HOENN.\pDo you have any idea where the lake is?		
+SafariZone_North_Text_Man	I'm going to catch a lot of rare POKéMON\nhere and trade them with my friends!		
+SafariZone_South_Text_Youngster	I put a {POKEBLOCK} on the {POKEBLOCK} FEEDER.\nBut it seems to have disappeared.\pI guess POKéMON must have eaten it\nwithout me noticing.		
+Route121_SafariZoneEntrance_Text_TrainerTip	SAFARI ZONE TRAINER TIP!\pThrow {POKEBLOCK}S at wild POKéMON to make\nthem less likely to flee.		
+SafariZone_Southwest_Text_RestHouseSign	“Relieve your tired feet.”\nREST HOUSE		
+SafariZone_RestHouse_Text_Youngster	I don't have any {POKEBLOCK}S, but I caught\na good number of POKéMON.\pYou can improve your chances of making\na catch by getting closer to them\lbefore throwing a SAFARI BALL.		
+SafariZone_RestHouse_Text_PsychicM	If you use {POKEBLOCK}S, wild POKéMON won't\nbe so quick to run away.\pIt's not much use to give {POKEBLOCK}S to\nPOKéMON that don't flee easily.		
+SafariZone_RestHouse_Text_FatMan	If you put a {POKEBLOCK} on the FEEDER,\nPOKéMON are attracted to it.\pI think POKéMON with the same sort of\nnature are drawn by a certain {POKEBLOCK}.		
+SafariZone_South_Text_AreaOffLimits1	This area is still under construction.\nIt's off-limits, sorry!		
+SafariZone_Southeast_Text_ExpansionIsFinished	The SAFARI ZONE's expansion project\nis finished now.\pWe hope you will enjoy the new area.		
+SafariZone_South_Text_AreaOffLimits2	This area is still under construction.\nIt's off-limits, sorry!		
+SafariZone_Southeast_Text_LittleGirl	Wow! Whee! I haven't seen any of\nthese POKéMON before!		
+SafariZone_Southeast_Text_FatMan	The POKéMON in this area are all\nnew to me.\pAnd I'm allowed to catch these rare\nPOKéMON! Too cool!		
+SafariZone_Southeast_Text_RichBoy	The POKéMON around here seem to be\nfrom somewhere other than HOENN.		
+SafariZone_Northeast_Text_Boy	I only have a couple SAFARI BALLS left.\pI'm having a hard time trying to\ndecide what I should catch.		
+SafariZone_Northeast_Text_Woman	I heard that you can see PIKACHU here.\nWhere might one be?		
+SafariZone_Northeast_Text_Girl	Oh, boo!\nI can't seem to catch anything!\pI'll end up wasting the admission\nprice if I don't catch something!		

@@ -1,0 +1,53 @@
+key	english	dutch	notes
+LilycoveCity_PokemonCenter_1F_Text_ImTheFavorLady	I'm the FAVOR LADY…		
+LilycoveCity_PokemonCenter_1F_Text_ObsessedWithThing	I've recently developed an obsession\nfor {STR_VAR_1} things…		
+LilycoveCity_PokemonCenter_1F_Text_ThankYouForLastTime	Oh…\nThank you for last time…		
+LilycoveCity_PokemonCenter_1F_Text_PlayerGaveMeBadThing	Before, I think it was {STR_VAR_3}…\p{STR_VAR_3} gave me one {STR_VAR_2},\nsaying it was {STR_VAR_1}.\pBut it wasn't {STR_VAR_1}.\nNot in the least bit.		
+LilycoveCity_PokemonCenter_1F_Text_PlayerGaveMeGreatThing	Before, {STR_VAR_3} gave me a very\n{STR_VAR_1} {STR_VAR_2}.\pI cherish it now.		
+LilycoveCity_PokemonCenter_1F_Text_WillYouShareThing	Listen, if you have anything that\nis {STR_VAR_1}, will you share it\lwith me?		
+LilycoveCity_PokemonCenter_1F_Text_WhatWillYouGiveMe	…Really?\nWhat will you give me?		
+LilycoveCity_PokemonCenter_1F_Text_IsThatSoGoodbye	Is that so?\nThen, it's good-bye…		
+LilycoveCity_PokemonCenter_1F_Text_NotWillingToShare	Oh…\nYou're not willing to share?		
+LilycoveCity_PokemonCenter_1F_Text_IllTryToCherishIt	Oh?\nThat {STR_VAR_2} is {STR_VAR_1}?\p…Oh, is that right?\pWell, I owe you a thanks anyway.\nI'll try to cherish it…		
+LilycoveCity_PokemonCenter_1F_Text_IWillCherishThis	Oh…\pThat's a quite {STR_VAR_1}\n{STR_VAR_2}…\pIsn't it nice?\nIt's so dreamy…\pThank you…\nI will cherish this…		
+LilycoveCity_PokemonCenter_1F_Text_IWillTreasureThis	…Oh, oh, oh…\pThis is amazing!\nThis really is {STR_VAR_1}!\pI never knew that one {STR_VAR_2}\ncould be this {STR_VAR_1}!\pThank you!\pI will treasure this for the rest\nof my life!		
+LilycoveCity_PokemonCenter_1F_Text_IllGiveYouThisInReturn	I'll give you this wonderful item in\nreturn for your fabulous gift.\pI hope you will cherish it…		
+LilycoveCity_PokemonCenter_1F_Text_YouDontHaveSpaceForIt	Oh, you can't have it if you don't have\nthe space for it.\pPlease come see me when you get\nyour BAG organized…		
+LilycoveCity_PokemonCenter_1F_Text_ImTheQuizLady	I'm the QUIZ LADY!\nI love quizzes!		
+LilycoveCity_PokemonCenter_1F_Text_WaitingToTakeYourQuiz	Oh?\pI'm waiting for a challenger to answer\nthe quiz you made.\pWe can chat another time, okay?		
+LilycoveCity_PokemonCenter_1F_Text_WaitingForChallenger	I'm waiting for someone to challenge\na quiz this {STR_VAR_1} thought up!		
+LilycoveCity_PokemonCenter_1F_Text_TakeQuizChallenge	If you answer correctly, you can win\nfabulous prizes!\pWould you like to take the quiz\nchallenge?		
+LilycoveCity_PokemonCenter_1F_Text_WaitForAnswer	… … … … … …\n… … … … … …		
+LilycoveCity_PokemonCenter_1F_Text_HowBoringBye	Oh, how boring!\nBye-bye!		
+LilycoveCity_PokemonCenter_1F_Text_YoureGoingToQuit	Awww!\nYou're going to quit?		
+LilycoveCity_PokemonCenter_1F_Text_TakeTheQuizAnotherTime	Please take the quiz challenge\nanother time!		
+LilycoveCity_PokemonCenter_1F_Text_YouGotItRight	You're amazing! You've got it right!\nYou're one sharp customer!		
+LilycoveCity_PokemonCenter_1F_Text_YouGotItRightYouveWonPersonsPrize	Congratulations!\nYou've got the quiz right!\pYou've won a prize provided by\n{STR_VAR_1}!		
+LilycoveCity_PokemonCenter_1F_Text_XReceivedOneY	{STR_VAR_1} received\none {STR_VAR_2}!		
+LilycoveCity_PokemonCenter_1F_Text_YourBagIsFilledUp	Oh? Your BAG is filled up!\nCome see me when you have room.		
+LilycoveCity_PokemonCenter_1F_Text_WrongTheCorrectAnswerIs	Hmm… Wrong!\nThe correct answer is “{STR_VAR_3}”!		
+LilycoveCity_PokemonCenter_1F_Text_IGetToKeepPrize	Too bad!\pI get to keep the quiz prize\n{STR_VAR_1} now!		
+LilycoveCity_PokemonCenter_1F_Text_MakeYourOwnQuiz	Listen, listen!\nWould you like to make your own quiz?		
+LilycoveCity_PokemonCenter_1F_Text_MaybeNextTime	Oh, I see…\nWell, maybe next time!		
+LilycoveCity_PokemonCenter_1F_Text_PickYourPrize	Okay, the first thing you have to do\nis pick the prize for the person that\lanswers your quiz correctly.\pBut beware, if the person taking\nthe quiz can't get it right, I get to\lkeep the prize!		
+LilycoveCity_PokemonCenter_1F_Text_QuitChoosingPrize	If you don't choose a prize,\nyour quiz can't be made.\pAre you going to quit making\nyour quiz?		
+LilycoveCity_PokemonCenter_1F_Text_WriteYourQuiz	Oh, how nice!\nThat's a wonderful prize!\pNext, you need to write your quiz\nquestion and its answer.		
+LilycoveCity_PokemonCenter_1F_Text_QuitWritingQuizQuestion	Are you going to quit writing\nyour quiz question?		
+LilycoveCity_PokemonCenter_1F_Text_QuitWritingQuizAnswer	Are you going to quit choosing\nyour quiz answer?		
+LilycoveCity_PokemonCenter_1F_Text_IllLookForAChallenger	Thank you!\nYou've put together a nice quiz.\pI'll go look for someone who'll take\nyour quiz challenge right away.		
+LilycoveCity_PokemonCenter_1F_Text_ImTheContestLady	I'm the CONTEST LADY!\nI sure do love CONTESTS!		
+LilycoveCity_PokemonCenter_1F_Text_ThankForPokeblock	Thanks for your {POKEBLOCK} before!		
+LilycoveCity_PokemonCenter_1F_Text_MyFriendDisplaysQuality	This is my friend {STR_VAR_1}!\nIt's the epitome of {STR_VAR_2}!\pBut I think that it will display\neven more {STR_VAR_2}!		
+LilycoveCity_PokemonCenter_1F_Text_DontHaveAPokeblockCase	So, I need your help!\pPlease, may I have one {POKEBLOCK}?\nAll I'm asking for is one!\p…Oh, but…\nDon't you have a {POKEBLOCK} CASE?\lThat's no good. Next time, then!		
+LilycoveCity_PokemonCenter_1F_Text_AskingForOnePokeblock	So, I need your help!\pPlease, may I have one {POKEBLOCK}?\nAll I'm asking for is one!		
+LilycoveCity_PokemonCenter_1F_Text_ICantHaveOnePokeblock	Awww!\nI can't have one {POKEBLOCK}?!		
+LilycoveCity_PokemonCenter_1F_Text_WhatACheapskate	Sheesh!\nWhat a cheapskate!		
+LilycoveCity_PokemonCenter_1F_Text_IllUseYourPokeblock	Yay!\nThank you!\pI'll feed my POKéMON your {POKEBLOCK}\nright away.		
+LilycoveCity_PokemonCenter_1F_Text_NoChangeThanks	…It doesn't seem to have changed\nin any way at all…\pHmm…\pOh, well!\nThank you very much!		
+LilycoveCity_PokemonCenter_1F_Text_ReallyImprovedThanks	Oh, yay!\nIt's really delighted!\pI think it really improved {STR_VAR_1}'s\n{STR_VAR_2} quality, too.\pThank you so much!		
+LilycoveCity_PokemonCenter_1F_Text_ReadyToEnterContests	Hmm…\pI think we may be ready to enter\nsome CONTESTS.\pIf you see us in one somewhere,\nI hope you'll cheer for us.		
+LilycoveCity_PokemonCenter_1F_Text_Zigzagoon	{STR_VAR_1}: Guguuh!		
+LilycoveCity_PokemonCenter_1F_Text_Kecleon	{STR_VAR_1}: Igigigiiih!		
+LilycoveCity_PokemonCenter_1F_Text_Poochyena	{STR_VAR_1}: Baaarun…		
+LilycoveCity_PokemonCenter_1F_Text_Pikachu	{STR_VAR_1}: Pikka!		
+LilycoveCity_PokemonCenter_1F_Text_Skitty	{STR_VAR_1}: Umyaaaan!		

@@ -22,7 +22,7 @@ def problems(text, kind, english=None, skip_width=False, max_px=None):
         out.append('contains " or a tab')
     if kind.max_bytes is not None and len(data) > kind.max_bytes:
         out.append(f"{len(data)} bytes > {kind.max_bytes}")
-    if english is not None and control_codes(text) != control_codes(english):
+    if english is not None and english != text and control_codes(text) != control_codes(english):
         out.append(f"control codes differ from English: {control_codes(english)}")
     for line in split_lines(text):
         for m in re.finditer(r"\{CLEAR_TO (\d+)\}", line):
@@ -33,6 +33,10 @@ def problems(text, kind, english=None, skip_width=False, max_px=None):
     if lines > kind.max_lines:
         out.append(f"{lines} lines > {kind.max_lines}")
     limits = [("normal", max_px, "window from notes")] if max_px else kind.limits
+    if kind.name == "dialogue" and english:
+        # placeholders are measured at worst case; the English is known to fit
+        en_max = max(line_widths(english, "normal"))
+        limits = [(f, max(px, en_max), w) for f, px, w in limits]
     for font, max_px, where in ([] if skip_width else limits):
         for i, w in enumerate(line_widths(text, font), 1):
             if w > max_px:
@@ -55,9 +59,11 @@ def main():
     widest = {}
     for spec in SPECS:
         kind = KINDS[spec.kind]
-        rows = {r["key"]: r for r in read_tsv(spec.tsv)}
+        tsvs = {}
         for e in scan(spec):
-            row = rows.get(e.key, {})
+            if e.tsv not in tsvs:
+                tsvs[e.tsv] = {r["key"]: r for r in read_tsv(e.tsv)}
+            row = tsvs[e.tsv].get(e.key, {})
             text = row.get(column, "")
             if not text:
                 continue
@@ -66,7 +72,7 @@ def main():
                 w = max(line_widths(text, font))
                 if w > widest.get(where, (0, ""))[0]:
                     widest[where] = (w, text)
-            english = row.get("english") if column == "dutch" else None
+            english = row.get("english")
             skip = "width-ok" in row.get("notes", "")
             m = re.search(r"max:(\d+)", row.get("notes", ""))
             if spec.kind == "ui" and english and column == "dutch" and not skip \
@@ -74,7 +80,7 @@ def main():
                 warn_label(e.key, text, english)
             for p in problems(text, kind, english, skip, int(m[1]) if m else None):
                 bad += 1
-                print(f"{spec.tsv}.tsv  {e.key}: {p}\n    {text}")
+                print(f"{e.tsv}.tsv  {e.key}: {p}\n    {text}")
     if column == "english":
         for k, (w, t) in widest.items():
             print(f"widest {k}: {w}px  {t}")

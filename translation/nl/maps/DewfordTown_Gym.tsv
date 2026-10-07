@@ -1,0 +1,34 @@
+key	english	dutch	notes
+DewfordTown_Gym_Text_GymGuideAdvice	Hey, how's it going, CHAMPION-\nbound {PLAYER}?\pDEWFORD's GYM LEADER BRAWLY commands\nFIGHTING-type POKéMON.\pGoing against him with NORMAL-type\nPOKéMON is asking for trouble.\pFIGHTING POKéMON will lay a serious\nsmack down on NORMAL POKéMON,\lso be careful!\pWhat's worse, the GYM is as dark as\nthe ocean floor.\pBut it will get brighter after defeating\nthe TRAINERS in your way.\pHey, okay, go for it!		
+DewfordTown_Gym_Text_GymGuidePostVictory	Whoah! It's turned too bright in here!\pYour future is bright, too!		
+DewfordTown_Gym_Text_TakaoIntro	Might is right!\nCome on!		
+DewfordTown_Gym_Text_TakaoDefeat	Not enough power…		
+DewfordTown_Gym_Text_TakaoPostBattle	Your skill overcame my strength!\nYour technique is commendable!		
+DewfordTown_Gym_Text_JocelynIntro	There's no need for BRAWLY to be\ninvolved!\pI'll crush you!		
+DewfordTown_Gym_Text_JocelynDefeat	But… How?\nHow could I lose so easily?		
+DewfordTown_Gym_Text_JocelynPostBattle	I'm not going to waste this loss.\nI'll use it to motivate me to train!\pOne day I'll become a GYM LEADER…\pNo, I'll become the POKéMON LEAGUE\nCHAMPION!		
+DewfordTown_Gym_Text_LauraIntro	Don't you dare brush me off!\nIt's not my fault if you cry!		
+DewfordTown_Gym_Text_LauraDefeat	Waaaaaaah!\nI lost!		
+DewfordTown_Gym_Text_LauraPostBattle	I battle in the dark to make my heart\nstronger.\pBut because it's so dark, I can never\nsee BRAWLY's face…		
+DewfordTown_Gym_Text_LilithIntro	Ufufu…\nAre you stumbling around in the dark?		
+DewfordTown_Gym_Text_LilithDefeat	Oh, you…\nI don't want to know you!		
+DewfordTown_Gym_Text_LilithPostBattle	You deserve to stay lost and end up\nback at the entrance again!		
+DewfordTown_Gym_Text_BrendenIntro	I'll show you the gumption of\na sailing man!		
+DewfordTown_Gym_Text_BrendenDefeat	How'd this happen?\nIt's not like me to lose this way!		
+DewfordTown_Gym_Text_BrendenPostBattle	Oh, aye! You're worthy of seeing\nour GYM LEADER.		
+DewfordTown_Gym_Text_CristianIntro	If you mean to pass, it has to be\nthrough me!		
+DewfordTown_Gym_Text_CristianDefeat	Grrrrr!\nVastly overpowered!		
+DewfordTown_Gym_Text_CristianPostBattle	You win!\nGo after that BADGE!		
+DewfordTown_Gym_Text_BrawlyIntro	I'm BRAWLY!\nDEWFORD's GYM LEADER!\pI've been churned in the rough waves\nof these parts, and I've grown tough\lin the pitch-black cave!\pSo you wanted to challenge me?\nLet me see what you're made of!		
+DewfordTown_Gym_Text_BrawlyDefeat	Whoah, wow! You made a much bigger\nsplash than I expected!\pYou swamped me!\pOkay, you've got me.\nTake this GYM BADGE!		
+DewfordTown_Gym_Text_ReceivedKnuckleBadge	{PLAYER} received the KNUCKLE BADGE\nfrom BRAWLY.		
+DewfordTown_Gym_Text_KnuckleBadgeInfoTakeThis	The KNUCKLE BADGE makes all POKéMON\nup to Level 30, even those you get in\ltrades, obey without question.\pAnd, you'll be able to use the HM move\nFLASH outside of battle.\pIf you'd like, use this TECHNICAL\nMACHINE, too.		
+DewfordTown_Gym_Text_ExplainBulkUp	That TM08 contains BULK UP.\pIt's a move that raises both ATTACK\nand DEFENSE stats.\p… … … … … …		
+DewfordTown_Gym_Text_RegisteredBrawly	Registered GYM LEADER BRAWLY\nin the POKéNAV.		
+DewfordTown_Gym_Text_BrawlyPostBattle	I can see your talent becoming a giant\nwave to cause a storm of astonishment\lamong TRAINERS one day!		
+DewfordTown_Gym_Text_GymStatue	DEWFORD TOWN POKéMON GYM		
+DewfordTown_Gym_Text_GymStatueCertified	DEWFORD TOWN POKéMON GYM\pBRAWLY'S CERTIFIED TRAINERS:\n{PLAYER}		
+DewfordTown_Gym_Text_BrawlyPreRematch	BRAWLY: A wave may draw back, but it\nalways returns to the shore.\pA giant wave of a talent like you…\nI knew you would return!\pShow me how much higher\nyou've gone!		
+DewfordTown_Gym_Text_BrawlyRematchDefeat	Wow!\nSwamped again!		
+DewfordTown_Gym_Text_BrawlyPostRematch	BRAWLY: Battling is vast and it's deep.\nYou can't see the bottom.\lIt's just like the sea of HOENN!		
+DewfordTown_Gym_Text_BrawlyRematchNeedTwoMons	BRAWLY: A wave may draw back, but it\nalways returns to the shore.\pA giant wave of a talent like you…\nI knew you would return!\pOh? You only have one POKéMON\nthat can battle.\pI'm sorry, but I'd like you to come back\nwith at least two POKéMON.		

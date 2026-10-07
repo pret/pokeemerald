@@ -1,0 +1,149 @@
+key	english	dutch	notes
+MauvilleCity_PokemonCenter_1F_Text_WantToTradeDecor	Hi, I'm the TRADER.\nWant to trade decorations with me?		
+MauvilleCity_PokemonCenter_1F_Text_TraderFeelingTheBlues	Oh…\nYou've left me feeling the blues…		
+MauvilleCity_PokemonCenter_1F_Text_WeveAlreadyTraded	But we've traded decorations already,\nyou and I.		
+MauvilleCity_PokemonCenter_1F_Text_PickADecorItem	If you see any decorative item that\nyou want of mine, speak up.		
+MauvilleCity_PokemonCenter_1F_Text_YouDontWantAnything	You don't want anything?\nI feel unwanted…		
+MauvilleCity_PokemonCenter_1F_Text_OnceBelongedToPlayerDoYouWantIt	That decorative item once belonged\nto {STR_VAR_1}.\pDo you want it?		
+MauvilleCity_PokemonCenter_1F_Text_YouDontHaveAnyDecor	Uh… Wait a second. You don't have a\nsingle piece of decoration!		
+MauvilleCity_PokemonCenter_1F_Text_PickTheDecorToTrade	Okay, pick the decoration that you'll\ntrade to me.		
+MauvilleCity_PokemonCenter_1F_Text_YouDontWantToTrade	You won't trade with me?\nI feel unwanted…		
+MauvilleCity_PokemonCenter_1F_Text_YouveNoRoomForThis	You've got all the {STR_VAR_2}S that can\nbe stored. You've no room for this.		
+MauvilleCity_PokemonCenter_1F_Text_SoWellTradeTheseDecor	Okay, so we'll trade my {STR_VAR_3}\nfor your {STR_VAR_2}?		
+MauvilleCity_PokemonCenter_1F_Text_ThatDecorIsInUse	That piece of decoration is in use.\nYou can't trade it.		
+MauvilleCity_PokemonCenter_1F_Text_SendDecorToYourPC	Then we'll trade!\nI'll send my decoration to your PC.		
+MauvilleCity_PokemonCenter_1F_Text_CantTradeThatOne	Oops! Sorry! That's a really rare\npiece of decoration.\lI can't trade that one away!\pCan I interest you in something else?		
+MauvilleCity_PokemonCenter_1F_Text_WillYouHearMyTale	I'm the STORYTELLER.\nI'll tell you tales of legendary\lTRAINERS.\pWill you hear my tale?		
+MauvilleCity_PokemonCenter_1F_Text_StorytellerFeelingTheBlues	Oh…\nYou've left me feeling the blues…		
+MauvilleCity_PokemonCenter_1F_Text_WhichTaleToTell	I know of these legends.\nWhich tale will you have me tell?		
+MauvilleCity_PokemonCenter_1F_Text_IKnowNoTales	But, I know of no legendary TRAINERS.\nHence, I know no tales.\pWhere does one find a TRAINER worthy\nof a legendary tale?		
+MauvilleCity_PokemonCenter_1F_Text_YouDidStatXTimes	What's that?!\nYou… You…\p{STR_VAR_2}\n{STR_VAR_1} time(s)?!\pThat is indeed magnificent!\nIt's the birth of a new legend!		
+MauvilleCity_PokemonCenter_1F_Text_CouldThereBeOtherLegends	It gets me thinking, could there be\nother TRAINERS with more impressive\llegends awaiting discovery?		
+MauvilleCity_PokemonCenter_1F_Text_HaveYouAnyLegendaryTales	Are you a TRAINER?\pThen tell me, have you any tales that\nare even remotely legendary?		
+MauvilleCity_PokemonCenter_1F_Text_HearAnotherLegendaryTale	Incidentally… Would you care to hear\nanother legendary tale?		
+MauvilleCity_PokemonCenter_1F_Text_NotWorthyOfLegend	Hmm…\nI'm not satisfied…\pI wish you would bring me news worthy\nof being called a legend.		
+MauvilleCity_PokemonCenter_1F_Text_IWishMorePeopleWereInterested	I wish more people would be interested\nin hearing my epic tales of legendary\lTRAINERS.		
+MauvilleCity_PokemonCenter_1F_Text_SavedGameTitle	The Save-Happy TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_SavedGameAction	Saved the game		
+MauvilleCity_PokemonCenter_1F_Text_SavedGameStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER saved the game\n{STR_VAR_1} times!\pA more cautious TRAINER than\n{STR_VAR_3} one will never find!		
+MauvilleCity_PokemonCenter_1F_Text_TrendsStartedTitle	The Trendsetter TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_TrendsStartedAction	Started trends		
+MauvilleCity_PokemonCenter_1F_Text_TrendsStartedStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER started new trends\n{STR_VAR_1} times!\p{STR_VAR_3} is setting trends for all\nthe HOENN region!		
+MauvilleCity_PokemonCenter_1F_Text_BerriesPlantedTitle	The BERRY-Planting TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_BerriesPlantedAction	Planted BERRIES		
+MauvilleCity_PokemonCenter_1F_Text_BerriesPlantedStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER planted BERRIES\n{STR_VAR_1} times!\p{STR_VAR_3} is a legendary lover of\nBERRIES!		
+MauvilleCity_PokemonCenter_1F_Text_BikeTradesTitle	The BIKE-Loving TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_BikeTradesAction	Traded BIKES		
+MauvilleCity_PokemonCenter_1F_Text_BikeTradesStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER swapped BIKES\n{STR_VAR_1} times!\p{STR_VAR_3} must love BIKES deeply\nand passionately!		
+MauvilleCity_PokemonCenter_1F_Text_InterviewsTitle	The Interviewed TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_InterviewsAction	Got interviewed		
+MauvilleCity_PokemonCenter_1F_Text_InterviewsStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER got interviewed\n{STR_VAR_1} times!\p{STR_VAR_3} must be a TRAINER who's\nattracting much attention!		
+MauvilleCity_PokemonCenter_1F_Text_TrainerBattlesTitle	The Battle-Happy TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_TrainerBattlesAction	Battled		
+MauvilleCity_PokemonCenter_1F_Text_TrainerBattlesStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER battled {STR_VAR_1} times!\p{STR_VAR_3} must be a TRAINER who can\nnever refuse a chance to battle!		
+MauvilleCity_PokemonCenter_1F_Text_PokemonCaughtTitle	The POKéMON-Catching TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_PokemonCaughtAction	Caught POKéMON		
+MauvilleCity_PokemonCenter_1F_Text_PokemonCaughtStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER caught\n{STR_VAR_1} POKéMON!\p{STR_VAR_3} is a legendary catcher of\nwild POKéMON!		
+MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtTitle	The Fishing TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtAction	Caught POKéMON with a ROD		
+MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER caught\n{STR_VAR_1} POKéMON while fishing!\p{STR_VAR_3} is a legendary fishing\nexpert!		
+MauvilleCity_PokemonCenter_1F_Text_EggsHatchedTitle	The EGG-Warming TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_EggsHatchedAction	Hatched EGGS		
+MauvilleCity_PokemonCenter_1F_Text_EggsHatchedStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER hatched {STR_VAR_1} POKéMON\nfrom EGGS!\p{STR_VAR_3} is a legendary warmer\nof EGGS!		
+MauvilleCity_PokemonCenter_1F_Text_PokemonEvolvedTitle	The Evolver TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_PokemonEvolvedAction	Evolved POKéMON		
+MauvilleCity_PokemonCenter_1F_Text_PokemonEvolvedStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER made {STR_VAR_1} POKéMON\nevolve!\p{STR_VAR_3} is the ultimate evolver\nof POKéMON!		
+MauvilleCity_PokemonCenter_1F_Text_UsedPokemonCenterTitle	The POKéMON CENTER-Loving TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_UsedPokemonCenterAction	Used POKéMON CENTERS		
+MauvilleCity_PokemonCenter_1F_Text_UsedPokemonCenterStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER healed POKéMON\n{STR_VAR_1} times at POKéMON CENTERS!\pThere could be no greater lover of\nPOKéMON CENTERS than {STR_VAR_3}!		
+MauvilleCity_PokemonCenter_1F_Text_RestedAtHomeTitle	The Homebody TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_RestedAtHomeAction	Rested POKéMON at home		
+MauvilleCity_PokemonCenter_1F_Text_RestedAtHomeStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER healed POKéMON\n{STR_VAR_1} times at home!\pThere could be no more of a homebody\nthan {STR_VAR_3}!		
+MauvilleCity_PokemonCenter_1F_Text_SafariGamesTitle	The SAFARI-Loving TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_SafariGamesAction	Entered the SAFARI ZONE		
+MauvilleCity_PokemonCenter_1F_Text_SafariGamesStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER went into the SAFARI ZONE\n{STR_VAR_1} times!\p{STR_VAR_3} is a TRAINER whose wild side\nmust come out in the SAFARI ZONE!		
+MauvilleCity_PokemonCenter_1F_Text_UsedCutTitle	The CUT-Frenzy TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_UsedCutAction	Used CUT		
+MauvilleCity_PokemonCenter_1F_Text_UsedCutStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER used CUT\n{STR_VAR_1} times!\p{STR_VAR_3} is a TRAINER who just must\nlove to CUT!		
+MauvilleCity_PokemonCenter_1F_Text_UsedRockSmashTitle	The ROCK-SMASHING TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_UsedRockSmashAction	Smashed rocks		
+MauvilleCity_PokemonCenter_1F_Text_UsedRockSmashStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER used ROCK SMASH\n{STR_VAR_1} times!\p{STR_VAR_3} must be a TRAINER who\ncan't leave a stone unsmashed!		
+MauvilleCity_PokemonCenter_1F_Text_MovedBasesTitle	The Move-Loving TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_MovedBasesAction	Moved the SECRET BASE		
+MauvilleCity_PokemonCenter_1F_Text_MovedBasesStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER moved the SECRET BASE\n{STR_VAR_1} times!\p{STR_VAR_3} is a TRAINER who loves\nto move houses often!		
+MauvilleCity_PokemonCenter_1F_Text_UsedSplashTitle	The SPLASH-Happy TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_UsedSplashAction	Used SPLASH		
+MauvilleCity_PokemonCenter_1F_Text_UsedSplashStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER used SPLASH\n{STR_VAR_1} times!\p{STR_VAR_3} is a TRAINER who must love\nSPLASHING around!		
+MauvilleCity_PokemonCenter_1F_Text_UsedStruggleTitle	The Tenacious TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_UsedStruggleAction	Resorted to using STRUGGLE		
+MauvilleCity_PokemonCenter_1F_Text_UsedStruggleStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER had to rely on STRUGGLE\n{STR_VAR_1} times!\p{STR_VAR_3} is a tenacious TRAINER\nwho never gives in to adversity!		
+MauvilleCity_PokemonCenter_1F_Text_SlotJackpotsTitle	The SLOT Champ		
+MauvilleCity_PokemonCenter_1F_Text_SlotJackpotsAction	Won the jackpot on the SLOTS		
+MauvilleCity_PokemonCenter_1F_Text_SlotJackpotsStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER won the jackpot on\nthe SLOTS {STR_VAR_1} times.\p{STR_VAR_3} is a TRAINER who was lucky\non the SLOTS!		
+MauvilleCity_PokemonCenter_1F_Text_RouletteWinsTitle	The ROULETTE Champ		
+MauvilleCity_PokemonCenter_1F_Text_RouletteWinsAction	Had consecutive ROULETTE wins of		
+MauvilleCity_PokemonCenter_1F_Text_RouletteWinsStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER won in ROULETTE\n{STR_VAR_1} times in a row.\p{STR_VAR_3} was lucky when the ball\nbounced in ROULETTE!		
+MauvilleCity_PokemonCenter_1F_Text_BattleTowerChallengesTitle	The BATTLE TOWER Challenger		
+MauvilleCity_PokemonCenter_1F_Text_BattleTowerChallengesAction	Took the BATTLE TOWER challenge		
+MauvilleCity_PokemonCenter_1F_Text_BattleTowerChallengesStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER took the BATTLE TOWER\nchallenge {STR_VAR_1} times!\p{STR_VAR_3} is a TRAINER who aspires\nfor excellence in the BATTLE TOWER!		
+MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksTitle	The Blend-Loving TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksAction	Made {POKEBLOCK}S		
+MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER made {POKEBLOCK}S\n{STR_VAR_1} times!\pThere is none better at using a BERRY\nBLENDER than {STR_VAR_3}!		
+MauvilleCity_PokemonCenter_1F_Text_EnteredContestsTitle	The CONTEST-Loving TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_EnteredContestsAction	Entered CONTESTS		
+MauvilleCity_PokemonCenter_1F_Text_EnteredContestsStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER entered CONTESTS\n{STR_VAR_1} times!\p{STR_VAR_3} must love showing off\nPOKéMON to others!		
+MauvilleCity_PokemonCenter_1F_Text_WonContestsTitle	The CONTEST Master		
+MauvilleCity_PokemonCenter_1F_Text_WonContestsAction	Won CONTESTS		
+MauvilleCity_PokemonCenter_1F_Text_WonContestsStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER won CONTESTS\n{STR_VAR_1} times!\p{STR_VAR_3} must be an incredible\nCONTEST master!		
+MauvilleCity_PokemonCenter_1F_Text_TimesShoppedTitle	The Happy Shopper		
+MauvilleCity_PokemonCenter_1F_Text_TimesShoppedAction	Shopped		
+MauvilleCity_PokemonCenter_1F_Text_TimesShoppedStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER bought items in shops\n{STR_VAR_1} times!\p{STR_VAR_3} must be one of those\npeople who are born to shop.		
+MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderTitle	The Item-Finding TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderAction	Used an ITEMFINDER		
+MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER used an ITEMFINDER\n{STR_VAR_1} times!\p{STR_VAR_3} must enjoy scouring the\nground for hidden items!		
+MauvilleCity_PokemonCenter_1F_Text_TimesRainedTitle	The Rain-Soaked TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_TimesRainedAction	Got rained on		
+MauvilleCity_PokemonCenter_1F_Text_TimesRainedStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER got soaked by rain\n{STR_VAR_1} times!\p{STR_VAR_3}'s charisma must even\nattract rain!		
+MauvilleCity_PokemonCenter_1F_Text_CheckedPokedexTitle	The Avid POKéDEX Reader		
+MauvilleCity_PokemonCenter_1F_Text_CheckedPokedexAction	Checked a POKéDEX		
+MauvilleCity_PokemonCenter_1F_Text_CheckedPokedexStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER checked a POKéDEX\n{STR_VAR_1} times!\p{STR_VAR_3} must love inspecting\nPOKéMON in a POKéDEX!		
+MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsTitle	The RIBBON Collector		
+MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsAction	Received RIBBONS		
+MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER received RIBBONS\n{STR_VAR_1} times!\p{STR_VAR_3} must be a TRAINER who\nloves to collect RIBBONS!		
+MauvilleCity_PokemonCenter_1F_Text_LedgesJumpedTitle	The Ledge-Jumping TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_LedgesJumpedAction	Jumped down ledges		
+MauvilleCity_PokemonCenter_1F_Text_LedgesJumpedStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER jumped down ledges\n{STR_VAR_1} times!\pIf there's a ledge to be jumped,\n{STR_VAR_3} can't ignore it!		
+MauvilleCity_PokemonCenter_1F_Text_TVWatchedTitle	The Legendary TV Viewer		
+MauvilleCity_PokemonCenter_1F_Text_TVWatchedAction	Watched TV		
+MauvilleCity_PokemonCenter_1F_Text_TVWatchedStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER watched TV\n{STR_VAR_1} times!\p{STR_VAR_3} must love watching TV!		
+MauvilleCity_PokemonCenter_1F_Text_CheckedClockTitle	The Time-Conscious TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_CheckedClockAction	Checked the time		
+MauvilleCity_PokemonCenter_1F_Text_CheckedClockStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER checked the time\n{STR_VAR_1} times!\p{STR_VAR_3} must be a punctual TRAINER\nwho's conscious of the time.		
+MauvilleCity_PokemonCenter_1F_Text_WonLotteryTitle	The POKéMON LOTTERY Wizard		
+MauvilleCity_PokemonCenter_1F_Text_WonLotteryAction	Won POKéMON LOTTERIES		
+MauvilleCity_PokemonCenter_1F_Text_WonLotteryStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER won POKéMON LOTTERIES\n{STR_VAR_1} times!\p{STR_VAR_3} must have many friends\nto trade POKéMON with!		
+MauvilleCity_PokemonCenter_1F_Text_UsedDaycareTitle	The DAY CARE-Using Trainer		
+MauvilleCity_PokemonCenter_1F_Text_UsedDaycareAction	Left POKéMON at the DAY CARE		
+MauvilleCity_PokemonCenter_1F_Text_UsedDaycareStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER left POKéMON with the\nDAY CARE {STR_VAR_1} times!\p{STR_VAR_3} must be a real go-getter\nwho raises POKéMON aggressively!		
+MauvilleCity_PokemonCenter_1F_Text_RodeCableCarTitle	The CABLE CAR-Loving TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_RodeCableCarAction	Rode the CABLE CAR		
+MauvilleCity_PokemonCenter_1F_Text_RodeCableCarStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER rode the CABLE CAR\n{STR_VAR_1} times!\p{STR_VAR_3} must be a busy TRAINER\nwho's up and down all the time!		
+MauvilleCity_PokemonCenter_1F_Text_HotSpringsTitle	The Hot Spring-Loving TRAINER		
+MauvilleCity_PokemonCenter_1F_Text_HotSpringsAction	Bathed in hot springs		
+MauvilleCity_PokemonCenter_1F_Text_HotSpringsStory	This is a tale of a TRAINER\nnamed {STR_VAR_3}.\pThis TRAINER bathed in hot springs\n{STR_VAR_1} times!\p{STR_VAR_3} must be a TRAINER with\nbaby-smooth skin!		
+MauvilleCity_PokemonCenter_1F_Text_HearMyStory	I'm GIDDY!\nI have a scintillating story for you!\pWould you like to hear my story?		
+MauvilleCity_PokemonCenter_1F_Text_GiddyFeelingTheBlues	Oh…\nYou've left me feeling the blues…		
+MauvilleCity_PokemonCenter_1F_Text_AlsoIWasThinking	Also, I was thinking…		
+MauvilleCity_PokemonCenter_1F_Text_WeShouldChatAgain	That's about it, I think…\pWe should chat again!\nBye-bye!		
+MauvilleCity_PokemonCenter_1F_Text_WouldYouLikeToHearMySong	Hi, I'm the BARD.\nWould you like to hear my song?		
+MauvilleCity_PokemonCenter_1F_Text_BardFeelingTheBlues1	Oh…\nYou've left me feeling the blues…		
+MauvilleCity_PokemonCenter_1F_Text_WishICouldPlaySongForOthers	Oh, what a moving song…\nI wish I could play it for others…		
+MauvilleCity_PokemonCenter_1F_Text_WouldYouLikeToWriteSomeLyrics	So?\nHow do you like my song?\pBut I'm none too happy about\nthe lyrics.\pHow would you like to write some\nnew lyrics for me?		
+MauvilleCity_PokemonCenter_1F_Text_BardFeelingTheBlues2	Oh…\nYou've left me feeling the blues…		
+MauvilleCity_PokemonCenter_1F_Text_LetMeSingItForYou	Thank you kindly!\nLet me sing it for you.		
+MauvilleCity_PokemonCenter_1F_Text_ThatHowYouWantedSongToGo	Was that how you wanted your song\nto go?		
+MauvilleCity_PokemonCenter_1F_Text_IllSingThisSongForAWhile	Okay! That's it, then.\nI'll sing this song for a while.		
+MauvilleCity_PokemonCenter_1F_Text_TeachWhatsHipAndHappening	Hey, yo! They call me the HIPSTER.\nI'll teach you what's hip and happening.		
+MauvilleCity_PokemonCenter_1F_Text_IAlreadyTaughtYou	But, hey, I taught you what's hip and\nhappening already.\pI'd like to spread the good word to\nother folks.		
+MauvilleCity_PokemonCenter_1F_Text_IveGotNothingNewToTeach	But, hey, you already know a lot about\nwhat's hip and happening.\pI've got nothing new to teach you!		
+MauvilleCity_PokemonCenter_1F_Text_HaveYouHeardOfWord	Hey, have you heard about\n“{STR_VAR_1}”?\pWhat's it mean? Well…\nAsk your daddy or mommy, okay?		

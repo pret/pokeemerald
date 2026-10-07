@@ -1,0 +1,48 @@
+key	english	dutch	notes
+BerryBlender_Text_WantToMakePokeblocks	Oh? Did you want to make some {POKEBLOCK}S\nwith this old-timer?		
+BerryBlender_Text_Excellent	Excellent!		
+BerryBlender_Text_MadeOldTimerSad	Oh…\nYou've made this old-timer sad…		
+BerryBlender_Text_KnowHowToMakePokeblocks	Do you know how to make a {POKEBLOCK}?		
+BerryBlender_Text_LetsBerryBlender	Let's get started, then!\pLet's BERRY BLENDER!		
+BerryBlender_Text_ExplainBerryBlending	Okay, a little explanation, then.\pOh, don't worry, it's quite simple.\pWhen the BLENDER's arrow comes to\nyour marker, just press the A Button.\pThat's all you have to do.\nYou'll see how easy it is when you try.		
+BerryBlender_Text_DontHaveAnyBerries	Oh?\nYou don't have any BERRIES?\pIf you don't have any BERRIES,\nyou can't make any {POKEBLOCK}S.		
+BerryBlender_Text_CanHaveOneOfMyBerries	Well, that won't do at all now, will it?\pIf you don't mind leftovers, you can\nhave one of my BERRIES.\pThat way, we could make some {POKEBLOCK}S\ntogether using the BERRY BLENDER.		
+BerryBlender_Text_DontHaveAnyBerriesToSpare	If I had some BERRIES left over,\nI'd gladly give you one…\pBut, I don't have any to spare today.\nWe'll have to do this another time.		
+BerryBlender_Text_PokeblockCaseIsFull	But your {POKEBLOCK} CASE is full.\pYou should use some {POKEBLOCK}S before\nyou come see me again.		
+BerryBlender_Text_DontHavePokeblockCase	But you don't have a {POKEBLOCK} CASE.\pYou should get a {POKEBLOCK} CASE and then\ncome see me.		
+BerryBlender_Text_LetsGetBlendingAlready	Let's get blending already!		
+BerryBlender_Text_WhatKindOfPokeblockWillIGet	I wonder what kind of {POKEBLOCK} I'll get?\nThis is so exciting!		
+BerryBlender_Text_WantToBlendPokeblocksWithUs	Hi, there! Did you want to blend some\n{POKEBLOCK}S with us?		
+BerryBlender_Text_Okay	Okay!		
+BerryBlender_Text_ThatsTooBad	That's too bad…\pBut we'll always be around whenever\nyou get the urge to blend!		
+BerryBlender_Text_KnowHowToMakePokeblocks2	Of course, you do know how to\nblend {POKEBLOCK}S, don't you?		
+BerryBlender_Text_LetsBerryBlender2	Let's get started, then!\pLet's BERRY BLENDER!		
+BerryBlender_Text_ExplainBerryBlending2	Okay!\nLet me explain it to you!\pWhen the spinning BLENDER's arrow\nreaches your marker, just press\lthe A Button.\pThat's all it takes.\nPretty easy, don't you think?		
+BerryBlender_Text_DontHaveAnyBerries2	Oh, but wait a second here…\nYou don't have any BERRIES.\pYou can't make any {POKEBLOCK}S without\nBERRIES…\pWe'll always be around whenever you\nget hold of some BERRIES to blend.		
+BerryBlender_Text_PokeblockCaseIsFull2	Oh, but wait a second here…\nYour {POKEBLOCK} CASE is full.\pYou should use some {POKEBLOCK}S and\nthen come back.		
+BerryBlender_Text_DontHavePokeblockCase2	Oh, but wait a second here…\nYou don't have a {POKEBLOCK} CASE.\pYou should get a {POKEBLOCK} CASE and\nthen come back.		
+BerryBlender_Text_MakePokeblocksWithOurGroup	Oh, hello! Did you want to make some\n{POKEBLOCK}S with our little group?		
+BerryBlender_Text_OhDear	Oh, dear!		
+BerryBlender_Text_LeftUsInShock	Oh, dear me…\pYou've left us in shock!		
+BerryBlender_Text_KnowHowToMakePokeblocks3	Naturally, you know how to make\n{POKEBLOCK}S, don't you?		
+BerryBlender_Text_LetsBerryBlender3	Okay, dear!\nLet's get started!\pLet's BERRY BLENDER!		
+BerryBlender_Text_ExplainBerryBlending3	Oh, dear!\pThen, I'll explain it to you nicely.\pWhen the BLENDER's arrow spins to\nyour marker, press the A Button.\pThat's all it takes.\nIsn't it simple?		
+BerryBlender_Text_DontHaveAnyBerries3	You don't have any BERRIES,\ndo you?\pIf you don't have any BERRIES,\nyou can't make any {POKEBLOCK}S.\pWe'll always be making {POKEBLOCK}S here,\nso let's make some together when\lyou get a BERRY or two.		
+BerryBlender_Text_PokeblockCaseIsFull3	Your {POKEBLOCK} CASE is full,\nit looks like.\pYou should use some {POKEBLOCK}S up\nand then come back.		
+BerryBlender_Text_DontHavePokeblockCase3	You haven't gotten a {POKEBLOCK} CASE\nyet, it looks like.\pYou need to get a {POKEBLOCK} CASE before\nyou come back.		
+BerryBlender_Text_SetNewBlenderRecord	Okay! Today's going to be the day that\nI set a new BLENDER speed record!		
+BerryBlender_Text_LookGoodAtBlendingJoinUs	Oh, dear!\nYou look as if you're good at blending.\lWould you like to join us?		
+BerryBlender_Text_MakeDeliciousPokeblocks	I'm going to make delicious {POKEBLOCK}S\nand make my POKéMON cuter.		
+BerryBlender_Text_SaveGameBeforeBerryBlenderLink	{POKEBLOCK}S will be made with your friends \nfrom BERRIES in the BERRY BLENDER.\pIs it okay to save the game before\nlinking with your friends?		
+BerryBlender_Text_SearchingForFriends	Searching for your friends…\n… … B Button: Cancel		
+BerryBlender_Text_Player1Arrived	{STR_VAR_1} arrived.		
+BerryBlender_Text_Player1And2Arrived	{STR_VAR_1} and {STR_VAR_2} arrived.		
+BerryBlender_Text_AllPlayersArrived	{STR_VAR_1}, {STR_VAR_2}, and\n{STR_VAR_3} arrived.		
+BerryBlender_Text_NoBerriesLink	You have no BERRIES.\nThe BERRY BLENDER can't be used.		
+BerryBlender_Text_PokeblockCaseIsFullLink	Your {POKEBLOCK} CASE is full.\nThe BERRY BLENDER can't be used.		
+BerryBlender_Text_DontHavePokeblockCaseLink	You don't have a {POKEBLOCK} CASE.\nThe BERRY BLENDER can't be used.		
+BerryBlender_Text_LoveMakingPokeblocks	I love making {POKEBLOCK}S.\pI always have some BERRIES with me.		
+BerryBlender_Text_MakePokeblocksUsingBerryBlender	If you'd like, we could make some\n{POKEBLOCK}S together using the\lBERRY BLENDER.		
+BerryBlender_Text_DontHaveAnyBerriesHaveOne	Oh?\nYou don't have any BERRIES?\pWell, that won't do at all now, will it?\pIf you don't mind leftovers, you can\nhave one of my BERRIES.		
+BerryBlender_Text_UseItToMakePokeblocksTogether	We'll use it to make {POKEBLOCK}S together\nusing the BERRY BLENDER.		
+BerryBlender_Text_DontHaveAnyBerriesNoneToSpare	Oh?\nYou don't have any BERRIES?\pIf I had some left over, I'd gladly\ngive you one…\pBut, I don't have any to spare today.\nSorry about that.		

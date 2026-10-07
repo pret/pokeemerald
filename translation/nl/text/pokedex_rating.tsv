@@ -1,0 +1,26 @@
+key	english	dutch	notes
+gBirchDexRatingText_AreYouCurious	PROF. BIRCH: Ah, {PLAYER}{KUN}!\pAre you curious about how your\nPOKéDEX is coming along?		
+gBirchDexRatingText_Cancel	Hm? Oh, you haven't caught enough\nPOKéMON to make it worthwhile.		
+gBirchDexRatingText_SoYouveSeenAndCaught	Hmhm…\pSo, you've seen {STR_VAR_1} POKéMON,\nand you've caught {STR_VAR_2} POKéMON…		
+gBirchDexRatingText_LessThan10	Go into grassy areas more and look\nfor POKéMON more carefully.		
+gBirchDexRatingText_LessThan20	I guess you're getting the hang\nof it. But, it gets harder from here.		
+gBirchDexRatingText_LessThan30	Some POKéMON only appear in\ncertain areas.\lYou must be persistent.		
+gBirchDexRatingText_LessThan40	Well, it could use more quantity,\nbut this is looking more like\la POKéDEX now.		
+gBirchDexRatingText_LessThan50	This is coming along pretty good.\nKeep up the effort.		
+gBirchDexRatingText_LessThan60	Are you using any RODS?\nThere are many POKéMON in the sea.		
+gBirchDexRatingText_LessThan70	Instead of just catching POKéMON,\nhow about making them evolve, too?		
+gBirchDexRatingText_LessThan80	This is going to be a fantastic\nPOKéDEX.\lThat's the feeling I'm getting.		
+gBirchDexRatingText_LessThan90	You've collected this many…\nYour talent is remarkable!		
+gBirchDexRatingText_LessThan100	Have you visited the SAFARI ZONE?\pI hear there are some POKéMON that\ncan only be caught there.		
+gBirchDexRatingText_LessThan110	You've finally reached\nthe 100-kind mark.\pThis is an impressive POKéDEX!		
+gBirchDexRatingText_LessThan120	There might be POKéMON that can be\nfound using ROCK SMASH.		
+gBirchDexRatingText_LessThan130	You should get some more POKéMON\nby trading with others.		
+gBirchDexRatingText_LessThan140	I've heard of POKéMON that evolve\nwhen they come to fully love their\lTRAINERS.		
+gBirchDexRatingText_LessThan150	I had no idea that there were so\nmany POKéMON species in the HOENN\lregion.		
+gBirchDexRatingText_LessThan160	On occasion, some POKéMON appear\nin large numbers like outbreaks.\pDon't miss opportunities like\nthose.		
+gBirchDexRatingText_LessThan170	One can get a very good idea about\nthe POKéMON of the HOENN region\lby looking through your POKéDEX.		
+gBirchDexRatingText_LessThan180	I would say you already qualify as\na POKéMON PROFESSOR, and a good\lone, too!		
+gBirchDexRatingText_LessThan190	With a POKéDEX this complete,\nyou're a real professional at this!		
+gBirchDexRatingText_LessThan200	You're very close to completing\nthis POKéDEX.\lI can feel it in my bones!		
+gBirchDexRatingText_DexCompleted	Congratulations!\nYour POKéDEX is complete!		
+gBirchDexRatingText_OnANationwideBasis	Hmhm…\nOn a nationwide basis…\pYou've seen {STR_VAR_1} POKéMON,\nand you've caught {STR_VAR_2} POKéMON…		

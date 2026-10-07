@@ -1,0 +1,13 @@
+key	english	dutch	notes
+Route120_Text_StevenGreeting	STEVEN: Hm? {PLAYER}{KUN}, hi.\nIt's been a while.\pThere's something here that you can't\nsee, right?\pNow, if I were to use this device on\nthe invisible obstacle…\pNo, no. Rather than describing it,\nI should just show you.\lThat would be more fun.\p{PLAYER}{KUN}, are your POKéMON ready for\nbattle?		
+Route120_Text_StevenIllWaitHere	STEVEN: No?\pI'll wait here, so you can get ready.		
+Route120_Text_StevenReadyForBattle	STEVEN: {PLAYER}{KUN}, are your POKéMON\nready for battle?		
+Route120_Text_StevenShowMeYourPower	STEVEN: {PLAYER}{KUN}, show me your true\npower as a TRAINER!		
+Route120_Text_StevenUsedDevonScope	STEVEN used the DEVON SCOPE.\pAn invisible POKéMON became completely\nvisible!\pThe startled POKéMON attacked!		
+Route120_Text_StevenGiveDevonScope	STEVEN: I see…\nYour battle style is intriguing.\pYour POKéMON have obviously grown\nsince I first met you in DEWFORD.\pI'd like you to have this\nDEVON SCOPE.\pWho knows, there may be other\nconcealed POKéMON.		
+Route120_Text_StevenGoodbye	STEVEN: {PLAYER}{KUN}.\pI enjoy seeing POKéMON and TRAINERS\nwho strive together.\pI think you're doing great.\pWell, let's meet again somewhere.		
+Kecleon_Text_SomethingUnseeable	Something unseeable is in the way.		
+Kecleon_Text_WantToUseDevonScope	Something unseeable is in the way.\pWant to use the DEVON SCOPE?		
+Kecleon_Text_UseDevonScopeMonAttacked	{PLAYER} used the DEVON SCOPE.\pAn invisible POKéMON became completely\nvisible!\pThe startled POKéMON attacked!		
+Route120_Text_RouteSignFortree	ROUTE 120\n{LEFT_ARROW} FORTREE CITY		
+Route120_Text_RouteSign121	{RIGHT_ARROW} ROUTE 121\n{LEFT_ARROW} ROUTE 120		

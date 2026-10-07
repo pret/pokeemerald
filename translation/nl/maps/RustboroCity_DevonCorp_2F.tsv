@@ -1,0 +1,18 @@
+key	english	dutch	notes
+RustboroCity_DevonCorp_2F_Text_DeviceForTalkingToPokemon	We're developing a device for talking\nwith POKéMON.\pBut we haven't had much success…		
+RustboroCity_DevonCorp_2F_Text_DevelopingNewBalls	I'm developing new kinds of\nPOKé BALLS…\pBut I haven't made much headway…		
+RustboroCity_DevonCorp_2F_Text_WeFinallyMadeNewBalls	We finally made new kinds of\nPOKé BALLS!\pThe REPEAT BALL makes it easier to\ncatch POKéMON you've caught before.\pThe TIMER BALL gets better at catching\nPOKéMON the longer a battle runs.\pBoth are proudly developed by\nthe DEVON CORPORATION.\pPlease give them a try!		
+RustboroCity_DevonCorp_2F_Text_IMadePokenav	I made the POKéNAV!\pAs an engineer, I feel blessed to have\nmade something so great!		
+RustboroCity_DevonCorp_2F_Text_WowThatsAPokenav	Oh, wow!\nThat's a POKéNAV!\pIt came about as a result of our\nPRESIDENT's desire to learn about\lthe feelings of POKéMON.\pWould you like me to describe its\nfeatures in detail?\pNo, no. I think you'll find out just by\ntrying the POKéNAV out.		
+RustboroCity_DevonCorp_2F_Text_DeviceToVisualizePokemonDreams	I'm trying to develop a device that\nvisually reproduces the dreams of\lPOKéMON…\pBut it's not going well.		
+RustboroCity_DevonCorp_2F_Text_DevelopDeviceToResurrectFossils	I've been trying to develop a device\nthat resurrects POKéMON from fossils…\pAnd, it's working!		
+RustboroCity_DevonCorp_2F_Text_WantToBringFossilBackToLife	Wait! That thing you have there…\nIs that a POKéMON fossil?\pWould you like to bring that POKéMON\nback to life?\pI can with my newly developed\nFOSSIL REGENERATOR.		
+RustboroCity_DevonCorp_2F_Text_OhIsThatSo	Oh, is that so?\pDEVON's technological expertise\nis outstanding, I tell you.		
+RustboroCity_DevonCorp_2F_Text_TwoFossilsPickOne	Oh, now that's a surprise!\nYou have not one, but two, fossils?\pUnfortunately, my machine can only\nregenerate one POKéMON at a time.\pWould you like to pick one of your\nfossils for regeneration?		
+RustboroCity_DevonCorp_2F_Text_HandedFossilToResearcher	Excellent!\nLet's do this right away.\p{PLAYER} handed the {STR_VAR_1} to\nthe DEVON RESEARCHER.		
+RustboroCity_DevonCorp_2F_Text_FossilRegeneratorTakesTime	The FOSSIL REGENERATOR, which I made,\nis incredible.\pBut it has one drawback--it takes\na long time to work.\pSo, uh… How about you go for a stroll\nand look around for a while?		
+RustboroCity_DevonCorp_2F_Text_FossilizedMonBroughtBackToLife	Thanks for waiting!\pYour fossilized POKéMON has been\nbrought back to life!\pThe fossil was an ancient POKéMON.\n{STR_VAR_2}, it was!		
+RustboroCity_DevonCorp_2F_Text_ReceivedMonFromResearcher	{PLAYER} received {STR_VAR_2} from\nthe DEVON RESEARCHER.		
+RustboroCity_DevonCorp_2F_Text_TooManyPokemon	Uh-oh, you've got too many POKéMON.\nYou have no room for this one.		
+RustboroCity_DevonCorp_2F_Text_DevelopNewPokenavFeature	I'm trying to develop a new feature\nfor the POKéNAV…\pBut it's not going well.		
+RustboroCity_DevonCorp_2F_Text_WhatToWorkOnNext	Well, now what shall I work on\ndeveloping next?\pOur company allows us to make our\ninspirations into reality.\pOne couldn't ask for a better\nenvironment as an engineer.		

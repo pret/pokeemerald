@@ -1,0 +1,9 @@
+key	english	dutch	notes
+LilycoveCity_DepartmentStoreRooftop_Text_SetDatesForClearOutSales	Don't they have set dates for their\nclear-out sales?\pI watch TV, but they never show any\ncommercials.		
+LilycoveCity_DepartmentStoreRooftop_Text_BeenWaitingForClearOutSale	Yes! I've been waiting a long time for\nthis clear-out sale.\pThey have items that you can only get\nhere. I'm going to load up, that I am!		
+LilycoveCity_DepartmentStoreRooftop_Text_BoneDryThirsty	Ohh… I'm bone-dry thirsty!		
+LilycoveCity_DepartmentStoreRooftop_Text_WhichDrinkWouldYouLike	It's a VENDING MACHINE.\nWhich drink would you like?		
+LilycoveCity_DepartmentStoreRooftop_Text_CanOfDrinkDroppedDown	Clang!\pA can of {STR_VAR_1} dropped down.		
+LilycoveCity_DepartmentStoreRooftop_Text_ExtraCanOfDrinkDroppedDown	Clang!\pScore! An extra can of {STR_VAR_1}\ndropped down!		
+LilycoveCity_DepartmentStoreRooftop_Text_NotEnoughMoney	Not enough money…		
+LilycoveCity_DepartmentStoreRooftop_Text_DecidedAgainstBuyingDrink	Decided against buying a drink.		
