@@ -7,7 +7,7 @@ MODERN      ?= 0
 KEEP_TEMPS  ?= 0
 
 # `File name`.gba ('_modern' will be appended to the modern builds)
-FILE_NAME := pokeemerald
+FILE_NAME := PokemonSmaragd
 BUILD_DIR := build
 
 # Builds the ROM using a modern compiler
