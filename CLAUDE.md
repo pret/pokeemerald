@@ -117,6 +117,7 @@ The player is a **Dutch kid (about 8–10 years old)**. Every Dutch string must 
   - `fill.py '*/*' file.txt` finds each key wherever it lives.
   - Dialogue lines may be as wide as the widest English line of the same string (min. 208px).
   - Translate area by area in the order the game is played. `PLAN.md` tracks which areas are done.
+- `python3 translation/check_fill.py <file>` checks a `KEY<TAB>dutch` fill file without writing anything (handy for parallel work).
 - `natures.tsv` holds the nature names (NAÏEF, VROLIJK…).
 - **Always edit the TSV, then apply.** Never hand-edit strings that a TSV manages (move/ability/item/berry names and descriptions), or the next apply will overwrite them.
 
