@@ -19,28 +19,28 @@ MauvilleCity_House1_EventScript_ReceivedRockSmash::
 	end
 
 MauvilleCity_House1_Text_ImRockSmashDudeTakeThis:
-	.string "Woohoo!\p"
-	.string "I hear people call me the ROCK SMASH\n"
-	.string "GUY, but I find that sort of degrading.\p"
-	.string "I think I deserve a bit more respect,\n"
-	.string "like maybe the ROCK SMASH DUDE.\p"
-	.string "Woohoo!\p"
-	.string "Anyways, your POKéMON look pretty\n"
-	.string "strong.\p"
-	.string "I like that!\n"
-	.string "Here, take this HIDDEN MACHINE!$"
+	.string "Joehoe!\p"
+	.string "Mensen noemen mij de STEENBREKER-\n"
+	.string "MAN, maar dat vind ik maar niks.\p"
+	.string "Ik verdien meer respect. Noem me\n"
+	.string "liever de STEENBREKER-HELD.\p"
+	.string "Joehoe!\p"
+	.string "Hoe dan ook, je POKéMON zien er\n"
+	.string "best sterk uit.\p"
+	.string "Dat vind ik leuk!\n"
+	.string "Hier, neem deze VERBORGEN MACHINE!$"
 
 MauvilleCity_House1_Text_ExplainRockSmash:
-	.string "That HM contains ROCK SMASH.\p"
-	.string "If you come across large boulders\n"
-	.string "that block your path…\p"
-	.string "Well, use that HM move and smash\n"
-	.string "them right out of your way!\p"
-	.string "Yes, sir! Smash rocks aside, I say!\n"
-	.string "Woohoo!$"
+	.string "Op die VM staat STEENBREKER.\p"
+	.string "Zie je grote rotsen die je\n"
+	.string "de weg versperren?\p"
+	.string "Gebruik dan die VM-aanval en sla\n"
+	.string "ze uit de weg!\p"
+	.string "Ja! Sla die rotsen aan stukken!\n"
+	.string "Joehoe!$"
 
 MauvilleCity_House1_Text_MonCanFlyOutOfSmashedRock:
-	.string "Oh, yes, if you smash a rock, a POKéMON\n"
-	.string "could come flying out of hiding.\p"
-	.string "Woohoo!$"
+	.string "Oh ja, als je een rots breekt, kan er\n"
+	.string "soms een POKéMON uit springen.\p"
+	.string "Joehoe!$"
 

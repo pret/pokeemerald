@@ -1,34 +1,34 @@
 key	english	dutch	notes
-MauvilleCity_GameCorner_Text_ThisIsMauvilleGameCorner	This is MAUVILLE GAME CORNER.		
-MauvilleCity_GameCorner_Text_NeedCoinCaseForCoins	Okay, you wanted some COINS for\nthe games?\pBut you don't have a COIN CASE for\nstowing the COINS.		
-MauvilleCity_GameCorner_Text_WereYouLookingForCoins	Were you looking for COINS?\pIt's ¥1000 for 50 COINS.\nWould you like some?		
-MauvilleCity_GameCorner_Text_ThankYouHereAreYourCoins	Thank you very much!\nHere are your COINS!		
-MauvilleCity_GameCorner_Text_DontHaveEnoughMoney	Um… You don't appear to have\nenough money…		
-MauvilleCity_GameCorner_Text_CoinCaseIsFull	Oh?\nYour COIN CASE is full.		
-MauvilleCity_GameCorner_Text_DontNeedCoinsThen	Oh… You don't need COINS, then?\nGood luck on your adventure!		
-MauvilleCity_GameCorner_Text_ExchangeCoinsForPrizes	Welcome.\pYou can exchange your COINS for\nprizes here.		
-MauvilleCity_GameCorner_Text_WhichPrize	Which prize would you like?		
-MauvilleCity_GameCorner_Text_SoYourChoiceIsTheTMX	So your choice is\nthe {STR_VAR_1} {STR_VAR_2}?		
-MauvilleCity_GameCorner_Text_SendToYourHomePC	Thank you!\nWe'll send it to your PC at home.		
-MauvilleCity_GameCorner_Text_NotEnoughCoins	You don't have enough COINS.		
-MauvilleCity_GameCorner_Text_NoRoomForPlacingDecor	There isn't any room available for\nplacing {STR_VAR_1}.		
-MauvilleCity_GameCorner_Text_OhIsThatSo	Oh, is that so? \nYou need to save some COINS before\lcoming back here.		
-MauvilleCity_GameCorner_Text_SoYourChoiceIsX	So your choice is {STR_VAR_1}?		
-MauvilleCity_GameCorner_Text_HereYouGo	Here you go!		
-MauvilleCity_GameCorner_Text_CantCarryAnyMore	Oh, you can't carry any more than that.		
-MauvilleCity_GameCorner_Text_GotTwoOfSameDollWantOne	I made a mistake and got two of\nthe same DOLLS.\pWould you like one of them?		
-MauvilleCity_GameCorner_Text_HereYouGo2	Here you go!		
-MauvilleCity_GameCorner_Text_YouWantItButNotNow	Huh?\nYou want it, but not right now?		
-MauvilleCity_GameCorner_Text_DontBeNegative	Oh, don't be so negative!\nYou can have this!		
-MauvilleCity_GameCorner_Text_CantWinJackpot	There's a prize I want, but I can't win\nthe jackpot.		
-MauvilleCity_GameCorner_Text_NeedCoinCaseGoNextDoor	Hey, kid, if you want to play here,\nyou need a COIN CASE.\pI think the young lady next door\nhad one. Go see her!		
-MauvilleCity_GameCorner_Text_LuckOnlyLastSoLongTakeCoins	My luck can only last so long.\nThis is too much for me.\lHere, take some COINS!		
-MauvilleCity_GameCorner_Text_MauvilleSomethingForEveryone	MAUVILLE has something for\neveryone.\pFor me, it's the GAME CORNER.		
-MauvilleCity_GameCorner_Text_RouletteTablesDifferentRates	The ROULETTE tables have different\nrates.\pCheck your COINS if you're going to\npick a table.		
-MauvilleCity_GameCorner_Text_EasyToLoseTrackOfTime	It's easy to lose track of time in here. \nI should get back to work.		
-MauvilleCity_GameCorner_Text_CoinsAreNeededToPlay	COINS are needed to play here\nin the GAME CORNER.		
-MauvilleCity_GameCorner_Text_RouletteOnlyLuck	This ROULETTE thing…\nIt's rather demanding.\pWin or lose, it's only by luck.		
-MauvilleCity_GameCorner_Text_UpTo3CoinsCanBeUsed	Up to three COINS can be used to play\nthe SLOTS.		
-MauvilleCity_GameCorner_Text_DifficultToStopOn7	It's very difficult to make it stop\nright on “7.”\pIf it stops on “7” during the REEL TIME\nbonus game, you'll receive extra COINS.		
-MauvilleCity_GameCorner_Text_HeresSomeSlotsInfo	Here's some information for you\nabout the SLOTS.\pThe more lightning bolts you stock,\nthe more REEL TIME chances you get.\pIn a game with the maximum five\nREEL TIME chances…\pIt is possible to receive four regular\nbonuses, then a big bonus.\pThat would total 660 COINS, but it's\nvery difficult to get.		
-MauvilleCity_GameCorner_Text_CantPlayWithNoCoinCase	You can't play if you don't have\na COIN CASE.		
+MauvilleCity_GameCorner_Text_ThisIsMauvilleGameCorner	This is MAUVILLE GAME CORNER.	Dit is de MAUVILLE GAME CORNER.	
+MauvilleCity_GameCorner_Text_NeedCoinCaseForCoins	Okay, you wanted some COINS for\nthe games?\pBut you don't have a COIN CASE for\nstowing the COINS.	Oké, wil je MUNTEN om te spelen?\pMaar je hebt geen MUNTENDOOS\nom de MUNTEN in te doen.	
+MauvilleCity_GameCorner_Text_WereYouLookingForCoins	Were you looking for COINS?\pIt's ¥1000 for 50 COINS.\nWould you like some?	Zoek je MUNTEN?\p50 MUNTEN kosten ¥1000.\nWil je er wat?	
+MauvilleCity_GameCorner_Text_ThankYouHereAreYourCoins	Thank you very much!\nHere are your COINS!	Hartelijk bedankt!\nHier zijn je MUNTEN!	
+MauvilleCity_GameCorner_Text_DontHaveEnoughMoney	Um… You don't appear to have\nenough money…	Eh… Je hebt niet genoeg\ngeld, zo te zien…	
+MauvilleCity_GameCorner_Text_CoinCaseIsFull	Oh?\nYour COIN CASE is full.	Oh?\nJe MUNTENDOOS is vol.	
+MauvilleCity_GameCorner_Text_DontNeedCoinsThen	Oh… You don't need COINS, then?\nGood luck on your adventure!	Oh… Wil je dan geen MUNTEN?\nVeel succes op je reis!	
+MauvilleCity_GameCorner_Text_ExchangeCoinsForPrizes	Welcome.\pYou can exchange your COINS for\nprizes here.	Welkom.\pHier kun je je MUNTEN ruilen\nvoor prijzen.	
+MauvilleCity_GameCorner_Text_WhichPrize	Which prize would you like?	Welke prijs wil je?	
+MauvilleCity_GameCorner_Text_SoYourChoiceIsTheTMX	So your choice is\nthe {STR_VAR_1} {STR_VAR_2}?	Je kiest dus\nde {STR_VAR_1} {STR_VAR_2}?	
+MauvilleCity_GameCorner_Text_SendToYourHomePC	Thank you!\nWe'll send it to your PC at home.	Dank je wel!\nWe sturen het naar je PC thuis.	
+MauvilleCity_GameCorner_Text_NotEnoughCoins	You don't have enough COINS.	Je hebt niet genoeg MUNTEN.	
+MauvilleCity_GameCorner_Text_NoRoomForPlacingDecor	There isn't any room available for\nplacing {STR_VAR_1}.	Er is geen plek meer voor\n{STR_VAR_1}.	
+MauvilleCity_GameCorner_Text_OhIsThatSo	Oh, is that so? \nYou need to save some COINS before\lcoming back here.	Oh, is dat zo?\nSpaar eerst wat MUNTEN en\lkom dan terug.	
+MauvilleCity_GameCorner_Text_SoYourChoiceIsX	So your choice is {STR_VAR_1}?	Je kiest dus {STR_VAR_1}?	
+MauvilleCity_GameCorner_Text_HereYouGo	Here you go!	Alsjeblieft!	
+MauvilleCity_GameCorner_Text_CantCarryAnyMore	Oh, you can't carry any more than that.	Oh, je kunt niet meer dragen.	
+MauvilleCity_GameCorner_Text_GotTwoOfSameDollWantOne	I made a mistake and got two of\nthe same DOLLS.\pWould you like one of them?	Oeps, ik heb per ongeluk twee\ndezelfde DOLLS gekregen.\pWil jij er een?	
+MauvilleCity_GameCorner_Text_HereYouGo2	Here you go!	Alsjeblieft!	
+MauvilleCity_GameCorner_Text_YouWantItButNotNow	Huh?\nYou want it, but not right now?	Hè?\nJe wilt hem wel, maar niet nu?	
+MauvilleCity_GameCorner_Text_DontBeNegative	Oh, don't be so negative!\nYou can have this!	Oh, doe niet zo moeilijk!\nJe mag hem hebben!	
+MauvilleCity_GameCorner_Text_CantWinJackpot	There's a prize I want, but I can't win\nthe jackpot.	Ik wil een prijs, maar ik win\nmaar niet de jackpot.	
+MauvilleCity_GameCorner_Text_NeedCoinCaseGoNextDoor	Hey, kid, if you want to play here,\nyou need a COIN CASE.\pI think the young lady next door\nhad one. Go see her!	Hé, als je hier wilt spelen,\nheb je een MUNTENDOOS nodig.\pDe mevrouw hiernaast had er\neen, geloof ik. Ga maar naar haar!	
+MauvilleCity_GameCorner_Text_LuckOnlyLastSoLongTakeCoins	My luck can only last so long.\nThis is too much for me.\lHere, take some COINS!	Mijn geluk duurt niet eeuwig.\nDit is te veel voor mij.\lHier, neem wat MUNTEN!	
+MauvilleCity_GameCorner_Text_MauvilleSomethingForEveryone	MAUVILLE has something for\neveryone.\pFor me, it's the GAME CORNER.	MAUVILLE heeft iets voor\niedereen.\pVoor mij is dat de GAME CORNER.	
+MauvilleCity_GameCorner_Text_RouletteTablesDifferentRates	The ROULETTE tables have different\nrates.\pCheck your COINS if you're going to\npick a table.	De ROULETTE-tafels hebben\nverschillende inzetten.\pKijk naar je MUNTEN voor je\neen tafel kiest.	
+MauvilleCity_GameCorner_Text_EasyToLoseTrackOfTime	It's easy to lose track of time in here. \nI should get back to work.	Je vergeet hier snel de tijd.\nIk moet weer aan het werk.	
+MauvilleCity_GameCorner_Text_CoinsAreNeededToPlay	COINS are needed to play here\nin the GAME CORNER.	Je hebt MUNTEN nodig om hier\nin de GAME CORNER te spelen.	
+MauvilleCity_GameCorner_Text_RouletteOnlyLuck	This ROULETTE thing…\nIt's rather demanding.\pWin or lose, it's only by luck.	Die ROULETTE…\nDie is best lastig.\pWinnen of verliezen, het is\nallemaal geluk.	
+MauvilleCity_GameCorner_Text_UpTo3CoinsCanBeUsed	Up to three COINS can be used to play\nthe SLOTS.	Je kunt tot 3 MUNTEN inzetten\nbij de SLOTS.	
+MauvilleCity_GameCorner_Text_DifficultToStopOn7	It's very difficult to make it stop\nright on “7.”\pIf it stops on “7” during the REEL TIME\nbonus game, you'll receive extra COINS.	Het is heel moeilijk om precies\nop “7” te stoppen.\pStopt hij op “7” tijdens het REEL TIME-\nbonusspel? Dan krijg je extra MUNTEN.	
+MauvilleCity_GameCorner_Text_HeresSomeSlotsInfo	Here's some information for you\nabout the SLOTS.\pThe more lightning bolts you stock,\nthe more REEL TIME chances you get.\pIn a game with the maximum five\nREEL TIME chances…\pIt is possible to receive four regular\nbonuses, then a big bonus.\pThat would total 660 COINS, but it's\nvery difficult to get.	Hier is wat uitleg over\nde SLOTS.\pHoe meer bliksems je spaart, hoe\nmeer REEL TIME-kansen je krijgt.\pIn een spel met de meeste kansen,\nvijf keer REEL TIME…\pkun je vier gewone bonussen\nkrijgen, en dan een grote bonus.\pDat is samen 660 MUNTEN, maar\ndat is heel moeilijk.	
+MauvilleCity_GameCorner_Text_CantPlayWithNoCoinCase	You can't play if you don't have\na COIN CASE.	Je kunt niet spelen zonder\nMUNTENDOOS.	

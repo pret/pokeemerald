@@ -1,11 +1,11 @@
 key	english	dutch	notes
-Route110_TrickHousePuzzle3_Text_WroteSecretCodeLockOpened	{PLAYER} wrote down the secret code\non the door.\p“TRICK MASTER is coveted.”\n… … … … … … … …\pThe lock clicked open!		
-Route110_TrickHousePuzzle3_Text_JustinIntro	I keep coming back to this same place!		
-Route110_TrickHousePuzzle3_Text_JustinDefeat	I'm already having trouble, and then\nyou have to beat me? It's not fair!		
-Route110_TrickHousePuzzle3_Text_JustinPostBattle	It's full of doors here!\nIt's too small and dark in here! Help!		
-Route110_TrickHousePuzzle3_Text_MarthaIntro	I don't know what's going on here.\nI'm starting to feel sad…		
-Route110_TrickHousePuzzle3_Text_MarthaDefeat	You… You're awful!		
-Route110_TrickHousePuzzle3_Text_MarthaPostBattle	I know I'm weak!\nAnd, I have no sense of direction!		
-Route110_TrickHousePuzzle3_Text_AlanIntro	I don't get it. What would anyone want\nwith a house this bizarre?		
-Route110_TrickHousePuzzle3_Text_AlanDefeat	I don't get it.\nHow did I lose?		
-Route110_TrickHousePuzzle3_Text_AlanPostBattle	I don't get it.\nHow many traps are in this house?\pYou may be the one to solve that.		
+Route110_TrickHousePuzzle3_Text_WroteSecretCodeLockOpened	{PLAYER} wrote down the secret code\non the door.\p“TRICK MASTER is coveted.”\n… … … … … … … …\pThe lock clicked open!	{PLAYER} schrijft de geheime code\nop de deur.\p“TRICK MASTER is begeerd.”\n… … … … … … … …\pKlik! Het slot gaat open!	
+Route110_TrickHousePuzzle3_Text_JustinIntro	I keep coming back to this same place!	Ik kom steeds weer op dezelfde plek!	
+Route110_TrickHousePuzzle3_Text_JustinDefeat	I'm already having trouble, and then\nyou have to beat me? It's not fair!	Ik heb het al zo moeilijk, en dan\nversla jij me ook nog? Oneerlijk!	
+Route110_TrickHousePuzzle3_Text_JustinPostBattle	It's full of doors here!\nIt's too small and dark in here! Help!	Het zit hier vol deuren!\nHet is hier te klein en donker! Help!	
+Route110_TrickHousePuzzle3_Text_MarthaIntro	I don't know what's going on here.\nI'm starting to feel sad…	Ik snap niet wat hier gebeurt.\nIk word er verdrietig van…	
+Route110_TrickHousePuzzle3_Text_MarthaDefeat	You… You're awful!	Jij… Jij bent gemeen!	
+Route110_TrickHousePuzzle3_Text_MarthaPostBattle	I know I'm weak!\nAnd, I have no sense of direction!	Ik weet dat ik zwak ben!\nEn ik verdwaal altijd!	
+Route110_TrickHousePuzzle3_Text_AlanIntro	I don't get it. What would anyone want\nwith a house this bizarre?	Ik snap het niet. Wie wil er nou\nzo'n raar huis?	
+Route110_TrickHousePuzzle3_Text_AlanDefeat	I don't get it.\nHow did I lose?	Ik snap het niet.\nHoe kon ik verliezen?	
+Route110_TrickHousePuzzle3_Text_AlanPostBattle	I don't get it.\nHow many traps are in this house?\pYou may be the one to solve that.	Ik snap het niet.\nHoeveel vallen zitten er in dit huis?\pMisschien kun jij dat uitzoeken.	

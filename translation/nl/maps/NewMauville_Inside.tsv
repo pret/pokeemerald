@@ -1,4 +1,4 @@
 key	english	dutch	notes
-NewMauville_Inside_Text_GeneratorRadiatingHeat	The generator is radiating heat that\ncan be felt even at a distance.\pIt looks like it should be turned off\nas soon as possible.		
-NewMauville_Inside_Text_GeneratorQuietedDown	The generator quieted down.		
-NewMauville_Inside_Text_SteppedOnSwitchGeneratorStopped	{PLAYER} stepped on the switch.\pClick…\p… … … … … … … …\n… … … … … … … …\pThe generator appears to have\nstopped…		
+NewMauville_Inside_Text_GeneratorRadiatingHeat	The generator is radiating heat that\ncan be felt even at a distance.\pIt looks like it should be turned off\nas soon as possible.	De generator geeft zoveel hitte af\ndat je het van ver al voelt.\pHij moet zo snel mogelijk\nuit, zo te zien.	
+NewMauville_Inside_Text_GeneratorQuietedDown	The generator quieted down.	De generator is stil geworden.	
+NewMauville_Inside_Text_SteppedOnSwitchGeneratorStopped	{PLAYER} stepped on the switch.\pClick…\p… … … … … … … …\n… … … … … … … …\pThe generator appears to have\nstopped…	{PLAYER} stapt op de knop.\pKlik…\p… … … … … … … …\n… … … … … … … …\pDe generator lijkt te zijn\ngestopt…	

@@ -1,11 +1,11 @@
 key	english	dutch	notes
-Route110_TrickHousePuzzle6_Text_WroteSecretCodeLockOpened	{PLAYER} wrote down the secret code\non the door.\p“TRICK MASTER is my life.”\n… … … … … … … …\pThe lock clicked open!		
-Route110_TrickHousePuzzle6_Text_SophiaIntro	When I heard there was a strange\nhouse, I had to check it out.		
-Route110_TrickHousePuzzle6_Text_SophiaDefeat	I've discovered a tough TRAINER!		
-Route110_TrickHousePuzzle6_Text_SophiaPostBattle	I'm sure having a good time checking\nthis place out.\pIt's a challenge I've found worth\nrepeating!		
-Route110_TrickHousePuzzle6_Text_BennyIntro	Maybe I could get my BIRD POKéMON\nto fly over the wall…		
-Route110_TrickHousePuzzle6_Text_BennyDefeat	Gwaaah! I blew it!		
-Route110_TrickHousePuzzle6_Text_BennyPostBattle	Ehehehe… I guess I lost because\nI was trying to cheat.		
-Route110_TrickHousePuzzle6_Text_SebastianIntro	I'm getting dizzy from these rotating\ndoors…		
-Route110_TrickHousePuzzle6_Text_SebastianDefeat	Everything's spinning around and\naround. I can't take this anymore…		
-Route110_TrickHousePuzzle6_Text_SebastianPostBattle	You don't seem to be affected at all.\nOr do you have your poker face on?		
+Route110_TrickHousePuzzle6_Text_WroteSecretCodeLockOpened	{PLAYER} wrote down the secret code\non the door.\p“TRICK MASTER is my life.”\n… … … … … … … …\pThe lock clicked open!	{PLAYER} schrijft de geheime code\nop de deur.\p“TRICK MASTER is mijn leven.”\n… … … … … … … …\pKlik! Het slot gaat open!	
+Route110_TrickHousePuzzle6_Text_SophiaIntro	When I heard there was a strange\nhouse, I had to check it out.	Ik hoorde over een raar huis.\nDaar moest ik even gaan kijken.	
+Route110_TrickHousePuzzle6_Text_SophiaDefeat	I've discovered a tough TRAINER!	Ik heb een sterke TRAINER gevonden!	
+Route110_TrickHousePuzzle6_Text_SophiaPostBattle	I'm sure having a good time checking\nthis place out.\pIt's a challenge I've found worth\nrepeating!	Ik vind het echt leuk om hier\nrond te kijken.\pDeze uitdaging doe ik graag\nnog een keer!	
+Route110_TrickHousePuzzle6_Text_BennyIntro	Maybe I could get my BIRD POKéMON\nto fly over the wall…	Misschien kan mijn VOGEL-POKéMON\nover de muur vliegen…	
+Route110_TrickHousePuzzle6_Text_BennyDefeat	Gwaaah! I blew it!	Gwaaah! Mislukt!	
+Route110_TrickHousePuzzle6_Text_BennyPostBattle	Ehehehe… I guess I lost because\nI was trying to cheat.	Ehehehe… Ik verloor vast omdat\nik wilde valsspelen.	
+Route110_TrickHousePuzzle6_Text_SebastianIntro	I'm getting dizzy from these rotating\ndoors…	Ik word duizelig van die\ndraaideuren…	
+Route110_TrickHousePuzzle6_Text_SebastianDefeat	Everything's spinning around and\naround. I can't take this anymore…	Alles draait rond en rond.\nIk kan niet meer…	
+Route110_TrickHousePuzzle6_Text_SebastianPostBattle	You don't seem to be affected at all.\nOr do you have your poker face on?	Jij hebt er helemaal geen last van.\nOf hou je gewoon je gezicht strak?	

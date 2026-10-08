@@ -238,108 +238,109 @@ Route110_TrickHouseEnd_Movement_TrickMasterSurprise:
 
 Route110_TrickHouseEnd_Text_YouveMadeItToMe:
 	.string "Aak!\n"
-	.string "You've made it to me?\l"
-	.string "Hmmm… You're sharp!$"
+	.string "Je bent tot bij mij gekomen?\l"
+	.string "Hmmm… Jij bent slim!$"
 
 Route110_TrickHouseEnd_Text_AllNightToPlantTrees:
-	.string "It took me all night to plant all those\n"
-	.string "trees…\p"
-	.string "You're almost my equal in greatness by\n"
-	.string "one, two, three, four, five, six places!$"
+	.string "Ik heb de hele nacht al die bomen\n"
+	.string "geplant…\p"
+	.string "Je bent bijna net zo goed als ik!\n"
+	.string "Nog maar een, twee, drie, vier, vijf, zes!$"
 
 Route110_TrickHouseEnd_Text_AllNightToMakeMaze:
-	.string "It took me all night to make the maze…\p"
-	.string "You're almost my equal in greatness by\n"
-	.string "one, two, three, four, five places!$"
+	.string "Ik heb de hele nacht aan het\n"
+	.string "doolhof gewerkt…\p"
+	.string "Je bent bijna net zo goed als ik!\n"
+	.string "Nog maar een, twee, drie, vier, vijf!$"
 
 Route110_TrickHouseEnd_Text_AllNightToPreparePanels:
-	.string "It took me all night to prepare\n"
-	.string "the wall panels…\p"
-	.string "You're almost my equal in greatness by\n"
-	.string "one, two, three, four places!$"
+	.string "Ik heb de hele nacht aan de\n"
+	.string "muurpanelen gewerkt…\p"
+	.string "Je bent bijna net zo goed als ik!\n"
+	.string "Nog maar een, twee, drie, vier!$"
 
 Route110_TrickHouseEnd_Text_AllNightToShoveBoulders:
-	.string "It took me all night to shove in those\n"
-	.string "boulders…\p"
-	.string "You're almost my equal in greatness by\n"
-	.string "one, two, three places!$"
+	.string "Ik heb de hele nacht die rotsen\n"
+	.string "op hun plek geduwd…\p"
+	.string "Je bent bijna net zo goed als ik!\n"
+	.string "Nog maar een, twee, drie!$"
 
 Route110_TrickHouseEnd_Text_AllNightToMakeMechadolls:
-	.string "It took me all night to make MECHADOLLS\n"
-	.string "and another to think up the quiz…\p"
-	.string "You're almost my equal in greatness by\n"
-	.string "one, two places!$"
+	.string "Ik heb een nacht MECHADOLLS gemaakt\n"
+	.string "en nog een nacht de quiz bedacht…\p"
+	.string "Je bent bijna net zo goed als ik!\n"
+	.string "Nog maar een, twee!$"
 
 Route110_TrickHouseEnd_Text_AllNightToInstallDoors:
-	.string "It took me all night to install\n"
-	.string "the doors…\p"
-	.string "You're almost my equal in greatness!$"
+	.string "Ik heb de hele nacht die deuren\n"
+	.string "gemaakt…\p"
+	.string "Je bent bijna net zo goed als ik!$"
 
 Route110_TrickHouseEnd_Text_AllNightSettingUpArrows:
-	.string "It took me all night setting up arrows…\p"
-	.string "You're my equal in greatness!$"
+	.string "Ik heb de hele nacht pijlen neergelegd…\p"
+	.string "Je bent net zo goed als ik!$"
 
 Route110_TrickHouseEnd_Text_AllNightPolishingFloors:
-	.string "It took me all night polishing floors…\p"
-	.string "You're above me in greatness!\n"
-	.string "Possibly…$"
+	.string "Ik heb de hele nacht vloeren gepoetst…\p"
+	.string "Je bent zelfs beter dan ik!\n"
+	.string "Misschien…$"
 
 Route110_TrickHouseEnd_Text_FountainOfIdeasRunDry:
-	.string "Wh-what should I do?\n"
-	.string "My fountain of ideas for tricks has\l"
-	.string "run dry…\p"
-	.string "Perhaps it is time I toured the country\n"
-	.string "on a quest to devise new tricks…$"
+	.string "W-wat moet ik nu?\n"
+	.string "Ik heb geen ideeën meer voor\l"
+	.string "nieuwe trucs…\p"
+	.string "Misschien moet ik op reis gaan\n"
+	.string "om nieuwe trucs te bedenken…$"
 
 Route110_TrickHouseEnd_Text_DefeatedMePreferWhichTent:
-	.string "I hate to admit defeat, but you have\n"
-	.string "bested me!\p"
-	.string "Still, you must have been reeled in by\n"
-	.string "my charisma for you to visit me again\l"
-	.string "and again. Yes, you must have!\p"
-	.string "But that has nothing to do with my\n"
-	.string "losing!\p"
-	.string "In recognition of the friendship\n"
-	.string "between you, the driven, and the genius\l"
-	.string "that is myself, I demand that you take\l"
-	.string "this keepsake!\p"
-	.string "Actually there are two--\n"
-	.string "a RED TENT and a BLUE TENT.\l"
-	.string "Which do you prefer?$"
+	.string "Ik geef het niet graag toe, maar\n"
+	.string "je hebt me verslagen!\p"
+	.string "Maar je kwam steeds terug, dus je\n"
+	.string "vindt mij vast heel geweldig.\l"
+	.string "Ja, dat moet wel!\p"
+	.string "Maar daarom heb ik niet\n"
+	.string "verloren, hoor!\p"
+	.string "Als teken van vriendschap tussen\n"
+	.string "jou, de doorzetter, en mij, het\l"
+	.string "genie, moet je dit aannemen!\p"
+	.string "Eigenlijk zijn er twee--\n"
+	.string "een RODE TENT en een BLAUWE TENT.\l"
+	.string "Welke wil je?$"
 
 Route110_TrickHouseEnd_Text_NoRoomInPC:
-	.string "What? No room in your PC?\n"
-	.string "What am I to make of that?\p"
-	.string "I wish I could say that, but I am much\n"
-	.string "too kind and caring, so come back later!$"
+	.string "Wat? Geen plek in je PC?\n"
+	.string "Wat moet ik daar nou mee?\p"
+	.string "Dat zou ik willen zeggen, maar ik ben\n"
+	.string "veel te lief. Kom later maar terug!$"
 
 Route110_TrickHouseEnd_Text_LeavingOnJourney:
 	.string "… … … … … …\p"
-	.string "I am leaving on a journey of discovery.\n"
-	.string "A quest in search of new tricks.\p"
-	.string "I wish that you will one day visit and\n"
-	.string "entertain me again.\p"
-	.string "And now, farewell!$"
+	.string "Ik ga op ontdekkingsreis.\n"
+	.string "Op zoek naar nieuwe trucs.\p"
+	.string "Ik hoop dat je ooit weer langskomt\n"
+	.string "om me te vermaken.\p"
+	.string "En nu, vaarwel!$"
 
 Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward:
-	.string "Fine!\n"
-	.string "You have earned this reward!$"
+	.string "Goed dan!\n"
+	.string "Je hebt deze beloning verdiend!$"
 
 Route110_TrickHouseEnd_Text_NoRoomForThis:
-	.string "What? Have you no room for this?\n"
-	.string "What manner of items do you carry?\p"
-	.string "But fine, since you've reached me,\n"
-	.string "your reward will be with me till later.$"
+	.string "Wat? Heb je hier geen plek voor?\n"
+	.string "Wat sjouw jij allemaal mee?\p"
+	.string "Maar goed, je bent tot bij mij gekomen.\n"
+	.string "Ik bewaar je beloning nog even.$"
 
 Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou:
-	.string "Scrub that smug smirk from your face!\n"
-	.string "It's much too early to think you've won!\p"
-	.string "I'll make new tricks to stump you, I will.\n"
-	.string "You may mock me only when you're done.\p"
-	.string "Come back for the next exciting\n"
-	.string "installment!$"
+	.string "Haal die grijns van je gezicht!\n"
+	.string "Je hebt nog lang niet gewonnen!\p"
+	.string "Ik maak nieuwe trucs om je te\n"
+	.string "verslaan.\p"
+	.string "Lach me pas uit als je klaar bent.\p"
+	.string "Kom terug voor het volgende\n"
+	.string "spannende deel!$"
 
 Route110_TrickHouseEnd_Text_YoureIgnoringMe:
-	.string "Now, now! You're ignoring me now?\n"
-	.string "Now that, I consider heartbreaking!$"
+	.string "Nou, nou! Negeer je me nu?\n"
+	.string "Dat breekt mijn hart!$"
 

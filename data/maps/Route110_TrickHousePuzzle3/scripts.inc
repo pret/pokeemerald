@@ -302,44 +302,44 @@ Route110_TrickHousePuzzle3_EventScript_Alan::
 	end
 
 Route110_TrickHousePuzzle3_Text_WroteSecretCodeLockOpened:
-	.string "{PLAYER} wrote down the secret code\n"
-	.string "on the door.\p"
-	.string "“TRICK MASTER is coveted.”\n"
+	.string "{PLAYER} schrijft de geheime code\n"
+	.string "op de deur.\p"
+	.string "“TRICK MASTER is begeerd.”\n"
 	.string "… … … … … … … …\p"
-	.string "The lock clicked open!$"
+	.string "Klik! Het slot gaat open!$"
 
 Route110_TrickHousePuzzle3_Text_JustinIntro:
-	.string "I keep coming back to this same place!$"
+	.string "Ik kom steeds weer op dezelfde plek!$"
 
 Route110_TrickHousePuzzle3_Text_JustinDefeat:
-	.string "I'm already having trouble, and then\n"
-	.string "you have to beat me? It's not fair!$"
+	.string "Ik heb het al zo moeilijk, en dan\n"
+	.string "versla jij me ook nog? Oneerlijk!$"
 
 Route110_TrickHousePuzzle3_Text_JustinPostBattle:
-	.string "It's full of doors here!\n"
-	.string "It's too small and dark in here! Help!$"
+	.string "Het zit hier vol deuren!\n"
+	.string "Het is hier te klein en donker! Help!$"
 
 Route110_TrickHousePuzzle3_Text_MarthaIntro:
-	.string "I don't know what's going on here.\n"
-	.string "I'm starting to feel sad…$"
+	.string "Ik snap niet wat hier gebeurt.\n"
+	.string "Ik word er verdrietig van…$"
 
 Route110_TrickHousePuzzle3_Text_MarthaDefeat:
-	.string "You… You're awful!$"
+	.string "Jij… Jij bent gemeen!$"
 
 Route110_TrickHousePuzzle3_Text_MarthaPostBattle:
-	.string "I know I'm weak!\n"
-	.string "And, I have no sense of direction!$"
+	.string "Ik weet dat ik zwak ben!\n"
+	.string "En ik verdwaal altijd!$"
 
 Route110_TrickHousePuzzle3_Text_AlanIntro:
-	.string "I don't get it. What would anyone want\n"
-	.string "with a house this bizarre?$"
+	.string "Ik snap het niet. Wie wil er nou\n"
+	.string "zo'n raar huis?$"
 
 Route110_TrickHousePuzzle3_Text_AlanDefeat:
-	.string "I don't get it.\n"
-	.string "How did I lose?$"
+	.string "Ik snap het niet.\n"
+	.string "Hoe kon ik verliezen?$"
 
 Route110_TrickHousePuzzle3_Text_AlanPostBattle:
-	.string "I don't get it.\n"
-	.string "How many traps are in this house?\p"
-	.string "You may be the one to solve that.$"
+	.string "Ik snap het niet.\n"
+	.string "Hoeveel vallen zitten er in dit huis?\p"
+	.string "Misschien kun jij dat uitzoeken.$"
 

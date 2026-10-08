@@ -1,11 +1,11 @@
 key	english	dutch	notes
-Route110_TrickHousePuzzle4_Text_WroteSecretCodeLockOpened	{PLAYER} wrote down the secret code\non the door.\p“TRICK MASTER is cool.”\n… … … … … … … …\pThe lock clicked open!		
-Route110_TrickHousePuzzle4_Text_CoraIntro	It's too much bother to think this out.\nI only wanted to battle!		
-Route110_TrickHousePuzzle4_Text_CoraDefeat	Even though I lost, I still like battling\nthe best!		
-Route110_TrickHousePuzzle4_Text_CoraPostBattle	Wouldn't you agree? You would go\nanywhere if TRAINERS were there.		
-Route110_TrickHousePuzzle4_Text_YujiIntro	Heh! Boulders like this, I can brush\naside with one finger!		
-Route110_TrickHousePuzzle4_Text_YujiDefeat	I can push boulders, but I can't solve\nthe puzzle…		
-Route110_TrickHousePuzzle4_Text_YujiPostBattle	It's not good enough to be brawny…\nYou have to use your head. Be brainy!		
-Route110_TrickHousePuzzle4_Text_PaulaIntro	The TRICK HOUSE is getting trickier,\nisn't it?		
-Route110_TrickHousePuzzle4_Text_PaulaDefeat	Aaak!		
-Route110_TrickHousePuzzle4_Text_PaulaPostBattle	Has anyone made it to the end?		
+Route110_TrickHousePuzzle4_Text_WroteSecretCodeLockOpened	{PLAYER} wrote down the secret code\non the door.\p“TRICK MASTER is cool.”\n… … … … … … … …\pThe lock clicked open!	{PLAYER} schrijft de geheime code\nop de deur.\p“TRICK MASTER is stoer.”\n… … … … … … … …\pKlik! Het slot gaat open!	
+Route110_TrickHousePuzzle4_Text_CoraIntro	It's too much bother to think this out.\nI only wanted to battle!	Nadenken is me te veel moeite.\nIk wilde alleen maar vechten!	
+Route110_TrickHousePuzzle4_Text_CoraDefeat	Even though I lost, I still like battling\nthe best!	Ik heb verloren, maar vechten\nvind ik nog steeds het leukst!	
+Route110_TrickHousePuzzle4_Text_CoraPostBattle	Wouldn't you agree? You would go\nanywhere if TRAINERS were there.	Vind je ook niet? Je gaat overal\nheen als er TRAINERS zijn.	
+Route110_TrickHousePuzzle4_Text_YujiIntro	Heh! Boulders like this, I can brush\naside with one finger!	Heh! Zulke rotsen duw ik met\néén vinger opzij!	
+Route110_TrickHousePuzzle4_Text_YujiDefeat	I can push boulders, but I can't solve\nthe puzzle…	Ik kan rotsen duwen, maar de\npuzzel snap ik niet…	
+Route110_TrickHousePuzzle4_Text_YujiPostBattle	It's not good enough to be brawny…\nYou have to use your head. Be brainy!	Spierballen alleen zijn niet genoeg…\nJe moet ook je hoofd gebruiken!	
+Route110_TrickHousePuzzle4_Text_PaulaIntro	The TRICK HOUSE is getting trickier,\nisn't it?	Het TRICK HOUSE wordt steeds\nlastiger, hè?	
+Route110_TrickHousePuzzle4_Text_PaulaDefeat	Aaak!	Aaak!	
+Route110_TrickHousePuzzle4_Text_PaulaPostBattle	Has anyone made it to the end?	Is er al iemand tot het einde\ngekomen?	

@@ -39,10 +39,10 @@ VerdanturfTown_Mart_EventScript_Lass::
 	end
 
 VerdanturfTown_Mart_Text_XSpecialIsCrucial:
-	.string "For any POKéMON match, X SPECIAL\n"
-	.string "is crucial.\p"
-	.string "It jacks up the power of some moves\n"
-	.string "even though it's only for one battle.$"
+	.string "Bij elk POKéMON-gevecht is X SPECIAAL\n"
+	.string "heel belangrijk.\p"
+	.string "Het maakt sommige aanvallen sterker,\n"
+	.string "ook al is het maar voor één gevecht.$"
 
 VerdanturfTown_Mart_Text_NoStrategyGuidesForBattleTent:
 	.string "Ze verkopen hier geen tipsboek\n"

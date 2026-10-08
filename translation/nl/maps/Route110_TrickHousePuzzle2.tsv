@@ -1,11 +1,11 @@
 key	english	dutch	notes
-Route110_TrickHousePuzzle2_Text_WroteSecretCodeLockOpened	{PLAYER} wrote down the secret code\non the door.\p“TRICK MASTER is smart.”\n… … … … … … … …\pThe lock clicked open!		
-Route110_TrickHousePuzzle2_Text_TedIntro	Which switch closes which hole?		
-Route110_TrickHousePuzzle2_Text_TedDefeat	After that battle, I'm even more\nconfused!		
-Route110_TrickHousePuzzle2_Text_TedPostBattle	Can I get you to push all the buttons\nfor me?		
-Route110_TrickHousePuzzle2_Text_PaulIntro	Oh! You're on your second TRICK HOUSE\nchallenge!		
-Route110_TrickHousePuzzle2_Text_PaulDefeat	You're good at battling too?		
-Route110_TrickHousePuzzle2_Text_PaulPostBattle	The TRICK MASTER rigged all the tricks\nin this house all by himself.		
-Route110_TrickHousePuzzle2_Text_GeorgiaIntro	I want to make my own GYM one day.\nSo, I'm studying how to set traps.		
-Route110_TrickHousePuzzle2_Text_GeorgiaDefeat	I didn't study battling enough!		
-Route110_TrickHousePuzzle2_Text_GeorgiaPostBattle	You're strong, aren't you?\nMaybe even enough to be a GYM LEADER!		
+Route110_TrickHousePuzzle2_Text_WroteSecretCodeLockOpened	{PLAYER} wrote down the secret code\non the door.\p“TRICK MASTER is smart.”\n… … … … … … … …\pThe lock clicked open!	{PLAYER} schrijft de geheime code\nop de deur.\p“TRICK MASTER is slim.”\n… … … … … … … …\pKlik! Het slot gaat open!	
+Route110_TrickHousePuzzle2_Text_TedIntro	Which switch closes which hole?	Welke knop sluit welk gat?	
+Route110_TrickHousePuzzle2_Text_TedDefeat	After that battle, I'm even more\nconfused!	Na dat gevecht ben ik nog meer\nin de war!	
+Route110_TrickHousePuzzle2_Text_TedPostBattle	Can I get you to push all the buttons\nfor me?	Wil jij alle knoppen voor mij\nindrukken?	
+Route110_TrickHousePuzzle2_Text_PaulIntro	Oh! You're on your second TRICK HOUSE\nchallenge!	Oh! Dit is je tweede uitdaging\nin het TRICK HOUSE!	
+Route110_TrickHousePuzzle2_Text_PaulDefeat	You're good at battling too?	Je bent ook goed in vechten?	
+Route110_TrickHousePuzzle2_Text_PaulPostBattle	The TRICK MASTER rigged all the tricks\nin this house all by himself.	De TRICK MASTER heeft alle trucs\nin dit huis zelf gemaakt.	
+Route110_TrickHousePuzzle2_Text_GeorgiaIntro	I want to make my own GYM one day.\nSo, I'm studying how to set traps.	Ik wil later mijn eigen GYM.\nDaarom leer ik valletjes maken.	
+Route110_TrickHousePuzzle2_Text_GeorgiaDefeat	I didn't study battling enough!	Ik heb te weinig vechten geoefend!	
+Route110_TrickHousePuzzle2_Text_GeorgiaPostBattle	You're strong, aren't you?\nMaybe even enough to be a GYM LEADER!	Jij bent sterk, hè?\nMisschien wel sterk genoeg\lvoor een GYMLEIDER!	

@@ -241,13 +241,13 @@ Route109_Text_HaileyPostBattle	When I learn how to swim, I think\nmy POKéMON wi
 Route109_Text_ElijahIntro	For a guy as macho as me, this kind\nof POKéMON is the perfect match!	Voor een stoere vent als ik past\ndit soort POKéMON perfect!	
 Route109_Text_ElijahDefeated	I'm cool even in defeat, hey?	Ik blijf cool, zelfs als ik verlies, hè?	
 Route109_Text_ElijahPostBattle	For a guy as macho as me, a port\nis the perfect setting!\pI guess I'll head for SLATEPORT.	Voor een stoere vent als ik is een\nhaven de perfecte plek!\pIk ga maar naar SLATEPORT.	
-Route110_Text_JacobIntro	Whoa! Watch it!\nI guess you're not used to BIKE racing.		
+Route110_Text_JacobIntro	Whoa! Watch it!\nI guess you're not used to BIKE racing.	Wauw! Kijk uit!\nJij bent zeker niet gewend\laan FIETS-races.	
 Route110_Text_JacobDefeated	Whoa!\nMy brakes failed!	Ho!\nMijn remmen doen het niet!	
 Route110_Text_JacobPostBattle	Flat tires and brake problems can\ncause serious injury!\lInspect your BIKE for problems!	Een lekke band of kapotte remmen\nkunnen gevaarlijk zijn!\lKijk je FIETS goed na!	
 Route110_Text_AnthonyIntro	Yo, you!\nCan you keep up with my speed?	Hé, jij!\nKun jij mij bijhouden?	
 Route110_Text_AnthonyDefeated	Crash and burn!	Gecrasht!	
-Route110_Text_AnthonyPostBattle	Speed alone won't let me win at POKéMON.\nI need to reconsider this…		
-Route110_Text_BenjaminIntro	Don't panic if your BIKE's going fast!		
+Route110_Text_AnthonyPostBattle	Speed alone won't let me win at POKéMON.\nI need to reconsider this…	Met alleen snelheid win ik niet\nbij POKéMON. Ik moet nadenken…	
+Route110_Text_BenjaminIntro	Don't panic if your BIKE's going fast!	Geen paniek als je FIETS snel gaat!	
 Route110_Text_BenjaminDefeated	I shouldn't panic during POKéMON\nbattles…	Ik moet niet in paniek raken\nin POKéMON-gevechten…	
 Route110_Text_BenjaminPostBattle	There's no need to panic or stress.\nTake it easy. There's plenty of time.	Je hoeft niet in paniek te raken.\nRustig aan. Je hebt tijd zat.	
 Route110_Text_BenjaminRegister	I'll keep chugging on without stressing.\nGive me a shout if you're up to it.	Ik ga rustig door, zonder stress.\nRoep me maar als je zin hebt.	
@@ -257,7 +257,7 @@ Route110_Text_BenjaminRematchPostBattle	There's no need to panic or stress.\nTak
 Route110_Text_AbigailIntro	The triathlon is hard in the extreme.\pYou have to complete the three events\nof swimming, cycling, and running.	Een triatlon is superzwaar.\pJe moet zwemmen, fietsen en\nrennen, alle drie!	
 Route110_Text_AbigailDefeated	POKéMON battles are hard, too!	POKéMON-gevechten zijn ook zwaar!	
 Route110_Text_AbigailPostBattle	I'm exhausted, so I need a break.\nIt's important to get proper rest.	Ik ben doodmoe, ik moet even rusten.\nGoed uitrusten is belangrijk.	
-Route110_Text_AbigailRegister	You know, I like you!\nLet's have a rematch on CYCLING ROAD.		
+Route110_Text_AbigailRegister	You know, I like you!\nLet's have a rematch on CYCLING ROAD.	Weet je, ik mag jou wel!\nLaten we nog eens vechten\lop CYCLING ROAD.	
 Route110_Text_AbigailRematchIntro	Isn't it neat to hold a battle while\ncycling?	Is het niet gaaf om te vechten\nterwijl je fietst?	
 Route110_Text_AbigailRematchDefeated	Wow…\nHow could you be so strong?	Wauw…\nHoe ben jij zo sterk geworden?	
 Route110_Text_AbigailRematchPostBattle	Were you going after a record?\pI'm sorry if I held you up!	Wilde je een record halen?\pSorry als ik je heb opgehouden!	
@@ -279,10 +279,10 @@ Route110_Text_EdwinRematchDefeated	Your POKéMON…\nI envy you.	Jouw POKéMON�
 Route110_Text_EdwinRematchPostBattle	Oh, I long to make all rare POKéMON\nmine!	O, ik wil alle zeldzame POKéMON\nhebben!	
 Route110_Text_DaleIntro	Hey!\nDon't sneak up behind me like that!	Hé!\nSluip niet zo achter me!	
 Route110_Text_DaleDefeated	I lost!\nDrat!	Verloren!\nBah!	
-Route110_Text_DalePostBattle	Fishing is all about concentration.\nYou have to focus on the floater.		
+Route110_Text_DalePostBattle	Fishing is all about concentration.\nYou have to focus on the floater.	Bij vissen draait alles om opletten.\nJe moet goed naar de dobber kijken.	
 Route110_Text_IsabelIntro	Ahahaha! I would go anywhere to show\noff my delightful POKéMON.	Ahahaha! Ik ga overal heen om mijn\nprachtige POKéMON te laten zien.	
 Route110_Text_IsabelDefeated	Oh, dear, this won't do.	O jee, dit gaat zo niet.	
-Route110_Text_IsabelPostBattle	Rather than battling, perhaps I should\nshow off my POKéMON at the FAN CLUB.		
+Route110_Text_IsabelPostBattle	Rather than battling, perhaps I should\nshow off my POKéMON at the FAN CLUB.	Misschien moet ik mijn POKéMON\nliever laten zien in de FAN CLUB.	
 Route110_Text_IsabelRegister	That wasn't close to what I could\ndo to show off my POKéMON.\pI'll have you as my captive audience\nas often as possible!	Dat was nog lang niet alles wat\nik met mijn POKéMON kan laten zien.\pJij moet zo vaak mogelijk\nnaar me komen kijken!	
 Route110_Text_IsabelRematchIntro	Ahahahaha! I would be happy to show\noff my POKéMON as often as you like!	Ahahahaha! Ik laat mijn POKéMON\ngraag zo vaak zien als jij wilt!	
 Route110_Text_IsabelRematchDefeated	Oh, dear, this won't do.	O jee, dit gaat zo niet.	
@@ -310,214 +310,214 @@ Route111_Text_BeauDefeat	I can't win on spirit alone…	Met lef alleen win ik ni
 Route111_Text_BeauPostBattle	I'm going to be a real hero one day.\nI'm going to work harder to make me\land my POKéMON stronger.	Ooit word ik een echte held.\nIk ga harder werken om mij en\lmijn POKéMON sterker te maken.	
 Route111_Text_BeckyIntro	I heard there are fossils to be found\nin the desert. Where could they be?	Ik hoorde dat er fossielen in de\nwoestijn liggen. Waar zouden ze zijn?	
 Route111_Text_BeckyDefeat	I came up short…	Net niet genoeg…	
-Route111_Text_BeckyPostBattle	If they can find fossils in the desert,\nit must have been a sea before.		
-Route111_Text_DustyIntro	For thirty years I have searched for\nancient ruins!\lI am to be challenged?		
-Route111_Text_DustyDefeat	While I have searched for ruins,\nI've not searched for strong POKéMON.		
-Route111_Text_DustyPostBattle	For thirty years I have searched for\nancient ruins!\pNo, wait, was that forty years?\nWhich was it now?		
-Route111_Text_DustyRegister	I haven't been searching for any\ntough POKéMON.\pBut, for some reason, I sure do like\nPOKéNAVS.		
-Route111_Text_DustyRematchIntro	For thirty years I have searched for\nancient ruins!\pNo, wait, was that forty years?\nAnyway, am I to be challenged?		
-Route111_Text_DustyRematchDefeat	I've found no ruins, nor have I found\nany strong POKéMON…		
-Route111_Text_DustyPostRematch	For thirty years I have searched for\nancient ruins!\pNo, wait, was that forty years\nI've searched?\pHmm… It could even be fifty…\nHow long have I been at this?		
-Route111_Text_TravisIntro	I'm full of pep!\nAnd my POKéMON is peppy, too!		
-Route111_Text_TravisDefeat	My POKéMON lost its pep…		
-Route111_Text_TravisPostBattle	When I see a TRAINER with a lot of pep,\nI can't help looking.		
-Route111_Text_IreneIntro	I don't know where you're going,\nbut would you like to battle?		
-Route111_Text_IreneDefeat	Oh, you're disgustingly good!		
-Route111_Text_IrenePostBattle	I'm thinking that I should go to\nMT. CHIMNEY, but the view around\lhere is very nice, too.		
-Route111_Text_DaisukeIntro	To train myself, I challenge all\nwhom I meet!		
-Route111_Text_DaisukeDefeat	Uncle! I give up!		
-Route111_Text_DaisukePostBattle	All I can do is keep training until\nI can defeat strong TRAINERS such\las yourself.		
-Route111_Text_WiltonIntro	Show me how much you've toughened\nyour POKéMON.		
-Route111_Text_WiltonDefeat	I see, you've toughened them\nconsiderably.		
-Route111_Text_WiltonPostBattle	POKéMON and TRAINERS learn much\nthrough battling.\pWhat's important is to never give up\neven if you lose.		
-Route111_Text_WiltonRegister	There is much to be learned from\nyour training style.\pI request a rematch if it\nbehooves you.		
-Route111_Text_WiltonRematchIntro	We're training here to elevate our\ngame to the next level.\lStay and train with us!		
-Route111_Text_WiltonRematchDefeat	Ooh, you're decent!		
-Route111_Text_WiltonPostRematch	Since you're that strong, you should\naim for the POKéMON LEAGUE.		
-Route111_Text_BrookeIntro	Oh, your POKéMON look like serious\nactors.\lI have to ask you for an engagement.		
-Route111_Text_BrookeDefeat	They didn't just look strong,\nthey are strong!		
-Route111_Text_BrookePostBattle	I thought I was raising my POKéMON\ndiligently, but, oh no, there is still\lmuch to be done.		
-Route111_Text_BrookeRegister	I wish I could become friends with\nmore strong people like you!		
-Route111_Text_BrookeRematchIntro	You can make POKéMON stronger or\nweaker depending on the moves you\lteach them.\pWhat kinds of moves do your POKéMON\nknow?		
-Route111_Text_BrookeRematchDefeat	You've taught them good moves!		
-Route111_Text_BrookePostRematch	Maybe I should have stopped my\nPOKéMON from evolving until they\llearned better moves…		
-Route111_Text_CeliaIntro	I shouldn't have come to a place like\nthis for a picnic!		
-Route111_Text_CeliaDefeat	Aww!\nI really shouldn't have come!		
-Route111_Text_CeliaPostBattle	In a sandstorm like this, I can't set\nthe places for a picnic even with my\lGO-GOGGLES on…		
-Route111_Text_BryanIntro	How tough are you?\nWe shall expose that secret!		
-Route111_Text_BryanDefeat	Oh! Your strength!\nIt is shrouded in mystery!		
-Route111_Text_BryanPostBattle	This desert hoards mysteries in\nits shifting sands!		
-Route111_Text_BrandenIntro	I'll give you some of my sandwich\nif you'll lose.		
-Route111_Text_BrandenDefeat	Tch! I thought a sandwich would be\nenough of a bribe…		
-Route111_Text_BrandenPostBattle	My SANDSHREW loves eating\nmy sandwiches.		
-Route111_Text_TyronIntro	This is my favorite kind of POKéMON!		
-Route111_Text_TyronDefeat	Wait!\nDid you get a good look at my POKéMON?		
-Route111_Text_TyronPostBattle	When having a battle, I get a kick out\nof showing off my POKéMON.\pI bet everyone feels that way when\nthey enter a battle!		
-Route111_Text_CelinaIntro	Show me how to put a little excitement\ninto my life.		
-Route111_Text_CelinaDefeat	Oh… My…\nThat was too much excitement.		
-Route111_Text_CelinaPostBattle	My pulse is still racing.\nYou're one fabulous TRAINER.		
-Route111_Text_HaydenIntro	When you're as famished as I am,\nthere is no room for pity!		
-Route111_Text_HaydenDefeat	Groan…		
-Route111_Text_HaydenPostBattle	My stomach is grumbling!\nMaybe I can grill some BERRIES…		
-Route111_Text_BiancaIntro	Did you come from MAUVILLE?\nThen you should be full of energy!		
-Route111_Text_BiancaDefeat	Ooh lala!\nThat's a lot to take!		
-Route111_Text_BiancaPostBattle	This road here…\nYou have quite a ways to travel.		
-Route112_Text_BriceIntro	Hahahaha!\nHow about we have a battle?\lYou and me!\lHahahaha!		
-Route112_Text_BriceDefeat	I lost!\nHahahaha!		
-Route112_Text_BricePostBattle	Hahahahaha! Something flew up my nose!\nHahahaha-hatchoo!		
-Route112_Text_TrentIntro	My legs are solid from pounding up\nand down the mountains.\pThey're not going to buckle easily,\nfriend!		
-Route112_Text_TrentDefeat	Ouch! My legs cramped up!		
-Route112_Text_TrentPostBattle	Try hiking, and I mean really\npounding, on these mountain trails\lwith a heavy pack weighing dozens of\lpounds.\pThat, my friend, will get your body\ninto serious shape.		
-Route112_Text_TrentRegister	Ow, my legs have cramped up.\nCan you grab me some bandages from\lmy backpack?\pNo, that's my POKéNAV!\nOh, fine, I'll register you.		
-Route112_Text_TrentRematchIntro	I've been keeping fit by hiking.\nPower, I have in spades!		
-Route112_Text_TrentRematchDefeat	I got trumped in power?		
-Route112_Text_TrentRematchPostBattle	I hear there are some seriously tough\nTRAINERS on top of MT. CHIMNEY.\pI intend to get up there and give them\na challenge!		
-Route112_Text_LarryIntro	I'm strong.\nI won't cry if I lose.		
-Route112_Text_LarryDefeat	Waaaah!		
-Route112_Text_LarryPostBattle	I'm not crying because I miss my mommy!\nSnivel…		
-Route112_Text_CarolIntro	When you're out on a picnic, why,\nyou simply have to sing!\lCome on, sing with me!		
-Route112_Text_CarolDefeat	Oh, you're so strong!		
-Route112_Text_CarolPostBattle	It doesn't matter if you're good or bad\nat singing or POKéMON.\pIf you have the most fun, you win!		
-Route112_Text_BryantIntro	I caught hot POKéMON in FIERY PATH!\nTake a look!		
-Route112_Text_BryantDefeat	What a bumpy ride that was!		
-Route112_Text_BryantPostBattle	I like the way you battle.\nIt has a certain flair to it.		
-Route112_Text_ShaylaIntro	Oh, aren't you an adorable TRAINER!\nPlease, I need a romantic battle!\lI'm somewhat decent!		
-Route112_Text_ShaylaDefeat	Oh, how strong you are!\nYou've given me quite a shock!		
-Route112_Text_ShaylaPostBattle	Are you busy right now?\nI was thinking that maybe we can have\la rematch right now…\lBut it's all right if you're busy.		
-Route113_Text_JaylenIntro	Can you guess why it's so cool\naround here?		
-Route113_Text_JaylenDefeat	Peeuuw!\nThat stinks!		
-Route113_Text_JaylenPostBattle	The volcanic ash blocks the sun,\nso it doesn't get very warm.\pThat's good for me--I can't stand heat!		
-Route113_Text_DillonIntro	The volcano's eruption is proof that\nthe earth is alive.		
-Route113_Text_DillonDefeat	You're some kind of strong!		
-Route113_Text_DillonPostBattle	Ouch! Owww! I can't see!\nI got ashes in my eyelashes!\pGet it? Ashes and eyelashes?\pOkay, that was bad, sorry…		
-Route113_Text_MadelineIntro	I use this parasol to ward off this\nfilthy, yucky volcanic ash from\lmy dear NUMEL.		
-Route113_Text_MadelineDefeat	Huff, huff…\nI am exhausted…		
-Route113_Text_MadelinePostBattle	You're very good at this.\nI must say I'm impressed!		
-Route113_Text_MadelineRegister	Here, slide under my parasol.\nLet me register you in my POKéNAV.		
-Route113_Text_MadelineRematchIntro	Oh, hello, hasn't it been a while?\nMay I invite you to battle?		
-Route113_Text_MadelineRematchDefeat	Oh, how super!		
-Route113_Text_MadelinePostRematch	You've remained very good at this.\nI must say I'm impressed!		
-Route113_Text_LaoIntro	From out of the ashes I leap! Hiyah!\nI challenge thee!		
-Route113_Text_LaoDefeat	With honor I admit defeat!		
-Route113_Text_LaoPostBattle	I must refine the art of concealment.\nI bid thee farewell.		
-Route113_Text_LaoRegister	Yiiyaah! Witness the ancient ninja\ntechnique of POKéNAV registration!		
-Route113_Text_LaoRematchIntro	From out of the ashes I leap! Hiyah!\nI challenge thee!		
-Route113_Text_LaoRematchDefeat	With honor I admit defeat!		
-Route113_Text_LaoPostRematch	My flawless concealment was let down\nby my immature battle skills…\pI bid thee farewell.		
-Route113_Text_LungIntro	Thanks for finding me!\nBut we still have to battle!		
-Route113_Text_LungDefeat	I'll use my ninjutsu on you…\n“VOLCANIC ASH SWIRL CLOAK”!\p…What?\nIt's already over?		
-Route113_Text_LungPostBattle	You know what's crummy about hiding?\nIt's lonely if no one comes along.		
-Route113_Text_ToriIntro	TORI: Both of us, we collect ashes.\nWe battle POKéMON, too.		
-Route113_Text_ToriDefeat	TORI: We lost… It's boring, so I'm going\nto get some more ashes.		
-Route113_Text_ToriPostBattle	TORI: How much ash do we have?\nEnough for a WHITE FLUTE, I hope.		
-Route113_Text_ToriNotEnoughMons	TORI: We want to battle 2-on-2.\nIf we didn't, we would lose!		
-Route113_Text_TiaIntro	TIA: Both of us, we collect ashes.\nWe battle POKéMON, too.		
-Route113_Text_TiaDefeat	TIA: We couldn't win… It's boring,\nso I'm getting some more ashes.		
-Route113_Text_TiaPostBattle	TIA: We have a lot of ashes!\nI think enough for a WHITE FLUTE!		
-Route113_Text_TiaNotEnoughMons	TIA: We want to battle 2-on-2.\nIf we don't, we won't win!		
-Route113_Text_CobyIntro	Pfft, with these wings I can\nflick you away!		
-Route113_Text_CobyDefeat	A… What?		
-Route113_Text_CobyPostBattle	I don't know what to say when I get\nbeaten so easily…		
-Route113_Text_SophieIntro	The warmth here is making me drowsy.\nBattle with me so I can stay awake.		
-Route113_Text_SophieDefeat	This is a dream.\nI'm sure of it…		
-Route113_Text_SophiePostBattle	Losing burns me up…\nI'm just going to sleep right here!\lZzz!		
-Route113_Text_LawrenceIntro	Were you maybe in the middle\nof gathering volcanic ashes?		
-Route113_Text_LawrenceDefeat	Ehehe.\nWe got beaten cleanly.		
-Route113_Text_LawrencePostBattle	I ought to hide under the ashes, too.		
-Route113_Text_WyattIntro	Y-you want to battle with me?\nEven though I just caught my POKéMON?		
-Route113_Text_WyattDefeat	Y-you're all happy to win?\nEven though it's only me?		
-Route113_Text_WyattPostBattle	Oh, so now you want to say a word to\nthe loser?\pAren't you just the coolest?\nHumph!		
-Route114_Text_LennyIntro	Yodelayhihoo!\p… …\pYou're supposed to shout\n“yodelayhihoo” since it doesn't\lecho here!		
-Route114_Text_LennyDefeat	Yodelayhihoo!		
-Route114_Text_LennyPostBattle	When I was a wee tyke, I believed there\nwas someone copying me and shouting\lback, “Yodelayhihoo.”		
-Route114_Text_LucasIntro	If you're not prepared, you shouldn't\nbe up in the mountains!		
-Route114_Text_LucasDefeat	The mountains are unforgiving…		
-Route114_Text_LucasPostBattle	In the winter, mountains turn deadly\nwith blizzards and avalanches.		
-Route114_Text_ShaneIntro	Camping's fun! You can fish, roast\nmarshmallows, and tell spooky stories!\pBut the best of all are the POKéMON\nbattles!		
-Route114_Text_ShaneDefeat	Way too strong!		
-Route114_Text_ShanePostBattle	I think it's great that I can go\ncamping with my POKéMON.		
-Route114_Text_NancyIntro	I need to exercise after a meal.\nLet's have a match!		
-Route114_Text_NancyDefeat	Oh, no!		
-Route114_Text_NancyPostBattle	I just had a tasty meal.\nI'm getting drowsy…		
-Route114_Text_SteveIntro	Ufufufufufu…\nWant to battle against my POKéMON?		
-Route114_Text_SteveDefeat	M-My POKéMON…		
-Route114_Text_StevePostBattle	A big body that's all lumpy and hard,\nenormous horns, and vicious fangs…\pUfufufufu…\nI wish I had a POKéMON like that…		
-Route114_Text_SteveRegister	Don't forget what you've done to me!\nI'll make it so you can't forget!		
-Route114_Text_SteveRematchIntro	Ufufufufufu…\nCome on, battle my POKéMON…		
-Route114_Text_SteveRematchDefeat	I feel so lucky getting to see your\nPOKéMON…		
-Route114_Text_StevePostRematch	Ufufufufufu…\pWhen I see POKéMON battling, I get all\nshivery and shaky…		
-Route114_Text_BernieIntro	If you're lighting a campfire,\nmake sure you have water handy.		
-Route114_Text_BernieDefeat	Thanks for dousing my fire!		
-Route114_Text_BerniePostBattle	You really do have to be careful with\nany sort of fire in a forest.\pDon't ever underestimate the power\nof fire.		
-Route114_Text_BernieRegister	You set my spirit on fire.\nLet's register each other!		
-Route114_Text_BernieRematchIntro	Have you learned to keep water handy\nfor campfires?		
-Route114_Text_BernieRematchDefeat	I got hosed down before I could\nflare up, I guess.		
-Route114_Text_BerniePostRematch	You really do have to be careful with\nany sort of fire in a forest.\pDon't ever underestimate the power\nof fire.		
-Route114_Text_ClaudeIntro	If we were fishing, you wouldn't stand\na chance against me.\lSo, bring on your POKéMON!		
-Route114_Text_ClaudeDefeat	If we were fishing, I would've won…		
-Route114_Text_ClaudePostBattle	I think I'll try my luck at landing\na big one at METEOR FALLS.\pThere has to be something in there.\nI just know it.		
-Route114_Text_NolanIntro	I like to fish. But I also like to\nbattle!\pIf anyone challenges me, I'm there,\neven if I'm fishing.		
-Route114_Text_NolanDefeat	I like to battle, but that doesn't\nmean I'm good at it…		
-Route114_Text_NolanPostBattle	This time I'll do it!\pI always think that, so I can't walk\naway from fishing or POKéMON.		
-Route114_Text_TyraIntro	TYRA: Well, sure.\nI'm in the mood for it.\lI'll teach you a little about POKéMON.		
-Route114_Text_TyraDefeat	TYRA: What an amazing battle style!		
-Route114_Text_TyraPostBattle	TYRA: I was teaching my junior IVY\nabout POKéMON.		
-Route114_Text_TyraNotEnoughMons	TYRA: Giggle…\nIf you want to battle with us, just one\lPOKéMON isn't enough!		
-Route114_Text_IvyIntro	IVY: Who taught you about POKéMON?		
-Route114_Text_IvyDefeat	IVY: What an amazing battle style!		
-Route114_Text_IvyPostBattle	IVY: I started training POKéMON\nbecause TYRA, my student mentor,\ltaught me!		
-Route114_Text_IvyNotEnoughMons	IVY: Do you only have one POKéMON?\nI think it must feel lonesome.		
-Route114_Text_KaiIntro	I landed a big one!\nA huge one, I tell you!		
-Route114_Text_KaiDefeat	What was that about?\nDid mine lose in size?		
-Route114_Text_KaiPostBattle	Okay!\nI'll just fish me a bigger one!		
-Route114_Text_CharlotteIntro	Me!\nI'm not just a pretty face!		
-Route114_Text_CharlotteDefeat	That wasn't cute in the least!		
-Route114_Text_CharlottePostBattle	I don't want a POKéMON that's\njust cute.\pI adore cute ones that have a quirk\nor two!		
-Route114_Text_AngelinaIntro	Have you made your POKéMON evolve\nvery much?		
-Route114_Text_AngelinaDefeat	Oh, I see.\nThat's good to know.		
-Route114_Text_AngelinaPostBattle	Some POKéMON change so much when\nthey evolve, it's startling!		
-Route115_Text_TimothyIntro	Hm…\nYou seem rather capable…\lLet me keep you company!		
-Route115_Text_TimothyDefeat	You're much stronger than\nI'd imagined!		
-Route115_Text_TimothyPostBattle	There is no such thing as a born genius.\nIt all depends on effort!\lThat is what I believe…		
-Route115_Text_TimothyRegister	Hmm… A loss this thorough has been\na distant memory.\pIf you would allow it, I wish for\nanother opportunity to do battle.		
-Route115_Text_TimothyRematchIntro	Hm… As always, your agility speaks\nfor itself.\lCome, keep me company!		
-Route115_Text_TimothyRematchDefeat	As strong as ever!		
-Route115_Text_TimothyPostRematch	All it takes is effort!\pI lost because I haven't put in enough\neffort!		
-Route115_Text_KoichiIntro	You!\pMy MACHOP!\pDemand a battle!		
-Route115_Text_KoichiDefeat	Ouch, ouch, ouch!		
-Route115_Text_KoichiPostBattle	My MACHOP crew!\pSo long as they seek power, I will\ngrow strong with them!		
-Route115_Text_NobIntro	My strongest skill is busting bricks\nwith my forehead!		
-Route115_Text_NobDefeat	Ugwaaaah!\nMy head is busted!		
-Route115_Text_NobPostBattle	I've been teaching my POKéMON karate.\pIt looks like they'll get a lot better\nthan me. I'm excited about that.		
-Route115_Text_NobRegister	You impress me! Give me a rematch\nafter I redo my training!		
-Route115_Text_NobRematchIntro	After you beat me, we trained hard to\nimprove our skills.\lCome on, give us a rematch!		
-Route115_Text_NobRematchDefeat	Ugwaaah!\nWe lost again!		
-Route115_Text_NobPostRematch	My POKéMON will grow stronger!\nI'll redouble my training!		
-Route115_Text_CyndyIntro	This beach is my secret training spot!\nDon't come butting in!		
-Route115_Text_CyndyDefeat	I haven't trained enough!		
-Route115_Text_CyndyPostBattle	The sand acts as a cushion to reduce\nimpact and prevent injury.\lThis is the perfect place to train.		
-Route115_Text_CyndyRegister	Okay, fine, you're free to come here.\nIn return, I'd like to battle you again.		
-Route115_Text_CyndyRematchIntro	Okay, let's get this battle on!		
-Route115_Text_CyndyRematchDefeat	I can battle but my POKéMON…		
-Route115_Text_CyndyPostRematch	Even when I lose, I still get some\nenjoyment out of it.\lIt must be that I love POKéMON.		
-Route115_Text_HectorIntro	I have a rare POKéMON!\nWould you like me to show you?		
-Route115_Text_HectorDefeat	You…\nYou want my POKéMON, don't you?		
-Route115_Text_HectorPostBattle	I have this rare POKéMON.\nIt's enough to keep me satisfied.		
-Route115_Text_KyraIntro	I'll battle while I'm running!\nTry to keep up with me!		
-Route115_Text_KyraDefeat	Gasp, gasp…		
-Route115_Text_KyraPostBattle	I made the mistake of trying to battle\nwhile running!\pI should take a run to calm down…		
-Route115_Text_JaidenIntro	Take that!\nUltra POKéMON ninja attack!		
-Route115_Text_JaidenDefeat	Waaah!\nOur strategy failed!		
-Route115_Text_JaidenPostBattle	But my POKéMON were ultra,\nweren't they?		
-Route115_Text_HeleneIntro	My POKéMON have black belt-level\nstrength!		
-Route115_Text_HeleneDefeat	This is too humiliating!		
-Route115_Text_HelenePostBattle	I rarely meet anyone who's better\nthan me…\pI get it now!\nYou're a GYM LEADER, aren't you?		
-Route115_Text_AlixIntro	Our eyes met!\nThere's no getting away now!		
-Route115_Text_AlixDefeat	Gah!\nNot bad!		
-Route115_Text_AlixPostBattle	Oh, well.\nI think I will TELEPORT home.		
-Route115_Text_MarleneIntro	You've disturbed my meditation…\nYou'll be punished for it.		
-Route115_Text_MarleneDefeat	You've broken my concentration!		
-Route115_Text_MarlenePostBattle	I was meditating with my POKéMON.\nBut this place isn't very peaceful…		
+Route111_Text_BeckyPostBattle	If they can find fossils in the desert,\nit must have been a sea before.	Als ze fossielen in de woestijn vinden,\nwas het hier vroeger vast zee.	
+Route111_Text_DustyIntro	For thirty years I have searched for\nancient ruins!\lI am to be challenged?	Al dertig jaar zoek ik naar\noude ruïnes!\lWil jij mij uitdagen?	
+Route111_Text_DustyDefeat	While I have searched for ruins,\nI've not searched for strong POKéMON.	Ik zocht wel naar ruïnes,\nmaar niet naar sterke POKéMON.	
+Route111_Text_DustyPostBattle	For thirty years I have searched for\nancient ruins!\pNo, wait, was that forty years?\nWhich was it now?	Al dertig jaar zoek ik naar\noude ruïnes!\pNee, wacht, was het veertig jaar?\nWat was het nou?	
+Route111_Text_DustyRegister	I haven't been searching for any\ntough POKéMON.\pBut, for some reason, I sure do like\nPOKéNAVS.	Ik zoek niet naar sterke\nPOKéMON.\pMaar om de een of andere reden\nhou ik wel van POKéNAVS.	
+Route111_Text_DustyRematchIntro	For thirty years I have searched for\nancient ruins!\pNo, wait, was that forty years?\nAnyway, am I to be challenged?	Al dertig jaar zoek ik naar\noude ruïnes!\pNee, wacht, was het veertig jaar?\nHoe dan ook, wil je me uitdagen?	
+Route111_Text_DustyRematchDefeat	I've found no ruins, nor have I found\nany strong POKéMON…	Ik vond geen ruïnes, en ook geen\nsterke POKéMON…	
+Route111_Text_DustyPostRematch	For thirty years I have searched for\nancient ruins!\pNo, wait, was that forty years\nI've searched?\pHmm… It could even be fifty…\nHow long have I been at this?	Al dertig jaar zoek ik naar\noude ruïnes!\pNee, wacht, was het veertig jaar\ndat ik zoek?\pHmm… Misschien wel vijftig…\nHoe lang doe ik dit al?	
+Route111_Text_TravisIntro	I'm full of pep!\nAnd my POKéMON is peppy, too!	Ik zit vol energie!\nEn mijn POKéMON ook!	
+Route111_Text_TravisDefeat	My POKéMON lost its pep…	Mijn POKéMON is zijn energie kwijt…	
+Route111_Text_TravisPostBattle	When I see a TRAINER with a lot of pep,\nI can't help looking.	Zie ik een TRAINER vol energie,\ndan moet ik wel kijken.	
+Route111_Text_IreneIntro	I don't know where you're going,\nbut would you like to battle?	Ik weet niet waar je heen gaat,\nmaar zullen we vechten?	
+Route111_Text_IreneDefeat	Oh, you're disgustingly good!	Oh, jij bent echt veel te goed!	
+Route111_Text_IrenePostBattle	I'm thinking that I should go to\nMT. CHIMNEY, but the view around\lhere is very nice, too.	Ik wil eigenlijk naar MT. CHIMNEY,\nmaar het uitzicht hier is\look heel mooi.	
+Route111_Text_DaisukeIntro	To train myself, I challenge all\nwhom I meet!	Om te trainen daag ik iedereen\nuit die ik tegenkom!	
+Route111_Text_DaisukeDefeat	Uncle! I give up!	Genade! Ik geef op!	
+Route111_Text_DaisukePostBattle	All I can do is keep training until\nI can defeat strong TRAINERS such\las yourself.	Ik moet gewoon blijven trainen\ntot ik sterke TRAINERS zoals\ljij kan verslaan.	
+Route111_Text_WiltonIntro	Show me how much you've toughened\nyour POKéMON.	Laat zien hoe sterk je je\nPOKéMON hebt gemaakt.	
+Route111_Text_WiltonDefeat	I see, you've toughened them\nconsiderably.	Ik zie het. Je hebt ze flink\nsterker gemaakt.	
+Route111_Text_WiltonPostBattle	POKéMON and TRAINERS learn much\nthrough battling.\pWhat's important is to never give up\neven if you lose.	POKéMON en TRAINERS leren veel\nvan vechten.\pHet belangrijkste is: nooit opgeven,\nook niet als je verliest.	
+Route111_Text_WiltonRegister	There is much to be learned from\nyour training style.\pI request a rematch if it\nbehooves you.	Ik kan veel leren van hoe\njij traint.\pIk wil graag nog eens vechten,\nals jij dat goed vindt.	
+Route111_Text_WiltonRematchIntro	We're training here to elevate our\ngame to the next level.\lStay and train with us!	We trainen hier om nog beter\nte worden.\lBlijf en train met ons mee!	
+Route111_Text_WiltonRematchDefeat	Ooh, you're decent!	Oeh, jij bent goed!	
+Route111_Text_WiltonPostRematch	Since you're that strong, you should\naim for the POKéMON LEAGUE.	Je bent zo sterk, je moet voor\nde POKéMON LEAGUE gaan.	
+Route111_Text_BrookeIntro	Oh, your POKéMON look like serious\nactors.\lI have to ask you for an engagement.	Oh, je POKéMON lijken wel echte\nacteurs.\lIk wil met je optreden.	
+Route111_Text_BrookeDefeat	They didn't just look strong,\nthey are strong!	Ze leken niet alleen sterk,\nze zijn ook sterk!	
+Route111_Text_BrookePostBattle	I thought I was raising my POKéMON\ndiligently, but, oh no, there is still\lmuch to be done.	Ik dacht dat ik mijn POKéMON goed\ntrainde, maar nee hoor, er is\lnog veel te doen.	
+Route111_Text_BrookeRegister	I wish I could become friends with\nmore strong people like you!	Ik wil graag vrienden worden met\nmeer sterke mensen zoals jij!	
+Route111_Text_BrookeRematchIntro	You can make POKéMON stronger or\nweaker depending on the moves you\lteach them.\pWhat kinds of moves do your POKéMON\nknow?	Je POKéMON worden sterker of\nzwakker door de aanvallen die je\lze leert.\pWelke aanvallen kennen jouw\nPOKéMON?	
+Route111_Text_BrookeRematchDefeat	You've taught them good moves!	Je hebt ze goede aanvallen geleerd!	
+Route111_Text_BrookePostRematch	Maybe I should have stopped my\nPOKéMON from evolving until they\llearned better moves…	Had ik mijn POKéMON maar laten\nwachten met evolueren tot ze\lbetere aanvallen kenden…	
+Route111_Text_CeliaIntro	I shouldn't have come to a place like\nthis for a picnic!	Ik had hier nooit moeten\npicknicken!	
+Route111_Text_CeliaDefeat	Aww!\nI really shouldn't have come!	Ah!\nIk had echt niet moeten komen!	
+Route111_Text_CeliaPostBattle	In a sandstorm like this, I can't set\nthe places for a picnic even with my\lGO-GOGGLES on…	In zo'n zandstorm kan ik niet eens\nmijn picknick klaarzetten, zelfs\lniet met mijn ZANDBRIL op…	
+Route111_Text_BryanIntro	How tough are you?\nWe shall expose that secret!	Hoe sterk ben jij?\nDat geheim gaan we onthullen!	
+Route111_Text_BryanDefeat	Oh! Your strength!\nIt is shrouded in mystery!	Oh! Jouw kracht!\nDie is vol geheimen!	
+Route111_Text_BryanPostBattle	This desert hoards mysteries in\nits shifting sands!	Deze woestijn verbergt geheimen\nin het stuivende zand!	
+Route111_Text_BrandenIntro	I'll give you some of my sandwich\nif you'll lose.	Je krijgt een stuk van mijn\nboterham als je verliest.	
+Route111_Text_BrandenDefeat	Tch! I thought a sandwich would be\nenough of a bribe…	Tsk! Ik dacht dat een boterham\nwel genoeg zou zijn…	
+Route111_Text_BrandenPostBattle	My SANDSHREW loves eating\nmy sandwiches.	Mijn SANDSHREW eet graag\nmijn boterhammen.	
+Route111_Text_TyronIntro	This is my favorite kind of POKéMON!	Dit is mijn lievelings-POKéMON!	
+Route111_Text_TyronDefeat	Wait!\nDid you get a good look at my POKéMON?	Wacht!\nHeb je mijn POKéMON goed bekeken?	
+Route111_Text_TyronPostBattle	When having a battle, I get a kick out\nof showing off my POKéMON.\pI bet everyone feels that way when\nthey enter a battle!	In een gevecht vind ik het leuk om\nmijn POKéMON te laten zien.\pDat vindt vast iedereen in\neen gevecht!	
+Route111_Text_CelinaIntro	Show me how to put a little excitement\ninto my life.	Breng eens wat spanning in\nmijn leven.	
+Route111_Text_CelinaDefeat	Oh… My…\nThat was too much excitement.	Oh… Jeetje…\nDat was te spannend.	
+Route111_Text_CelinaPostBattle	My pulse is still racing.\nYou're one fabulous TRAINER.	Mijn hart bonst nog steeds.\nJij bent een geweldige TRAINER.	
+Route111_Text_HaydenIntro	When you're as famished as I am,\nthere is no room for pity!	Als je zo'n honger hebt als ik,\nken je geen genade!	
+Route111_Text_HaydenDefeat	Groan…	Kreun…	
+Route111_Text_HaydenPostBattle	My stomach is grumbling!\nMaybe I can grill some BERRIES…	Mijn maag knort!\nMisschien kan ik wat BESSEN grillen…	
+Route111_Text_BiancaIntro	Did you come from MAUVILLE?\nThen you should be full of energy!	Kom je uit MAUVILLE?\nDan zit je vast vol energie!	
+Route111_Text_BiancaDefeat	Ooh lala!\nThat's a lot to take!	Oh lala!\nDat is heftig!	
+Route111_Text_BiancaPostBattle	This road here…\nYou have quite a ways to travel.	Deze weg hier…\nJe moet nog een flink eind.	
+Route112_Text_BriceIntro	Hahahaha!\nHow about we have a battle?\lYou and me!\lHahahaha!	Hahahaha!\nZullen we vechten?\lJij en ik!\lHahahaha!	
+Route112_Text_BriceDefeat	I lost!\nHahahaha!	Ik heb verloren!\nHahahaha!	
+Route112_Text_BricePostBattle	Hahahahaha! Something flew up my nose!\nHahahaha-hatchoo!	Hahahahaha! Er vloog iets in mijn neus!\nHahahaha-hatsjoe!	
+Route112_Text_TrentIntro	My legs are solid from pounding up\nand down the mountains.\pThey're not going to buckle easily,\nfriend!	Mijn benen zijn keihard van al dat\nklimmen op en af de bergen.\pDie zakken niet zomaar in,\nvriend!	
+Route112_Text_TrentDefeat	Ouch! My legs cramped up!	Au! Kramp in mijn benen!	
+Route112_Text_TrentPostBattle	Try hiking, and I mean really\npounding, on these mountain trails\lwith a heavy pack weighing dozens of\lpounds.\pThat, my friend, will get your body\ninto serious shape.	Ga eens wandelen op deze bergpaden,\nmet een hele zware rugzak.\pDaar word je echt\nsuperfit van, vriend.	
+Route112_Text_TrentRegister	Ow, my legs have cramped up.\nCan you grab me some bandages from\lmy backpack?\pNo, that's my POKéNAV!\nOh, fine, I'll register you.	Au, kramp in mijn benen.\nPak jij wat verband uit\lmijn rugzak?\pNee, dat is mijn POKéNAV!\nNou, goed, ik zet jou erin.	
+Route112_Text_TrentRematchIntro	I've been keeping fit by hiking.\nPower, I have in spades!	Ik blijf fit door te wandelen.\nKracht heb ik genoeg!	
+Route112_Text_TrentRematchDefeat	I got trumped in power?	Was jij sterker dan ik?	
+Route112_Text_TrentRematchPostBattle	I hear there are some seriously tough\nTRAINERS on top of MT. CHIMNEY.\pI intend to get up there and give them\na challenge!	Ik hoor dat er heel sterke TRAINERS\nboven op MT. CHIMNEY zijn.\pIk ga daarheen en daag ze uit!	
+Route112_Text_LarryIntro	I'm strong.\nI won't cry if I lose.	Ik ben sterk.\nIk huil niet als ik verlies.	
+Route112_Text_LarryDefeat	Waaaah!	Buaaah!	
+Route112_Text_LarryPostBattle	I'm not crying because I miss my mommy!\nSnivel…	Ik huil niet omdat ik mama mis!\nSnif…	
+Route112_Text_CarolIntro	When you're out on a picnic, why,\nyou simply have to sing!\lCome on, sing with me!	Als je gaat picknicken, moet je\ngewoon zingen!\lKom op, zing met me mee!	
+Route112_Text_CarolDefeat	Oh, you're so strong!	Oh, wat ben jij sterk!	
+Route112_Text_CarolPostBattle	It doesn't matter if you're good or bad\nat singing or POKéMON.\pIf you have the most fun, you win!	Of je nu goed of slecht bent in\nzingen of POKéMON, maakt niet uit.\pWie de meeste lol heeft, wint!	
+Route112_Text_BryantIntro	I caught hot POKéMON in FIERY PATH!\nTake a look!	Ik ving hete POKéMON op FIERY PATH!\nKijk maar!	
+Route112_Text_BryantDefeat	What a bumpy ride that was!	Wat een hobbelige rit was dat!	
+Route112_Text_BryantPostBattle	I like the way you battle.\nIt has a certain flair to it.	Ik vind je manier van vechten leuk.\nDie heeft echt stijl.	
+Route112_Text_ShaylaIntro	Oh, aren't you an adorable TRAINER!\nPlease, I need a romantic battle!\lI'm somewhat decent!	Oh, wat een schattige TRAINER!\nIk wil een romantisch gevecht!\lIk ben best goed!	
+Route112_Text_ShaylaDefeat	Oh, how strong you are!\nYou've given me quite a shock!	Oh, wat ben jij sterk!\nDaar schrik ik van!	
+Route112_Text_ShaylaPostBattle	Are you busy right now?\nI was thinking that maybe we can have\la rematch right now…\lBut it's all right if you're busy.	Heb je het nu druk?\nMisschien kunnen we meteen\lnog eens vechten…\lMaar het geeft niet als je druk bent.	
+Route113_Text_JaylenIntro	Can you guess why it's so cool\naround here?	Weet je waarom het hier\nzo koel is?	
+Route113_Text_JaylenDefeat	Peeuuw!\nThat stinks!	Bah!\nDat stinkt!	
+Route113_Text_JaylenPostBattle	The volcanic ash blocks the sun,\nso it doesn't get very warm.\pThat's good for me--I can't stand heat!	De vulkaanas houdt de zon tegen.\nDaardoor wordt het niet zo warm.\pFijn voor mij--ik kan niet tegen hitte!	
+Route113_Text_DillonIntro	The volcano's eruption is proof that\nthe earth is alive.	Als de vulkaan uitbarst, zie je dat\nde aarde leeft.	
+Route113_Text_DillonDefeat	You're some kind of strong!	Jij bent echt sterk!	
+Route113_Text_DillonPostBattle	Ouch! Owww! I can't see!\nI got ashes in my eyelashes!\pGet it? Ashes and eyelashes?\pOkay, that was bad, sorry…	Au! Auww! Ik zie niks!\nIk heb as in mijn ogen!\pSnap je? Ik zie het nu\nzwart in! Haha…\pOké, dat was flauw, sorry…	
+Route113_Text_MadelineIntro	I use this parasol to ward off this\nfilthy, yucky volcanic ash from\lmy dear NUMEL.	Met deze parasol hou ik die vieze,\nsmerige vulkaanas weg van\lmijn lieve NUMEL.	
+Route113_Text_MadelineDefeat	Huff, huff…\nI am exhausted…	Pff, pff…\nIk ben doodop…	
+Route113_Text_MadelinePostBattle	You're very good at this.\nI must say I'm impressed!	Jij bent hier heel goed in.\nIk ben echt onder de indruk!	
+Route113_Text_MadelineRegister	Here, slide under my parasol.\nLet me register you in my POKéNAV.	Kom, schuif onder mijn parasol.\nIk zet je in mijn POKéNAV.	
+Route113_Text_MadelineRematchIntro	Oh, hello, hasn't it been a while?\nMay I invite you to battle?	Oh, hallo, dat is lang geleden!\nZullen we vechten?	
+Route113_Text_MadelineRematchDefeat	Oh, how super!	Oh, wat super!	
+Route113_Text_MadelinePostRematch	You've remained very good at this.\nI must say I'm impressed!	Je bent nog steeds heel goed.\nIk ben echt onder de indruk!	
+Route113_Text_LaoIntro	From out of the ashes I leap! Hiyah!\nI challenge thee!	Uit de as spring ik op! Hiyah!\nIk daag u uit!	
+Route113_Text_LaoDefeat	With honor I admit defeat!	Met eer geef ik mij gewonnen!	
+Route113_Text_LaoPostBattle	I must refine the art of concealment.\nI bid thee farewell.	Ik moet beter leren verstoppen.\nIk groet u, vaarwel.	
+Route113_Text_LaoRegister	Yiiyaah! Witness the ancient ninja\ntechnique of POKéNAV registration!	Yiiyaah! Zie de oude ninjatruc\nvan het POKéNAV-nummer!	
+Route113_Text_LaoRematchIntro	From out of the ashes I leap! Hiyah!\nI challenge thee!	Uit de as spring ik op! Hiyah!\nIk daag u uit!	
+Route113_Text_LaoRematchDefeat	With honor I admit defeat!	Met eer geef ik mij gewonnen!	
+Route113_Text_LaoPostRematch	My flawless concealment was let down\nby my immature battle skills…\pI bid thee farewell.	Mijn verstopplek was perfect, maar\nik kan nog niet goed genoeg vechten…\pIk groet u, vaarwel.	
+Route113_Text_LungIntro	Thanks for finding me!\nBut we still have to battle!	Goed dat je me gevonden hebt!\nMaar we moeten nog wel vechten!	
+Route113_Text_LungDefeat	I'll use my ninjutsu on you…\n“VOLCANIC ASH SWIRL CLOAK”!\p…What?\nIt's already over?	Ik gebruik mijn ninjatruc op je…\n“DRAAIENDE VULKAANAS-MANTEL”!\p…Wat?\nIs het al voorbij?	
+Route113_Text_LungPostBattle	You know what's crummy about hiding?\nIt's lonely if no one comes along.	Weet je wat stom is aan verstoppen?\nHet is eenzaam als er niemand komt.	
+Route113_Text_ToriIntro	TORI: Both of us, we collect ashes.\nWe battle POKéMON, too.	TORI: Wij verzamelen allebei as.\nEn we vechten met POKéMON.	
+Route113_Text_ToriDefeat	TORI: We lost… It's boring, so I'm going\nto get some more ashes.	TORI: Verloren… Saai. Ik ga nog\nmeer as halen.	
+Route113_Text_ToriPostBattle	TORI: How much ash do we have?\nEnough for a WHITE FLUTE, I hope.	TORI: Hoeveel as hebben we?\nGenoeg voor een WITTE FLUIT, hoop ik.	
+Route113_Text_ToriNotEnoughMons	TORI: We want to battle 2-on-2.\nIf we didn't, we would lose!	TORI: We willen 2 tegen 2 vechten.\nAnders verliezen we!	
+Route113_Text_TiaIntro	TIA: Both of us, we collect ashes.\nWe battle POKéMON, too.	TIA: Wij verzamelen allebei as.\nEn we vechten met POKéMON.	
+Route113_Text_TiaDefeat	TIA: We couldn't win… It's boring,\nso I'm getting some more ashes.	TIA: We konden niet winnen… Saai.\nIk ga nog meer as halen.	
+Route113_Text_TiaPostBattle	TIA: We have a lot of ashes!\nI think enough for a WHITE FLUTE!	TIA: We hebben heel veel as!\nGenoeg voor een WITTE FLUIT, denk ik!	
+Route113_Text_TiaNotEnoughMons	TIA: We want to battle 2-on-2.\nIf we don't, we won't win!	TIA: We willen 2 tegen 2 vechten.\nAnders winnen we niet!	
+Route113_Text_CobyIntro	Pfft, with these wings I can\nflick you away!	Pff, met deze vleugels blaas ik\njou zo weg!	
+Route113_Text_CobyDefeat	A… What?	Wa… Wat?	
+Route113_Text_CobyPostBattle	I don't know what to say when I get\nbeaten so easily…	Ik weet niet wat ik moet zeggen als\nik zo makkelijk verlies…	
+Route113_Text_SophieIntro	The warmth here is making me drowsy.\nBattle with me so I can stay awake.	Van die warmte hier word ik slaperig.\nVecht met me, dan blijf ik wakker.	
+Route113_Text_SophieDefeat	This is a dream.\nI'm sure of it…	Dit is een droom.\nDat weet ik zeker…	
+Route113_Text_SophiePostBattle	Losing burns me up…\nI'm just going to sleep right here!\lZzz!	Verliezen maakt me boos…\nIk ga hier gewoon slapen!\lZzz!	
+Route113_Text_LawrenceIntro	Were you maybe in the middle\nof gathering volcanic ashes?	Was je misschien net vulkaanas\naan het verzamelen?	
+Route113_Text_LawrenceDefeat	Ehehe.\nWe got beaten cleanly.	Ehehe.\nWe zijn eerlijk verslagen.	
+Route113_Text_LawrencePostBattle	I ought to hide under the ashes, too.	Ik moet me ook onder de as verstoppen.	
+Route113_Text_WyattIntro	Y-you want to battle with me?\nEven though I just caught my POKéMON?	W-wil je tegen mij vechten?\nIk heb mijn POKéMON net gevangen!	
+Route113_Text_WyattDefeat	Y-you're all happy to win?\nEven though it's only me?	B-ben je zo blij dat je wint?\nHet is maar tegen mij!	
+Route113_Text_WyattPostBattle	Oh, so now you want to say a word to\nthe loser?\pAren't you just the coolest?\nHumph!	Oh, en nu wil je iets tegen de\nverliezer zeggen?\pJij vindt jezelf zeker heel stoer?\nHmpf!	
+Route114_Text_LennyIntro	Yodelayhihoo!\p… …\pYou're supposed to shout\n“yodelayhihoo” since it doesn't\lecho here!	Jodelahiti!\p… …\pJij moet “jodelahiti” roepen,\nwant hier is geen echo!	
+Route114_Text_LennyDefeat	Yodelayhihoo!	Jodelahiti!	
+Route114_Text_LennyPostBattle	When I was a wee tyke, I believed there\nwas someone copying me and shouting\lback, “Yodelayhihoo.”	Toen ik klein was, dacht ik dat\niemand me nadeed en terugriep:\l“Jodelahiti.”	
+Route114_Text_LucasIntro	If you're not prepared, you shouldn't\nbe up in the mountains!	Ben je niet goed voorbereid, dan\nmoet je niet de bergen in!	
+Route114_Text_LucasDefeat	The mountains are unforgiving…	De bergen zijn genadeloos…	
+Route114_Text_LucasPostBattle	In the winter, mountains turn deadly\nwith blizzards and avalanches.	In de winter zijn de bergen gevaarlijk,\nmet sneeuwstormen en lawines.	
+Route114_Text_ShaneIntro	Camping's fun! You can fish, roast\nmarshmallows, and tell spooky stories!\pBut the best of all are the POKéMON\nbattles!	Kamperen is leuk! Je kunt vissen,\nspekjes roosteren en enge verhalen\lvertellen!\pMaar het leukst zijn de\nPOKéMON-gevechten!	
+Route114_Text_ShaneDefeat	Way too strong!	Veel te sterk!	
+Route114_Text_ShanePostBattle	I think it's great that I can go\ncamping with my POKéMON.	Ik vind het geweldig dat ik met mijn\nPOKéMON kan kamperen.	
+Route114_Text_NancyIntro	I need to exercise after a meal.\nLet's have a match!	Na het eten moet ik bewegen.\nLaten we vechten!	
+Route114_Text_NancyDefeat	Oh, no!	Oh, nee!	
+Route114_Text_NancyPostBattle	I just had a tasty meal.\nI'm getting drowsy…	Ik heb net lekker gegeten.\nIk word slaperig…	
+Route114_Text_SteveIntro	Ufufufufufu…\nWant to battle against my POKéMON?	Hihihihihi…\nWil je tegen mijn POKéMON vechten?	
+Route114_Text_SteveDefeat	M-My POKéMON…	M-mijn POKéMON…	
+Route114_Text_StevePostBattle	A big body that's all lumpy and hard,\nenormous horns, and vicious fangs…\pUfufufufu…\nI wish I had a POKéMON like that…	Een groot lijf, vol bulten en hard,\nenorme hoorns en gemene tanden…\pHihihihi…\nZo'n POKéMON wil ik ook…	
+Route114_Text_SteveRegister	Don't forget what you've done to me!\nI'll make it so you can't forget!	Vergeet niet wat je mij hebt gedaan!\nIk zorg dat je het nooit vergeet!	
+Route114_Text_SteveRematchIntro	Ufufufufufu…\nCome on, battle my POKéMON…	Hihihihihi…\nKom op, vecht tegen mijn POKéMON…	
+Route114_Text_SteveRematchDefeat	I feel so lucky getting to see your\nPOKéMON…	Wat een geluk dat ik jouw POKéMON\nmocht zien…	
+Route114_Text_StevePostRematch	Ufufufufufu…\pWhen I see POKéMON battling, I get all\nshivery and shaky…	Hihihihihi…\pAls ik POKéMON zie vechten, word ik\nhelemaal bibberig…	
+Route114_Text_BernieIntro	If you're lighting a campfire,\nmake sure you have water handy.	Maak je een kampvuur? Zorg dan\ndat je water bij de hand hebt.	
+Route114_Text_BernieDefeat	Thanks for dousing my fire!	Bedankt voor het blussen!	
+Route114_Text_BerniePostBattle	You really do have to be careful with\nany sort of fire in a forest.\pDon't ever underestimate the power\nof fire.	Je moet echt voorzichtig zijn met\nvuur in een bos.\pOnderschat nooit de kracht\nvan vuur.	
+Route114_Text_BernieRegister	You set my spirit on fire.\nLet's register each other!	Jij zet mijn hart in vuur en vlam.\nLaten we elkaars nummer opslaan!	
+Route114_Text_BernieRematchIntro	Have you learned to keep water handy\nfor campfires?	Heb je nu altijd water bij de hand\nvoor een kampvuur?	
+Route114_Text_BernieRematchDefeat	I got hosed down before I could\nflare up, I guess.	Ik ben geblust voor ik kon\nopvlammen, denk ik.	
+Route114_Text_BerniePostRematch	You really do have to be careful with\nany sort of fire in a forest.\pDon't ever underestimate the power\nof fire.	Je moet echt voorzichtig zijn met\nvuur in een bos.\pOnderschat nooit de kracht\nvan vuur.	
+Route114_Text_ClaudeIntro	If we were fishing, you wouldn't stand\na chance against me.\lSo, bring on your POKéMON!	Als we gingen vissen, maakte je\ngeen kans tegen mij.\lDus kom maar op met je POKéMON!	
+Route114_Text_ClaudeDefeat	If we were fishing, I would've won…	Met vissen had ik gewonnen…	
+Route114_Text_ClaudePostBattle	I think I'll try my luck at landing\na big one at METEOR FALLS.\pThere has to be something in there.\nI just know it.	Ik ga een grote vangen bij\nMETEOR FALLS.\pDaar zit vast iets.\nDat weet ik gewoon.	
+Route114_Text_NolanIntro	I like to fish. But I also like to\nbattle!\pIf anyone challenges me, I'm there,\neven if I'm fishing.	Ik hou van vissen. Maar ook van\nvechten!\pAls iemand me uitdaagt, doe ik mee,\nook als ik aan het vissen ben.	
+Route114_Text_NolanDefeat	I like to battle, but that doesn't\nmean I'm good at it…	Ik vecht graag, maar dat wil niet\nzeggen dat ik er goed in ben…	
+Route114_Text_NolanPostBattle	This time I'll do it!\pI always think that, so I can't walk\naway from fishing or POKéMON.	Deze keer lukt het!\pDat denk ik altijd. Daarom kan ik niet\nstoppen met vissen of POKéMON.	
+Route114_Text_TyraIntro	TYRA: Well, sure.\nI'm in the mood for it.\lI'll teach you a little about POKéMON.	TYRA: Nou, goed dan.\nIk heb er wel zin in.\lIk leer je iets over POKéMON.	
+Route114_Text_TyraDefeat	TYRA: What an amazing battle style!	TYRA: Wat een geweldige manier\nvan vechten!	
+Route114_Text_TyraPostBattle	TYRA: I was teaching my junior IVY\nabout POKéMON.	TYRA: Ik leerde IVY, die jonger is,\nover POKéMON.	
+Route114_Text_TyraNotEnoughMons	TYRA: Giggle…\nIf you want to battle with us, just one\lPOKéMON isn't enough!	TYRA: Giechel…\nWil je tegen ons vechten? Dan is één\lPOKéMON niet genoeg!	
+Route114_Text_IvyIntro	IVY: Who taught you about POKéMON?	IVY: Wie heeft jou over POKéMON\ngeleerd?	
+Route114_Text_IvyDefeat	IVY: What an amazing battle style!	IVY: Wat een geweldige manier\nvan vechten!	
+Route114_Text_IvyPostBattle	IVY: I started training POKéMON\nbecause TYRA, my student mentor,\ltaught me!	IVY: Ik train POKéMON omdat TYRA,\nmijn oudere klasgenoot, het\lmij heeft geleerd!	
+Route114_Text_IvyNotEnoughMons	IVY: Do you only have one POKéMON?\nI think it must feel lonesome.	IVY: Heb je maar één POKéMON?\nDie voelt zich vast eenzaam.	
+Route114_Text_KaiIntro	I landed a big one!\nA huge one, I tell you!	Ik heb een grote gevangen!\nEen enorme, echt waar!	
+Route114_Text_KaiDefeat	What was that about?\nDid mine lose in size?	Hoe kan dat nou?\nWas die van mij te klein?	
+Route114_Text_KaiPostBattle	Okay!\nI'll just fish me a bigger one!	Oké!\nDan vang ik gewoon een grotere!	
+Route114_Text_CharlotteIntro	Me!\nI'm not just a pretty face!	Ik!\nIk ben niet alleen maar mooi!	
+Route114_Text_CharlotteDefeat	That wasn't cute in the least!	Dat was helemaal niet schattig!	
+Route114_Text_CharlottePostBattle	I don't want a POKéMON that's\njust cute.\pI adore cute ones that have a quirk\nor two!	Ik wil geen POKéMON die alleen\nmaar schattig is.\pIk hou van schattige POKéMON\nmet een gek trekje!	
+Route114_Text_AngelinaIntro	Have you made your POKéMON evolve\nvery much?	Heb jij je POKéMON al vaak\nlaten evolueren?	
+Route114_Text_AngelinaDefeat	Oh, I see.\nThat's good to know.	Oh, ik snap het.\nGoed om te weten.	
+Route114_Text_AngelinaPostBattle	Some POKéMON change so much when\nthey evolve, it's startling!	Sommige POKéMON veranderen zo veel\nals ze evolueren, dat je schrikt!	
+Route115_Text_TimothyIntro	Hm…\nYou seem rather capable…\lLet me keep you company!	Hm…\nJij lijkt me best goed…\lIk vecht wel met je mee!	
+Route115_Text_TimothyDefeat	You're much stronger than\nI'd imagined!	Je bent veel sterker dan\nik dacht!	
+Route115_Text_TimothyPostBattle	There is no such thing as a born genius.\nIt all depends on effort!\lThat is what I believe…	Niemand wordt als genie geboren.\nAlles hangt af van je best doen!\lDat geloof ik…	
+Route115_Text_TimothyRegister	Hmm… A loss this thorough has been\na distant memory.\pIf you would allow it, I wish for\nanother opportunity to do battle.	Hmm… Zo hard verloor ik al heel\nlang niet meer.\pAls het mag, wil ik graag nog\neen keer tegen je vechten.	
+Route115_Text_TimothyRematchIntro	Hm… As always, your agility speaks\nfor itself.\lCome, keep me company!	Hm… Je bent snel als altijd.\nDat zie je zo.\lKom, vecht met me mee!	
+Route115_Text_TimothyRematchDefeat	As strong as ever!	Sterk als altijd!	
+Route115_Text_TimothyPostRematch	All it takes is effort!\pI lost because I haven't put in enough\neffort!	Je moet gewoon je best doen!\pIk verloor omdat ik niet genoeg\nmijn best deed!	
+Route115_Text_KoichiIntro	You!\pMy MACHOP!\pDemand a battle!	Jij!\pMijn MACHOP!\pWil vechten!	
+Route115_Text_KoichiDefeat	Ouch, ouch, ouch!	Au, au, au!	
+Route115_Text_KoichiPostBattle	My MACHOP crew!\pSo long as they seek power, I will\ngrow strong with them!	Mijn MACHOP-ploeg!\pZolang zij kracht zoeken, word\nik samen met hen sterk!	
+Route115_Text_NobIntro	My strongest skill is busting bricks\nwith my forehead!	Ik ben het best in stenen breken\nmet mijn voorhoofd!	
+Route115_Text_NobDefeat	Ugwaaaah!\nMy head is busted!	Oegwaaaah!\nMijn hoofd is kapot!	
+Route115_Text_NobPostBattle	I've been teaching my POKéMON karate.\pIt looks like they'll get a lot better\nthan me. I'm excited about that.	Ik leer mijn POKéMON karate.\pZe worden vast veel beter dan ik.\nDaar heb ik echt zin in.	
+Route115_Text_NobRegister	You impress me! Give me a rematch\nafter I redo my training!	Je bent indrukwekkend! Vecht weer\nmet me als ik opnieuw heb getraind!	
+Route115_Text_NobRematchIntro	After you beat me, we trained hard to\nimprove our skills.\lCome on, give us a rematch!	Na mijn verlies hebben we hard\ngetraind om beter te worden.\lKom op, vecht nog eens!	
+Route115_Text_NobRematchDefeat	Ugwaaah!\nWe lost again!	Oegwaaah!\nWeer verloren!	
+Route115_Text_NobPostRematch	My POKéMON will grow stronger!\nI'll redouble my training!	Mijn POKéMON worden sterker!\nIk ga dubbel zo hard trainen!	
+Route115_Text_CyndyIntro	This beach is my secret training spot!\nDon't come butting in!	Dit strand is mijn geheime trainplek!\nBlijf weg!	
+Route115_Text_CyndyDefeat	I haven't trained enough!	Ik heb niet genoeg getraind!	
+Route115_Text_CyndyPostBattle	The sand acts as a cushion to reduce\nimpact and prevent injury.\lThis is the perfect place to train.	Het zand is zacht als een kussen.\nZo raak je minder snel gewond.\lDit is de perfecte trainplek.	
+Route115_Text_CyndyRegister	Okay, fine, you're free to come here.\nIn return, I'd like to battle you again.	Oké, goed, je mag hier komen.\nMaar dan wil ik nog eens vechten.	
+Route115_Text_CyndyRematchIntro	Okay, let's get this battle on!	Oké, laten we beginnen!	
+Route115_Text_CyndyRematchDefeat	I can battle but my POKéMON…	Ik kan vechten, maar mijn POKéMON…	
+Route115_Text_CyndyPostRematch	Even when I lose, I still get some\nenjoyment out of it.\lIt must be that I love POKéMON.	Ook als ik verlies, vind ik het\nnog leuk.\lIk hou gewoon van POKéMON.	
+Route115_Text_HectorIntro	I have a rare POKéMON!\nWould you like me to show you?	Ik heb een zeldzame POKéMON!\nWil je hem zien?	
+Route115_Text_HectorDefeat	You…\nYou want my POKéMON, don't you?	Jij…\nJij wilt mijn POKéMON, hè?	
+Route115_Text_HectorPostBattle	I have this rare POKéMON.\nIt's enough to keep me satisfied.	Ik heb deze zeldzame POKéMON.\nDaar ben ik blij genoeg mee.	
+Route115_Text_KyraIntro	I'll battle while I'm running!\nTry to keep up with me!	Ik vecht terwijl ik ren!\nProbeer me maar bij te houden!	
+Route115_Text_KyraDefeat	Gasp, gasp…	Hijg, hijg…	
+Route115_Text_KyraPostBattle	I made the mistake of trying to battle\nwhile running!\pI should take a run to calm down…	Vechten terwijl je rent, was\neen fout!\pIk ga een stukje rennen om\nrustig te worden…	
+Route115_Text_JaidenIntro	Take that!\nUltra POKéMON ninja attack!	Pak aan!\nUltra-POKéMON-ninja-aanval!	
+Route115_Text_JaidenDefeat	Waaah!\nOur strategy failed!	Waaah!\nOns plan is mislukt!	
+Route115_Text_JaidenPostBattle	But my POKéMON were ultra,\nweren't they?	Maar mijn POKéMON waren wel\nultra, toch?	
+Route115_Text_HeleneIntro	My POKéMON have black belt-level\nstrength!	Mijn POKéMON zijn zo sterk als\neen zwarte band!	
+Route115_Text_HeleneDefeat	This is too humiliating!	Wat een afgang!	
+Route115_Text_HelenePostBattle	I rarely meet anyone who's better\nthan me…\pI get it now!\nYou're a GYM LEADER, aren't you?	Ik kom zelden iemand tegen die\nbeter is dan ik…\pNu snap ik het!\nJij bent een GYMLEIDER, toch?	
+Route115_Text_AlixIntro	Our eyes met!\nThere's no getting away now!	Onze ogen ontmoetten elkaar!\nJe kunt niet meer weg!	
+Route115_Text_AlixDefeat	Gah!\nNot bad!	Gah!\nNiet slecht!	
+Route115_Text_AlixPostBattle	Oh, well.\nI think I will TELEPORT home.	Nou ja.\nIk ga wel met TELEPORT naar huis.	
+Route115_Text_MarleneIntro	You've disturbed my meditation…\nYou'll be punished for it.	Je stoort mijn meditatie…\nDaar krijg je straf voor.	
+Route115_Text_MarleneDefeat	You've broken my concentration!	Je hebt mijn aandacht verstoord!	
+Route115_Text_MarlenePostBattle	I was meditating with my POKéMON.\nBut this place isn't very peaceful…	Ik mediteerde met mijn POKéMON.\nMaar het is hier niet erg rustig…	
 Route116_Text_ClarkIntro	If the tunnel doesn't go through, then\nI'll just go over the top.	Als de tunnel niet doorgaat,\nga ik er gewoon overheen.	
 Route116_Text_ClarkDefeat	Gasp… Gasp…\nLosing made me tired…	Hijg… Hijg…\nVan verliezen word ik moe…	
 Route116_Text_ClarkPostBattle	It's no big deal if there's no tunnel.\nTo a HIKER, mountains are roads!	Geen tunnel? Geen probleem.\nVoor een WANDELAAR zijn bergen wegen!	
@@ -558,63 +558,63 @@ Route116_Text_DevanPostBattle	I should try different POKéMON\ntypes, that's wha
 Route116_Text_JohnsonIntro	It's a dead end up here.\nI'm bored, so can we battle?	Het loopt hier dood.\nIk verveel me, zullen we vechten?	
 Route116_Text_JohnsonDefeat	That was fun even though I lost.	Dat was leuk, ook al verloor ik.	
 Route116_Text_JohnsonPostBattle	Want to stay here and keep\nme company?	Blijf je hier om me gezelschap\nte houden?	
-Route117_Text_IsaacIntro	Listen, could I get you to battle\nthe POKéMON I'm raising?		
-Route117_Text_IsaacDefeat	You've raised yours superbly…		
-Route117_Text_IsaacPostBattle	POKéMON isn't all about power.\pPolishing a unique aspect of one's\ncharacter is another way of enjoying\lPOKéMON.		
-Route117_Text_IsaacRegister	I'm going to redouble my training.\nWould you come look in on us?		
-Route117_Text_IsaacRematchIntro	The POKéMON I've been raising are\nlooking good, just like before.		
-Route117_Text_IsaacRematchDefeat	You know how to raise them properly.\nYou might have DAY CARE skills…		
-Route117_Text_IsaacPostRematch	Your POKéMON are growing good!\nYou should enter them in CONTESTS.		
-Route117_Text_LydiaIntro	Please, allow me to evaluate if you\nhave raised your POKéMON properly.		
-Route117_Text_LydiaDefeat	Yes, they are growing properly.		
-Route117_Text_LydiaPostBattle	Try raising POKéMON with more\nattention to their character traits.		
-Route117_Text_LydiaRegister	I'm glad I met a superb TRAINER in you.\nI hope to see you again.		
-Route117_Text_LydiaRematchIntro	Allow me to reevaluate if you have\nraised your POKéMON properly.		
-Route117_Text_LydiaRematchDefeat	They are growing admirably.		
-Route117_Text_LydiaPostRematch	POKéMON seem to like different kinds\nof {POKEBLOCK}S, depending on their nature.		
-Route117_Text_DylanIntro	I'm in the middle of a triathlon, but,\nwhatever, let's have a battle!		
-Route117_Text_DylanDefeat	I ran out of energy!		
-Route117_Text_DylanPostBattle	I may have blown it…\pI might have dropped to last during\nthat battle…		
-Route117_Text_DylanRegister	POKéMON have to be strong, too?\nI'd like you to train me!		
-Route117_Text_DylanRematchIntro	I'm smack in the middle of a triathlon,\nbut I'm comfortably ahead.\lLet's make this a quick battle!		
-Route117_Text_DylanRematchDefeat	I ran out of energy again!		
-Route117_Text_DylanPostRematch	I was tops in swimming and cycling,\nbut I'm not quite that confident with\lPOKéMON yet.		
-Route117_Text_MariaIntro	I do my triathlon training with POKéMON,\nso I'm pretty confident about my speed.		
-Route117_Text_MariaDefeat	I need to get more practices in,\nI guess.		
-Route117_Text_MariaPostBattle	Training is meaningful only if you\nkeep it up regularly.\pOkay! I'll resume my training!\nTomorrow!		
-Route117_Text_MariaRegister	You appear to be training properly…\nIf you'd like, I'll battle you later!		
-Route117_Text_MariaRematchIntro	Are you keeping up with your training?\nI sure am!\lLet me show you the evidence!		
-Route117_Text_MariaRematchDefeat	I need to get more practices in,\nI guess.		
-Route117_Text_MariaPostRematch	I'll resume training tomorrow.\nLet's battle again sometime!		
-Route117_Text_DerekIntro	Once a BUG CATCHER!\nAnd now a BUG MANIAC!\pBut my love for POKéMON remains\nunchanged!		
-Route117_Text_DerekDefeat	My ineptitude also remains\nunchanged…		
-Route117_Text_DerekPostBattle	All I did was follow my heart, and now\nthey call me a BUG MANIAC…\pStill, I am an expert on BUG POKéMON,\nso it's only natural that they call me\la BUG MANIAC.		
-Route117_Text_AnnaIntro	ANNA: I'm with my pretty junior student\npartner. I have to do good!		
-Route117_Text_AnnaDefeat	ANNA: I'm with my pretty junior student\npartner! Let me win!		
-Route117_Text_AnnaPostBattle	ANNA: Your POKéMON have some good\ncombinations.\pI'd say you're second only to us!		
-Route117_Text_AnnaAndMegRegister	ANNA: We can't take this lying down!\nYou will come back, won't you?		
-Route117_Text_AnnaNotEnoughMons	ANNA: If you want to battle us,\nbring two POKéMON with you.		
-Route117_Text_MegIntro	MEG: I'm going to tag up with my super\nsenior student partner and beat you!		
-Route117_Text_MegDefeat	MEG: Oh, no!\nI'm sorry, ANNA! I let you down…		
-Route117_Text_MegPostBattle	MEG: I dragged ANNA down…\nIf I didn't, she would have won!		
-Route117_Text_MegNotEnoughMons	MEG: Do you only have one POKéMON?\nWe can't battle with you, then.\pWe want to have a 2-on-2 battle.		
-Route117_Text_AnnaRematchIntro	ANNA: I can't keep losing in front of\nmy junior partner, right?		
-Route117_Text_AnnaRematchDefeat	ANNA: I couldn't get into the groove.		
-Route117_Text_AnnaPostRematch	ANNA: Your POKéMON have some good\ncombinations.\pI'd say you're second only to us!		
-Route117_Text_AnnaRematchNotEnoughMons	ANNA: If you want to battle us,\nbring two POKéMON with you.		
-Route117_Text_MegRematchIntro	MEG: I'm going to tag up with my\nsenior partner and win this time!		
-Route117_Text_MegRematchDefeat	MEG: Too strong!		
-Route117_Text_MegPostRematch	MEG: I battled together with my\nsenior partner, but we lost…\pThat's so discouraging…		
-Route117_Text_MegRematchNotEnoughMons	MEG: Do you only have one POKéMON?\nWe can't battle with you, then.\pWe want to have a 2-on-2 battle.		
-Route117_Text_MelinaIntro	Isn't it nice? To battle while looking\nat pretty flowers?		
-Route117_Text_MelinaDefeat	Oh, that's quite impressive!		
-Route117_Text_MelinaPostBattle	It feels wonderful to go for a jog\nwhile looking at flowers.		
-Route117_Text_BrandiIntro	Let me demonstrate the power\nhidden within a PSYCHIC POKéMON!		
-Route117_Text_BrandiDefeat	Astonishing!		
-Route117_Text_BrandiPostBattle	PSYCHIC POKéMON are complex.\nYou should try catching some.		
-Route117_Text_AishaIntro	Concentrate on getting the win.\nThat's how I battle!		
-Route117_Text_AishaDefeat	I don't waste any time being angry\nover a loss--I would rather train.		
-Route117_Text_AishaPostBattle	I think that if you worry about losing,\nyou're more likely to lose.		
+Route117_Text_IsaacIntro	Listen, could I get you to battle\nthe POKéMON I'm raising?	Zeg, wil je vechten tegen de\nPOKéMON die ik opvoed?	
+Route117_Text_IsaacDefeat	You've raised yours superbly…	Jij hebt de jouwe super opgevoed…	
+Route117_Text_IsaacPostBattle	POKéMON isn't all about power.\pPolishing a unique aspect of one's\ncharacter is another way of enjoying\lPOKéMON.	Bij POKéMON gaat het niet alleen\nom kracht.\pJe kunt ook genieten van POKéMON\ndoor hun eigen karakter\lte laten stralen.	
+Route117_Text_IsaacRegister	I'm going to redouble my training.\nWould you come look in on us?	Ik ga dubbel zo hard trainen.\nKom je ons eens opzoeken?	
+Route117_Text_IsaacRematchIntro	The POKéMON I've been raising are\nlooking good, just like before.	De POKéMON die ik opvoed, zien\ner goed uit, net als eerst.	
+Route117_Text_IsaacRematchDefeat	You know how to raise them properly.\nYou might have DAY CARE skills…	Jij weet hoe je ze goed opvoedt.\nJij zou bij de DAY CARE kunnen werken…	
+Route117_Text_IsaacPostRematch	Your POKéMON are growing good!\nYou should enter them in CONTESTS.	Je POKéMON groeien goed!\nDoe eens mee aan WEDSTRIJDEN.	
+Route117_Text_LydiaIntro	Please, allow me to evaluate if you\nhave raised your POKéMON properly.	Mag ik kijken of je je POKéMON\ngoed hebt opgevoed?	
+Route117_Text_LydiaDefeat	Yes, they are growing properly.	Ja, ze groeien goed.	
+Route117_Text_LydiaPostBattle	Try raising POKéMON with more\nattention to their character traits.	Let bij het opvoeden van POKéMON\nmeer op hun karakter.	
+Route117_Text_LydiaRegister	I'm glad I met a superb TRAINER in you.\nI hope to see you again.	Fijn dat ik zo'n goede TRAINER\nheb ontmoet. Tot ziens!	
+Route117_Text_LydiaRematchIntro	Allow me to reevaluate if you have\nraised your POKéMON properly.	Mag ik nog eens kijken of je je\nPOKéMON goed hebt opgevoed?	
+Route117_Text_LydiaRematchDefeat	They are growing admirably.	Ze groeien prachtig.	
+Route117_Text_LydiaPostRematch	POKéMON seem to like different kinds\nof {POKEBLOCK}S, depending on their nature.	Elke POKéMON houdt van andere\n{POKEBLOCK}S, door zijn karakter.	
+Route117_Text_DylanIntro	I'm in the middle of a triathlon, but,\nwhatever, let's have a battle!	Ik ben midden in een triatlon, maar\nwat maakt het uit, laten we vechten!	
+Route117_Text_DylanDefeat	I ran out of energy!	Mijn energie is op!	
+Route117_Text_DylanPostBattle	I may have blown it…\pI might have dropped to last during\nthat battle…	Misschien heb ik het verpest…\pMisschien ben ik tijdens dat\ngevecht laatste geworden…	
+Route117_Text_DylanRegister	POKéMON have to be strong, too?\nI'd like you to train me!	POKéMON moeten ook sterk zijn?\nWil jij mij trainen?	
+Route117_Text_DylanRematchIntro	I'm smack in the middle of a triathlon,\nbut I'm comfortably ahead.\lLet's make this a quick battle!	Ik ben midden in een triatlon,\nmaar ik lig ver voor.\lLaten we snel vechten!	
+Route117_Text_DylanRematchDefeat	I ran out of energy again!	Mijn energie is weer op!	
+Route117_Text_DylanPostRematch	I was tops in swimming and cycling,\nbut I'm not quite that confident with\lPOKéMON yet.	Ik was de beste in zwemmen en\nfietsen, maar met POKéMON ben ik\lnog niet zo zeker.	
+Route117_Text_MariaIntro	I do my triathlon training with POKéMON,\nso I'm pretty confident about my speed.	Ik train voor de triatlon met POKéMON.\nIk weet dus zeker dat ik snel ben.	
+Route117_Text_MariaDefeat	I need to get more practices in,\nI guess.	Ik moet nog meer oefenen,\ndenk ik.	
+Route117_Text_MariaPostBattle	Training is meaningful only if you\nkeep it up regularly.\pOkay! I'll resume my training!\nTomorrow!	Trainen helpt alleen als je het\nvaak blijft doen.\pOké! Ik ga weer trainen!\nMorgen!	
+Route117_Text_MariaRegister	You appear to be training properly…\nIf you'd like, I'll battle you later!	Jij traint goed, zo te zien…\nAls je wilt, vechten we later nog!	
+Route117_Text_MariaRematchIntro	Are you keeping up with your training?\nI sure am!\lLet me show you the evidence!	Blijf jij goed trainen?\nIk wel!\lIk laat je het bewijs zien!	
+Route117_Text_MariaRematchDefeat	I need to get more practices in,\nI guess.	Ik moet nog meer oefenen,\ndenk ik.	
+Route117_Text_MariaPostRematch	I'll resume training tomorrow.\nLet's battle again sometime!	Morgen ga ik weer trainen.\nLaten we nog eens vechten!	
+Route117_Text_DerekIntro	Once a BUG CATCHER!\nAnd now a BUG MANIAC!\pBut my love for POKéMON remains\nunchanged!	Eerst een INSECTVANGER!\nEn nu een INSECTENFAN!\pMaar ik hou nog net zoveel\nvan POKéMON!	
+Route117_Text_DerekDefeat	My ineptitude also remains\nunchanged…	Ik ben ook nog net zo onhandig…	
+Route117_Text_DerekPostBattle	All I did was follow my heart, and now\nthey call me a BUG MANIAC…\pStill, I am an expert on BUG POKéMON,\nso it's only natural that they call me\la BUG MANIAC.	Ik volgde gewoon mijn hart, en nu\nnoemen ze me een INSECTENFAN…\pMaar ik weet alles van INSECT-\nPOKéMON. Dus het klopt wel dat ze\lme een INSECTENFAN noemen.	
+Route117_Text_AnnaIntro	ANNA: I'm with my pretty junior student\npartner. I have to do good!	ANNA: Ik ben hier met mijn lieve\njongere klasgenoot. Ik moet winnen!	
+Route117_Text_AnnaDefeat	ANNA: I'm with my pretty junior student\npartner! Let me win!	ANNA: Ik ben hier met mijn lieve\njongere klasgenoot! Laat me winnen!	
+Route117_Text_AnnaPostBattle	ANNA: Your POKéMON have some good\ncombinations.\pI'd say you're second only to us!	ANNA: Jouw POKéMON werken goed\nsamen.\pAlleen wij zijn nog beter!	
+Route117_Text_AnnaAndMegRegister	ANNA: We can't take this lying down!\nYou will come back, won't you?	ANNA: Dit pikken we niet!\nJe komt toch wel terug?	
+Route117_Text_AnnaNotEnoughMons	ANNA: If you want to battle us,\nbring two POKéMON with you.	ANNA: Wil je tegen ons vechten?\nNeem dan twee POKéMON mee.	
+Route117_Text_MegIntro	MEG: I'm going to tag up with my super\nsenior student partner and beat you!	MEG: Ik vecht samen met mijn super\noudere klasgenoot en we verslaan je!	
+Route117_Text_MegDefeat	MEG: Oh, no!\nI'm sorry, ANNA! I let you down…	MEG: Oh, nee!\nSorry, ANNA! Ik liet je in de steek…	
+Route117_Text_MegPostBattle	MEG: I dragged ANNA down…\nIf I didn't, she would have won!	MEG: Door mij verloor ANNA…\nZonder mij had ze gewonnen!	
+Route117_Text_MegNotEnoughMons	MEG: Do you only have one POKéMON?\nWe can't battle with you, then.\pWe want to have a 2-on-2 battle.	MEG: Heb je maar één POKéMON?\nDan kunnen we niet tegen je vechten.\pWe willen 2 tegen 2 vechten.	
+Route117_Text_AnnaRematchIntro	ANNA: I can't keep losing in front of\nmy junior partner, right?	ANNA: Ik kan niet steeds verliezen\nwaar mijn klasgenoot bij is, toch?	
+Route117_Text_AnnaRematchDefeat	ANNA: I couldn't get into the groove.	ANNA: Ik kwam niet goed op gang.	
+Route117_Text_AnnaPostRematch	ANNA: Your POKéMON have some good\ncombinations.\pI'd say you're second only to us!	ANNA: Jouw POKéMON werken goed\nsamen.\pAlleen wij zijn nog beter!	
+Route117_Text_AnnaRematchNotEnoughMons	ANNA: If you want to battle us,\nbring two POKéMON with you.	ANNA: Wil je tegen ons vechten?\nNeem dan twee POKéMON mee.	
+Route117_Text_MegRematchIntro	MEG: I'm going to tag up with my\nsenior partner and win this time!	MEG: Ik vecht samen met mijn oudere\nklasgenoot. Nu winnen we wel!	
+Route117_Text_MegRematchDefeat	MEG: Too strong!	MEG: Te sterk!	
+Route117_Text_MegPostRematch	MEG: I battled together with my\nsenior partner, but we lost…\pThat's so discouraging…	MEG: Ik vocht samen met mijn oudere\nklasgenoot, maar we verloren…\pDat is zo jammer…	
+Route117_Text_MegRematchNotEnoughMons	MEG: Do you only have one POKéMON?\nWe can't battle with you, then.\pWe want to have a 2-on-2 battle.	MEG: Heb je maar één POKéMON?\nDan kunnen we niet tegen je vechten.\pWe willen 2 tegen 2 vechten.	
+Route117_Text_MelinaIntro	Isn't it nice? To battle while looking\nat pretty flowers?	Is het niet fijn? Vechten en\nondertussen naar bloemen kijken?	
+Route117_Text_MelinaDefeat	Oh, that's quite impressive!	Oh, dat is echt knap!	
+Route117_Text_MelinaPostBattle	It feels wonderful to go for a jog\nwhile looking at flowers.	Het is heerlijk om te joggen en\nnaar de bloemen te kijken.	
+Route117_Text_BrandiIntro	Let me demonstrate the power\nhidden within a PSYCHIC POKéMON!	Ik laat je de kracht zien die in\neen PSYCHISCH-POKéMON zit!	
+Route117_Text_BrandiDefeat	Astonishing!	Ongelooflijk!	
+Route117_Text_BrandiPostBattle	PSYCHIC POKéMON are complex.\nYou should try catching some.	PSYCHISCH-POKéMON zijn ingewikkeld.\nProbeer er eens een paar te vangen.	
+Route117_Text_AishaIntro	Concentrate on getting the win.\nThat's how I battle!	Denk alleen aan winnen.\nZo vecht ik!	
+Route117_Text_AishaDefeat	I don't waste any time being angry\nover a loss--I would rather train.	Ik word niet boos als ik verlies.\nDan train ik liever.	
+Route117_Text_AishaPostBattle	I think that if you worry about losing,\nyou're more likely to lose.	Als je bang bent om te verliezen,\nverlies je juist sneller, denk ik.	
 Route118_Text_RoseIntro	The aroma of flowers has a magical\npower. It cleanses us body and soul.		
 Route118_Text_RoseDefeat	Oh, dear me.\nI seem to have lost.		
 Route118_Text_RosePostBattle	Flowers, POKéMON…\nI love whatever smells nice.\pStinky things…\nI'll pass.		

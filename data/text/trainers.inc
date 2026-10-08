@@ -1008,8 +1008,9 @@ Route109_Text_ElijahPostBattle:
 	.string "Ik ga maar naar SLATEPORT.$"
 
 Route110_Text_JacobIntro:
-	.string "Whoa! Watch it!\n"
-	.string "I guess you're not used to BIKE racing.$"
+	.string "Wauw! Kijk uit!\n"
+	.string "Jij bent zeker niet gewend\l"
+	.string "aan FIETS-races.$"
 
 Route110_Text_JacobDefeated:
 	.string "Ho!\n"
@@ -1028,11 +1029,11 @@ Route110_Text_AnthonyDefeated:
 	.string "Gecrasht!$"
 
 Route110_Text_AnthonyPostBattle:
-	.string "Speed alone won't let me win at POKéMON.\n"
-	.string "I need to reconsider this…$"
+	.string "Met alleen snelheid win ik niet\n"
+	.string "bij POKéMON. Ik moet nadenken…$"
 
 Route110_Text_BenjaminIntro:
-	.string "Don't panic if your BIKE's going fast!$"
+	.string "Geen paniek als je FIETS snel gaat!$"
 
 Route110_Text_BenjaminDefeated:
 	.string "Ik moet niet in paniek raken\n"
@@ -1070,8 +1071,9 @@ Route110_Text_AbigailPostBattle:
 	.string "Goed uitrusten is belangrijk.$"
 
 Route110_Text_AbigailRegister:
-	.string "You know, I like you!\n"
-	.string "Let's have a rematch on CYCLING ROAD.$"
+	.string "Weet je, ik mag jou wel!\n"
+	.string "Laten we nog eens vechten\l"
+	.string "op CYCLING ROAD.$"
 
 Route110_Text_AbigailRematchIntro:
 	.string "Is het niet gaaf om te vechten\n"
@@ -1158,8 +1160,8 @@ Route110_Text_DaleDefeated:
 	.string "Bah!$"
 
 Route110_Text_DalePostBattle:
-	.string "Fishing is all about concentration.\n"
-	.string "You have to focus on the floater.$"
+	.string "Bij vissen draait alles om opletten.\n"
+	.string "Je moet goed naar de dobber kijken.$"
 
 Route110_Text_IsabelIntro:
 	.string "Ahahaha! Ik ga overal heen om mijn\n"
@@ -1169,8 +1171,8 @@ Route110_Text_IsabelDefeated:
 	.string "O jee, dit gaat zo niet.$"
 
 Route110_Text_IsabelPostBattle:
-	.string "Rather than battling, perhaps I should\n"
-	.string "show off my POKéMON at the FAN CLUB.$"
+	.string "Misschien moet ik mijn POKéMON\n"
+	.string "liever laten zien in de FAN CLUB.$"
 
 Route110_Text_IsabelRegister:
 	.string "Dat was nog lang niet alles wat\n"
@@ -1286,893 +1288,895 @@ Route111_Text_BeckyDefeat:
 	.string "Net niet genoeg…$"
 
 Route111_Text_BeckyPostBattle:
-	.string "If they can find fossils in the desert,\n"
-	.string "it must have been a sea before.$"
+	.string "Als ze fossielen in de woestijn vinden,\n"
+	.string "was het hier vroeger vast zee.$"
 
 Route111_Text_DustyIntro:
-	.string "For thirty years I have searched for\n"
-	.string "ancient ruins!\l"
-	.string "I am to be challenged?$"
+	.string "Al dertig jaar zoek ik naar\n"
+	.string "oude ruïnes!\l"
+	.string "Wil jij mij uitdagen?$"
 
 Route111_Text_DustyDefeat:
-	.string "While I have searched for ruins,\n"
-	.string "I've not searched for strong POKéMON.$"
+	.string "Ik zocht wel naar ruïnes,\n"
+	.string "maar niet naar sterke POKéMON.$"
 
 Route111_Text_DustyPostBattle:
-	.string "For thirty years I have searched for\n"
-	.string "ancient ruins!\p"
-	.string "No, wait, was that forty years?\n"
-	.string "Which was it now?$"
+	.string "Al dertig jaar zoek ik naar\n"
+	.string "oude ruïnes!\p"
+	.string "Nee, wacht, was het veertig jaar?\n"
+	.string "Wat was het nou?$"
 
 Route111_Text_DustyRegister:
-	.string "I haven't been searching for any\n"
-	.string "tough POKéMON.\p"
-	.string "But, for some reason, I sure do like\n"
-	.string "POKéNAVS.$"
+	.string "Ik zoek niet naar sterke\n"
+	.string "POKéMON.\p"
+	.string "Maar om de een of andere reden\n"
+	.string "hou ik wel van POKéNAVS.$"
 
 Route111_Text_DustyRematchIntro:
-	.string "For thirty years I have searched for\n"
-	.string "ancient ruins!\p"
-	.string "No, wait, was that forty years?\n"
-	.string "Anyway, am I to be challenged?$"
+	.string "Al dertig jaar zoek ik naar\n"
+	.string "oude ruïnes!\p"
+	.string "Nee, wacht, was het veertig jaar?\n"
+	.string "Hoe dan ook, wil je me uitdagen?$"
 
 Route111_Text_DustyRematchDefeat:
-	.string "I've found no ruins, nor have I found\n"
-	.string "any strong POKéMON…$"
+	.string "Ik vond geen ruïnes, en ook geen\n"
+	.string "sterke POKéMON…$"
 
 Route111_Text_DustyPostRematch:
-	.string "For thirty years I have searched for\n"
-	.string "ancient ruins!\p"
-	.string "No, wait, was that forty years\n"
-	.string "I've searched?\p"
-	.string "Hmm… It could even be fifty…\n"
-	.string "How long have I been at this?$"
+	.string "Al dertig jaar zoek ik naar\n"
+	.string "oude ruïnes!\p"
+	.string "Nee, wacht, was het veertig jaar\n"
+	.string "dat ik zoek?\p"
+	.string "Hmm… Misschien wel vijftig…\n"
+	.string "Hoe lang doe ik dit al?$"
 
 Route111_Text_TravisIntro:
-	.string "I'm full of pep!\n"
-	.string "And my POKéMON is peppy, too!$"
+	.string "Ik zit vol energie!\n"
+	.string "En mijn POKéMON ook!$"
 
 Route111_Text_TravisDefeat:
-	.string "My POKéMON lost its pep…$"
+	.string "Mijn POKéMON is zijn energie kwijt…$"
 
 Route111_Text_TravisPostBattle:
-	.string "When I see a TRAINER with a lot of pep,\n"
-	.string "I can't help looking.$"
+	.string "Zie ik een TRAINER vol energie,\n"
+	.string "dan moet ik wel kijken.$"
 
 Route111_Text_IreneIntro:
-	.string "I don't know where you're going,\n"
-	.string "but would you like to battle?$"
+	.string "Ik weet niet waar je heen gaat,\n"
+	.string "maar zullen we vechten?$"
 
 Route111_Text_IreneDefeat:
-	.string "Oh, you're disgustingly good!$"
+	.string "Oh, jij bent echt veel te goed!$"
 
 Route111_Text_IrenePostBattle:
-	.string "I'm thinking that I should go to\n"
-	.string "MT. CHIMNEY, but the view around\l"
-	.string "here is very nice, too.$"
+	.string "Ik wil eigenlijk naar MT. CHIMNEY,\n"
+	.string "maar het uitzicht hier is\l"
+	.string "ook heel mooi.$"
 
 Route111_Text_DaisukeIntro:
-	.string "To train myself, I challenge all\n"
-	.string "whom I meet!$"
+	.string "Om te trainen daag ik iedereen\n"
+	.string "uit die ik tegenkom!$"
 
 Route111_Text_DaisukeDefeat:
-	.string "Uncle! I give up!$"
+	.string "Genade! Ik geef op!$"
 
 Route111_Text_DaisukePostBattle:
-	.string "All I can do is keep training until\n"
-	.string "I can defeat strong TRAINERS such\l"
-	.string "as yourself.$"
+	.string "Ik moet gewoon blijven trainen\n"
+	.string "tot ik sterke TRAINERS zoals\l"
+	.string "jij kan verslaan.$"
 
 Route111_Text_WiltonIntro:
-	.string "Show me how much you've toughened\n"
-	.string "your POKéMON.$"
+	.string "Laat zien hoe sterk je je\n"
+	.string "POKéMON hebt gemaakt.$"
 
 Route111_Text_WiltonDefeat:
-	.string "I see, you've toughened them\n"
-	.string "considerably.$"
+	.string "Ik zie het. Je hebt ze flink\n"
+	.string "sterker gemaakt.$"
 
 Route111_Text_WiltonPostBattle:
-	.string "POKéMON and TRAINERS learn much\n"
-	.string "through battling.\p"
-	.string "What's important is to never give up\n"
-	.string "even if you lose.$"
+	.string "POKéMON en TRAINERS leren veel\n"
+	.string "van vechten.\p"
+	.string "Het belangrijkste is: nooit opgeven,\n"
+	.string "ook niet als je verliest.$"
 
 Route111_Text_WiltonRegister:
-	.string "There is much to be learned from\n"
-	.string "your training style.\p"
-	.string "I request a rematch if it\n"
-	.string "behooves you.$"
+	.string "Ik kan veel leren van hoe\n"
+	.string "jij traint.\p"
+	.string "Ik wil graag nog eens vechten,\n"
+	.string "als jij dat goed vindt.$"
 
 Route111_Text_WiltonRematchIntro:
-	.string "We're training here to elevate our\n"
-	.string "game to the next level.\l"
-	.string "Stay and train with us!$"
+	.string "We trainen hier om nog beter\n"
+	.string "te worden.\l"
+	.string "Blijf en train met ons mee!$"
 
 Route111_Text_WiltonRematchDefeat:
-	.string "Ooh, you're decent!$"
+	.string "Oeh, jij bent goed!$"
 
 Route111_Text_WiltonPostRematch:
-	.string "Since you're that strong, you should\n"
-	.string "aim for the POKéMON LEAGUE.$"
+	.string "Je bent zo sterk, je moet voor\n"
+	.string "de POKéMON LEAGUE gaan.$"
 
 Route111_Text_BrookeIntro:
-	.string "Oh, your POKéMON look like serious\n"
-	.string "actors.\l"
-	.string "I have to ask you for an engagement.$"
+	.string "Oh, je POKéMON lijken wel echte\n"
+	.string "acteurs.\l"
+	.string "Ik wil met je optreden.$"
 
 Route111_Text_BrookeDefeat:
-	.string "They didn't just look strong,\n"
-	.string "they are strong!$"
+	.string "Ze leken niet alleen sterk,\n"
+	.string "ze zijn ook sterk!$"
 
 Route111_Text_BrookePostBattle:
-	.string "I thought I was raising my POKéMON\n"
-	.string "diligently, but, oh no, there is still\l"
-	.string "much to be done.$"
+	.string "Ik dacht dat ik mijn POKéMON goed\n"
+	.string "trainde, maar nee hoor, er is\l"
+	.string "nog veel te doen.$"
 
 Route111_Text_BrookeRegister:
-	.string "I wish I could become friends with\n"
-	.string "more strong people like you!$"
+	.string "Ik wil graag vrienden worden met\n"
+	.string "meer sterke mensen zoals jij!$"
 
 Route111_Text_BrookeRematchIntro:
-	.string "You can make POKéMON stronger or\n"
-	.string "weaker depending on the moves you\l"
-	.string "teach them.\p"
-	.string "What kinds of moves do your POKéMON\n"
-	.string "know?$"
+	.string "Je POKéMON worden sterker of\n"
+	.string "zwakker door de aanvallen die je\l"
+	.string "ze leert.\p"
+	.string "Welke aanvallen kennen jouw\n"
+	.string "POKéMON?$"
 
 Route111_Text_BrookeRematchDefeat:
-	.string "You've taught them good moves!$"
+	.string "Je hebt ze goede aanvallen geleerd!$"
 
 Route111_Text_BrookePostRematch:
-	.string "Maybe I should have stopped my\n"
-	.string "POKéMON from evolving until they\l"
-	.string "learned better moves…$"
+	.string "Had ik mijn POKéMON maar laten\n"
+	.string "wachten met evolueren tot ze\l"
+	.string "betere aanvallen kenden…$"
 
 Route111_Text_CeliaIntro:
-	.string "I shouldn't have come to a place like\n"
-	.string "this for a picnic!$"
+	.string "Ik had hier nooit moeten\n"
+	.string "picknicken!$"
 
 Route111_Text_CeliaDefeat:
-	.string "Aww!\n"
-	.string "I really shouldn't have come!$"
+	.string "Ah!\n"
+	.string "Ik had echt niet moeten komen!$"
 
 Route111_Text_CeliaPostBattle:
-	.string "In a sandstorm like this, I can't set\n"
-	.string "the places for a picnic even with my\l"
-	.string "GO-GOGGLES on…$"
+	.string "In zo'n zandstorm kan ik niet eens\n"
+	.string "mijn picknick klaarzetten, zelfs\l"
+	.string "niet met mijn ZANDBRIL op…$"
 
 Route111_Text_BryanIntro:
-	.string "How tough are you?\n"
-	.string "We shall expose that secret!$"
+	.string "Hoe sterk ben jij?\n"
+	.string "Dat geheim gaan we onthullen!$"
 
 Route111_Text_BryanDefeat:
-	.string "Oh! Your strength!\n"
-	.string "It is shrouded in mystery!$"
+	.string "Oh! Jouw kracht!\n"
+	.string "Die is vol geheimen!$"
 
 Route111_Text_BryanPostBattle:
-	.string "This desert hoards mysteries in\n"
-	.string "its shifting sands!$"
+	.string "Deze woestijn verbergt geheimen\n"
+	.string "in het stuivende zand!$"
 
 Route111_Text_BrandenIntro:
-	.string "I'll give you some of my sandwich\n"
-	.string "if you'll lose.$"
+	.string "Je krijgt een stuk van mijn\n"
+	.string "boterham als je verliest.$"
 
 Route111_Text_BrandenDefeat:
-	.string "Tch! I thought a sandwich would be\n"
-	.string "enough of a bribe…$"
+	.string "Tsk! Ik dacht dat een boterham\n"
+	.string "wel genoeg zou zijn…$"
 
 Route111_Text_BrandenPostBattle:
-	.string "My SANDSHREW loves eating\n"
-	.string "my sandwiches.$"
+	.string "Mijn SANDSHREW eet graag\n"
+	.string "mijn boterhammen.$"
 
 Route111_Text_TyronIntro:
-	.string "This is my favorite kind of POKéMON!$"
+	.string "Dit is mijn lievelings-POKéMON!$"
 
 Route111_Text_TyronDefeat:
-	.string "Wait!\n"
-	.string "Did you get a good look at my POKéMON?$"
+	.string "Wacht!\n"
+	.string "Heb je mijn POKéMON goed bekeken?$"
 
 Route111_Text_TyronPostBattle:
-	.string "When having a battle, I get a kick out\n"
-	.string "of showing off my POKéMON.\p"
-	.string "I bet everyone feels that way when\n"
-	.string "they enter a battle!$"
+	.string "In een gevecht vind ik het leuk om\n"
+	.string "mijn POKéMON te laten zien.\p"
+	.string "Dat vindt vast iedereen in\n"
+	.string "een gevecht!$"
 
 Route111_Text_CelinaIntro:
-	.string "Show me how to put a little excitement\n"
-	.string "into my life.$"
+	.string "Breng eens wat spanning in\n"
+	.string "mijn leven.$"
 
 Route111_Text_CelinaDefeat:
-	.string "Oh… My…\n"
-	.string "That was too much excitement.$"
+	.string "Oh… Jeetje…\n"
+	.string "Dat was te spannend.$"
 
 Route111_Text_CelinaPostBattle:
-	.string "My pulse is still racing.\n"
-	.string "You're one fabulous TRAINER.$"
+	.string "Mijn hart bonst nog steeds.\n"
+	.string "Jij bent een geweldige TRAINER.$"
 
 Route111_Text_HaydenIntro:
-	.string "When you're as famished as I am,\n"
-	.string "there is no room for pity!$"
+	.string "Als je zo'n honger hebt als ik,\n"
+	.string "ken je geen genade!$"
 
 Route111_Text_HaydenDefeat:
-	.string "Groan…$"
+	.string "Kreun…$"
 
 Route111_Text_HaydenPostBattle:
-	.string "My stomach is grumbling!\n"
-	.string "Maybe I can grill some BERRIES…$"
+	.string "Mijn maag knort!\n"
+	.string "Misschien kan ik wat BESSEN grillen…$"
 
 Route111_Text_BiancaIntro:
-	.string "Did you come from MAUVILLE?\n"
-	.string "Then you should be full of energy!$"
+	.string "Kom je uit MAUVILLE?\n"
+	.string "Dan zit je vast vol energie!$"
 
 Route111_Text_BiancaDefeat:
-	.string "Ooh lala!\n"
-	.string "That's a lot to take!$"
+	.string "Oh lala!\n"
+	.string "Dat is heftig!$"
 
 Route111_Text_BiancaPostBattle:
-	.string "This road here…\n"
-	.string "You have quite a ways to travel.$"
+	.string "Deze weg hier…\n"
+	.string "Je moet nog een flink eind.$"
 
 Route112_Text_BriceIntro:
 	.string "Hahahaha!\n"
-	.string "How about we have a battle?\l"
-	.string "You and me!\l"
+	.string "Zullen we vechten?\l"
+	.string "Jij en ik!\l"
 	.string "Hahahaha!$"
 
 Route112_Text_BriceDefeat:
-	.string "I lost!\n"
+	.string "Ik heb verloren!\n"
 	.string "Hahahaha!$"
 
 Route112_Text_BricePostBattle:
-	.string "Hahahahaha! Something flew up my nose!\n"
-	.string "Hahahaha-hatchoo!$"
+	.string "Hahahahaha! Er vloog iets in mijn neus!\n"
+	.string "Hahahaha-hatsjoe!$"
 
 Route112_Text_TrentIntro:
-	.string "My legs are solid from pounding up\n"
-	.string "and down the mountains.\p"
-	.string "They're not going to buckle easily,\n"
-	.string "friend!$"
+	.string "Mijn benen zijn keihard van al dat\n"
+	.string "klimmen op en af de bergen.\p"
+	.string "Die zakken niet zomaar in,\n"
+	.string "vriend!$"
 
 Route112_Text_TrentDefeat:
-	.string "Ouch! My legs cramped up!$"
+	.string "Au! Kramp in mijn benen!$"
 
 Route112_Text_TrentPostBattle:
-	.string "Try hiking, and I mean really\n"
-	.string "pounding, on these mountain trails\l"
-	.string "with a heavy pack weighing dozens of\l"
-	.string "pounds.\p"
-	.string "That, my friend, will get your body\n"
-	.string "into serious shape.$"
+	.string "Ga eens wandelen op deze bergpaden,\n"
+	.string "met een hele zware rugzak.\p"
+	.string "Daar word je echt\n"
+	.string "superfit van, vriend.$"
 
 Route112_Text_TrentRegister:
-	.string "Ow, my legs have cramped up.\n"
-	.string "Can you grab me some bandages from\l"
-	.string "my backpack?\p"
-	.string "No, that's my POKéNAV!\n"
-	.string "Oh, fine, I'll register you.$"
+	.string "Au, kramp in mijn benen.\n"
+	.string "Pak jij wat verband uit\l"
+	.string "mijn rugzak?\p"
+	.string "Nee, dat is mijn POKéNAV!\n"
+	.string "Nou, goed, ik zet jou erin.$"
 
 Route112_Text_TrentRematchIntro:
-	.string "I've been keeping fit by hiking.\n"
-	.string "Power, I have in spades!$"
+	.string "Ik blijf fit door te wandelen.\n"
+	.string "Kracht heb ik genoeg!$"
 
 Route112_Text_TrentRematchDefeat:
-	.string "I got trumped in power?$"
+	.string "Was jij sterker dan ik?$"
 
 Route112_Text_TrentRematchPostBattle:
-	.string "I hear there are some seriously tough\n"
-	.string "TRAINERS on top of MT. CHIMNEY.\p"
-	.string "I intend to get up there and give them\n"
-	.string "a challenge!$"
+	.string "Ik hoor dat er heel sterke TRAINERS\n"
+	.string "boven op MT. CHIMNEY zijn.\p"
+	.string "Ik ga daarheen en daag ze uit!$"
 
 Route112_Text_LarryIntro:
-	.string "I'm strong.\n"
-	.string "I won't cry if I lose.$"
+	.string "Ik ben sterk.\n"
+	.string "Ik huil niet als ik verlies.$"
 
 Route112_Text_LarryDefeat:
-	.string "Waaaah!$"
+	.string "Buaaah!$"
 
 Route112_Text_LarryPostBattle:
-	.string "I'm not crying because I miss my mommy!\n"
-	.string "Snivel…$"
+	.string "Ik huil niet omdat ik mama mis!\n"
+	.string "Snif…$"
 
 Route112_Text_CarolIntro:
-	.string "When you're out on a picnic, why,\n"
-	.string "you simply have to sing!\l"
-	.string "Come on, sing with me!$"
+	.string "Als je gaat picknicken, moet je\n"
+	.string "gewoon zingen!\l"
+	.string "Kom op, zing met me mee!$"
 
 Route112_Text_CarolDefeat:
-	.string "Oh, you're so strong!$"
+	.string "Oh, wat ben jij sterk!$"
 
 Route112_Text_CarolPostBattle:
-	.string "It doesn't matter if you're good or bad\n"
-	.string "at singing or POKéMON.\p"
-	.string "If you have the most fun, you win!$"
+	.string "Of je nu goed of slecht bent in\n"
+	.string "zingen of POKéMON, maakt niet uit.\p"
+	.string "Wie de meeste lol heeft, wint!$"
 
 Route112_Text_BryantIntro:
-	.string "I caught hot POKéMON in FIERY PATH!\n"
-	.string "Take a look!$"
+	.string "Ik ving hete POKéMON op FIERY PATH!\n"
+	.string "Kijk maar!$"
 
 Route112_Text_BryantDefeat:
-	.string "What a bumpy ride that was!$"
+	.string "Wat een hobbelige rit was dat!$"
 
 Route112_Text_BryantPostBattle:
-	.string "I like the way you battle.\n"
-	.string "It has a certain flair to it.$"
+	.string "Ik vind je manier van vechten leuk.\n"
+	.string "Die heeft echt stijl.$"
 
 Route112_Text_ShaylaIntro:
-	.string "Oh, aren't you an adorable TRAINER!\n"
-	.string "Please, I need a romantic battle!\l"
-	.string "I'm somewhat decent!$"
+	.string "Oh, wat een schattige TRAINER!\n"
+	.string "Ik wil een romantisch gevecht!\l"
+	.string "Ik ben best goed!$"
 
 Route112_Text_ShaylaDefeat:
-	.string "Oh, how strong you are!\n"
-	.string "You've given me quite a shock!$"
+	.string "Oh, wat ben jij sterk!\n"
+	.string "Daar schrik ik van!$"
 
 Route112_Text_ShaylaPostBattle:
-	.string "Are you busy right now?\n"
-	.string "I was thinking that maybe we can have\l"
-	.string "a rematch right now…\l"
-	.string "But it's all right if you're busy.$"
+	.string "Heb je het nu druk?\n"
+	.string "Misschien kunnen we meteen\l"
+	.string "nog eens vechten…\l"
+	.string "Maar het geeft niet als je druk bent.$"
 
 Route113_Text_JaylenIntro:
-	.string "Can you guess why it's so cool\n"
-	.string "around here?$"
+	.string "Weet je waarom het hier\n"
+	.string "zo koel is?$"
 
 Route113_Text_JaylenDefeat:
-	.string "Peeuuw!\n"
-	.string "That stinks!$"
+	.string "Bah!\n"
+	.string "Dat stinkt!$"
 
 Route113_Text_JaylenPostBattle:
-	.string "The volcanic ash blocks the sun,\n"
-	.string "so it doesn't get very warm.\p"
-	.string "That's good for me--I can't stand heat!$"
+	.string "De vulkaanas houdt de zon tegen.\n"
+	.string "Daardoor wordt het niet zo warm.\p"
+	.string "Fijn voor mij--ik kan niet tegen hitte!$"
 
 Route113_Text_DillonIntro:
-	.string "The volcano's eruption is proof that\n"
-	.string "the earth is alive.$"
+	.string "Als de vulkaan uitbarst, zie je dat\n"
+	.string "de aarde leeft.$"
 
 Route113_Text_DillonDefeat:
-	.string "You're some kind of strong!$"
+	.string "Jij bent echt sterk!$"
 
 Route113_Text_DillonPostBattle:
-	.string "Ouch! Owww! I can't see!\n"
-	.string "I got ashes in my eyelashes!\p"
-	.string "Get it? Ashes and eyelashes?\p"
-	.string "Okay, that was bad, sorry…$"
+	.string "Au! Auww! Ik zie niks!\n"
+	.string "Ik heb as in mijn ogen!\p"
+	.string "Snap je? Ik zie het nu\n"
+	.string "zwart in! Haha…\p"
+	.string "Oké, dat was flauw, sorry…$"
 
 Route113_Text_MadelineIntro:
-	.string "I use this parasol to ward off this\n"
-	.string "filthy, yucky volcanic ash from\l"
-	.string "my dear NUMEL.$"
+	.string "Met deze parasol hou ik die vieze,\n"
+	.string "smerige vulkaanas weg van\l"
+	.string "mijn lieve NUMEL.$"
 
 Route113_Text_MadelineDefeat:
-	.string "Huff, huff…\n"
-	.string "I am exhausted…$"
+	.string "Pff, pff…\n"
+	.string "Ik ben doodop…$"
 
 Route113_Text_MadelinePostBattle:
-	.string "You're very good at this.\n"
-	.string "I must say I'm impressed!$"
+	.string "Jij bent hier heel goed in.\n"
+	.string "Ik ben echt onder de indruk!$"
 
 Route113_Text_MadelineRegister:
-	.string "Here, slide under my parasol.\n"
-	.string "Let me register you in my POKéNAV.$"
+	.string "Kom, schuif onder mijn parasol.\n"
+	.string "Ik zet je in mijn POKéNAV.$"
 
 Route113_Text_MadelineRematchIntro:
-	.string "Oh, hello, hasn't it been a while?\n"
-	.string "May I invite you to battle?$"
+	.string "Oh, hallo, dat is lang geleden!\n"
+	.string "Zullen we vechten?$"
 
 Route113_Text_MadelineRematchDefeat:
-	.string "Oh, how super!$"
+	.string "Oh, wat super!$"
 
 Route113_Text_MadelinePostRematch:
-	.string "You've remained very good at this.\n"
-	.string "I must say I'm impressed!$"
+	.string "Je bent nog steeds heel goed.\n"
+	.string "Ik ben echt onder de indruk!$"
 
 Route113_Text_LaoIntro:
-	.string "From out of the ashes I leap! Hiyah!\n"
-	.string "I challenge thee!$"
+	.string "Uit de as spring ik op! Hiyah!\n"
+	.string "Ik daag u uit!$"
 
 Route113_Text_LaoDefeat:
-	.string "With honor I admit defeat!$"
+	.string "Met eer geef ik mij gewonnen!$"
 
 Route113_Text_LaoPostBattle:
-	.string "I must refine the art of concealment.\n"
-	.string "I bid thee farewell.$"
+	.string "Ik moet beter leren verstoppen.\n"
+	.string "Ik groet u, vaarwel.$"
 
 Route113_Text_LaoRegister:
-	.string "Yiiyaah! Witness the ancient ninja\n"
-	.string "technique of POKéNAV registration!$"
+	.string "Yiiyaah! Zie de oude ninjatruc\n"
+	.string "van het POKéNAV-nummer!$"
 
 Route113_Text_LaoRematchIntro:
-	.string "From out of the ashes I leap! Hiyah!\n"
-	.string "I challenge thee!$"
+	.string "Uit de as spring ik op! Hiyah!\n"
+	.string "Ik daag u uit!$"
 
 Route113_Text_LaoRematchDefeat:
-	.string "With honor I admit defeat!$"
+	.string "Met eer geef ik mij gewonnen!$"
 
 Route113_Text_LaoPostRematch:
-	.string "My flawless concealment was let down\n"
-	.string "by my immature battle skills…\p"
-	.string "I bid thee farewell.$"
+	.string "Mijn verstopplek was perfect, maar\n"
+	.string "ik kan nog niet goed genoeg vechten…\p"
+	.string "Ik groet u, vaarwel.$"
 
 Route113_Text_LungIntro:
-	.string "Thanks for finding me!\n"
-	.string "But we still have to battle!$"
+	.string "Goed dat je me gevonden hebt!\n"
+	.string "Maar we moeten nog wel vechten!$"
 
 Route113_Text_LungDefeat:
-	.string "I'll use my ninjutsu on you…\n"
-	.string "“VOLCANIC ASH SWIRL CLOAK”!\p"
-	.string "…What?\n"
-	.string "It's already over?$"
+	.string "Ik gebruik mijn ninjatruc op je…\n"
+	.string "“DRAAIENDE VULKAANAS-MANTEL”!\p"
+	.string "…Wat?\n"
+	.string "Is het al voorbij?$"
 
 Route113_Text_LungPostBattle:
-	.string "You know what's crummy about hiding?\n"
-	.string "It's lonely if no one comes along.$"
+	.string "Weet je wat stom is aan verstoppen?\n"
+	.string "Het is eenzaam als er niemand komt.$"
 
 Route113_Text_ToriIntro:
-	.string "TORI: Both of us, we collect ashes.\n"
-	.string "We battle POKéMON, too.$"
+	.string "TORI: Wij verzamelen allebei as.\n"
+	.string "En we vechten met POKéMON.$"
 
 Route113_Text_ToriDefeat:
-	.string "TORI: We lost… It's boring, so I'm going\n"
-	.string "to get some more ashes.$"
+	.string "TORI: Verloren… Saai. Ik ga nog\n"
+	.string "meer as halen.$"
 
 Route113_Text_ToriPostBattle:
-	.string "TORI: How much ash do we have?\n"
-	.string "Enough for a WHITE FLUTE, I hope.$"
+	.string "TORI: Hoeveel as hebben we?\n"
+	.string "Genoeg voor een WITTE FLUIT, hoop ik.$"
 
 Route113_Text_ToriNotEnoughMons:
-	.string "TORI: We want to battle 2-on-2.\n"
-	.string "If we didn't, we would lose!$"
+	.string "TORI: We willen 2 tegen 2 vechten.\n"
+	.string "Anders verliezen we!$"
 
 Route113_Text_TiaIntro:
-	.string "TIA: Both of us, we collect ashes.\n"
-	.string "We battle POKéMON, too.$"
+	.string "TIA: Wij verzamelen allebei as.\n"
+	.string "En we vechten met POKéMON.$"
 
 Route113_Text_TiaDefeat:
-	.string "TIA: We couldn't win… It's boring,\n"
-	.string "so I'm getting some more ashes.$"
+	.string "TIA: We konden niet winnen… Saai.\n"
+	.string "Ik ga nog meer as halen.$"
 
 Route113_Text_TiaPostBattle:
-	.string "TIA: We have a lot of ashes!\n"
-	.string "I think enough for a WHITE FLUTE!$"
+	.string "TIA: We hebben heel veel as!\n"
+	.string "Genoeg voor een WITTE FLUIT, denk ik!$"
 
 Route113_Text_TiaNotEnoughMons:
-	.string "TIA: We want to battle 2-on-2.\n"
-	.string "If we don't, we won't win!$"
+	.string "TIA: We willen 2 tegen 2 vechten.\n"
+	.string "Anders winnen we niet!$"
 
 Route113_Text_CobyIntro:
-	.string "Pfft, with these wings I can\n"
-	.string "flick you away!$"
+	.string "Pff, met deze vleugels blaas ik\n"
+	.string "jou zo weg!$"
 
 Route113_Text_CobyDefeat:
-	.string "A… What?$"
+	.string "Wa… Wat?$"
 
 Route113_Text_CobyPostBattle:
-	.string "I don't know what to say when I get\n"
-	.string "beaten so easily…$"
+	.string "Ik weet niet wat ik moet zeggen als\n"
+	.string "ik zo makkelijk verlies…$"
 
 Route113_Text_SophieIntro:
-	.string "The warmth here is making me drowsy.\n"
-	.string "Battle with me so I can stay awake.$"
+	.string "Van die warmte hier word ik slaperig.\n"
+	.string "Vecht met me, dan blijf ik wakker.$"
 
 Route113_Text_SophieDefeat:
-	.string "This is a dream.\n"
-	.string "I'm sure of it…$"
+	.string "Dit is een droom.\n"
+	.string "Dat weet ik zeker…$"
 
 Route113_Text_SophiePostBattle:
-	.string "Losing burns me up…\n"
-	.string "I'm just going to sleep right here!\l"
+	.string "Verliezen maakt me boos…\n"
+	.string "Ik ga hier gewoon slapen!\l"
 	.string "Zzz!$"
 
 Route113_Text_LawrenceIntro:
-	.string "Were you maybe in the middle\n"
-	.string "of gathering volcanic ashes?$"
+	.string "Was je misschien net vulkaanas\n"
+	.string "aan het verzamelen?$"
 
 Route113_Text_LawrenceDefeat:
 	.string "Ehehe.\n"
-	.string "We got beaten cleanly.$"
+	.string "We zijn eerlijk verslagen.$"
 
 Route113_Text_LawrencePostBattle:
-	.string "I ought to hide under the ashes, too.$"
+	.string "Ik moet me ook onder de as verstoppen.$"
 
 Route113_Text_WyattIntro:
-	.string "Y-you want to battle with me?\n"
-	.string "Even though I just caught my POKéMON?$"
+	.string "W-wil je tegen mij vechten?\n"
+	.string "Ik heb mijn POKéMON net gevangen!$"
 
 Route113_Text_WyattDefeat:
-	.string "Y-you're all happy to win?\n"
-	.string "Even though it's only me?$"
+	.string "B-ben je zo blij dat je wint?\n"
+	.string "Het is maar tegen mij!$"
 
 Route113_Text_WyattPostBattle:
-	.string "Oh, so now you want to say a word to\n"
-	.string "the loser?\p"
-	.string "Aren't you just the coolest?\n"
-	.string "Humph!$"
+	.string "Oh, en nu wil je iets tegen de\n"
+	.string "verliezer zeggen?\p"
+	.string "Jij vindt jezelf zeker heel stoer?\n"
+	.string "Hmpf!$"
 
 Route114_Text_LennyIntro:
-	.string "Yodelayhihoo!\p"
+	.string "Jodelahiti!\p"
 	.string "… …\p"
-	.string "You're supposed to shout\n"
-	.string "“yodelayhihoo” since it doesn't\l"
-	.string "echo here!$"
+	.string "Jij moet “jodelahiti” roepen,\n"
+	.string "want hier is geen echo!$"
 
 Route114_Text_LennyDefeat:
-	.string "Yodelayhihoo!$"
+	.string "Jodelahiti!$"
 
 Route114_Text_LennyPostBattle:
-	.string "When I was a wee tyke, I believed there\n"
-	.string "was someone copying me and shouting\l"
-	.string "back, “Yodelayhihoo.”$"
+	.string "Toen ik klein was, dacht ik dat\n"
+	.string "iemand me nadeed en terugriep:\l"
+	.string "“Jodelahiti.”$"
 
 Route114_Text_LucasIntro:
-	.string "If you're not prepared, you shouldn't\n"
-	.string "be up in the mountains!$"
+	.string "Ben je niet goed voorbereid, dan\n"
+	.string "moet je niet de bergen in!$"
 
 Route114_Text_LucasDefeat:
-	.string "The mountains are unforgiving…$"
+	.string "De bergen zijn genadeloos…$"
 
 Route114_Text_LucasPostBattle:
-	.string "In the winter, mountains turn deadly\n"
-	.string "with blizzards and avalanches.$"
+	.string "In de winter zijn de bergen gevaarlijk,\n"
+	.string "met sneeuwstormen en lawines.$"
 
 Route114_Text_ShaneIntro:
-	.string "Camping's fun! You can fish, roast\n"
-	.string "marshmallows, and tell spooky stories!\p"
-	.string "But the best of all are the POKéMON\n"
-	.string "battles!$"
+	.string "Kamperen is leuk! Je kunt vissen,\n"
+	.string "spekjes roosteren en enge verhalen\l"
+	.string "vertellen!\p"
+	.string "Maar het leukst zijn de\n"
+	.string "POKéMON-gevechten!$"
 
 Route114_Text_ShaneDefeat:
-	.string "Way too strong!$"
+	.string "Veel te sterk!$"
 
 Route114_Text_ShanePostBattle:
-	.string "I think it's great that I can go\n"
-	.string "camping with my POKéMON.$"
+	.string "Ik vind het geweldig dat ik met mijn\n"
+	.string "POKéMON kan kamperen.$"
 
 Route114_Text_NancyIntro:
-	.string "I need to exercise after a meal.\n"
-	.string "Let's have a match!$"
+	.string "Na het eten moet ik bewegen.\n"
+	.string "Laten we vechten!$"
 
 Route114_Text_NancyDefeat:
-	.string "Oh, no!$"
+	.string "Oh, nee!$"
 
 Route114_Text_NancyPostBattle:
-	.string "I just had a tasty meal.\n"
-	.string "I'm getting drowsy…$"
+	.string "Ik heb net lekker gegeten.\n"
+	.string "Ik word slaperig…$"
 
 Route114_Text_SteveIntro:
-	.string "Ufufufufufu…\n"
-	.string "Want to battle against my POKéMON?$"
+	.string "Hihihihihi…\n"
+	.string "Wil je tegen mijn POKéMON vechten?$"
 
 Route114_Text_SteveDefeat:
-	.string "M-My POKéMON…$"
+	.string "M-mijn POKéMON…$"
 
 Route114_Text_StevePostBattle:
-	.string "A big body that's all lumpy and hard,\n"
-	.string "enormous horns, and vicious fangs…\p"
-	.string "Ufufufufu…\n"
-	.string "I wish I had a POKéMON like that…$"
+	.string "Een groot lijf, vol bulten en hard,\n"
+	.string "enorme hoorns en gemene tanden…\p"
+	.string "Hihihihi…\n"
+	.string "Zo'n POKéMON wil ik ook…$"
 
 Route114_Text_SteveRegister:
-	.string "Don't forget what you've done to me!\n"
-	.string "I'll make it so you can't forget!$"
+	.string "Vergeet niet wat je mij hebt gedaan!\n"
+	.string "Ik zorg dat je het nooit vergeet!$"
 
 Route114_Text_SteveRematchIntro:
-	.string "Ufufufufufu…\n"
-	.string "Come on, battle my POKéMON…$"
+	.string "Hihihihihi…\n"
+	.string "Kom op, vecht tegen mijn POKéMON…$"
 
 Route114_Text_SteveRematchDefeat:
-	.string "I feel so lucky getting to see your\n"
-	.string "POKéMON…$"
+	.string "Wat een geluk dat ik jouw POKéMON\n"
+	.string "mocht zien…$"
 
 Route114_Text_StevePostRematch:
-	.string "Ufufufufufu…\p"
-	.string "When I see POKéMON battling, I get all\n"
-	.string "shivery and shaky…$"
+	.string "Hihihihihi…\p"
+	.string "Als ik POKéMON zie vechten, word ik\n"
+	.string "helemaal bibberig…$"
 
 Route114_Text_BernieIntro:
-	.string "If you're lighting a campfire,\n"
-	.string "make sure you have water handy.$"
+	.string "Maak je een kampvuur? Zorg dan\n"
+	.string "dat je water bij de hand hebt.$"
 
 Route114_Text_BernieDefeat:
-	.string "Thanks for dousing my fire!$"
+	.string "Bedankt voor het blussen!$"
 
 Route114_Text_BerniePostBattle:
-	.string "You really do have to be careful with\n"
-	.string "any sort of fire in a forest.\p"
-	.string "Don't ever underestimate the power\n"
-	.string "of fire.$"
+	.string "Je moet echt voorzichtig zijn met\n"
+	.string "vuur in een bos.\p"
+	.string "Onderschat nooit de kracht\n"
+	.string "van vuur.$"
 
 Route114_Text_BernieRegister:
-	.string "You set my spirit on fire.\n"
-	.string "Let's register each other!$"
+	.string "Jij zet mijn hart in vuur en vlam.\n"
+	.string "Laten we elkaars nummer opslaan!$"
 
 Route114_Text_BernieRematchIntro:
-	.string "Have you learned to keep water handy\n"
-	.string "for campfires?$"
+	.string "Heb je nu altijd water bij de hand\n"
+	.string "voor een kampvuur?$"
 
 Route114_Text_BernieRematchDefeat:
-	.string "I got hosed down before I could\n"
-	.string "flare up, I guess.$"
+	.string "Ik ben geblust voor ik kon\n"
+	.string "opvlammen, denk ik.$"
 
 Route114_Text_BerniePostRematch:
-	.string "You really do have to be careful with\n"
-	.string "any sort of fire in a forest.\p"
-	.string "Don't ever underestimate the power\n"
-	.string "of fire.$"
+	.string "Je moet echt voorzichtig zijn met\n"
+	.string "vuur in een bos.\p"
+	.string "Onderschat nooit de kracht\n"
+	.string "van vuur.$"
 
 Route114_Text_ClaudeIntro:
-	.string "If we were fishing, you wouldn't stand\n"
-	.string "a chance against me.\l"
-	.string "So, bring on your POKéMON!$"
+	.string "Als we gingen vissen, maakte je\n"
+	.string "geen kans tegen mij.\l"
+	.string "Dus kom maar op met je POKéMON!$"
 
 Route114_Text_ClaudeDefeat:
-	.string "If we were fishing, I would've won…$"
+	.string "Met vissen had ik gewonnen…$"
 
 Route114_Text_ClaudePostBattle:
-	.string "I think I'll try my luck at landing\n"
-	.string "a big one at METEOR FALLS.\p"
-	.string "There has to be something in there.\n"
-	.string "I just know it.$"
+	.string "Ik ga een grote vangen bij\n"
+	.string "METEOR FALLS.\p"
+	.string "Daar zit vast iets.\n"
+	.string "Dat weet ik gewoon.$"
 
 Route114_Text_NolanIntro:
-	.string "I like to fish. But I also like to\n"
-	.string "battle!\p"
-	.string "If anyone challenges me, I'm there,\n"
-	.string "even if I'm fishing.$"
+	.string "Ik hou van vissen. Maar ook van\n"
+	.string "vechten!\p"
+	.string "Als iemand me uitdaagt, doe ik mee,\n"
+	.string "ook als ik aan het vissen ben.$"
 
 Route114_Text_NolanDefeat:
-	.string "I like to battle, but that doesn't\n"
-	.string "mean I'm good at it…$"
+	.string "Ik vecht graag, maar dat wil niet\n"
+	.string "zeggen dat ik er goed in ben…$"
 
 Route114_Text_NolanPostBattle:
-	.string "This time I'll do it!\p"
-	.string "I always think that, so I can't walk\n"
-	.string "away from fishing or POKéMON.$"
+	.string "Deze keer lukt het!\p"
+	.string "Dat denk ik altijd. Daarom kan ik niet\n"
+	.string "stoppen met vissen of POKéMON.$"
 
 Route114_Text_TyraIntro:
-	.string "TYRA: Well, sure.\n"
-	.string "I'm in the mood for it.\l"
-	.string "I'll teach you a little about POKéMON.$"
+	.string "TYRA: Nou, goed dan.\n"
+	.string "Ik heb er wel zin in.\l"
+	.string "Ik leer je iets over POKéMON.$"
 
 Route114_Text_TyraDefeat:
-	.string "TYRA: What an amazing battle style!$"
+	.string "TYRA: Wat een geweldige manier\n"
+	.string "van vechten!$"
 
 Route114_Text_TyraPostBattle:
-	.string "TYRA: I was teaching my junior IVY\n"
-	.string "about POKéMON.$"
+	.string "TYRA: Ik leerde IVY, die jonger is,\n"
+	.string "over POKéMON.$"
 
 Route114_Text_TyraNotEnoughMons:
-	.string "TYRA: Giggle…\n"
-	.string "If you want to battle with us, just one\l"
-	.string "POKéMON isn't enough!$"
+	.string "TYRA: Giechel…\n"
+	.string "Wil je tegen ons vechten? Dan is één\l"
+	.string "POKéMON niet genoeg!$"
 
 Route114_Text_IvyIntro:
-	.string "IVY: Who taught you about POKéMON?$"
+	.string "IVY: Wie heeft jou over POKéMON\n"
+	.string "geleerd?$"
 
 Route114_Text_IvyDefeat:
-	.string "IVY: What an amazing battle style!$"
+	.string "IVY: Wat een geweldige manier\n"
+	.string "van vechten!$"
 
 Route114_Text_IvyPostBattle:
-	.string "IVY: I started training POKéMON\n"
-	.string "because TYRA, my student mentor,\l"
-	.string "taught me!$"
+	.string "IVY: Ik train POKéMON omdat TYRA,\n"
+	.string "mijn oudere klasgenoot, het\l"
+	.string "mij heeft geleerd!$"
 
 Route114_Text_IvyNotEnoughMons:
-	.string "IVY: Do you only have one POKéMON?\n"
-	.string "I think it must feel lonesome.$"
+	.string "IVY: Heb je maar één POKéMON?\n"
+	.string "Die voelt zich vast eenzaam.$"
 
 Route114_Text_KaiIntro:
-	.string "I landed a big one!\n"
-	.string "A huge one, I tell you!$"
+	.string "Ik heb een grote gevangen!\n"
+	.string "Een enorme, echt waar!$"
 
 Route114_Text_KaiDefeat:
-	.string "What was that about?\n"
-	.string "Did mine lose in size?$"
+	.string "Hoe kan dat nou?\n"
+	.string "Was die van mij te klein?$"
 
 Route114_Text_KaiPostBattle:
-	.string "Okay!\n"
-	.string "I'll just fish me a bigger one!$"
+	.string "Oké!\n"
+	.string "Dan vang ik gewoon een grotere!$"
 
 Route114_Text_CharlotteIntro:
-	.string "Me!\n"
-	.string "I'm not just a pretty face!$"
+	.string "Ik!\n"
+	.string "Ik ben niet alleen maar mooi!$"
 
 Route114_Text_CharlotteDefeat:
-	.string "That wasn't cute in the least!$"
+	.string "Dat was helemaal niet schattig!$"
 
 Route114_Text_CharlottePostBattle:
-	.string "I don't want a POKéMON that's\n"
-	.string "just cute.\p"
-	.string "I adore cute ones that have a quirk\n"
-	.string "or two!$"
+	.string "Ik wil geen POKéMON die alleen\n"
+	.string "maar schattig is.\p"
+	.string "Ik hou van schattige POKéMON\n"
+	.string "met een gek trekje!$"
 
 Route114_Text_AngelinaIntro:
-	.string "Have you made your POKéMON evolve\n"
-	.string "very much?$"
+	.string "Heb jij je POKéMON al vaak\n"
+	.string "laten evolueren?$"
 
 Route114_Text_AngelinaDefeat:
-	.string "Oh, I see.\n"
-	.string "That's good to know.$"
+	.string "Oh, ik snap het.\n"
+	.string "Goed om te weten.$"
 
 Route114_Text_AngelinaPostBattle:
-	.string "Some POKéMON change so much when\n"
-	.string "they evolve, it's startling!$"
+	.string "Sommige POKéMON veranderen zo veel\n"
+	.string "als ze evolueren, dat je schrikt!$"
 
 Route115_Text_TimothyIntro:
 	.string "Hm…\n"
-	.string "You seem rather capable…\l"
-	.string "Let me keep you company!$"
+	.string "Jij lijkt me best goed…\l"
+	.string "Ik vecht wel met je mee!$"
 
 Route115_Text_TimothyDefeat:
-	.string "You're much stronger than\n"
-	.string "I'd imagined!$"
+	.string "Je bent veel sterker dan\n"
+	.string "ik dacht!$"
 
 Route115_Text_TimothyPostBattle:
-	.string "There is no such thing as a born genius.\n"
-	.string "It all depends on effort!\l"
-	.string "That is what I believe…$"
+	.string "Niemand wordt als genie geboren.\n"
+	.string "Alles hangt af van je best doen!\l"
+	.string "Dat geloof ik…$"
 
 Route115_Text_TimothyRegister:
-	.string "Hmm… A loss this thorough has been\n"
-	.string "a distant memory.\p"
-	.string "If you would allow it, I wish for\n"
-	.string "another opportunity to do battle.$"
+	.string "Hmm… Zo hard verloor ik al heel\n"
+	.string "lang niet meer.\p"
+	.string "Als het mag, wil ik graag nog\n"
+	.string "een keer tegen je vechten.$"
 
 Route115_Text_TimothyRematchIntro:
-	.string "Hm… As always, your agility speaks\n"
-	.string "for itself.\l"
-	.string "Come, keep me company!$"
+	.string "Hm… Je bent snel als altijd.\n"
+	.string "Dat zie je zo.\l"
+	.string "Kom, vecht met me mee!$"
 
 Route115_Text_TimothyRematchDefeat:
-	.string "As strong as ever!$"
+	.string "Sterk als altijd!$"
 
 Route115_Text_TimothyPostRematch:
-	.string "All it takes is effort!\p"
-	.string "I lost because I haven't put in enough\n"
-	.string "effort!$"
+	.string "Je moet gewoon je best doen!\p"
+	.string "Ik verloor omdat ik niet genoeg\n"
+	.string "mijn best deed!$"
 
 Route115_Text_KoichiIntro:
-	.string "You!\p"
-	.string "My MACHOP!\p"
-	.string "Demand a battle!$"
+	.string "Jij!\p"
+	.string "Mijn MACHOP!\p"
+	.string "Wil vechten!$"
 
 Route115_Text_KoichiDefeat:
-	.string "Ouch, ouch, ouch!$"
+	.string "Au, au, au!$"
 
 Route115_Text_KoichiPostBattle:
-	.string "My MACHOP crew!\p"
-	.string "So long as they seek power, I will\n"
-	.string "grow strong with them!$"
+	.string "Mijn MACHOP-ploeg!\p"
+	.string "Zolang zij kracht zoeken, word\n"
+	.string "ik samen met hen sterk!$"
 
 Route115_Text_NobIntro:
-	.string "My strongest skill is busting bricks\n"
-	.string "with my forehead!$"
+	.string "Ik ben het best in stenen breken\n"
+	.string "met mijn voorhoofd!$"
 
 Route115_Text_NobDefeat:
-	.string "Ugwaaaah!\n"
-	.string "My head is busted!$"
+	.string "Oegwaaaah!\n"
+	.string "Mijn hoofd is kapot!$"
 
 Route115_Text_NobPostBattle:
-	.string "I've been teaching my POKéMON karate.\p"
-	.string "It looks like they'll get a lot better\n"
-	.string "than me. I'm excited about that.$"
+	.string "Ik leer mijn POKéMON karate.\p"
+	.string "Ze worden vast veel beter dan ik.\n"
+	.string "Daar heb ik echt zin in.$"
 
 Route115_Text_NobRegister:
-	.string "You impress me! Give me a rematch\n"
-	.string "after I redo my training!$"
+	.string "Je bent indrukwekkend! Vecht weer\n"
+	.string "met me als ik opnieuw heb getraind!$"
 
 Route115_Text_NobRematchIntro:
-	.string "After you beat me, we trained hard to\n"
-	.string "improve our skills.\l"
-	.string "Come on, give us a rematch!$"
+	.string "Na mijn verlies hebben we hard\n"
+	.string "getraind om beter te worden.\l"
+	.string "Kom op, vecht nog eens!$"
 
 Route115_Text_NobRematchDefeat:
-	.string "Ugwaaah!\n"
-	.string "We lost again!$"
+	.string "Oegwaaah!\n"
+	.string "Weer verloren!$"
 
 Route115_Text_NobPostRematch:
-	.string "My POKéMON will grow stronger!\n"
-	.string "I'll redouble my training!$"
+	.string "Mijn POKéMON worden sterker!\n"
+	.string "Ik ga dubbel zo hard trainen!$"
 
 Route115_Text_CyndyIntro:
-	.string "This beach is my secret training spot!\n"
-	.string "Don't come butting in!$"
+	.string "Dit strand is mijn geheime trainplek!\n"
+	.string "Blijf weg!$"
 
 Route115_Text_CyndyDefeat:
-	.string "I haven't trained enough!$"
+	.string "Ik heb niet genoeg getraind!$"
 
 Route115_Text_CyndyPostBattle:
-	.string "The sand acts as a cushion to reduce\n"
-	.string "impact and prevent injury.\l"
-	.string "This is the perfect place to train.$"
+	.string "Het zand is zacht als een kussen.\n"
+	.string "Zo raak je minder snel gewond.\l"
+	.string "Dit is de perfecte trainplek.$"
 
 Route115_Text_CyndyRegister:
-	.string "Okay, fine, you're free to come here.\n"
-	.string "In return, I'd like to battle you again.$"
+	.string "Oké, goed, je mag hier komen.\n"
+	.string "Maar dan wil ik nog eens vechten.$"
 
 Route115_Text_CyndyRematchIntro:
-	.string "Okay, let's get this battle on!$"
+	.string "Oké, laten we beginnen!$"
 
 Route115_Text_CyndyRematchDefeat:
-	.string "I can battle but my POKéMON…$"
+	.string "Ik kan vechten, maar mijn POKéMON…$"
 
 Route115_Text_CyndyPostRematch:
-	.string "Even when I lose, I still get some\n"
-	.string "enjoyment out of it.\l"
-	.string "It must be that I love POKéMON.$"
+	.string "Ook als ik verlies, vind ik het\n"
+	.string "nog leuk.\l"
+	.string "Ik hou gewoon van POKéMON.$"
 
 Route115_Text_HectorIntro:
-	.string "I have a rare POKéMON!\n"
-	.string "Would you like me to show you?$"
+	.string "Ik heb een zeldzame POKéMON!\n"
+	.string "Wil je hem zien?$"
 
 Route115_Text_HectorDefeat:
-	.string "You…\n"
-	.string "You want my POKéMON, don't you?$"
+	.string "Jij…\n"
+	.string "Jij wilt mijn POKéMON, hè?$"
 
 Route115_Text_HectorPostBattle:
-	.string "I have this rare POKéMON.\n"
-	.string "It's enough to keep me satisfied.$"
+	.string "Ik heb deze zeldzame POKéMON.\n"
+	.string "Daar ben ik blij genoeg mee.$"
 
 Route115_Text_KyraIntro:
-	.string "I'll battle while I'm running!\n"
-	.string "Try to keep up with me!$"
+	.string "Ik vecht terwijl ik ren!\n"
+	.string "Probeer me maar bij te houden!$"
 
 Route115_Text_KyraDefeat:
-	.string "Gasp, gasp…$"
+	.string "Hijg, hijg…$"
 
 Route115_Text_KyraPostBattle:
-	.string "I made the mistake of trying to battle\n"
-	.string "while running!\p"
-	.string "I should take a run to calm down…$"
+	.string "Vechten terwijl je rent, was\n"
+	.string "een fout!\p"
+	.string "Ik ga een stukje rennen om\n"
+	.string "rustig te worden…$"
 
 Route115_Text_JaidenIntro:
-	.string "Take that!\n"
-	.string "Ultra POKéMON ninja attack!$"
+	.string "Pak aan!\n"
+	.string "Ultra-POKéMON-ninja-aanval!$"
 
 Route115_Text_JaidenDefeat:
 	.string "Waaah!\n"
-	.string "Our strategy failed!$"
+	.string "Ons plan is mislukt!$"
 
 Route115_Text_JaidenPostBattle:
-	.string "But my POKéMON were ultra,\n"
-	.string "weren't they?$"
+	.string "Maar mijn POKéMON waren wel\n"
+	.string "ultra, toch?$"
 
 Route115_Text_HeleneIntro:
-	.string "My POKéMON have black belt-level\n"
-	.string "strength!$"
+	.string "Mijn POKéMON zijn zo sterk als\n"
+	.string "een zwarte band!$"
 
 Route115_Text_HeleneDefeat:
-	.string "This is too humiliating!$"
+	.string "Wat een afgang!$"
 
 Route115_Text_HelenePostBattle:
-	.string "I rarely meet anyone who's better\n"
-	.string "than me…\p"
-	.string "I get it now!\n"
-	.string "You're a GYM LEADER, aren't you?$"
+	.string "Ik kom zelden iemand tegen die\n"
+	.string "beter is dan ik…\p"
+	.string "Nu snap ik het!\n"
+	.string "Jij bent een GYMLEIDER, toch?$"
 
 Route115_Text_AlixIntro:
-	.string "Our eyes met!\n"
-	.string "There's no getting away now!$"
+	.string "Onze ogen ontmoetten elkaar!\n"
+	.string "Je kunt niet meer weg!$"
 
 Route115_Text_AlixDefeat:
 	.string "Gah!\n"
-	.string "Not bad!$"
+	.string "Niet slecht!$"
 
 Route115_Text_AlixPostBattle:
-	.string "Oh, well.\n"
-	.string "I think I will TELEPORT home.$"
+	.string "Nou ja.\n"
+	.string "Ik ga wel met TELEPORT naar huis.$"
 
 Route115_Text_MarleneIntro:
-	.string "You've disturbed my meditation…\n"
-	.string "You'll be punished for it.$"
+	.string "Je stoort mijn meditatie…\n"
+	.string "Daar krijg je straf voor.$"
 
 Route115_Text_MarleneDefeat:
-	.string "You've broken my concentration!$"
+	.string "Je hebt mijn aandacht verstoord!$"
 
 Route115_Text_MarlenePostBattle:
-	.string "I was meditating with my POKéMON.\n"
-	.string "But this place isn't very peaceful…$"
+	.string "Ik mediteerde met mijn POKéMON.\n"
+	.string "Maar het is hier niet erg rustig…$"
 
 Route116_Text_ClarkIntro:
 	.string "Als de tunnel niet doorgaat,\n"
@@ -2343,241 +2347,241 @@ Route116_Text_JohnsonPostBattle:
 	.string "te houden?$"
 
 Route117_Text_IsaacIntro:
-	.string "Listen, could I get you to battle\n"
-	.string "the POKéMON I'm raising?$"
+	.string "Zeg, wil je vechten tegen de\n"
+	.string "POKéMON die ik opvoed?$"
 
 Route117_Text_IsaacDefeat:
-	.string "You've raised yours superbly…$"
+	.string "Jij hebt de jouwe super opgevoed…$"
 
 Route117_Text_IsaacPostBattle:
-	.string "POKéMON isn't all about power.\p"
-	.string "Polishing a unique aspect of one's\n"
-	.string "character is another way of enjoying\l"
-	.string "POKéMON.$"
+	.string "Bij POKéMON gaat het niet alleen\n"
+	.string "om kracht.\p"
+	.string "Je kunt ook genieten van POKéMON\n"
+	.string "door hun eigen karakter\l"
+	.string "te laten stralen.$"
 
 Route117_Text_IsaacRegister:
-	.string "I'm going to redouble my training.\n"
-	.string "Would you come look in on us?$"
+	.string "Ik ga dubbel zo hard trainen.\n"
+	.string "Kom je ons eens opzoeken?$"
 
 Route117_Text_IsaacRematchIntro:
-	.string "The POKéMON I've been raising are\n"
-	.string "looking good, just like before.$"
+	.string "De POKéMON die ik opvoed, zien\n"
+	.string "er goed uit, net als eerst.$"
 
 Route117_Text_IsaacRematchDefeat:
-	.string "You know how to raise them properly.\n"
-	.string "You might have DAY CARE skills…$"
+	.string "Jij weet hoe je ze goed opvoedt.\n"
+	.string "Jij zou bij de DAY CARE kunnen werken…$"
 
 Route117_Text_IsaacPostRematch:
-	.string "Your POKéMON are growing good!\n"
-	.string "You should enter them in CONTESTS.$"
+	.string "Je POKéMON groeien goed!\n"
+	.string "Doe eens mee aan WEDSTRIJDEN.$"
 
 Route117_Text_LydiaIntro:
-	.string "Please, allow me to evaluate if you\n"
-	.string "have raised your POKéMON properly.$"
+	.string "Mag ik kijken of je je POKéMON\n"
+	.string "goed hebt opgevoed?$"
 
 Route117_Text_LydiaDefeat:
-	.string "Yes, they are growing properly.$"
+	.string "Ja, ze groeien goed.$"
 
 Route117_Text_LydiaPostBattle:
-	.string "Try raising POKéMON with more\n"
-	.string "attention to their character traits.$"
+	.string "Let bij het opvoeden van POKéMON\n"
+	.string "meer op hun karakter.$"
 
 Route117_Text_LydiaRegister:
-	.string "I'm glad I met a superb TRAINER in you.\n"
-	.string "I hope to see you again.$"
+	.string "Fijn dat ik zo'n goede TRAINER\n"
+	.string "heb ontmoet. Tot ziens!$"
 
 Route117_Text_LydiaRematchIntro:
-	.string "Allow me to reevaluate if you have\n"
-	.string "raised your POKéMON properly.$"
+	.string "Mag ik nog eens kijken of je je\n"
+	.string "POKéMON goed hebt opgevoed?$"
 
 Route117_Text_LydiaRematchDefeat:
-	.string "They are growing admirably.$"
+	.string "Ze groeien prachtig.$"
 
 Route117_Text_LydiaPostRematch:
-	.string "POKéMON seem to like different kinds\n"
-	.string "of {POKEBLOCK}S, depending on their nature.$"
+	.string "Elke POKéMON houdt van andere\n"
+	.string "{POKEBLOCK}S, door zijn karakter.$"
 
 Route117_Text_DylanIntro:
-	.string "I'm in the middle of a triathlon, but,\n"
-	.string "whatever, let's have a battle!$"
+	.string "Ik ben midden in een triatlon, maar\n"
+	.string "wat maakt het uit, laten we vechten!$"
 
 Route117_Text_DylanDefeat:
-	.string "I ran out of energy!$"
+	.string "Mijn energie is op!$"
 
 Route117_Text_DylanPostBattle:
-	.string "I may have blown it…\p"
-	.string "I might have dropped to last during\n"
-	.string "that battle…$"
+	.string "Misschien heb ik het verpest…\p"
+	.string "Misschien ben ik tijdens dat\n"
+	.string "gevecht laatste geworden…$"
 
 Route117_Text_DylanRegister:
-	.string "POKéMON have to be strong, too?\n"
-	.string "I'd like you to train me!$"
+	.string "POKéMON moeten ook sterk zijn?\n"
+	.string "Wil jij mij trainen?$"
 
 Route117_Text_DylanRematchIntro:
-	.string "I'm smack in the middle of a triathlon,\n"
-	.string "but I'm comfortably ahead.\l"
-	.string "Let's make this a quick battle!$"
+	.string "Ik ben midden in een triatlon,\n"
+	.string "maar ik lig ver voor.\l"
+	.string "Laten we snel vechten!$"
 
 Route117_Text_DylanRematchDefeat:
-	.string "I ran out of energy again!$"
+	.string "Mijn energie is weer op!$"
 
 Route117_Text_DylanPostRematch:
-	.string "I was tops in swimming and cycling,\n"
-	.string "but I'm not quite that confident with\l"
-	.string "POKéMON yet.$"
+	.string "Ik was de beste in zwemmen en\n"
+	.string "fietsen, maar met POKéMON ben ik\l"
+	.string "nog niet zo zeker.$"
 
 Route117_Text_MariaIntro:
-	.string "I do my triathlon training with POKéMON,\n"
-	.string "so I'm pretty confident about my speed.$"
+	.string "Ik train voor de triatlon met POKéMON.\n"
+	.string "Ik weet dus zeker dat ik snel ben.$"
 
 Route117_Text_MariaDefeat:
-	.string "I need to get more practices in,\n"
-	.string "I guess.$"
+	.string "Ik moet nog meer oefenen,\n"
+	.string "denk ik.$"
 
 Route117_Text_MariaPostBattle:
-	.string "Training is meaningful only if you\n"
-	.string "keep it up regularly.\p"
-	.string "Okay! I'll resume my training!\n"
-	.string "Tomorrow!$"
+	.string "Trainen helpt alleen als je het\n"
+	.string "vaak blijft doen.\p"
+	.string "Oké! Ik ga weer trainen!\n"
+	.string "Morgen!$"
 
 Route117_Text_MariaRegister:
-	.string "You appear to be training properly…\n"
-	.string "If you'd like, I'll battle you later!$"
+	.string "Jij traint goed, zo te zien…\n"
+	.string "Als je wilt, vechten we later nog!$"
 
 Route117_Text_MariaRematchIntro:
-	.string "Are you keeping up with your training?\n"
-	.string "I sure am!\l"
-	.string "Let me show you the evidence!$"
+	.string "Blijf jij goed trainen?\n"
+	.string "Ik wel!\l"
+	.string "Ik laat je het bewijs zien!$"
 
 Route117_Text_MariaRematchDefeat:
-	.string "I need to get more practices in,\n"
-	.string "I guess.$"
+	.string "Ik moet nog meer oefenen,\n"
+	.string "denk ik.$"
 
 Route117_Text_MariaPostRematch:
-	.string "I'll resume training tomorrow.\n"
-	.string "Let's battle again sometime!$"
+	.string "Morgen ga ik weer trainen.\n"
+	.string "Laten we nog eens vechten!$"
 
 Route117_Text_DerekIntro:
-	.string "Once a BUG CATCHER!\n"
-	.string "And now a BUG MANIAC!\p"
-	.string "But my love for POKéMON remains\n"
-	.string "unchanged!$"
+	.string "Eerst een INSECTVANGER!\n"
+	.string "En nu een INSECTENFAN!\p"
+	.string "Maar ik hou nog net zoveel\n"
+	.string "van POKéMON!$"
 
 Route117_Text_DerekDefeat:
-	.string "My ineptitude also remains\n"
-	.string "unchanged…$"
+	.string "Ik ben ook nog net zo onhandig…$"
 
 Route117_Text_DerekPostBattle:
-	.string "All I did was follow my heart, and now\n"
-	.string "they call me a BUG MANIAC…\p"
-	.string "Still, I am an expert on BUG POKéMON,\n"
-	.string "so it's only natural that they call me\l"
-	.string "a BUG MANIAC.$"
+	.string "Ik volgde gewoon mijn hart, en nu\n"
+	.string "noemen ze me een INSECTENFAN…\p"
+	.string "Maar ik weet alles van INSECT-\n"
+	.string "POKéMON. Dus het klopt wel dat ze\l"
+	.string "me een INSECTENFAN noemen.$"
 
 Route117_Text_AnnaIntro:
-	.string "ANNA: I'm with my pretty junior student\n"
-	.string "partner. I have to do good!$"
+	.string "ANNA: Ik ben hier met mijn lieve\n"
+	.string "jongere klasgenoot. Ik moet winnen!$"
 
 Route117_Text_AnnaDefeat:
-	.string "ANNA: I'm with my pretty junior student\n"
-	.string "partner! Let me win!$"
+	.string "ANNA: Ik ben hier met mijn lieve\n"
+	.string "jongere klasgenoot! Laat me winnen!$"
 
 Route117_Text_AnnaPostBattle:
-	.string "ANNA: Your POKéMON have some good\n"
-	.string "combinations.\p"
-	.string "I'd say you're second only to us!$"
+	.string "ANNA: Jouw POKéMON werken goed\n"
+	.string "samen.\p"
+	.string "Alleen wij zijn nog beter!$"
 
 Route117_Text_AnnaAndMegRegister:
-	.string "ANNA: We can't take this lying down!\n"
-	.string "You will come back, won't you?$"
+	.string "ANNA: Dit pikken we niet!\n"
+	.string "Je komt toch wel terug?$"
 
 Route117_Text_AnnaNotEnoughMons:
-	.string "ANNA: If you want to battle us,\n"
-	.string "bring two POKéMON with you.$"
+	.string "ANNA: Wil je tegen ons vechten?\n"
+	.string "Neem dan twee POKéMON mee.$"
 
 Route117_Text_MegIntro:
-	.string "MEG: I'm going to tag up with my super\n"
-	.string "senior student partner and beat you!$"
+	.string "MEG: Ik vecht samen met mijn super\n"
+	.string "oudere klasgenoot en we verslaan je!$"
 
 Route117_Text_MegDefeat:
-	.string "MEG: Oh, no!\n"
-	.string "I'm sorry, ANNA! I let you down…$"
+	.string "MEG: Oh, nee!\n"
+	.string "Sorry, ANNA! Ik liet je in de steek…$"
 
 Route117_Text_MegPostBattle:
-	.string "MEG: I dragged ANNA down…\n"
-	.string "If I didn't, she would have won!$"
+	.string "MEG: Door mij verloor ANNA…\n"
+	.string "Zonder mij had ze gewonnen!$"
 
 Route117_Text_MegNotEnoughMons:
-	.string "MEG: Do you only have one POKéMON?\n"
-	.string "We can't battle with you, then.\p"
-	.string "We want to have a 2-on-2 battle.$"
+	.string "MEG: Heb je maar één POKéMON?\n"
+	.string "Dan kunnen we niet tegen je vechten.\p"
+	.string "We willen 2 tegen 2 vechten.$"
 
 Route117_Text_AnnaRematchIntro:
-	.string "ANNA: I can't keep losing in front of\n"
-	.string "my junior partner, right?$"
+	.string "ANNA: Ik kan niet steeds verliezen\n"
+	.string "waar mijn klasgenoot bij is, toch?$"
 
 Route117_Text_AnnaRematchDefeat:
-	.string "ANNA: I couldn't get into the groove.$"
+	.string "ANNA: Ik kwam niet goed op gang.$"
 
 Route117_Text_AnnaPostRematch:
-	.string "ANNA: Your POKéMON have some good\n"
-	.string "combinations.\p"
-	.string "I'd say you're second only to us!$"
+	.string "ANNA: Jouw POKéMON werken goed\n"
+	.string "samen.\p"
+	.string "Alleen wij zijn nog beter!$"
 
 Route117_Text_AnnaRematchNotEnoughMons:
-	.string "ANNA: If you want to battle us,\n"
-	.string "bring two POKéMON with you.$"
+	.string "ANNA: Wil je tegen ons vechten?\n"
+	.string "Neem dan twee POKéMON mee.$"
 
 Route117_Text_MegRematchIntro:
-	.string "MEG: I'm going to tag up with my\n"
-	.string "senior partner and win this time!$"
+	.string "MEG: Ik vecht samen met mijn oudere\n"
+	.string "klasgenoot. Nu winnen we wel!$"
 
 Route117_Text_MegRematchDefeat:
-	.string "MEG: Too strong!$"
+	.string "MEG: Te sterk!$"
 
 Route117_Text_MegPostRematch:
-	.string "MEG: I battled together with my\n"
-	.string "senior partner, but we lost…\p"
-	.string "That's so discouraging…$"
+	.string "MEG: Ik vocht samen met mijn oudere\n"
+	.string "klasgenoot, maar we verloren…\p"
+	.string "Dat is zo jammer…$"
 
 Route117_Text_MegRematchNotEnoughMons:
-	.string "MEG: Do you only have one POKéMON?\n"
-	.string "We can't battle with you, then.\p"
-	.string "We want to have a 2-on-2 battle.$"
+	.string "MEG: Heb je maar één POKéMON?\n"
+	.string "Dan kunnen we niet tegen je vechten.\p"
+	.string "We willen 2 tegen 2 vechten.$"
 
 Route117_Text_MelinaIntro:
-	.string "Isn't it nice? To battle while looking\n"
-	.string "at pretty flowers?$"
+	.string "Is het niet fijn? Vechten en\n"
+	.string "ondertussen naar bloemen kijken?$"
 
 Route117_Text_MelinaDefeat:
-	.string "Oh, that's quite impressive!$"
+	.string "Oh, dat is echt knap!$"
 
 Route117_Text_MelinaPostBattle:
-	.string "It feels wonderful to go for a jog\n"
-	.string "while looking at flowers.$"
+	.string "Het is heerlijk om te joggen en\n"
+	.string "naar de bloemen te kijken.$"
 
 Route117_Text_BrandiIntro:
-	.string "Let me demonstrate the power\n"
-	.string "hidden within a PSYCHIC POKéMON!$"
+	.string "Ik laat je de kracht zien die in\n"
+	.string "een PSYCHISCH-POKéMON zit!$"
 
 Route117_Text_BrandiDefeat:
-	.string "Astonishing!$"
+	.string "Ongelooflijk!$"
 
 Route117_Text_BrandiPostBattle:
-	.string "PSYCHIC POKéMON are complex.\n"
-	.string "You should try catching some.$"
+	.string "PSYCHISCH-POKéMON zijn ingewikkeld.\n"
+	.string "Probeer er eens een paar te vangen.$"
 
 Route117_Text_AishaIntro:
-	.string "Concentrate on getting the win.\n"
-	.string "That's how I battle!$"
+	.string "Denk alleen aan winnen.\n"
+	.string "Zo vecht ik!$"
 
 Route117_Text_AishaDefeat:
-	.string "I don't waste any time being angry\n"
-	.string "over a loss--I would rather train.$"
+	.string "Ik word niet boos als ik verlies.\n"
+	.string "Dan train ik liever.$"
 
 Route117_Text_AishaPostBattle:
-	.string "I think that if you worry about losing,\n"
-	.string "you're more likely to lose.$"
+	.string "Als je bang bent om te verliezen,\n"
+	.string "verlies je juist sneller, denk ik.$"
 
 Route118_Text_RoseIntro:
 	.string "The aroma of flowers has a magical\n"

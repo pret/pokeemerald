@@ -257,165 +257,167 @@ MauvilleCity_Gym_EventScript_GymStatue::
 	end
 
 MauvilleCity_Gym_Text_GymGuideAdvice:
-	.string "Hey, how's it going, CHAMPION-\n"
-	.string "bound {PLAYER}?\p"
-	.string "WATTSON, the LEADER of MAUVILLE\n"
-	.string "GYM, uses ELECTRIC-type POKéMON.\p"
-	.string "If you challenge him with WATER-type\n"
-	.string "POKéMON, he'll zap them! Bzzt!\p"
-	.string "And, he's put in switch-controlled\n"
-	.string "doors all over his GYM! Eccentric!\p"
-	.string "Hey, go for it!$"
+	.string "Hé, hoe gaat het, toekomstige\n"
+	.string "KAMPIOEN {PLAYER}?\p"
+	.string "WATTSON, de LEIDER van MAUVILLE\n"
+	.string "GYM, gebruikt ELEKTRISCH-POKéMON.\p"
+	.string "Vecht je met WATER-POKéMON,\n"
+	.string "dan krijgen die een schok! Bzzt!\p"
+	.string "En hij heeft overal in zijn GYM deuren\n"
+	.string "met knoppen gezet! Wat een gekke man!\p"
+	.string "Hé, zet 'm op!$"
 
 MauvilleCity_Gym_Text_GymGuidePostVictory:
-	.string "Whoa, you're electrifying!\n"
-	.string "You've powered the door open!$"
+	.string "Wauw, jij zit vol stroom!\n"
+	.string "Je hebt de deur opengezet!$"
 
 MauvilleCity_Gym_Text_KirkIntro:
-	.string "My electric soul, it'll shatter your\n"
-	.string "dreams whole, whoa-yeahah!$"
+	.string "Mijn elektrische ziel breekt al\n"
+	.string "jouw dromen, whoa-yeahah!$"
 
 MauvilleCity_Gym_Text_KirkDefeat:
-	.string "That was plugged in, amped up,\n"
-	.string "over-driven electric, man!$"
+	.string "Dat was vol onder stroom,\n"
+	.string "mega-elektrisch, man!$"
 
 MauvilleCity_Gym_Text_KirkPostBattle:
-	.string "POKéMON and rock, it's all about heart,\n"
-	.string "whoa-yeah!$"
+	.string "POKéMON en rock, het draait allemaal\n"
+	.string "om je hart, whoa-yeah!$"
 
 MauvilleCity_Gym_Text_ShawnIntro:
-	.string "I trained under WATTSON!\n"
-	.string "There ain't no way I'll lose easily!$"
+	.string "WATTSON heeft me getraind!\n"
+	.string "Ik verlies echt niet zomaar!$"
 
 MauvilleCity_Gym_Text_ShawnDefeat:
-	.string "Unplugged and turned off…$"
+	.string "Stekker eruit en uitgezet…$"
 
 MauvilleCity_Gym_Text_ShawnPostBattle:
-	.string "WATTSON, our GYM LEADER, has been\n"
-	.string "around for a long, long time.\p"
-	.string "He was battling even before your\n"
-	.string "daddy was born, that tough coot.$"
+	.string "WATTSON, onze GYMLEIDER, is al\n"
+	.string "heel, heel lang bezig.\p"
+	.string "Hij vocht al voordat je papa\n"
+	.string "geboren was, die taaie ouwe!$"
 
 MauvilleCity_Gym_Text_BenIntro:
-	.string "This GYM's got puzzles!\n"
-	.string "Isn't it fun?$"
+	.string "Deze GYM heeft puzzels!\n"
+	.string "Leuk, hè?$"
 
 MauvilleCity_Gym_Text_BenDefeat:
-	.string "It's no fun to lose…$"
+	.string "Verliezen is niet leuk…$"
 
 MauvilleCity_Gym_Text_BenPostBattle:
-	.string "WATTSON says he likes setting up\n"
-	.string "little traps with switches.$"
+	.string "WATTSON zegt dat hij graag kleine\n"
+	.string "valletjes maakt met knoppen.$"
 
 MauvilleCity_Gym_Text_VivianIntro:
-	.string "With my charm and my POKéMON's moves,\n"
-	.string "you'll be shocked!$"
+	.string "Met mijn charme en de aanvallen van\n"
+	.string "mijn POKéMON krijg jij een schok!$"
 
 MauvilleCity_Gym_Text_VivianDefeat:
-	.string "I'm shocked by your power!$"
+	.string "Ik schrik van jouw kracht!$"
 
 MauvilleCity_Gym_Text_VivianPostBattle:
-	.string "I've heard that MAUVILLE was founded\n"
-	.string "by WATTSON.\p"
-	.string "He was a TRAINER long before we\n"
-	.string "became TRAINERS.\l"
-	.string "He must know all sorts of things!$"
+	.string "Ik hoorde dat WATTSON MAUVILLE\n"
+	.string "heeft gesticht.\p"
+	.string "Hij was al TRAINER lang voordat\n"
+	.string "wij TRAINERS werden.\l"
+	.string "Hij weet vast heel veel!$"
 
 MauvilleCity_Gym_Text_AngeloIntro:
-	.string "I love shiny things!$"
+	.string "Ik hou van glimmende dingen!$"
 
 MauvilleCity_Gym_Text_AngeloDefeat:
 	.string "Oh…\n"
-	.string "My eyes are frazzled…$"
+	.string "Mijn ogen zijn verblind…$"
 
 MauvilleCity_Gym_Text_AngeloPostBattle:
-	.string "MAUVILLE GYM's WATTSON has a shiny\n"
-	.string "forehead. It makes me happy!$"
+	.string "WATTSON van MAUVILLE GYM heeft\n"
+	.string "een glimmend voorhoofd. Daar word\l"
+	.string "ik blij van!$"
 
 MauvilleCity_Gym_Text_WattsonIntro:
-	.string "I've given up on my plans to convert\n"
-	.string "the city, I have.\p"
-	.string "And so, I put my time into making\n"
-	.string "door traps in my GYM.\p"
-	.string "Oh? Now, what are you doing here?\p"
-	.string "What's that? You say you've gotten\n"
-	.string "past all my rigged doors?\p"
+	.string "Ik wilde de stad ombouwen,\n"
+	.string "maar dat plan heb ik opgegeven.\p"
+	.string "Daarom maak ik nu deuren met\n"
+	.string "valletjes in mijn GYM.\p"
+	.string "Oh? Wat doe jij hier?\p"
+	.string "Wat zeg je? Ben je langs al mijn\n"
+	.string "valdeuren gekomen?\p"
 	.string "Wahahahah!\n"
-	.string "Now, that is amusing!\p"
-	.string "Then, I, WATTSON, the LEADER of\n"
-	.string "MAUVILLE GYM, shall electrify you!$"
+	.string "Dat is grappig!\p"
+	.string "Dan zal ik, WATTSON, de LEIDER van\n"
+	.string "MAUVILLE GYM, je een schok geven!$"
 
 MauvilleCity_Gym_Text_WattsonDefeat:
 	.string "Wahahahah!\n"
-	.string "Fine, I lost!\p"
-	.string "You ended up giving me a thrill!\n"
-	.string "Take this BADGE!$"
+	.string "Goed, ik heb verloren!\p"
+	.string "Dat was echt spannend!\n"
+	.string "Hier is je BADGE!$"
 
 MauvilleCity_Gym_Text_ReceivedDynamoBadge:
-	.string "{PLAYER} received the DYNAMO BADGE\n"
-	.string "from WATTSON.$"
+	.string "{PLAYER} krijgt de DYNAMO BADGE\n"
+	.string "van WATTSON.$"
 
 MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis:
-	.string "With the DYNAMO BADGE, POKéMON can\n"
-	.string "use ROCK SMASH out of battle.\p"
-	.string "And, it will make your POKéMON a little\n"
-	.string "bit faster, too.\p"
+	.string "Met de DYNAMO BADGE kunnen POKéMON\n"
+	.string "STEENBREKER ook buiten\l"
+	.string "gevechten gebruiken.\p"
+	.string "En je POKéMON worden er ook een\n"
+	.string "beetje sneller van.\p"
 	.string "Hmm…\n"
-	.string "You should take this, too!$"
+	.string "Neem dit ook maar!$"
 
 MauvilleCity_Gym_Text_ExplainShockWave:
-	.string "That TM34 there contains SHOCK WAVE.\p"
-	.string "It's a trustworthy move that never\n"
-	.string "misses! You can count on it!\p"
+	.string "Op die TM34 staat SCHOKGOLF.\p"
+	.string "Die aanval mist nooit!\n"
+	.string "Daar kun je op rekenen!\p"
 	.string "… … … … … …$"
 
 MauvilleCity_Gym_Text_RegisteredWattson:
-	.string "Registered GYM LEADER WATTSON\n"
-	.string "in the POKéNAV.$"
+	.string "GYMLEIDER WATTSON staat nu\n"
+	.string "in de POKéNAV.$"
 
 MauvilleCity_Gym_Text_WattsonPostBattle:
-	.string "I swell with optimism, seeing a promising\n"
-	.string "young TRAINER like you!$"
+	.string "Ik word zo vrolijk van een jonge\n"
+	.string "TRAINER met zoveel talent als jij!$"
 
 MauvilleCity_Gym_Text_WattsonGoForthAndEndeavor:
 	.string "Wahahahah!\n"
-	.string "Go forth and endeavor, youngster!$"
+	.string "Ga op pad en doe je best, jongere!$"
 
 MauvilleCity_Gym_Text_GymStatue:
 	.string "MAUVILLE CITY POKéMON GYM$"
 
 MauvilleCity_Gym_Text_GymStatueCertified:
 	.string "MAUVILLE CITY POKéMON GYM\p"
-	.string "WATTSON'S CERTIFIED TRAINERS:\n"
+	.string "GOEDGEKEURDE TRAINERS VAN WATTSON:\n"
 	.string "{PLAYER}$"
 
 MauvilleCity_Gym_Text_WattsonPreRematch:
-	.string "WATTSON: Ah-ha! Here at last!\n"
-	.string "I know what you want.\l"
-	.string "You want to battle my POKéMON!\p"
+	.string "WATTSON: Aha! Daar ben je eindelijk!\n"
+	.string "Ik weet wat je wilt.\l"
+	.string "Je wilt tegen mijn POKéMON vechten!\p"
 	.string "Wahahahaha!\p"
-	.string "I'll make sparks fly from you!\n"
-	.string "Don't say I didn't warn you!$"
+	.string "Ik laat de vonken eraf vliegen!\n"
+	.string "Ik heb je gewaarschuwd!$"
 
 MauvilleCity_Gym_Text_WattsonRematchDefeat:
-	.string "Oof…\n"
-	.string "Our batteries ran dry…$"
+	.string "Oef…\n"
+	.string "Onze batterijen zijn leeg…$"
 
 MauvilleCity_Gym_Text_WattsonPostRematch:
-	.string "WATTSON: We'll have to recharge our\n"
-	.string "batteries again.\p"
-	.string "When we're fully charged up, we'll\n"
-	.string "gladly accept your challenge.\p"
-	.string "So, come back again sometime,\n"
-	.string "won't you?$"
+	.string "WATTSON: We moeten onze batterijen\n"
+	.string "weer opladen.\p"
+	.string "Als we weer vol zijn, vechten\n"
+	.string "we graag weer tegen je.\p"
+	.string "Dus kom nog eens terug,\n"
+	.string "oké?$"
 
 MauvilleCity_Gym_Text_WattsonRematchNeedTwoMons:
-	.string "WATTSON: Ah-ha! Here at last!\n"
-	.string "I know what you want.\l"
-	.string "You want to battle my POKéMON!\p"
+	.string "WATTSON: Aha! Daar ben je eindelijk!\n"
+	.string "Ik weet wat je wilt.\l"
+	.string "Je wilt tegen mijn POKéMON vechten!\p"
 	.string "Wahahahaha!\p"
-	.string "Oops! Wait!\n"
-	.string "You've only one POKéMON with you!\p"
-	.string "Come see me with two or more\n"
-	.string "POKéMON, all right?$"
+	.string "Oeps! Wacht!\n"
+	.string "Je hebt maar één POKéMON bij je!\p"
+	.string "Kom terug met twee of meer\n"
+	.string "POKéMON, oké?$"
 

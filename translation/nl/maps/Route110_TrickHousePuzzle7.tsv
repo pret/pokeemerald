@@ -1,20 +1,20 @@
 key	english	dutch	notes
-Route110_TrickHousePuzzle7_Text_WroteSecretCodeLockOpened	{PLAYER} wrote down the secret code\non the door.\p“TRICK MASTER is huggable.”\n… … … … … … … …\pThe lock clicked open!		
-Route110_TrickHousePuzzle7_Text_JoshuaIntro	The TRICK MASTER always vanishes\nlike smoke. How does he do it?		
-Route110_TrickHousePuzzle7_Text_JoshuaDefeat	Aiyeeeh! You're much too strong!\nHow do you do it?		
-Route110_TrickHousePuzzle7_Text_JoshuaPostBattle	I wish I could appear and disappear as\nif I were smoke, too.		
-Route110_TrickHousePuzzle7_Text_PatriciaIntro	Going around the same spot…\nIt begets ill fortune…		
-Route110_TrickHousePuzzle7_Text_PatriciaDefeat	Defeated!\nIt's a bad sign…		
-Route110_TrickHousePuzzle7_Text_PatriciaPostBattle	I've circled the same spot over ten\ntimes now… It's ill fortune…		
-Route110_TrickHousePuzzle7_Text_AlexisIntro	Whoever wins will get through here\nfirst. That's the feeling I get.		
-Route110_TrickHousePuzzle7_Text_AlexisDefeat	Oh!\nWell, go ahead, then!		
-Route110_TrickHousePuzzle7_Text_AlexisPostBattle	You're solving all the puzzles in the\nTRICK HOUSE. That's the feeling I get.		
-Route110_TrickHousePuzzle7_Text_MarielaIntro	Nufufufu, here at last!\nLet's get right with it!		
-Route110_TrickHousePuzzle7_Text_MarielaDefeat	You're so casual about winning!		
-Route110_TrickHousePuzzle7_Text_MarielaPostBattle	Humph! I'm not upset!\nNot me!		
-Route110_TrickHousePuzzle7_Text_AlvaroIntro	I ever so closely watched you coming!		
-Route110_TrickHousePuzzle7_Text_AlvaroDefeat	This outcome I didn't see coming…		
-Route110_TrickHousePuzzle7_Text_AlvaroPostBattle	Well, anyway, we both picked a weird\nplace to get acquainted.\pAs one weirdo to another,\nlet's do our best!		
-Route110_TrickHousePuzzle7_Text_EverettIntro	It's awfully cramped in here…		
-Route110_TrickHousePuzzle7_Text_EverettDefeat	Oh, yes, strong you are.		
-Route110_TrickHousePuzzle7_Text_EverettPostBattle	I was hoping to switch places with you\nwhen I beat you, but…		
+Route110_TrickHousePuzzle7_Text_WroteSecretCodeLockOpened	{PLAYER} wrote down the secret code\non the door.\p“TRICK MASTER is huggable.”\n… … … … … … … …\pThe lock clicked open!	{PLAYER} schrijft de geheime code\nop de deur.\p“TRICK MASTER is knuffelbaar.”\n… … … … … … … …\pKlik! Het slot gaat open!	
+Route110_TrickHousePuzzle7_Text_JoshuaIntro	The TRICK MASTER always vanishes\nlike smoke. How does he do it?	De TRICK MASTER verdwijnt altijd\nals rook. Hoe doet hij dat?	
+Route110_TrickHousePuzzle7_Text_JoshuaDefeat	Aiyeeeh! You're much too strong!\nHow do you do it?	Aaah! Je bent veel te sterk!\nHoe doe je dat?	
+Route110_TrickHousePuzzle7_Text_JoshuaPostBattle	I wish I could appear and disappear as\nif I were smoke, too.	Ik wil ook verschijnen en verdwijnen\nals rook.	
+Route110_TrickHousePuzzle7_Text_PatriciaIntro	Going around the same spot…\nIt begets ill fortune…	Steeds rondjes om dezelfde plek…\nDat brengt ongeluk…	
+Route110_TrickHousePuzzle7_Text_PatriciaDefeat	Defeated!\nIt's a bad sign…	Verslagen!\nDat is een slecht teken…	
+Route110_TrickHousePuzzle7_Text_PatriciaPostBattle	I've circled the same spot over ten\ntimes now… It's ill fortune…	Ik heb al meer dan tien keer rond\ndeze plek gelopen… Dat is ongeluk…	
+Route110_TrickHousePuzzle7_Text_AlexisIntro	Whoever wins will get through here\nfirst. That's the feeling I get.	Wie wint, komt hier als eerste\ndoor. Dat gevoel heb ik.	
+Route110_TrickHousePuzzle7_Text_AlexisDefeat	Oh!\nWell, go ahead, then!	Oh!\nNou, ga je gang dan!	
+Route110_TrickHousePuzzle7_Text_AlexisPostBattle	You're solving all the puzzles in the\nTRICK HOUSE. That's the feeling I get.	Jij lost alle puzzels in het\nTRICK HOUSE op. Dat gevoel heb ik.	
+Route110_TrickHousePuzzle7_Text_MarielaIntro	Nufufufu, here at last!\nLet's get right with it!	Nufufufu, eindelijk!\nLaten we meteen beginnen!	
+Route110_TrickHousePuzzle7_Text_MarielaDefeat	You're so casual about winning!	Jij wint alsof het niks is!	
+Route110_TrickHousePuzzle7_Text_MarielaPostBattle	Humph! I'm not upset!\nNot me!	Hmpf! Ik ben niet boos!\nIk niet!	
+Route110_TrickHousePuzzle7_Text_AlvaroIntro	I ever so closely watched you coming!	Ik zag je heel goed aankomen!	
+Route110_TrickHousePuzzle7_Text_AlvaroDefeat	This outcome I didn't see coming…	Dit zag ik niet aankomen…	
+Route110_TrickHousePuzzle7_Text_AlvaroPostBattle	Well, anyway, we both picked a weird\nplace to get acquainted.\pAs one weirdo to another,\nlet's do our best!	Nou ja, we kozen allebei een rare\nplek om elkaar te leren kennen.\pVan de ene gekke naar de andere:\nlaten we ons best doen!	
+Route110_TrickHousePuzzle7_Text_EverettIntro	It's awfully cramped in here…	Het is hier wel heel krap…	
+Route110_TrickHousePuzzle7_Text_EverettDefeat	Oh, yes, strong you are.	Oh ja, sterk ben jij.	
+Route110_TrickHousePuzzle7_Text_EverettPostBattle	I was hoping to switch places with you\nwhen I beat you, but…	Ik hoopte met je te ruilen van\nplek als ik won, maar…	

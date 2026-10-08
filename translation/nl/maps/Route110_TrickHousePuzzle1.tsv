@@ -1,11 +1,11 @@
 key	english	dutch	notes
-Route110_TrickHousePuzzle1_Text_WroteSecretCodeLockOpened	{PLAYER} wrote down the secret code\non the door.\p“TRICK MASTER is fabulous.”\n… … … … … … … …\pThe lock clicked open!		
-Route110_TrickHousePuzzle1_Text_SallyIntro	I'll hack and slash my way to victory\nwith the CUT we just learned!		
-Route110_TrickHousePuzzle1_Text_SallyDefeat	Why are you so serious?		
-Route110_TrickHousePuzzle1_Text_SallyPostBattle	I never get tired of hacking\nand slashing!		
-Route110_TrickHousePuzzle1_Text_EddieIntro	I wandered into this weird house\nby accident…		
-Route110_TrickHousePuzzle1_Text_EddieDefeat	And now I've lost…		
-Route110_TrickHousePuzzle1_Text_EddiePostBattle	I lost my way, I lost a battle, and I'm\nnow even more lost… I can't get out…		
-Route110_TrickHousePuzzle1_Text_RobinIntro	Just who is the TRICK MASTER?		
-Route110_TrickHousePuzzle1_Text_RobinDefeat	I lost while I was lost in thought!		
-Route110_TrickHousePuzzle1_Text_RobinPostBattle	You're strong!\nJust who are you?		
+Route110_TrickHousePuzzle1_Text_WroteSecretCodeLockOpened	{PLAYER} wrote down the secret code\non the door.\p“TRICK MASTER is fabulous.”\n… … … … … … … …\pThe lock clicked open!	{PLAYER} schrijft de geheime code\nop de deur.\p“TRICK MASTER is fantastisch.”\n… … … … … … … …\pKlik! Het slot gaat open!	
+Route110_TrickHousePuzzle1_Text_SallyIntro	I'll hack and slash my way to victory\nwith the CUT we just learned!	Ik hak me een weg naar de winst\nmet SNIJDEN, net geleerd!	
+Route110_TrickHousePuzzle1_Text_SallyDefeat	Why are you so serious?	Waarom ben je zo serieus?	
+Route110_TrickHousePuzzle1_Text_SallyPostBattle	I never get tired of hacking\nand slashing!	Ik word nooit moe van hakken\nen snijden!	
+Route110_TrickHousePuzzle1_Text_EddieIntro	I wandered into this weird house\nby accident…	Ik liep per ongeluk dit rare\nhuis binnen…	
+Route110_TrickHousePuzzle1_Text_EddieDefeat	And now I've lost…	En nu heb ik ook nog verloren…	
+Route110_TrickHousePuzzle1_Text_EddiePostBattle	I lost my way, I lost a battle, and I'm\nnow even more lost… I can't get out…	Ik ben verdwaald, ik heb verloren en\nnu ben ik nog meer de weg kwijt…	
+Route110_TrickHousePuzzle1_Text_RobinIntro	Just who is the TRICK MASTER?	Wie is die TRICK MASTER nou?	
+Route110_TrickHousePuzzle1_Text_RobinDefeat	I lost while I was lost in thought!	Ik verloor terwijl ik in\ngedachten was!	
+Route110_TrickHousePuzzle1_Text_RobinPostBattle	You're strong!\nJust who are you?	Jij bent sterk!\nWie ben jij eigenlijk?	

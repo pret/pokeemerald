@@ -1,11 +1,11 @@
 key	english	dutch	notes
-Route110_TrickHousePuzzle8_Text_WroteSecretCodeLockOpened	{PLAYER} wrote down the secret code\non the door.\p“TRICK MASTER I love.”\n… … … … … … … …\pThe lock clicked open!		
-Route110_TrickHousePuzzle8_Text_VincentIntro	Not many TRAINERS have made it\nthis far.		
-Route110_TrickHousePuzzle8_Text_VincentDefeat	That must mean you're tough, too…		
-Route110_TrickHousePuzzle8_Text_VincentPostBattle	You've beaten the POKéMON LEAGUE\nCHAMPION? That's too much!		
-Route110_TrickHousePuzzle8_Text_KeiraIntro	Consider yourself lucky to be\nbattling me!		
-Route110_TrickHousePuzzle8_Text_KeiraDefeat	This isn't right!\nI can't lose!		
-Route110_TrickHousePuzzle8_Text_KeiraPostBattle	It's a miracle that you beat me.\nYou can brag about it.		
-Route110_TrickHousePuzzle8_Text_LeroyIntro	You've been slugging through the TRICK\nHOUSE challenge, too.		
-Route110_TrickHousePuzzle8_Text_LeroyDefeat	I see…\nYou possess an extraordinary style.		
-Route110_TrickHousePuzzle8_Text_LeroyPostBattle	Seeing someone like you should please\nthe TRICK MASTER.		
+Route110_TrickHousePuzzle8_Text_WroteSecretCodeLockOpened	{PLAYER} wrote down the secret code\non the door.\p“TRICK MASTER I love.”\n… … … … … … … …\pThe lock clicked open!	{PLAYER} schrijft de geheime code\nop de deur.\p“TRICK MASTER, ik hou van je.”\n… … … … … … … …\pKlik! Het slot gaat open!	
+Route110_TrickHousePuzzle8_Text_VincentIntro	Not many TRAINERS have made it\nthis far.	Niet veel TRAINERS komen\nzo ver.	
+Route110_TrickHousePuzzle8_Text_VincentDefeat	That must mean you're tough, too…	Dan ben jij dus ook sterk…	
+Route110_TrickHousePuzzle8_Text_VincentPostBattle	You've beaten the POKéMON LEAGUE\nCHAMPION? That's too much!	Heb jij de KAMPIOEN van de POKéMON\nLEAGUE verslagen? Niet te geloven!	
+Route110_TrickHousePuzzle8_Text_KeiraIntro	Consider yourself lucky to be\nbattling me!	Je mag blij zijn dat je tegen\nmij mag vechten!	
+Route110_TrickHousePuzzle8_Text_KeiraDefeat	This isn't right!\nI can't lose!	Dit klopt niet!\nIk kan niet verliezen!	
+Route110_TrickHousePuzzle8_Text_KeiraPostBattle	It's a miracle that you beat me.\nYou can brag about it.	Het is een wonder dat je won.\nDaar mag je over opscheppen.	
+Route110_TrickHousePuzzle8_Text_LeroyIntro	You've been slugging through the TRICK\nHOUSE challenge, too.	Jij ploetert ook door de\nTRICK HOUSE-uitdaging.	
+Route110_TrickHousePuzzle8_Text_LeroyDefeat	I see…\nYou possess an extraordinary style.	Ik snap het…\nJij hebt een heel bijzondere stijl.	
+Route110_TrickHousePuzzle8_Text_LeroyPostBattle	Seeing someone like you should please\nthe TRICK MASTER.	Iemand zoals jij maakt de\nTRICK MASTER vast blij.	
