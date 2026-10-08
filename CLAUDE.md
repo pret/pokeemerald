@@ -1,144 +1,57 @@
 # Pokémon Smaragd: Dutch translation of pokeemerald
 
-This repo is pret's pokeemerald decomp. We are translating the game into **Dutch**.
-Build with `make` → `PokemonSmaragd.gba`. Test in mGBA (start a new game for intro text).
-Work happens on branch `nl-translation`, one commit per batch.
+pret's pokeemerald decomp, translated into Dutch for a Dutch kid (about 8-10 years old).
+Build: `make` → PokemonSmaragd.gba. Test in mGBA (start a new game for intro text).
+Branch `nl-translation`, one commit per batch. Progress and next package: `translation/PLAN.md` ("Dialogue progress").
 
-## How to work (keep it cheap)
-- **Do not spawn subagents or parallel agents unless the user explicitly asks.** Work sequentially in the main session.
-- **Translate one package at a time**, then stop and report.
-  - A package is one area of the game (a group of maps), or one shared text file.
-  - Progress and the next package are in `translation/PLAN.md` ("Dialogue progress").
-- **Per package:**
-  1. `python3 translation/next_package.py '<regex>' > /tmp/pkg.in.txt` lists the untranslated `KEY<TAB>english` lines for maps/keys matching the regex. Example regex: `^(LavaridgeTown|Route112)`.
-  2. Write the Dutch straight to `/tmp/pkg.out.txt` (`KEY<TAB>dutch`, one line per input key). Append in chunks; do not echo translations back in chat.
-  3. Run `python3 translation/check_fill.py /tmp/pkg.out.txt` and fix problems until 0.
-  4. Run `python3 translation/fill.py '*/*' /tmp/pkg.out.txt`, then `python3 translation/apply.py`, then `make`.
-  5. Commit, tick the package in `PLAN.md`, and add any new recurring terms to `translation/nl/misc.tsv`.
-- **Read reference files once per session, not per package:** this file, `translation/nl/misc.tsv`, and targeted `grep` lookups in `items.tsv`/`moves.tsv`. Never read whole big TSVs or `.inc` files.
-- **Keep one task per session.** Bulk translation works fine on Sonnet; use Opus for tricky technical issues such as window widths, charmap or scripts.
+## Hard rules
+- **Never spawn subagents or parallel agents.** If you think one would help, ask me first. (Each one re-reads a large context and burns tokens.)
+- Work sequentially in the main session. Translate one package, then stop and report.
+- Do not echo translations back in chat. Write them straight to the output file.
+- Read reference files once per session, not per package. Never read whole big TSVs or .inc files; use targeted grep (e.g. in items.tsv / moves.tsv).
+- Never hand-edit strings a TSV manages. Edit the TSV (or fill file), then apply. Otherwise the next apply overwrites your change.
+- One task per session.
 
-## Who we write for
-The player is a **Dutch kid (about 8–10 years old)**. Every Dutch string must be easy for them to read.
+## Workflow per package
+A package is one area of the game (a group of maps) or one shared text file.
 
-- Use **simple, everyday Dutch**. Write the way you would explain it to a child, not the way a manual is written.
-- **Short sentences.** One idea per sentence. Do not add words the English doesn't need.
-- **Short words.** Avoid long compound words and formal or rare words.
-  - Good: *maakt*, *helpt*, *raakt*, *soms*, *heel*
-  - Bad: *bewerkstelligt*, *ondersteunt*, *frequent*, *aanzienlijk*
-  - If a compound gets long, split or rephrase it: *kans op een voltreffer*, not *voltreffer­waarschijnlijkheid*.
-- Address the player with **je/jij**, never u.
-- Translate the **meaning**, not word for word. Shorter is better when it says the same thing.
-- **Numbers:** keep them as numbers ("2 tot 5 keer").
+1. `python3 translation/next_package.py '<regex>' > /tmp/pkg.in.txt` lists untranslated `KEY<TAB>english` lines for maps/keys matching the regex (example: `^(LavaridgeTown|Route112)`).
+2. Write Dutch to `/tmp/pkg.out.txt` (`KEY<TAB>dutch`, one line per input key). Append in chunks.
+3. `python3 translation/check_fill.py /tmp/pkg.out.txt`. Fix until 0 problems.
+4. `python3 translation/fill.py '*/*' /tmp/pkg.out.txt`, then `python3 translation/apply.py`, then `make`.
+5. Commit, tick the package in PLAN.md, add new recurring terms to `translation/nl/misc.tsv`.
+6. Stop and report. I review the TSV diff and test in mGBA.
 
-## What gets translated and what stays English
-| Stays English | Gets translated |
-|---|---|
-| Pokémon names (CHARIZARD), character names (BIRCH), POKéMON, POKé BALL, TM/HM, berry names (CHERI) | All dialogue and menus |
-| Town, route and place names (LITTLEROOT, ROUTE 101, ABANDONED SHIP): easy to look up online, and the Dutch anime keeps them English too | Move names + descriptions |
-| | Ability names + descriptions |
-| | Item names + descriptions |
-| | Berry descriptions, firmness, the word BERRY → BES / BESSEN |
+For non-dialogue TSVs (items, moves, abilities, berries, battle, strings, types, natures, trainers, contest): fill the dutch column, run `python3 translation/check.py`, fix violations, then `apply.py` and `make`.
 
-## Style rules
-- **Names** of moves, abilities and items are in CAPITALS, like Gen 3 English: `DONDERFLITS`, `DRANKJE`.
-- **Inside descriptions and dialogue**, the words POKéMON and stat names are also in capitals, like the English.
-- **One Dutch term per concept, everywhere.** The glossary is `translation/nl/misc.tsv` (stats, types, status effects, common words). Check it before inventing a new word, and add new recurring terms to it.
-- When a name doesn't fit:
-  1. choose a shorter synonym,
-  2. else use a clear abbreviation (`SP. AANV`),
-  3. never cut a word silently.
+## Core style rules
+- Simple, everyday Dutch, as you would explain it to a child. Short sentences, one idea each. Short words.
+- Address the player with je/jij, never u.
+- Translate the meaning, not word for word. Shorter is better if it says the same.
+- Use one Dutch term per concept. Check `translation/nl/misc.tsv` before inventing a word.
+- Keep every control code (`{PLAYER}`, `{STR_VAR_1}`, `\n`, `\l`, `\p`, `$`) exactly as in the English.
+- Pokémon, character, town/route/place names stay English. Dialogue, menus, moves, abilities, items and berry texts get translated.
+- Pixel width is authoritative (dialogue lines: as wide as the widest English line of that string, min. 208px). ~33 characters is only a rough guide. `check.py` / `check_fill.py` enforce bytes, characters and pixels, so fix what they report instead of guessing.
 
-## Battle messages (`battle.tsv` → `src/battle_message.c`)
-- **Name prefixes are separate strings** glued before `{B_*_NAME_WITH_PREFIX}`:
-  - `Wilde `
-  - `Vijandige `
-  - nothing for your own POKéMON
+## Examples (English → bad → good)
+Dialogue:
+- `Your POKéMON look tired.\nGo to a POKéMON CENTER.`
+  - Bad: `Uw POKéMON zijn zeer vermoeid.\nBegeef u naar een POKéMON CENTER.` (formal, rare words)
+  - Good: `Je POKéMON zijn heel moe.\nGa naar een POKéMON CENTER.`
+- `{PLAYER}, you're late!\pHurry up!`
+  - Good: `{PLAYER}, je bent te laat!\pSnel, kom op!`
 
-  So **put the name first** in the sentence: `{B_ATK_NAME_WITH_PREFIX} gebruikt\n{B_BUFF2}` → "Wilde ZIGZAGOON gebruikt TACKLE!".
-- `{B_ATK_PREFIX1/2/3}` expand to `jouw team` / `het vijandige team` (lowercase). Never put them at the start of a sentence.
-- **No possessive 's.** Use "X van Y", or start with the name.
-- **Stat changes** are `{NAME}: {STAT}\n{flink }{omhoog!|omlaag!}`, assembled by the game.
-- **Present tense:** "gebruikt", "is verslagen", "gaat naar LV. 5!".
-- **Ability messages:** "X laat het regenen met MOTREGEN!". When a line is too long, use "X gebruikt\nTALENT!\p" plus a new sentence.
-- **Referee:** `SCHEIDS:`.
-- **Control codes:** the Dutch must contain exactly the same `{...}` codes as the English; `check.py` enforces this.
-- **Widths:** placeholders are measured at worst case (name with prefix = "Vijandige " + 10 letters). If a line is too wide, break it with `\l`. In the rare case where the worst case can't happen (e.g. a buffer that's always a digit), put `width-ok: <reason>` in the notes column.
+Move description (2 lines):
+- `A powerful electric attack that may paralyze the foe.`
+  - Bad: `Een krachtige elektrische aanval die de tegenstander mogelijk verlamt.` (too long, formal)
+  - Good: `Sterke stroomaanval. Kan de\nvijand verlammen.`
 
-## Technical limits (the check script enforces these)
-| String | Limit |
-|---|---|
-| Move names | max 12 bytes |
-| Ability names | max 12 bytes |
-| Item names | max **13** bytes |
-| Berry names | max 6 bytes |
-| Move descriptions | 2 lines |
-| Item descriptions | 3 lines |
-| Ability descriptions | 1 line |
-| Berry descriptions | 1 line per part |
+Battle message (name first, no possessive 's):
+- `{B_ATK_NAME_WITH_PREFIX} gebruikt\n{B_BUFF2}!`
 
-- **Bytes, not characters:** most characters are 1 byte, `{PKMN}` is 2.
-- Every line must also fit its box **in pixels**. `check.py` measures with the real font widths from `src/fonts.c`.
-- **Allowed characters** are only those in `charmap.txt`. Dutch needs ë, ï, é, and these all exist. Do not use `"`, tabs, or curly apostrophes in C strings; use `'`.
-- **Dialogue (`.string` in `.inc` files):** keep lines at most ~33 characters. Line-break codes:
-  - `\n` starts a new line,
-  - `\l` scrolls to the next line,
-  - `\p` starts a new text box,
-  - `$` ends the text.
-- Keep control codes like `{PLAYER}`, `{STR_VAR_1}`, `{KUN}` exactly as they are.
+(Examples are illustrative: always let the checker decide whether a line fits.)
 
-## Translation tooling (`translation/`)
-- `translation/nl/*.tsv` are the glossaries, with columns `key<TAB>english<TAB>dutch<TAB>notes`.
-  - The `english` column is the source text, raw as it appears in C (with `\n`).
-  - An empty `dutch` cell means "not translated yet"; that string stays English.
-- `python3 translation/extract.py` refreshes the `english` column from the source and keeps existing `dutch`/`notes`.
-- `python3 translation/check.py` validates all Dutch cells (characters, byte length, line count, pixel width). It must pass before building.
-- `python3 translation/apply.py` writes the Dutch cells into the source files.
-- `python3 translation/fill.py <tsv-name> <file>` bulk-fills Dutch cells from a `KEY<TAB>dutch` text file.
-- Which source strings each TSV manages is defined in `SPECS` in `translation/common.py`. It supports both `_("...")` C strings and `.string "...$"` blocks in `.inc` files.
-- `contest.tsv` holds the contest move effect descriptions (`data/text/contest_strings.inc`).
-- `trainers.tsv` holds trainer class names (max 12 bytes). Team names, ELITE FOUR and Battle Frontier titles stay English.
-- `battle.tsv` holds all strings in `src/battle_message.c` (battle messages, battle menu, stat names, Battle Frontier referee).
-- `types.tsv` holds the type names (`gTypeNames`, max 6 bytes, e.g. "TYPE/VUUR" in the battle move menu).
-- `strings.tsv` holds `src/strings.c` (menus, bag, PC, PokéNav, options, Mystery Gift…).
-  - Place and attraction names stay English (BATTLE TOWER, TRADE CENTER, BERRY CRUSH).
-  - Character names stay too, except MOM/DAD → MAMA/PAPA.
-- **UI text windows are often small.** `check.py` prints `WARN` when narrow English UI text (≤130px) gets wider in Dutch.
-  - For each warning, look up the window in the C code: `WindowTemplate .width` × 8px, minus the cursor or x offset. Many menus size themselves via `GetMaxWidthInMenuTable` / `DisplayTextAndGetWidth`.
-  - Shorten the text if it doesn't fit, then run `python3 translation/review.py` to mark the remaining warnings `label-ok: reviewed`.
-- **Notes-column markers** (in `check.py`):
-  - `max:NNN` sets a pixel limit for that string.
-  - `width-ok: <reason>` skips the width checks.
-  - `label-ok` silences the narrow-window warning.
-- **Known tight spots, with short forms in use:**
-
-  | Where | Width | Short forms |
-  |---|---|---|
-  | Summary stat labels | 36-42px | VERD., SP.AAN, SP.VER, SNELH. |
-  | Level-up box | 54px | VERD. |
-  | Bag description box | 106px, 3 lines | |
-  | PC box messages | 144px, 1 line | |
-  | Options values | x=104-198 | TRAAG / NORM / SNEL |
-  | Trainer card | value right-aligned at 216px | |
-
-- `check.py` also verifies text fits before a `{CLEAR_TO n}` column.
-- **Dialogue** lives in one TSV per file:
-  - `maps/<MapName>.tsv` for `data/maps/*/scripts.inc`
-  - `text/<name>.tsv` for `data/text/*.inc` (shared texts; `text/trainers.tsv` holds every trainer's battle lines)
-  - `scripts/<name>.tsv` for `data/scripts/*.inc`
-
-  Keys are the script labels.
-  - `fill.py '*/*' file.txt` finds each key wherever it lives.
-  - Dialogue lines may be as wide as the widest English line of the same string (min. 208px).
-  - Translate area by area in the order the game is played. `PLAN.md` tracks which areas are done.
-- `python3 translation/check_fill.py <file>` checks a `KEY<TAB>dutch` fill file without writing anything (handy for parallel work).
-- `natures.tsv` holds the nature names (NAÏEF, VROLIJK…).
-- **Always edit the TSV, then apply.** Never hand-edit strings that a TSV manages (move/ability/item/berry names and descriptions), or the next apply will overwrite them.
-
-## Workflow per batch
-1. Fill the `dutch` column for the batch's rows, following the rules above.
-2. Run `check.py`, fix violations, then run `apply.py` and `make`.
-3. The user reviews the TSV diff and checks in-game in mGBA.
-4. Commit on `nl-translation`.
-
-The master plan with the batch order is in `translation/PLAN.md`.
+## Read before touching other areas
+- Wording, vocabulary, what stays English: `translation/docs/style.md`
+- battle.tsv / `src/battle_message.c`: `translation/docs/battle.md`
+- Moves, abilities, items, berries, UI/menu strings, byte and pixel limits, tooling details: `translation/docs/ui-limits.md`
