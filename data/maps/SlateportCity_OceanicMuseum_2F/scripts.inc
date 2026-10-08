@@ -255,168 +255,169 @@ SlateportCity_OceanicMuseum_2F_EventScript_MuseumPatron3::
 	end
 
 SlateportCity_OceanicMuseum_2F_Text_ThankYouForTheParts:
-	.string "Yes? If you're looking for STERN,\n"
-	.string "that would be me.\p"
-	.string "Ah! Those must be the parts I ordered\n"
-	.string "from MR. STONE of DEVON.\p"
-	.string "Thank you! That's great!\n"
-	.string "We can prepare for our expedition now.$"
+	.string "Ja? Zoek je STERN?\n"
+	.string "Dat ben ik.\p"
+	.string "Ah! Dat zijn vast de onderdelen die\n"
+	.string "ik bij MR. STONE van DEVON bestelde.\p"
+	.string "Dank je wel! Geweldig!\n"
+	.string "Nu kunnen we onze reis voorbereiden.$"
 
 SlateportCity_OceanicMuseum_2F_Text_WellTakeThoseParts:
-	.string "Hehehe, hold it!\n"
-	.string "We'll take those parts!$"
+	.string "Hehehe, stop!\n"
+	.string "Wij nemen die onderdelen!$"
 
 SlateportCity_OceanicMuseum_2F_Text_SternWhoAreYou:
-	.string "CAPT. STERN: Wh-what?\n"
-	.string "Who are you people?$"
+	.string "CAPT. STERN: W-wat?\n"
+	.string "Wie zijn jullie?$"
 
 SlateportCity_OceanicMuseum_2F_Text_WereTeamAqua:
-	.string "We're TEAM AQUA!\p"
-	.string "Our BOSS wants those parts!\n"
-	.string "Shut your yap and fork them over!$"
+	.string "Wij zijn TEAM AQUA!\p"
+	.string "Onze BAAS wil die onderdelen!\n"
+	.string "Hou je mond en geef ze hier!$"
 
 SlateportCity_OceanicMuseum_2F_Text_Grunt1Defeat:
-	.string "Awaaaah!\n"
-	.string "A kid beat me!$"
+	.string "Aaaaah!\n"
+	.string "Een kind heeft me verslagen!$"
 
 SlateportCity_OceanicMuseum_2F_Text_BossGoingToBeFurious:
-	.string "Oh, man, what a disaster…\n"
-	.string "The BOSS is going to be furious…$"
+	.string "O nee, wat een ramp…\n"
+	.string "De BAAS wordt woedend…$"
 
 SlateportCity_OceanicMuseum_2F_Text_LetMeTakeCareOfThis:
-	.string "Humph, sniveling wimp!\n"
-	.string "Let me take care of this!$"
+	.string "Hmpf, jankerd!\n"
+	.string "Laat mij dit maar doen!$"
 
 SlateportCity_OceanicMuseum_2F_Text_Grunt2Defeat:
-	.string "What?!\n"
-	.string "I lost, too!$"
+	.string "Wat?!\n"
+	.string "Ik verlies ook!$"
 
 SlateportCity_OceanicMuseum_2F_Text_MeddlingKid:
-	.string "Now what? If we don't get the parts,\n"
-	.string "we're in for it!\p"
-	.string "Arrgh, I didn't count on being meddled\n"
-	.string "with by some meddling kid!$"
+	.string "Wat nu? Zonder die onderdelen\n"
+	.string "zijn we de klos!\p"
+	.string "Argh, ik had niet gedacht dat een\n"
+	.string "bemoeizuchtig kind ons zou dwarsbomen!$"
 
 SlateportCity_OceanicMuseum_2F_Text_CameToSeeWhatsTakingSoLong:
-	.string "I came to see what was taking so\n"
-	.string "long to snatch some parts, and you\l"
-	.string "simps are held up by a mere child?$"
+	.string "Ik kwam kijken waarom het zo lang\n"
+	.string "duurt om wat onderdelen te jatten.\l"
+	.string "En jullie sukkels worden tegengehouden\l"
+	.string "door een kind?$"
 
 SlateportCity_OceanicMuseum_2F_Text_ArchieWarning:
-	.string "We are TEAM AQUA,\n"
-	.string "and we love the sea!\p"
-	.string "And I am TEAM AQUA's leader,\n"
+	.string "Wij zijn TEAM AQUA,\n"
+	.string "en wij houden van de zee!\p"
+	.string "En ik ben de leider van TEAM AQUA,\n"
 	.string "ARCHIE!\p"
-	.string "What makes you interfere with us?\p"
-	.string "…No! You can't be!\n"
-	.string "You're not one of TEAM MAGMA?\p"
-	.string "Wait, that can't be right.\n"
-	.string "You're not dressed for the part.\p"
+	.string "Waarom zit jij ons dwars?\p"
+	.string "…Nee! Dat kan niet!\n"
+	.string "Jij bent toch niet van TEAM MAGMA?\p"
+	.string "Wacht, dat klopt niet.\n"
+	.string "Je draagt hun kleren niet.\p"
 	.string "… … … … … …\n"
 	.string "… … … … … …\p"
-	.string "POKéMON, people… All life depends on\n"
-	.string "the sea.\p"
-	.string "So, TEAM AQUA is dedicated to\n"
-	.string "the expansion of the sea.\p"
-	.string "Don't you agree? What we are doing\n"
-	.string "is a magnificent undertaking.\p"
-	.string "Ah, fine…\n"
-	.string "You're still too young to understand\l"
-	.string "our noble objective.\p"
-	.string "But, I warn you, don't even consider\n"
-	.string "interfering with our plans again.\p"
-	.string "The consequences will cost you\n"
-	.string "dearly!\p"
-	.string "And don't you forget it!$"
+	.string "POKéMON, mensen… Al het leven\n"
+	.string "hangt af van de zee.\p"
+	.string "Daarom wil TEAM AQUA de zee\n"
+	.string "groter maken.\p"
+	.string "Vind je ook niet? Wat wij doen,\n"
+	.string "is een prachtig plan.\p"
+	.string "Ah, laat maar…\n"
+	.string "Je bent nog te jong om ons\l"
+	.string "mooie doel te snappen.\p"
+	.string "Maar ik waarschuw je: bemoei je\n"
+	.string "niet meer met onze plannen.\p"
+	.string "Anders krijg je daar flink\n"
+	.string "spijt van!\p"
+	.string "Vergeet dat niet!$"
 
 SlateportCity_OceanicMuseum_2F_Text_SternThankYouForSavingUs:
-	.string "CAPT. STERN: You're…\n"
-	.string "Ah, okay, you're {PLAYER}{KUN}…\p"
-	.string "Anyway, that was a tense situation!\n"
-	.string "Thank you for saving us!\p"
-	.string "Oh, yes, I almost forgot that you\n"
-	.string "even brought the parts from DEVON!$"
+	.string "CAPT. STERN: Jij bent…\n"
+	.string "Ah, oké, jij bent {PLAYER}{KUN}…\p"
+	.string "Dat was best eng, zeg!\n"
+	.string "Bedankt dat je ons hebt gered!\p"
+	.string "O ja, ik vergat bijna dat jij ook\n"
+	.string "de onderdelen van DEVON bracht!$"
 
 SlateportCity_OceanicMuseum_2F_Text_SternIveGotToGo:
-	.string "CAPT. STERN: Whoops!\n"
-	.string "There's no time to lose!\p"
-	.string "We have to set out on our ocean-floor\n"
-	.string "expedition really soon.\p"
-	.string "Thanks again, but now I've got\n"
-	.string "to go!\p"
-	.string "Feel free to wander around and check\n"
-	.string "out our facilities, though.$"
+	.string "CAPT. STERN: Oeps!\n"
+	.string "Er is geen tijd te verliezen!\p"
+	.string "We gaan heel snel op reis naar\n"
+	.string "de zeebodem.\p"
+	.string "Nogmaals bedankt, maar nu\n"
+	.string "moet ik gaan!\p"
+	.string "Kijk gerust rond in ons\n"
+	.string "MUSEUM.$"
 
 SlateportCity_OceanicMuseum_2F_Text_RemindsMeOfAbandonedShip:
-	.string "I saw a model of a ship here.\p"
-	.string "It reminded me of the ABANDONED SHIP\n"
-	.string "near DEWFORD TOWN…$"
+	.string "Ik zag hier een model van een schip.\p"
+	.string "Het deed me denken aan het ABANDONED\n"
+	.string "SHIP bij DEWFORD TOWN…$"
 
 SlateportCity_OceanicMuseum_2F_Text_DontRunInMuseum:
-	.string "Don't you dare run around inside\n"
-	.string "the MUSEUM!$"
+	.string "Je mag niet rennen in\n"
+	.string "het MUSEUM!$"
 
 SlateportCity_OceanicMuseum_2F_Text_WantToRideSubmarine:
-	.string "Wow, the submarine's awesome!\n"
-	.string "I want to go for a ride!$"
+	.string "Wauw, die duikboot is supertof!\n"
+	.string "Ik wil er een ritje in maken!$"
 
 SlateportCity_OceanicMuseum_2F_Text_WaterQualitySample1:
-	.string "“WATER QUALITY SAMPLE 1,” the\n"
-	.string "label says.\p"
-	.string "The sea is all connected, but the\n"
-	.string "water seems to differ by region.$"
+	.string "“WATERMONSTER 1,” staat er\n"
+	.string "op het etiket.\p"
+	.string "De zee hangt overal aan elkaar,\n"
+	.string "maar het water is overal anders.$"
 
 SlateportCity_OceanicMuseum_2F_Text_WaterQualitySample2:
-	.string "“WATER QUALITY SAMPLE 2,” the\n"
-	.string "label says.\p"
-	.string "Does the saltiness of seawater differ\n"
-	.string "by region, too?$"
+	.string "“WATERMONSTER 2,” staat er\n"
+	.string "op het etiket.\p"
+	.string "Is zeewater ook niet overal\n"
+	.string "even zout?$"
 
 SlateportCity_OceanicMuseum_2F_Text_PressureExperiment:
-	.string "A rubber ball is expanding and\n"
-	.string "shrinking.\p"
-	.string "“In the sea, the weight of water itself\n"
-	.string "exerts pressure.\p"
-	.string "“In shallow water, the pressure is not\n"
-	.string "very heavy.\p"
-	.string "“However, in extremely deep water,\n"
-	.string "the pressure can reach even tens of\l"
-	.string "thousands of tons on a small area.”$"
+	.string "Een rubberen bal wordt groter\n"
+	.string "en weer kleiner.\p"
+	.string "“In de zee drukt het gewicht van\n"
+	.string "het water zelf op alles.\p"
+	.string "“In ondiep water is die druk\n"
+	.string "niet zo groot.\p"
+	.string "“Maar heel diep in de zee kan de\n"
+	.string "druk wel duizenden tonnen zijn,\l"
+	.string "op een heel klein stukje.”$"
 
 SlateportCity_OceanicMuseum_2F_Text_HoennModel:
-	.string "“MODEL OF HOENN REGION”\p"
-	.string "It's a miniature diorama of the\n"
-	.string "HOENN region.\p"
-	.string "Where is LITTLEROOT TOWN on this?$"
+	.string "“MODEL VAN DE HOENN REGIO”\p"
+	.string "Het is een mini-model van\n"
+	.string "de HOENN regio.\p"
+	.string "Waar ligt LITTLEROOT TOWN hierop?$"
 
 SlateportCity_OceanicMuseum_2F_Text_DeepSeawaterDisplay:
-	.string "It's a display on the flow of seawater.\p"
-	.string "“Near the bottom of the sea, water\n"
-	.string "flows due to differences in such\l"
-	.string "factors as temperature and salinity.”$"
+	.string "Uitleg over hoe zeewater stroomt.\p"
+	.string "“Diep in de zee stroomt water door\n"
+	.string "verschillen in bijvoorbeeld\l"
+	.string "warmte en zout.”$"
 
 SlateportCity_OceanicMuseum_2F_Text_SurfaceSeawaterDisplay:
-	.string "It's a display on the flow of seawater.\p"
-	.string "“Toward the surface, seawater flows\n"
-	.string "as currents driven by the winds.”$"
+	.string "Uitleg over hoe zeewater stroomt.\p"
+	.string "“Bovenin de zee stroomt het water\n"
+	.string "door de wind.”$"
 
 SlateportCity_OceanicMuseum_2F_Text_SSTidalReplica:
-	.string "“THE FERRY S.S. TIDAL\p"
-	.string "“A scale replica of the ship under\n"
-	.string "construction at STERN'S SHIPYARD.”$"
+	.string "“DE VEERBOOT S.S. TIDAL\p"
+	.string "“Een schaalmodel van het schip dat\n"
+	.string "wordt gebouwd bij STERN.”$"
 
 SlateportCity_OceanicMuseum_2F_Text_SubmarineReplica:
 	.string "“SUBMARINE EXPLORER 1\p"
-	.string "“A replica of the high-performance\n"
-	.string "ocean floor exploration submarine.”$"
+	.string "“Een model van de supersnelle\n"
+	.string "duikboot voor de zeebodem.”$"
 
 SlateportCity_OceanicMuseum_2F_Text_SumbersibleReplica:
-	.string "“SUBMERSIBLE POD\p"
-	.string "“A replica of a compact, unmanned\n"
-	.string "pod for seafloor exploration.”$"
+	.string "“DUIKCAPSULE\p"
+	.string "“Een model van een kleine capsule\n"
+	.string "zonder mensen, voor de zeebodem.”$"
 
 SlateportCity_OceanicMuseum_2F_Text_SSAnneReplica:
 	.string "“S.S. ANNE\p"
-	.string "“A replica of the luxury liner that\n"
-	.string "circles the globe.”$"
+	.string "“Een model van het luxe schip dat\n"
+	.string "de hele wereld rond vaart.”$"
 

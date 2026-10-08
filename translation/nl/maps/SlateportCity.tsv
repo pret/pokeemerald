@@ -40,40 +40,40 @@ SlateportCity_Text_InterviewerSoCool	That lady interviewer is so cool\nand prett
 SlateportCity_Text_SternSaysDiscoveredSomething	CAPT. STERN says they discovered\nsomething at the bottom of the sea.\pI wonder what it is?\nWhat could it be?		
 SlateportCity_Text_CaptainComeBackWithBigFish	What's going on here?\pDid the good CAPTAIN come back with\na big fish from the ocean floor?		
 SlateportCity_Text_AmIOnTV	Hey! Are you watching?\nAm I on TV?		
-SlateportCity_Text_CaptainsACelebrity	A TV interview! Here!\nThe CAPTAIN's a celebrity!		
-SlateportCity_Text_BigSmileForCamera	TY: Okay, CAPT. STERN, a big smile\nfor the camera!		
-SlateportCity_Text_MostInvaluableExperience	GABBY: I see, I see. You've had a most\ninvaluable experience…		
-SlateportCity_Text_SternMoveAheadWithExploration	CAPT. STERN: Yes, indeed. We intend to\nmove ahead with our exploration.		
-SlateportCity_Text_GabbyWonderfulThanksForInterview	GABBY: That's wonderful, CAPT. STERN!\nThank you for taking the time from\lyour busy schedule to talk to us.\pWe hope we can interview you again\nwith news of more discoveries!		
-SlateportCity_Text_SternWhewFirstInterview	CAPT. STERN: Whew…\pThat was my first time to be filmed for\nTV. That was nerve-wracking.		
-SlateportCity_Text_OhPlayerWeMadeDiscovery	Oh! {PLAYER}{KUN}!\nYou're looking great!\pWe made a huge discovery on our last\nseafloor exploration.\pWe found an underwater cavern on\nROUTE 128.\pWe think it's the habitat of a POKéMON\nthat's said to have been long extinct.		
-SlateportCity_Text_AquaWillAssumeControlOfSubmarine	Fufufu…\nCAPT. STERN, I presume.\pWe of TEAM AQUA will assume\ncontrol of your submarine!\pYour objections are meaningless!\nWe expect your total cooperation!\pFufufu…\nJust watch and learn what TEAM\lAQUA has planned!		
-SlateportCity_Text_SternWhatWasAllThat	CAPT. STERN: What was that all about?\pIt sounded like someone using\na megaphone…\pWhere did it come from?		
-SlateportCity_Text_FromHarborTryingToTakeSub	It's from the HARBOR!\pThe submarine!\nThey're trying to take it!		
-SlateportCity_Text_PleaseComeWithMe	{PLAYER}{KUN}!\nPlease, come with me!		
-SlateportCity_Text_BattleTentSign	BATTLE TENT SLATEPORT SITE\n“Find it! The ultimate POKéMON!”		
-SlateportCity_Text_SternsShipyardWantedSign	STERN'S SHIPYARD\p“Wanted: A sailor capable of sailing\nin all currents.”		
-SlateportCity_Text_SternsShipyardNearsCompletion	STERN'S SHIPYARD\p“The ferry S.S. TIDAL nears\ncompletion for serving the ports of\lSLATEPORT and LILYCOVE.”		
-SlateportCity_Text_SternsShipyardFerryComplete	STERN'S SHIPYARD\p“Boarding of the SLATEPORT-LILYCOVE\nferry S.S. TIDAL is handled at the\lHARBOR.”		
-SlateportCity_Text_PokemonFanClubSign	POKéMON FAN CLUB\n“Calling all fans of POKéMON!”		
-SlateportCity_Text_OceanicMuseumSign	“The endless sea sustains\nall life.”\pOCEANIC MUSEUM		
-SlateportCity_Text_CitySign	SLATEPORT CITY\p“The port where people and POKéMON\ncross paths.”		
-SlateportCity_Text_MarketSign	SLATEPORT MARKET\n“Unique items found nowhere else!”		
-SlateportCity_Text_HarborFerryUnderConstruction	SLATEPORT HARBOR\p“The ferry S.S. TIDAL is under\nconstruction in the SHIPYARD.\p“Service is scheduled to begin\nshortly.”		
-SlateportCity_Text_HarborSign	SLATEPORT HARBOR\p“Enjoy a delightful cruise on\nthe ferry S.S. TIDAL.”		
-SlateportCity_Text_NameRatersHouseSign	NAME RATER'S HOUSE\n“POKéMON nicknames rated.”		
-SlateportCity_Text_ExplainBerries	If a wild POKéMON gets hurt, it heals\nitself by chewing on BERRIES.\pDid you know that?\pSomebody saw that and got the idea\nof making medicine from BERRIES.\pDid you know that?\pTo turn BERRIES into medicine,\nthey must be crushed into powder.\pDid you know that?\pYou seem to have an interest\nin BERRIES!\pI've got something good for someone\nlike you.		
-SlateportCity_Text_ExplainBerryPowder	I recently had machines installed at\nPOKéMON CENTERS for crushing BERRIES.\pThe BERRY CRUSH machines are at\nthe DIRECT CORNER upstairs.\pDid you know?\pCould you make BERRY POWDER for\nme using those machines?\pI can make you all sorts of medicine\nif you bring me lots of BERRY POWDER.		
-SlateportCity_Text_BroughtMeSomeBerryPowder	Have you brought me some\nBERRY POWDER?		
-SlateportCity_Text_ExchangeWhatWithIt	What would you like to exchange\nit with?		
-SlateportCity_Text_ExchangeBerryPowderForItem	Okay, you want to exchange your\nBERRY POWDER for one {STR_VAR_1}?		
-SlateportCity_Text_DontHaveEnoughBerryPowder	Oh, dear. You don't have enough\nBERRY POWDER.		
-SlateportCity_Text_FineBerryPowderTradeSomethingElse	This is fine BERRY POWDER.\nIt will make excellent medicine.\pWould you like to trade more of your\nBERRY POWDER for something else?		
-SlateportCity_Text_WhenYouGetMoreBringItToMe	Okay! When you get some more\nBERRY POWDER, bring it to me, please!		
-SlateportCity_Text_ComeBackToTradeBerryPowder	Come back if you'd like to trade your\nBERRY POWDER for some medicine.\pI'm always running a bazaar here.\pDid you know?		
-SlateportCity_Text_YouDroveTeamAquaAway	SCOTT: Huh?\nI'm sure I met you somewhere before.\pHave I introduced myself to you?\nIf not, my name's SCOTT.\pI just saw TEAM AQUA run away from\nhere like they were stung.\pLet me guess--you drove them away?		
-SlateportCity_Text_MaybeThisTrainer	SCOTT: Hmm…\nMaybe, just maybe, this TRAINER…		
-SlateportCity_Text_LetsRegisterEachOther	SCOTT: All right! I think you're going\nto become a good friend.\pSo, let's register each other in our\nPOKéNAVS.\p… … … … … …		
-SlateportCity_Text_RegisteredScott	Registered this SCOTT person\nin the POKéNAV.		
-SlateportCity_Text_KeepEyeOnTrainersBeSeeingYou	SCOTT: What I'd like to do is tag along\nwith you, but I do want to keep an eye\lon the talents of other people, too.\pSo, I'll be off to roam other towns\na bit more.\pBe seeing you, {PLAYER}{KUN}!		
-SlateportCity_Text_TakingBattleTentChallenge	SCOTT: Oh, hey!\nIf it isn't {PLAYER}{KUN}!\p{PLAYER}{KUN}, let me guess--you're going\nto take the BATTLE TENT challenge?\pYeah! That's a good idea!\nThat's a really great idea!\pAfter all, a tough TRAINER is\nthe perfect fit for the BATTLE TENT!\pGive it your best effort!		
+SlateportCity_Text_CaptainsACelebrity	A TV interview! Here!\nThe CAPTAIN's a celebrity!	Een interview voor de tv! Hier!\nDe KAPITEIN is beroemd!	
+SlateportCity_Text_BigSmileForCamera	TY: Okay, CAPT. STERN, a big smile\nfor the camera!	TY: Oké, CAPT. STERN, een grote\nlach voor de camera!	
+SlateportCity_Text_MostInvaluableExperience	GABBY: I see, I see. You've had a most\ninvaluable experience…	GABBY: Ik snap het. Dat was dus\neen heel waardevolle ervaring…	
+SlateportCity_Text_SternMoveAheadWithExploration	CAPT. STERN: Yes, indeed. We intend to\nmove ahead with our exploration.	CAPT. STERN: Ja, zeker. We gaan\ngewoon verder met ons onderzoek.	
+SlateportCity_Text_GabbyWonderfulThanksForInterview	GABBY: That's wonderful, CAPT. STERN!\nThank you for taking the time from\lyour busy schedule to talk to us.\pWe hope we can interview you again\nwith news of more discoveries!	GABBY: Geweldig, CAPT. STERN!\nBedankt dat u even tijd voor\lons had, ondanks uw drukke dag.\pHopelijk mogen we u nog eens\nspreken over nieuwe ontdekkingen!	
+SlateportCity_Text_SternWhewFirstInterview	CAPT. STERN: Whew…\pThat was my first time to be filmed for\nTV. That was nerve-wracking.	CAPT. STERN: Pfff…\pIk was voor het eerst op tv.\nDat was best spannend.	
+SlateportCity_Text_OhPlayerWeMadeDiscovery	Oh! {PLAYER}{KUN}!\nYou're looking great!\pWe made a huge discovery on our last\nseafloor exploration.\pWe found an underwater cavern on\nROUTE 128.\pWe think it's the habitat of a POKéMON\nthat's said to have been long extinct.	O! {PLAYER}{KUN}!\nWat zie jij er goed uit!\pWe hebben iets groots ontdekt\nop de zeebodem.\pWe vonden een grot onder water\nbij ROUTE 128.\pWe denken dat daar een POKéMON\nwoont die al heel lang weg zou zijn.	
+SlateportCity_Text_AquaWillAssumeControlOfSubmarine	Fufufu…\nCAPT. STERN, I presume.\pWe of TEAM AQUA will assume\ncontrol of your submarine!\pYour objections are meaningless!\nWe expect your total cooperation!\pFufufu…\nJust watch and learn what TEAM\lAQUA has planned!	Fufufu…\nU bent vast CAPT. STERN.\pWij van TEAM AQUA nemen uw\nduikboot over!\pProtesteren heeft geen zin!\nU doet gewoon wat wij zeggen!\pFufufu…\nKijk maar goed wat TEAM AQUA\lvan plan is!	
+SlateportCity_Text_SternWhatWasAllThat	CAPT. STERN: What was that all about?\pIt sounded like someone using\na megaphone…\pWhere did it come from?	CAPT. STERN: Wat was dat nou?\pHet klonk alsof iemand door\neen megafoon praatte…\pWaar kwam het vandaan?	
+SlateportCity_Text_FromHarborTryingToTakeSub	It's from the HARBOR!\pThe submarine!\nThey're trying to take it!	Het komt van de HAVEN!\pDe duikboot!\nZe willen hem stelen!	
+SlateportCity_Text_PleaseComeWithMe	{PLAYER}{KUN}!\nPlease, come with me!	{PLAYER}{KUN}!\nKom alsjeblieft mee!	
+SlateportCity_Text_BattleTentSign	BATTLE TENT SLATEPORT SITE\n“Find it! The ultimate POKéMON!”	BATTLE TENT SLATEPORT\n“Vind hem! De beste POKéMON!”	
+SlateportCity_Text_SternsShipyardWantedSign	STERN'S SHIPYARD\p“Wanted: A sailor capable of sailing\nin all currents.”	SCHEEPSWERF VAN STERN\p“Gezocht: een zeeman die op elke\nstroming kan varen.”	
+SlateportCity_Text_SternsShipyardNearsCompletion	STERN'S SHIPYARD\p“The ferry S.S. TIDAL nears\ncompletion for serving the ports of\lSLATEPORT and LILYCOVE.”	SCHEEPSWERF VAN STERN\p“De veerboot S.S. TIDAL is bijna\nklaar. Hij gaat varen tussen\lSLATEPORT en LILYCOVE.”	
+SlateportCity_Text_SternsShipyardFerryComplete	STERN'S SHIPYARD\p“Boarding of the SLATEPORT-LILYCOVE\nferry S.S. TIDAL is handled at the\lHARBOR.”	SCHEEPSWERF VAN STERN\p“Instappen op de veerboot S.S. TIDAL\nvan SLATEPORT naar LILYCOVE\lgaat via de HAVEN.”	
+SlateportCity_Text_PokemonFanClubSign	POKéMON FAN CLUB\n“Calling all fans of POKéMON!”	POKéMON FAN CLUB\n“Voor alle fans van POKéMON!”	
+SlateportCity_Text_OceanicMuseumSign	“The endless sea sustains\nall life.”\pOCEANIC MUSEUM	“De eindeloze zee geeft\nalles wat leeft.”\pOCEANIC MUSEUM	
+SlateportCity_Text_CitySign	SLATEPORT CITY\p“The port where people and POKéMON\ncross paths.”	SLATEPORT CITY\p“De haven waar mensen en POKéMON\nelkaar tegenkomen.”	
+SlateportCity_Text_MarketSign	SLATEPORT MARKET\n“Unique items found nowhere else!”	SLATEPORT MARKET\n“Spullen die je nergens anders vindt!”	
+SlateportCity_Text_HarborFerryUnderConstruction	SLATEPORT HARBOR\p“The ferry S.S. TIDAL is under\nconstruction in the SHIPYARD.\p“Service is scheduled to begin\nshortly.”	SLATEPORT HARBOR\p“De veerboot S.S. TIDAL wordt nog\ngebouwd in de SCHEEPSWERF.\p“Hij gaat binnenkort varen.”	
+SlateportCity_Text_HarborSign	SLATEPORT HARBOR\p“Enjoy a delightful cruise on\nthe ferry S.S. TIDAL.”	SLATEPORT HARBOR\p“Maak een fijne boottocht met\nde veerboot S.S. TIDAL.”	
+SlateportCity_Text_NameRatersHouseSign	NAME RATER'S HOUSE\n“POKéMON nicknames rated.”	HUIS VAN DE NAME RATER\n“Wij beoordelen bijnamen.”	
+SlateportCity_Text_ExplainBerries	If a wild POKéMON gets hurt, it heals\nitself by chewing on BERRIES.\pDid you know that?\pSomebody saw that and got the idea\nof making medicine from BERRIES.\pDid you know that?\pTo turn BERRIES into medicine,\nthey must be crushed into powder.\pDid you know that?\pYou seem to have an interest\nin BERRIES!\pI've got something good for someone\nlike you.	Als een wilde POKéMON gewond is,\nkauwt hij op BESSEN om te genezen.\pWist je dat?\pIemand zag dat en kreeg een idee:\nmedicijnen maken van BESSEN.\pWist je dat?\pOm er medicijnen van te maken,\nmoet je BESSEN tot poeder malen.\pWist je dat?\pJij houdt zeker van BESSEN!\pIk heb iets leuks voor iemand\nzoals jij.	
+SlateportCity_Text_ExplainBerryPowder	I recently had machines installed at\nPOKéMON CENTERS for crushing BERRIES.\pThe BERRY CRUSH machines are at\nthe DIRECT CORNER upstairs.\pDid you know?\pCould you make BERRY POWDER for\nme using those machines?\pI can make you all sorts of medicine\nif you bring me lots of BERRY POWDER.	Ik heb pas machines laten zetten\nin POKéMON CENTERS om BESSEN te malen.\pDe BERRY CRUSH-machines staan\nboven, in de DIRECT CORNER.\pWist je dat?\pWil jij met die machines\nBESSENPOEDER voor me maken?\pIk maak allerlei medicijnen voor je\nals je veel BESSENPOEDER brengt.	
+SlateportCity_Text_BroughtMeSomeBerryPowder	Have you brought me some\nBERRY POWDER?	Heb je BESSENPOEDER voor me\nmeegebracht?	
+SlateportCity_Text_ExchangeWhatWithIt	What would you like to exchange\nit with?	Waarvoor wil je het\nruilen?	
+SlateportCity_Text_ExchangeBerryPowderForItem	Okay, you want to exchange your\nBERRY POWDER for one {STR_VAR_1}?	Oké, wil je je BESSENPOEDER ruilen\nvoor één {STR_VAR_1}?	
+SlateportCity_Text_DontHaveEnoughBerryPowder	Oh, dear. You don't have enough\nBERRY POWDER.	O jee. Je hebt niet genoeg\nBESSENPOEDER.	
+SlateportCity_Text_FineBerryPowderTradeSomethingElse	This is fine BERRY POWDER.\nIt will make excellent medicine.\pWould you like to trade more of your\nBERRY POWDER for something else?	Dit is mooi BESSENPOEDER.\nDaar maak ik goede medicijnen van.\pWil je nog meer BESSENPOEDER\nruilen voor iets anders?	
+SlateportCity_Text_WhenYouGetMoreBringItToMe	Okay! When you get some more\nBERRY POWDER, bring it to me, please!	Oké! Heb je weer wat BESSENPOEDER,\nbreng het dan naar mij!	
+SlateportCity_Text_ComeBackToTradeBerryPowder	Come back if you'd like to trade your\nBERRY POWDER for some medicine.\pI'm always running a bazaar here.\pDid you know?	Kom terug als je BESSENPOEDER\nwilt ruilen voor medicijnen.\pIk sta hier altijd met mijn kraam.\pWist je dat?	
+SlateportCity_Text_YouDroveTeamAquaAway	SCOTT: Huh?\nI'm sure I met you somewhere before.\pHave I introduced myself to you?\nIf not, my name's SCOTT.\pI just saw TEAM AQUA run away from\nhere like they were stung.\pLet me guess--you drove them away?	SCOTT: Hè?\nIk heb jou vast al eens gezien.\pHeb ik me al voorgesteld?\nZo niet: ik heet SCOTT.\pIk zag TEAM AQUA net hard\nwegrennen, alsof ze gestoken waren.\pLaat me raden: jij hebt ze\nweggejaagd?	
+SlateportCity_Text_MaybeThisTrainer	SCOTT: Hmm…\nMaybe, just maybe, this TRAINER…	SCOTT: Hmm…\nMisschien, heel misschien,\lis deze TRAINER…	
+SlateportCity_Text_LetsRegisterEachOther	SCOTT: All right! I think you're going\nto become a good friend.\pSo, let's register each other in our\nPOKéNAVS.\p… … … … … …	SCOTT: Top! Volgens mij worden wij\ngoede vrienden.\pLaten we elkaar in onze\nPOKéNAV zetten.\p… … … … … …	
+SlateportCity_Text_RegisteredScott	Registered this SCOTT person\nin the POKéNAV.	Die SCOTT staat nu\nin de POKéNAV.	
+SlateportCity_Text_KeepEyeOnTrainersBeSeeingYou	SCOTT: What I'd like to do is tag along\nwith you, but I do want to keep an eye\lon the talents of other people, too.\pSo, I'll be off to roam other towns\na bit more.\pBe seeing you, {PLAYER}{KUN}!	SCOTT: Ik zou het liefst met je\nmeegaan, maar ik wil ook andere\lmensen met talent zien.\pDus ik ga nog wat rondkijken\nin andere steden.\pTot ziens, {PLAYER}{KUN}!	
+SlateportCity_Text_TakingBattleTentChallenge	SCOTT: Oh, hey!\nIf it isn't {PLAYER}{KUN}!\p{PLAYER}{KUN}, let me guess--you're going\nto take the BATTLE TENT challenge?\pYeah! That's a good idea!\nThat's a really great idea!\pAfter all, a tough TRAINER is\nthe perfect fit for the BATTLE TENT!\pGive it your best effort!	SCOTT: O, hé!\nDat is {PLAYER}{KUN}!\p{PLAYER}{KUN}, laat me raden: jij gaat\nde BATTLE TENT uitdagen?\pJa! Dat is een goed idee!\nDat is echt een top idee!\pEen sterke TRAINER past\nperfect in de BATTLE TENT!\pDoe je best!	

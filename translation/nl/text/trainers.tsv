@@ -242,74 +242,74 @@ Route109_Text_ElijahIntro	For a guy as macho as me, this kind\nof POKéMON is th
 Route109_Text_ElijahDefeated	I'm cool even in defeat, hey?	Ik blijf cool, zelfs als ik verlies, hè?	
 Route109_Text_ElijahPostBattle	For a guy as macho as me, a port\nis the perfect setting!\pI guess I'll head for SLATEPORT.	Voor een stoere vent als ik is een\nhaven de perfecte plek!\pIk ga maar naar SLATEPORT.	
 Route110_Text_JacobIntro	Whoa! Watch it!\nI guess you're not used to BIKE racing.		
-Route110_Text_JacobDefeated	Whoa!\nMy brakes failed!		
-Route110_Text_JacobPostBattle	Flat tires and brake problems can\ncause serious injury!\lInspect your BIKE for problems!		
-Route110_Text_AnthonyIntro	Yo, you!\nCan you keep up with my speed?		
-Route110_Text_AnthonyDefeated	Crash and burn!		
+Route110_Text_JacobDefeated	Whoa!\nMy brakes failed!	Ho!\nMijn remmen doen het niet!	
+Route110_Text_JacobPostBattle	Flat tires and brake problems can\ncause serious injury!\lInspect your BIKE for problems!	Een lekke band of kapotte remmen\nkunnen gevaarlijk zijn!\lKijk je FIETS goed na!	
+Route110_Text_AnthonyIntro	Yo, you!\nCan you keep up with my speed?	Hé, jij!\nKun jij mij bijhouden?	
+Route110_Text_AnthonyDefeated	Crash and burn!	Gecrasht!	
 Route110_Text_AnthonyPostBattle	Speed alone won't let me win at POKéMON.\nI need to reconsider this…		
 Route110_Text_BenjaminIntro	Don't panic if your BIKE's going fast!		
-Route110_Text_BenjaminDefeated	I shouldn't panic during POKéMON\nbattles…		
-Route110_Text_BenjaminPostBattle	There's no need to panic or stress.\nTake it easy. There's plenty of time.		
-Route110_Text_BenjaminRegister	I'll keep chugging on without stressing.\nGive me a shout if you're up to it.		
-Route110_Text_BenjaminRematchIntro	Aren't you going a little too fast?\nTake it easy and let's battle.		
-Route110_Text_BenjaminRematchDefeated	I didn't panic, but I still lost…		
-Route110_Text_BenjaminRematchPostBattle	There's no need to panic or stress.\nTake it easy. There's plenty of time.		
-Route110_Text_AbigailIntro	The triathlon is hard in the extreme.\pYou have to complete the three events\nof swimming, cycling, and running.		
-Route110_Text_AbigailDefeated	POKéMON battles are hard, too!		
-Route110_Text_AbigailPostBattle	I'm exhausted, so I need a break.\nIt's important to get proper rest.		
+Route110_Text_BenjaminDefeated	I shouldn't panic during POKéMON\nbattles…	Ik moet niet in paniek raken\nin POKéMON-gevechten…	
+Route110_Text_BenjaminPostBattle	There's no need to panic or stress.\nTake it easy. There's plenty of time.	Je hoeft niet in paniek te raken.\nRustig aan. Je hebt tijd zat.	
+Route110_Text_BenjaminRegister	I'll keep chugging on without stressing.\nGive me a shout if you're up to it.	Ik ga rustig door, zonder stress.\nRoep me maar als je zin hebt.	
+Route110_Text_BenjaminRematchIntro	Aren't you going a little too fast?\nTake it easy and let's battle.	Ga jij niet een beetje te snel?\nRustig aan, laten we vechten.	
+Route110_Text_BenjaminRematchDefeated	I didn't panic, but I still lost…	Ik bleef rustig, maar verloor toch…	
+Route110_Text_BenjaminRematchPostBattle	There's no need to panic or stress.\nTake it easy. There's plenty of time.	Je hoeft niet in paniek te raken.\nRustig aan. Je hebt tijd zat.	
+Route110_Text_AbigailIntro	The triathlon is hard in the extreme.\pYou have to complete the three events\nof swimming, cycling, and running.	Een triatlon is superzwaar.\pJe moet zwemmen, fietsen en\nrennen, alle drie!	
+Route110_Text_AbigailDefeated	POKéMON battles are hard, too!	POKéMON-gevechten zijn ook zwaar!	
+Route110_Text_AbigailPostBattle	I'm exhausted, so I need a break.\nIt's important to get proper rest.	Ik ben doodmoe, ik moet even rusten.\nGoed uitrusten is belangrijk.	
 Route110_Text_AbigailRegister	You know, I like you!\nLet's have a rematch on CYCLING ROAD.		
-Route110_Text_AbigailRematchIntro	Isn't it neat to hold a battle while\ncycling?		
-Route110_Text_AbigailRematchDefeated	Wow…\nHow could you be so strong?		
-Route110_Text_AbigailRematchPostBattle	Were you going after a record?\pI'm sorry if I held you up!		
-Route110_Text_JasmineIntro	I've been riding without stopping.\nMy thighs are like rocks!		
-Route110_Text_JasmineDefeated	I'm worried about muscle cramps…		
-Route110_Text_JasminePostBattle	Oh, you have some GYM BADGES?\nNo wonder you're so strong!		
-Route110_Text_EdwardIntro	I have foreseen your intentions!\nI cannot possibly lose!		
-Route110_Text_EdwardDefeated	I failed to prophesize my own demise!		
-Route110_Text_EdwardPostBattle	I see your future…\pHmm…\nI see a shining light…		
-Route110_Text_JaclynIntro	Ahahahaha!\nI'll dazzle you with my wonders!		
-Route110_Text_JaclynDefeated	I wondrously lost!		
-Route110_Text_JaclynPostBattle	You managed to win only because it was\na wonder! Yes, a wonder!\lDon't think you can win all the time!		
-Route110_Text_EdwinIntro	Could I see your POKéMON?\nJust one look, please?		
-Route110_Text_EdwinDefeated	I wanted to complete\nmy collection…		
-Route110_Text_EdwinPostBattle	When I see a POKéMON that I don't know,\nmy passion as a collector is ignited!		
-Route110_Text_EdwinRegister	I like collecting MATCH CALL\nregistrations, too…		
-Route110_Text_EdwinRematchIntro	Hi, have you caught any new POKéMON?\pCould I see your POKéMON?\nJust one look, please?		
-Route110_Text_EdwinRematchDefeated	Your POKéMON…\nI envy you.		
-Route110_Text_EdwinRematchPostBattle	Oh, I long to make all rare POKéMON\nmine!		
-Route110_Text_DaleIntro	Hey!\nDon't sneak up behind me like that!		
-Route110_Text_DaleDefeated	I lost!\nDrat!		
+Route110_Text_AbigailRematchIntro	Isn't it neat to hold a battle while\ncycling?	Is het niet gaaf om te vechten\nterwijl je fietst?	
+Route110_Text_AbigailRematchDefeated	Wow…\nHow could you be so strong?	Wauw…\nHoe ben jij zo sterk geworden?	
+Route110_Text_AbigailRematchPostBattle	Were you going after a record?\pI'm sorry if I held you up!	Wilde je een record halen?\pSorry als ik je heb opgehouden!	
+Route110_Text_JasmineIntro	I've been riding without stopping.\nMy thighs are like rocks!	Ik fiets al heel lang zonder stoppen.\nMijn benen zijn keihard!	
+Route110_Text_JasmineDefeated	I'm worried about muscle cramps…	Ik ben bang voor kramp…	
+Route110_Text_JasminePostBattle	Oh, you have some GYM BADGES?\nNo wonder you're so strong!	O, heb jij GYM BADGES?\nGeen wonder dat je zo sterk bent!	
+Route110_Text_EdwardIntro	I have foreseen your intentions!\nI cannot possibly lose!	Ik heb je plannen al voorspeld!\nIk kan echt niet verliezen!	
+Route110_Text_EdwardDefeated	I failed to prophesize my own demise!	Mijn eigen verlies zag ik niet aankomen!	
+Route110_Text_EdwardPostBattle	I see your future…\pHmm…\nI see a shining light…	Ik zie jouw toekomst…\pHmm…\nIk zie een stralend licht…	
+Route110_Text_JaclynIntro	Ahahahaha!\nI'll dazzle you with my wonders!	Ahahahaha!\nIk verblind je met mijn wonderen!	
+Route110_Text_JaclynDefeated	I wondrously lost!	Ik heb wonderlijk verloren!	
+Route110_Text_JaclynPostBattle	You managed to win only because it was\na wonder! Yes, a wonder!\lDon't think you can win all the time!	Je won alleen door een wonder!\nJa, een wonder!\lDenk niet dat je altijd wint!	
+Route110_Text_EdwinIntro	Could I see your POKéMON?\nJust one look, please?	Mag ik je POKéMON zien?\nEven kijken maar?	
+Route110_Text_EdwinDefeated	I wanted to complete\nmy collection…	Ik wilde mijn verzameling\nafmaken…	
+Route110_Text_EdwinPostBattle	When I see a POKéMON that I don't know,\nmy passion as a collector is ignited!	Als ik een POKéMON zie die ik niet ken,\nwil ik hem meteen verzamelen!	
+Route110_Text_EdwinRegister	I like collecting MATCH CALL\nregistrations, too…	Ik verzamel ook graag mensen\nin MATCH CALL…	
+Route110_Text_EdwinRematchIntro	Hi, have you caught any new POKéMON?\pCould I see your POKéMON?\nJust one look, please?	Hoi, heb je nieuwe POKéMON gevangen?\pMag ik je POKéMON zien?\nEven kijken maar?	
+Route110_Text_EdwinRematchDefeated	Your POKéMON…\nI envy you.	Jouw POKéMON…\nIk ben jaloers.	
+Route110_Text_EdwinRematchPostBattle	Oh, I long to make all rare POKéMON\nmine!	O, ik wil alle zeldzame POKéMON\nhebben!	
+Route110_Text_DaleIntro	Hey!\nDon't sneak up behind me like that!	Hé!\nSluip niet zo achter me!	
+Route110_Text_DaleDefeated	I lost!\nDrat!	Verloren!\nBah!	
 Route110_Text_DalePostBattle	Fishing is all about concentration.\nYou have to focus on the floater.		
-Route110_Text_IsabelIntro	Ahahaha! I would go anywhere to show\noff my delightful POKéMON.		
-Route110_Text_IsabelDefeated	Oh, dear, this won't do.		
+Route110_Text_IsabelIntro	Ahahaha! I would go anywhere to show\noff my delightful POKéMON.	Ahahaha! Ik ga overal heen om mijn\nprachtige POKéMON te laten zien.	
+Route110_Text_IsabelDefeated	Oh, dear, this won't do.	O jee, dit gaat zo niet.	
 Route110_Text_IsabelPostBattle	Rather than battling, perhaps I should\nshow off my POKéMON at the FAN CLUB.		
-Route110_Text_IsabelRegister	That wasn't close to what I could\ndo to show off my POKéMON.\pI'll have you as my captive audience\nas often as possible!		
-Route110_Text_IsabelRematchIntro	Ahahahaha! I would be happy to show\noff my POKéMON as often as you like!		
-Route110_Text_IsabelRematchDefeated	Oh, dear, this won't do.		
-Route110_Text_IsabelRematchPostBattle	I don't think that I could ever stop\nfrom showing off my POKéMON.\pBut I like to battle, too!		
-Route110_Text_TimmyIntro	I found some cool POKéMON in the grass\naround here!		
-Route110_Text_TimmyDefeated	Being cool isn't enough to win…		
-Route110_Text_TimmyPostBattle	It's hard to battle with POKéMON you\njust caught.		
-Route110_Text_AlyssaIntro	I fell off CYCLING ROAD…\pI'll get over my embarrassment by\nbattling with you!		
-Route110_Text_AlyssaDefeated	Oops!\nI ended up losing!		
-Route110_Text_AlyssaPostBattle	Falling… Losing…\nThis is so humiliating for me!		
-Route110_Text_JosephIntro	Okay! Full-throttle time! If you can't\ngroove, you get left behind!		
-Route110_Text_JosephDefeated	You got into the groove all right…		
-Route110_Text_JosephPostBattle	This isn't going to bring me down!\nLosing has made me a better man!		
-Route110_Text_KalebIntro	When cute POKéMON help each other…\nYou won't see a more adorable sight!		
-Route110_Text_KalebDefeated	Have you no compassion or pity?		
-Route110_Text_KalebPostBattle	Okay, okay, you've done the best you\ncould, my pretties.		
-Route111_Text_DrewIntro	Oh, hey! Those GO-GOGGLES suit you.\nBut I think they look better on me.\pLet's decide who they look better on\nwith a battle!		
-Route111_Text_DrewDefeat	I couldn't see what was happening at\nmy sides because of the GO-GOGGLES.		
-Route111_Text_DrewPostBattle	The GO-GOGGLES make it possible to\nget through sandstorms.\lThat makes me happy!		
-Route111_Text_HeidiIntro	I'm having a picnic in the desert.\pYou can always find a TRAINER,\nso I can enjoy a battle here, too!		
-Route111_Text_HeidiDefeat	Ohhh! You're mean!		
-Route111_Text_HeidiPostBattle	When you're battling in a sandstorm,\nwatch out for your POKéMON's HP.\pIt can faint if you don't keep\nan eye on it!		
-Route111_Text_BeauIntro	Wearing these GO-GOGGLES makes me\nfeel like a superhero.\lRight now, nobody can beat me!		
-Route111_Text_BeauDefeat	I can't win on spirit alone…		
-Route111_Text_BeauPostBattle	I'm going to be a real hero one day.\nI'm going to work harder to make me\land my POKéMON stronger.		
-Route111_Text_BeckyIntro	I heard there are fossils to be found\nin the desert. Where could they be?		
-Route111_Text_BeckyDefeat	I came up short…		
+Route110_Text_IsabelRegister	That wasn't close to what I could\ndo to show off my POKéMON.\pI'll have you as my captive audience\nas often as possible!	Dat was nog lang niet alles wat\nik met mijn POKéMON kan laten zien.\pJij moet zo vaak mogelijk\nnaar me komen kijken!	
+Route110_Text_IsabelRematchIntro	Ahahahaha! I would be happy to show\noff my POKéMON as often as you like!	Ahahahaha! Ik laat mijn POKéMON\ngraag zo vaak zien als jij wilt!	
+Route110_Text_IsabelRematchDefeated	Oh, dear, this won't do.	O jee, dit gaat zo niet.	
+Route110_Text_IsabelRematchPostBattle	I don't think that I could ever stop\nfrom showing off my POKéMON.\pBut I like to battle, too!	Ik kan echt niet stoppen met\nmijn POKéMON laten zien.\pMaar ik vecht ook graag!	
+Route110_Text_TimmyIntro	I found some cool POKéMON in the grass\naround here!	Ik vond hier in het gras een\npaar stoere POKéMON!	
+Route110_Text_TimmyDefeated	Being cool isn't enough to win…	Stoer zijn is niet genoeg om te winnen…	
+Route110_Text_TimmyPostBattle	It's hard to battle with POKéMON you\njust caught.	Vechten met POKéMON die je net\nhebt gevangen is lastig.	
+Route110_Text_AlyssaIntro	I fell off CYCLING ROAD…\pI'll get over my embarrassment by\nbattling with you!	Ik viel van CYCLING ROAD af…\pIk vergeet mijn schaamte door\ntegen jou te vechten!	
+Route110_Text_AlyssaDefeated	Oops!\nI ended up losing!	Oeps!\nIk heb toch verloren!	
+Route110_Text_AlyssaPostBattle	Falling… Losing…\nThis is so humiliating for me!	Vallen… Verliezen…\nWat een afgang!	
+Route110_Text_JosephIntro	Okay! Full-throttle time! If you can't\ngroove, you get left behind!	Oké! Vol gas! Als je niet mee\nkunt, blijf je achter!	
+Route110_Text_JosephDefeated	You got into the groove all right…	Jij zat wel goed in het ritme…	
+Route110_Text_JosephPostBattle	This isn't going to bring me down!\nLosing has made me a better man!	Hier word ik niet verdrietig van!\nVan verliezen word ik beter!	
+Route110_Text_KalebIntro	When cute POKéMON help each other…\nYou won't see a more adorable sight!	Als schattige POKéMON elkaar helpen…\nIs er iets liefs dan dat?	
+Route110_Text_KalebDefeated	Have you no compassion or pity?	Heb jij dan geen medelijden?	
+Route110_Text_KalebPostBattle	Okay, okay, you've done the best you\ncould, my pretties.	Oké, oké, jullie deden je best,\nmijn schatjes.	
+Route111_Text_DrewIntro	Oh, hey! Those GO-GOGGLES suit you.\nBut I think they look better on me.\pLet's decide who they look better on\nwith a battle!	O, hé! Die ZANDBRIL staat je goed.\nMaar volgens mij staat hij mij beter.\pLaten we met een gevecht kijken\nwie hij beter staat!	
+Route111_Text_DrewDefeat	I couldn't see what was happening at\nmy sides because of the GO-GOGGLES.	Door de ZANDBRIL zag ik niet wat\ner naast me gebeurde.	
+Route111_Text_DrewPostBattle	The GO-GOGGLES make it possible to\nget through sandstorms.\lThat makes me happy!	Met de ZANDBRIL kom je door\nzandstormen heen.\lDaar word ik blij van!	
+Route111_Text_HeidiIntro	I'm having a picnic in the desert.\pYou can always find a TRAINER,\nso I can enjoy a battle here, too!	Ik heb een picknick in de woestijn.\pEr is altijd wel een TRAINER,\ndus ik kan hier ook vechten!	
+Route111_Text_HeidiDefeat	Ohhh! You're mean!	Ohhh! Wat ben jij gemeen!	
+Route111_Text_HeidiPostBattle	When you're battling in a sandstorm,\nwatch out for your POKéMON's HP.\pIt can faint if you don't keep\nan eye on it!	Vecht je in een zandstorm, let dan\ngoed op de HP van je POKéMON.\pAnders kan hij verslagen\nraken!	
+Route111_Text_BeauIntro	Wearing these GO-GOGGLES makes me\nfeel like a superhero.\lRight now, nobody can beat me!	Met deze ZANDBRIL op voel ik me\neen superheld.\lNiemand kan mij nu verslaan!	
+Route111_Text_BeauDefeat	I can't win on spirit alone…	Met lef alleen win ik niet…	
+Route111_Text_BeauPostBattle	I'm going to be a real hero one day.\nI'm going to work harder to make me\land my POKéMON stronger.	Ooit word ik een echte held.\nIk ga harder werken om mij en\lmijn POKéMON sterker te maken.	
+Route111_Text_BeckyIntro	I heard there are fossils to be found\nin the desert. Where could they be?	Ik hoorde dat er fossielen in de\nwoestijn liggen. Waar zouden ze zijn?	
+Route111_Text_BeckyDefeat	I came up short…	Net niet genoeg…	
 Route111_Text_BeckyPostBattle	If they can find fossils in the desert,\nit must have been a sea before.		
 Route111_Text_DustyIntro	For thirty years I have searched for\nancient ruins!\lI am to be challenged?		
 Route111_Text_DustyDefeat	While I have searched for ruins,\nI've not searched for strong POKéMON.		

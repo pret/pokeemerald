@@ -1,10 +1,10 @@
 key	english	dutch	notes
-SlateportCity_NameRatersHouse_Text_PleasedToRateMonNickname	Hi, hi! I'm the NAME RATER!\nI'm the fortune-teller of names!\pI shall be pleased to rate your\nPOKéMON's nickname.		
-SlateportCity_NameRatersHouse_Text_CritiqueWhichMonNickname	Which POKéMON's nickname should\nI critique?		
-SlateportCity_NameRatersHouse_Text_FineNameSuggestBetterOne	Hmmm… {STR_VAR_1}, is it? That is\nquite a fine name you bestowed.\pBut! What say you, if I were to\nsuggest a slightly better name?		
-SlateportCity_NameRatersHouse_Text_WhatShallNewNameBe	Ah, good. Then, what shall the new\nnickname be?		
-SlateportCity_NameRatersHouse_Text_MonShallBeKnownAsName	Done! From now on, this POKéMON\nshall be known as {STR_VAR_1}!\pIt is a better name than before!\nHow fortunate for you!		
-SlateportCity_NameRatersHouse_Text_DoVisitAgain	I see.\nDo come visit again.		
-SlateportCity_NameRatersHouse_Text_NameNoDifferentYetSuperior	Done! From now on, this POKéMON\nshall be known as {STR_VAR_1}!\pIt looks no different from before,\nand yet, this is vastly superior!\pHow fortunate for you!		
-SlateportCity_NameRatersHouse_Text_MagnificentName	Hmmm… {STR_VAR_1} it is!\pThis is a magnificent nickname!\nIt is impeccably beyond reproach!\pYou'll do well to cherish your\n{STR_VAR_1} now and beyond.		
-SlateportCity_NameRatersHouse_Text_ThatIsMerelyAnEgg	Now, now.\nThat is merely an EGG!		
+SlateportCity_NameRatersHouse_Text_PleasedToRateMonNickname	Hi, hi! I'm the NAME RATER!\nI'm the fortune-teller of names!\pI shall be pleased to rate your\nPOKéMON's nickname.	Hoi, hoi! Ik ben de NAME RATER!\nIk ben de waarzegger van namen!\pIk geef graag een cijfer voor de\nbijnaam van je POKéMON.	
+SlateportCity_NameRatersHouse_Text_CritiqueWhichMonNickname	Which POKéMON's nickname should\nI critique?	Van welke POKéMON zal ik de\nbijnaam beoordelen?	
+SlateportCity_NameRatersHouse_Text_FineNameSuggestBetterOne	Hmmm… {STR_VAR_1}, is it? That is\nquite a fine name you bestowed.\pBut! What say you, if I were to\nsuggest a slightly better name?	Hmmm… {STR_VAR_1}, zei je? Dat is\neen heel mooie naam.\pMaar! Wat zeg je ervan als ik een\nnog iets betere naam bedenk?	
+SlateportCity_NameRatersHouse_Text_WhatShallNewNameBe	Ah, good. Then, what shall the new\nnickname be?	Ah, mooi. Wat wordt de nieuwe\nbijnaam?	
+SlateportCity_NameRatersHouse_Text_MonShallBeKnownAsName	Done! From now on, this POKéMON\nshall be known as {STR_VAR_1}!\pIt is a better name than before!\nHow fortunate for you!	Klaar! Vanaf nu heet deze POKéMON\n{STR_VAR_1}!\pDat is een betere naam dan eerst!\nWat een geluk voor jou!	
+SlateportCity_NameRatersHouse_Text_DoVisitAgain	I see.\nDo come visit again.	Ik snap het.\nKom gerust nog eens langs.	
+SlateportCity_NameRatersHouse_Text_NameNoDifferentYetSuperior	Done! From now on, this POKéMON\nshall be known as {STR_VAR_1}!\pIt looks no different from before,\nand yet, this is vastly superior!\pHow fortunate for you!	Klaar! Vanaf nu heet deze POKéMON\n{STR_VAR_1}!\pHet lijkt hetzelfde als eerst,\nmaar het is veel beter!\pWat een geluk voor jou!	
+SlateportCity_NameRatersHouse_Text_MagnificentName	Hmmm… {STR_VAR_1} it is!\pThis is a magnificent nickname!\nIt is impeccably beyond reproach!\pYou'll do well to cherish your\n{STR_VAR_1} now and beyond.	Hmmm… {STR_VAR_1} dus!\pDat is een prachtige bijnaam!\nDaar is niks op aan te merken!\pZorg goed voor je {STR_VAR_1},\nnu en altijd.	
+SlateportCity_NameRatersHouse_Text_ThatIsMerelyAnEgg	Now, now.\nThat is merely an EGG!	Nou, nou.\nDat is maar een EI!	
