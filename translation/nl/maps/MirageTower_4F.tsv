@@ -1,5 +1,5 @@
 key	english	dutch	notes
-MirageTower_4F_Text_TakeRootFossil	You found the ROOT FOSSIL.\pIf this FOSSIL is taken, the ground\naround it will likely crumble away…\pTake the ROOT FOSSIL anyway?		
-MirageTower_4F_Text_LeftRootFossilAlone	{PLAYER} left the ROOT FOSSIL alone.		
-MirageTower_4F_Text_TakeClawFossil	You found the CLAW FOSSIL.\pIf this FOSSIL is taken, the ground\naround it will likely crumble away…\pTake the CLAW FOSSIL anyway?		
-MirageTower_4F_Text_LeaveClawFossilAlone	{PLAYER} left the CLAW FOSSIL alone.		
+MirageTower_4F_Text_TakeRootFossil	You found the ROOT FOSSIL.\pIf this FOSSIL is taken, the ground\naround it will likely crumble away…\pTake the ROOT FOSSIL anyway?	Je vond het WORTELFOSSIEL.\pAls je dit FOSSIEL pakt, stort de\ngrond eromheen waarschijnlijk in…\pToch het WORTELFOSSIEL pakken?	
+MirageTower_4F_Text_LeftRootFossilAlone	{PLAYER} left the ROOT FOSSIL alone.	{PLAYER} liet het WORTELFOSSIEL\nliggen.	
+MirageTower_4F_Text_TakeClawFossil	You found the CLAW FOSSIL.\pIf this FOSSIL is taken, the ground\naround it will likely crumble away…\pTake the CLAW FOSSIL anyway?	Je vond het KLAUWFOSSIEL.\pAls je dit FOSSIEL pakt, stort de\ngrond eromheen waarschijnlijk in…\pToch het KLAUWFOSSIEL pakken?	
+MirageTower_4F_Text_LeaveClawFossilAlone	{PLAYER} left the CLAW FOSSIL alone.	{PLAYER} liet het KLAUWFOSSIEL\nliggen.	

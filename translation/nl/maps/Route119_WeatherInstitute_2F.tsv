@@ -1,23 +1,23 @@
 key	english	dutch	notes
-Route119_WeatherInstitute_2F_Text_Grunt2Intro	The INSTITUTE created a type of\nPOKéMON that has something to do with\lthe weather. We're here to take them!		
-Route119_WeatherInstitute_2F_Text_Grunt2Defeat	Our plan's being spoiled by a kid?		
-Route119_WeatherInstitute_2F_Text_Grunt2PostBattle	If the POKéMON they made here can\ncontrol the weather freely, then we of\lTEAM AQUA definitely need it!		
-Route119_WeatherInstitute_2F_Text_Grunt3Intro	We're TEAM AQUA!\nWe appear wherever anything rare is\lfound!		
-Route119_WeatherInstitute_2F_Text_Grunt3Defeat	You got me!		
-Route119_WeatherInstitute_2F_Text_Grunt3PostBattle	You don't have any idea what we of\nTEAM AQUA are working towards!\lYou stay out of our way!		
-Route119_WeatherInstitute_2F_Text_Grunt5Intro	Don't tell me you're looking for that\nweather POKéMON, too?\pThat's a no-no!\nWe were here to get it first!		
-Route119_WeatherInstitute_2F_Text_Grunt5Defeat	Oh, will you look at my POKéMON?		
-Route119_WeatherInstitute_2F_Text_Grunt5PostBattle	Humph, so what?\nWhat we want…\pWhat we really want isn't here…\nIhihihihi…		
-Route119_WeatherInstitute_2F_Text_ShellyIntro	Ahahahaha!\pYou're going to meddle in TEAM AQUA's\naffairs?\pYou're either absolutely fearless,\nsimply ignorant, or both!\pYou're so cute, you're disgusting!\nI'll put you down, kiddy!		
-Route119_WeatherInstitute_2F_Text_ShellyDefeat	Ahahahaha!\nYou're disgustingly strong!		
-Route119_WeatherInstitute_2F_Text_ShellyPostBattle	It's bad enough to have TEAM MAGMA\nblunder about, but now there's you!\pWhat makes you want to sniff around\nin our business, anyway?		
-Route119_WeatherInstitute_2F_Text_TeamMagmaJustPassedBy	We have a situation here!\pA TEAM MAGMA mob just passed\nthe WEATHER INSTITUTE.\pThey appear to be headed for\nMT. PYRE!		
-Route119_WeatherInstitute_2F_Text_WeHaveToHurryToMtPyre	What?!\pWe can't waste any more time here!\nWe have to hurry to MT. PYRE, too!\pAhahahaha!\nTEAM MAGMA, just you wait!		
-Route119_WeatherInstitute_2F_Text_ThanksPleaseTakePokemon	Thanks!\nThanks to you, we're safe!\pIt might be an odd way of thanking you,\nbut take this POKéMON.		
-Route119_WeatherInstitute_2F_Text_NoRoomForPokemon	Hm? You don't seem to have any room\nfor this POKéMON.		
-Route119_WeatherInstitute_2F_Text_PlayerReceivedCastform	{PLAYER} received CASTFORM!		
-Route119_WeatherInstitute_2F_Text_PokemonChangesWithWeather	That POKéMON changes shape according\nto the weather conditions.\pThere're plenty of them in the\nINSTITUTE--go ahead and take it.		
-Route119_WeatherInstitute_2F_Text_ChangingWeatherRidiculous	I've been researching rain for many\nyears, but it's ridiculous to think that\lhumans can freely change the weather.		
-Route119_WeatherInstitute_2F_Text_GroudonWeather	I track weather patterns over\nthe HOENN region.\pPresently, a drought has been recorded\nin {STR_VAR_1}.\pCould that mean, somewhere near\n{STR_VAR_1}…		
-Route119_WeatherInstitute_2F_Text_KyogreWeather	I track weather patterns over\nthe HOENN region.\pPresently, heavy rainfall has been\nrecorded over {STR_VAR_1}.\pCould that mean, somewhere near\n{STR_VAR_1}…		
-Route119_WeatherInstitute_2F_Text_NoAbnormalWeather	Abnormal weather conditions are\nno longer being reported.\pThe occasional rainfall is a blessing,\nreally.		
+Route119_WeatherInstitute_2F_Text_Grunt2Intro	The INSTITUTE created a type of\nPOKéMON that has something to do with\lthe weather. We're here to take them!	Het INSTITUTE maakte een POKéMON\ndie iets met het weer doet.\lWij komen ze halen!	
+Route119_WeatherInstitute_2F_Text_Grunt2Defeat	Our plan's being spoiled by a kid?	Ons plan wordt verpest door een kind?	
+Route119_WeatherInstitute_2F_Text_Grunt2PostBattle	If the POKéMON they made here can\ncontrol the weather freely, then we of\lTEAM AQUA definitely need it!	Als de POKéMON die ze hier maakten\nhet weer kunnen sturen, dan moet\lTEAM AQUA ze hebben!	
+Route119_WeatherInstitute_2F_Text_Grunt3Intro	We're TEAM AQUA!\nWe appear wherever anything rare is\lfound!	Wij zijn TEAM AQUA!\nWe komen overal waar iets\lzeldzaams is!	
+Route119_WeatherInstitute_2F_Text_Grunt3Defeat	You got me!	Je hebt me!	
+Route119_WeatherInstitute_2F_Text_Grunt3PostBattle	You don't have any idea what we of\nTEAM AQUA are working towards!\lYou stay out of our way!	Je hebt geen idee waar wij van\nTEAM AQUA naartoe werken!\lBlijf uit onze weg!	
+Route119_WeatherInstitute_2F_Text_Grunt5Intro	Don't tell me you're looking for that\nweather POKéMON, too?\pThat's a no-no!\nWe were here to get it first!	Zeg niet dat je ook die\nweer-POKéMON zoekt?\pDat mag niet!\nWij waren hier eerst!	
+Route119_WeatherInstitute_2F_Text_Grunt5Defeat	Oh, will you look at my POKéMON?	Oh, kijk nou naar mijn POKéMON!	
+Route119_WeatherInstitute_2F_Text_Grunt5PostBattle	Humph, so what?\nWhat we want…\pWhat we really want isn't here…\nIhihihihi…	Hmpf, en wat dan nog?\nWat we willen…\pWat we echt willen is hier niet…\nIhihihihi…	
+Route119_WeatherInstitute_2F_Text_ShellyIntro	Ahahahaha!\pYou're going to meddle in TEAM AQUA's\naffairs?\pYou're either absolutely fearless,\nsimply ignorant, or both!\pYou're so cute, you're disgusting!\nI'll put you down, kiddy!	Ahahahaha!\pJe gaat je bemoeien met\nzaken van TEAM AQUA?\pJe bent of heel dapper,\nof gewoon dom, of allebei!\pJe bent zo schattig dat het\nwalgelijk is! Ik maak je klein!	
+Route119_WeatherInstitute_2F_Text_ShellyDefeat	Ahahahaha!\nYou're disgustingly strong!	Ahahahaha!\nJe bent walgelijk sterk!	
+Route119_WeatherInstitute_2F_Text_ShellyPostBattle	It's bad enough to have TEAM MAGMA\nblunder about, but now there's you!\pWhat makes you want to sniff around\nin our business, anyway?	Het is al erg dat TEAM MAGMA\nrondrommelt, en nu ook jij!\pWaarom steek je je neus in\nonze zaken?	
+Route119_WeatherInstitute_2F_Text_TeamMagmaJustPassedBy	We have a situation here!\pA TEAM MAGMA mob just passed\nthe WEATHER INSTITUTE.\pThey appear to be headed for\nMT. PYRE!	Er is een probleem!\pEen bende van TEAM MAGMA liep\nnet langs het WEATHER INSTITUTE.\pZe gaan blijkbaar naar\nMT. PYRE!	
+Route119_WeatherInstitute_2F_Text_WeHaveToHurryToMtPyre	What?!\pWe can't waste any more time here!\nWe have to hurry to MT. PYRE, too!\pAhahahaha!\nTEAM MAGMA, just you wait!	Wat?!\pWe mogen geen tijd verliezen!\nWe moeten ook snel naar MT. PYRE!\pAhahahaha!\nTEAM MAGMA, wacht maar!	
+Route119_WeatherInstitute_2F_Text_ThanksPleaseTakePokemon	Thanks!\nThanks to you, we're safe!\pIt might be an odd way of thanking you,\nbut take this POKéMON.	Bedankt!\nDankzij jou zijn we veilig!\pHet is misschien raar, maar\nneem deze POKéMON als bedankje.	
+Route119_WeatherInstitute_2F_Text_NoRoomForPokemon	Hm? You don't seem to have any room\nfor this POKéMON.	Hm? Je hebt geen plek meer\nvoor deze POKéMON.	
+Route119_WeatherInstitute_2F_Text_PlayerReceivedCastform	{PLAYER} received CASTFORM!	{PLAYER} kreeg CASTFORM!	
+Route119_WeatherInstitute_2F_Text_PokemonChangesWithWeather	That POKéMON changes shape according\nto the weather conditions.\pThere're plenty of them in the\nINSTITUTE--go ahead and take it.	Die POKéMON verandert van vorm\nmet het weer.\pEr zijn er genoeg in het\nINSTITUTE. Neem er maar een.	
+Route119_WeatherInstitute_2F_Text_ChangingWeatherRidiculous	I've been researching rain for many\nyears, but it's ridiculous to think that\lhumans can freely change the weather.	Ik onderzoek regen al jaren, maar\nhet is belachelijk om te denken dat\lmensen het weer kunnen veranderen.	
+Route119_WeatherInstitute_2F_Text_GroudonWeather	I track weather patterns over\nthe HOENN region.\pPresently, a drought has been recorded\nin {STR_VAR_1}.\pCould that mean, somewhere near\n{STR_VAR_1}…	Ik volg het weer boven HOENN.\pNu is droogte gemeld\nin {STR_VAR_1}.\pZou dat betekenen dat ergens bij\n{STR_VAR_1}…	
+Route119_WeatherInstitute_2F_Text_KyogreWeather	I track weather patterns over\nthe HOENN region.\pPresently, heavy rainfall has been\nrecorded over {STR_VAR_1}.\pCould that mean, somewhere near\n{STR_VAR_1}…	Ik volg het weer boven HOENN.\pNu is zware regen gemeld\nboven {STR_VAR_1}.\pZou dat betekenen dat ergens bij\n{STR_VAR_1}…	
+Route119_WeatherInstitute_2F_Text_NoAbnormalWeather	Abnormal weather conditions are\nno longer being reported.\pThe occasional rainfall is a blessing,\nreally.	Er wordt geen vreemd weer\nmeer gemeld.\pEen beetje regen is eigenlijk\ngewoon fijn.	

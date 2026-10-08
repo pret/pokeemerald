@@ -29,20 +29,21 @@ LavaridgeTown_PokemonCenter_1F_EventScript_Gentleman::
 	end
 
 LavaridgeTown_PokemonCenter_1F_Text_TrainersPokemonSpendTimeTogether:
-	.string "I think POKéMON get closer to their\n"
-	.string "TRAINERS if they spend time together.\p"
-	.string "The longer the better.\n"
-	.string "That's what I think.$"
+	.string "Ik denk dat POKéMON dichter bij\n"
+	.string "hun TRAINER komen als ze samen\l"
+	.string "veel tijd doorbrengen.\p"
+	.string "Hoe langer, hoe beter.\n"
+	.string "Dat denk ik.$"
 
 LavaridgeTown_PokemonCenter_1F_Text_HotSpringCanInvigorate:
-	.string "It's sort of magical how just sitting\n"
-	.string "in a hot-spring pool can invigorate.\p"
-	.string "I wish I could let my POKéMON\n"
-	.string "soak, too.$"
+	.string "Het is magisch hoe fit je wordt\n"
+	.string "van zomaar in een warm bad zitten.\p"
+	.string "Ik wou dat mijn POKéMON ook\n"
+	.string "konden badderen.$"
 
 LavaridgeTown_PokemonCenter_1F_Text_TrainersShouldRestToo:
-	.string "Hohoho! Hey, kid, you can reach\n"
-	.string "the hot springs from here.\p"
-	.string "If POKéMON are getting rest, so too\n"
-	.string "should their TRAINERS.$"
+	.string "Hohoho! Hé joh, vanaf hier kom je\n"
+	.string "bij de warme bronnen.\p"
+	.string "Als POKéMON rusten, moeten hun\n"
+	.string "TRAINERS dat ook doen.$"
 

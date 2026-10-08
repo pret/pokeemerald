@@ -40,25 +40,25 @@ LavaridgeTown_HerbShop_EventScript_ExplainCharcoal::
 	end
 
 LavaridgeTown_HerbShop_Text_WelcomeToHerbShop:
-	.string "Welcome to the HERB SHOP, home of\n"
-	.string "effective and inexpensive medicine!$"
+	.string "Welkom bij de KRUIDENWINKEL, voor\n"
+	.string "goede en goedkope medicijnen!$"
 
 LavaridgeTown_HerbShop_Text_YouveComeToLookAtHerbalMedicine:
-	.string "You've come to look at herbal medicine\n"
+	.string "Kom je kijken naar kruidenmedicijn\n"
 	.string "in LAVARIDGE?\p"
-	.string "That's rather commendable.\p"
-	.string "I like you! Take this!$"
+	.string "Dat is knap van je.\p"
+	.string "Ik mag je! Pak dit!$"
 
 LavaridgeTown_HerbShop_Text_ExplainCharcoal:
-	.string "That CHARCOAL I gave you, it's used\n"
-	.string "for making herbal medicine.\p"
-	.string "It also does wonders when held by\n"
-	.string "a POKéMON.\p"
-	.string "It intensifies the power of FIRE-type\n"
-	.string "moves.$"
+	.string "Die HOUTSKOOL die ik je gaf,\n"
+	.string "maakt men kruidenmedicijn mee.\p"
+	.string "Een POKéMON die het vasthoudt,\n"
+	.string "wordt er ook sterker van.\p"
+	.string "De VUUR-aanvallen worden er\n"
+	.string "krachtiger door.$"
 
 LavaridgeTown_HerbShop_Text_HerbalMedicineWorksButMonWillDislike:
-	.string "Herbal medicine works impressively well.\n"
-	.string "But your POKéMON will dislike you for it.\l"
-	.string "It must be horribly bitter!$"
+	.string "Kruidenmedicijn werkt heel goed.\n"
+	.string "Maar je POKéMON vindt het vies.\l"
+	.string "Het is ontzettend bitter!$"
 

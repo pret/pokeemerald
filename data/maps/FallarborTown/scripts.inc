@@ -52,44 +52,43 @@ FallarborTown_EventScript_MoveTutorSign::
 	end
 
 FallarborTown_Text_ShadyCharactersCozmosHome:
-	.string "Something's happening,\n"
-	.string "and I don't like it!\p"
-	.string "I've seen shady characters wandering\n"
-	.string "in and out of PROF. COZMO's home…$"
+	.string "Er is iets aan de hand,\n"
+	.string "en ik vind het niet fijn!\p"
+	.string "Ik zag vreemde types in en uit\n"
+	.string "het huis van PROF. COZMO lopen…$"
 
 FallarborTown_Text_RegionKnownForMeteors:
-	.string "This region's been known for meteors\n"
-	.string "since the olden days.\p"
-	.string "They say METEOR FALLS was gouged out\n"
-	.string "by a falling meteorite long ago.$"
+	.string "Hier vallen al heel lang\n"
+	.string "meteorieten uit de lucht.\p"
+	.string "Men zegt dat METEOR FALLS is\n"
+	.string "ontstaan door een meteoriet.$"
 
 FallarborTown_Text_MyPreciousAzurill:
-	.string "See! Take a look!\n"
-	.string "This is my precious AZURILL!\p"
-	.string "It's slick and smooth and plushy, too!$"
+	.string "Kijk eens!\n"
+	.string "Dit is mijn lieve AZURILL!\p"
+	.string "Hij is glad, zacht en pluizig!$"
 
 FallarborTown_Text_Azurill:
 	.string "AZURILL: Rooreelooo.$"
 
 FallarborTown_Text_HaveYouChallengedFlannery:
-	.string "Have you already challenged FLANNERY,\n"
-	.string "the LEADER of LAVARIDGE GYM?\p"
-	.string "The girl's grandfather was famous.\n"
-	.string "He was one of the ELITE FOUR in the\l"
-	.string "POKéMON LEAGUE at one point.\p"
-	.string "It wouldn't surprise me to see FLANNERY\n"
-	.string "become a great TRAINER in her own\l"
-	.string "right.$"
+	.string "Heb je FLANNERY al uitgedaagd,\n"
+	.string "de LEIDER van LAVARIDGE GYM?\p"
+	.string "Haar opa was beroemd.\n"
+	.string "Hij zat ooit bij de ELITE FOUR\l"
+	.string "van de POKéMON LEAGUE.\p"
+	.string "Ik denk dat FLANNERY ook een\n"
+	.string "geweldige TRAINER wordt.$"
 
 FallarborTown_Text_BattleTentSign:
-	.string "BATTLE TENT FALLARBOR SITE\n"
-	.string "“May the Greatest Teams Gather!”$"
+	.string "BATTLE TENT FALLARBOR\n"
+	.string "“Laat de beste teams komen!”$"
 
 FallarborTown_Text_TownSign:
 	.string "FALLARBOR TOWN\n"
-	.string "“A farm community with small gardens.”$"
+	.string "“Een dorp met kleine tuintjes.”$"
 
 FallarborTown_Text_MoveTutorSign:
-	.string "MOVE TUTOR'S HOUSE\n"
-	.string "“New moves taught to POKéMON.”$"
+	.string "HUIS VAN DE MOVE TUTOR\n"
+	.string "“Leert POKéMON nieuwe aanvallen.”$"
 

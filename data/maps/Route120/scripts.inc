@@ -354,65 +354,66 @@ Route120_EventScript_Callie::
 	end
 
 Route120_Text_StevenGreeting:
-	.string "STEVEN: Hm? {PLAYER}{KUN}, hi.\n"
-	.string "It's been a while.\p"
-	.string "There's something here that you can't\n"
-	.string "see, right?\p"
-	.string "Now, if I were to use this device on\n"
-	.string "the invisible obstacle…\p"
-	.string "No, no. Rather than describing it,\n"
-	.string "I should just show you.\l"
-	.string "That would be more fun.\p"
-	.string "{PLAYER}{KUN}, are your POKéMON ready for\n"
-	.string "battle?$"
+	.string "STEVEN: Hm? {PLAYER}{KUN}, hoi.\n"
+	.string "Lang niet gezien.\p"
+	.string "Hier is iets dat je niet kunt zien,\n"
+	.string "hè?\p"
+	.string "Als ik dit apparaat gebruik op\n"
+	.string "het onzichtbare ding…\p"
+	.string "Nee, nee. Ik kan het beter\n"
+	.string "gewoon laten zien.\l"
+	.string "Dat is leuker.\p"
+	.string "{PLAYER}{KUN}, zijn je POKéMON klaar\n"
+	.string "voor een gevecht?$"
 
 Route120_Text_StevenIllWaitHere:
-	.string "STEVEN: No?\p"
-	.string "I'll wait here, so you can get ready.$"
+	.string "STEVEN: Nee?\p"
+	.string "Ik wacht hier, dan kun je je\n"
+	.string "voorbereiden.$"
 
 Route120_Text_StevenReadyForBattle:
-	.string "STEVEN: {PLAYER}{KUN}, are your POKéMON\n"
-	.string "ready for battle?$"
+	.string "STEVEN: {PLAYER}{KUN}, zijn je POKéMON\n"
+	.string "klaar voor een gevecht?$"
 
 Route120_Text_StevenShowMeYourPower:
-	.string "STEVEN: {PLAYER}{KUN}, show me your true\n"
-	.string "power as a TRAINER!$"
+	.string "STEVEN: {PLAYER}{KUN}, laat me zien\n"
+	.string "hoe sterk je echt bent als TRAINER!$"
 
 Route120_Text_StevenUsedDevonScope:
-	.string "STEVEN used the DEVON SCOPE.\p"
-	.string "An invisible POKéMON became completely\n"
-	.string "visible!\p"
-	.string "The startled POKéMON attacked!$"
+	.string "STEVEN gebruikte de DEVONKIJKER.\p"
+	.string "Een onzichtbare POKéMON werd\n"
+	.string "helemaal zichtbaar!\p"
+	.string "De POKéMON schrok en viel aan!$"
 
 Route120_Text_StevenGiveDevonScope:
-	.string "STEVEN: I see…\n"
-	.string "Your battle style is intriguing.\p"
-	.string "Your POKéMON have obviously grown\n"
-	.string "since I first met you in DEWFORD.\p"
-	.string "I'd like you to have this\n"
-	.string "DEVON SCOPE.\p"
-	.string "Who knows, there may be other\n"
-	.string "concealed POKéMON.$"
+	.string "STEVEN: Ik begrijp het…\n"
+	.string "Je vechtstijl is interessant.\p"
+	.string "Je POKéMON zijn duidelijk gegroeid\n"
+	.string "sinds ik je zag in DEWFORD.\p"
+	.string "Je mag deze DEVONKIJKER\n"
+	.string "hebben.\p"
+	.string "Wie weet zijn er nog meer\n"
+	.string "verborgen POKéMON.$"
 
 Route120_Text_StevenGoodbye:
 	.string "STEVEN: {PLAYER}{KUN}.\p"
-	.string "I enjoy seeing POKéMON and TRAINERS\n"
-	.string "who strive together.\p"
-	.string "I think you're doing great.\p"
-	.string "Well, let's meet again somewhere.$"
+	.string "Ik vind het mooi om POKéMON en\n"
+	.string "TRAINERS samen te zien groeien.\p"
+	.string "Ik vind dat je het geweldig doet.\p"
+	.string "Nou, tot ziens ergens.$"
 
 Kecleon_Text_SomethingUnseeable:
-	.string "Something unseeable is in the way.$"
+	.string "Er staat iets onzichtbaars in de weg.$"
 
 Kecleon_Text_WantToUseDevonScope:
-	.string "Something unseeable is in the way.\p"
-	.string "Want to use the DEVON SCOPE?$"
+	.string "Er staat iets onzichtbaars in de weg.\p"
+	.string "Wil je de DEVONKIJKER gebruiken?$"
 
 Kecleon_Text_UseDevonScopeMonAttacked:
-	.string "{PLAYER} used the DEVON SCOPE.\p"
-	.string "An invisible POKéMON became completely\n"
-	.string "visible!\p"
-	.string "The startled POKéMON attacked!$"
+	.string "{PLAYER} gebruikte de DEVONKIJKER.\p"
+	.string "Een onzichtbare POKéMON werd\n"
+	.string "helemaal zichtbaar!\p"
+	.string "De POKéMON schrok en viel aan!$"
 
 Route120_Text_RouteSignFortree:
 	.string "ROUTE 120\n"

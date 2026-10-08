@@ -33,13 +33,16 @@ LavaridgeTown_Mart_EventScript_OldWoman::
 	end
 
 LavaridgeTown_Mart_Text_XSpeedFirstStrike:
-	.string "Use X SPEED to add to a POKéMON's\n"
-	.string "SPEED in battle.\p"
-	.string "That will help it get in the first\n"
-	.string "strike--a decided advantage!$"
+	.string "Gebruik X SNELHEID om de\n"
+	.string "SNELHEID van een POKéMON te\l"
+	.string "verhogen in een gevecht.\p"
+	.string "Dan kan hij als eerste aanvallen,\n"
+	.string "en dat is een groot voordeel!$"
 
 LavaridgeTown_Mart_Text_LocalSpecialtyOnMtChimney:
-	.string "On MT. CHIMNEY's peak, there's a local\n"
-	.string "specialty that you can buy only there.\p"
-	.string "Give it to a POKéMON--it will be elated.$"
+	.string "Op de top van MT. CHIMNEY is\n"
+	.string "een speciale lekkernij die je alleen\l"
+	.string "daar koopt.\p"
+	.string "Geef het aan een POKéMON,\n"
+	.string "en hij wordt super blij.$"
 

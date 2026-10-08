@@ -1,10 +1,10 @@
 key	english	dutch	notes
-Route118_Text_StevenQuestions	STEVEN: Hi, {PLAYER}{KUN}!\pIt's me, STEVEN!\nWe met in the cave near DEWFORD.\pHave you met many kinds of POKéMON\nsince I last saw you?\pThere are many, many kinds of POKéMON\nin this wide world of ours.\pIf you wanted to raise only your\nfavorites, that's fine.\pPerhaps you find it more fun to raise\nall sorts of POKéMON.\pAs a TRAINER of POKéMON,\nwhat do you think?\pOf course, it's not any of my business.\pIt would be nice if we were to meet\nagain somewhere.		
-Route118_Text_YouAgreeGoodRodIsGood	Hmm!\nA GOOD ROD is really good!\pWouldn't you agree?		
-Route118_Text_IdenticalMindsTakeThis	Hmm!\nWe're of identical minds!\pHmm!\nTake this GOOD ROD!		
-Route118_Text_TryYourLuckFishing	Wherever there's water, try your luck\nat fishing.		
-Route118_Text_DontYouLikeToFish	Don't you like to fish?		
-Route118_Text_TryCatchingMonWithGoodRod	Try catching all sorts of POKéMON\nwith your GOOD ROD.		
-Route118_Text_CanCrossRiversWithSurf	Even if there isn't a boat, you can\ncross rivers and the sea if you have\la POKéMON that knows SURF.\pPOKéMON can be counted on to do so\nmuch!		
-Route118_Text_RouteSignMauville	ROUTE 118\n{LEFT_ARROW} MAUVILLE CITY		
-Route118_Text_RouteSign119	ROUTE 118\n{UP_ARROW} ROUTE 119		
+Route118_Text_StevenQuestions	STEVEN: Hi, {PLAYER}{KUN}!\pIt's me, STEVEN!\nWe met in the cave near DEWFORD.\pHave you met many kinds of POKéMON\nsince I last saw you?\pThere are many, many kinds of POKéMON\nin this wide world of ours.\pIf you wanted to raise only your\nfavorites, that's fine.\pPerhaps you find it more fun to raise\nall sorts of POKéMON.\pAs a TRAINER of POKéMON,\nwhat do you think?\pOf course, it's not any of my business.\pIt would be nice if we were to meet\nagain somewhere.	STEVEN: Hoi, {PLAYER}{KUN}!\pIk ben het, STEVEN!\nWe ontmoetten elkaar in de grot\lbij DEWFORD.\pHeb je veel soorten POKéMON\ngezien sinds ik je zag?\pEr zijn heel veel soorten POKéMON\nin onze wereld.\pAls je alleen je lievelingen wilt\nopvoeden, is dat prima.\pMisschien vind je het leuker om\nallerlei POKéMON op te voeden.\pWat denk jij als TRAINER\nvan POKéMON?\pNatuurlijk, het is mijn zaak niet.\pHet zou fijn zijn als we elkaar\nergens weer tegenkomen.	
+Route118_Text_YouAgreeGoodRodIsGood	Hmm!\nA GOOD ROD is really good!\pWouldn't you agree?	Hmm!\nEen GOEDE HENGEL is echt goed!\pVind je ook niet?	
+Route118_Text_IdenticalMindsTakeThis	Hmm!\nWe're of identical minds!\pHmm!\nTake this GOOD ROD!	Hmm!\nWe denken hetzelfde!\pHmm!\nPak deze GOEDE HENGEL!	
+Route118_Text_TryYourLuckFishing	Wherever there's water, try your luck\nat fishing.	Probeer overal waar water is\nje geluk met vissen.	
+Route118_Text_DontYouLikeToFish	Don't you like to fish?	Hou je niet van vissen?	
+Route118_Text_TryCatchingMonWithGoodRod	Try catching all sorts of POKéMON\nwith your GOOD ROD.	Probeer allerlei POKéMON te vangen\nmet je GOEDE HENGEL.	
+Route118_Text_CanCrossRiversWithSurf	Even if there isn't a boat, you can\ncross rivers and the sea if you have\la POKéMON that knows SURF.\pPOKéMON can be counted on to do so\nmuch!	Ook zonder boot kun je rivieren en\nde zee oversteken met een POKéMON\ldie SURFEN kent.\pOp POKéMON kun je echt veel\nrekenen!	
+Route118_Text_RouteSignMauville	ROUTE 118\n{LEFT_ARROW} MAUVILLE CITY	ROUTE 118\n{LEFT_ARROW} MAUVILLE CITY	
+Route118_Text_RouteSign119	ROUTE 118\n{UP_ARROW} ROUTE 119	ROUTE 118\n{UP_ARROW} ROUTE 119	

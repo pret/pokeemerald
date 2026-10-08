@@ -42,27 +42,27 @@ FallarborTown_BattleTentCorridor_Movement_AttendantEnterDoor:
 @ Leftover text from when this was a Contest Hall in R/S
 @ Unused
 FallarborTown_ContestHall_Text_DoAllRightInPreliminary:
-	.string "We do all right in the preliminary round,\n"
-	.string "but we can never win the appeals…\p"
-	.string "Maybe it means I have to watch what\n"
-	.string "other contestants are doing…$"
+	.string "In de voorronde gaat het prima,\n"
+	.string "maar de finale winnen we nooit…\p"
+	.string "Misschien moet ik beter kijken\n"
+	.string "wat de anderen doen…$"
 
 @ Unused
 FallarborTown_ContestHall_Text_MonAllTheseRibbons:
-	.string "See!\n"
-	.string "My POKéMON won all these RIBBONS!\p"
-	.string "Have your POKéMON earned any RIBBONS?\n"
-	.string "You can check them on your POKéNAV.$"
+	.string "Kijk!\n"
+	.string "Mijn POKéMON won al deze LINTEN!\p"
+	.string "Heeft jouw POKéMON ook LINTEN?\n"
+	.string "Dat zie je op je POKéNAV.$"
 
 @ Unused
 FallarborTown_ContestHall_Text_CantWinEverywhere:
-	.string "I can't beat GYM LEADERS…\p"
-	.string "I can't win any CONTESTS…\p"
-	.string "I've been here, there, and everywhere,\n"
-	.string "and it's all for naught…$"
+	.string "Ik win niet van GYMLEIDERS…\p"
+	.string "Ik win ook geen WEDSTRIJDEN…\p"
+	.string "Ik ben overal geweest,\n"
+	.string "maar het helpt niks…$"
 
 @ Unused
 FallarborTown_ContestHall_Text_SuperRankStage:
-	.string "POKéMON CONTESTS\n"
-	.string "SUPER RANK STAGE!$"
+	.string "POKéMON WEDSTRIJDEN\n"
+	.string "SUPER RANK PODIUM!$"
 

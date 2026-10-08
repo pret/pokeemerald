@@ -1,9 +1,9 @@
 key	english	dutch	notes
-FallarborTown_MoveRelearnersHouse_Text_ImTheMoveTutor	I'm the MOVE TUTOR.\pI know all the moves that POKéMON\nlearn--every one of them--and I can\lteach POKéMON those moves.\pI can teach a move to a POKéMON\nof yours if you'd like.\pI'll do it for a HEART SCALE.\nI'm collecting those now.		
-FallarborTown_MoveRelearnersHouse_Text_ThatsAHeartScaleWantMeToTeachMove	Oh! That's it! That's an honest to\ngoodness HEART SCALE!\pLet me guess, you want me to teach\na move?		
-FallarborTown_MoveRelearnersHouse_Text_TutorWhichMon	Which POKéMON needs tutoring?		
-FallarborTown_MoveRelearnersHouse_Text_TeachWhichMove	Which move should I teach?		
-FallarborTown_MoveRelearnersHouse_Text_DontHaveMoveToTeachPokemon	Sorry…\pIt doesn't appear as if I have any move\nI can teach that POKéMON.		
-FallarborTown_MoveRelearnersHouse_Text_HandedOverHeartScale	{PLAYER} handed over one HEART SCALE\nin exchange.		
-FallarborTown_MoveRelearnersHouse_Text_ComeBackWithHeartScale	If your POKéMON need to learn a move,\ncome back with a HEART SCALE.		
-FallarborTown_MoveRelearnersHouse_Text_CantTeachEgg	Hunh? There isn't a single move that\nI can teach an EGG.		
+FallarborTown_MoveRelearnersHouse_Text_ImTheMoveTutor	I'm the MOVE TUTOR.\pI know all the moves that POKéMON\nlearn--every one of them--and I can\lteach POKéMON those moves.\pI can teach a move to a POKéMON\nof yours if you'd like.\pI'll do it for a HEART SCALE.\nI'm collecting those now.	Ik ben de MOVE TUTOR.\pIk ken alle aanvallen die POKéMON\nkunnen leren, echt alle, en ik kan\lze aan POKéMON leren.\pIk leer jouw POKéMON een aanval\nals je wilt.\pIk doe het voor een HARTSCHUB.\nDie verzamel ik nu.	
+FallarborTown_MoveRelearnersHouse_Text_ThatsAHeartScaleWantMeToTeachMove	Oh! That's it! That's an honest to\ngoodness HEART SCALE!\pLet me guess, you want me to teach\na move?	Oh! Dat is echt een HARTSCHUB!\pLaat me raden: wil je dat ik\neen aanval leer?	
+FallarborTown_MoveRelearnersHouse_Text_TutorWhichMon	Which POKéMON needs tutoring?	Welke POKéMON wil les?	
+FallarborTown_MoveRelearnersHouse_Text_TeachWhichMove	Which move should I teach?	Welke aanval leer ik hem?	
+FallarborTown_MoveRelearnersHouse_Text_DontHaveMoveToTeachPokemon	Sorry…\pIt doesn't appear as if I have any move\nI can teach that POKéMON.	Sorry…\pIk heb geen aanval die ik\ndeze POKéMON kan leren.	
+FallarborTown_MoveRelearnersHouse_Text_HandedOverHeartScale	{PLAYER} handed over one HEART SCALE\nin exchange.	{PLAYER} gaf één HARTSCHUB\nin ruil.	
+FallarborTown_MoveRelearnersHouse_Text_ComeBackWithHeartScale	If your POKéMON need to learn a move,\ncome back with a HEART SCALE.	Moet je POKéMON een aanval leren?\nKom dan terug met een HARTSCHUB.	
+FallarborTown_MoveRelearnersHouse_Text_CantTeachEgg	Hunh? There isn't a single move that\nI can teach an EGG.	Hè? Ik kan een EI helemaal\ngeen aanval leren.	
