@@ -1,8 +1,22 @@
 # Pokémon Smaragd: Dutch translation of pokeemerald
 
 This repo is pret's pokeemerald decomp. We are translating the game into **Dutch**.
-Build with `make` → `pokeemerald.gba`. Test in mGBA (start a new game for intro text).
+Build with `make` → `PokemonSmaragd.gba`. Test in mGBA (start a new game for intro text).
 Work happens on branch `nl-translation`, one commit per batch.
+
+## How to work (keep it cheap)
+- **Do not spawn subagents or parallel agents unless the user explicitly asks.** Work sequentially in the main session.
+- **Translate one package at a time**, then stop and report.
+  - A package is one area of the game (a group of maps), or one shared text file.
+  - Progress and the next package are in `translation/PLAN.md` ("Dialogue progress").
+- **Per package:**
+  1. `python3 translation/next_package.py '<regex>' > /tmp/pkg.in.txt` lists the untranslated `KEY<TAB>english` lines for maps/keys matching the regex. Example regex: `^(LavaridgeTown|Route112)`.
+  2. Write the Dutch straight to `/tmp/pkg.out.txt` (`KEY<TAB>dutch`, one line per input key). Append in chunks; do not echo translations back in chat.
+  3. Run `python3 translation/check_fill.py /tmp/pkg.out.txt` and fix problems until 0.
+  4. Run `python3 translation/fill.py '*/*' /tmp/pkg.out.txt`, then `python3 translation/apply.py`, then `make`.
+  5. Commit, tick the package in `PLAN.md`, and add any new recurring terms to `translation/nl/misc.tsv`.
+- **Read reference files once per session, not per package:** this file, `translation/nl/misc.tsv`, and targeted `grep` lookups in `items.tsv`/`moves.tsv`. Never read whole big TSVs or `.inc` files.
+- **Keep one task per session.** Bulk translation works fine on Sonnet; use Opus for tricky technical issues such as window widths, charmap or scripts.
 
 ## Who we write for
 The player is a **Dutch kid (about 8–10 years old)**. Every Dutch string must be easy for them to read.

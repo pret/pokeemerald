@@ -152,4 +152,11 @@ Until then dialogue is English text with Dutch names inserted where the game fil
 - [x] Littleroot Town (+ houses, lab), Route 101, Oldale Town, shared texts (Center, Mart, items, PC, save)
 - [x] Route 103, Route 102, Petalburg City (+ gym)
 - [x] Route 104, Petalburg Woods, Rustboro City (+ gym, DEVON, school)
-- [ ] Route 116, Rusturf Tunnel, Dewford Town (+ gym), Granite Cave, Route 106-109, Slateport …
+- [x] Route 116, Rusturf Tunnel, Dewford Town (+ gym), Granite Cave, Routes 105-109
+- [~] Slateport, Route 110, Mauville, Verdanturf, Routes 111-115 (partly done; finish with regex `^(SlateportCity|Route110|MauvilleCity|NewMauville|Route117|VerdanturfTown|Route11[1-5])`)
+- [ ] Volcano area: `^(FallarborTown|MeteorFalls|MtChimney|JaggedPass|FieryPath|LavaridgeTown|DesertRuins|DesertUnderpass|MirageTower|ScorchedSlab|Route11[89]|Route12[01]|WeatherInstitute)`
+- [ ] Fortree/Lilycove: `^(FortreeCity|LilycoveCity|MtPyre|Route12[23]|SafariZone|AquaHideout|MagmaHideout|ShoalCave)`
+- [ ] Mossdeep to the League: `^(MossdeepCity|Route12[4-9]|Route13\d|SootopolisCity|CaveOfOrigin|SeafloorCavern|SkyPillar|PacifidlogTown|SealedChamber|EverGrandeCity|VictoryRoad|Underwater|AbandonedShip)`
+- [ ] Post-game maps: `^(BattleFrontier|TrainerHill|SouthernIsland|FarawayIsland|BirthIsland|NavelRock|ArtisanCave|IslandCave|AncientTomb|MarineCave|TerraCave|AlteringCave)`
+- [ ] Shared texts, one TSV each: `text/tv`, `text/match_call`, `text/apprentice`, other `text/*`, `scripts/*` (see `next_package.py --summary`)
+- [ ] Leftover maps: run `next_package.py --summary` and do what's left
