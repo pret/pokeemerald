@@ -25,26 +25,26 @@ MossdeepCity_House3_EventScript_DeclineSuperRod::
 	end
 
 MossdeepCity_House3_Text_YouWantSuperRod:
-	.string "Hey there, TRAINER!\n"
-	.string "A SUPER ROD really is super!\p"
-	.string "Say all you want, but this baby can\n"
-	.string "catch POKéMON off the seafloor!\p"
-	.string "What do you think?\n"
-	.string "You want it, don't you?$"
+	.string "Hé daar, TRAINER!\n"
+	.string "Een SUPERHENGEL is echt super!\p"
+	.string "Zeg wat je wilt, maar hiermee\n"
+	.string "vang je POKéMON van de zeebodem!\p"
+	.string "Wat vind je?\n"
+	.string "Je wilt hem wel, of niet?$"
 
 MossdeepCity_House3_Text_SuperRodIsSuper:
-	.string "You bet, you bet!\n"
-	.string "After all, a SUPER ROD is really super!$"
+	.string "Natuurlijk, natuurlijk!\n"
+	.string "Een SUPERHENGEL is echt super!$"
 
 MossdeepCity_House3_Text_TryDroppingRodInWater:
-	.string "If there's any water, try dropping in\n"
-	.string "your ROD and see what bites!$"
+	.string "Zie je water? Gooi je HENGEL\n"
+	.string "uit en kijk wat er bijt!$"
 
 MossdeepCity_House3_Text_DontYouLikeToFish:
-	.string "Hunh?\n"
-	.string "Don't you like to fish?$"
+	.string "Hè?\n"
+	.string "Vis je niet graag?$"
 
 MossdeepCity_House3_Text_GoAfterSeafloorPokemon:
-	.string "Go after the seafloor POKéMON with\n"
-	.string "your SUPER ROD.$"
+	.string "Ga met je SUPERHENGEL op zoek\n"
+	.string "naar POKéMON van de zeebodem.$"
 

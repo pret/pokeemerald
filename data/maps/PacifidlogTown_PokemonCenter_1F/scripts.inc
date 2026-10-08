@@ -28,21 +28,20 @@ PacifidlogTown_PokemonCenter_1F_EventScript_OldMan::
 	end
 
 PacifidlogTown_PokemonCenter_1F_Text_WhatColorTrainerCard:
-	.string "What color is your TRAINER CARD?\n"
-	.string "Mine's copper!$"
+	.string "Welke kleur is jouw TRAINERKAART?\n"
+	.string "Mijn kaart is koper!$"
 
 PacifidlogTown_PokemonCenter_1F_Text_OnColonyOfCorsola:
-	.string "PACIFIDLOG TOWN floats on top of\n"
-	.string "a colony of CORSOLA.\p"
-	.string "If I told you that, would you believe\n"
-	.string "me?$"
+	.string "PACIFIDLOG TOWN drijft op een\n"
+	.string "kolonie CORSOLA.\p"
+	.string "Als ik dat zei, zou je me\n"
+	.string "geloven?$"
 
 PacifidlogTown_PokemonCenter_1F_Text_AncestorsLivedOnBoats:
-	.string "The ancestors of the people in\n"
-	.string "PACIFIDLOG were said to have been\l"
-	.string "born on boats and then lived and died \l"
-	.string "aboard them.\p"
-	.string "I understand that they lived that way\n"
-	.string "because they were searching for\l"
-	.string "something.$"
+	.string "De voorouders van de mensen in\n"
+	.string "PACIFIDLOG zijn volgens het verhaal\l"
+	.string "op boten geboren, en leefden en\l"
+	.string "stierven daar.\p"
+	.string "Ik denk dat ze zo leefden omdat\n"
+	.string "ze iets zochten.$"
 

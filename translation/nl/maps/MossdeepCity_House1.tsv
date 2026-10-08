@@ -1,5 +1,5 @@
 key	english	dutch	notes
-MossdeepCity_House1_Text_HmmYourPokemon	Hmm!\nYour {STR_VAR_1}…		
-MossdeepCity_House1_Text_ItLikesXPokeblocks	It likes {STR_VAR_1}S,\ndoesn't it?\pNo, I'm positive of it! It definitely\nlikes {STR_VAR_1}S!		
-MossdeepCity_House1_Text_DoesntLikeOrDislikePokeblocks	It doesn't appear to like or dislike\nany {POKEBLOCK}S.		
-MossdeepCity_House1_Text_HusbandCanTellPokeblockMonLikes	My husband can tell what kind of\n{POKEBLOCK}S a POKéMON likes at a glance.		
+MossdeepCity_House1_Text_HmmYourPokemon	Hmm!\nYour {STR_VAR_1}…	Hmm!\nJouw {STR_VAR_1}…	
+MossdeepCity_House1_Text_ItLikesXPokeblocks	It likes {STR_VAR_1}S,\ndoesn't it?\pNo, I'm positive of it! It definitely\nlikes {STR_VAR_1}S!	Hij houdt van {STR_VAR_1}S,\nhè?\pNee, ik weet het zeker! Hij houdt\necht van {STR_VAR_1}S!	
+MossdeepCity_House1_Text_DoesntLikeOrDislikePokeblocks	It doesn't appear to like or dislike\nany {POKEBLOCK}S.	Hij lijkt geen {POKEBLOCK}S te\nlekker of vies te vinden.	
+MossdeepCity_House1_Text_HusbandCanTellPokeblockMonLikes	My husband can tell what kind of\n{POKEBLOCK}S a POKéMON likes at a glance.	Mijn man ziet in één blik welke\n{POKEBLOCK}S een POKéMON lekker vindt.	

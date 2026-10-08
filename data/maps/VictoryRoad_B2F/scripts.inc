@@ -32,77 +32,77 @@ VictoryRoad_B2F_EventScript_Dianne::
 	end
 
 VictoryRoad_B2F_Text_VitoIntro:
-	.string "I trained together with my whole family,\n"
-	.string "every one of us!\l"
-	.string "I'm not losing to anyone!$"
+	.string "Ik trainde met mijn hele familie,\n"
+	.string "allemaal!\l"
+	.string "Ik verlies van niemand!$"
 
 VictoryRoad_B2F_Text_VitoDefeat:
-	.string "Better than my family?!\n"
-	.string "Is that possible?!$"
+	.string "Beter dan mijn familie?!\n"
+	.string "Is dat mogelijk?!$"
 
 VictoryRoad_B2F_Text_VitoPostBattle:
-	.string "I was better than everyone in my\n"
-	.string "family. I've never lost before…\p"
-	.string "I've lost my confidence…\n"
-	.string "Maybe I'll go home…$"
+	.string "Ik was beter dan iedereen in mijn\n"
+	.string "familie. Ik verloor nog nooit…\p"
+	.string "Ik ben mijn zelfvertrouwen kwijt…\n"
+	.string "Misschien ga ik naar huis…$"
 
 VictoryRoad_B2F_Text_OwenIntro:
-	.string "I'd heard that there was a tough\n"
-	.string "little kid around. Do they mean you?$"
+	.string "Ik hoorde dat er een stoer klein\n"
+	.string "kind rondloopt. Ben jij dat?$"
 
 VictoryRoad_B2F_Text_OwenDefeat:
-	.string "The little shrimp is tough!$"
+	.string "Dat kleine ding is stoer!$"
 
 VictoryRoad_B2F_Text_OwenPostBattle:
-	.string "The rumors I heard, that tough little\n"
-	.string "kid is from PETALBURG CITY.$"
+	.string "Ik hoorde dat dat stoere kleine\n"
+	.string "kind uit PETALBURG CITY komt.$"
 
 VictoryRoad_B2F_Text_CarolineIntro:
-	.string "You must be getting a little tired.$"
+	.string "Je wordt vast een beetje moe.$"
 
 VictoryRoad_B2F_Text_CarolineDefeat:
-	.string "No signs of tiring at all!$"
+	.string "Helemaal geen teken van moeheid!$"
 
 VictoryRoad_B2F_Text_CarolinePostBattle:
-	.string "VICTORY ROAD and the POKéMON LEAGUE\n"
-	.string "are long and grueling challenges.\l"
-	.string "Beware of fatigue!$"
+	.string "VICTORY ROAD en de POKéMON LEAGUE\n"
+	.string "zijn lange, slopende uitdagingen.\l"
+	.string "Pas op voor vermoeidheid!$"
 
 VictoryRoad_B2F_Text_JulieIntro:
-	.string "You shouldn't get complacent just\n"
-	.string "because you have a lot of GYM BADGES.\p"
-	.string "There's always going to be someone\n"
-	.string "who's better than you!$"
+	.string "Word niet te zelfverzekerd omdat\n"
+	.string "je veel GYM BADGES hebt.\p"
+	.string "Er is altijd iemand die beter\n"
+	.string "is dan jij!$"
 
 VictoryRoad_B2F_Text_JulieDefeat:
-	.string "You're better than me!$"
+	.string "Je bent beter dan ik!$"
 
 VictoryRoad_B2F_Text_JuliePostBattle:
-	.string "Gaze on your collected BADGES and\n"
-	.string "remember the TRAINERS you've faced.$"
+	.string "Kijk naar je BADGES en denk\n"
+	.string "aan de TRAINERS die je versloeg.$"
 
 VictoryRoad_B2F_Text_FelixIntro:
-	.string "I've come this far, but the tension's\n"
-	.string "giving me awful stomach pain…$"
+	.string "Ik ben zo ver gekomen, maar de\n"
+	.string "spanning geeft me buikpijn…$"
 
 VictoryRoad_B2F_Text_FelixDefeat:
 	.string "Ooh…\n"
-	.string "It hurts…$"
+	.string "Au…$"
 
 VictoryRoad_B2F_Text_FelixPostBattle:
-	.string "I can't help getting all tense knowing\n"
-	.string "that I'm nearing the POKéMON LEAGUE.\p"
-	.string "It's all I can do to feign calm.$"
+	.string "Ik word zenuwachtig omdat ik de\n"
+	.string "POKéMON LEAGUE nader.\p"
+	.string "Ik doe maar alsof ik rustig ben.$"
 
 VictoryRoad_B2F_Text_DianneIntro:
-	.string "The elite among the elite gather in\n"
-	.string "this cave.\p"
-	.string "How are you finding it?$"
+	.string "De besten van de besten komen\n"
+	.string "in deze grot samen.\p"
+	.string "Hoe vind je het?$"
 
 VictoryRoad_B2F_Text_DianneDefeat:
-	.string "Not rattled in the least bit!$"
+	.string "Helemaal niet van slag!$"
 
 VictoryRoad_B2F_Text_DiannePostBattle:
-	.string "You do have guts! I like that!\n"
-	.string "Keep it going!$"
+	.string "Je hebt lef! Dat vind ik leuk!\n"
+	.string "Blijf het doen!$"
 

@@ -1,53 +1,53 @@
 key	english	dutch	notes
-MossdeepCity_Gym_Text_GymGuideAdvice	Yo, how's it going, CHAMPION-bound\n{PLAYER}?\pThe GYM LEADERS here use\nPSYCHIC-type POKéMON.\pIf you go up against them with\nFIGHTING- or POISON-type POKéMON,\lthey'll inflict horrible damage!\pPlus, they'll come at you with\noutstanding combination attacks.\pIf you want to win, you'll need to show\nthem how tight you are with your\lPOKéMON. Go for it!		
-MossdeepCity_Gym_Text_GymGuidePostVictory	Wow, you're astounding!\nYou're one great TRAINER!		
-MossdeepCity_Gym_Text_PrestonIntro	Battles hinge on the strength of your\nspirit! The weak-spirited will never win!		
-MossdeepCity_Gym_Text_PrestonDefeat	I lost!\nI must temper my spirit again!		
-MossdeepCity_Gym_Text_PrestonPostBattle	The indecisive lose.\nThat's my warning to you.		
-MossdeepCity_Gym_Text_VirgilIntro	Let me see your talent!		
-MossdeepCity_Gym_Text_VirgilDefeat	You possess spectacular talent!		
-MossdeepCity_Gym_Text_VirgilPostBattle	If there are prodigies in the world,\nthen our GYM LEADERS are them!\pHowever, you may be even more talented\nthan them…		
-MossdeepCity_Gym_Text_BlakeIntro	Fufufufu… Watch me levitate a POKé\nBALL telekinetically!\pWrooooooooaaaar!\n… … … … … … …\pSometimes, I'm out of sync…		
-MossdeepCity_Gym_Text_BlakeDefeat	My POKéMON battling skills are out\nof sync, too!		
-MossdeepCity_Gym_Text_BlakePostBattle	A POKé BALL was too heavy to lift\npsychically. But this dust bunny…\pWhoooooooooooooooh!\n… … … … … …\pNo, I'm not cheating!\nI didn't blow on it! Honestly!		
-MossdeepCity_Gym_Text_HannahIntro	When you lose to me, don't be too hard\non yourself.\pIt's not that you're weak--I'm just\ntoo strong!		
-MossdeepCity_Gym_Text_HannahDefeat	You're just too strong!		
-MossdeepCity_Gym_Text_HannahPostBattle	I'm not going to get down on myself for\nlosing. I just need to train harder.\pPositive thinking--that's my strong\npoint!		
-MossdeepCity_Gym_Text_SamanthaIntro	I see it…\nI see your future…\pIf you can beat me, I will tell you\nyour future!		
-MossdeepCity_Gym_Text_SamanthaDefeat	I surrender!		
-MossdeepCity_Gym_Text_SamanthaPostBattle	You will wage a terrifically intense\nbattle with our GYM LEADERS…\pThe result…\nYou won't hear it from me!		
-MossdeepCity_Gym_Text_MauraIntro	The roads you have traveled…\nWhat you have experienced…\pCome at me with everything you've\nlearned!		
-MossdeepCity_Gym_Text_MauraDefeat	You've traveled a path of greatness!		
-MossdeepCity_Gym_Text_MauraPostBattle	A bright future awaits those who have\nworked diligently.\pFor those who lazed idly, there is\nonly despair at the end.\pWhat goes around comes around…		
-MossdeepCity_Gym_Text_SylviaIntro	Even at the risk of life, I will win\nthis battle!		
-MossdeepCity_Gym_Text_SylviaDefeat	What you do…\nIt horrifies me…		
-MossdeepCity_Gym_Text_SylviaPostBattle	How dare you beat me…\pIt won't be my fault if something\nhorrible befalls you…		
-MossdeepCity_Gym_Text_NateIntro	Hohoho.\pYou need me to show you how tenacious\nthe PSYCHIC type can be.		
-MossdeepCity_Gym_Text_NateDefeat	Oh! My, my!\nYour battle style is fantastic!		
-MossdeepCity_Gym_Text_NatePostBattle	I… I don't let defeat rattle m-me,\nhowever b-badly.		
-MossdeepCity_Gym_Text_KathleenIntro	Let me show you a perfectly awful,\nhorrifying time!		
-MossdeepCity_Gym_Text_KathleenDefeat	N-nooooo!		
-MossdeepCity_Gym_Text_KathleenPostBattle	Your vitality is contagious!\nGet away from me quickly!		
-MossdeepCity_Gym_Text_CliffordIntro	I may be past my prime, but I suggest\nyou not patronize me.		
-MossdeepCity_Gym_Text_CliffordDefeat	Ah, you overflow with the power\nof youth!		
-MossdeepCity_Gym_Text_CliffordPostBattle	It seems that I could not overcome\nyour youthful energy.		
-MossdeepCity_Gym_Text_MaceyIntro	You're not getting through to the end!\nNot if I can help it!		
-MossdeepCity_Gym_Text_MaceyDefeat	How could you be so ludicrously\nstrong?		
-MossdeepCity_Gym_Text_MaceyPostBattle	Humph! You may be strong, but you're\nnot suitable for the PSYCHIC type!\pThe way you battle is somehow brutal!		
-MossdeepCity_Gym_Text_NicholasIntro	Wroooar! Have a taste of my super\nPOKéMON hard-battling power!		
-MossdeepCity_Gym_Text_NicholasDefeat	Oh!\nDone in!		
-MossdeepCity_Gym_Text_NicholasPostBattle	All right! I think I'll develop a special\ninvincible POKéMON power next.		
-MossdeepCity_Gym_Text_TateAndLizaIntro	TATE: Hehehe… Were you surprised?\pLIZA: Fufufu… Were you surprised?\pTATE: That there are two GYM LEADERS?\nLIZA: That there are two GYM LEADERS?\pTATE: We're twins!\nLIZA: We're twins!\pTATE: We don't need to talk because…\nLIZA: We can each determine what…\pTATE: The other is thinking…\nLIZA: All in our minds!\pTATE: This combination of ours…\nLIZA: Can you beat it?		
-MossdeepCity_Gym_Text_TateAndLizaDefeat	TATE: What?! Our combination…\nLIZA: Was shattered!\pTATE: It can't be helped. You've won…\nLIZA: So, in recognition, take this.		
-MossdeepCity_Gym_Text_ReceivedMindBadge	{PLAYER} received the MIND BADGE\nfrom TATE and LIZA.		
-MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis	TATE: The MIND BADGE enhances the\nSP. ATK and SP. DEF of POKéMON.\pLIZA: It also lets you use the HM move\nDIVE outside of battle.\pTATE: You should also take this, too.		
-MossdeepCity_Gym_Text_ExplainCalmMind	TATE: That TM04 contains…\nLIZA: CALM MIND!\pTATE: It raises SP. ATK and…\nLIZA: It raises SP. DEF!\pTATE: It's a move that's perfect…\nLIZA: For PSYCHIC POKéMON!\p… … … … … …		
-MossdeepCity_Gym_Text_RegisteredTateAndLiza	Registered GYM LEADERS TATE & LIZA\nin the POKéNAV.		
-MossdeepCity_Gym_Text_TateAndLizaPostBattle	TATE: Looks like the bond between you\nand your POKéMON is far stronger than\lthe bond that we share as twins.\pLIZA: You will become even stronger!\nWe've battled you, so we know.		
-MossdeepCity_Gym_Text_TateAndLizaNeedTwoMons	TATE: Hehehe… Were you surprised?\pLIZA: That there are two GYM LEADERS?\pTATE: Oops, you have only one…\nLIZA: POKéMON that can battle.\pTATE: We can't battle that way!\pLIZA: If you want to challenge us,\nbring some more POKéMON.		
-MossdeepCity_Gym_Text_GymStatue	MOSSDEEP CITY POKéMON GYM		
-MossdeepCity_Gym_Text_GymStatueCertified	MOSSDEEP CITY POKéMON GYM\pLIZA AND TATE'S CERTIFIED TRAINERS:\n{PLAYER}		
-MossdeepCity_Gym_Text_TateAndLizaPreRematch	TATE: POKéMON…\nLIZA: POKéMON…\pTATE: By changing the party's mix…\nLIZA: The battle style changes.\pTATE: But me…\nLIZA: But me…\pTATE: I'll always be with LIZA!\nLIZA: I'll always be with TATE!\pTATE: Our combination…\nLIZA: We'll show you again and again!		
-MossdeepCity_Gym_Text_TateAndLizaRematchDefeat	TATE: You and your POKéMON…\nLIZA: It's as if you were siblings!		
-MossdeepCity_Gym_Text_TateAndLizaPostRematch	TATE: You can knock us down,\nbut we'll never stay down!\pLIZA: Because the two of us,\nwe always support each other!		
-MossdeepCity_Gym_Text_TateAndLizaRematchNeedTwoMons	TATE: You're back again…\nLIZA: You're back again…\pTATE: To give us a rematch.\nLIZA: To give us a rematch.\pTATE: But…\nLIZA: For our match…\pTATE: You brought just one POKéMON!\nLIZA: You brought just one POKéMON!\pTATE: We need you to bring at least…\nLIZA: Two POKéMON when you come back.		
+MossdeepCity_Gym_Text_GymGuideAdvice	Yo, how's it going, CHAMPION-bound\n{PLAYER}?\pThe GYM LEADERS here use\nPSYCHIC-type POKéMON.\pIf you go up against them with\nFIGHTING- or POISON-type POKéMON,\lthey'll inflict horrible damage!\pPlus, they'll come at you with\noutstanding combination attacks.\pIf you want to win, you'll need to show\nthem how tight you are with your\lPOKéMON. Go for it!	Yo, hoe gaat het, toekomstige\nKAMPIOEN {PLAYER}?\pDe GYMLEIDERS hier gebruiken\nPSYCHISCH-POKéMON.\pGa je tegen ze op met VECHT- of\nGIF-POKéMON, dan doe je veel schade!\pMaar zij vallen aan met\nsterke teamaanvallen.\pWil je winnen? Laat dan zien hoe\ngoed je band met je POKéMON is.\lSucces!	
+MossdeepCity_Gym_Text_GymGuidePostVictory	Wow, you're astounding!\nYou're one great TRAINER!	Wow, geweldig!\nJij bent een top-TRAINER!	
+MossdeepCity_Gym_Text_PrestonIntro	Battles hinge on the strength of your\nspirit! The weak-spirited will never win!	Een gevecht draait om je geest!\nZwakke geesten winnen nooit!	
+MossdeepCity_Gym_Text_PrestonDefeat	I lost!\nI must temper my spirit again!	Ik verloor!\nIk moet mijn geest weer trainen!	
+MossdeepCity_Gym_Text_PrestonPostBattle	The indecisive lose.\nThat's my warning to you.	Wie twijfelt, verliest.\nDat is mijn waarschuwing.	
+MossdeepCity_Gym_Text_VirgilIntro	Let me see your talent!	Laat me je talent zien!	
+MossdeepCity_Gym_Text_VirgilDefeat	You possess spectacular talent!	Jij hebt prachtig talent!	
+MossdeepCity_Gym_Text_VirgilPostBattle	If there are prodigies in the world,\nthen our GYM LEADERS are them!\pHowever, you may be even more talented\nthan them…	Als er wonderkinderen bestaan,\ndan zijn onze GYMLEIDERS het!\pMaar jij hebt misschien nog meer\ntalent dan zij…	
+MossdeepCity_Gym_Text_BlakeIntro	Fufufufu… Watch me levitate a POKé\nBALL telekinetically!\pWrooooooooaaaar!\n… … … … … … …\pSometimes, I'm out of sync…	Fufufufu… Kijk hoe ik een POKé\nBALL laat zweven met mijn geest!\pWrooooooooaaaar!\n… … … … … … …\pSoms ben ik niet in de maat…	
+MossdeepCity_Gym_Text_BlakeDefeat	My POKéMON battling skills are out\nof sync, too!	Mijn vechtkunst is ook niet\nin de maat!	
+MossdeepCity_Gym_Text_BlakePostBattle	A POKé BALL was too heavy to lift\npsychically. But this dust bunny…\pWhoooooooooooooooh!\n… … … … … …\pNo, I'm not cheating!\nI didn't blow on it! Honestly!	Een POKé BALL was te zwaar. Maar\ndit stofpluisje…\pWhoooooooooooooooh!\n… … … … … …\pNee, ik speel niet vals!\nIk heb er niet op geblazen! Echt!	
+MossdeepCity_Gym_Text_HannahIntro	When you lose to me, don't be too hard\non yourself.\pIt's not that you're weak--I'm just\ntoo strong!	Als je van mij verliest, wees\ndan niet te streng voor jezelf.\pJij bent niet zwak, ik ben gewoon\nte sterk!	
+MossdeepCity_Gym_Text_HannahDefeat	You're just too strong!	Je bent gewoon te sterk!	
+MossdeepCity_Gym_Text_HannahPostBattle	I'm not going to get down on myself for\nlosing. I just need to train harder.\pPositive thinking--that's my strong\npoint!	Ik baal niet van mijn verlies.\nIk moet gewoon harder trainen.\pPositief denken, dat is mijn\nsterke punt!	
+MossdeepCity_Gym_Text_SamanthaIntro	I see it…\nI see your future…\pIf you can beat me, I will tell you\nyour future!	Ik zie het…\nIk zie je toekomst…\pAls je me verslaat, vertel ik je\nje toekomst!	
+MossdeepCity_Gym_Text_SamanthaDefeat	I surrender!	Ik geef me over!	
+MossdeepCity_Gym_Text_SamanthaPostBattle	You will wage a terrifically intense\nbattle with our GYM LEADERS…\pThe result…\nYou won't hear it from me!	Je krijgt een ongelofelijk\nzwaar gevecht met onze GYMLEIDERS…\pDe uitslag…\nDie vertel ik je niet!	
+MossdeepCity_Gym_Text_MauraIntro	The roads you have traveled…\nWhat you have experienced…\pCome at me with everything you've\nlearned!	De wegen die je liep…\nWat je allemaal meemaakte…\pKom op me af met alles wat\nje geleerd hebt!	
+MossdeepCity_Gym_Text_MauraDefeat	You've traveled a path of greatness!	Je hebt een groots pad gelopen!	
+MossdeepCity_Gym_Text_MauraPostBattle	A bright future awaits those who have\nworked diligently.\pFor those who lazed idly, there is\nonly despair at the end.\pWhat goes around comes around…	Wie hard werkt, krijgt een\nmooie toekomst.\pWie lui was, heeft op het einde\nalleen wanhoop.\pWat je zaait, zul je oogsten…	
+MossdeepCity_Gym_Text_SylviaIntro	Even at the risk of life, I will win\nthis battle!	Zelfs als het mijn leven kost,\nik win dit gevecht!	
+MossdeepCity_Gym_Text_SylviaDefeat	What you do…\nIt horrifies me…	Wat jij doet…\nHet maakt me bang…	
+MossdeepCity_Gym_Text_SylviaPostBattle	How dare you beat me…\pIt won't be my fault if something\nhorrible befalls you…	Hoe durf je me te verslaan…\pHet is niet mijn schuld als jou\niets vreselijks overkomt…	
+MossdeepCity_Gym_Text_NateIntro	Hohoho.\pYou need me to show you how tenacious\nthe PSYCHIC type can be.	Hohoho.\pIk laat je zien hoe taai het\nPSYCHISCH type kan zijn.	
+MossdeepCity_Gym_Text_NateDefeat	Oh! My, my!\nYour battle style is fantastic!	Oh! Jemig!\nJouw vechtstijl is fantastisch!	
+MossdeepCity_Gym_Text_NatePostBattle	I… I don't let defeat rattle m-me,\nhowever b-badly.	Ik… ik laat me niet uit het\nveld slaan, h-hoe erg ook.	
+MossdeepCity_Gym_Text_KathleenIntro	Let me show you a perfectly awful,\nhorrifying time!	Ik laat je een verschrikkelijk\nenge tijd beleven!	
+MossdeepCity_Gym_Text_KathleenDefeat	N-nooooo!	N-neeeee!	
+MossdeepCity_Gym_Text_KathleenPostBattle	Your vitality is contagious!\nGet away from me quickly!	Jouw energie is aanstekelijk!\nWeg bij me, snel!	
+MossdeepCity_Gym_Text_CliffordIntro	I may be past my prime, but I suggest\nyou not patronize me.	Ik ben misschien niet jong meer,\nmaar behandel me niet als oud.	
+MossdeepCity_Gym_Text_CliffordDefeat	Ah, you overflow with the power\nof youth!	Ah, jij zit vol jeugdige kracht!	
+MossdeepCity_Gym_Text_CliffordPostBattle	It seems that I could not overcome\nyour youthful energy.	Ik kon jouw jeugdige energie\nniet aan, zo te zien.	
+MossdeepCity_Gym_Text_MaceyIntro	You're not getting through to the end!\nNot if I can help it!	Je komt niet tot het einde!\nNiet als ik het kan voorkomen!	
+MossdeepCity_Gym_Text_MaceyDefeat	How could you be so ludicrously\nstrong?	Hoe kun je zo belachelijk\nsterk zijn?	
+MossdeepCity_Gym_Text_MaceyPostBattle	Humph! You may be strong, but you're\nnot suitable for the PSYCHIC type!\pThe way you battle is somehow brutal!	Hmpf! Je bent sterk, maar je past\nniet bij het PSYCHISCH type!\pJe vecht op een ruwe manier!	
+MossdeepCity_Gym_Text_NicholasIntro	Wroooar! Have a taste of my super\nPOKéMON hard-battling power!	Wroooar! Proef mijn super\nPOKéMON-vechtkracht!	
+MossdeepCity_Gym_Text_NicholasDefeat	Oh!\nDone in!	Oh!\nIk ben erbij!	
+MossdeepCity_Gym_Text_NicholasPostBattle	All right! I think I'll develop a special\ninvincible POKéMON power next.	Goed! Ik ga nu een speciale\nonverslaanbare POKéMON-kracht maken.	
+MossdeepCity_Gym_Text_TateAndLizaIntro	TATE: Hehehe… Were you surprised?\pLIZA: Fufufu… Were you surprised?\pTATE: That there are two GYM LEADERS?\nLIZA: That there are two GYM LEADERS?\pTATE: We're twins!\nLIZA: We're twins!\pTATE: We don't need to talk because…\nLIZA: We can each determine what…\pTATE: The other is thinking…\nLIZA: All in our minds!\pTATE: This combination of ours…\nLIZA: Can you beat it?	TATE: Hehehe… Was je verrast?\pLIZA: Fufufu… Was je verrast?\pTATE: Dat er twee GYMLEIDERS zijn?\nLIZA: Dat er twee GYMLEIDERS zijn?\pTATE: Wij zijn een tweeling!\nLIZA: Wij zijn een tweeling!\pTATE: We hoeven niet te praten want…\nLIZA: We weten allebei wat…\pTATE: De ander denkt…\nLIZA: Alles in ons hoofd!\pTATE: Onze combinatie…\nLIZA: Kun jij die verslaan?	
+MossdeepCity_Gym_Text_TateAndLizaDefeat	TATE: What?! Our combination…\nLIZA: Was shattered!\pTATE: It can't be helped. You've won…\nLIZA: So, in recognition, take this.	TATE: Wat?! Onze combinatie…\nLIZA: Is verbroken!\pTATE: Dat kan niet anders. Je won…\nLIZA: Neem dit dan als beloning.	
+MossdeepCity_Gym_Text_ReceivedMindBadge	{PLAYER} received the MIND BADGE\nfrom TATE and LIZA.	{PLAYER} krijgt de MIND BADGE\nvan TATE en LIZA.	
+MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis	TATE: The MIND BADGE enhances the\nSP. ATK and SP. DEF of POKéMON.\pLIZA: It also lets you use the HM move\nDIVE outside of battle.\pTATE: You should also take this, too.	TATE: De MIND BADGE maakt de\nSP. AANV en SP. VERD van POKéMON\lhoger.\pLIZA: Met hem kun je ook de\nHM-aanval DUIKEN buiten een\lgevecht gebruiken.\pTATE: Neem dit ook mee.	
+MossdeepCity_Gym_Text_ExplainCalmMind	TATE: That TM04 contains…\nLIZA: CALM MIND!\pTATE: It raises SP. ATK and…\nLIZA: It raises SP. DEF!\pTATE: It's a move that's perfect…\nLIZA: For PSYCHIC POKéMON!\p… … … … … …	TATE: Die TM04 bevat…\nLIZA: KALME GEEST!\pTATE: Hij verhoogt SP. AANV en…\nLIZA: Hij verhoogt SP. VERD!\pTATE: Het is een perfecte aanval…\nLIZA: Voor PSYCHISCHE POKéMON!\p… … … … … …	
+MossdeepCity_Gym_Text_RegisteredTateAndLiza	Registered GYM LEADERS TATE & LIZA\nin the POKéNAV.	GYMLEIDERS TATE & LIZA staan nu\nin de POKéNAV.	
+MossdeepCity_Gym_Text_TateAndLizaPostBattle	TATE: Looks like the bond between you\nand your POKéMON is far stronger than\lthe bond that we share as twins.\pLIZA: You will become even stronger!\nWe've battled you, so we know.	TATE: Jouw band met je POKéMON is\nsterker dan de band die wij als\ltweeling hebben.\pLIZA: Je wordt nog sterker!\nWe hebben tegen je gevochten, dus\lwe weten het.	
+MossdeepCity_Gym_Text_TateAndLizaNeedTwoMons	TATE: Hehehe… Were you surprised?\pLIZA: That there are two GYM LEADERS?\pTATE: Oops, you have only one…\nLIZA: POKéMON that can battle.\pTATE: We can't battle that way!\pLIZA: If you want to challenge us,\nbring some more POKéMON.	TATE: Hehehe… Was je verrast?\pLIZA: Dat er twee GYMLEIDERS zijn?\pTATE: Oeps, je hebt maar één…\nLIZA: POKéMON die kan vechten.\pTATE: Zo kunnen we niet vechten!\pLIZA: Wil je ons uitdagen, neem dan\nmeer POKéMON mee.	
+MossdeepCity_Gym_Text_GymStatue	MOSSDEEP CITY POKéMON GYM	MOSSDEEP CITY POKéMON GYM	
+MossdeepCity_Gym_Text_GymStatueCertified	MOSSDEEP CITY POKéMON GYM\pLIZA AND TATE'S CERTIFIED TRAINERS:\n{PLAYER}	MOSSDEEP CITY POKéMON GYM\pTRAINERS GEKEURD DOOR LIZA EN TATE:\n{PLAYER}	
+MossdeepCity_Gym_Text_TateAndLizaPreRematch	TATE: POKéMON…\nLIZA: POKéMON…\pTATE: By changing the party's mix…\nLIZA: The battle style changes.\pTATE: But me…\nLIZA: But me…\pTATE: I'll always be with LIZA!\nLIZA: I'll always be with TATE!\pTATE: Our combination…\nLIZA: We'll show you again and again!	TATE: POKéMON…\nLIZA: POKéMON…\pTATE: Als je het team verandert…\nLIZA: Verandert de vechtstijl.\pTATE: Maar ik…\nLIZA: Maar ik…\pTATE: Ik blijf altijd bij LIZA!\nLIZA: Ik blijf altijd bij TATE!\pTATE: Onze combinatie…\nLIZA: Die laten we je steeds zien!	
+MossdeepCity_Gym_Text_TateAndLizaRematchDefeat	TATE: You and your POKéMON…\nLIZA: It's as if you were siblings!	TATE: Jij en je POKéMON…\nLIZA: Net of jullie familie zijn!	
+MossdeepCity_Gym_Text_TateAndLizaPostRematch	TATE: You can knock us down,\nbut we'll never stay down!\pLIZA: Because the two of us,\nwe always support each other!	TATE: Je kunt ons omver gooien,\nmaar we blijven niet liggen!\pLIZA: Want wij tweeën\nsteunen elkaar altijd!	
+MossdeepCity_Gym_Text_TateAndLizaRematchNeedTwoMons	TATE: You're back again…\nLIZA: You're back again…\pTATE: To give us a rematch.\nLIZA: To give us a rematch.\pTATE: But…\nLIZA: For our match…\pTATE: You brought just one POKéMON!\nLIZA: You brought just one POKéMON!\pTATE: We need you to bring at least…\nLIZA: Two POKéMON when you come back.	TATE: Je bent terug…\nLIZA: Je bent terug…\pTATE: Voor een nieuw gevecht.\nLIZA: Voor een nieuw gevecht.\pTATE: Maar…\nLIZA: Voor ons gevecht…\pTATE: Je nam maar één POKéMON mee!\nLIZA: Je nam maar één POKéMON mee!\pTATE: Neem er minstens…\nLIZA: Twee POKéMON als je terugkomt.	

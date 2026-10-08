@@ -1,6 +1,6 @@
 key	english	dutch	notes
-SkyPillar_Outside_Text_DoorIsClosed	The door is closed.		
-SkyPillar_Outside_Text_OpenedDoorToSkyPillar	WALLACE: Oh, my, I'm terribly sorry!\pIn my haste, I didn't notice that\nI'd left you behind!\pI've opened the locked door of\nthe SKY PILLAR.\p{PLAYER}{KUN}, let's be on our way!		
-SkyPillar_Outside_Text_EarthquakeNotMomentToWaste	WALLACE: It's an earthquake!\pThere's not a moment to waste!\nWe've got to hurry!		
-SkyPillar_Outside_Text_SituationGettingWorse	WALLACE: Hmm…\nThe situation is getting worse…		
-SkyPillar_Outside_Text_GotToGoBackForSootopolis	WALLACE: This isn't good…\pThe weather distortion is spreading\neven here…\p{PLAYER}{KUN}.\pRAYQUAZA should be farther up\nfrom here.\pI'm worried about SOOTOPOLIS.\nI've got to go back.\pEverything is in your hands now.\nDon't fail us!		
+SkyPillar_Outside_Text_DoorIsClosed	The door is closed.	De deur is dicht.	
+SkyPillar_Outside_Text_OpenedDoorToSkyPillar	WALLACE: Oh, my, I'm terribly sorry!\pIn my haste, I didn't notice that\nI'd left you behind!\pI've opened the locked door of\nthe SKY PILLAR.\p{PLAYER}{KUN}, let's be on our way!	WALLACE: Oh jee, het spijt me zeer!\pIn mijn haast zag ik niet dat\nik je achterliet!\pIk heb de gesloten deur van\nde SKY PILLAR geopend.\p{PLAYER}{KUN}, laten we gaan!	
+SkyPillar_Outside_Text_EarthquakeNotMomentToWaste	WALLACE: It's an earthquake!\pThere's not a moment to waste!\nWe've got to hurry!	WALLACE: Een aardbeving!\pWe hebben geen tijd te verliezen!\nSnel!	
+SkyPillar_Outside_Text_SituationGettingWorse	WALLACE: Hmm…\nThe situation is getting worse…	WALLACE: Hmm…\nHet wordt steeds erger…	
+SkyPillar_Outside_Text_GotToGoBackForSootopolis	WALLACE: This isn't good…\pThe weather distortion is spreading\neven here…\p{PLAYER}{KUN}.\pRAYQUAZA should be farther up\nfrom here.\pI'm worried about SOOTOPOLIS.\nI've got to go back.\pEverything is in your hands now.\nDon't fail us!	WALLACE: Dit is niet goed…\pHet rare weer verspreidt zich\nzelfs tot hier…\p{PLAYER}{KUN}.\pRAYQUAZA moet hier verderop\nzijn.\pIk maak me zorgen om SOOTOPOLIS.\nIk moet terug.\pNu is alles aan jou.\nLaat ons niet in de steek!	

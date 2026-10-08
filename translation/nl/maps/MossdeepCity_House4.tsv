@@ -1,6 +1,6 @@
 key	english	dutch	notes
-MossdeepCity_House4_Text_BrotherLikesToFindBases	My little brother says he likes to go\nfind people's SECRET BASES.		
-MossdeepCity_House4_Text_BrotherLikesToVisitBasesAndBattle	My little brother says he likes to\nvisit people's SECRET BASES and have\lPOKéMON battles.		
-MossdeepCity_House4_Text_YouMadeSecretBaseNearX	Was it you who made a SECRET BASE\nnear {STR_VAR_1}?		
-MossdeepCity_House4_Text_MakeSecretBase	You should make a SECRET BASE\nsomewhere. I'll go find it!		
-MossdeepCity_House4_Text_Skitty	SKITTY: Miyaan?		
+MossdeepCity_House4_Text_BrotherLikesToFindBases	My little brother says he likes to go\nfind people's SECRET BASES.	Mijn broertje zegt dat hij graag\nde GEHEIME BASIS van anderen zoekt.	
+MossdeepCity_House4_Text_BrotherLikesToVisitBasesAndBattle	My little brother says he likes to\nvisit people's SECRET BASES and have\lPOKéMON battles.	Mijn broertje zegt dat hij graag\nGEHEIME BASISSEN bezoekt en daar\lPOKéMON-gevechten doet.	
+MossdeepCity_House4_Text_YouMadeSecretBaseNearX	Was it you who made a SECRET BASE\nnear {STR_VAR_1}?	Was jij het die een GEHEIME BASIS\nmaakte bij {STR_VAR_1}?	
+MossdeepCity_House4_Text_MakeSecretBase	You should make a SECRET BASE\nsomewhere. I'll go find it!	Maak ergens een GEHEIME BASIS.\nDan ga ik hem zoeken!	
+MossdeepCity_House4_Text_Skitty	SKITTY: Miyaan?	SKITTY: Miyaan?	

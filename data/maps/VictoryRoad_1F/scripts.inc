@@ -116,100 +116,102 @@ VictoryRoad_1F_EventScript_Katelynn::
 	end
 
 VictoryRoad_1F_Text_WallyNotGoingToLoseAnymore:
-	.string "WALLY: Hi! {PLAYER}!\p"
-	.string "I bet you're surprised to see me here!\p"
-	.string "I made it all the way here, and it's\n"
-	.string "all thanks to you!\p"
-	.string "{PLAYER}, losing to you that time\n"
-	.string "made me stronger!\p"
-	.string "But I'm not going to lose anymore!\p"
-	.string "I'm going to win! For the POKéMON who\n"
-	.string "gave me courage and strength!\p"
-	.string "Okay… Here I come!$"
+	.string "WALLY: Hoi! {PLAYER}!\p"
+	.string "Je bent vast verrast om mij hier te\n"
+	.string "zien!\p"
+	.string "Ik ben helemaal hier gekomen, en\n"
+	.string "dat is dankzij jou!\p"
+	.string "{PLAYER}, door die keer van je te\n"
+	.string "verliezen werd ik sterker!\p"
+	.string "Maar ik ga niet meer verliezen!\p"
+	.string "Ik ga winnen! Voor de POKéMON die\n"
+	.string "mij moed en kracht gaf!\p"
+	.string "Oké… Daar ga ik!$"
 
 VictoryRoad_1F_Text_WallyEntranceDefeat:
 	.string "Wow!\n"
-	.string "{PLAYER}, you are strong, after all!$"
+	.string "{PLAYER}, je bent toch sterk!$"
 
 VictoryRoad_1F_Text_WallyPostEntranceBattle:
-	.string "WALLY: I couldn't beat you today,\n"
-	.string "{PLAYER}, but one of these days, I'll\l"
-	.string "catch up to you!$"
+	.string "WALLY: Ik kon je vandaag niet\n"
+	.string "verslaan, {PLAYER}, maar op een dag\l"
+	.string "haal ik je in!$"
 
 VictoryRoad_1F_Text_WallyIntro:
-	.string "WALLY: Hi! {PLAYER}!\p"
-	.string "I've gotten stronger since that last\n"
-	.string "time! I wanted to show you, {PLAYER}!\p"
-	.string "Okay… Here I come!$"
+	.string "WALLY: Hoi! {PLAYER}!\p"
+	.string "Ik ben sterker geworden sinds\n"
+	.string "de vorige keer! Dat wilde ik je\l"
+	.string "laten zien, {PLAYER}!\p"
+	.string "Oké… Daar ga ik!$"
 
 VictoryRoad_1F_Text_WallyDefeat:
 	.string "Wow!\n"
-	.string "{PLAYER}, you are strong, after all!$"
+	.string "{PLAYER}, je bent toch sterk!$"
 
 VictoryRoad_1F_Text_WallyPostBattle:
-	.string "WALLY: I couldn't beat you this time,\n"
-	.string "too… But one of these days, {PLAYER},\l"
-	.string "I'm going to catch up to you…\p"
-	.string "And challenge the POKéMON LEAGUE!$"
+	.string "WALLY: Ik kon je ook deze keer\n"
+	.string "niet verslaan… Maar op een dag,\l"
+	.string "{PLAYER}, haal ik je in…\p"
+	.string "En daag ik de POKéMON LEAGUE uit!$"
 
 VictoryRoad_1F_Text_EdgarIntro:
-	.string "I've made it this far a couple times,\n"
-	.string "but the last stretch is so long…$"
+	.string "Ik kwam hier al een paar keer,\n"
+	.string "maar het laatste stuk is zo lang…$"
 
 VictoryRoad_1F_Text_EdgarDefeat:
-	.string "My dream ends here again…$"
+	.string "Mijn droom eindigt hier weer…$"
 
 VictoryRoad_1F_Text_EdgarPostBattle:
-	.string "You've made it this far. Keep the\n"
-	.string "momentum going and become the\l"
-	.string "CHAMPION! If anyone can, it's you!$"
+	.string "Je bent zo ver gekomen. Hou het\n"
+	.string "tempo vast en word KAMPIOEN!\l"
+	.string "Als iemand het kan, ben jij het!$"
 
 VictoryRoad_1F_Text_AlbertIntro:
-	.string "I didn't come all this way to lose now.\n"
-	.string "That possibility doesn't exist!$"
+	.string "Ik kwam niet helemaal hier om\n"
+	.string "nu te verliezen. Dat kan niet!$"
 
 VictoryRoad_1F_Text_AlbertDefeat:
-	.string "Impossible…\n"
-	.string "I lost?$"
+	.string "Onmogelijk…\n"
+	.string "Ik verloor?$"
 
 VictoryRoad_1F_Text_AlbertPostBattle:
-	.string "I lost here…\p"
-	.string "That means I lack the qualifications\n"
-	.string "to become the CHAMPION…$"
+	.string "Ik verloor hier…\p"
+	.string "Dan ben ik niet goed genoeg om\n"
+	.string "KAMPIOEN te worden…$"
 
 VictoryRoad_1F_Text_HopeIntro:
-	.string "This seemingly infinite and harsh road\n"
-	.string "lives up to its name of VICTORY.$"
+	.string "Deze eindeloze, harde weg\n"
+	.string "maakt zijn naam VICTORY waar.$"
 
 VictoryRoad_1F_Text_HopeDefeat:
-	.string "Your battle style is fantastic…$"
+	.string "Jouw vechtstijl is fantastisch…$"
 
 VictoryRoad_1F_Text_HopePostBattle:
-	.string "You seem to have the potential for\n"
-	.string "becoming the CHAMPION.$"
+	.string "Je lijkt het talent te hebben\n"
+	.string "om KAMPIOEN te worden.$"
 
 VictoryRoad_1F_Text_QuincyIntro:
-	.string "What is the VICTORY ROAD?\n"
-	.string "I'll tell you if you win!$"
+	.string "Wat is de VICTORY ROAD?\n"
+	.string "Ik vertel het als je wint!$"
 
 VictoryRoad_1F_Text_QuincyDefeat:
-	.string "Okay!\n"
-	.string "Well done!$"
+	.string "Oké!\n"
+	.string "Goed gedaan!$"
 
 VictoryRoad_1F_Text_QuincyPostBattle:
-	.string "Getting through here safely--that's\n"
-	.string "the final test for any TRAINER aiming\l"
-	.string "to become the POKéMON CHAMPION.\p"
-	.string "That's why it's called the VICTORY\n"
+	.string "Hier veilig doorheen komen is de\n"
+	.string "laatste test voor elke TRAINER die\l"
+	.string "POKéMON KAMPIOEN wil worden.\p"
+	.string "Daarom heet het de VICTORY\n"
 	.string "ROAD.$"
 
 VictoryRoad_1F_Text_KatelynnIntro:
-	.string "I have nothing to say to anyone\n"
-	.string "that's come this far. Come on!$"
+	.string "Ik heb niets te zeggen tegen\n"
+	.string "iedereen die zo ver kwam. Kom op!$"
 
 VictoryRoad_1F_Text_KatelynnDefeat:
-	.string "This is a disgrace…$"
+	.string "Dit is een schande…$"
 
 VictoryRoad_1F_Text_KatelynnPostBattle:
-	.string "Humph, go right on ahead.\n"
-	.string "See if I care.$"
+	.string "Hmpf, ga maar door.\n"
+	.string "Het kan me niet schelen.$"

@@ -1,7 +1,7 @@
 key	english	dutch	notes
-PacifidlogTown_House3_Text_WillingToTradeIt	Check out this {STR_VAR_2}!\pIt's the {STR_VAR_2} that I caught\nyesterday to celebrate my birthday!\pOh, I can see that you want it!\nAfter all, it's priceless!\pI'll tell you what. I might be willing\nto trade it for a {STR_VAR_1}.		
-PacifidlogTown_House3_Text_ItsSubtlyDifferentThankYou	Oh, so this is a {STR_VAR_1}?\pIt's sort of like a {STR_VAR_2},\nand yet it's subtly different.\pThank you!		
-PacifidlogTown_House3_Text_WontAcceptAnyLessThanRealMon	No, no, no! I won't accept any\nless than a real {STR_VAR_1}!		
-PacifidlogTown_House3_Text_NotDesperateOrAnything	Oh, so you're not going to go through\nwith this?\pThat's cool. I'm not desperate to make\na trade or anything.		
-PacifidlogTown_House3_Text_ReallyWantedToGetBagon	I know I could go looking for one\non my own, but…\pBut I really wanted to get a BAGON\nthat another TRAINER caught…		
-PacifidlogTown_House3_Text_IsThatAPokedex	Is that a POKéDEX?\pDid you get to meet a lot of different\nPOKéMON?\pI wish I was like you.		
+PacifidlogTown_House3_Text_WillingToTradeIt	Check out this {STR_VAR_2}!\pIt's the {STR_VAR_2} that I caught\nyesterday to celebrate my birthday!\pOh, I can see that you want it!\nAfter all, it's priceless!\pI'll tell you what. I might be willing\nto trade it for a {STR_VAR_1}.	Kijk eens naar deze {STR_VAR_2}!\pIk ving de {STR_VAR_2} gisteren\nvoor mijn verjaardag!\pOh, ik zie dat je hem wilt!\nHij is dan ook onbetaalbaar!\pWeet je wat. Misschien ruil ik hem\nwel voor een {STR_VAR_1}.	
+PacifidlogTown_House3_Text_ItsSubtlyDifferentThankYou	Oh, so this is a {STR_VAR_1}?\pIt's sort of like a {STR_VAR_2},\nand yet it's subtly different.\pThank you!	Oh, dit is dus een {STR_VAR_1}?\pHij lijkt op een {STR_VAR_2},\nmaar is toch een beetje anders.\pBedankt!	
+PacifidlogTown_House3_Text_WontAcceptAnyLessThanRealMon	No, no, no! I won't accept any\nless than a real {STR_VAR_1}!	Nee, nee, nee! Ik neem niet minder\ndan een echte {STR_VAR_1}!	
+PacifidlogTown_House3_Text_NotDesperateOrAnything	Oh, so you're not going to go through\nwith this?\pThat's cool. I'm not desperate to make\na trade or anything.	Oh, dus je doet het niet?\pPrima. Ik ben niet wanhopig om\nte ruilen of zo.	
+PacifidlogTown_House3_Text_ReallyWantedToGetBagon	I know I could go looking for one\non my own, but…\pBut I really wanted to get a BAGON\nthat another TRAINER caught…	Ik kan er zelf wel een zoeken,\nmaar…\pIk wilde echt een BAGON die een\nander TRAINER ving…	
+PacifidlogTown_House3_Text_IsThatAPokedex	Is that a POKéDEX?\pDid you get to meet a lot of different\nPOKéMON?\pI wish I was like you.	Is dat een POKéDEX?\pHeb je veel verschillende\nPOKéMON ontmoet?\pIk wou dat ik zoals jij was.	

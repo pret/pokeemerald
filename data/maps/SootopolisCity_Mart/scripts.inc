@@ -53,23 +53,23 @@ SootopolisCity_Mart_EventScript_GentlemanNoLegendaries::
 	end
 
 SootopolisCity_Mart_Text_PPUpIsGreat:
-	.string "PP UP is great!\p"
-	.string "It raises the POWER POINTS, the PP,\n"
-	.string "of a POKéMON move.$"
+	.string "PP UP is geweldig!\p"
+	.string "Het verhoogt de PP, de\n"
+	.string "POWER POINTS, van een aanval.$"
 
 SootopolisCity_Mart_Text_TooScaryOutside:
-	.string "What…\n"
-	.string "What is happening?\p"
-	.string "I really want to know, but it's too\n"
-	.string "scary to go outside.$"
+	.string "Wat…\n"
+	.string "Wat gebeurt er?\p"
+	.string "Ik wil het echt weten, maar het is\n"
+	.string "te eng om naar buiten te gaan.$"
 
 SootopolisCity_Mart_Text_FullRestoreItemOfDreams:
-	.string "Do you know FULL RESTORE?\p"
-	.string "Full restoration of HP!\n"
-	.string "Eradication of all status problems!\p"
-	.string "It's truly an item of your dreams!$"
+	.string "Ken je ALLESHERSTEL?\p"
+	.string "Volledig HP herstellen!\n"
+	.string "Alle kwaaltjes weg!\p"
+	.string "Een echt droom-voorwerp!$"
 
 SootopolisCity_Mart_Text_DidSomethingAwaken:
-	.string "This weather…\n"
-	.string "Did something awaken?$"
+	.string "Dit weer…\n"
+	.string "Is er iets wakker geworden?$"
 

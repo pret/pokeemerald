@@ -132,33 +132,33 @@ SkyPillar_Outside_EventScript_ClosedDoor::
 	end
 
 SkyPillar_Outside_Text_DoorIsClosed:
-	.string "The door is closed.$"
+	.string "De deur is dicht.$"
 
 SkyPillar_Outside_Text_OpenedDoorToSkyPillar:
-	.string "WALLACE: Oh, my, I'm terribly sorry!\p"
-	.string "In my haste, I didn't notice that\n"
-	.string "I'd left you behind!\p"
-	.string "I've opened the locked door of\n"
-	.string "the SKY PILLAR.\p"
-	.string "{PLAYER}{KUN}, let's be on our way!$"
+	.string "WALLACE: Oh jee, het spijt me zeer!\p"
+	.string "In mijn haast zag ik niet dat\n"
+	.string "ik je achterliet!\p"
+	.string "Ik heb de gesloten deur van\n"
+	.string "de SKY PILLAR geopend.\p"
+	.string "{PLAYER}{KUN}, laten we gaan!$"
 
 SkyPillar_Outside_Text_EarthquakeNotMomentToWaste:
-	.string "WALLACE: It's an earthquake!\p"
-	.string "There's not a moment to waste!\n"
-	.string "We've got to hurry!$"
+	.string "WALLACE: Een aardbeving!\p"
+	.string "We hebben geen tijd te verliezen!\n"
+	.string "Snel!$"
 
 SkyPillar_Outside_Text_SituationGettingWorse:
 	.string "WALLACE: Hmm…\n"
-	.string "The situation is getting worse…$"
+	.string "Het wordt steeds erger…$"
 
 SkyPillar_Outside_Text_GotToGoBackForSootopolis:
-	.string "WALLACE: This isn't good…\p"
-	.string "The weather distortion is spreading\n"
-	.string "even here…\p"
+	.string "WALLACE: Dit is niet goed…\p"
+	.string "Het rare weer verspreidt zich\n"
+	.string "zelfs tot hier…\p"
 	.string "{PLAYER}{KUN}.\p"
-	.string "RAYQUAZA should be farther up\n"
-	.string "from here.\p"
-	.string "I'm worried about SOOTOPOLIS.\n"
-	.string "I've got to go back.\p"
-	.string "Everything is in your hands now.\n"
-	.string "Don't fail us!$"
+	.string "RAYQUAZA moet hier verderop\n"
+	.string "zijn.\p"
+	.string "Ik maak me zorgen om SOOTOPOLIS.\n"
+	.string "Ik moet terug.\p"
+	.string "Nu is alles aan jou.\n"
+	.string "Laat ons niet in de steek!$"

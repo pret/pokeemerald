@@ -144,66 +144,65 @@ MossdeepCity_StevensHouse_EventScript_DiveItemBall::
 
 MossdeepCity_StevensHouse_Text_YouveEarnedHMDive:
 	.string "STEVEN: {PLAYER}{KUN}…\p"
-	.string "As you can see, there's not much here,\n"
-	.string "but this is my home.\p"
-	.string "Thank you for all that you've done.\p"
-	.string "This is my token of appreciation.\n"
-	.string "It's the HIDDEN MACHINE DIVE.\p"
-	.string "No need to be shy--you've earned\n"
-	.string "this HM.$"
+	.string "Zoals je ziet is hier niet veel,\n"
+	.string "maar dit is mijn huis.\p"
+	.string "Bedankt voor alles wat je deed.\p"
+	.string "Dit is mijn bedankje.\n"
+	.string "Het is de VERBORGEN MACHINE DUIKEN.\p"
+	.string "Wees niet verlegen, je hebt\n"
+	.string "deze HM verdiend.$"
 
 MossdeepCity_StevensHouse_Text_ExplainDive:
-	.string "STEVEN: While you're using SURF, you\n"
-	.string "should notice dark patches of water.\p"
-	.string "Use DIVE if you come to deep water\n"
-	.string "like it. You'll drop to the seafloor.\p"
-	.string "When you want to come back up, use\n"
-	.string "DIVE again.\p"
-	.string "In some places, it won't be possible\n"
-	.string "for you to surface, though.$"
+	.string "STEVEN: Als je SURFEN gebruikt,\n"
+	.string "zie je donkere stukken water.\p"
+	.string "Gebruik DUIKEN in zulk diep water.\n"
+	.string "Dan zak je naar de zeebodem.\p"
+	.string "Wil je weer omhoog, gebruik dan\n"
+	.string "weer DUIKEN.\p"
+	.string "Op sommige plekken kun je\n"
+	.string "niet naar boven komen.$"
 
 MossdeepCity_StevensHouse_Text_UnderwateCavernBetweenMossdeepSootopolis:
-	.string "STEVEN: Apparently, there's an\n"
-	.string "underwater cavern between\l"
-	.string "MOSSDEEP and SOOTOPOLIS.\p"
-	.string "You know, the one that CAPT. STERN\n"
-	.string "found in his submarine.$"
+	.string "STEVEN: Er schijnt een grot onder\n"
+	.string "water te zijn tussen\l"
+	.string "MOSSDEEP en SOOTOPOLIS.\p"
+	.string "Je weet wel, die CAPT. STERN vond\n"
+	.string "met zijn duikboot.$"
 
 MossdeepCity_StevensHouse_Text_TakeBallContainingBeldum:
-	.string "{PLAYER} checked the POKé BALL.\p"
-	.string "It contained the POKéMON\n"
+	.string "{PLAYER} bekijkt de POKé BALL.\p"
+	.string "Hierin zit de POKéMON\n"
 	.string "BELDUM.\p"
-	.string "Take the POKé BALL?$"
+	.string "Pak je de POKé BALL?$"
 
 MossdeepCity_StevensHouse_Text_ObtainedBeldum:
-	.string "{PLAYER} obtained a BELDUM.$"
+	.string "{PLAYER} krijgt een BELDUM.$"
 
 @ Unused
 MossdeepCity_StevensHouse_Text_NoSpaceForAnotherMon:
-	.string "There is no space for another POKéMON.$"
+	.string "Er is geen plek voor nog een POKéMON.$"
 
 MossdeepCity_StevensHouse_Text_LeftPokeBallWhereItWas:
-	.string "{PLAYER} left the POKé BALL where\n"
-	.string "it was.$"
+	.string "{PLAYER} laat de POKé BALL\n"
+	.string "liggen.$"
 
 MossdeepCity_StevensHouse_Text_LetterFromSteven:
-	.string "It's a letter.\p"
+	.string "Het is een brief.\p"
 	.string "… … … … … …\p"
-	.string "To {PLAYER}{KUN}…\p"
-	.string "I've decided to do a little soul-\n"
-	.string "searching and train on the road.\p"
-	.string "I don't plan to return home for some\n"
-	.string "time.\p"
-	.string "I have a favor to ask of you.\p"
-	.string "I want you to take the POKé BALL on\n"
-	.string "the desk.\p"
-	.string "Inside it is a BELDUM, my favorite\n"
-	.string "POKéMON.\p"
-	.string "I'm counting on you.\p"
-	.string "May our paths cross someday.\p"
+	.string "Aan {PLAYER}{KUN}…\p"
+	.string "Ik ga nadenken over mezelf en\n"
+	.string "trainen onderweg.\p"
+	.string "Ik kom een tijd niet thuis.\p"
+	.string "Ik wil je om een gunst vragen.\p"
+	.string "Pak de POKé BALL die op het\n"
+	.string "bureau ligt.\p"
+	.string "Er zit een BELDUM in, mijn\n"
+	.string "lievelings-POKéMON.\p"
+	.string "Ik reken op je.\p"
+	.string "Mogen onze wegen elkaar ooit kruisen.\p"
 	.string "STEVEN STONE$"
 
 MossdeepCity_StevensHouse_Text_CollectionOfRareRocks:
-	.string "It's a collection of rare rocks and\n"
-	.string "stones assembled by STEVEN.$"
+	.string "Een verzameling zeldzame stenen,\n"
+	.string "bijeengebracht door STEVEN.$"
 

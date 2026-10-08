@@ -302,125 +302,124 @@ MossdeepCity_Movement_ScottExitEast:
 	step_end
 
 MossdeepCity_Text_WantKingsRockStevenGaveMe:
-	.string "I got this from STEVEN, but I don't\n"
-	.string "know what it's good for.\p"
-	.string "I think it's called KING'S ROCK.\n"
-	.string "Do you want it?$"
+	.string "Ik kreeg dit van STEVEN, maar ik\n"
+	.string "weet niet waar het goed voor is.\p"
+	.string "Ik denk dat het KING'S ROCK heet.\n"
+	.string "Wil je het hebben?$"
 
 MossdeepCity_Text_YouCanKeepIt:
-	.string "Why would you want it?\n"
-	.string "You're weird.\p"
-	.string "You can keep it, but keep it a secret\n"
-	.string "from STEVEN.$"
+	.string "Waarom zou je dat willen?\n"
+	.string "Jij bent raar.\p"
+	.string "Je mag het houden, maar hou het\n"
+	.string "geheim voor STEVEN.$"
 
 MossdeepCity_Text_StevensHouseOverThere:
-	.string "STEVEN's house is right over there!$"
+	.string "STEVENs huis is daar vlakbij!$"
 
 MossdeepCity_Text_WhatToDoWithWeirdRock:
-	.string "Yeah, you think so, too! What are you\n"
-	.string "supposed to do with some weird rock?$"
+	.string "Ja, vind jij dat ook! Wat moet je\n"
+	.string "nou met een rare steen?$"
 
 MossdeepCity_Text_WailmerWatching:
-	.string "Around MOSSDEEP, you can see wild\n"
+	.string "Bij MOSSDEEP zie je wilde\n"
 	.string "WAILMER.\p"
-	.string "It's called, uh…\n"
-	.string "What was it now…\p"
+	.string "Hoe heet dat ook alweer…\n"
+	.string "Wat was het nou…\p"
 	.string "WAI, WAI, WAI…\p"
-	.string "WAILMER watching!$"
+	.string "WAILMER kijken!$"
 
 MossdeepCity_Text_SpaceCenterReceivedLetter:
-	.string "The island's SPACE CENTER has been\n"
-	.string "launching huge rockets.\p"
-	.string "There's been some kind of an uproar\n"
-	.string "over a letter they received recently.$"
+	.string "Het SPACE CENTER op het eiland\n"
+	.string "lanceert grote raketten.\p"
+	.string "Er is ophef over een brief die\n"
+	.string "ze laatst kregen.$"
 
 MossdeepCity_Text_SpaceCenterLaunchingRockets:
-	.string "The island's SPACE CENTER has been\n"
-	.string "launching huge rockets.$"
+	.string "Het SPACE CENTER op het eiland\n"
+	.string "lanceert grote raketten.$"
 
 MossdeepCity_Text_MossdeepTargetedByMagma:
-	.string "I heard from a SAILOR buddy that\n"
-	.string "TEAM AQUA set up shop in LILYCOVE.\p"
-	.string "I also heard that someone came along\n"
-	.string "and wiped the floor with them!\p"
-	.string "But MOSSDEEP here's been targeted\n"
-	.string "by that TEAM MAGMA.\p"
-	.string "If you want to know what they're up to,\n"
-	.string "go visit the SPACE CENTER.$"
+	.string "Een MATROOS-vriend vertelde me dat\n"
+	.string "TEAM AQUA in LILYCOVE zat.\p"
+	.string "En iemand heeft ze verslagen!\p"
+	.string "Maar TEAM MAGMA heeft het nu\n"
+	.string "op MOSSDEEP gemunt.\p"
+	.string "Wil je weten wat ze doen?\n"
+	.string "Ga dan naar het SPACE CENTER.$"
 
 MossdeepCity_Text_FeelReliefOnLand:
-	.string "I'm a SAILOR, so the sea's obviously\n"
-	.string "more important to me.\p"
-	.string "But you know? When I get back on land\n"
-	.string "after a long voyage, I do feel relief!$"
+	.string "Ik ben matroos, dus de zee is voor\n"
+	.string "mij belangrijker.\p"
+	.string "Maar na een lange reis ben ik\n"
+	.string "blij als ik weer op land ben!$"
 
 MossdeepCity_Text_NiceIfWorldCoveredByFlowers:
-	.string "Wouldn't it be nice?\p"
-	.string "If the whole world was covered in\n"
-	.string "plants and flowers like this island?$"
+	.string "Zou het niet mooi zijn?\p"
+	.string "Als de hele wereld vol planten en\n"
+	.string "bloemen zat, zoals dit eiland?$"
 
 MossdeepCity_Text_LifeNeedsSeaToLive:
-	.string "All life needs the sea to live, even\n"
-	.string "though it makes its home on the land.\p"
-	.string "Life, having run its course, becomes\n"
-	.string "soil and returns to the land.\p"
-	.string "And the sea is always connected to\n"
-	.string "the land.\p"
-	.string "Yes, like the very shoreline here.$"
+	.string "Al het leven heeft de zee nodig,\n"
+	.string "ook al woont het op het land.\p"
+	.string "Als het leven voorbij is, wordt\n"
+	.string "het aarde en keert terug naar land.\p"
+	.string "En de zee hoort altijd bij\n"
+	.string "het land.\p"
+	.string "Ja, zoals de kust hier.$"
 
 MossdeepCity_Text_SurfExhilarating:
-	.string "A voyage on a ship is fine.\p"
-	.string "But crossing the sea with POKéMON\n"
-	.string "using SURF…\p"
-	.string "Now that's an exhilarating trip!\n"
-	.string "Wouldn't you agree, youngster?$"
+	.string "Een reis op een schip is fijn.\p"
+	.string "Maar over zee gaan met POKéMON\n"
+	.string "en SURF…\p"
+	.string "Dat is pas spannend!\n"
+	.string "Vind je ook niet, jochie?$"
 
 MossdeepCity_Text_SpecialSpaceCenterRock:
-	.string "This rock has a special meaning to\n"
-	.string "the people at the SPACE CENTER.\p"
-	.string "They put it here as their wish for\n"
-	.string "their rockets to fly safely.\p"
-	.string "When you make a wish, what do you use?\n"
-	.string "Do you wish upon a star?\p"
-	.string "I use a wish tag to make it happen.\n"
-	.string "That's what I do.$"
+	.string "Deze steen is speciaal voor de\n"
+	.string "mensen van het SPACE CENTER.\p"
+	.string "Ze zetten hem hier neer als wens\n"
+	.string "dat hun raketten veilig vliegen.\p"
+	.string "Wat gebruik jij als je een wens doet?\n"
+	.string "Wens je op een ster?\p"
+	.string "Ik gebruik een wenskaartje.\n"
+	.string "Dat doe ik.$"
 
 MossdeepCity_Text_ItsAWhiteRock:
-	.string "It's a white rock.$"
+	.string "Het is een witte steen.$"
 
 MossdeepCity_Text_GymSign:
 	.string "MOSSDEEP CITY POKéMON GYM\n"
-	.string "LEADERS: LIZA & TATE\p"
-	.string "“The mystic combination!”$"
+	.string "LEIDERS: LIZA & TATE\p"
+	.string "“De mystieke combinatie!”$"
 
 MossdeepCity_Text_CitySign:
 	.string "MOSSDEEP CITY\n"
-	.string "“Our slogan: Cherish POKéMON!”$"
+	.string "“Ons motto: Zorg goed voor POKéMON!”$"
 
 MossdeepCity_Text_SpaceCenterSign:
 	.string "MOSSDEEP SPACE CENTER\n"
-	.string "“The closest place to space.”$"
+	.string "“Dichtst bij de ruimte.”$"
 
 MossdeepCity_Text_ScottSomethingWrongWithTown:
-	.string "SCOTT: {PLAYER}{KUN}, feeling good?\n"
-	.string "I'm doing great!\p"
-	.string "I'd heard MOSSDEEP's GYM LEADER is\n"
-	.string "pretty strong, so I decided to come\l"
-	.string "take a look-see for myself.\p"
-	.string "But there's something wrong about\n"
-	.string "this town.\p"
-	.string "People are going on about a warning\n"
-	.string "letter and the SPACE CENTER…\p"
-	.string "I don't think it concerns me in any\n"
-	.string "way, though.$"
+	.string "SCOTT: {PLAYER}{KUN}, gaat het goed?\n"
+	.string "Met mij wel!\p"
+	.string "Ik hoorde dat de GYMLEIDER van\n"
+	.string "MOSSDEEP sterk is. Ik kwam even\l"
+	.string "kijken.\p"
+	.string "Maar er is iets vreemds aan\n"
+	.string "deze stad.\p"
+	.string "Mensen praten over een waarschuwings-\n"
+	.string "brief en het SPACE CENTER…\p"
+	.string "Ik denk niet dat het mij\n"
+	.string "wat aangaat.$"
 
 MossdeepCity_Text_SootopolisNewGymLeader:
-	.string "Ahh… It feels great letting the waves\n"
-	.string "wash over my feet…\p"
-	.string "Speaking of the waves, you know that\n"
-	.string "island city SOOTOPOLIS?\p"
-	.string "I think the GYM there had a new\n"
-	.string "LEADER come in.\p"
-	.string "People tell me the new LEADER once\n"
-	.string "mentored WALLACE.$"
+	.string "Ahh… Wat heerlijk, de golven over\n"
+	.string "mijn voeten…\p"
+	.string "Over golven gesproken, ken je\n"
+	.string "SOOTOPOLIS, die eilandstad?\p"
+	.string "Daar is volgens mij een nieuwe\n"
+	.string "LEIDER in de GYM.\p"
+	.string "Mensen zeggen dat die LEIDER\n"
+	.string "vroeger WALLACE trainde.$"
 
