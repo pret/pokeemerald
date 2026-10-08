@@ -1,17 +1,17 @@
 key	english	dutch	notes
-DewfordTown_Text_BrineyLandedInSlateportDeliverGoods	MR. BRINEY: Ahoy!\nWe've made land in SLATEPORT!\pI suppose you're going to visit CAPT.\nSTERN and deliver the DEVON GOODS?		
-Route109_Text_BrineySailToDewfordQuestion	MR. BRINEY: I thought you're supposed\nto deliver the DEVON GOODS.\pWould you like to sail back to\nDEWFORD, then?		
-Route109_Text_BrineyDewfordItIs	MR. BRINEY: DEWFORD it is, then!\pAnchors aweigh!\nPEEKO, we're setting sail, my darling!		
-Route109_Text_BrineyDeliverDevonGoods	MR. BRINEY: Then you go on and deliver\nthe DEVON GOODS. I'll be waiting.		
-DewfordTown_Text_BrineyLandedInSlateport	MR. BRINEY: Ahoy! We've made land in\nSLATEPORT!\pYou just go on and tell me whenever\nyou want to set sail again!		
-Route109_Text_BrineyWhereAreWeBound	MR. BRINEY: Ahoy!\nFor you, I'll go out to sea anytime!\pNow, my friend, where are we bound?		
-Route109_Text_BrineyTellMeWhenYouNeedToSail	MR. BRINEY: You just tell me whenever\nyou need to set sail again!		
-Route109_Text_ChillAtMyPapasSpot	Yo, TRAINERS!\nWhether you're hot to trot,\lor cool cat not,\lchill at my papa's spot!		
-Route109_Text_LittleKidsDartAround	Little kids can dart around so quickly…\pYou don't dare take your eyes off them\nfor an instant. It's very taxing.\pMine are with my POKéMON, so they\nshould be okay, but…		
-Route109_Text_SandCastleTakingLongTime	Our sand castle's taking a long time\nto make.		
-Route109_Text_YouCanHaveThis	You can have this!		
-Route109_Text_WereGoingToMakeBigCastle	We're going to get all the sand from\nthe beach and make a big castle!\pAnd then we're going to be a king and\nqueen.\pWe'll let you be a servant.		
-Route109_Text_ZigzagoonPicksUpLitter	The water around these parts is clean.\pBut, I get my ZIGZAGOON to pick up\nlitter from the shoreline at times.\pDirty water becomes rain and joins our\nrivers, which we drink from…\pIf we pollute the sea, it all comes\nback to haunt us eventually.		
-Route109_Text_ZigzagoonCry	ZIGZAGOON: Guguu?		
-Route109_Text_SeashoreHouseSign	SEASHORE HOUSE\p“May hot battles rage on hot sands!\nThe place for hot TRAINERS!”		
-Route109_Text_TrainerTipsSign	TRAINER TIPS\pPOKéMON at the same level may not\nalways have identical stats.\pPOKéMON raised by TRAINERS are said\nto grow stronger than wild POKéMON.		
+DewfordTown_Text_BrineyLandedInSlateportDeliverGoods	MR. BRINEY: Ahoy!\nWe've made land in SLATEPORT!\pI suppose you're going to visit CAPT.\nSTERN and deliver the DEVON GOODS?	MR. BRINEY: Ahoi!\nWe zijn in SLATEPORT!\pJij gaat vast naar CAPT. STERN\nom het DEVONPAKKET te brengen?	
+Route109_Text_BrineySailToDewfordQuestion	MR. BRINEY: I thought you're supposed\nto deliver the DEVON GOODS.\pWould you like to sail back to\nDEWFORD, then?	MR. BRINEY: Moest jij niet het\nDEVONPAKKET brengen?\pWil je dan terugvaren naar\nDEWFORD?	
+Route109_Text_BrineyDewfordItIs	MR. BRINEY: DEWFORD it is, then!\pAnchors aweigh!\nPEEKO, we're setting sail, my darling!	MR. BRINEY: Naar DEWFORD dan!\pAnker op!\nPEEKO, we varen uit, schatje!	
+Route109_Text_BrineyDeliverDevonGoods	MR. BRINEY: Then you go on and deliver\nthe DEVON GOODS. I'll be waiting.	MR. BRINEY: Ga jij het DEVONPAKKET\nmaar brengen. Ik wacht hier op je.	
+DewfordTown_Text_BrineyLandedInSlateport	MR. BRINEY: Ahoy! We've made land in\nSLATEPORT!\pYou just go on and tell me whenever\nyou want to set sail again!	MR. BRINEY: Ahoi! We zijn in\nSLATEPORT!\pZeg het maar als je weer\nwilt uitvaren!	
+Route109_Text_BrineyWhereAreWeBound	MR. BRINEY: Ahoy!\nFor you, I'll go out to sea anytime!\pNow, my friend, where are we bound?	MR. BRINEY: Ahoi!\nVoor jou ga ik altijd de zee op!\pNou, vriend, waar gaan we heen?	
+Route109_Text_BrineyTellMeWhenYouNeedToSail	MR. BRINEY: You just tell me whenever\nyou need to set sail again!	MR. BRINEY: Zeg het maar als je\nweer wilt uitvaren!	
+Route109_Text_ChillAtMyPapasSpot	Yo, TRAINERS!\nWhether you're hot to trot,\lor cool cat not,\lchill at my papa's spot!	Yo, TRAINERS!\nBen je heet van het vechten,\lof koel en relaxed,\lchill bij mijn pa in de tent!	
+Route109_Text_LittleKidsDartAround	Little kids can dart around so quickly…\pYou don't dare take your eyes off them\nfor an instant. It's very taxing.\pMine are with my POKéMON, so they\nshould be okay, but…	Kleine kinderen rennen zo snel\nalle kanten op…\pJe mag ze geen seconde uit het oog\nverliezen. Dat is best zwaar.\pMijn kinderen zijn bij mijn POKéMON,\ndus het gaat vast goed, maar…	
+Route109_Text_SandCastleTakingLongTime	Our sand castle's taking a long time\nto make.	Ons zandkasteel bouwen duurt\nheel lang.	
+Route109_Text_YouCanHaveThis	You can have this!	Dit mag jij hebben!	
+Route109_Text_WereGoingToMakeBigCastle	We're going to get all the sand from\nthe beach and make a big castle!\pAnd then we're going to be a king and\nqueen.\pWe'll let you be a servant.	We pakken al het zand van het\nstrand en bouwen een groot kasteel!\pEn dan worden we koning en\nkoningin.\pJij mag dan onze knecht zijn.	
+Route109_Text_ZigzagoonPicksUpLitter	The water around these parts is clean.\pBut, I get my ZIGZAGOON to pick up\nlitter from the shoreline at times.\pDirty water becomes rain and joins our\nrivers, which we drink from…\pIf we pollute the sea, it all comes\nback to haunt us eventually.	Het water hier is schoon.\pMaar soms laat ik mijn ZIGZAGOON\nafval van het strand oprapen.\pVies water wordt regen en komt in\nde rivieren. Daar drinken we van…\pAls we de zee vies maken, krijgen\nwe dat later zelf terug.	
+Route109_Text_ZigzagoonCry	ZIGZAGOON: Guguu?	ZIGZAGOON: Guguu?	
+Route109_Text_SeashoreHouseSign	SEASHORE HOUSE\p“May hot battles rage on hot sands!\nThe place for hot TRAINERS!”	SEASHORE HOUSE\p“Hete gevechten op heet zand!\nDe plek voor hete TRAINERS!”	
+Route109_Text_TrainerTipsSign	TRAINER TIPS\pPOKéMON at the same level may not\nalways have identical stats.\pPOKéMON raised by TRAINERS are said\nto grow stronger than wild POKéMON.	TRAINERTIPS\pPOKéMON met hetzelfde level zijn\nniet altijd even sterk.\pPOKéMON van TRAINERS worden vaak\nsterker dan wilde POKéMON.	

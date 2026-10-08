@@ -1,18 +1,18 @@
 key	english	dutch	notes
-Route109_SeashoreHouse_Text_SeashoreHouseIntro	I'm the owner of the SEASHORE HOUSE.\nBut you can call me MR. SEA!\pWhat I love above all is to see hot\nPOKéMON battles.\pLet me see that your heart burns hot!\pIf you can defeat all the TRAINERS\nhere, I'll reward your efforts.		
-Route109_SeashoreHouse_Text_ShowMeSomeHotMatches	Show me some hot matches!\pI run this SEASHORE HOUSE just for\nthat reason alone!		
-Route109_SeashoreHouse_Text_TakeTheseSodaPopBottles	You're scorching hot!\nThose battles blazed!\lI'm more than just satisfied!\pAs thanks for showing me your hot\nstreak, I want you to take these.\pIt's half a dozen bottles of SODA POP!		
-Route109_SeashoreHouse_Text_BagFull	Oh, but hey, your BAG's jammed full.\nI'll hang on to these for you.		
-Route109_SeashoreHouse_Text_WantToBuySodaPop	Want to buy some SODA POP?\nPOKéMON love it!\pJust ¥300 a bottle!\nBuy some!		
-Route109_SeashoreHouse_Text_HereYouGo	Here you go!		
-Route109_SeashoreHouse_Text_NotEnoughMoney	You don't have the money.		
-Route109_SeashoreHouse_Text_ThatsTooBad	No?\nThat's too bad.		
-Route109_SeashoreHouse_Text_DwayneIntro	If you're looking for a battle in the\nSEASHORE HOUSE, you'll find no\lhotter TRAINER than me, matey!		
-Route109_SeashoreHouse_Text_DwayneDefeated	That was a hot battle!\nI can accept that loss, matey!		
-Route109_SeashoreHouse_Text_DwaynePostBattle	Whenever I'm in SLATEPORT, I enjoy\nhot battles and ice-cold SODA POP!		
-Route109_SeashoreHouse_Text_JohannaIntro	Boring battles aren't worth the effort.\pFiery hot battles are what toughen up\nTRAINERS and POKéMON!		
-Route109_SeashoreHouse_Text_JohannaDefeated	That's hot!		
-Route109_SeashoreHouse_Text_JohannaPostBattle	Whew, I'm all thirsty.\nMaybe I'll have a SODA POP.		
-Route109_SeashoreHouse_Text_SimonIntro	I'm going to show you how great\nmy POKéMON are, but don't cry!		
-Route109_SeashoreHouse_Text_SimonDefeated	…I lost, but I won't cry…		
-Route109_SeashoreHouse_Text_SimonPostBattle	If one of my POKéMON knew the move\nfor carrying me across water on its\lback, I could get rid of this inner tube.		
+Route109_SeashoreHouse_Text_SeashoreHouseIntro	I'm the owner of the SEASHORE HOUSE.\nBut you can call me MR. SEA!\pWhat I love above all is to see hot\nPOKéMON battles.\pLet me see that your heart burns hot!\pIf you can defeat all the TRAINERS\nhere, I'll reward your efforts.	Ik ben de baas van het SEASHORE\nHOUSE. Noem me maar MR. SEA!\pIk hou het meest van hete\nPOKéMON-gevechten.\pLaat zien dat jouw hart brandt!\pAls je alle TRAINERS hier verslaat,\nkrijg je een beloning van mij.	
+Route109_SeashoreHouse_Text_ShowMeSomeHotMatches	Show me some hot matches!\pI run this SEASHORE HOUSE just for\nthat reason alone!	Laat me hete gevechten zien!\pDaarom heb ik dit SEASHORE HOUSE!\nAlleen daarom!	
+Route109_SeashoreHouse_Text_TakeTheseSodaPopBottles	You're scorching hot!\nThose battles blazed!\lI'm more than just satisfied!\pAs thanks for showing me your hot\nstreak, I want you to take these.\pIt's half a dozen bottles of SODA POP!	Jij bent gloeiend heet!\nWat een vurige gevechten!\lIk ben heel tevreden!\pAls dank voor je hete gevechten\nkrijg je deze van mij.\pHet zijn 6 flessen FRISDRANK!	
+Route109_SeashoreHouse_Text_BagFull	Oh, but hey, your BAG's jammed full.\nI'll hang on to these for you.	O, maar je TAS is propvol.\nIk bewaar ze wel voor je.	
+Route109_SeashoreHouse_Text_WantToBuySodaPop	Want to buy some SODA POP?\nPOKéMON love it!\pJust ¥300 a bottle!\nBuy some!	Wil je FRISDRANK kopen?\nPOKéMON zijn er dol op!\pMaar ¥300 per fles!\nKoop wat!	
+Route109_SeashoreHouse_Text_HereYouGo	Here you go!	Alsjeblieft!	
+Route109_SeashoreHouse_Text_NotEnoughMoney	You don't have the money.	Je hebt niet genoeg geld.	
+Route109_SeashoreHouse_Text_ThatsTooBad	No?\nThat's too bad.	Nee?\nDat is jammer.	
+Route109_SeashoreHouse_Text_DwayneIntro	If you're looking for a battle in the\nSEASHORE HOUSE, you'll find no\lhotter TRAINER than me, matey!	Zoek je een gevecht in het\nSEASHORE HOUSE? Niemand is\lheter dan ik, maatje!	
+Route109_SeashoreHouse_Text_DwayneDefeated	That was a hot battle!\nI can accept that loss, matey!	Wat een heet gevecht!\nDit verlies is oké, maatje!	
+Route109_SeashoreHouse_Text_DwaynePostBattle	Whenever I'm in SLATEPORT, I enjoy\nhot battles and ice-cold SODA POP!	In SLATEPORT hou ik van hete\ngevechten en ijskoude FRISDRANK!	
+Route109_SeashoreHouse_Text_JohannaIntro	Boring battles aren't worth the effort.\pFiery hot battles are what toughen up\nTRAINERS and POKéMON!	Saaie gevechten zijn niks waard.\pVan hete gevechten worden TRAINERS\nen POKéMON sterk!	
+Route109_SeashoreHouse_Text_JohannaDefeated	That's hot!	Dat is heet!	
+Route109_SeashoreHouse_Text_JohannaPostBattle	Whew, I'm all thirsty.\nMaybe I'll have a SODA POP.	Pfoe, ik heb dorst.\nMisschien neem ik een FRISDRANK.	
+Route109_SeashoreHouse_Text_SimonIntro	I'm going to show you how great\nmy POKéMON are, but don't cry!	Ik laat zien hoe goed mijn\nPOKéMON zijn, maar niet huilen!	
+Route109_SeashoreHouse_Text_SimonDefeated	…I lost, but I won't cry…	…Ik heb verloren, maar ik huil niet…	
+Route109_SeashoreHouse_Text_SimonPostBattle	If one of my POKéMON knew the move\nfor carrying me across water on its\lback, I could get rid of this inner tube.	Als mijn POKéMON me op zijn rug\nover het water kon dragen, had ik\ldeze zwemband niet meer nodig.	

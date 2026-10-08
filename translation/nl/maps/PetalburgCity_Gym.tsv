@@ -65,7 +65,7 @@ PetalburgCity_Gym_Text_EnterRecoveryRoom	“RECOVERY ROOM,” the sign says.\pDo
 PetalburgCity_Gym_Text_EnterStrengthRoom	“STRENGTH ROOM,” the sign says.\pDo you want to go through?	“KRACHTKAMER”, staat er.\pWil je naar binnen?	
 PetalburgCity_Gym_Text_EnterOHKORoom	“ONE-HIT KO ROOM,” the sign says.\pDo you want to go through?	“KO-KAMER”, staat er.\pWil je naar binnen?	
 PetalburgCity_Gym_Text_EnterGymLeadersRoom	“GYM LEADER'S ROOM\p“See for yourself what POKéMON await\nyou!” the sign says.\pDo you want to go through?	“KAMER VAN DE GYMLEIDER\p“Kom zelf kijken welke POKéMON op je\nwachten!”, staat er.\pWil je naar binnen?	
-PetalburgCity_Gym_Text_GymStatue	PETALBURG CITY POKéMON GYM		
+PetalburgCity_Gym_Text_GymStatue	PETALBURG CITY POKéMON GYM	PETALBURG CITY POKéMON GYM	
 PetalburgCity_Gym_Text_GymStatueCertified	PETALBURG CITY POKéMON GYM\pNORMAN'S CERTIFIED TRAINERS:\n{PLAYER}	PETALBURG CITY POKéMON GYM\pGOEDGEKEURDE TRAINERS VAN NORMAN:\n{PLAYER}	
 PetalburgCity_Gym_Text_NormanPreRematch	DAD: {PLAYER}…\nI had a feeling that you would come.\pI would never refuse to accept\na challenge from you.\pYou do understand, don't you?\pInside a GYM, it doesn't matter that\nwe are a parent and child.\p…No, because we are parent and child,\nwe owe it to each other to do the best\lwe can. Isn't that right, {PLAYER}?	PAPA: {PLAYER}…\nIk dacht al dat je zou komen.\pIk zeg nooit nee tegen een\nuitdaging van jou.\pDat snap je toch?\pIn een GYM maakt het niet uit dat\nwe ouder en kind zijn.\p…Nee, juist omdat we ouder en kind zijn,\nmoeten we allebei ons best doen.\lToch, {PLAYER}?	
 PetalburgCity_Gym_Text_NormanRematchDefeat	Uh… Haha…\nMaybe that was going too hard…	Eh… Haha…\nMisschien ging ik te hard…	

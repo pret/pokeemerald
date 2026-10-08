@@ -12,28 +12,28 @@ SSTidalLowerDeck_EventScript_Leonard::
 	end
 
 SSTidalLowerDeck_Text_PhillipIntro:
-	.string "Arrrgh! I'm fed up and dog-tired of\n"
-	.string "cleaning this huge place!\p"
-	.string "Let's have a quick battle!$"
+	.string "Arrrgh! Ik ben het spuugzat om dit\n"
+	.string "enorme schip schoon te maken!\p"
+	.string "Laten we snel vechten!$"
 
 SSTidalLowerDeck_Text_PhillipDefeat:
-	.string "Little bro, I lost!$"
+	.string "Broertje, ik heb verloren!$"
 
 SSTidalLowerDeck_Text_PhillipPostBattle:
-	.string "We're the CLEANUP BROTHERS!\p"
-	.string "The old one dumps the detergent,\n"
-	.string "and the young one does the scrubbing!$"
+	.string "Wij zijn de POETSBROERS!\p"
+	.string "De oudste gooit de zeep,\n"
+	.string "en de jongste doet het schrobben!$"
 
 SSTidalLowerDeck_Text_LeonardIntro:
-	.string "This is the bottom of the ship's hull.\n"
-	.string "There's plenty of room.\l"
-	.string "It'll be alright for a POKéMON battle.$"
+	.string "Dit is de bodem van het schip.\n"
+	.string "Er is hier genoeg ruimte.\l"
+	.string "Prima voor een POKéMON-gevecht.$"
 
 SSTidalLowerDeck_Text_LeonardDefeat:
-	.string "Big bro, I lost!$"
+	.string "Grote broer, ik heb verloren!$"
 
 SSTidalLowerDeck_Text_LeonardPostBattle:
-	.string "We're the CLEANUP BROTHERS!\p"
-	.string "The old one dumps the detergent,\n"
-	.string "and the young one does the scrubbing!$"
+	.string "Wij zijn de POETSBROERS!\p"
+	.string "De oudste gooit de zeep,\n"
+	.string "en de jongste doet het schrobben!$"
 

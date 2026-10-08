@@ -1,24 +1,24 @@
 key	english	dutch	notes
-AbandonedShip_Rooms2_1F_Text_DanIntro	DAN: While searching for treasures,\nwe discovered a TRAINER!		
-AbandonedShip_Rooms2_1F_Text_DanDefeat	DAN: We couldn't win even though\nwe worked together…		
-AbandonedShip_Rooms2_1F_Text_DanPostBattle	DAN: We can't find any treasures…\nI wonder if someone got them already?		
-AbandonedShip_Rooms2_1F_Text_DanNotEnoughMons	DAN: You don't even have two POKéMON.\nYou can't expect to beat us like that.		
-AbandonedShip_Rooms2_1F_Text_KiraIntro	KIRA: Oh?\nWe were searching for treasures.\lBut we discovered a TRAINER instead!		
-AbandonedShip_Rooms2_1F_Text_KiraDefeat	KIRA: Ooh, so strong!		
-AbandonedShip_Rooms2_1F_Text_KiraPostBattle	KIRA: Where could the treasures be?\pI've already decided what I'm buying\nwhen we find the treasures!		
-AbandonedShip_Rooms2_1F_Text_KiraNotEnoughMons	KIRA: Oh, you don't have two POKéMON?\nWe'll have to battle some other time!		
-AbandonedShip_Rooms2_1F_Text_KiraRegister	KIRA: Oh, you make me so angry!\nI'm going to register you for that!		
-AbandonedShip_Rooms2_1F_Text_DanRematchIntro	DAN: We've been searching for\ntreasures all this time.\pOur POKéMON have grown stronger, too.\nLet us show you, okay?		
-AbandonedShip_Rooms2_1F_Text_DanRematchDefeat	DAN: You're strong, as usual!		
-AbandonedShip_Rooms2_1F_Text_DanPostRematch	DAN: We can't find any treasures,\nwe lose at POKéMON…\pI want to go home… But if I say that,\nshe gets all angry with me…		
-AbandonedShip_Rooms2_1F_Text_DanRematchNotEnoughMons	DAN: You don't even have two POKéMON.\nYou can't expect to beat us like that.		
-AbandonedShip_Rooms2_1F_Text_KiraRematchIntro	KIRA: Oh? We meet again!\pJust like us, you still haven't given up\nsearching for treasures, have you?\pWant to make it so the loser has\nto give up searching?		
-AbandonedShip_Rooms2_1F_Text_KiraRematchDefeat	KIRA: Oh, we lost again…		
-AbandonedShip_Rooms2_1F_Text_KiraPostRematch	KIRA: We're not leaving until we raise\nour POKéMON some more and we find\lthe treasures here!		
-AbandonedShip_Rooms2_1F_Text_KiraRematchNotEnoughMons	KIRA: Oh, you don't have two POKéMON?\nWe'll have to battle some other time!		
-AbandonedShip_Rooms2_1F_Text_JaniIntro	I'm not good at swimming,\nbut I am good at battles!		
-AbandonedShip_Rooms2_1F_Text_JaniDefeat	Oops.\nThat didn't go very well.		
-AbandonedShip_Rooms2_1F_Text_JaniPostBattle	Walking around barefoot in this ship\nis kind of gross.		
-AbandonedShip_Rooms2_1F_Text_GarrisonIntro	Strength and compassion…\nThose are a TRAINER's treasures!		
-AbandonedShip_Rooms2_1F_Text_GarrisonDefeat	Ah, there is something about you\nthat sparkles.		
-AbandonedShip_Rooms2_1F_Text_GarrisonPostBattle	In a cabin somewhere on board,\nI saw something sparkle.		
+AbandonedShip_Rooms2_1F_Text_DanIntro	DAN: While searching for treasures,\nwe discovered a TRAINER!	DAN: We zochten een schat,\nmaar we vonden een TRAINER!	
+AbandonedShip_Rooms2_1F_Text_DanDefeat	DAN: We couldn't win even though\nwe worked together…	DAN: Zelfs samen konden we\nniet winnen…	
+AbandonedShip_Rooms2_1F_Text_DanPostBattle	DAN: We can't find any treasures…\nI wonder if someone got them already?	DAN: We vinden geen schatten…\nHeeft iemand ze al gevonden?	
+AbandonedShip_Rooms2_1F_Text_DanNotEnoughMons	DAN: You don't even have two POKéMON.\nYou can't expect to beat us like that.	DAN: Je hebt niet eens 2 POKéMON.\nZo kun je ons nooit verslaan.	
+AbandonedShip_Rooms2_1F_Text_KiraIntro	KIRA: Oh?\nWe were searching for treasures.\lBut we discovered a TRAINER instead!	KIRA: O?\nWe zochten een schat.\lMaar we vonden een TRAINER!	
+AbandonedShip_Rooms2_1F_Text_KiraDefeat	KIRA: Ooh, so strong!	KIRA: Oeh, wat sterk!	
+AbandonedShip_Rooms2_1F_Text_KiraPostBattle	KIRA: Where could the treasures be?\pI've already decided what I'm buying\nwhen we find the treasures!	KIRA: Waar zou de schat zijn?\pIk weet al wat ik ga kopen\nals we de schat vinden!	
+AbandonedShip_Rooms2_1F_Text_KiraNotEnoughMons	KIRA: Oh, you don't have two POKéMON?\nWe'll have to battle some other time!	KIRA: O, je hebt geen 2 POKéMON?\nDan vechten we een andere keer!	
+AbandonedShip_Rooms2_1F_Text_KiraRegister	KIRA: Oh, you make me so angry!\nI'm going to register you for that!	KIRA: O, ik word zo boos op je!\nIk zet je in mijn POKéNAV!	
+AbandonedShip_Rooms2_1F_Text_DanRematchIntro	DAN: We've been searching for\ntreasures all this time.\pOur POKéMON have grown stronger, too.\nLet us show you, okay?	DAN: We zoeken al die tijd\nnaar schatten.\pOnze POKéMON zijn ook sterker.\nZullen we het je laten zien?	
+AbandonedShip_Rooms2_1F_Text_DanRematchDefeat	DAN: You're strong, as usual!	DAN: Jij bent sterk, zoals altijd!	
+AbandonedShip_Rooms2_1F_Text_DanPostRematch	DAN: We can't find any treasures,\nwe lose at POKéMON…\pI want to go home… But if I say that,\nshe gets all angry with me…	DAN: We vinden geen schatten,\nwe verliezen met POKéMON…\pIk wil naar huis… Maar als ik dat\nzeg, wordt zij heel boos…	
+AbandonedShip_Rooms2_1F_Text_DanRematchNotEnoughMons	DAN: You don't even have two POKéMON.\nYou can't expect to beat us like that.	DAN: Je hebt niet eens 2 POKéMON.\nZo kun je ons nooit verslaan.	
+AbandonedShip_Rooms2_1F_Text_KiraRematchIntro	KIRA: Oh? We meet again!\pJust like us, you still haven't given up\nsearching for treasures, have you?\pWant to make it so the loser has\nto give up searching?	KIRA: O? Daar ben je weer!\pJij zoekt ook nog steeds naar\nschatten, of niet?\pWie verliest, moet stoppen met\nzoeken. Goed?	
+AbandonedShip_Rooms2_1F_Text_KiraRematchDefeat	KIRA: Oh, we lost again…	KIRA: O, weer verloren…	
+AbandonedShip_Rooms2_1F_Text_KiraPostRematch	KIRA: We're not leaving until we raise\nour POKéMON some more and we find\lthe treasures here!	KIRA: We gaan pas weg als onze\nPOKéMON sterker zijn en we de\lschat hier hebben gevonden!	
+AbandonedShip_Rooms2_1F_Text_KiraRematchNotEnoughMons	KIRA: Oh, you don't have two POKéMON?\nWe'll have to battle some other time!	KIRA: O, je hebt geen 2 POKéMON?\nDan vechten we een andere keer!	
+AbandonedShip_Rooms2_1F_Text_JaniIntro	I'm not good at swimming,\nbut I am good at battles!	Ik kan niet goed zwemmen,\nmaar wel goed vechten!	
+AbandonedShip_Rooms2_1F_Text_JaniDefeat	Oops.\nThat didn't go very well.	Oeps.\nDat ging niet zo goed.	
+AbandonedShip_Rooms2_1F_Text_JaniPostBattle	Walking around barefoot in this ship\nis kind of gross.	Op blote voeten door dit schip\nlopen is best vies.	
+AbandonedShip_Rooms2_1F_Text_GarrisonIntro	Strength and compassion…\nThose are a TRAINER's treasures!	Kracht en een goed hart…\nDat zijn de schatten van een TRAINER!	
+AbandonedShip_Rooms2_1F_Text_GarrisonDefeat	Ah, there is something about you\nthat sparkles.	Ah, er is iets aan jou\ndat schittert.	
+AbandonedShip_Rooms2_1F_Text_GarrisonPostBattle	In a cabin somewhere on board,\nI saw something sparkle.	In een hut ergens op dit schip\nzag ik iets schitteren.	

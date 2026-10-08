@@ -9,4 +9,4 @@ Route103_Text_BrendanDefeated	Huh, {PLAYER}, you're not too shabby.	Hm, {PLAYER}
 Route103_Text_BrendanTimeToHeadBack	BRENDAN: I think I get it.\nI think I know why my dad has his eye\lout for you now.\pLook, your POKéMON already likes you,\neven though you just got it.\p{PLAYER}, I get the feeling that you\ncould befriend any POKéMON with ease.\pWe should head back to the LAB.	BRENDAN: Ik snap het.\nNu weet ik waarom mijn vader\lzo op je let.\pKijk, je POKéMON vindt je nu al leuk,\nterwijl je hem net hebt.\p{PLAYER}, volgens mij word jij met elke\nPOKéMON makkelijk vrienden.\pKom, we gaan terug naar het LAB.	
 Route103_Text_ShouldHaveBroughtPotion	My POKéMON is staggeringly tired…\nI should have brought a POTION…	Mijn POKéMON is heel erg moe…\nHad ik maar een DRANKJE meegenomen…	
 Route103_Text_ShortcutToOldale	If you cross the sea from here,\nit'll be a shortcut to OLDALE TOWN.\pFufufu, that's useful, isn't it?	Als je hier over het water gaat, ben\nje sneller in OLDALE TOWN.\pHihihi, handig hè?	
-Route103_Text_RouteSign	ROUTE 103\n{DOWN_ARROW} OLDALE TOWN		
+Route103_Text_RouteSign	ROUTE 103\n{DOWN_ARROW} OLDALE TOWN	ROUTE 103\n{DOWN_ARROW} OLDALE TOWN	

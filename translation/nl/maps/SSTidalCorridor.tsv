@@ -1,17 +1,17 @@
 key	english	dutch	notes
-SSTidalCorridor_Text_ScottBattleFrontierInvite	SCOTT: Well, hi, hi!\n{PLAYER}{KUN}, {PLAYER}{KUN}!\pSomething's come up, so I have to\ndisembark, but am I glad to see you!\pCongratulations, LEAGUE CHAMPION!\pThere's a place I'd like to invite\nsomeone like you.\pIt's the…\nBATTLE FRONTIER!\pWhat's the place like?\nYou'll understand when you see it!\pI've spoken with the ship's CAPTAIN\nabout this.\pThe next time you take a ferry,\nyou should be able to sail to\lthe BATTLE FRONTIER.\pOkay, {PLAYER}{KUN}, I'll be waiting for you\nat the BATTLE FRONTIER!		
-SSTidal_Text_FastCurrentsHopeYouEnjoyVoyage	This ferry is built to plow through\nfast-running currents.\pWe hope you enjoy your voyage with us.\nFeel free to explore the ship.		
-SSTidal_Text_HopeYouEnjoyVoyage	We hope you enjoy your voyage on\nour ferry.		
-SSTidal_Text_MadeLandInSlateport	We have made land in SLATEPORT CITY.\nThank you for sailing with us.		
-SSTidal_Text_MadeLandInLilycove	We have made land in LILYCOVE CITY.\nThank you for sailing with us.		
-SSTidalCorridor_Text_CanRestInCabin2	It'll be some time before we make land,\nI reckon.\pYou can rest up in your cabin if you'd\nlike. Your cabin's No. 2.\pThe bed in there is soft and plushy.\nI can attest to how comfy it is!		
-SSTidalCorridor_Text_WeveArrived	We've arrived!		
-SSTidalCorridor_Text_VisitOtherCabins	Go visit other cabins.\nTRAINERS bored of the boat trip will\lbe itching to battle.		
-SSTidalCorridor_Text_EnjoyYourCruise	Enjoy your cruise!		
-SSTidalCorridor_Text_HorizonSpreadsBeyondPorthole	The horizon spreads beyond\nthe porthole.		
-SSTidalCorridor_Text_BrineyWelcomeAboard	MR. BRINEY: Welcome aboard, {PLAYER}{KUN}!\pThey made me honorary captain of\nthe S.S. TIDAL!\pYou can call me CAPTAIN BRINEY now!\pYou know, I retired once before,\nbut when I saw this majestic ship…\pLet me just say, it stirred my sleeping\nsoul as a sailor!		
-SSTidalCorridor_Text_Peeko	PEEKO: Pihyo pihyohyo…		
-SSTidalCorridor_Text_Cabin1	Cabin 1		
-SSTidalCorridor_Text_Cabin2	Cabin 2		
-SSTidalCorridor_Text_Cabin3	Cabin 3		
-SSTidalCorridor_Text_Cabin4	Cabin 4		
+SSTidalCorridor_Text_ScottBattleFrontierInvite	SCOTT: Well, hi, hi!\n{PLAYER}{KUN}, {PLAYER}{KUN}!\pSomething's come up, so I have to\ndisembark, but am I glad to see you!\pCongratulations, LEAGUE CHAMPION!\pThere's a place I'd like to invite\nsomeone like you.\pIt's the…\nBATTLE FRONTIER!\pWhat's the place like?\nYou'll understand when you see it!\pI've spoken with the ship's CAPTAIN\nabout this.\pThe next time you take a ferry,\nyou should be able to sail to\lthe BATTLE FRONTIER.\pOkay, {PLAYER}{KUN}, I'll be waiting for you\nat the BATTLE FRONTIER!	SCOTT: Nou, hoi, hoi!\n{PLAYER}{KUN}, {PLAYER}{KUN}!\pEr kwam iets tussen, dus ik moet\nvan boord, maar wat leuk je te zien!\pGefeliciteerd, KAMPIOEN!\pIk wil iemand zoals jij graag\nuitnodigen voor een plek.\pDat is de…\nBATTLE FRONTIER!\pHoe het daar is?\nDat zie je vanzelf!\pIk heb al met de KAPITEIN van\nhet schip gepraat.\pAls je weer met de boot gaat,\nkun je naar de\lBATTLE FRONTIER varen.\pOké, {PLAYER}{KUN}, ik wacht op je\nin de BATTLE FRONTIER!	
+SSTidal_Text_FastCurrentsHopeYouEnjoyVoyage	This ferry is built to plow through\nfast-running currents.\pWe hope you enjoy your voyage with us.\nFeel free to explore the ship.	Deze boot is gebouwd om door\nsnelle stromingen te varen.\pWe wensen je een fijne reis.\nKijk gerust rond op het schip.	
+SSTidal_Text_HopeYouEnjoyVoyage	We hope you enjoy your voyage on\nour ferry.	We wensen je een fijne reis op\nonze boot.	
+SSTidal_Text_MadeLandInSlateport	We have made land in SLATEPORT CITY.\nThank you for sailing with us.	We zijn aangekomen in SLATEPORT CITY.\nBedankt dat je met ons meevoer.	
+SSTidal_Text_MadeLandInLilycove	We have made land in LILYCOVE CITY.\nThank you for sailing with us.	We zijn aangekomen in LILYCOVE CITY.\nBedankt dat je met ons meevoer.	
+SSTidalCorridor_Text_CanRestInCabin2	It'll be some time before we make land,\nI reckon.\pYou can rest up in your cabin if you'd\nlike. Your cabin's No. 2.\pThe bed in there is soft and plushy.\nI can attest to how comfy it is!	Het duurt nog wel even voor we\naankomen, denk ik.\pJe kunt uitrusten in je hut als\nje wilt. Je hut is nummer 2.\pHet bed daar is lekker zacht.\nIk weet hoe fijn het ligt!	
+SSTidalCorridor_Text_WeveArrived	We've arrived!	We zijn er!	
+SSTidalCorridor_Text_VisitOtherCabins	Go visit other cabins.\nTRAINERS bored of the boat trip will\lbe itching to battle.	Ga ook naar de andere hutten.\nTRAINERS die zich vervelen, willen\lvast graag vechten.	
+SSTidalCorridor_Text_EnjoyYourCruise	Enjoy your cruise!	Fijne reis!	
+SSTidalCorridor_Text_HorizonSpreadsBeyondPorthole	The horizon spreads beyond\nthe porthole.	Door het raampje zie je de\nzee tot aan de horizon.	
+SSTidalCorridor_Text_BrineyWelcomeAboard	MR. BRINEY: Welcome aboard, {PLAYER}{KUN}!\pThey made me honorary captain of\nthe S.S. TIDAL!\pYou can call me CAPTAIN BRINEY now!\pYou know, I retired once before,\nbut when I saw this majestic ship…\pLet me just say, it stirred my sleeping\nsoul as a sailor!	MR. BRINEY: Welkom aan boord, {PLAYER}{KUN}!\pIk ben nu erekapitein van\nde S.S. TIDAL!\pNoem me maar KAPITEIN BRINEY!\pIk was al eens met pensioen,\nmaar toen ik dit mooie schip zag…\pToen werd mijn zeemanshart\nweer wakker!	
+SSTidalCorridor_Text_Peeko	PEEKO: Pihyo pihyohyo…	PEEKO: Pihyo pihyohyo…	
+SSTidalCorridor_Text_Cabin1	Cabin 1	Hut 1	
+SSTidalCorridor_Text_Cabin2	Cabin 2	Hut 2	
+SSTidalCorridor_Text_Cabin3	Cabin 3	Hut 3	
+SSTidalCorridor_Text_Cabin4	Cabin 4	Hut 4	

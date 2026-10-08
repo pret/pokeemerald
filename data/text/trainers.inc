@@ -430,580 +430,582 @@ Route104_Text_DarianPostBattle:
 	.string "zo sterk als je naam doet denken!$"
 
 Route105_Text_FosterIntro:
-	.string "There's supposed to be a mystical\n"
-	.string "rock around here.\l"
-	.string "Do you know anything about it?$"
+	.string "Hier zou ergens een magische\n"
+	.string "steen moeten liggen.\l"
+	.string "Weet jij daar iets van?$"
 
 Route105_Text_FosterDefeated:
-	.string "I was thinking too much about that\n"
-	.string "rock, while my POKéMON remained weak…$"
+	.string "Ik dacht te veel aan die steen,\n"
+	.string "en mijn POKéMON bleven zwak…$"
 
 Route105_Text_FosterPostBattle:
-	.string "I can spend hours and hours staring\n"
-	.string "at a nice rock without growing bored.$"
+	.string "Ik kan uren naar een mooie\n"
+	.string "steen kijken zonder me te vervelen.$"
 
 Route105_Text_LuisIntro:
-	.string "Whew! I was worried that a kid was\n"
-	.string "drowning when I saw you.\p"
-	.string "You seem to be okay, so what do you\n"
-	.string "say to a battle?$"
+	.string "Pfoe! Ik dacht dat er een kind\n"
+	.string "aan het verdrinken was.\p"
+	.string "Maar met jou gaat het goed.\n"
+	.string "Zin in een gevecht?$"
 
 Route105_Text_LuisDefeated:
-	.string "Glub… Glub…$"
+	.string "Blub… Blub…$"
 
 Route105_Text_LuisPostBattle:
-	.string "If you are drowning, the signal is to\n"
-	.string "wave one arm toward the beach.$"
+	.string "Ben je aan het verdrinken? Zwaai\n"
+	.string "dan met één arm naar het strand.$"
 
 Route105_Text_DominikIntro:
-	.string "Swimming the deep blue sea…\n"
-	.string "It feels the greatest!$"
+	.string "Zwemmen in de diepblauwe zee…\n"
+	.string "Er is niks fijner!$"
 
 Route105_Text_DominikDefeated:
-	.string "I lost…\n"
-	.string "Now I'm feeling blue…$"
+	.string "Ik heb verloren…\n"
+	.string "Nu voel ik me somber…$"
 
 Route105_Text_DominikPostBattle:
-	.string "Why is the sea blue?\p"
-	.string "I learned about that at the MUSEUM in\n"
-	.string "SLATEPORT, but I forgot.$"
+	.string "Waarom is de zee blauw?\p"
+	.string "Dat leerde ik in het MUSEUM in\n"
+	.string "SLATEPORT, maar ik ben het vergeten.$"
 
 Route105_Text_BeverlyIntro:
-	.string "My body feels lighter in the water.\n"
-	.string "It's as if I've gotten slimmer!$"
+	.string "In het water voelt mijn lijf lichter.\n"
+	.string "Alsof ik dunner ben geworden!$"
 
 Route105_Text_BeverlyDefeated:
-	.string "I'm floating…$"
+	.string "Ik zweef…$"
 
 Route105_Text_PostBattle:
-	.string "Your body weight is reduced to just\n"
-	.string "one tenth in the water.\p"
-	.string "That would make me…\n"
-	.string "Whoops! I'm not telling you my weight!$"
+	.string "In het water weeg je maar een\n"
+	.string "tiende van je gewicht.\p"
+	.string "Dan ben ik…\n"
+	.string "Oeps! Mijn gewicht zeg ik niet!$"
 
 Route105_Text_ImaniIntro:
-	.string "The blue, blue sky…\n"
-	.string "The vast sea…\l"
-	.string "It's so peaceful…$"
+	.string "De blauwe, blauwe lucht…\n"
+	.string "De grote zee…\l"
+	.string "Het is zo rustig…$"
 
 Route105_Text_ImaniDefeated:
-	.string "I lost while I was lounging!$"
+	.string "Ik verloor terwijl ik lag te luieren!$"
 
 Route105_Text_ImaniPostBattle:
-	.string "I want to be told I'm relaxing to be\n"
-	.string "with. Giggle.$"
+	.string "Ik wil horen dat ik fijn gezelschap\n"
+	.string "ben. Hihi.$"
 
 Route105_Text_AndresIntro:
-	.string "I'm convinced that the sea keeps\n"
-	.string "secrets from us.$"
+	.string "Ik weet zeker dat de zee\n"
+	.string "geheimen voor ons heeft.$"
 
 Route105_Text_AndresDefeated:
-	.string "Yes…\n"
-	.string "I am no good at battling…$"
+	.string "Ja…\n"
+	.string "Ik ben niet goed in vechten…$"
 
 Route105_Text_AndresPostBattle:
-	.string "I'm sure there are many secrets to be\n"
-	.string "discovered in the world's seas.\p"
-	.string "I mean to find them all!$"
+	.string "In de zeeën van de wereld zijn vast\n"
+	.string "nog veel geheimen te vinden.\p"
+	.string "Ik ga ze allemaal vinden!$"
 
 Route105_Text_AndresRegister:
-	.string "Huh? I'm so weak, but you're willing\n"
-	.string "to register me in your POKéNAV?$"
+	.string "Huh? Ik ben zo zwak, en toch wil\n"
+	.string "je me in je POKéNAV zetten?$"
 
 Route105_Text_AndresRematchIntro:
-	.string "I've told you that I'm weak…\n"
-	.string "Are you sure you want to do this?$"
+	.string "Ik zei toch dat ik zwak ben…\n"
+	.string "Weet je zeker dat je dit wilt?$"
 
 Route105_Text_AndresRematchDefeated:
-	.string "Yes…\n"
-	.string "I didn't think I could win.$"
+	.string "Ja…\n"
+	.string "Ik dacht al dat ik niet kon winnen.$"
 
 Route105_Text_AndresRematchPostBattle:
-	.string "I may be weak at battling, but my\n"
-	.string "drive to explore can't be bested.\p"
-	.string "I will travel the seas all around\n"
-	.string "the world!$"
+	.string "Ik ben misschien zwak in vechten,\n"
+	.string "maar niemand ontdekt zo graag als ik.\p"
+	.string "Ik ga over alle zeeën van\n"
+	.string "de wereld reizen!$"
 
 Route105_Text_JosueIntro:
-	.string "I'm exhausted from swimming.\n"
-	.string "I'm just not used to it.\p"
-	.string "I need a battle for a change of pace!$"
+	.string "Ik ben moe van het zwemmen.\n"
+	.string "Ik ben het gewoon niet gewend.\p"
+	.string "Ik heb zin in een gevecht,\n"
+	.string "voor de afwisseling!$"
 
 Route105_Text_JosueDefeated:
-	.string "I lost because I battled at sea.$"
+	.string "Ik verloor omdat ik op zee vocht.$"
 
 Route105_Text_JosuePostBattle:
-	.string "Yeah, for me, the sky is a much better\n"
-	.string "match than the sea.$"
+	.string "Ja, de lucht past veel beter bij\n"
+	.string "mij dan de zee.$"
 
 Route106_Text_ElliotIntro:
-	.string "Which do you prefer, fishing in the\n"
-	.string "sea or a stream?$"
+	.string "Wat vind jij leuker: vissen in\n"
+	.string "de zee of in een beek?$"
 
 Route106_Text_ElliotDefeated:
-	.string "Like in deep-sea fishing, I lost\n"
-	.string "spectacularly!$"
+	.string "Net als bij diepzeevissen ging ik\n"
+	.string "flink kopje-onder!$"
 
 Route106_Text_ElliotPostBattle:
-	.string "Fishing is the greatest whether it's\n"
-	.string "in the sea or a stream.\l"
-	.string "You agree with me, right?$"
+	.string "Vissen is het leukst, of het nu\n"
+	.string "in de zee is of in een beek.\l"
+	.string "Toch?$"
 
 Route106_Text_ElliotRegister:
-	.string "Fishing's great, but so is battling.\n"
-	.string "If you don't mind, can we meet again?$"
+	.string "Vissen is leuk, maar vechten ook.\n"
+	.string "Zullen we nog eens vechten?$"
 
 Route106_Text_ElliotRematchIntro:
-	.string "I caught a bunch of POKéMON fishing.\n"
-	.string "I'll show you an impressive battle!$"
+	.string "Ik heb veel POKéMON gevist.\n"
+	.string "Ik laat je een mooi gevecht zien!$"
 
 Route106_Text_ElliotRematchDefeated:
-	.string "I lost again spectacularly!$"
+	.string "Ik heb weer flink verloren!$"
 
 Route106_Text_ElliotRematchPostBattle:
-	.string "Win or lose, POKéMON are the greatest!\n"
-	.string "You agree with me, right?$"
+	.string "Winnen of verliezen, POKéMON zijn\n"
+	.string "het leukst! Toch?$"
 
 Route106_Text_NedIntro:
-	.string "What do people do if they need to go\n"
-	.string "to a washroom?\p"
-	.string "What if my ROD hooks a big one while\n"
-	.string "I'm in the washroom? I just can't go…$"
+	.string "Wat doe je als je naar de\n"
+	.string "wc moet?\p"
+	.string "Stel dat er iets groots aan mijn\n"
+	.string "HENGEL bijt als ik op de wc zit…$"
 
 Route106_Text_NedDefeated:
-	.string "I lost because I'm trying to not go\n"
-	.string "to the washroom…$"
+	.string "Ik verloor omdat ik mijn plas\n"
+	.string "moet ophouden…$"
 
 Route106_Text_NedPostBattle:
-	.string "Oh, no! I've got this feeling I'll hook\n"
-	.string "a big one!$"
+	.string "O nee! Ik voel dat ik zo een\n"
+	.string "grote ga vangen!$"
 
 Route106_Text_DouglasIntro:
-	.string "Hahahah! I'm a lousy runner, but in\n"
-	.string "the water you can't catch me!$"
+	.string "Hahahah! Ik ren heel slecht, maar\n"
+	.string "in het water vang je me niet!$"
 
 Route106_Text_DouglasDefeated:
-	.string "I give up!$"
+	.string "Ik geef op!$"
 
 Route106_Text_DouglasPostBattle:
-	.string "I wouldn't lose in a swim race…$"
+	.string "Met zwemmen zou ik niet verliezen…$"
 
 Route106_Text_KylaIntro:
-	.string "The sea is my backyard. I'm not going\n"
-	.string "to take it easy because you're a kid!$"
+	.string "De zee is mijn achtertuin. Ik doe\n"
+	.string "niet rustig aan omdat je een kind bent!$"
 
 Route106_Text_KylaDefeated:
-	.string "Did you take it easy on me by any\n"
-	.string "chance?$"
+	.string "Deed jij soms rustig aan\n"
+	.string "met mij?$"
 
 Route106_Text_KylaPostBattle:
-	.string "Drifting along with the waves…\n"
-	.string "I love it! Why don't you give it a try?$"
+	.string "Drijven op de golven…\n"
+	.string "Heerlijk! Probeer het ook eens!$"
 
 Route107_Text_DarrinIntro:
-	.string "Yawn…\p"
-	.string "I must have drifted off to sleep while\n"
-	.string "I was drifting in the waves.$"
+	.string "Gaap…\p"
+	.string "Ik ben vast in slaap gevallen\n"
+	.string "terwijl ik op de golven dreef.$"
 
 Route107_Text_DarrinDefeated:
-	.string "Ahaha, I lost…\n"
-	.string "I'll take a snooze, I think…$"
+	.string "Haha, ik heb verloren…\n"
+	.string "Ik ga een dutje doen, denk ik…$"
 
 Route107_Text_DarrinPostBattle:
-	.string "Floating and being rocked by\n"
-	.string "the waves--it's like sleeping in\l"
-	.string "a plush, comfy bed.$"
+	.string "Drijven en wiegen op de golven…\n"
+	.string "Het is net slapen in een\l"
+	.string "zacht, lekker bed.$"
 
 Route107_Text_TonyIntro:
-	.string "The sea is like my backyard.\n"
-	.string "Let's battle!$"
+	.string "De zee is mijn achtertuin.\n"
+	.string "Laten we vechten!$"
 
 Route107_Text_TonyDefeated:
-	.string "I lost on my home field…\n"
-	.string "I'm in shock!$"
+	.string "Verloren in mijn eigen tuin…\n"
+	.string "Ik ben in shock!$"
 
 Route107_Text_TonyPostBattle:
-	.string "I swim the seas with a heart full of\n"
-	.string "dreams…\p"
-	.string "It's a song!\n"
-	.string "Anyways, I'm swimming some more.$"
+	.string "Ik zwem door de zee met een hart\n"
+	.string "vol dromen…\p"
+	.string "Dat is een liedje!\n"
+	.string "Nou, ik ga verder zwemmen.$"
 
 Route107_Text_TonyRegister:
-	.string "You've shocked me to the bone!\n"
-	.string "Well, so you won't forget me…$"
+	.string "Ik schrok me rot!\n"
+	.string "Nou, dan vergeet je me niet…$"
 
 Route107_Text_TonyRematchIntro:
-	.string "Swimming in the big, wide sea,\n"
-	.string "my POKéMON has grown stronger!$"
+	.string "Door te zwemmen in de grote zee\n"
+	.string "is mijn POKéMON sterker geworden!$"
 
 Route107_Text_TonyRematchDefeated:
-	.string "What a shock!\p"
-	.string "My POKéMON has gotten stronger, but\n"
-	.string "I stayed weak as a TRAINER!$"
+	.string "Wat een schok!\p"
+	.string "Mijn POKéMON werd sterker, maar\n"
+	.string "ik bleef een zwakke TRAINER!$"
 
 Route107_Text_TonyRematchPostBattle:
-	.string "What you learn in battle makes you\n"
-	.string "a stronger TRAINER.\l"
-	.string "The waves taught me that.$"
+	.string "Wat je leert in een gevecht, maakt\n"
+	.string "je een sterkere TRAINER.\l"
+	.string "Dat leerden de golven me.$"
 
 Route107_Text_DeniseIntro:
-	.string "Do you know a little town called\n"
-	.string "DEWFORD?$"
+	.string "Ken jij een klein stadje dat\n"
+	.string "DEWFORD heet?$"
 
 Route107_Text_DeniseDefeated:
-	.string "I hate this!$"
+	.string "Ik haat dit!$"
 
 Route107_Text_DenisePostBattle:
-	.string "A weird saying is getting really\n"
-	.string "trendy at DEWFORD HALL.$"
+	.string "In DEWFORD HALL is een raar\n"
+	.string "woord nu heel erg hip.$"
 
 Route107_Text_BethIntro:
-	.string "Did you want to battle me?\n"
-	.string "Sure, I'll go with you!$"
+	.string "Wil je tegen me vechten?\n"
+	.string "Prima, ik doe mee!$"
 
 Route107_Text_BethDefeated:
-	.string "I wasn't good enough for you.$"
+	.string "Ik was niet goed genoeg voor jou.$"
 
 Route107_Text_BethPostBattle:
-	.string "I think you're going to keep getting\n"
-	.string "better. I'll go for it, too!$"
+	.string "Jij wordt vast steeds beter.\n"
+	.string "Ik ga ook mijn best doen!$"
 
 Route107_Text_LisaIntro:
-	.string "LISA: We challenge you as a sister\n"
-	.string "and brother!$"
+	.string "LISA: Wij dagen je uit als zus\n"
+	.string "en broer!$"
 
 Route107_Text_LisaDefeated:
-	.string "LISA: Awesome.\n"
-	.string "You're in a different class of tough.$"
+	.string "LISA: Super.\n"
+	.string "Jij bent echt veel sterker.$"
 
 Route107_Text_LisaPostBattle:
-	.string "LISA: Do you have any friends who\n"
-	.string "would go to the beach with you?$"
+	.string "LISA: Heb jij vrienden die met\n"
+	.string "jou naar het strand gaan?$"
 
 Route107_Text_LisaNotEnoughPokemon:
-	.string "LISA: If you want to battle with us,\n"
-	.string "bring more POKéMON.$"
+	.string "LISA: Wil je met ons vechten?\n"
+	.string "Neem dan meer POKéMON mee.$"
 
 Route107_Text_RayIntro:
-	.string "RAY: We always battle POKéMON,\n"
-	.string "me and my sister.\p"
-	.string "I always lose, but we can beat you\n"
-	.string "2-on-2!$"
+	.string "RAY: Mijn zus en ik vechten\n"
+	.string "altijd met POKéMON.\p"
+	.string "Ik verlies altijd, maar samen\n"
+	.string "verslaan we jou wel, 2 tegen 2!$"
 
 Route107_Text_RayDefeated:
-	.string "RAY: Wowee, you're at a higher level\n"
-	.string "than us!$"
+	.string "RAY: Wauw, jij bent veel beter\n"
+	.string "dan wij!$"
 
 Route107_Text_RayPostBattle:
-	.string "RAY: My sister gave me my POKéMON.\n"
-	.string "I raised it, and now it's my important\l"
-	.string "partner!$"
+	.string "RAY: Ik kreeg mijn POKéMON van\n"
+	.string "mijn zus. Ik heb hem groot gebracht,\l"
+	.string "en nu is hij mijn beste maatje!$"
 
 Route107_Text_RayNotEnoughPokemon:
-	.string "RAY: If you want to battle us,\n"
-	.string "go bring some more POKéMON!$"
+	.string "RAY: Wil je met ons vechten?\n"
+	.string "Haal dan meer POKéMON!$"
 
 Route107_Text_CamronIntro:
-	.string "I'm in the middle of a triathlon,\n"
-	.string "but I'm nowhere near tired!$"
+	.string "Ik doe mee aan een triatlon,\n"
+	.string "maar ik ben nog lang niet moe!$"
 
 Route107_Text_CamronDefeated:
-	.string "That exhausted me…$"
+	.string "Daar werd ik moe van…$"
 
 Route107_Text_CamronPostBattle:
-	.string "I still have swimming and running left\n"
-	.string "to do after this.\p"
-	.string "Am I going to be okay?$"
+	.string "Hierna moet ik nog zwemmen en\n"
+	.string "hardlopen.\p"
+	.string "Gaat dat wel goed?$"
 
 Route108_Text_JeromeIntro:
-	.string "My dream is to swim the world's seven\n"
-	.string "seas!$"
+	.string "Mijn droom is om door alle zeven\n"
+	.string "zeeën te zwemmen!$"
 
 Route108_Text_JeromeDefeated:
-	.string "I won't be able to swim the seven seas\n"
-	.string "like this…$"
+	.string "Zo kom ik nooit door de zeven\n"
+	.string "zeeën…$"
 
 Route108_Text_JeromePostBattle:
-	.string "Playing with marine POKéMON is one of\n"
-	.string "the pleasures of swimming!$"
+	.string "Spelen met zee-POKéMON is een\n"
+	.string "van de leukste dingen van zwemmen!$"
 
 Route108_Text_MatthewIntro:
-	.string "Ahoy, there! Are you going out to\n"
-	.string "the ABANDONED SHIP, too?$"
+	.string "Ahoi! Ga jij ook naar\n"
+	.string "het ABANDONED SHIP?$"
 
 Route108_Text_MatthewDefeated:
-	.string "I'm sinking!\n"
-	.string "Glub… Glub…$"
+	.string "Ik zink!\n"
+	.string "Blub… Blub…$"
 
 Route108_Text_MatthewPostBattle:
-	.string "Some people even go inside that\n"
-	.string "ABANDONED SHIP.$"
+	.string "Sommige mensen gaan zelfs naar\n"
+	.string "binnen in dat ABANDONED SHIP.$"
 
 Route108_Text_TaraIntro:
-	.string "My liar of a boyfriend told me that\n"
-	.string "I look great in a bikini…$"
+	.string "Mijn vriend, die leugenaar, zei\n"
+	.string "dat ik er mooi uitzie in bikini…$"
 
 Route108_Text_TaraDefeated:
-	.string "Oh, boo!$"
+	.string "O, boe!$"
 
 Route108_Text_TaraPostBattle:
-	.string "Even if it's a lie, I love being told\n"
-	.string "I look great…\l"
-	.string "We girls are so complex…$"
+	.string "Ook als het een leugen is, hoor ik\n"
+	.string "graag dat ik er mooi uitzie…\l"
+	.string "Wij meiden zijn ingewikkeld…$"
 
 Route108_Text_MissyIntro:
-	.string "I love the sea!\n"
-	.string "I forget all my worries when I swim!$"
+	.string "Ik hou van de zee!\n"
+	.string "Als ik zwem, vergeet ik al mijn zorgen!$"
 
 Route108_Text_MissyDefeated:
-	.string "When I lose a battle, I get all\n"
-	.string "stressed out!$"
+	.string "Als ik een gevecht verlies, word\n"
+	.string "ik heel gestrest!$"
 
 Route108_Text_MissyPostBattle:
-	.string "Work off your stress by swimming!\n"
-	.string "It's so healthy!$"
+	.string "Zwem je stress weg!\n"
+	.string "Dat is zo gezond!$"
 
 Route108_Text_CoryIntro:
-	.string "I love WATER-type POKéMON.\n"
-	.string "I love other POKéMON, too!$"
+	.string "Ik hou van WATER-POKéMON.\n"
+	.string "En van andere POKéMON ook!$"
 
 Route108_Text_CoryDefeated:
-	.string "Waaah! I lost!\n"
+	.string "Waaah! Verloren!\n"
 	.string "Waaah! Waaah!$"
 
 Route108_Text_CoryPostBattle:
-	.string "Shouting is good for me!\n"
-	.string "It uplifts me!$"
+	.string "Schreeuwen is goed voor me!\n"
+	.string "Ik word er vrolijk van!$"
 
 Route108_Text_CoryRegister:
-	.string "I love tough TRAINERS, too!\n"
-	.string "Register me in your POKéNAV!$"
+	.string "Ik hou ook van sterke TRAINERS!\n"
+	.string "Zet me in je POKéNAV!$"
 
 Route108_Text_CoryRematchIntro:
-	.string "Win or lose, I love battling at sea!$"
+	.string "Winnen of verliezen, ik vecht graag\n"
+	.string "op zee!$"
 
 Route108_Text_CoryRematchDefeated:
-	.string "Waaah! I lost again!\n"
+	.string "Waaah! Weer verloren!\n"
 	.string "Waaah! Waaah!$"
 
 Route108_Text_CoryRematchPostBattle:
-	.string "If you're faced with a challenge,\n"
-	.string "try shouting at the sea!$"
+	.string "Heb je het moeilijk?\n"
+	.string "Schreeuw dan naar de zee!$"
 
 Route108_Text_CarolinaIntro:
-	.string "I take huge pride in my POKéMON.\n"
-	.string "We'll show you one speedy battle!$"
+	.string "Ik ben heel trots op mijn POKéMON.\n"
+	.string "We laten je een snel gevecht zien!$"
 
 Route108_Text_CarolinaDefeated:
-	.string "That wasn't cute at all.$"
+	.string "Dat was helemaal niet schattig.$"
 
 Route108_Text_CarolinaPostBattle:
-	.string "Since I'm at sea like this, I wouldn't\n"
-	.string "mind putting on a pink, frilly swimsuit…$"
+	.string "Nu ik op zee ben, wil ik best een\n"
+	.string "roze badpak met ruches aan…$"
 
 Route109_Text_DavidIntro:
-	.string "Hiyah! Look at my chiseled abs!\n"
-	.string "This is what you call “cut”!$"
+	.string "Hiyah! Kijk naar mijn buikspieren!\n"
+	.string "Dat noem je nou “strak”!$"
 
 Route109_Text_DavidDefeated:
 	.string "Aiyah!\n"
-	.string "Flubbed out!$"
+	.string "Mislukt!$"
 
 Route109_Text_DavidPostBattle:
 	.string "Hiyah!\p"
-	.string "My sculpted abs have nothing to do\n"
-	.string "with POKéMON battles!$"
+	.string "Mijn buikspieren helpen niks bij\n"
+	.string "POKéMON-gevechten!$"
 
 Route109_Text_AliceIntro:
-	.string "Are you properly protected against\n"
-	.string "the sun?$"
+	.string "Heb jij je goed ingesmeerd\n"
+	.string "tegen de zon?$"
 
 Route109_Text_AliceDefeated:
-	.string "Ouch, ouch, ouch!$"
+	.string "Au, au, au!$"
 
 Route109_Text_AlicePostBattle:
-	.string "Cheeks are the most prone to burning!$"
+	.string "Je wangen verbranden het snelst!$"
 
 Route109_Text_HueyIntro:
-	.string "I've laid anchor in ports around\n"
-	.string "the world, but SLATEPORT's the best.$"
+	.string "Ik lag in havens over de hele\n"
+	.string "wereld, maar SLATEPORT is de beste.$"
 
 Route109_Text_HueyDefeated:
-	.string "You're the best!$"
+	.string "Jij bent de beste!$"
 
 Route109_Text_HueyPostBattle:
-	.string "In the best port was the best\n"
+	.string "In de beste haven was de beste\n"
 	.string "TRAINER…$"
 
 Route109_Text_EdmondIntro:
-	.string "Urrrrppp…\n"
-	.string "Battle? With me?$"
+	.string "Bweeeuh…\n"
+	.string "Vechten? Met mij?$"
 
 Route109_Text_EdmondDefeated:
-	.string "Urp… Ooooooohhhhhh…\n"
-	.string "Urrrrpppp…$"
+	.string "Bweh… Oooooooh…\n"
+	.string "Bweeeuh…$"
 
 Route109_Text_EdmondPostBattle:
-	.string "I'm usually stronger than this!\n"
-	.string "I'm just seasick as a dog!\p"
-	.string "I'm a SAILOR, but…$"
+	.string "Normaal ben ik sterker!\n"
+	.string "Ik ben gewoon zo zeeziek!\p"
+	.string "Ik ben een MATROOS, maar…$"
 
 Route109_Text_RickyIntro:
-	.string "I'm thirsty… I could go for a SODA POP\n"
-	.string "at the SEASHORE HOUSE…$"
+	.string "Ik heb dorst… Ik wil een FRISDRANK\n"
+	.string "uit het SEASHORE HOUSE…$"
 
 Route109_Text_RickyDefeated:
-	.string "Groan…$"
+	.string "Zucht…$"
 
 Route109_Text_RickyPostBattle:
-	.string "I'm getting famished… My inner tube\n"
-	.string "looks like a giant doughnut…$"
+	.string "Ik heb zo'n honger… Mijn zwemband\n"
+	.string "lijkt wel een reuzedonut…$"
 
 Route109_Text_RickyRegister:
-	.string "Will you have another match with me\n"
-	.string "when I'm not all thirsty?$"
+	.string "Vecht je nog eens met me als\n"
+	.string "ik geen dorst heb?$"
 
 Route109_Text_RickyRematchIntro:
-	.string "I'm hungry, but I've got enough pep in\n"
-	.string "me for a battle!$"
+	.string "Ik heb honger, maar ik heb nog\n"
+	.string "genoeg energie om te vechten!$"
 
 Route109_Text_RickyRematchDefeated:
-	.string "I lost…\n"
-	.string "It's because I'm hungry…$"
+	.string "Ik heb verloren…\n"
+	.string "Omdat ik honger heb…$"
 
 Route109_Text_RickyRematchPostBattle:
-	.string "When you eat on a beach, everything\n"
-	.string "seems to taste a little better.$"
+	.string "Als je op het strand eet, smaakt\n"
+	.string "alles een beetje lekkerder.$"
 
 Route109_Text_LolaIntro:
-	.string "Doesn't a beach umbrella look like\n"
-	.string "a giant flower?$"
+	.string "Lijkt een parasol niet op een\n"
+	.string "reuzebloem?$"
 
 Route109_Text_LolaDefeated:
-	.string "Mommy!$"
+	.string "Mama!$"
 
 Route109_Text_LolaPostBattle:
-	.string "If you look at the beach from the sky,\n"
-	.string "it looks like a big flower garden!$"
+	.string "Als je van boven naar het strand\n"
+	.string "kijkt, lijkt het een grote bloementuin!$"
 
 Route109_Text_LolaRegister:
-	.string "Me?\n"
-	.string "I'm here every day!$"
+	.string "Ik?\n"
+	.string "Ik ben hier elke dag!$"
 
 Route109_Text_LolaRematchIntro:
-	.string "I'm not losing to you again!\n"
-	.string "That's why I have my inner tube!$"
+	.string "Ik verlies niet meer van jou!\n"
+	.string "Daarom heb ik mijn zwemband!$"
 
 Route109_Text_LolaRematchDefeated:
-	.string "Mommy!$"
+	.string "Mama!$"
 
 Route109_Text_LolaRematchPostBattle:
-	.string "If I have an inner tube, me and my\n"
-	.string "POKéMON's cuteness goes way up!$"
+	.string "Met een zwemband zijn ik en mijn\n"
+	.string "POKéMON nog veel schattiger!$"
 
 Route109_Text_AustinaIntro:
-	.string "I can't swim without my inner tube,\n"
-	.string "but I won't lose at POKéMON!$"
+	.string "Zonder zwemband kan ik niet zwemmen,\n"
+	.string "maar met POKéMON verlies ik niet!$"
 
 Route109_Text_AustinaDefeated:
-	.string "Did I lose because I have an inner\n"
-	.string "tube?$"
+	.string "Verloor ik omdat ik een\n"
+	.string "zwemband heb?$"
 
 Route109_Text_AustinaPostBattle:
-	.string "My inner tube is a fashion item.\n"
-	.string "I can't be seen without it.$"
+	.string "Mijn zwemband is mode.\n"
+	.string "Zonder ga ik nergens heen.$"
 
 Route109_Text_GwenIntro:
-	.string "Hi, big TRAINER.\n"
-	.string "Will you battle with me?$"
+	.string "Hoi, grote TRAINER.\n"
+	.string "Wil je met me vechten?$"
 
 Route109_Text_GwenDefeated:
-	.string "Oh, you're strong.$"
+	.string "O, jij bent sterk.$"
 
 Route109_Text_GwenPostBattle:
-	.string "How did you get to be so strong?$"
+	.string "Hoe ben jij zo sterk geworden?$"
 
 Route109_Text_CarterIntro:
-	.string "Wahahah! This dude's going to catch\n"
-	.string "himself a big one!$"
+	.string "Wahahah! Deze gast gaat een\n"
+	.string "grote vangen!$"
 
 Route109_Text_CarterDefeated:
-	.string "This dude just lost one…$"
+	.string "Deze gast is er een kwijt…$"
 
 Route109_Text_CarterPostBattle:
-	.string "This dude thinks you're a big one.\n"
-	.string "No, you're a big-one-to-be!$"
+	.string "Deze gast vindt jou een grote.\n"
+	.string "Nee, jij wordt nog een grote!$"
 
 Route109_Text_PaulIntro:
-	.string "PAUL: Well, this is a mood-breaker.\p"
-	.string "I wish you wouldn't disturb our\n"
-	.string "precious time together.$"
+	.string "PAUL: Nou, daar gaat de sfeer.\p"
+	.string "Ik wou dat je ons niet stoorde\n"
+	.string "in onze fijne tijd samen.$"
 
 Route109_Text_PaulDefeated:
-	.string "PAUL: Well, I give up.$"
+	.string "PAUL: Nou, ik geef op.$"
 
 Route109_Text_PaulPostBattle:
-	.string "PAUL: Well, don't tell anyone that\n"
-	.string "we're here.\l"
-	.string "This is just our private world of two!$"
+	.string "PAUL: Nou, zeg tegen niemand\n"
+	.string "dat we hier zijn.\l"
+	.string "Dit is onze eigen kleine wereld!$"
 
 Route109_Text_PaulNotEnoughPokemon:
-	.string "PAUL: We're totally, deeply in love.\n"
-	.string "That's why we make our POKéMON battle\l"
-	.string "together.$"
+	.string "PAUL: We zijn heel erg verliefd.\n"
+	.string "Daarom laten we onze POKéMON\l"
+	.string "samen vechten.$"
 
 Route109_Text_MelIntro:
-	.string "MEL: We're, like, totally in love.\n"
-	.string "Our romance is heating up all of HOENN!$"
+	.string "MEL: We zijn, echt, superverliefd.\n"
+	.string "Heel HOENN wordt er warm van!$"
 
 Route109_Text_MelDefeated:
-	.string "MEL: We lost, and it's my fault!\n"
-	.string "PAUL will hate me!$"
+	.string "MEL: We verloren, en het is mijn\n"
+	.string "schuld! PAUL wordt boos op me!$"
 
 Route109_Text_MelPostBattle:
-	.string "MEL: Um, PAUL, are you angry with me?\n"
-	.string "Please don't be angry.$"
+	.string "MEL: Eh, PAUL, ben je boos op me?\n"
+	.string "Wees alsjeblieft niet boos.$"
 
 Route109_Text_MelNotEnoughPokemon:
-	.string "MEL: We're, like, deeply and truly in love.\n"
-	.string "That's why we make our POKéMON\l"
-	.string "battle together.$"
+	.string "MEL: We zijn, echt, heel erg verliefd.\n"
+	.string "Daarom laten we onze POKéMON\l"
+	.string "samen vechten.$"
 
 Route109_Text_ChandlerIntro:
-	.string "Tadaah! See?\n"
-	.string "My inner tube's round!$"
+	.string "Tadaa! Zie je?\n"
+	.string "Mijn zwemband is rond!$"
 
 Route109_Text_ChandlerDefeated:
-	.string "Oh, oh!\n"
-	.string "Too bad!$"
+	.string "O, o!\n"
+	.string "Jammer!$"
 
 Route109_Text_ChandlerPostBattle:
-	.string "After I showed you my round inner\n"
-	.string "tube, too…$"
+	.string "En ik liet je nog wel mijn ronde\n"
+	.string "zwemband zien…$"
 
 Route109_Text_HaileyIntro:
-	.string "I can't swim, so I'm pretending\n"
-	.string "to swim.$"
+	.string "Ik kan niet zwemmen, dus ik doe\n"
+	.string "alsof ik zwem.$"
 
 Route109_Text_HaileyDefeated:
-	.string "I thought so!\n"
-	.string "I didn't think we could win.$"
+	.string "Dat dacht ik al!\n"
+	.string "Ik dacht al dat we niet zouden winnen.$"
 
 Route109_Text_HaileyPostBattle:
-	.string "When I learn how to swim, I think\n"
-	.string "my POKéMON will become tougher.$"
+	.string "Als ik kan zwemmen, worden mijn\n"
+	.string "POKéMON vast ook sterker.$"
 
 Route109_Text_ElijahIntro:
-	.string "For a guy as macho as me, this kind\n"
-	.string "of POKéMON is the perfect match!$"
+	.string "Voor een stoere vent als ik past\n"
+	.string "dit soort POKéMON perfect!$"
 
 Route109_Text_ElijahDefeated:
-	.string "I'm cool even in defeat, hey?$"
+	.string "Ik blijf cool, zelfs als ik verlies, hè?$"
 
 Route109_Text_ElijahPostBattle:
-	.string "For a guy as macho as me, a port\n"
-	.string "is the perfect setting!\p"
-	.string "I guess I'll head for SLATEPORT.$"
+	.string "Voor een stoere vent als ik is een\n"
+	.string "haven de perfecte plek!\p"
+	.string "Ik ga maar naar SLATEPORT.$"
 
 Route110_Text_JacobIntro:
 	.string "Whoa! Watch it!\n"
@@ -2173,172 +2175,172 @@ Route115_Text_MarlenePostBattle:
 	.string "But this place isn't very peaceful…$"
 
 Route116_Text_ClarkIntro:
-	.string "If the tunnel doesn't go through, then\n"
-	.string "I'll just go over the top.$"
+	.string "Als de tunnel niet doorgaat,\n"
+	.string "ga ik er gewoon overheen.$"
 
 Route116_Text_ClarkDefeat:
-	.string "Gasp… Gasp…\n"
-	.string "Losing made me tired…$"
+	.string "Hijg… Hijg…\n"
+	.string "Van verliezen word ik moe…$"
 
 Route116_Text_ClarkPostBattle:
-	.string "It's no big deal if there's no tunnel.\n"
-	.string "To a HIKER, mountains are roads!$"
+	.string "Geen tunnel? Geen probleem.\n"
+	.string "Voor een WANDELAAR zijn bergen wegen!$"
 
 Route116_Text_JoeyIntro:
-	.string "My POKéMON rule!\n"
-	.string "Check them out!$"
+	.string "Mijn POKéMON zijn de beste!\n"
+	.string "Kijk maar!$"
 
 Route116_Text_JoeyDefeat:
-	.string "Ouch! A scrape!\n"
-	.string "I have to put on a bandage!$"
+	.string "Au! Een schaafwond!\n"
+	.string "Ik moet er een pleister op doen!$"
 
 Route116_Text_JoeyPostBattle:
-	.string "Bandages are signs of toughness!\n"
-	.string "I've got another one!$"
+	.string "Pleisters laten zien dat je stoer\n"
+	.string "bent! Ik heb er nog een!$"
 
 Route116_Text_JoseIntro:
-	.string "My BUG POKéMON are tough!\n"
-	.string "Let's battle!$"
+	.string "Mijn INSECT-POKéMON zijn sterk!\n"
+	.string "Laten we vechten!$"
 
 Route116_Text_JoseDefeat:
-	.string "I lost!\n"
-	.string "I thought I had you!$"
+	.string "Ik heb verloren!\n"
+	.string "Ik dacht dat ik je had!$"
 
 Route116_Text_JosePostBattle:
-	.string "BUG POKéMON evolve quickly.\n"
-	.string "So they get strong quickly, too.$"
+	.string "INSECT-POKéMON evolueren snel.\n"
+	.string "Dus ze worden ook snel sterk.$"
 
 Route116_Text_JaniceIntro:
-	.string "Let me teach you how strong my\n"
-	.string "adorable POKéMON is!$"
+	.string "Ik laat je zien hoe sterk mijn\n"
+	.string "schattige POKéMON is!$"
 
 Route116_Text_JaniceDefeat:
-	.string "You're a notch above me…$"
+	.string "Jij bent net iets beter dan ik…$"
 
 Route116_Text_JanicePostBattle:
-	.string "POKéMON that possess cuteness and\n"
-	.string "power, that's ideal, I think.$"
+	.string "POKéMON die schattig en sterk\n"
+	.string "zijn, dat is het mooiste, vind ik.$"
 
 Route116_Text_JerryIntro:
-	.string "We learn all sorts of things at the\n"
+	.string "We leren van alles op de\n"
 	.string "TRAINER'S SCHOOL.\p"
-	.string "I want to test things out for real!$"
+	.string "Ik wil het nu echt uitproberen!$"
 
 Route116_Text_JerryDefeat:
-	.string "I slacked off in school…\n"
-	.string "That's why I lost.$"
+	.string "Ik heb op school niet opgelet…\n"
+	.string "Daarom verloor ik.$"
 
 Route116_Text_JerryPostBattle:
-	.string "I'll have to redo some courses at\n"
-	.string "the TRAINER'S SCHOOL.\l"
-	.string "If I don't, ROXANNE will be steamed.$"
+	.string "Ik moet wat lessen overdoen op\n"
+	.string "de TRAINER'S SCHOOL.\l"
+	.string "Anders wordt ROXANNE boos.$"
 
 Route116_Text_JerryRegister1:
-	.string "I learned at the TRAINER'S SCHOOL\n"
-	.string "that a POKéNAV can register TRAINERS.\p"
-	.string "I don't really get what that means,\n"
-	.string "so can I just try it?$"
+	.string "Op de TRAINER'S SCHOOL leerde ik dat\n"
+	.string "je TRAINERS in een POKéNAV zet.\p"
+	.string "Ik snap niet echt wat dat is,\n"
+	.string "dus mag ik het even proberen?$"
 
 Route116_Text_JerryRegister2:
-	.string "I learned at the TRAINER'S SCHOOL\n"
-	.string "that a POKéNAV can register TRAINERS.\p"
-	.string "I don't really get what that means,\n"
-	.string "so can I just try it?$"
+	.string "Op de TRAINER'S SCHOOL leerde ik dat\n"
+	.string "je TRAINERS in een POKéNAV zet.\p"
+	.string "Ik snap niet echt wat dat is,\n"
+	.string "dus mag ik het even proberen?$"
 
 Route116_Text_JerryRematchIntro:
-	.string "I've been studying seriously at the\n"
+	.string "Ik heb hard geleerd op de\n"
 	.string "TRAINER'S SCHOOL.\l"
-	.string "I won't lose like I did last time.$"
+	.string "Ik verlies niet meer zoals vorige keer.$"
 
 Route116_Text_JerryRematchDefeat:
-	.string "Hunh?\n"
-	.string "I studied diligently.$"
+	.string "Huh?\n"
+	.string "Ik heb zo hard geleerd.$"
 
 Route116_Text_JerryPostRematch:
-	.string "I'll have to redo some courses at\n"
-	.string "the TRAINER'S SCHOOL.\l"
-	.string "If I don't, ROXANNE will be steamed.$"
+	.string "Ik moet wat lessen overdoen op\n"
+	.string "de TRAINER'S SCHOOL.\l"
+	.string "Anders wordt ROXANNE boos.$"
 
 Route116_Text_KarenIntro:
-	.string "I study at school, and I study on\n"
-	.string "the way home, too!$"
+	.string "Ik leer op school, en ik leer ook\n"
+	.string "op weg naar huis!$"
 
 Route116_Text_KarenDefeat:
-	.string "I'm in shock--I lost?$"
+	.string "Ik ben in shock… verloren?$"
 
 Route116_Text_KarenPostBattle:
-	.string "Awww, I'll never become an elegant\n"
-	.string "TRAINER like ROXANNE this way!$"
+	.string "Ooo, zo word ik nooit een sierlijke\n"
+	.string "TRAINER zoals ROXANNE!$"
 
 Route116_Text_KarenRegister1:
-	.string "Oh, wow! Isn't that a POKéNAV?\n"
-	.string "I have one, too! Please register me!$"
+	.string "O, wauw! Is dat een POKéNAV?\n"
+	.string "Ik heb er ook een! Zet me erin!$"
 
 Route116_Text_KarenRegister2:
-	.string "Oh, wow! Isn't that a POKéNAV?\n"
-	.string "I have one, too! Please register me!$"
+	.string "O, wauw! Is dat een POKéNAV?\n"
+	.string "Ik heb er ook een! Zet me erin!$"
 
 Route116_Text_KarenRematchIntro:
-	.string "I studied a whole lot since I saw you.\n"
-	.string "You must see my achievements!$"
+	.string "Ik heb heel veel geleerd sinds ik\n"
+	.string "je zag. Kijk maar wat ik kan!$"
 
 Route116_Text_KarenRematchDefeat:
-	.string "I'm in shock.\n"
-	.string "I lost again?$"
+	.string "Ik ben in shock.\n"
+	.string "Weer verloren?$"
 
 Route116_Text_KarenPostRematch:
-	.string "You've beaten ROXANNE?\n"
-	.string "I can't beat you, then. Not yet.$"
+	.string "Heb jij ROXANNE verslagen?\n"
+	.string "Dan win ik niet van je. Nog niet.$"
 
 Route116_Text_SarahIntro:
-	.string "Just so you know, I've never once been\n"
-	.string "bested by anyone at anything.$"
+	.string "Even dat je het weet: ik heb nog\n"
+	.string "nooit van iemand verloren.$"
 
 Route116_Text_SarahDefeat:
-	.string "Oh, my goodness.\n"
-	.string "This is a new experience for me.$"
+	.string "O, lieve hemel.\n"
+	.string "Dit is nieuw voor mij.$"
 
 Route116_Text_SarahPostBattle:
-	.string "My life of luxury affords me all that\n"
-	.string "I could possibly desire.\p"
-	.string "However, when it comes to POKéMON,\n"
-	.string "my wealth has no meaning.$"
+	.string "Ik ben rijk en kan alles krijgen\n"
+	.string "wat ik maar wil.\p"
+	.string "Maar bij POKéMON heb je niks\n"
+	.string "aan geld.$"
 
 Route116_Text_DawsonIntro:
-	.string "When you lay your eyes on my POKéMON's\n"
-	.string "gorgeous fur, their beauty will render\l"
-	.string "you helpless!$"
+	.string "Als je de prachtige vacht van mijn\n"
+	.string "POKéMON ziet, ben je meteen\l"
+	.string "verkocht!$"
 
 Route116_Text_DawsonDefeat:
-	.string "Oh, baby, say it isn't so!$"
+	.string "O nee, zeg dat het niet waar is!$"
 
 Route116_Text_DawsonPostBattle:
-	.string "Oh, no, no, no!\n"
-	.string "You've mussed up my POKéMON's fur!\l"
-	.string "You've ruined my hairdo, too!\l"
-	.string "I'll have to call my stylist now!$"
+	.string "O nee, nee, nee!\n"
+	.string "De vacht van mijn POKéMON is in\l"
+	.string "de war! En mijn haar ook!\l"
+	.string "Ik moet mijn kapper bellen!$"
 
 Route116_Text_DevanIntro:
-	.string "We'll rock you hard!$"
+	.string "Wij rocken je helemaal plat!$"
 
 Route116_Text_DevanDefeat:
-	.string "Aiyiyi!\n"
-	.string "No contest at all!$"
+	.string "Aiaiai!\n"
+	.string "Geen schijn van kans!$"
 
 Route116_Text_DevanPostBattle:
-	.string "I should try different POKéMON\n"
-	.string "types, that's what I ought to do.$"
+	.string "Ik moet andere soorten POKéMON\n"
+	.string "proberen. Dat moet ik doen.$"
 
 Route116_Text_JohnsonIntro:
-	.string "It's a dead end up here.\n"
-	.string "I'm bored, so can we battle?$"
+	.string "Het loopt hier dood.\n"
+	.string "Ik verveel me, zullen we vechten?$"
 
 Route116_Text_JohnsonDefeat:
-	.string "That was fun even though I lost.$"
+	.string "Dat was leuk, ook al verloor ik.$"
 
 Route116_Text_JohnsonPostBattle:
-	.string "Want to stay here and keep\n"
-	.string "me company?$"
+	.string "Blijf je hier om me gezelschap\n"
+	.string "te houden?$"
 
 Route117_Text_IsaacIntro:
 	.string "Listen, could I get you to battle\n"

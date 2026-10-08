@@ -9,9 +9,9 @@ Route104_Text_TMsAreOneTimeUse	A word of advice!\pA TM, TECHNICAL MACHINE, is go
 Route104_Text_DontNeedThisTakeIt	This FLOWER SHOP started selling\nsaplings recently.\pIt made me so happy, I went overboard\nshopping.\pI don't need this WHITE HERB anymore.\nWould you take it, please?	Deze BLOEMENWINKEL verkoopt\nsinds kort jonge plantjes.\pIk was zo blij dat ik veel te veel\nheb gekocht.\pDit WIT KRUID heb ik niet meer nodig.\nWil jij het hebben?	
 Route104_Text_FlowerShopSellingSaplings	This FLOWER SHOP started selling\nsaplings recently.\pIt made me so happy, I went overboard\nshopping. Where should I put them?	Deze BLOEMENWINKEL verkoopt\nsinds kort jonge plantjes.\pIk was zo blij dat ik veel te veel\nheb gekocht. Waar laat ik ze nou?	
 Route104_Text_MrBrineysCottage	MR. BRINEY'S COTTAGE	HUISJE VAN MR. BRINEY	
-Route104_Text_RouteSignPetalburg	ROUTE 1O4\n{RIGHT_ARROW} PETALBURG CITY		
-Route104_Text_RouteSignRustboro	ROUTE 1O4\n{UP_ARROW} RUSTBORO CITY		
-Route104_Text_PrettyPetalFlowShop	PRETTY PETAL FLOWER SHOP		
+Route104_Text_RouteSignPetalburg	ROUTE 1O4\n{RIGHT_ARROW} PETALBURG CITY	ROUTE 1O4\n{RIGHT_ARROW} PETALBURG CITY	
+Route104_Text_RouteSignRustboro	ROUTE 1O4\n{UP_ARROW} RUSTBORO CITY	ROUTE 1O4\n{UP_ARROW} RUSTBORO CITY	
+Route104_Text_PrettyPetalFlowShop	PRETTY PETAL FLOWER SHOP	PRETTY PETAL FLOWER SHOP	
 Route104_Text_TrainerTipsDoubleBattles	TRAINER TIPS\pIn the HOENN region there are pairs\nof TRAINERS who challenge others\lfor 2-on-2 POKéMON battles called\lDOUBLE BATTLES.\pIn a DOUBLE BATTLE, the TRAINER must\nsend out two POKéMON, the one at the\lleft of the list and the top one.\lWatch how POKéMON are lined up.	TRAINERTIPS\pIn HOENN zijn er TRAINERS die met z'n\ntweeën vechten, 2 tegen 2. Dat heet\leen DUBBEL GEVECHT.\pDan stuurt de TRAINER twee\nPOKéMON: de eerste en de\ltweede in de lijst.\lLet dus op de volgorde.	
 Route104_Text_MayWeShouldRegister	MAY: Oh, hi, {PLAYER}{KUN}!\pDEVON upgraded your POKéNAV with\nthe MATCH CALL system, huh?\pWe should register each other so we\ncan get in contact anytime.	MAY: O, hoi, {PLAYER}{KUN}!\pDEVON heeft MATCH CALL in je\nPOKéNAV gezet, hè?\pLaten we elkaar opslaan, dan kunnen\nwe elkaar altijd bellen.	
 Route104_Text_RegisteredMay	{PLAYER} registered MAY\nin the POKéNAV.	{PLAYER} zet MAY\nin de POKéNAV.	

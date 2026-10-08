@@ -1,8 +1,8 @@
 key	english	dutch	notes
-AbandonedShip_Corridors_B1F_Text_DuncanIntro	When we go out to sea, we SAILORS\nalways bring our POKéMON.\lHow about a quick battle?		
-AbandonedShip_Corridors_B1F_Text_DuncanDefeat	Whoops, I'm sunk!		
-AbandonedShip_Corridors_B1F_Text_DuncanPostBattle	The ship's bottom has sunk into the\ndepths.\pIf a POKéMON knew how to go underwater,\nwe might make some progress…		
-AbandonedShip_Corridors_B1F_Text_YayItsAShip	Yay!\nIt's a ship!		
-AbandonedShip_Corridors_B1F_Text_DoorIsLocked	The door is locked.\p“STORAGE” is painted on the door.		
-AbandonedShip_Corridors_B1F_Text_InsertedStorageKey	{PLAYER} inserted and turned the\nSTORAGE KEY.\pThe inserted KEY stuck fast,\nbut the door opened.		
-AbandonedShip_Text_TheDoorIsOpen	The door is open.		
+AbandonedShip_Corridors_B1F_Text_DuncanIntro	When we go out to sea, we SAILORS\nalways bring our POKéMON.\lHow about a quick battle?	Als wij MATROZEN de zee op gaan,\nnemen we altijd POKéMON mee.\lZin in een snel gevecht?	
+AbandonedShip_Corridors_B1F_Text_DuncanDefeat	Whoops, I'm sunk!	Oeps, ik ben gezonken!	
+AbandonedShip_Corridors_B1F_Text_DuncanPostBattle	The ship's bottom has sunk into the\ndepths.\pIf a POKéMON knew how to go underwater,\nwe might make some progress…	De bodem van het schip is diep\nweggezakt.\pAls een POKéMON onder water kon,\nkwamen we vast verder…	
+AbandonedShip_Corridors_B1F_Text_YayItsAShip	Yay!\nIt's a ship!	Joepie!\nEen schip!	
+AbandonedShip_Corridors_B1F_Text_DoorIsLocked	The door is locked.\p“STORAGE” is painted on the door.	De deur zit op slot.\pOp de deur staat “OPSLAG”.	
+AbandonedShip_Corridors_B1F_Text_InsertedStorageKey	{PLAYER} inserted and turned the\nSTORAGE KEY.\pThe inserted KEY stuck fast,\nbut the door opened.	{PLAYER} stopt de OPSLAGSLEUTEL\nin het slot en draait hem om.\pDe SLEUTEL zit nu vast,\nmaar de deur is open.	
+AbandonedShip_Text_TheDoorIsOpen	The door is open.	De deur is open.	

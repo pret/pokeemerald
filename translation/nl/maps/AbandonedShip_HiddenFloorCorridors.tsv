@@ -1,6 +1,6 @@
 key	english	dutch	notes
-AbandonedShip_HiddenFloorCorridors_Text_Rm1DoorIsLocked	The door is locked.\p“RM. 1” is painted on the door.		
-AbandonedShip_HiddenFloorCorridors_Text_Rm2DoorIsLocked	The door is locked.\p“RM. 2” is painted on the door.		
-AbandonedShip_HiddenFloorCorridors_Text_Rm4DoorIsLocked	The door is locked.\p“RM. 4” is painted on the door.		
-AbandonedShip_HiddenFloorCorridors_Text_Rm6DoorIsLocked	The door is locked.\p“RM. 6” is painted on the door.		
-AbandonedShip_HiddenFloorCorridors_Text_InsertedKey	{PLAYER} inserted and turned the\nKEY.\pThe inserted KEY stuck fast,\nbut the door opened.		
+AbandonedShip_HiddenFloorCorridors_Text_Rm1DoorIsLocked	The door is locked.\p“RM. 1” is painted on the door.	De deur zit op slot.\pOp de deur staat “KAMER 1”.	
+AbandonedShip_HiddenFloorCorridors_Text_Rm2DoorIsLocked	The door is locked.\p“RM. 2” is painted on the door.	De deur zit op slot.\pOp de deur staat “KAMER 2”.	
+AbandonedShip_HiddenFloorCorridors_Text_Rm4DoorIsLocked	The door is locked.\p“RM. 4” is painted on the door.	De deur zit op slot.\pOp de deur staat “KAMER 4”.	
+AbandonedShip_HiddenFloorCorridors_Text_Rm6DoorIsLocked	The door is locked.\p“RM. 6” is painted on the door.	De deur zit op slot.\pOp de deur staat “KAMER 6”.	
+AbandonedShip_HiddenFloorCorridors_Text_InsertedKey	{PLAYER} inserted and turned the\nKEY.\pThe inserted KEY stuck fast,\nbut the door opened.	{PLAYER} stopt de SLEUTEL in het\nslot en draait hem om.\pDe SLEUTEL zit nu vast,\nmaar de deur is open.	

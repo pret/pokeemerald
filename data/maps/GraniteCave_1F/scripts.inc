@@ -18,22 +18,22 @@ GraniteCave_1F_EventScript_ReceivedFlash::
 	end
 
 GraniteCave_1F_Text_GetsDarkAheadHereYouGo:
-	.string "Hey, you.\n"
-	.string "It gets awfully dark ahead.\l"
-	.string "It'll be tough trying to explore.\p"
-	.string "That guy who came by earlier…\n"
-	.string "STEVEN, I think it was.\p"
-	.string "He knew how to use FLASH, so he ought\n"
-	.string "to be all right, but…\p"
-	.string "Well, for us HIKERS, helping out those\n"
-	.string "that we meet is our motto.\p"
-	.string "Here you go, I'll pass this on to you.$"
+	.string "Hé, jij daar.\n"
+	.string "Verderop is het heel donker.\l"
+	.string "Dan is rondkijken lastig.\p"
+	.string "Die man die hier net langskwam…\n"
+	.string "STEVEN heette hij, geloof ik.\p"
+	.string "Hij kon FLITS gebruiken, dus met\n"
+	.string "hem gaat het wel goed, maar…\p"
+	.string "Nou, wij WANDELAARS helpen altijd\n"
+	.string "iedereen die we tegenkomen.\p"
+	.string "Hier, deze geef ik aan jou.$"
 
 GraniteCave_1F_Text_ExplainFlash:
-	.string "Teach that hidden move FLASH to\n"
-	.string "a POKéMON and use it.\p"
-	.string "It lights up even the inky darkness\n"
-	.string "of caves.\p"
-	.string "But, to use it, you need the GYM BADGE\n"
-	.string "from DEWFORD's POKéMON GYM.$"
+	.string "Leer een POKéMON de verborgen\n"
+	.string "aanval FLITS en gebruik hem.\p"
+	.string "Dan wordt zelfs een pikdonkere\n"
+	.string "grot licht.\p"
+	.string "Maar dan heb je wel de GYM BADGE\n"
+	.string "van de POKéMON GYM in DEWFORD nodig.$"
 

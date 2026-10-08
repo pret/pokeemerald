@@ -4,5 +4,5 @@ Route102_Text_WallyIDidIt	WALLY: I did it… It's my…\nMy POKéMON!	WALLY: Het
 Route102_Text_LetsGoBack	{PLAYER}, thank you!\nLet's go back to the GYM!	{PLAYER}, bedankt!\nKom, terug naar de GYM!	
 Route102_Text_ImNotVeryTall	I'm…not very tall, so I sink right\ninto tall grass.\pThe grass goes up my nose and…\nFwafwafwafwafwa…\pFwatchoo!	Ik ben… niet zo groot, dus ik zak\nhelemaal weg in het hoge gras.\pHet gras kriebelt in mijn neus en…\nHa… ha… ha…\pHATSJOE!	
 Route102_Text_CatchWholeBunchOfPokemon	I'm going to catch a whole bunch of\nPOKéMON!	Ik ga heel veel POKéMON\nvangen!	
-Route102_Text_RouteSignOldale	ROUTE 102\n{RIGHT_ARROW} OLDALE TOWN		
-Route102_Text_RouteSignPetalburg	ROUTE 102\n{LEFT_ARROW} PETALBURG CITY		
+Route102_Text_RouteSignOldale	ROUTE 102\n{RIGHT_ARROW} OLDALE TOWN	ROUTE 102\n{RIGHT_ARROW} OLDALE TOWN	
+Route102_Text_RouteSignPetalburg	ROUTE 102\n{LEFT_ARROW} PETALBURG CITY	ROUTE 102\n{LEFT_ARROW} PETALBURG CITY	
