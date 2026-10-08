@@ -153,7 +153,7 @@ Until then dialogue is English text with Dutch names inserted where the game fil
 - [x] Route 103, Route 102, Petalburg City (+ gym)
 - [x] Route 104, Petalburg Woods, Rustboro City (+ gym, DEVON, school)
 - [x] Route 116, Rusturf Tunnel, Dewford Town (+ gym), Granite Cave, Routes 105-109
-- [x] Slateport, Route 110, Mauville, Verdanturf, Routes 111-115
+- [x] Slateport, Route 110, Mauville, Verdanturf, Routes 111-115 (except 31 Battle Tent / Contest Hall lines; do them with the post-game maps)
 - [ ] Volcano area: `^(FallarborTown|MeteorFalls|MtChimney|JaggedPass|FieryPath|LavaridgeTown|DesertRuins|DesertUnderpass|MirageTower|ScorchedSlab|Route11[89]|Route12[01]|WeatherInstitute)`
 - [ ] Fortree/Lilycove: `^(FortreeCity|LilycoveCity|MtPyre|Route12[23]|SafariZone|AquaHideout|MagmaHideout|ShoalCave)`
 - [ ] Mossdeep to the League: `^(MossdeepCity|Route12[4-9]|Route13\d|SootopolisCity|CaveOfOrigin|SeafloorCavern|SkyPillar|PacifidlogTown|SealedChamber|EverGrandeCity|VictoryRoad|Underwater|AbandonedShip)`
