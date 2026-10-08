@@ -59,37 +59,36 @@ FortreeCity_House1_EventScript_Zigzagoon::
 	end
 
 FortreeCity_House1_Text_YouWillTradeWontYou:
-	.string "Wrooooaaar! I need it!\n"
-	.string "I have to get me a {STR_VAR_1}!\l"
-	.string "I'll do anything for it!\p"
-	.string "…Uh… Did you hear that?\n"
-	.string "My shout from the bottom of my heart?\p"
-	.string "Having heard that, you will trade\n"
-	.string "your {STR_VAR_1} for my {STR_VAR_2},\l"
-	.string "won't you?$"
+	.string "Wroooaaar! Ik wil hem!\n"
+	.string "Ik moet een {STR_VAR_1} hebben!\l"
+	.string "Ik doe alles ervoor!\p"
+	.string "…Eh… Hoorde je dat?\n"
+	.string "Mijn kreet uit het diepst van mijn hart?\p"
+	.string "Nu je dat hoorde, ruil je je\n"
+	.string "{STR_VAR_1} toch voor mijn {STR_VAR_2}?$"
 
 FortreeCity_House1_Text_MonYouTakeCare:
-	.string "Oh, yeah, right on!\p"
-	.string "{STR_VAR_1}, welcome!\n"
-	.string "{STR_VAR_2}, you take care!$"
+	.string "Oh ja, top!\p"
+	.string "{STR_VAR_1}, welkom!\n"
+	.string "{STR_VAR_2}, pas goed op jezelf!$"
 
 FortreeCity_House1_Text_ThisIsntAMon:
-	.string "Uh, no, I don't think so.\n"
-	.string "That isn't a {STR_VAR_1}.$"
+	.string "Eh, nee, dat denk ik niet.\n"
+	.string "Dat is geen {STR_VAR_1}.$"
 
 FortreeCity_House1_Text_YouWontTradeMe:
-	.string "No? You won't trade me?\n"
-	.string "Even after I bared my heart to you?$"
+	.string "Nee? Ruil je niet met me?\n"
+	.string "Terwijl ik mijn hart voor je opende?$"
 
 FortreeCity_House1_Text_GoingToMakeVolbeatStrong:
-	.string "I'm going to make VOLBEAT super\n"
-	.string "strong from this moment on!\p"
-	.string "I hope you do the same with PLUSLE!$"
+	.string "Vanaf nu maak ik VOLBEAT super\n"
+	.string "sterk!\p"
+	.string "Houd jij PLUSLE ook sterk!$"
 
 FortreeCity_House1_Text_TradingMemoriesWithOthers:
-	.string "Trading POKéMON with others…\p"
-	.string "It's as if you're trading your own\n"
-	.string "memories with other people.$"
+	.string "POKéMON ruilen met anderen…\p"
+	.string "Het is alsof je je eigen\n"
+	.string "herinneringen ruilt.$"
 
 FortreeCity_House1_Text_Zigzagoon:
 	.string "ZIGZAGOON: Gumomoh?$"

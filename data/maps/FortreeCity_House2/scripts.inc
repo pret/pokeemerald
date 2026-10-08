@@ -42,40 +42,40 @@ FortreeCity_House2_EventScript_WrongGuess::
 	end
 
 FortreeCity_House2_Text_HiddenPowersArousedByNature:
-	.string "People… POKéMON…\p"
-	.string "Their hidden powers are aroused by\n"
-	.string "living in natural environments…$"
+	.string "Mensen… POKéMON…\p"
+	.string "Hun verborgen krachten ontwaken\n"
+	.string "in de natuur…$"
 
 FortreeCity_House2_Text_CoinInWhichHand:
-	.string "Let this old woman see if your hidden\n"
-	.string "power has awoken…\p"
-	.string "I hold a coin in my hand.\p"
-	.string "Now, tell me, have I palmed it in\n"
-	.string "the right hand? Or in the left?$"
+	.string "Laat deze oude vrouw zien of jouw\n"
+	.string "verborgen kracht wakker is…\p"
+	.string "Ik hou een munt in mijn hand.\p"
+	.string "Zeg me, zit hij in\n"
+	.string "mijn rechterhand of linkerhand?$"
 
 FortreeCity_House2_Text_CorrectTryAgainWhichHand:
-	.string "Oh! Yes, correct!\p"
-	.string "We shall try again.\p"
-	.string "In which hand have I palmed the coin?\n"
-	.string "The right or left?$"
+	.string "Oh! Ja, goed!\p"
+	.string "We proberen het nog eens.\p"
+	.string "In welke hand zit de munt?\n"
+	.string "Links of rechts?$"
 
 FortreeCity_House2_Text_CorrectTryAgainWhichHand2:
-	.string "Oh! Yes, correct!\p"
-	.string "We shall try again.\p"
-	.string "In which hand have I palmed the coin?\n"
-	.string "The right or left?$"
+	.string "Oh! Ja, goed!\p"
+	.string "We proberen het nog eens.\p"
+	.string "In welke hand zit de munt?\n"
+	.string "Links of rechts?$"
 
 FortreeCity_House2_Text_YourHiddenPowerHasAwoken:
-	.string "Oh! Splendid!\n"
-	.string "Your hidden power has awoken!\p"
-	.string "Here, take this and awaken the hidden\n"
-	.string "power of your POKéMON.$"
+	.string "Oh! Prachtig!\n"
+	.string "Je verborgen kracht is wakker!\p"
+	.string "Hier, neem dit en wek de verborgen\n"
+	.string "kracht van je POKéMON.$"
 
 FortreeCity_House2_Text_ExplainHiddenPower:
-	.string "HIDDEN POWER is a move that changes\n"
-	.string "with the POKéMON.$"
+	.string "BINNENKRACHT is een aanval die\n"
+	.string "verandert per POKéMON.$"
 
 FortreeCity_House2_Text_YouGuessedWrong:
-	.string "No, too bad.\n"
-	.string "You guessed wrong.$"
+	.string "Nee, jammer.\n"
+	.string "Je raadde fout.$"
 

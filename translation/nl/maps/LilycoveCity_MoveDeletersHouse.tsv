@@ -1,10 +1,10 @@
 key	english	dutch	notes
-LilycoveCity_MoveDeletersHouse_Text_ICanMakeMonForgetMove	Uh…\nOh, yes, I'm the MOVE DELETER.\pI can make POKéMON forget their moves.\pWould you like me to do that?		
-LilycoveCity_MoveDeletersHouse_Text_WhichMonShouldForget	Which POKéMON should forget a move?		
-LilycoveCity_MoveDeletersHouse_Text_WhichMoveShouldBeForgotten	Which move should be forgotten?		
-LilycoveCity_MoveDeletersHouse_Text_MonOnlyKnowsOneMove	{STR_VAR_1} knows only one move\nso it can't be forgotten…		
-LilycoveCity_MoveDeletersHouse_Text_MonsMoveShouldBeForgotten	Hm! {STR_VAR_1}'s {STR_VAR_2}?\nThat move should be forgotten?		
-LilycoveCity_MoveDeletersHouse_Text_MonHasForgottenMove	It worked to perfection!\p{STR_VAR_1} has forgotten\n{STR_VAR_2} completely.		
-LilycoveCity_MoveDeletersHouse_Text_ComeAgain	Come again if there are moves that\nneed to be forgotten.		
-LilycoveCity_MoveDeletersHouse_Text_EggCantForgetMoves	What?\nNo EGG should know any moves.		
-LilycoveCity_MoveDeletersHouse_Text_CantForgetSurf	Hm!\pYour {STR_VAR_1} doesn't seem willing\nto forget SURF.		
+LilycoveCity_MoveDeletersHouse_Text_ICanMakeMonForgetMove	Uh…\nOh, yes, I'm the MOVE DELETER.\pI can make POKéMON forget their moves.\pWould you like me to do that?	Eh…\nO ja, ik ben de MOVE DELETER.\pIk laat POKéMON aanvallen vergeten.\pWil je dat ik dat doe?	
+LilycoveCity_MoveDeletersHouse_Text_WhichMonShouldForget	Which POKéMON should forget a move?	Welke POKéMON moet iets vergeten?	
+LilycoveCity_MoveDeletersHouse_Text_WhichMoveShouldBeForgotten	Which move should be forgotten?	Welke aanval moet vergeten worden?	
+LilycoveCity_MoveDeletersHouse_Text_MonOnlyKnowsOneMove	{STR_VAR_1} knows only one move\nso it can't be forgotten…	{STR_VAR_1} kent maar één aanval,\ndus die kan niet vergeten worden…	
+LilycoveCity_MoveDeletersHouse_Text_MonsMoveShouldBeForgotten	Hm! {STR_VAR_1}'s {STR_VAR_2}?\nThat move should be forgotten?	Hm! {STR_VAR_2} van {STR_VAR_1}?\nMoet die aanval vergeten worden?	
+LilycoveCity_MoveDeletersHouse_Text_MonHasForgottenMove	It worked to perfection!\p{STR_VAR_1} has forgotten\n{STR_VAR_2} completely.	Het is perfect gelukt!\p{STR_VAR_1} is {STR_VAR_2}\nhelemaal vergeten.	
+LilycoveCity_MoveDeletersHouse_Text_ComeAgain	Come again if there are moves that\nneed to be forgotten.	Kom terug als er aanvallen zijn\ndie vergeten moeten worden.	
+LilycoveCity_MoveDeletersHouse_Text_EggCantForgetMoves	What?\nNo EGG should know any moves.	Wat?\nEen EI kent geen aanvallen.	
+LilycoveCity_MoveDeletersHouse_Text_CantForgetSurf	Hm!\pYour {STR_VAR_1} doesn't seem willing\nto forget SURF.	Hm!\pJe {STR_VAR_1} wil SURFEN\nniet vergeten.	

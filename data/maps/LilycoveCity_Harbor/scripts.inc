@@ -518,51 +518,50 @@ LilycoveCity_Harbor_Movement_SailorBoardWithBrineyEast:
 	step_end
 
 LilycoveCity_Harbor_Text_FerryUnavailable:
-	.string "I beg your pardon?\n"
-	.string "You're looking for a ship?\p"
-	.string "I'm sorry, the ferry service isn't\n"
-	.string "available at present…$"
+	.string "Wat zegt u?\n"
+	.string "Zoekt u een schip?\p"
+	.string "Het spijt me, de ferry vaart\n"
+	.string "nu niet…$"
 
 LilycoveCity_Harbor_Text_MayISeeYourTicket:
-	.string "Hello, are you here for the ferry?\n"
-	.string "May I see your TICKET?$"
+	.string "Hallo, kom je voor de ferry?\n"
+	.string "Mag ik je KAARTJE zien?$"
 
 LilycoveCity_Harbor_Text_NoTicket:
-	.string "{PLAYER} doesn't have the TICKET…\p"
-	.string "I'm terribly sorry.\p"
-	.string "You must have a TICKET to board\n"
-	.string "the ferry.$"
+	.string "{PLAYER} heeft het KAARTJE niet…\p"
+	.string "Het spijt me.\p"
+	.string "Zonder KAARTJE mag je niet\n"
+	.string "op de ferry.$"
 
 LilycoveCity_Harbor_Text_FlashTicketWhereTo:
-	.string "{PLAYER} flashed the TICKET.\p"
-	.string "Perfect! That's all you need!\p"
-	.string "And where would you like to go?$"
+	.string "{PLAYER} liet het KAARTJE zien.\p"
+	.string "Perfect! Meer heb je niet nodig!\p"
+	.string "En waar wil je heen?$"
 
 LilycoveCity_Harbor_Text_SailAnotherTime:
-	.string "Please sail with us another time!$"
+	.string "Vaar een andere keer met ons mee!$"
 
 LilycoveCity_Harbor_Text_SlateportItIs:
-	.string "SLATEPORT CITY it is, then!$"
+	.string "Dan wordt het SLATEPORT CITY!$"
 
 LilycoveCity_Harbor_Text_BattleFrontierItIs:
-	.string "BATTLE FRONTIER it is, then!$"
+	.string "Dan wordt het BATTLE FRONTIER!$"
 
 LilycoveCity_Harbor_Text_PleaseBoard:
-	.string "Please board the ferry and wait for\n"
-	.string "departure.$"
+	.string "Stap aan boord van de ferry en\n"
+	.string "wacht op vertrek.$"
 
 LilycoveCity_Harbor_Text_WhereWouldYouLikeToGo:
-	.string "Then, where would you like to go?$"
+	.string "Waar wil je dan heen?$"
 
 LilycoveCity_Harbor_Text_SailorFerryUnavailable:
-	.string "Until they finish making the ferry,\n"
-	.string "we sailors have nothing to do…\p"
-	.string "I wish they'd get a move on, the folks\n"
-	.string "at the SHIPYARD in SLATEPORT.$"
+	.string "Tot de ferry klaar is, hebben\n"
+	.string "wij MATROZEN niets te doen…\p"
+	.string "Wat zijn ze op de SCHEEPSWERF\n"
+	.string "in SLATEPORT toch traag.$"
 
 LilycoveCity_Harbor_Text_SailorFerryAvailable:
-	.string "The ferry S.S. TIDAL is finally in\n"
-	.string "operation.\p"
-	.string "The folks at the SHIPYARD in SLATEPORT\n"
-	.string "must've worked extra hard.\p"
-	.string "Well, it's my turn to get busy now!$"
+	.string "De ferry S.S. TIDAL vaart eindelijk.\p"
+	.string "De mensen van de SCHEEPSWERF in\n"
+	.string "SLATEPORT werkten vast extra hard.\p"
+	.string "Nu moet ik zelf aan de slag!$"

@@ -171,19 +171,19 @@ Route123_EventScript_RematchFernando::
 	end
 
 Route123_Text_LoveGrassMonsHaveAny:
-	.string "I love GRASS-type POKéMON!\p"
-	.string "Do you have any GRASS-type POKéMON?$"
+	.string "Ik hou van GRAS-POKéMON!\p"
+	.string "Heb jij GRAS-POKéMON?$"
 
 Route123_Text_YouLikeGrassMonsTooHaveThis:
 	.string "Oh?\p"
-	.string "You like GRASS-type POKéMON, too,\n"
-	.string "don't you?\p"
-	.string "I'm so happy, you can have this!\n"
-	.string "It's a token of our friendship.$"
+	.string "Jij houdt ook van GRAS-POKéMON,\n"
+	.string "hè?\p"
+	.string "Ik ben zo blij, je mag dit hebben!\n"
+	.string "Het is een teken van vriendschap.$"
 
 Route123_Text_CheckTreesWithMyGrassMon:
-	.string "I check trees with my GRASS-type\n"
-	.string "POKéMON. I'm like a tree doctor.$"
+	.string "Ik check bomen met mijn GRAS-POKéMON.\n"
+	.string "Ik ben een soort boomdokter.$"
 
 Route123_Text_RouteSign:
 	.string "{RIGHT_ARROW} ROUTE 123\n"
@@ -191,8 +191,8 @@ Route123_Text_RouteSign:
 
 Route123_Text_RouteSignMtPyre:
 	.string "{UP_ARROW} MT. PYRE\n"
-	.string "“Forbidden to the faint of heart.”$"
+	.string "“Verboden voor bangeriken.”$"
 
 Route123_Text_BerryMastersHouse:
-	.string "BERRY MASTER'S HOUSE$"
+	.string "HUIS VAN DE BESSENMEESTER$"
 

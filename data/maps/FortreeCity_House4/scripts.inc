@@ -59,32 +59,32 @@ FortreeCity_House4_EventScript_Wingull::
 	end
 
 FortreeCity_House4_Text_BringsWorldCloserTogether:
-	.string "By being together with POKéMON,\n"
-	.string "people make more and more friends.\p"
-	.string "And that brings the world closer\n"
-	.string "together. I think it's wonderful!$"
+	.string "Met POKéMON maken mensen steeds\n"
+	.string "meer vrienden.\p"
+	.string "Zo komt de wereld dichter bij\n"
+	.string "elkaar. Ik vind dat mooi!$"
 
 FortreeCity_House4_Text_GoBirdPokemon:
-	.string "There!\n"
-	.string "Go, BIRD POKéMON!$"
+	.string "Daar!\n"
+	.string "Op weg, VOGEL-POKéMON!$"
 
 FortreeCity_House4_Text_AskedWingullToRunErrand:
-	.string "Heheh, I asked my WINGULL to run\n"
-	.string "an errand for me.$"
+	.string "Hehe, ik heb mijn WINGULL een\n"
+	.string "boodschap laten doen.$"
 
 FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb:
-	.string "Good!\n"
-	.string "Welcome back, WINGULL!\p"
-	.string "Huh? What is this?\n"
-	.string "What is it holding?\p"
-	.string "A MENTAL HERB?\n"
-	.string "It must have picked it up somewhere.\p"
-	.string "But I'm not a TRAINER, so you can\n"
-	.string "have it.$"
+	.string "Goed!\n"
+	.string "Welkom terug, WINGULL!\p"
+	.string "Hè? Wat is dit?\n"
+	.string "Wat heeft hij vast?\p"
+	.string "Een HOOFDKRUID?\n"
+	.string "Hij vond het vast ergens.\p"
+	.string "Maar ik ben geen TRAINER, dus\n"
+	.string "je mag het hebben.$"
 
 FortreeCity_House4_Text_FriendsFarAwayThanksToWingull:
-	.string "Thanks to my WINGULL, I have friends\n"
-	.string "who live far away.$"
+	.string "Dankzij mijn WINGULL heb ik\n"
+	.string "vrienden ver weg.$"
 
 FortreeCity_House4_Text_Wingull:
 	.string "WINGULL: Pihyoh!$"

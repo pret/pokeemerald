@@ -797,68 +797,68 @@ Route121_Text_PatPostBattle	I raise every POKéMON with the same\nlove and care-
 Route121_Text_MarcelIntro	My POKéMON have never tasted defeat!\nOn their next win, I'm entering them\lin CONTESTS.	Mijn POKéMON hebben nog nooit\nverloren! Na hun volgende winst\ldoe ik mee aan WEDSTRIJDEN.	
 Route121_Text_MarcelDefeat	Oh, now what happened here?	Oh, wat gebeurde hier nou?	
 Route121_Text_MarcelPostBattle	I may have to train my gang some more\nbefore entering any CONTEST.	Ik moet mijn team misschien\nnog trainen voor een WEDSTRIJD.	
-Route123_Text_WendyIntro	Want to determine how strong you are?\nI'll be the test!		
-Route123_Text_WendyDefeat	You passed with flying colors!		
-Route123_Text_WendyPostBattle	To best even me…\nYour strength is marvelous!		
-Route123_Text_BraxtonIntro	You seem to have a big collection\nof GYM BADGES.\pLet me see if you're actually worthy of\nthose BADGES!		
-Route123_Text_BraxtonDefeat	Oh, you're worthy, all right!		
-Route123_Text_BraxtonPostBattle	You did your BADGES proud in that\nmatch!		
-Route123_Text_VioletIntro	They say that good times are filled\nwith good aromas.		
-Route123_Text_VioletDefeat	Oh…\nI smell the bitter scent of misery…		
-Route123_Text_VioletPostBattle	The BERRY MASTER's garden is filled\nwith uplifting fragrances.		
-Route123_Text_CameronIntro	Being a psychic is about willpower.\pI've willed myself not to lose to\nanyone. That makes me strong!		
-Route123_Text_CameronDefeat	I feel sad…		
-Route123_Text_CameronPostBattle	Being a psychic is about willpower.\nI thought I wouldn't lose to you…		
-Route123_Text_CameronRegister	I sense it!\nYou and I shall battle again!\lI can't tell if I'll win, though…\pLet's see your POKéNAV.		
-Route123_Text_CameronRematchIntro	I've convinced myself that I won't\nlose anymore. That makes me strong!		
-Route123_Text_CameronRematchDefeat	I feel sad…		
-Route123_Text_CameronPostRematch	I should train at MT. PYRE…\nI'll never beat you this way…		
-Route123_Text_JackiIntro	Don't be too happy if your POKéMON\ndevelop psychic powers.\pYou need to refine those powers to\nmake them really useful.		
-Route123_Text_JackiDefeat	Overwhelmed!		
-Route123_Text_JackiPostBattle	We all have psychic powers.\nWe've just forgotten how to use them.		
-Route123_Text_JackiRegister	I would like to face you again.\nIs that okay with you?		
-Route123_Text_JackiRematchIntro	Have you awoken the psychic powers\nwithin you?		
-Route123_Text_JackiRematchDefeat	Astounding!		
-Route123_Text_JackiPostRematch	Your power with POKéMON…\nThat could be a psychic power, too.		
-Route123_Text_MiuIntro	MIU: Hello, TRAINER. I hope your\nPOKéMON won't cry when they lose.		
-Route123_Text_MiuDefeat	MIU: Uh-oh, we lost.		
-Route123_Text_MiuPostBattle	MIU: TRAINER, your POKéMON are\nstrong because you are friends.		
-Route123_Text_MiuNotEnoughMons	MIU: It's no fun to battle if you\ndon't have two POKéMON.		
-Route123_Text_YukiIntro	YUKI: Okay!\nWe're beating the TRAINER's POKéMON!		
-Route123_Text_YukiDefeat	YUKI: Uh-oh, we lost.		
-Route123_Text_YukiPostBattle	YUKI: Why are you so strong?\nWe've never lost before.		
-Route123_Text_YukiNotEnoughMons	YUKI: It's no fun to battle if you\ndon't have two POKéMON.		
-Route123_Text_KindraIntro	MT. PYRE…\nWhere the spirits of POKéMON sleep…\lWill your POKéMON sleep?		
-Route123_Text_KindraDefeat	Overflowing with vitality…		
-Route123_Text_KindraPostBattle	MT. PYRE…\nWhere the spirits of POKéMON sleep…\pIt must overflow with a power that\nsoothes spirits…		
-Route123_Text_FernandoIntro	I'll turn your lights out while\nI rip through this tune!		
-Route123_Text_FernandoDefeat	Hey, hold it!\nI was still playing the intro!		
-Route123_Text_FernandoPostBattle	You're rock steady.\nI'd like to write a tune about you.		
-Route123_Text_FernandoRegister	The next time, lend your ears to\nthe full tune, will you?		
-Route123_Text_FernandoRematchIntro	Today's the day I'm going to do it!\nI'll turn out your lights before\lI finish singing my song!		
-Route123_Text_FernandoRematchDefeat	Hey, hold it!\nI haven't even hit the chorus!		
-Route123_Text_FernandoPostRematch	I thought you'd be so enthralled\nby my tune, you'd lose.		
-Route123_Text_DavisIntro	This is my awesome BUG POKéMON!\nMy big brother got it for me.		
-Route123_Text_DavisDefeat	Waaaah!\nYou meanie!		
-Route123_Text_DavisPostBattle	Don't tell my brother I lost.\nYou have to keep it a secret!		
-Route123_Text_JazmynIntro	My confidence will get a boost by\nbeating someone obviously strong!		
-Route123_Text_JazmynDefeat	There goes my confidence…		
-Route123_Text_JazmynPostBattle	They say that you can't judge a person\nby their appearance.\pBut often, their looks don't lie…		
-Route123_Text_FrederickIntro	Hello, child!\nCan you spare some time?		
-Route123_Text_FrederickDefeat	Ah, a mighty capable child!\nLet me contribute to your allowance.		
-Route123_Text_FrederickPostBattle	Contribute to your allowance?\nWasn't the prize money enough?		
-Route123_Text_AlbertoIntro	I have to tell you, BIRD POKéMON\nare my obsession!\pBirds are cool!\nThey're the best!		
-Route123_Text_AlbertoDefeat	Even in defeat, BIRD POKéMON are cool!		
-Route123_Text_AlbertoPostBattle	I gather BIRD POKéMON feathers that\nscatter during battles.\pI'm going to make a hat with\nBIRD POKéMON feathers.		
-Route123_Text_EdIntro	When there are no TRAINERS around,\nI let my POKéMON battle each other.\lI watch them.		
-Route123_Text_EdDefeat	I kind of like your POKéMON.		
-Route123_Text_EdPostBattle	Hehe, I'm swiping your battling ideas!\nI think they'll make me better.		
-Route123_Text_JonasIntro	I lay in ambush, and a TRAINER has\nlanded in my trap!		
-Route123_Text_JonasDefeat	If you don't lose, how am I supposed\nto have fun playing ninja?		
-Route123_Text_JonasPostBattle	I'm going to ambush a weaker-looking\nTRAINER next time.		
-Route123_Text_KayleyIntro	I just bought this parasol.\nMy cuteness should be up by a third!		
-Route123_Text_KayleyDefeat	You're better than me by about\nfive times!		
-Route123_Text_KayleyPostBattle	Using accessories effectively is\nthe secret behind fashion appeal.		
+Route123_Text_WendyIntro	Want to determine how strong you are?\nI'll be the test!	Wil je weten hoe sterk je bent?\nIk ben de test!	
+Route123_Text_WendyDefeat	You passed with flying colors!	Je slaagde met glans!	
+Route123_Text_WendyPostBattle	To best even me…\nYour strength is marvelous!	Zelfs mij verslaan…\nJe kracht is geweldig!	
+Route123_Text_BraxtonIntro	You seem to have a big collection\nof GYM BADGES.\pLet me see if you're actually worthy of\nthose BADGES!	Je hebt een grote verzameling\nGYM BADGES.\pLaat me zien of je die BADGES\nwel verdient!	
+Route123_Text_BraxtonDefeat	Oh, you're worthy, all right!	Oh, je verdient ze echt!	
+Route123_Text_BraxtonPostBattle	You did your BADGES proud in that\nmatch!	Je maakte je BADGES trots in\ndat gevecht!	
+Route123_Text_VioletIntro	They say that good times are filled\nwith good aromas.	Ze zeggen dat goede tijden vol\nzijn van goede geuren.	
+Route123_Text_VioletDefeat	Oh…\nI smell the bitter scent of misery…	Oh…\nIk ruik de bittere geur van verdriet…	
+Route123_Text_VioletPostBattle	The BERRY MASTER's garden is filled\nwith uplifting fragrances.	De tuin van de BESSENMEESTER is\nvol opbeurende geuren.	
+Route123_Text_CameronIntro	Being a psychic is about willpower.\pI've willed myself not to lose to\nanyone. That makes me strong!	Paranormaal zijn draait om wilskracht.\pIk wil van niemand verliezen.\nDat maakt me sterk!	
+Route123_Text_CameronDefeat	I feel sad…	Ik voel me verdrietig…	
+Route123_Text_CameronPostBattle	Being a psychic is about willpower.\nI thought I wouldn't lose to you…	Paranormaal zijn draait om wilskracht.\nIk dacht dat ik niet zou verliezen…	
+Route123_Text_CameronRegister	I sense it!\nYou and I shall battle again!\lI can't tell if I'll win, though…\pLet's see your POKéNAV.	Ik voel het!\nJij en ik vechten weer!\lIk weet niet of ik win…\pLaat je POKéNAV zien.	
+Route123_Text_CameronRematchIntro	I've convinced myself that I won't\nlose anymore. That makes me strong!	Ik heb mezelf overtuigd dat ik\nniet meer verlies. Dat maakt me sterk!	
+Route123_Text_CameronRematchDefeat	I feel sad…	Ik voel me verdrietig…	
+Route123_Text_CameronPostRematch	I should train at MT. PYRE…\nI'll never beat you this way…	Ik moet trainen op MT. PYRE…\nZo versla ik jou nooit…	
+Route123_Text_JackiIntro	Don't be too happy if your POKéMON\ndevelop psychic powers.\pYou need to refine those powers to\nmake them really useful.	Wees niet te blij als je POKéMON\nparanormale kracht krijgen.\pJe moet die kracht slijpen om\nhem echt nuttig te maken.	
+Route123_Text_JackiDefeat	Overwhelmed!	Overweldigd!	
+Route123_Text_JackiPostBattle	We all have psychic powers.\nWe've just forgotten how to use them.	We hebben allemaal paranormale\nkracht. We vergaten hoe je\lhem gebruikt.	
+Route123_Text_JackiRegister	I would like to face you again.\nIs that okay with you?	Ik wil je nog eens uitdagen.\nIs dat goed?	
+Route123_Text_JackiRematchIntro	Have you awoken the psychic powers\nwithin you?	Heb je de paranormale kracht\nin jezelf gewekt?	
+Route123_Text_JackiRematchDefeat	Astounding!	Verbluffend!	
+Route123_Text_JackiPostRematch	Your power with POKéMON…\nThat could be a psychic power, too.	Je kracht met POKéMON…\nDat kan ook paranormale kracht zijn.	
+Route123_Text_MiuIntro	MIU: Hello, TRAINER. I hope your\nPOKéMON won't cry when they lose.	MIU: Hallo, TRAINER. Ik hoop dat\nje POKéMON niet huilen als ze verliezen.	
+Route123_Text_MiuDefeat	MIU: Uh-oh, we lost.	MIU: Oeps, we verloren.	
+Route123_Text_MiuPostBattle	MIU: TRAINER, your POKéMON are\nstrong because you are friends.	MIU: TRAINER, je POKéMON zijn sterk\nomdat jullie vrienden zijn.	
+Route123_Text_MiuNotEnoughMons	MIU: It's no fun to battle if you\ndon't have two POKéMON.	MIU: Vechten is niet leuk als je\ngeen twee POKéMON hebt.	
+Route123_Text_YukiIntro	YUKI: Okay!\nWe're beating the TRAINER's POKéMON!	YUKI: Oké!\nWe verslaan de POKéMON van de TRAINER!	
+Route123_Text_YukiDefeat	YUKI: Uh-oh, we lost.	YUKI: Oeps, we verloren.	
+Route123_Text_YukiPostBattle	YUKI: Why are you so strong?\nWe've never lost before.	YUKI: Waarom ben je zo sterk?\nWe verloren nog nooit.	
+Route123_Text_YukiNotEnoughMons	YUKI: It's no fun to battle if you\ndon't have two POKéMON.	YUKI: Vechten is niet leuk als je\ngeen twee POKéMON hebt.	
+Route123_Text_KindraIntro	MT. PYRE…\nWhere the spirits of POKéMON sleep…\lWill your POKéMON sleep?	MT. PYRE…\nWaar de geesten van POKéMON slapen…\lGaan jouw POKéMON slapen?	
+Route123_Text_KindraDefeat	Overflowing with vitality…	Vol levenskracht…	
+Route123_Text_KindraPostBattle	MT. PYRE…\nWhere the spirits of POKéMON sleep…\pIt must overflow with a power that\nsoothes spirits…	MT. PYRE…\nWaar de geesten van POKéMON slapen…\pEr moet een kracht zijn die\ngeesten tot rust brengt…	
+Route123_Text_FernandoIntro	I'll turn your lights out while\nI rip through this tune!	Ik doe je lichten uit terwijl ik\ndit liedje inzet!	
+Route123_Text_FernandoDefeat	Hey, hold it!\nI was still playing the intro!	Hé, wacht!\nIk speelde nog de intro!	
+Route123_Text_FernandoPostBattle	You're rock steady.\nI'd like to write a tune about you.	Je bent rotsvast.\nIk wil een liedje over je schrijven.	
+Route123_Text_FernandoRegister	The next time, lend your ears to\nthe full tune, will you?	Luister de volgende keer naar het\nhele liedje, goed?	
+Route123_Text_FernandoRematchIntro	Today's the day I'm going to do it!\nI'll turn out your lights before\lI finish singing my song!	Vandaag lukt het me!\nIk doe je lichten uit voordat\lik mijn lied af heb!	
+Route123_Text_FernandoRematchDefeat	Hey, hold it!\nI haven't even hit the chorus!	Hé, wacht!\nIk was nog niet bij het refrein!	
+Route123_Text_FernandoPostRematch	I thought you'd be so enthralled\nby my tune, you'd lose.	Ik dacht dat je zo gegrepen\ndoor mijn liedje zou zijn, dat je verloor.	
+Route123_Text_DavisIntro	This is my awesome BUG POKéMON!\nMy big brother got it for me.	Dit is mijn geweldige INSECT-POKéMON!\nMijn grote broer gaf hem me.	
+Route123_Text_DavisDefeat	Waaaah!\nYou meanie!	Waaaah!\nJe bent gemeen!	
+Route123_Text_DavisPostBattle	Don't tell my brother I lost.\nYou have to keep it a secret!	Vertel mijn broer niet dat ik\nverloor. Het is een geheim!	
+Route123_Text_JazmynIntro	My confidence will get a boost by\nbeating someone obviously strong!	Mijn zelfvertrouwen groeit als ik\niemand versla die duidelijk sterk is!	
+Route123_Text_JazmynDefeat	There goes my confidence…	Daar gaat mijn zelfvertrouwen…	
+Route123_Text_JazmynPostBattle	They say that you can't judge a person\nby their appearance.\pBut often, their looks don't lie…	Ze zeggen dat je iemand niet op\nuiterlijk kunt beoordelen.\pMaar vaak liegt het uiterlijk niet…	
+Route123_Text_FrederickIntro	Hello, child!\nCan you spare some time?	Hallo, kind!\nHeb je even tijd?	
+Route123_Text_FrederickDefeat	Ah, a mighty capable child!\nLet me contribute to your allowance.	Ah, een heel sterk kind!\nIk geef je wat zakgeld.	
+Route123_Text_FrederickPostBattle	Contribute to your allowance?\nWasn't the prize money enough?	Zakgeld geven?\nWas het prijsgeld niet genoeg?	
+Route123_Text_AlbertoIntro	I have to tell you, BIRD POKéMON\nare my obsession!\pBirds are cool!\nThey're the best!	Ik moet je zeggen: VOGEL-POKéMON\nzijn mijn obsessie!\pVogels zijn stoer!\nDe beste!	
+Route123_Text_AlbertoDefeat	Even in defeat, BIRD POKéMON are cool!	Ook bij verlies zijn\nVOGEL-POKéMON stoer!	
+Route123_Text_AlbertoPostBattle	I gather BIRD POKéMON feathers that\nscatter during battles.\pI'm going to make a hat with\nBIRD POKéMON feathers.	Ik verzamel veren van VOGEL-POKéMON\ndie tijdens gevechten rondvliegen.\pIk maak een hoed van veren van\nVOGEL-POKéMON.	
+Route123_Text_EdIntro	When there are no TRAINERS around,\nI let my POKéMON battle each other.\lI watch them.	Als er geen TRAINERS zijn, laat\nik mijn POKéMON tegen elkaar vechten.\lIk kijk ernaar.	
+Route123_Text_EdDefeat	I kind of like your POKéMON.	Ik vind je POKéMON wel leuk.	
+Route123_Text_EdPostBattle	Hehe, I'm swiping your battling ideas!\nI think they'll make me better.	Hehe, ik pik je gevechtsideeën!\nIk word er vast beter van.	
+Route123_Text_JonasIntro	I lay in ambush, and a TRAINER has\nlanded in my trap!	Ik lag op de loer, en een TRAINER\nis in mijn val gelopen!	
+Route123_Text_JonasDefeat	If you don't lose, how am I supposed\nto have fun playing ninja?	Als jij niet verliest, hoe moet ik\ndan ninja spelen?	
+Route123_Text_JonasPostBattle	I'm going to ambush a weaker-looking\nTRAINER next time.	De volgende keer val ik een\nzwakker ogende TRAINER aan.	
+Route123_Text_KayleyIntro	I just bought this parasol.\nMy cuteness should be up by a third!	Ik heb net deze parasol gekocht.\nIk ben nu een derde schattiger!	
+Route123_Text_KayleyDefeat	You're better than me by about\nfive times!	Je bent ongeveer vijf keer\nbeter dan ik!	
+Route123_Text_KayleyPostBattle	Using accessories effectively is\nthe secret behind fashion appeal.	Accessoires slim gebruiken is het\ngeheim van modieus optreden.	
 Route124_Text_SpencerIntro	Hey, are you lost at sea?\pIf you can beat my POKéMON,\nI can serve as your pilot.		
 Route124_Text_SpencerDefeat	I lost my bearings in battle!		
 Route124_Text_SpencerPostBattle	Many people lose their bearings at sea.\pIf you're that sort, you should refer\nto the POKéNAV's MAP.		

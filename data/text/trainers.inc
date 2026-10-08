@@ -3350,257 +3350,259 @@ Route121_Text_MarcelPostBattle:
 	.string "nog trainen voor een WEDSTRIJD.$"
 
 Route123_Text_WendyIntro:
-	.string "Want to determine how strong you are?\n"
-	.string "I'll be the test!$"
+	.string "Wil je weten hoe sterk je bent?\n"
+	.string "Ik ben de test!$"
 
 Route123_Text_WendyDefeat:
-	.string "You passed with flying colors!$"
+	.string "Je slaagde met glans!$"
 
 Route123_Text_WendyPostBattle:
-	.string "To best even me…\n"
-	.string "Your strength is marvelous!$"
+	.string "Zelfs mij verslaan…\n"
+	.string "Je kracht is geweldig!$"
 
 Route123_Text_BraxtonIntro:
-	.string "You seem to have a big collection\n"
-	.string "of GYM BADGES.\p"
-	.string "Let me see if you're actually worthy of\n"
-	.string "those BADGES!$"
+	.string "Je hebt een grote verzameling\n"
+	.string "GYM BADGES.\p"
+	.string "Laat me zien of je die BADGES\n"
+	.string "wel verdient!$"
 
 Route123_Text_BraxtonDefeat:
-	.string "Oh, you're worthy, all right!$"
+	.string "Oh, je verdient ze echt!$"
 
 Route123_Text_BraxtonPostBattle:
-	.string "You did your BADGES proud in that\n"
-	.string "match!$"
+	.string "Je maakte je BADGES trots in\n"
+	.string "dat gevecht!$"
 
 Route123_Text_VioletIntro:
-	.string "They say that good times are filled\n"
-	.string "with good aromas.$"
+	.string "Ze zeggen dat goede tijden vol\n"
+	.string "zijn van goede geuren.$"
 
 Route123_Text_VioletDefeat:
 	.string "Oh…\n"
-	.string "I smell the bitter scent of misery…$"
+	.string "Ik ruik de bittere geur van verdriet…$"
 
 Route123_Text_VioletPostBattle:
-	.string "The BERRY MASTER's garden is filled\n"
-	.string "with uplifting fragrances.$"
+	.string "De tuin van de BESSENMEESTER is\n"
+	.string "vol opbeurende geuren.$"
 
 Route123_Text_CameronIntro:
-	.string "Being a psychic is about willpower.\p"
-	.string "I've willed myself not to lose to\n"
-	.string "anyone. That makes me strong!$"
+	.string "Paranormaal zijn draait om wilskracht.\p"
+	.string "Ik wil van niemand verliezen.\n"
+	.string "Dat maakt me sterk!$"
 
 Route123_Text_CameronDefeat:
-	.string "I feel sad…$"
+	.string "Ik voel me verdrietig…$"
 
 Route123_Text_CameronPostBattle:
-	.string "Being a psychic is about willpower.\n"
-	.string "I thought I wouldn't lose to you…$"
+	.string "Paranormaal zijn draait om wilskracht.\n"
+	.string "Ik dacht dat ik niet zou verliezen…$"
 
 Route123_Text_CameronRegister:
-	.string "I sense it!\n"
-	.string "You and I shall battle again!\l"
-	.string "I can't tell if I'll win, though…\p"
-	.string "Let's see your POKéNAV.$"
+	.string "Ik voel het!\n"
+	.string "Jij en ik vechten weer!\l"
+	.string "Ik weet niet of ik win…\p"
+	.string "Laat je POKéNAV zien.$"
 
 Route123_Text_CameronRematchIntro:
-	.string "I've convinced myself that I won't\n"
-	.string "lose anymore. That makes me strong!$"
+	.string "Ik heb mezelf overtuigd dat ik\n"
+	.string "niet meer verlies. Dat maakt me sterk!$"
 
 Route123_Text_CameronRematchDefeat:
-	.string "I feel sad…$"
+	.string "Ik voel me verdrietig…$"
 
 Route123_Text_CameronPostRematch:
-	.string "I should train at MT. PYRE…\n"
-	.string "I'll never beat you this way…$"
+	.string "Ik moet trainen op MT. PYRE…\n"
+	.string "Zo versla ik jou nooit…$"
 
 Route123_Text_JackiIntro:
-	.string "Don't be too happy if your POKéMON\n"
-	.string "develop psychic powers.\p"
-	.string "You need to refine those powers to\n"
-	.string "make them really useful.$"
+	.string "Wees niet te blij als je POKéMON\n"
+	.string "paranormale kracht krijgen.\p"
+	.string "Je moet die kracht slijpen om\n"
+	.string "hem echt nuttig te maken.$"
 
 Route123_Text_JackiDefeat:
-	.string "Overwhelmed!$"
+	.string "Overweldigd!$"
 
 Route123_Text_JackiPostBattle:
-	.string "We all have psychic powers.\n"
-	.string "We've just forgotten how to use them.$"
+	.string "We hebben allemaal paranormale\n"
+	.string "kracht. We vergaten hoe je\l"
+	.string "hem gebruikt.$"
 
 Route123_Text_JackiRegister:
-	.string "I would like to face you again.\n"
-	.string "Is that okay with you?$"
+	.string "Ik wil je nog eens uitdagen.\n"
+	.string "Is dat goed?$"
 
 Route123_Text_JackiRematchIntro:
-	.string "Have you awoken the psychic powers\n"
-	.string "within you?$"
+	.string "Heb je de paranormale kracht\n"
+	.string "in jezelf gewekt?$"
 
 Route123_Text_JackiRematchDefeat:
-	.string "Astounding!$"
+	.string "Verbluffend!$"
 
 Route123_Text_JackiPostRematch:
-	.string "Your power with POKéMON…\n"
-	.string "That could be a psychic power, too.$"
+	.string "Je kracht met POKéMON…\n"
+	.string "Dat kan ook paranormale kracht zijn.$"
 
 Route123_Text_MiuIntro:
-	.string "MIU: Hello, TRAINER. I hope your\n"
-	.string "POKéMON won't cry when they lose.$"
+	.string "MIU: Hallo, TRAINER. Ik hoop dat\n"
+	.string "je POKéMON niet huilen als ze verliezen.$"
 
 Route123_Text_MiuDefeat:
-	.string "MIU: Uh-oh, we lost.$"
+	.string "MIU: Oeps, we verloren.$"
 
 Route123_Text_MiuPostBattle:
-	.string "MIU: TRAINER, your POKéMON are\n"
-	.string "strong because you are friends.$"
+	.string "MIU: TRAINER, je POKéMON zijn sterk\n"
+	.string "omdat jullie vrienden zijn.$"
 
 Route123_Text_MiuNotEnoughMons:
-	.string "MIU: It's no fun to battle if you\n"
-	.string "don't have two POKéMON.$"
+	.string "MIU: Vechten is niet leuk als je\n"
+	.string "geen twee POKéMON hebt.$"
 
 Route123_Text_YukiIntro:
-	.string "YUKI: Okay!\n"
-	.string "We're beating the TRAINER's POKéMON!$"
+	.string "YUKI: Oké!\n"
+	.string "We verslaan de POKéMON van de TRAINER!$"
 
 Route123_Text_YukiDefeat:
-	.string "YUKI: Uh-oh, we lost.$"
+	.string "YUKI: Oeps, we verloren.$"
 
 Route123_Text_YukiPostBattle:
-	.string "YUKI: Why are you so strong?\n"
-	.string "We've never lost before.$"
+	.string "YUKI: Waarom ben je zo sterk?\n"
+	.string "We verloren nog nooit.$"
 
 Route123_Text_YukiNotEnoughMons:
-	.string "YUKI: It's no fun to battle if you\n"
-	.string "don't have two POKéMON.$"
+	.string "YUKI: Vechten is niet leuk als je\n"
+	.string "geen twee POKéMON hebt.$"
 
 Route123_Text_KindraIntro:
 	.string "MT. PYRE…\n"
-	.string "Where the spirits of POKéMON sleep…\l"
-	.string "Will your POKéMON sleep?$"
+	.string "Waar de geesten van POKéMON slapen…\l"
+	.string "Gaan jouw POKéMON slapen?$"
 
 Route123_Text_KindraDefeat:
-	.string "Overflowing with vitality…$"
+	.string "Vol levenskracht…$"
 
 Route123_Text_KindraPostBattle:
 	.string "MT. PYRE…\n"
-	.string "Where the spirits of POKéMON sleep…\p"
-	.string "It must overflow with a power that\n"
-	.string "soothes spirits…$"
+	.string "Waar de geesten van POKéMON slapen…\p"
+	.string "Er moet een kracht zijn die\n"
+	.string "geesten tot rust brengt…$"
 
 Route123_Text_FernandoIntro:
-	.string "I'll turn your lights out while\n"
-	.string "I rip through this tune!$"
+	.string "Ik doe je lichten uit terwijl ik\n"
+	.string "dit liedje inzet!$"
 
 Route123_Text_FernandoDefeat:
-	.string "Hey, hold it!\n"
-	.string "I was still playing the intro!$"
+	.string "Hé, wacht!\n"
+	.string "Ik speelde nog de intro!$"
 
 Route123_Text_FernandoPostBattle:
-	.string "You're rock steady.\n"
-	.string "I'd like to write a tune about you.$"
+	.string "Je bent rotsvast.\n"
+	.string "Ik wil een liedje over je schrijven.$"
 
 Route123_Text_FernandoRegister:
-	.string "The next time, lend your ears to\n"
-	.string "the full tune, will you?$"
+	.string "Luister de volgende keer naar het\n"
+	.string "hele liedje, goed?$"
 
 Route123_Text_FernandoRematchIntro:
-	.string "Today's the day I'm going to do it!\n"
-	.string "I'll turn out your lights before\l"
-	.string "I finish singing my song!$"
+	.string "Vandaag lukt het me!\n"
+	.string "Ik doe je lichten uit voordat\l"
+	.string "ik mijn lied af heb!$"
 
 Route123_Text_FernandoRematchDefeat:
-	.string "Hey, hold it!\n"
-	.string "I haven't even hit the chorus!$"
+	.string "Hé, wacht!\n"
+	.string "Ik was nog niet bij het refrein!$"
 
 Route123_Text_FernandoPostRematch:
-	.string "I thought you'd be so enthralled\n"
-	.string "by my tune, you'd lose.$"
+	.string "Ik dacht dat je zo gegrepen\n"
+	.string "door mijn liedje zou zijn, dat je verloor.$"
 
 Route123_Text_DavisIntro:
-	.string "This is my awesome BUG POKéMON!\n"
-	.string "My big brother got it for me.$"
+	.string "Dit is mijn geweldige INSECT-POKéMON!\n"
+	.string "Mijn grote broer gaf hem me.$"
 
 Route123_Text_DavisDefeat:
 	.string "Waaaah!\n"
-	.string "You meanie!$"
+	.string "Je bent gemeen!$"
 
 Route123_Text_DavisPostBattle:
-	.string "Don't tell my brother I lost.\n"
-	.string "You have to keep it a secret!$"
+	.string "Vertel mijn broer niet dat ik\n"
+	.string "verloor. Het is een geheim!$"
 
 Route123_Text_JazmynIntro:
-	.string "My confidence will get a boost by\n"
-	.string "beating someone obviously strong!$"
+	.string "Mijn zelfvertrouwen groeit als ik\n"
+	.string "iemand versla die duidelijk sterk is!$"
 
 Route123_Text_JazmynDefeat:
-	.string "There goes my confidence…$"
+	.string "Daar gaat mijn zelfvertrouwen…$"
 
 Route123_Text_JazmynPostBattle:
-	.string "They say that you can't judge a person\n"
-	.string "by their appearance.\p"
-	.string "But often, their looks don't lie…$"
+	.string "Ze zeggen dat je iemand niet op\n"
+	.string "uiterlijk kunt beoordelen.\p"
+	.string "Maar vaak liegt het uiterlijk niet…$"
 
 Route123_Text_FrederickIntro:
-	.string "Hello, child!\n"
-	.string "Can you spare some time?$"
+	.string "Hallo, kind!\n"
+	.string "Heb je even tijd?$"
 
 Route123_Text_FrederickDefeat:
-	.string "Ah, a mighty capable child!\n"
-	.string "Let me contribute to your allowance.$"
+	.string "Ah, een heel sterk kind!\n"
+	.string "Ik geef je wat zakgeld.$"
 
 Route123_Text_FrederickPostBattle:
-	.string "Contribute to your allowance?\n"
-	.string "Wasn't the prize money enough?$"
+	.string "Zakgeld geven?\n"
+	.string "Was het prijsgeld niet genoeg?$"
 
 Route123_Text_AlbertoIntro:
-	.string "I have to tell you, BIRD POKéMON\n"
-	.string "are my obsession!\p"
-	.string "Birds are cool!\n"
-	.string "They're the best!$"
+	.string "Ik moet je zeggen: VOGEL-POKéMON\n"
+	.string "zijn mijn obsessie!\p"
+	.string "Vogels zijn stoer!\n"
+	.string "De beste!$"
 
 Route123_Text_AlbertoDefeat:
-	.string "Even in defeat, BIRD POKéMON are cool!$"
+	.string "Ook bij verlies zijn\n"
+	.string "VOGEL-POKéMON stoer!$"
 
 Route123_Text_AlbertoPostBattle:
-	.string "I gather BIRD POKéMON feathers that\n"
-	.string "scatter during battles.\p"
-	.string "I'm going to make a hat with\n"
-	.string "BIRD POKéMON feathers.$"
+	.string "Ik verzamel veren van VOGEL-POKéMON\n"
+	.string "die tijdens gevechten rondvliegen.\p"
+	.string "Ik maak een hoed van veren van\n"
+	.string "VOGEL-POKéMON.$"
 
 Route123_Text_EdIntro:
-	.string "When there are no TRAINERS around,\n"
-	.string "I let my POKéMON battle each other.\l"
-	.string "I watch them.$"
+	.string "Als er geen TRAINERS zijn, laat\n"
+	.string "ik mijn POKéMON tegen elkaar vechten.\l"
+	.string "Ik kijk ernaar.$"
 
 Route123_Text_EdDefeat:
-	.string "I kind of like your POKéMON.$"
+	.string "Ik vind je POKéMON wel leuk.$"
 
 Route123_Text_EdPostBattle:
-	.string "Hehe, I'm swiping your battling ideas!\n"
-	.string "I think they'll make me better.$"
+	.string "Hehe, ik pik je gevechtsideeën!\n"
+	.string "Ik word er vast beter van.$"
 
 Route123_Text_JonasIntro:
-	.string "I lay in ambush, and a TRAINER has\n"
-	.string "landed in my trap!$"
+	.string "Ik lag op de loer, en een TRAINER\n"
+	.string "is in mijn val gelopen!$"
 
 Route123_Text_JonasDefeat:
-	.string "If you don't lose, how am I supposed\n"
-	.string "to have fun playing ninja?$"
+	.string "Als jij niet verliest, hoe moet ik\n"
+	.string "dan ninja spelen?$"
 
 Route123_Text_JonasPostBattle:
-	.string "I'm going to ambush a weaker-looking\n"
-	.string "TRAINER next time.$"
+	.string "De volgende keer val ik een\n"
+	.string "zwakker ogende TRAINER aan.$"
 
 Route123_Text_KayleyIntro:
-	.string "I just bought this parasol.\n"
-	.string "My cuteness should be up by a third!$"
+	.string "Ik heb net deze parasol gekocht.\n"
+	.string "Ik ben nu een derde schattiger!$"
 
 Route123_Text_KayleyDefeat:
-	.string "You're better than me by about\n"
-	.string "five times!$"
+	.string "Je bent ongeveer vijf keer\n"
+	.string "beter dan ik!$"
 
 Route123_Text_KayleyPostBattle:
-	.string "Using accessories effectively is\n"
-	.string "the secret behind fashion appeal.$"
+	.string "Accessoires slim gebruiken is het\n"
+	.string "geheim van modieus optreden.$"
 
 Route124_Text_SpencerIntro:
 	.string "Hey, are you lost at sea?\p"

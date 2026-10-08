@@ -86,69 +86,68 @@ FortreeCity_Movement_KecleonFlee:
 	step_end
 
 FortreeCity_Text_SawGiganticPokemonInSky:
-	.string "No one believes me, but I saw this\n"
-	.string "gigantic POKéMON in the sky.\p"
-	.string "It seemed to squirm as it flew toward\n"
-	.string "ROUTE 131.\p"
-	.string "By the way… Sniff…\n"
-	.string "Um… You, uh…smell singed.\p"
-	.string "Were you at a volcano or something?$"
+	.string "Niemand gelooft me, maar ik zag\n"
+	.string "een gigantische POKéMON in de lucht.\p"
+	.string "Hij kronkelde terwijl hij naar\n"
+	.string "ROUTE 131 vloog.\p"
+	.string "Trouwens… Snuf…\n"
+	.string "Eh… Jij, eh… ruikt verbrand.\p"
+	.string "Was je bij een vulkaan of zo?$"
 
 FortreeCity_Text_SomethingBlockingGym:
-	.string "I want to go to the POKéMON GYM,\n"
-	.string "but something's blocking the way.\p"
-	.string "After all the bother I went through\n"
-	.string "training on ROUTE 120…$"
+	.string "Ik wil naar de POKéMON GYM,\n"
+	.string "maar er staat iets in de weg.\p"
+	.string "Terwijl ik zo hard trainde\n"
+	.string "op ROUTE 120…$"
 
 FortreeCity_Text_ThisTimeIllBeatWinona:
-	.string "I've got my pride-and-joy POKéMON\n"
-	.string "with me. This time, I'll beat WINONA.$"
+	.string "Mijn lievelings-POKéMON is bij me.\n"
+	.string "Deze keer versla ik WINONA.$"
 
 FortreeCity_Text_TreesGrowByDrinkingRainwater:
-	.string "The ground absorbs rainwater, and\n"
-	.string "trees grow by drinking that water…\p"
-	.string "Our FORTREE CITY exists because\n"
-	.string "there's both water and soil.$"
+	.string "De grond slurpt regenwater op en\n"
+	.string "bomen groeien van dat water…\p"
+	.string "Onze FORTREE CITY bestaat door\n"
+	.string "water en aarde.$"
 
 FortreeCity_Text_EveryoneHealthyAndLively:
-	.string "The CITY consists of homes built on\n"
-	.string "trees.\p"
-	.string "Perhaps because of that lifestyle,\n"
-	.string "everyone is healthy and lively.\p"
-	.string "Why, even myself--I feel as if I've\n"
-	.string "grown thirty years younger.$"
+	.string "De STAD heeft huizen in de bomen.\p"
+	.string "Misschien daarom is iedereen\n"
+	.string "gezond en vrolijk.\p"
+	.string "Ik voel me zelf wel dertig jaar\n"
+	.string "jonger!$"
 
 FortreeCity_Text_BugPokemonComeThroughWindow:
-	.string "Living on top of trees is okay.\p"
-	.string "But sometimes BUG POKéMON come in\n"
-	.string "through windows.\l"
-	.string "It can be really startling.$"
+	.string "In de bomen wonen is leuk.\p"
+	.string "Maar soms komen INSECT-POKéMON\n"
+	.string "door het raam.\l"
+	.string "Dat is echt schrikken.$"
 
 FortreeCity_Text_PokemonThatEvolveWhenTraded:
-	.string "There are POKéMON that evolve when\n"
-	.string "you trade them! That's what I heard.$"
+	.string "Sommige POKéMON evolueren als je\n"
+	.string "ze ruilt! Dat heb ik gehoord.$"
 
 FortreeCity_Text_SomethingUnseeable:
-	.string "Something unseeable is in the way.$"
+	.string "Er staat iets onzichtbaars in de weg.$"
 
 FortreeCity_Text_UnseeableUseDevonScope:
-	.string "Something unseeable is in the way.\p"
-	.string "Want to use the DEVON SCOPE?$"
+	.string "Er staat iets onzichtbaars in de weg.\p"
+	.string "Wil je de DEVONKIJKER gebruiken?$"
 
 FortreeCity_Text_UsedDevonScopePokemonFled:
-	.string "{PLAYER} used the DEVON SCOPE.\p"
-	.string "An invisible POKéMON became completely\n"
-	.string "visible!\p"
-	.string "The startled POKéMON fled!$"
+	.string "{PLAYER} gebruikte de DEVONKIJKER.\p"
+	.string "Een onzichtbare POKéMON werd\n"
+	.string "helemaal zichtbaar!\p"
+	.string "De POKéMON schrok en vluchtte weg!$"
 
 FortreeCity_Text_CitySign:
 	.string "FORTREE CITY\n"
-	.string "“The treetop city that frolics with\l"
-	.string "nature.”$"
+	.string "“De stad in de boomtoppen,\l"
+	.string "die speelt met de natuur.”$"
 
 FortreeCity_Text_GymSign:
 	.string "FORTREE CITY POKéMON GYM\n"
-	.string "LEADER: WINONA\p"
-	.string "“The bird user taking flight into\n"
-	.string "the world.”$"
+	.string "LEIDER: WINONA\p"
+	.string "“De vogelfan die de wereld in\n"
+	.string "vliegt.”$"
 

@@ -1,8 +1,8 @@
 key	english	dutch	notes
-FortreeCity_House1_Text_YouWillTradeWontYou	Wrooooaaar! I need it!\nI have to get me a {STR_VAR_1}!\lI'll do anything for it!\p…Uh… Did you hear that?\nMy shout from the bottom of my heart?\pHaving heard that, you will trade\nyour {STR_VAR_1} for my {STR_VAR_2},\lwon't you?		
-FortreeCity_House1_Text_MonYouTakeCare	Oh, yeah, right on!\p{STR_VAR_1}, welcome!\n{STR_VAR_2}, you take care!		
-FortreeCity_House1_Text_ThisIsntAMon	Uh, no, I don't think so.\nThat isn't a {STR_VAR_1}.		
-FortreeCity_House1_Text_YouWontTradeMe	No? You won't trade me?\nEven after I bared my heart to you?		
-FortreeCity_House1_Text_GoingToMakeVolbeatStrong	I'm going to make VOLBEAT super\nstrong from this moment on!\pI hope you do the same with PLUSLE!		
-FortreeCity_House1_Text_TradingMemoriesWithOthers	Trading POKéMON with others…\pIt's as if you're trading your own\nmemories with other people.		
-FortreeCity_House1_Text_Zigzagoon	ZIGZAGOON: Gumomoh?		
+FortreeCity_House1_Text_YouWillTradeWontYou	Wrooooaaar! I need it!\nI have to get me a {STR_VAR_1}!\lI'll do anything for it!\p…Uh… Did you hear that?\nMy shout from the bottom of my heart?\pHaving heard that, you will trade\nyour {STR_VAR_1} for my {STR_VAR_2},\lwon't you?	Wroooaaar! Ik wil hem!\nIk moet een {STR_VAR_1} hebben!\lIk doe alles ervoor!\p…Eh… Hoorde je dat?\nMijn kreet uit het diepst van mijn hart?\pNu je dat hoorde, ruil je je\n{STR_VAR_1} toch voor mijn {STR_VAR_2}?	
+FortreeCity_House1_Text_MonYouTakeCare	Oh, yeah, right on!\p{STR_VAR_1}, welcome!\n{STR_VAR_2}, you take care!	Oh ja, top!\p{STR_VAR_1}, welkom!\n{STR_VAR_2}, pas goed op jezelf!	
+FortreeCity_House1_Text_ThisIsntAMon	Uh, no, I don't think so.\nThat isn't a {STR_VAR_1}.	Eh, nee, dat denk ik niet.\nDat is geen {STR_VAR_1}.	
+FortreeCity_House1_Text_YouWontTradeMe	No? You won't trade me?\nEven after I bared my heart to you?	Nee? Ruil je niet met me?\nTerwijl ik mijn hart voor je opende?	
+FortreeCity_House1_Text_GoingToMakeVolbeatStrong	I'm going to make VOLBEAT super\nstrong from this moment on!\pI hope you do the same with PLUSLE!	Vanaf nu maak ik VOLBEAT super\nsterk!\pHoud jij PLUSLE ook sterk!	
+FortreeCity_House1_Text_TradingMemoriesWithOthers	Trading POKéMON with others…\pIt's as if you're trading your own\nmemories with other people.	POKéMON ruilen met anderen…\pHet is alsof je je eigen\nherinneringen ruilt.	
+FortreeCity_House1_Text_Zigzagoon	ZIGZAGOON: Gumomoh?	ZIGZAGOON: Gumomoh?	

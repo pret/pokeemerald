@@ -1,12 +1,12 @@
 key	english	dutch	notes
-LilycoveCity_Harbor_Text_FerryUnavailable	I beg your pardon?\nYou're looking for a ship?\pI'm sorry, the ferry service isn't\navailable at present…		
-LilycoveCity_Harbor_Text_MayISeeYourTicket	Hello, are you here for the ferry?\nMay I see your TICKET?		
-LilycoveCity_Harbor_Text_NoTicket	{PLAYER} doesn't have the TICKET…\pI'm terribly sorry.\pYou must have a TICKET to board\nthe ferry.		
-LilycoveCity_Harbor_Text_FlashTicketWhereTo	{PLAYER} flashed the TICKET.\pPerfect! That's all you need!\pAnd where would you like to go?		
-LilycoveCity_Harbor_Text_SailAnotherTime	Please sail with us another time!		
-LilycoveCity_Harbor_Text_SlateportItIs	SLATEPORT CITY it is, then!		
-LilycoveCity_Harbor_Text_BattleFrontierItIs	BATTLE FRONTIER it is, then!		
-LilycoveCity_Harbor_Text_PleaseBoard	Please board the ferry and wait for\ndeparture.		
-LilycoveCity_Harbor_Text_WhereWouldYouLikeToGo	Then, where would you like to go?		
-LilycoveCity_Harbor_Text_SailorFerryUnavailable	Until they finish making the ferry,\nwe sailors have nothing to do…\pI wish they'd get a move on, the folks\nat the SHIPYARD in SLATEPORT.		
-LilycoveCity_Harbor_Text_SailorFerryAvailable	The ferry S.S. TIDAL is finally in\noperation.\pThe folks at the SHIPYARD in SLATEPORT\nmust've worked extra hard.\pWell, it's my turn to get busy now!		
+LilycoveCity_Harbor_Text_FerryUnavailable	I beg your pardon?\nYou're looking for a ship?\pI'm sorry, the ferry service isn't\navailable at present…	Wat zegt u?\nZoekt u een schip?\pHet spijt me, de ferry vaart\nnu niet…	
+LilycoveCity_Harbor_Text_MayISeeYourTicket	Hello, are you here for the ferry?\nMay I see your TICKET?	Hallo, kom je voor de ferry?\nMag ik je KAARTJE zien?	
+LilycoveCity_Harbor_Text_NoTicket	{PLAYER} doesn't have the TICKET…\pI'm terribly sorry.\pYou must have a TICKET to board\nthe ferry.	{PLAYER} heeft het KAARTJE niet…\pHet spijt me.\pZonder KAARTJE mag je niet\nop de ferry.	
+LilycoveCity_Harbor_Text_FlashTicketWhereTo	{PLAYER} flashed the TICKET.\pPerfect! That's all you need!\pAnd where would you like to go?	{PLAYER} liet het KAARTJE zien.\pPerfect! Meer heb je niet nodig!\pEn waar wil je heen?	
+LilycoveCity_Harbor_Text_SailAnotherTime	Please sail with us another time!	Vaar een andere keer met ons mee!	
+LilycoveCity_Harbor_Text_SlateportItIs	SLATEPORT CITY it is, then!	Dan wordt het SLATEPORT CITY!	
+LilycoveCity_Harbor_Text_BattleFrontierItIs	BATTLE FRONTIER it is, then!	Dan wordt het BATTLE FRONTIER!	
+LilycoveCity_Harbor_Text_PleaseBoard	Please board the ferry and wait for\ndeparture.	Stap aan boord van de ferry en\nwacht op vertrek.	
+LilycoveCity_Harbor_Text_WhereWouldYouLikeToGo	Then, where would you like to go?	Waar wil je dan heen?	
+LilycoveCity_Harbor_Text_SailorFerryUnavailable	Until they finish making the ferry,\nwe sailors have nothing to do…\pI wish they'd get a move on, the folks\nat the SHIPYARD in SLATEPORT.	Tot de ferry klaar is, hebben\nwij MATROZEN niets te doen…\pWat zijn ze op de SCHEEPSWERF\nin SLATEPORT toch traag.	
+LilycoveCity_Harbor_Text_SailorFerryAvailable	The ferry S.S. TIDAL is finally in\noperation.\pThe folks at the SHIPYARD in SLATEPORT\nmust've worked extra hard.\pWell, it's my turn to get busy now!	De ferry S.S. TIDAL vaart eindelijk.\pDe mensen van de SCHEEPSWERF in\nSLATEPORT werkten vast extra hard.\pNu moet ik zelf aan de slag!	

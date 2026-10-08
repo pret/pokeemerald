@@ -1,13 +1,13 @@
 key	english	dutch	notes
-FortreeCity_Text_SawGiganticPokemonInSky	No one believes me, but I saw this\ngigantic POKéMON in the sky.\pIt seemed to squirm as it flew toward\nROUTE 131.\pBy the way… Sniff…\nUm… You, uh…smell singed.\pWere you at a volcano or something?		
-FortreeCity_Text_SomethingBlockingGym	I want to go to the POKéMON GYM,\nbut something's blocking the way.\pAfter all the bother I went through\ntraining on ROUTE 120…		
-FortreeCity_Text_ThisTimeIllBeatWinona	I've got my pride-and-joy POKéMON\nwith me. This time, I'll beat WINONA.		
-FortreeCity_Text_TreesGrowByDrinkingRainwater	The ground absorbs rainwater, and\ntrees grow by drinking that water…\pOur FORTREE CITY exists because\nthere's both water and soil.		
-FortreeCity_Text_EveryoneHealthyAndLively	The CITY consists of homes built on\ntrees.\pPerhaps because of that lifestyle,\neveryone is healthy and lively.\pWhy, even myself--I feel as if I've\ngrown thirty years younger.		
-FortreeCity_Text_BugPokemonComeThroughWindow	Living on top of trees is okay.\pBut sometimes BUG POKéMON come in\nthrough windows.\lIt can be really startling.		
-FortreeCity_Text_PokemonThatEvolveWhenTraded	There are POKéMON that evolve when\nyou trade them! That's what I heard.		
-FortreeCity_Text_SomethingUnseeable	Something unseeable is in the way.		
-FortreeCity_Text_UnseeableUseDevonScope	Something unseeable is in the way.\pWant to use the DEVON SCOPE?		
-FortreeCity_Text_UsedDevonScopePokemonFled	{PLAYER} used the DEVON SCOPE.\pAn invisible POKéMON became completely\nvisible!\pThe startled POKéMON fled!		
-FortreeCity_Text_CitySign	FORTREE CITY\n“The treetop city that frolics with\lnature.”		
-FortreeCity_Text_GymSign	FORTREE CITY POKéMON GYM\nLEADER: WINONA\p“The bird user taking flight into\nthe world.”		
+FortreeCity_Text_SawGiganticPokemonInSky	No one believes me, but I saw this\ngigantic POKéMON in the sky.\pIt seemed to squirm as it flew toward\nROUTE 131.\pBy the way… Sniff…\nUm… You, uh…smell singed.\pWere you at a volcano or something?	Niemand gelooft me, maar ik zag\neen gigantische POKéMON in de lucht.\pHij kronkelde terwijl hij naar\nROUTE 131 vloog.\pTrouwens… Snuf…\nEh… Jij, eh… ruikt verbrand.\pWas je bij een vulkaan of zo?	
+FortreeCity_Text_SomethingBlockingGym	I want to go to the POKéMON GYM,\nbut something's blocking the way.\pAfter all the bother I went through\ntraining on ROUTE 120…	Ik wil naar de POKéMON GYM,\nmaar er staat iets in de weg.\pTerwijl ik zo hard trainde\nop ROUTE 120…	
+FortreeCity_Text_ThisTimeIllBeatWinona	I've got my pride-and-joy POKéMON\nwith me. This time, I'll beat WINONA.	Mijn lievelings-POKéMON is bij me.\nDeze keer versla ik WINONA.	
+FortreeCity_Text_TreesGrowByDrinkingRainwater	The ground absorbs rainwater, and\ntrees grow by drinking that water…\pOur FORTREE CITY exists because\nthere's both water and soil.	De grond slurpt regenwater op en\nbomen groeien van dat water…\pOnze FORTREE CITY bestaat door\nwater en aarde.	
+FortreeCity_Text_EveryoneHealthyAndLively	The CITY consists of homes built on\ntrees.\pPerhaps because of that lifestyle,\neveryone is healthy and lively.\pWhy, even myself--I feel as if I've\ngrown thirty years younger.	De STAD heeft huizen in de bomen.\pMisschien daarom is iedereen\ngezond en vrolijk.\pIk voel me zelf wel dertig jaar\njonger!	
+FortreeCity_Text_BugPokemonComeThroughWindow	Living on top of trees is okay.\pBut sometimes BUG POKéMON come in\nthrough windows.\lIt can be really startling.	In de bomen wonen is leuk.\pMaar soms komen INSECT-POKéMON\ndoor het raam.\lDat is echt schrikken.	
+FortreeCity_Text_PokemonThatEvolveWhenTraded	There are POKéMON that evolve when\nyou trade them! That's what I heard.	Sommige POKéMON evolueren als je\nze ruilt! Dat heb ik gehoord.	
+FortreeCity_Text_SomethingUnseeable	Something unseeable is in the way.	Er staat iets onzichtbaars in de weg.	
+FortreeCity_Text_UnseeableUseDevonScope	Something unseeable is in the way.\pWant to use the DEVON SCOPE?	Er staat iets onzichtbaars in de weg.\pWil je de DEVONKIJKER gebruiken?	
+FortreeCity_Text_UsedDevonScopePokemonFled	{PLAYER} used the DEVON SCOPE.\pAn invisible POKéMON became completely\nvisible!\pThe startled POKéMON fled!	{PLAYER} gebruikte de DEVONKIJKER.\pEen onzichtbare POKéMON werd\nhelemaal zichtbaar!\pDe POKéMON schrok en vluchtte weg!	
+FortreeCity_Text_CitySign	FORTREE CITY\n“The treetop city that frolics with\lnature.”	FORTREE CITY\n“De stad in de boomtoppen,\ldie speelt met de natuur.”	
+FortreeCity_Text_GymSign	FORTREE CITY POKéMON GYM\nLEADER: WINONA\p“The bird user taking flight into\nthe world.”	FORTREE CITY POKéMON GYM\nLEIDER: WINONA\p“De vogelfan die de wereld in\nvliegt.”	

@@ -28,42 +28,46 @@ MtPyre_6F_EventScript_Cedric::
 	end
 
 MtPyre_6F_Text_ValerieIntro:
-	.string "When I'm here…\n"
-	.string "A curious power flows into me…$"
+	.string "Als ik hier ben…\n"
+	.string "Stroomt er een vreemde kracht\l"
+	.string "in me…$"
 
 MtPyre_6F_Text_ValerieDefeat:
-	.string "The power is ebbing away…$"
+	.string "De kracht ebt weg…$"
 
 MtPyre_6F_Text_ValeriePostBattle:
-	.string "Perhaps the power is from the spirits\n"
-	.string "of POKéMON in fitful sleep here…$"
+	.string "Misschien komt de kracht van de\n"
+	.string "geesten van POKéMON die hier\l"
+	.string "onrustig slapen…$"
 
 MtPyre_6F_Text_ValerieRegister:
-	.string "Fufufu… I lost the match, but…\n"
-	.string "I have this little ability…\p"
-	.string "Without ever laying my hands on\n"
-	.string "your POKéNAV… Hiyah!$"
+	.string "Fufufu… Ik verloor, maar…\n"
+	.string "Ik heb een klein talent…\p"
+	.string "Zonder je POKéNAV aan te raken…\n"
+	.string "Hiyah!$"
 
 MtPyre_6F_Text_ValerieRematchIntro:
-	.string "Behind you…\n"
-	.string "What is it…$"
+	.string "Achter je…\n"
+	.string "Wat is dat…$"
 
 MtPyre_6F_Text_ValerieRematchDefeat:
-	.string "Something faded away…$"
+	.string "Iets verdween…$"
 
 MtPyre_6F_Text_ValeriePostRematch:
-	.string "The POKéMON at rest here…\n"
-	.string "Sometimes, they play…$"
+	.string "De POKéMON die hier rusten…\n"
+	.string "Soms spelen ze…$"
 
 MtPyre_6F_Text_CedricIntro:
-	.string "Have you lost your bearings?\n"
-	.string "Have no fear for I am here!$"
+	.string "Ben je de weg kwijt?\n"
+	.string "Wees niet bang, ik ben er!$"
 
 MtPyre_6F_Text_CedricDefeat:
-	.string "Weren't you lost?$"
+	.string "Was je niet de weg kwijt?$"
 
 MtPyre_6F_Text_CedricPostBattle:
-	.string "I had this feeling that a lost TRAINER\n"
-	.string "would be panicked and easy to beat.\p"
-	.string "It's dirty and I won't try it again…$"
+	.string "Ik dacht dat een TRAINER die de\n"
+	.string "weg kwijt is in paniek en makkelijk\l"
+	.string "te verslaan zou zijn.\p"
+	.string "Dat is gemeen en ik doe het\n"
+	.string "niet meer…$"
 
