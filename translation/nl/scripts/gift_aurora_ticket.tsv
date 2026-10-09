@@ -1,5 +1,5 @@
 key	english	dutch	notes
-sText_AuroraTicketForYou	Thank you for using the MYSTERY\nGIFT System.\pYou must be {PLAYER}.\nThere is a ticket here for you.		
-sText_AuroraTicketUseAtPort	It appears to be for use at the\nLILYCOVE CITY port.\pWhy not give it a try and see what\nit is about?		
-sText_AuroraTicketThankYou	Thank you for using the MYSTERY\nGIFT System.		
-sText_AuroraTicketBagFull	Oh, I'm sorry, {PLAYER}.\nYour BAG's KEY ITEMS POCKET is full.\pPlease store something on your PC,\nthen come back for this.		
+sText_AuroraTicketForYou	Thank you for using the MYSTERY\nGIFT System.\pYou must be {PLAYER}.\nThere is a ticket here for you.	Bedankt voor het gebruik van het\nGEHEIM CADEAU-systeem.\pJij bent vast {PLAYER}.\nEr ligt hier een kaart voor je.	
+sText_AuroraTicketUseAtPort	It appears to be for use at the\nLILYCOVE CITY port.\pWhy not give it a try and see what\nit is about?	Hij lijkt bedoeld voor de haven\nvan LILYCOVE CITY.\pProbeer het eens en kijk wat\nhet is!	
+sText_AuroraTicketThankYou	Thank you for using the MYSTERY\nGIFT System.	Bedankt voor het gebruik van het\nGEHEIM CADEAU-systeem.	
+sText_AuroraTicketBagFull	Oh, I'm sorry, {PLAYER}.\nYour BAG's KEY ITEMS POCKET is full.\pPlease store something on your PC,\nthen come back for this.	Oh, sorry, {PLAYER}.\nHet BELANGRIJK-vak van je TAS is vol.\pLeg iets op je PC en kom dan\nterug hiervoor.	

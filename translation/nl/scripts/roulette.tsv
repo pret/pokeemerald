@@ -1,14 +1,14 @@
 key	english	dutch	notes
-Roulette_Text_PlayMinimumWagerIsX	The minimum wager at this table\nis {STR_VAR_1}. Do you want to play?		
-Roulette_Text_NotEnoughCoins	You don't have enough COINS.		
-Roulette_Text_SpecialRateTable	Special rate table right now!		
-Roulette_Text_ControlsInstruction	Place your wager with the + Control\nPad, then press the A Button.		
-Roulette_Text_ItsAHit	It's a hit!		
-Roulette_Text_Jackpot	Jackpot!		
-Roulette_Text_NothingDoing	Nothing doing!		
-Roulette_Text_YouveWonXCoins	You've won {STR_VAR_1} COINS!		
-Roulette_Text_NoCoinsLeft	No COINS left…		
-Roulette_Text_KeepPlaying	Keep playing?		
-Roulette_Text_BoardWillBeCleared	The ROULETTE board will be cleared.		
-Roulette_Text_YouDontHaveACoinCase	You don't have a COIN CASE.		
-Roulette_Text_CoinCaseIsFull	Your COIN CASE is full!\nCoins can be exchanged for prizes.		
+Roulette_Text_PlayMinimumWagerIsX	The minimum wager at this table\nis {STR_VAR_1}. Do you want to play?	De minimale inzet aan deze tafel\nis {STR_VAR_1}. Wil je spelen?	
+Roulette_Text_NotEnoughCoins	You don't have enough COINS.	Je hebt niet genoeg MUNTEN.	
+Roulette_Text_SpecialRateTable	Special rate table right now!	Nu een tafel met speciaal tarief!	
+Roulette_Text_ControlsInstruction	Place your wager with the + Control\nPad, then press the A Button.	Zet in met de + Control Pad\nen druk dan op de A-knop.	
+Roulette_Text_ItsAHit	It's a hit!	Raak!	
+Roulette_Text_Jackpot	Jackpot!	Jackpot!	
+Roulette_Text_NothingDoing	Nothing doing!	Mis!	
+Roulette_Text_YouveWonXCoins	You've won {STR_VAR_1} COINS!	Je wint {STR_VAR_1} MUNTEN!	
+Roulette_Text_NoCoinsLeft	No COINS left…	Geen MUNTEN meer…	
+Roulette_Text_KeepPlaying	Keep playing?	Verder spelen?	
+Roulette_Text_BoardWillBeCleared	The ROULETTE board will be cleared.	Het ROULETTE-bord wordt leeggemaakt.	
+Roulette_Text_YouDontHaveACoinCase	You don't have a COIN CASE.	Je hebt geen MUNTENDOOS.	
+Roulette_Text_CoinCaseIsFull	Your COIN CASE is full!\nCoins can be exchanged for prizes.	Je MUNTENDOOS is vol!\nMUNTEN kun je ruilen voor prijzen.	

@@ -1,33 +1,33 @@
 key	english	dutch	notes
-Route117_Text_SeeWifeIfYoudLikeMeToRaiseMon	I'm the DAY-CARE MAN.\pI help take care of the precious\nPOKéMON of TRAINERS.\pIf you'd like me to raise your POKéMON,\nhave a word with my wife.		
-Route117_Text_DoYouWantEgg	Ah, it's you!\pWe were raising your POKéMON,\nand my goodness, were we surprised!\pYour POKéMON had an EGG!\pWe don't know how it got there,\nbut your POKéMON had it.\pYou do want it, yes?		
-Route117_Text_YourMonIsDoingFine	Ah, it's you! Good to see you.\nYour {STR_VAR_1}'s doing fine.		
-Route117_Text_IllKeepIt	Well then, I'll keep it.\nThanks!		
-Route117_Text_YouHaveNoRoomForIt	You have no room for it…\nCome back when you've made room.		
-Route117_Text_ReceivedEgg	{PLAYER} received the EGG from\nthe DAY-CARE MAN.		
-Route117_Text_TakeGoodCareOfIt	Take good care of it.		
-Route117_Text_FriendlyWithOtherTrainersMon	By the way, about your {STR_VAR_1},\nit seemed to be friendly with\l{STR_VAR_2}'s {STR_VAR_3}.\pI may even have seen it receiving\na piece of MAIL.		
-Route117_Text_SeeWifeIfYouWantToPickUpMon	If you want to pick up your POKéMON,\nhave a word with my wife.		
-Route117_Text_YourMonsAreDoingFine	Ah, it's you! Your {STR_VAR_1} and\n{STR_VAR_2} are doing fine.		
-Route117_Text_IWillKeepDoYouWantIt	I really will keep it.\nYou do want this, yes?		
-Route117_PokemonDayCare_Text_WouldYouLikeUsToRaiseAMon	I'm the DAY-CARE LADY.\pWe can raise POKéMON for you.\pWould you like us to raise one?		
-Route117_PokemonDayCare_Text_WhichMonShouldWeRaise	Which POKéMON should we raise for\nyou?		
-Route117_PokemonDayCare_Text_WellRaiseYourMon	Fine, we'll raise your {STR_VAR_1}\nfor a while.\pCome back for it later.		
-Route117_PokemonDayCare_Text_WeCanRaiseOneMore	We can raise two of your POKéMON.\nWould you like us to raise one more?		
-Route117_PokemonDayCare_Text_HusbandWasLookingForYou	My husband was looking for you.		
-Route117_PokemonDayCare_Text_FineThenComeAgain	Oh, fine, then.\nCome again.		
-Route117_PokemonDayCare_Text_NotEnoughMoney	You don't have enough money…		
-Route117_PokemonDayCare_Text_TakeOtherOneBackToo	Will you take back the other one,\ntoo?		
-Route117_PokemonDayCare_Text_ComeAgain	Fine.\nCome again.		
-Route117_PokemonDayCare_Text_GoodToSeeYou	Ah, it's you! Good to see you.\nYour POKéMON can only be doing good!		
-Route117_PokemonDayCare_Text_YourMonHasGrownXLevels	By level, your {STR_VAR_1} has\ngrown by {STR_VAR_2}.		
-Route117_PokemonDayCare_Text_YourTeamIsFull	Your POKéMON team is full.\nMake room, then come see me.		
-Route117_PokemonDayCare_Text_TakeBackWhichMon	Which POKéMON will you take back?		
-Route117_PokemonDayCare_Text_ItWillCostX	If you want your {STR_VAR_1} back,\nit will cost ¥{STR_VAR_2}.		
-Route117_PokemonDayCare_Text_HeresYourMon	Perfect!\nHere's your POKéMON.		
-Route117_PokemonDayCare_Text_TookBackMon	{PLAYER} took back {STR_VAR_1} from\nthe DAY-CARE LADY.		
-Route117_PokemonDayCare_Text_YouHaveJustOneMon	Oh? But you have just one\nPOKéMON.\pCome back another time.		
-Route117_PokemonDayCare_Text_TakeYourMonBack	Will you take your POKéMON back?		
-Route117_PokemonDayCare_Text_WhatWillYouBattleWith	If you leave me that POKéMON,\nwhat will you battle with?\pCome back another time.		
-Text_EggHatchHuh	Huh?		
-Route117_PokemonDayCare_Text_YoullBeLeftWithJustOne	Huh?\nNow, now.\pIf you leave that POKéMON with\nme, you'll be left with just one.\pYou will be better off if you catch\nsome more, I dare say.		
+Route117_Text_SeeWifeIfYoudLikeMeToRaiseMon	I'm the DAY-CARE MAN.\pI help take care of the precious\nPOKéMON of TRAINERS.\pIf you'd like me to raise your POKéMON,\nhave a word with my wife.	Ik ben de OPPASMAN.\pIk pas op de kostbare POKéMON\nvan TRAINERS.\pWil je dat ik je POKéMON verzorg?\nPraat dan met mijn vrouw.	
+Route117_Text_DoYouWantEgg	Ah, it's you!\pWe were raising your POKéMON,\nand my goodness, were we surprised!\pYour POKéMON had an EGG!\pWe don't know how it got there,\nbut your POKéMON had it.\pYou do want it, yes?	Ah, jij bent het!\pWij pasten op je POKéMON en\nwat schrokken we!\pJe POKéMON had een EI!\pWe weten niet hoe het daar kwam,\nmaar je POKéMON had het.\pJe wilt het wel hebben, toch?	
+Route117_Text_YourMonIsDoingFine	Ah, it's you! Good to see you.\nYour {STR_VAR_1}'s doing fine.	Ah, jij bent het! Fijn je te zien.\nJe {STR_VAR_1} maakt het goed.	
+Route117_Text_IllKeepIt	Well then, I'll keep it.\nThanks!	Dan hou ik het zelf.\nBedankt!	
+Route117_Text_YouHaveNoRoomForIt	You have no room for it…\nCome back when you've made room.	Je hebt geen ruimte meer…\nKom terug als je plek hebt.	
+Route117_Text_ReceivedEgg	{PLAYER} received the EGG from\nthe DAY-CARE MAN.	{PLAYER} kreeg het EI van\nde OPPASMAN.	
+Route117_Text_TakeGoodCareOfIt	Take good care of it.	Zorg er goed voor.	
+Route117_Text_FriendlyWithOtherTrainersMon	By the way, about your {STR_VAR_1},\nit seemed to be friendly with\l{STR_VAR_2}'s {STR_VAR_3}.\pI may even have seen it receiving\na piece of MAIL.	Trouwens, je {STR_VAR_1}\nwas bevriend met de {STR_VAR_3}\lvan {STR_VAR_2}.\pIk zag zelfs dat hij een BRIEF\nkreeg.	
+Route117_Text_SeeWifeIfYouWantToPickUpMon	If you want to pick up your POKéMON,\nhave a word with my wife.	Wil je je POKéMON ophalen?\nPraat dan met mijn vrouw.	
+Route117_Text_YourMonsAreDoingFine	Ah, it's you! Your {STR_VAR_1} and\n{STR_VAR_2} are doing fine.	Ah, jij bent het! Je {STR_VAR_1} en\n{STR_VAR_2} maken het goed.	
+Route117_Text_IWillKeepDoYouWantIt	I really will keep it.\nYou do want this, yes?	Ik hou het echt zelf.\nJe wilt het wel, toch?	
+Route117_PokemonDayCare_Text_WouldYouLikeUsToRaiseAMon	I'm the DAY-CARE LADY.\pWe can raise POKéMON for you.\pWould you like us to raise one?	Ik ben de OPPASVROUW.\pWij kunnen POKéMON voor je verzorgen.\pWil je dat we er een verzorgen?	
+Route117_PokemonDayCare_Text_WhichMonShouldWeRaise	Which POKéMON should we raise for\nyou?	Welke POKéMON moeten wij\nverzorgen?	
+Route117_PokemonDayCare_Text_WellRaiseYourMon	Fine, we'll raise your {STR_VAR_1}\nfor a while.\pCome back for it later.	Goed, we verzorgen je {STR_VAR_1}\neen tijdje.\pKom hem later maar ophalen.	
+Route117_PokemonDayCare_Text_WeCanRaiseOneMore	We can raise two of your POKéMON.\nWould you like us to raise one more?	We kunnen twee POKéMON verzorgen.\nWil je dat we er nog een verzorgen?	
+Route117_PokemonDayCare_Text_HusbandWasLookingForYou	My husband was looking for you.	Mijn man zocht je.	
+Route117_PokemonDayCare_Text_FineThenComeAgain	Oh, fine, then.\nCome again.	Oké, dan.\nTot de volgende keer.	
+Route117_PokemonDayCare_Text_NotEnoughMoney	You don't have enough money…	Je hebt niet genoeg geld…	
+Route117_PokemonDayCare_Text_TakeOtherOneBackToo	Will you take back the other one,\ntoo?	Neem je de andere ook mee?	
+Route117_PokemonDayCare_Text_ComeAgain	Fine.\nCome again.	Goed.\nTot de volgende keer.	
+Route117_PokemonDayCare_Text_GoodToSeeYou	Ah, it's you! Good to see you.\nYour POKéMON can only be doing good!	Ah, jij bent het! Fijn je te zien.\nJe POKéMON maken het vast goed!	
+Route117_PokemonDayCare_Text_YourMonHasGrownXLevels	By level, your {STR_VAR_1} has\ngrown by {STR_VAR_2}.	Je {STR_VAR_1} is {STR_VAR_2}\nlevel(s) gegroeid.	
+Route117_PokemonDayCare_Text_YourTeamIsFull	Your POKéMON team is full.\nMake room, then come see me.	Je POKéMON-team zit vol.\nMaak ruimte en kom dan terug.	
+Route117_PokemonDayCare_Text_TakeBackWhichMon	Which POKéMON will you take back?	Welke POKéMON haal je op?	
+Route117_PokemonDayCare_Text_ItWillCostX	If you want your {STR_VAR_1} back,\nit will cost ¥{STR_VAR_2}.	Wil je je {STR_VAR_1} terug?\nDat kost ¥{STR_VAR_2}.	
+Route117_PokemonDayCare_Text_HeresYourMon	Perfect!\nHere's your POKéMON.	Prima!\nHier is je POKéMON.	
+Route117_PokemonDayCare_Text_TookBackMon	{PLAYER} took back {STR_VAR_1} from\nthe DAY-CARE LADY.	{PLAYER} nam {STR_VAR_1} terug van\nde OPPASVROUW.	
+Route117_PokemonDayCare_Text_YouHaveJustOneMon	Oh? But you have just one\nPOKéMON.\pCome back another time.	Oh? Je hebt maar één\nPOKéMON.\pKom een andere keer terug.	
+Route117_PokemonDayCare_Text_TakeYourMonBack	Will you take your POKéMON back?	Neem je je POKéMON terug?	
+Route117_PokemonDayCare_Text_WhatWillYouBattleWith	If you leave me that POKéMON,\nwhat will you battle with?\pCome back another time.	Als je die POKéMON bij mij laat,\nmet wie ga je dan vechten?\pKom een andere keer terug.	
+Text_EggHatchHuh	Huh?	Huh?	
+Route117_PokemonDayCare_Text_YoullBeLeftWithJustOne	Huh?\nNow, now.\pIf you leave that POKéMON with\nme, you'll be left with just one.\pYou will be better off if you catch\nsome more, I dare say.	Huh?\nWacht even.\pAls je die POKéMON bij mij laat,\nhou je er maar één over.\pVang eerst maar wat meer\nPOKéMON, zou ik zeggen.	

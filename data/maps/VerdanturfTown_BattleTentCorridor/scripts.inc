@@ -43,32 +43,34 @@ VerdanturfTown_BattleTentCorridor_Movement_AttendantEnterDoor:
 @ Leftover text from when this was a Contest Hall in R/S
 @ Unused
 VerdanturfTown_ContestHall_Text_WhichContestYouEntering:
-	.string "Which CONTEST are you entering?\n"
-	.string "Want a piece of advice?\p"
-	.string "In any CONTEST, for example, a CUTE\n"
-	.string "CONTEST, I don't think they judge you\l"
-	.string "only on cuteness in the first round.\p"
-	.string "You need to work out ways for raising\n"
-	.string "POKéMON better.$"
+	.string "Aan welke WEDSTRIJD doe je mee?\n"
+	.string "Wil je een tip?\p"
+	.string "Bij elke WEDSTRIJD, bijvoorbeeld een\n"
+	.string "SCHATTIG-WEDSTRIJD, kijken ze in de\l"
+	.string "eerste ronde niet alleen naar\l"
+	.string "schattigheid.\p"
+	.string "Je moet bedenken hoe je\n"
+	.string "POKéMON beter kunt opvoeden.$"
 
 @ Unused
 VerdanturfTown_ContestHall_Text_RaisedMonToBeCute:
-	.string "I raised my POKéMON to be cute.\p"
-	.string "I found out you can put POKéMON in\n"
-	.string "a CONTEST for cuteness!\p"
-	.string "I'm so glad I raised my POKéMON with\n"
-	.string "loving care…$"
+	.string "Ik heb mijn POKéMON schattig\n"
+	.string "opgevoed.\p"
+	.string "Ik ontdekte dat je POKéMON kunt\n"
+	.string "inschrijven voor schattigheid!\p"
+	.string "Ik ben blij dat ik mijn POKéMON\n"
+	.string "met liefde heb opgevoed…$"
 
 @ Unused
 VerdanturfTown_ContestHall_Text_MyMonRules:
-	.string "My POKéMON rules!\p"
-	.string "It's cool, tough yet beautiful, cute,\n"
-	.string "and smart. It's complete!\p"
-	.string "I may as well go for wins in every\n"
-	.string "single CONTEST.$"
+	.string "Mijn POKéMON is de beste!\p"
+	.string "Hij is stoer, sterk maar mooi,\n"
+	.string "schattig en slim. Hij is compleet!\p"
+	.string "Ik kan net zo goed elke\n"
+	.string "WEDSTRIJD proberen te winnen.$"
 
 @ Unused
 VerdanturfTown_ContestHall_Text_NormalRankStage:
-	.string "POKéMON CONTESTS\n"
-	.string "NORMAL RANK STAGE!$"
+	.string "POKéMON WEDSTRIJDEN\n"
+	.string "NORMAAL NIVEAU PODIUM!$"
 

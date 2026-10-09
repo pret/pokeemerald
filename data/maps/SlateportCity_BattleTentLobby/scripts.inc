@@ -273,35 +273,36 @@ SlateportCity_BattleTentLobby_EventScript_ExitRules::
 	end
 
 SlateportCity_BattleTentLobby_Text_CouldntFindMonForMe:
-	.string "So, like, I couldn't find myself any\n"
-	.string "POKéMON that were, like, for me.\p"
-	.string "So, I figured, like, hey, I should file\n"
-	.string "a complaint to the guy there?\p"
-	.string "And he wouldn't hear me out, like, hey!\n"
-	.string "So, like, total bummer, man!\p"
-	.string "Hey, like, you! Zip it, you know?\n"
-	.string "Just, you know, take this!$"
+	.string "Dus, zeg maar, ik kon geen POKéMON\n"
+	.string "vinden die bij mij pasten.\p"
+	.string "Dus ik dacht, zeg maar, hé, ik\n"
+	.string "moet een klacht indienen bij die gast?\p"
+	.string "En hij wilde me niet horen, hé!\n"
+	.string "Dus, zeg maar, echt balen, man!\p"
+	.string "Hé, jij! Houd je mond, weet je?\n"
+	.string "Pak dit maar, weet je!$"
 
 SlateportCity_BattleTentLobby_Text_ExplainTorment:
-	.string "That's, like, TM41, you know?\n"
-	.string "Hey, it's TORMENT, you hearing me?\p"
-	.string "Like, it won't let the other guy\n"
-	.string "use the same move twice in a row, see?\p"
-	.string "Hey, now, you listen here, like,\n"
-	.string "I'm not laying a torment on you!$"
+	.string "Dat is, zeg maar, TM41, weet je?\n"
+	.string "Hé, het is PESTEN, hoor je me?\p"
+	.string "Het laat de ander dezelfde\n"
+	.string "aanval niet twee keer na elkaar\l"
+	.string "gebruiken, snap je?\p"
+	.string "Hé, luister, ik ben jou niet\n"
+	.string "aan het pesten, hoor!$"
 
 SlateportCity_BattleTentLobby_Text_IllTryUsingBugMons:
-	.string "I don't really like BUG POKéMON,\n"
-	.string "but maybe I'll try using some for\l"
-	.string "a change of pace.\p"
-	.string "Who knows, I might even get to like\n"
-	.string "them!$"
+	.string "Ik hou niet zo van INSECT-POKéMON,\n"
+	.string "maar misschien probeer ik er een paar\l"
+	.string "voor de verandering.\p"
+	.string "Wie weet, misschien ga ik ze\n"
+	.string "wel leuk vinden!$"
 
 SlateportCity_BattleTentLobby_Text_BattleEvenWithoutToughMons:
-	.string "You can battle all you want here even\n"
-	.string "if you don't have any tough POKéMON.$"
+	.string "Je kunt hier zoveel vechten als je wilt,\n"
+	.string "ook zonder sterke POKéMON.$"
 
 SlateportCity_BattleTentLobby_Text_NiceIfMoreSelection:
-	.string "Wouldn't it be nice if they had more of\n"
-	.string "a selection?$"
+	.string "Zou het niet fijn zijn als ze\n"
+	.string "meer keuze hadden?$"
 

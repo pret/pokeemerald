@@ -35,24 +35,24 @@ OldSeaMap_Obtained:
 	end
 
 sText_MysteryGiftOldSeaMapForYou:
-	.string "Thank you for using the MYSTERY\n"
-	.string "GIFT System.\p"
-	.string "Let me confirm--you are {PLAYER}?\p"
-	.string "We received this OLD SEA MAP\n"
-	.string "addressed to you.$"
+	.string "Bedankt voor het gebruik van het\n"
+	.string "GEHEIM CADEAU-systeem.\p"
+	.string "Laat me even kijken: ben jij {PLAYER}?\p"
+	.string "We kregen deze ZEEKAART\n"
+	.string "voor je.$"
 
 sText_MysteryGiftOldSeaMapUseAtPort:
-	.string "It appears to be for use at the\n"
-	.string "LILYCOVE CITY port.\p"
-	.string "Why not give it a try and see what\n"
-	.string "it is about?$"
+	.string "Hij lijkt bedoeld voor de haven\n"
+	.string "van LILYCOVE CITY.\p"
+	.string "Probeer het eens en kijk wat\n"
+	.string "het is!$"
 
 sText_MysteryGiftOldSeaMapThankYou:
-	.string "Thank you for using the MYSTERY\n"
-	.string "GIFT System.$"
+	.string "Bedankt voor het gebruik van het\n"
+	.string "GEHEIM CADEAU-systeem.$"
 
 sText_MysteryGiftOldSeaMapBagFull:
-	.string "Oh, I'm sorry, {PLAYER}.\n"
-	.string "Your BAG's KEY ITEMS POCKET is full.\p"
-	.string "Please store something on your PC,\n"
-	.string "then come back for this.$"
+	.string "Oh, sorry, {PLAYER}.\n"
+	.string "Het BELANGRIJK-vak van je TAS is vol.\p"
+	.string "Leg iets op je PC en kom dan\n"
+	.string "terug hiervoor.$"

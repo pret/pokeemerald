@@ -36,23 +36,23 @@ MysticTicket_Obtained:
 	end
 
 sText_MysticTicketForYou:
-	.string "Thank you for using the MYSTERY\n"
-	.string "GIFT System.\p"
-	.string "You must be {PLAYER}.\n"
-	.string "There is a ticket here for you.$"
+	.string "Bedankt voor het gebruik van het\n"
+	.string "GEHEIM CADEAU-systeem.\p"
+	.string "Jij bent vast {PLAYER}.\n"
+	.string "Er ligt hier een kaart voor je.$"
 
 sText_MysticTicketUseAtPort:
-	.string "It appears to be for use at the\n"
-	.string "LILYCOVE CITY port.\p"
-	.string "Why not give it a try and see what\n"
-	.string "it is about?$"
+	.string "Hij lijkt bedoeld voor de haven\n"
+	.string "van LILYCOVE CITY.\p"
+	.string "Probeer het eens en kijk wat\n"
+	.string "het is!$"
 
 sText_MysticTicketThankYou:
-	.string "Thank you for using the MYSTERY\n"
-	.string "GIFT System.$"
+	.string "Bedankt voor het gebruik van het\n"
+	.string "GEHEIM CADEAU-systeem.$"
 
 sText_MysticTicketBagFull:
-	.string "Oh, I'm sorry, {PLAYER}.\n"
-	.string "Your BAG's KEY ITEMS POCKET is full.\p"
-	.string "Please store something on your PC,\n"
-	.string "then come back for this.$"
+	.string "Oh, sorry, {PLAYER}.\n"
+	.string "Het BELANGRIJK-vak van je TAS is vol.\p"
+	.string "Leg iets op je PC en kom dan\n"
+	.string "terug hiervoor.$"

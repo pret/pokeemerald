@@ -1,77 +1,77 @@
 key	english	dutch	notes
-LilycoveCity_ContestLobby_Text_ReceptionDontHavePokeblockCase	Hello!\pThis is the reception counter for\nPOKéMON CONTESTS.\pOh? It appears that you don't have\na {POKEBLOCK} CASE yet.\pIn that case, we need to provide you\nwith this!		
-LilycoveCity_ContestLobby_Text_NowThatWeveClearedThatUp	Okay, now that we've cleared that\nup…\pHello!\pThis is the reception counter for\nPOKéMON CONTESTS.		
-LilycoveCity_ContestLobby_Text_ContestReception	Hello!\pThis is the reception counter for\nPOKéMON CONTESTS.		
-LilycoveCity_ContestLobby_Text_CounterOnlyFor4PlayerContests	Hello!\pThis reception counter is only\nfor 4-player POKéMON CONTESTS.		
-LilycoveCity_ContestLobby_Text_EnterContest1	Would you like to enter your POKéMON\nin our CONTESTS?		
-LilycoveCity_ContestLobby_Text_WhichTopic1	Which topic would you like?		
-LilycoveCity_ContestLobby_Text_ExplainContests	A POKéMON CONTEST involves four\nTRAINERS entering one POKéMON each\lin competitive judging.\pA CONTEST has two stages of judging,\nprimary and secondary.\pPrimary judging is a popularity poll\ninvolving the audience.\pSecondary judging features appeals\nby the POKéMON using their moves.\pPlan appeals carefully to earn the\nmost attention of the JUDGE and\lexcite the audience.\lDo your best to stand out.\pThe primary and secondary scores are\nadded at the end.\pThe POKéMON garnering the highest\nscore is declared the winner.		
-LilycoveCity_ContestLobby_Text_ExplainContestTypes	There are five kinds of CONTESTS.\pCOOL, BEAUTY, CUTE, SMART, and\nTOUGH are the five categories.\pChoose the CONTEST that is right for\nthe POKéMON you plan to enter.		
-LilycoveCity_ContestLobby_Text_ExplainContestRanks	There are four ranks of POKéMON\nCONTESTS.\pNORMAL, SUPER, HYPER, and MASTER\nare the four ranks.\pIn the NORMAL Rank, any POKéMON may\nenter.\pAny POKéMON that won a NORMAL Rank\nCONTEST may move up to the SUPER Rank\lin the same category.\pIn the same way, a SUPER Rank winner\ncan move up to the HYPER Rank, and\la HYPER Rank winner can advance to\lthe MASTER Rank in the same category.\pA POKéMON that won in the MASTER Rank\nmay compete in the MASTER Rank as\loften as its TRAINER wants.		
-LilycoveCity_ContestLobby_Text_EnterWhichRank	Which Rank would you like to enter?		
-LilycoveCity_ContestLobby_Text_EnterWhichContest1	Which CONTEST would you like to enter?		
-LilycoveCity_ContestLobby_Text_EnterWhichPokemon1	Which POKéMON would you like to enter?		
-LilycoveCity_ContestLobby_Text_MonNotQualifiedForRank	I'm terribly sorry, but your POKéMON\nis not qualified to compete at this\lRank yet…		
-LilycoveCity_ContestLobby_Text_EggCannotTakePart	I'm sorry, but an EGG cannot take part\nin a POKéMON CONTEST.		
-LilycoveCity_ContestLobby_Text_MonInNoConditionForContest	Your POKéMON appears to be in no\ncondition to take part in a CONTEST…		
-LilycoveCity_ContestLobby_Text_AlreadyWonEnterAnyway	Oh, but that RIBBON…\pYour POKéMON has won this CONTEST\nbefore, hasn't it?\pWould you like to enter it in this\nCONTEST anyway?		
-LilycoveCity_ContestLobby_Text_ConfirmContestMon	Is that your CONTEST POKéMON?		
-LilycoveCity_ContestLobby_Text_YourMonIsEntryNum4	Okay, your POKéMON will be entered\nin this CONTEST.\pYour POKéMON is Entry No. 4.\nThe CONTEST will begin shortly.		
-LilycoveCity_ContestLobby_Text_ComeThroughHere	Please come in through here.\nGood luck!		
-LilycoveCity_ContestLobby_Text_PokemonWonWeHavePrize	Congratulations! Your POKéMON is the\nCONTEST winner!\pWe have your prize right here.\nPlease, right this way!		
-LilycoveCity_ContestLobby_Text_ComeBackForPrizeLater	Please come back for your prize\nlater on.		
-ContestHall_Text_GettingStartedParticipantsAsFollows	MC: Hello! We're just getting started\nwith a {STR_VAR_3} Rank POKéMON\l{STR_VAR_2}!\pThe participating TRAINERS and their\nPOKéMON are as follows:		
-ContestHall_Text_GettingStartedParticipantsAsFollowsLink	MC: Hello! We're just getting started\nwith a 4-player linked POKéMON\l{STR_VAR_2}!\pThe participating TRAINERS and their\nPOKéMON are as follows:		
-ContestHall_Text_EntryXTrainersMon	MC: Entry No. {STR_VAR_2}!\n{STR_VAR_1}'s {STR_VAR_3}!		
-ContestHall_Text_SeenContestantsAudienceWillVote	MC: We've just seen the four POKéMON\ncontestants.\pNow it's time for primary judging!\pThe audience will vote on their\nfavorite POKéMON contestants.\pWithout any further ado, let the\nvoting begin!		
-ContestHall_Text_VotingUnderWay	Voting under way…		
-ContestHall_Text_VotingCompleteLetsAppeal	Voting is now complete!\pWhile the votes are being tallied,\nlet's move on to secondary judging!\pThe second stage of judging is the\nmuch anticipated appeal time!\pMay the contestants amaze us with\nsuperb appeals of dazzling moves!\pLet's see a little enthusiasm!\nLet's appeal!		
-ContestHall_Text_ThatsItForJudging	MC: That's it for judging!		
-ContestHall_Text_ThankYouForAppeals	Thank you all for a most wonderful\ndisplay of quality appeals!\pThis concludes all judging!\nThank you for your fine efforts!		
-ContestHall_Text_JudgeLooksReady	Now, all that remains is the pulse-\npounding proclamation of the winner.\pThe JUDGE looks ready to make\nthe announcement!		
-ContestHall_Text_WeWillNowDeclareWinner	JUDGE: We will now declare the winner!		
-ContestHall_Text_CongratsTrainerXandMon	MC: Entry No. {STR_VAR_2}!\p{STR_VAR_3} and {STR_VAR_1},\ncongratulations!		
-ContestHall_Text_CongratsPleaseCompeteAgain	MC: Congratulations!\nPlease do compete again!		
-ContestHall_Text_AcceptYourPrize	MC: Here you are!\nPlease accept your prize!		
-ContestHall_Text_ConferRibbonAsPrize	We confer on you this RIBBON\nas your prize!		
-ContestHall_Text_ReceivedRibbon	{PLAYER} received a RIBBON.		
-ContestHall_Text_PutRibbonOnMon	{PLAYER} put the RIBBON on\n{STR_VAR_1}.		
-ContestHall_Text_PickUpPrizeAtCounterLater	Please pick up your prize at\nthe reception counter later.\lPlease do compete again!		
-ContestHall_Text_OnlyRegister4Players	I only register four players for\nPOKéMON CONTESTS.\pIf three other players link up, all\nfour may enter the same CONTEST.\pWould you like to take part?		
-LilycoveCity_ContestLobby_Text_ProgressWillBeSaved	Before entering a CONTEST, your\nprogress will be saved.		
-LilycoveCity_ContestLobby_Text_ParticipateAnotherTime	We hope you will participate another\ntime.		
-LilycoveCity_ContestLobby_Text_EnterContest2	Would you like to enter a CONTEST?		
-LilycoveCity_ContestLobby_Text_Explain4PlayerContest	When four players are ready, connect\nover a Game Link cable, and register\lwith me, please.\pPlease choose the same CONTEST\nas your fellow contestants.\pThe CONTEST begins as soon as all\nplayers register their entry.\pAfter that, the usual CONTEST rules\napply.		
-LilycoveCity_ContestLobby_Text_EnterWhichContest2	Which CONTEST would you like to enter?		
-LilycoveCity_ContestLobby_Text_EnterWhichPokemon2	Which POKéMON would you like to enter?		
-LilycoveCity_ContestLobby_Text_Transmitting	Transmitting…		
-LilycoveCity_ContestLobby_Text_TransmissionError	Transmission error…		
-LilycoveCity_ContestLobby_Text_PlayersChoseDifferentContest	You may have chosen a different\nCONTEST than another player.		
-LilycoveCity_ContestLobby_Text_PlayersMadeDifferentChoice	You may have made a different\nchoice than another player.		
-LilycoveCity_ContestLobby_Text_PleaseWaitBButtonCancel	Please wait.\n… … B Button: Cancel		
-LilycoveCity_ContestLobby_Text_ParticipateAnotherTime2	We hope you will participate another\ntime.		
-LilycoveCity_ContestLobby_Text_TransmissionErrorTryAgain	Transmission error.\nPlease try again.		
-LilycoveCity_ContestLobby_Text_YourMonIsEntryNumX	Your POKéMON will be entered in\nthe CONTEST.\pYour POKéMON is Entry No. {STR_VAR_2}.		
-LilycoveCity_ContestLobby_Text_ContestBeginShortly	The CONTEST will begin shortly.		
-LilycoveCity_ContestLobby_Text_LinkContestReception	Welcome! This is the POKéMON CONTEST\nlink reception counter.\pYou may enter CONTESTS together with\none or more friends.		
-LilycoveCity_ContestLobby_Text_WhichTopic2	Which topic would you like?		
-LilycoveCity_ContestLobby_Text_EnterContest3	Would you like to enter a CONTEST?		
-LilycoveCity_ContestLobby_Text_EnterWhichContest3	Which CONTEST would you like to enter?		
-LilycoveCity_ContestLobby_Text_MonInNoCondition2	Your POKéMON appears to be in no\ncondition to take part in a CONTEST…		
-LilycoveCity_ContestLobby_Text_EggCannotTakePart2	I'm sorry, but an EGG cannot take part\nin a POKéMON CONTEST.		
-LilycoveCity_ContestLobby_Text_EnterWhichPokemon3	Which POKéMON would you like to enter?		
-LilycoveCity_ContestLobby_Text_PleaseDecideLinkLeader	Please decide which of you will\nbecome the GROUP LEADER.\pThe other players must then choose\n“JOIN GROUP.”		
-LilycoveCity_ContestLobby_Text_PlayerAt4PCounterUseGMode	At least one player has entered using\nthe 4-player reception counter.\pThere must be four players connected\nusing a GBA Game Link cable.\pWhen the four players are ready,\nselect G-MODE (GLOBAL MODE),\lthen register to enter again, please.		
-LilycoveCity_ContestLobby_Text_ExplainLinkContest	This is a CONTEST for two to four\nplayers linked using a Wireless\lAdapter or a GBA Game Link cable.\pParticipants are first asked to choose\nthe mode they wish to enter.\pThere are two different modes.\pE-MODE (EMERALD MODE) is for\ntwo to four players, each with a\lPOKéMON Emerald Game Pak.\pG-MODE (GLOBAL MODE) is only for\nfour players, each with a POKéMON\lEmerald, Ruby, or Sapphire Game Pak.\pThe players should discuss which mode\nthey want, then choose the same mode.\pOnce all the players have chosen\nthe same CONTEST in the same mode,\lthe entry registration is complete.\pAfter that, a CONTEST will start in\nthe usual manner.		
-LilycoveCity_ContestLobby_Text_ExplainEMode	In E-MODE (EMERALD MODE),\na LINK CONTEST can be held with\ltwo to four players. Each player must\lhave a POKéMON Emerald Game Pak.\pThe players must be linked with each\nother using Wireless Adapters or\lGBA Game Link cables.\pIf there are fewer than four players,\nTRAINERS in the hall will join to fill\lthe 4-player CONTEST lineup.\pPlease be aware that E-MODE is not\navailable in POKéMON Ruby or Sapphire.		
-LilycoveCity_ContestLobby_Text_ExplainGMode	G-MODE (GLOBAL MODE) is specifically\nfor four players who are linked using\lGBA Game Link cables.\pEach player must have a POKéMON\nEmerald, Ruby, or Sapphire Game Pak.\pThe CONTEST starts after all players\nchoose G-MODE (POKéMON Emerald) or\lenter through the 4-player reception\lcounter (POKéMON Ruby or Sapphire).		
-LilycoveCity_ContestLobby_Text_NoWirelessAdapterInGMode	I'm terribly sorry.\pG-MODE does not function\nwith Wireless Adapters.\pPlease select E-MODE or try\nagain using a GBA Game Link cable.		
-LilycoveCity_ContestLobby_Text_WhichContestMode	Which CONTEST MODE would you like\nto enter?		
-ContestHall_Text_GettingStartedWireless	MC: Hello! We're just getting started\nwith a 4-player linked POKéMON\l{STR_VAR_2}!		
-ContestHall_Text_ParticipantsAsFollows	The participating TRAINERS and their\nPOKéMON are as follows:		
-ContestHall_Text_WeveSeenContestants	MC: We've just seen the four POKéMON\ncontestants.\pNow it's time for primary judging!		
-ContestHall_Text_AudienceWillVote	The audience will vote on their\nfavorite POKéMON contestants.		
-ContestHall_Text_LetVotingBegin	Without any further ado,\nlet the voting begin!		
-ContestHall_Text_VotingComplete	Voting is now complete!\pWhile the votes are being tallied,\nlet's move on to secondary judging!		
-ContestHall_Text_SecondStageOfJudging	The second stage of judging is\nthe much-anticipated appeal time!\pMay the contestants amaze us with\nsuperb appeals of dazzling moves!		
-ContestHall_Text_LetsAppeal	Let's see a little enthusiasm!\nLet's appeal!		
+LilycoveCity_ContestLobby_Text_ReceptionDontHavePokeblockCase	Hello!\pThis is the reception counter for\nPOKéMON CONTESTS.\pOh? It appears that you don't have\na {POKEBLOCK} CASE yet.\pIn that case, we need to provide you\nwith this!	Hallo!\pDit is de balie voor\nPOKéMON WEDSTRIJDEN.\pOh? Je hebt nog geen\n{POKEBLOCK} DOOS.\pDan geven we je deze!	
+LilycoveCity_ContestLobby_Text_NowThatWeveClearedThatUp	Okay, now that we've cleared that\nup…\pHello!\pThis is the reception counter for\nPOKéMON CONTESTS.	Goed, dat is opgelost…\pHallo!\pDit is de balie voor\nPOKéMON WEDSTRIJDEN.	
+LilycoveCity_ContestLobby_Text_ContestReception	Hello!\pThis is the reception counter for\nPOKéMON CONTESTS.	Hallo!\pDit is de balie voor\nPOKéMON WEDSTRIJDEN.	
+LilycoveCity_ContestLobby_Text_CounterOnlyFor4PlayerContests	Hello!\pThis reception counter is only\nfor 4-player POKéMON CONTESTS.	Hallo!\pDeze balie is alleen voor\nPOKéMON WEDSTRIJDEN met 4 spelers.	
+LilycoveCity_ContestLobby_Text_EnterContest1	Would you like to enter your POKéMON\nin our CONTESTS?	Wil je je POKéMON laten meedoen\naan onze WEDSTRIJDEN?	
+LilycoveCity_ContestLobby_Text_WhichTopic1	Which topic would you like?	Waarover wil je iets weten?	
+LilycoveCity_ContestLobby_Text_ExplainContests	A POKéMON CONTEST involves four\nTRAINERS entering one POKéMON each\lin competitive judging.\pA CONTEST has two stages of judging,\nprimary and secondary.\pPrimary judging is a popularity poll\ninvolving the audience.\pSecondary judging features appeals\nby the POKéMON using their moves.\pPlan appeals carefully to earn the\nmost attention of the JUDGE and\lexcite the audience.\lDo your best to stand out.\pThe primary and secondary scores are\nadded at the end.\pThe POKéMON garnering the highest\nscore is declared the winner.	Bij een POKéMON WEDSTRIJD doen vier\nTRAINERS mee met elk één POKéMON.\pEen WEDSTRIJD heeft twee rondes:\neerst en daarna de tweede ronde.\pIn de eerste ronde stemt het\npubliek op de POKéMON.\pIn de tweede ronde treden de\nPOKéMON op met hun aanvallen.\pPlan je optredens goed om de JURY\nte raken en het publiek te boeien.\lDoe je best om op te vallen.\pAan het eind worden de scores\nbij elkaar opgeteld.\pDe POKéMON met de hoogste score\nwint de WEDSTRIJD.	
+LilycoveCity_ContestLobby_Text_ExplainContestTypes	There are five kinds of CONTESTS.\pCOOL, BEAUTY, CUTE, SMART, and\nTOUGH are the five categories.\pChoose the CONTEST that is right for\nthe POKéMON you plan to enter.	Er zijn vijf soorten WEDSTRIJDEN.\pSTOER, MOOI, SCHATTIG, SLIM en\nSTERK zijn de vijf soorten.\pKies de WEDSTRIJD die bij je\nPOKéMON past.	
+LilycoveCity_ContestLobby_Text_ExplainContestRanks	There are four ranks of POKéMON\nCONTESTS.\pNORMAL, SUPER, HYPER, and MASTER\nare the four ranks.\pIn the NORMAL Rank, any POKéMON may\nenter.\pAny POKéMON that won a NORMAL Rank\nCONTEST may move up to the SUPER Rank\lin the same category.\pIn the same way, a SUPER Rank winner\ncan move up to the HYPER Rank, and\la HYPER Rank winner can advance to\lthe MASTER Rank in the same category.\pA POKéMON that won in the MASTER Rank\nmay compete in the MASTER Rank as\loften as its TRAINER wants.	Er zijn vier niveaus voor POKéMON\nWEDSTRIJDEN.\pNORMAAL, SUPER, HYPER en MEESTER\nzijn de vier niveaus.\pOp NORMAAL NIVEAU mag elke POKéMON\nmeedoen.\pWie een NORMAAL NIVEAU WEDSTRIJD won,\nmag naar SUPER NIVEAU\lin dezelfde soort.\pZo mag een winnaar van SUPER NIVEAU\nnaar HYPER NIVEAU, en een winnaar\lvan HYPER NIVEAU naar MEESTER NIVEAU\lin dezelfde soort.\pEen POKéMON die op MEESTER NIVEAU won,\nmag daar zo vaak meedoen\lals zijn TRAINER wil.	
+LilycoveCity_ContestLobby_Text_EnterWhichRank	Which Rank would you like to enter?	Welk niveau wil je kiezen?	
+LilycoveCity_ContestLobby_Text_EnterWhichContest1	Which CONTEST would you like to enter?	Aan welke WEDSTRIJD wil je meedoen?	
+LilycoveCity_ContestLobby_Text_EnterWhichPokemon1	Which POKéMON would you like to enter?	Welke POKéMON wil je laten meedoen?	
+LilycoveCity_ContestLobby_Text_MonNotQualifiedForRank	I'm terribly sorry, but your POKéMON\nis not qualified to compete at this\lRank yet…	Het spijt me, maar je POKéMON mag\nnog niet meedoen op dit\lniveau…	
+LilycoveCity_ContestLobby_Text_EggCannotTakePart	I'm sorry, but an EGG cannot take part\nin a POKéMON CONTEST.	Sorry, maar een EI kan niet meedoen\naan een POKéMON WEDSTRIJD.	
+LilycoveCity_ContestLobby_Text_MonInNoConditionForContest	Your POKéMON appears to be in no\ncondition to take part in a CONTEST…	Je POKéMON is niet fit genoeg\nvoor een WEDSTRIJD…	
+LilycoveCity_ContestLobby_Text_AlreadyWonEnterAnyway	Oh, but that RIBBON…\pYour POKéMON has won this CONTEST\nbefore, hasn't it?\pWould you like to enter it in this\nCONTEST anyway?	Oh, maar dat LINT…\pJe POKéMON heeft deze WEDSTRIJD\nal eens gewonnen, hè?\pWil je toch meedoen aan deze\nWEDSTRIJD?	
+LilycoveCity_ContestLobby_Text_ConfirmContestMon	Is that your CONTEST POKéMON?	Is dat je WEDSTRIJD-POKéMON?	
+LilycoveCity_ContestLobby_Text_YourMonIsEntryNum4	Okay, your POKéMON will be entered\nin this CONTEST.\pYour POKéMON is Entry No. 4.\nThe CONTEST will begin shortly.	Goed, je POKéMON doet mee aan\ndeze WEDSTRIJD.\pJe POKéMON is nummer 4.\nDe WEDSTRIJD begint zo.	
+LilycoveCity_ContestLobby_Text_ComeThroughHere	Please come in through here.\nGood luck!	Kom maar hier door.\nSucces!	
+LilycoveCity_ContestLobby_Text_PokemonWonWeHavePrize	Congratulations! Your POKéMON is the\nCONTEST winner!\pWe have your prize right here.\nPlease, right this way!	Gefeliciteerd! Je POKéMON is de\nwinnaar van de WEDSTRIJD!\pHier is je prijs.\nKom maar mee!	
+LilycoveCity_ContestLobby_Text_ComeBackForPrizeLater	Please come back for your prize\nlater on.	Kom je prijs later maar halen.	
+ContestHall_Text_GettingStartedParticipantsAsFollows	MC: Hello! We're just getting started\nwith a {STR_VAR_3} Rank POKéMON\l{STR_VAR_2}!\pThe participating TRAINERS and their\nPOKéMON are as follows:	MC: Hallo! We beginnen met een\n{STR_VAR_3} NIVEAU POKéMON\l{STR_VAR_2}!\pDit zijn de TRAINERS en hun\nPOKéMON:	
+ContestHall_Text_GettingStartedParticipantsAsFollowsLink	MC: Hello! We're just getting started\nwith a 4-player linked POKéMON\l{STR_VAR_2}!\pThe participating TRAINERS and their\nPOKéMON are as follows:	MC: Hallo! We beginnen met een\nPOKéMON {STR_VAR_2} voor 4 spelers!\pDit zijn de TRAINERS en hun\nPOKéMON:	
+ContestHall_Text_EntryXTrainersMon	MC: Entry No. {STR_VAR_2}!\n{STR_VAR_1}'s {STR_VAR_3}!	MC: Nummer {STR_VAR_2}!\n{STR_VAR_3} van {STR_VAR_1}!	
+ContestHall_Text_SeenContestantsAudienceWillVote	MC: We've just seen the four POKéMON\ncontestants.\pNow it's time for primary judging!\pThe audience will vote on their\nfavorite POKéMON contestants.\pWithout any further ado, let the\nvoting begin!	MC: Nu hebben we de vier POKéMON\ngezien.\pTijd voor de eerste ronde!\pHet publiek stemt op de POKéMON\ndie ze het leukst vinden.\pLaat de stemmen maar komen!	
+ContestHall_Text_VotingUnderWay	Voting under way…	Er wordt gestemd…	
+ContestHall_Text_VotingCompleteLetsAppeal	Voting is now complete!\pWhile the votes are being tallied,\nlet's move on to secondary judging!\pThe second stage of judging is the\nmuch anticipated appeal time!\pMay the contestants amaze us with\nsuperb appeals of dazzling moves!\pLet's see a little enthusiasm!\nLet's appeal!	Het stemmen is klaar!\pTerwijl de stemmen geteld worden,\ngaan we naar de tweede ronde!\pDe tweede ronde is de spannende\ntijd van de optredens!\pLaat de POKéMON ons verrassen met\nprachtige optredens!\pLaat maar zien!\nHet optreden begint!	
+ContestHall_Text_ThatsItForJudging	MC: That's it for judging!	MC: Dat was het!	
+ContestHall_Text_ThankYouForAppeals	Thank you all for a most wonderful\ndisplay of quality appeals!\pThis concludes all judging!\nThank you for your fine efforts!	Bedankt voor jullie mooie\noptredens!\pDe WEDSTRIJD is afgelopen!\nBedankt voor jullie inzet!	
+ContestHall_Text_JudgeLooksReady	Now, all that remains is the pulse-\npounding proclamation of the winner.\pThe JUDGE looks ready to make\nthe announcement!	Nu komt het spannendste: de\nwinnaar wordt bekendgemaakt.\pDe JURY is klaar om de\nwinnaar te noemen!	
+ContestHall_Text_WeWillNowDeclareWinner	JUDGE: We will now declare the winner!	JURY: We noemen nu de winnaar!	
+ContestHall_Text_CongratsTrainerXandMon	MC: Entry No. {STR_VAR_2}!\p{STR_VAR_3} and {STR_VAR_1},\ncongratulations!	MC: Nummer {STR_VAR_2}!\p{STR_VAR_3} en {STR_VAR_1},\ngefeliciteerd!	
+ContestHall_Text_CongratsPleaseCompeteAgain	MC: Congratulations!\nPlease do compete again!	MC: Gefeliciteerd!\nDoe zeker weer mee!	
+ContestHall_Text_AcceptYourPrize	MC: Here you are!\nPlease accept your prize!	MC: Alsjeblieft!\nHier is je prijs!	
+ContestHall_Text_ConferRibbonAsPrize	We confer on you this RIBBON\nas your prize!	Dit LINT krijg je\nals prijs!	
+ContestHall_Text_ReceivedRibbon	{PLAYER} received a RIBBON.	{PLAYER} kreeg een LINT.	
+ContestHall_Text_PutRibbonOnMon	{PLAYER} put the RIBBON on\n{STR_VAR_1}.	{PLAYER} deed het LINT om\n{STR_VAR_1}.	
+ContestHall_Text_PickUpPrizeAtCounterLater	Please pick up your prize at\nthe reception counter later.\lPlease do compete again!	Haal je prijs later bij de\nbalie op.\lDoe zeker weer mee!	
+ContestHall_Text_OnlyRegister4Players	I only register four players for\nPOKéMON CONTESTS.\pIf three other players link up, all\nfour may enter the same CONTEST.\pWould you like to take part?	Ik schrijf alleen vier spelers in\nvoor POKéMON WEDSTRIJDEN.\pAls drie anderen verbinding maken,\nkunnen alle vier meedoen.\pWil je meedoen?	
+LilycoveCity_ContestLobby_Text_ProgressWillBeSaved	Before entering a CONTEST, your\nprogress will be saved.	Voor de WEDSTRIJD wordt je\nvoortgang opgeslagen.	
+LilycoveCity_ContestLobby_Text_ParticipateAnotherTime	We hope you will participate another\ntime.	Doe de volgende keer mee!	
+LilycoveCity_ContestLobby_Text_EnterContest2	Would you like to enter a CONTEST?	Wil je meedoen aan een WEDSTRIJD?	
+LilycoveCity_ContestLobby_Text_Explain4PlayerContest	When four players are ready, connect\nover a Game Link cable, and register\lwith me, please.\pPlease choose the same CONTEST\nas your fellow contestants.\pThe CONTEST begins as soon as all\nplayers register their entry.\pAfter that, the usual CONTEST rules\napply.	Als vier spelers klaar zijn, maak je\nverbinding met een Game Link-kabel\len schrijf je je bij mij in.\pKies dezelfde WEDSTRIJD als de\nandere spelers.\pDe WEDSTRIJD begint zodra alle\nspelers zich hebben ingeschreven.\pDaarna gelden de gewone regels.	
+LilycoveCity_ContestLobby_Text_EnterWhichContest2	Which CONTEST would you like to enter?	Aan welke WEDSTRIJD wil je meedoen?	
+LilycoveCity_ContestLobby_Text_EnterWhichPokemon2	Which POKéMON would you like to enter?	Welke POKéMON wil je laten meedoen?	
+LilycoveCity_ContestLobby_Text_Transmitting	Transmitting…	Verzenden…	
+LilycoveCity_ContestLobby_Text_TransmissionError	Transmission error…	Verzendfout…	
+LilycoveCity_ContestLobby_Text_PlayersChoseDifferentContest	You may have chosen a different\nCONTEST than another player.	Je hebt misschien een andere\nWEDSTRIJD gekozen dan een ander.	
+LilycoveCity_ContestLobby_Text_PlayersMadeDifferentChoice	You may have made a different\nchoice than another player.	Je hebt misschien een andere\nkeuze gemaakt dan een ander.	
+LilycoveCity_ContestLobby_Text_PleaseWaitBButtonCancel	Please wait.\n… … B Button: Cancel	Even wachten.\n… … B-knop: Stop	
+LilycoveCity_ContestLobby_Text_ParticipateAnotherTime2	We hope you will participate another\ntime.	Doe de volgende keer mee!	
+LilycoveCity_ContestLobby_Text_TransmissionErrorTryAgain	Transmission error.\nPlease try again.	Verzendfout.\nProbeer het nog eens.	
+LilycoveCity_ContestLobby_Text_YourMonIsEntryNumX	Your POKéMON will be entered in\nthe CONTEST.\pYour POKéMON is Entry No. {STR_VAR_2}.	Je POKéMON doet mee aan\nde WEDSTRIJD.\pJe POKéMON is nummer {STR_VAR_2}.	
+LilycoveCity_ContestLobby_Text_ContestBeginShortly	The CONTEST will begin shortly.	De WEDSTRIJD begint zo.	
+LilycoveCity_ContestLobby_Text_LinkContestReception	Welcome! This is the POKéMON CONTEST\nlink reception counter.\pYou may enter CONTESTS together with\none or more friends.	Welkom! Dit is de balie voor\nPOKéMON WEDSTRIJDEN met verbinding.\pJe kunt samen met een of meer\nvrienden meedoen.	
+LilycoveCity_ContestLobby_Text_WhichTopic2	Which topic would you like?	Waarover wil je iets weten?	
+LilycoveCity_ContestLobby_Text_EnterContest3	Would you like to enter a CONTEST?	Wil je meedoen aan een WEDSTRIJD?	
+LilycoveCity_ContestLobby_Text_EnterWhichContest3	Which CONTEST would you like to enter?	Aan welke WEDSTRIJD wil je meedoen?	
+LilycoveCity_ContestLobby_Text_MonInNoCondition2	Your POKéMON appears to be in no\ncondition to take part in a CONTEST…	Je POKéMON is niet fit genoeg\nvoor een WEDSTRIJD…	
+LilycoveCity_ContestLobby_Text_EggCannotTakePart2	I'm sorry, but an EGG cannot take part\nin a POKéMON CONTEST.	Sorry, maar een EI kan niet meedoen\naan een POKéMON WEDSTRIJD.	
+LilycoveCity_ContestLobby_Text_EnterWhichPokemon3	Which POKéMON would you like to enter?	Welke POKéMON wil je laten meedoen?	
+LilycoveCity_ContestLobby_Text_PleaseDecideLinkLeader	Please decide which of you will\nbecome the GROUP LEADER.\pThe other players must then choose\n“JOIN GROUP.”	Kies wie de GROEPSLEIDER wordt.\pDe anderen moeten dan\n“JOIN GROUP” kiezen.	
+LilycoveCity_ContestLobby_Text_PlayerAt4PCounterUseGMode	At least one player has entered using\nthe 4-player reception counter.\pThere must be four players connected\nusing a GBA Game Link cable.\pWhen the four players are ready,\nselect G-MODE (GLOBAL MODE),\lthen register to enter again, please.	Iemand deed mee via de balie\nvoor 4 spelers.\pDan moeten vier spelers verbonden\nzijn met een GBA Game Link-kabel.\pAls alle vier klaar zijn, kies je\nG-MODUS (GLOBAAL) en\lschrijf je je opnieuw in.	
+LilycoveCity_ContestLobby_Text_ExplainLinkContest	This is a CONTEST for two to four\nplayers linked using a Wireless\lAdapter or a GBA Game Link cable.\pParticipants are first asked to choose\nthe mode they wish to enter.\pThere are two different modes.\pE-MODE (EMERALD MODE) is for\ntwo to four players, each with a\lPOKéMON Emerald Game Pak.\pG-MODE (GLOBAL MODE) is only for\nfour players, each with a POKéMON\lEmerald, Ruby, or Sapphire Game Pak.\pThe players should discuss which mode\nthey want, then choose the same mode.\pOnce all the players have chosen\nthe same CONTEST in the same mode,\lthe entry registration is complete.\pAfter that, a CONTEST will start in\nthe usual manner.	Dit is een WEDSTRIJD voor twee tot\nvier spelers met een Draadloze\lAdapter of een GBA Game Link-kabel.\pEerst kies je de stand\nwaarin je meedoet.\pEr zijn twee standen.\pE-MODUS (SMARAGD) is voor twee\ntot vier spelers, elk met een\lPOKéMON Smaragd-cassette.\pG-MODUS (GLOBAAL) is alleen voor\nvier spelers met POKéMON\lSmaragd, Ruby of Sapphire.\pBespreek welke stand jullie willen\nen kies allemaal dezelfde.\pAls iedereen dezelfde WEDSTRIJD in\ndezelfde stand heeft gekozen,\lis het inschrijven klaar.\pDaarna begint de WEDSTRIJD\nzoals gewoonlijk.	
+LilycoveCity_ContestLobby_Text_ExplainEMode	In E-MODE (EMERALD MODE),\na LINK CONTEST can be held with\ltwo to four players. Each player must\lhave a POKéMON Emerald Game Pak.\pThe players must be linked with each\nother using Wireless Adapters or\lGBA Game Link cables.\pIf there are fewer than four players,\nTRAINERS in the hall will join to fill\lthe 4-player CONTEST lineup.\pPlease be aware that E-MODE is not\navailable in POKéMON Ruby or Sapphire.	In E-MODUS (SMARAGD) kun je met\ntwee tot vier spelers een\lLINK-WEDSTRIJD doen. Iedereen moet\neen POKéMON Smaragd-cassette hebben.\pJullie moeten verbonden zijn met\nDraadloze Adapters of\lGBA Game Link-kabels.\pZijn er minder dan vier spelers,\ndan doen TRAINERS uit de hal mee,\lzodat er vier zijn.\pE-MODUS kan niet in POKéMON\nRuby of Sapphire.	
+LilycoveCity_ContestLobby_Text_ExplainGMode	G-MODE (GLOBAL MODE) is specifically\nfor four players who are linked using\lGBA Game Link cables.\pEach player must have a POKéMON\nEmerald, Ruby, or Sapphire Game Pak.\pThe CONTEST starts after all players\nchoose G-MODE (POKéMON Emerald) or\lenter through the 4-player reception\lcounter (POKéMON Ruby or Sapphire).	G-MODUS (GLOBAAL) is speciaal voor\nvier spelers met GBA Game Link-kabels.\pIedereen moet POKéMON Smaragd,\nRuby of Sapphire hebben.\pDe WEDSTRIJD begint als iedereen\nG-MODUS kiest (POKéMON Smaragd) of\lzich inschrijft bij de balie voor\l4 spelers (Ruby of Sapphire).	
+LilycoveCity_ContestLobby_Text_NoWirelessAdapterInGMode	I'm terribly sorry.\pG-MODE does not function\nwith Wireless Adapters.\pPlease select E-MODE or try\nagain using a GBA Game Link cable.	Het spijt me.\pG-MODUS werkt niet met\nDraadloze Adapters.\pKies E-MODUS of probeer het met\neen GBA Game Link-kabel.	
+LilycoveCity_ContestLobby_Text_WhichContestMode	Which CONTEST MODE would you like\nto enter?	Welke stand wil je kiezen?	
+ContestHall_Text_GettingStartedWireless	MC: Hello! We're just getting started\nwith a 4-player linked POKéMON\l{STR_VAR_2}!	MC: Hallo! We beginnen met een\nPOKéMON {STR_VAR_2} voor 4 spelers!	
+ContestHall_Text_ParticipantsAsFollows	The participating TRAINERS and their\nPOKéMON are as follows:	Dit zijn de TRAINERS en hun\nPOKéMON:	
+ContestHall_Text_WeveSeenContestants	MC: We've just seen the four POKéMON\ncontestants.\pNow it's time for primary judging!	MC: Nu hebben we de vier POKéMON\ngezien.\pTijd voor de eerste ronde!	
+ContestHall_Text_AudienceWillVote	The audience will vote on their\nfavorite POKéMON contestants.	Het publiek stemt op de POKéMON\ndie ze het leukst vinden.	
+ContestHall_Text_LetVotingBegin	Without any further ado,\nlet the voting begin!	Laat de stemmen maar komen!	
+ContestHall_Text_VotingComplete	Voting is now complete!\pWhile the votes are being tallied,\nlet's move on to secondary judging!	Het stemmen is klaar!\pTerwijl de stemmen geteld worden,\ngaan we naar de tweede ronde!	
+ContestHall_Text_SecondStageOfJudging	The second stage of judging is\nthe much-anticipated appeal time!\pMay the contestants amaze us with\nsuperb appeals of dazzling moves!	De tweede ronde is de spannende\ntijd van de optredens!\pLaat de POKéMON ons verrassen met\nprachtige optredens!	
+ContestHall_Text_LetsAppeal	Let's see a little enthusiasm!\nLet's appeal!	Laat maar zien!\nHet optreden begint!	

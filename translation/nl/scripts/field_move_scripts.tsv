@@ -1,19 +1,19 @@
 key	english	dutch	notes
-Text_WantToCut	This tree looks like it can be\nCUT down!\pWould you like to CUT it?		
-Text_MonUsedFieldMove	{STR_VAR_1} used {STR_VAR_2}!		
-Text_CantCut	This tree looks like it can be\nCUT down!		
-Text_WantToSmash	This rock appears to be breakable.\nWould you like to use ROCK SMASH?		
-Text_CantSmash	It's a rugged rock, but a POKéMON\nmay be able to smash it.		
-Text_WantToStrength	It's a big boulder, but a POKéMON\nmay be able to push it aside.\pWould you like to use STRENGTH?		
-Text_MonUsedStrength	{STR_VAR_1} used STRENGTH!\p{STR_VAR_1}'s STRENGTH made it\npossible to move boulders around!		
-Text_CantStrength	It's a big boulder, but a POKéMON\nmay be able to push it aside.		
-Text_StrengthActivated	STRENGTH made it possible to move\nboulders around.		
-Text_CantWaterfall	A wall of water is crashing down with\na mighty roar.		
-Text_WantToWaterfall	It's a large waterfall.\nWould you like to use WATERFALL?		
-Text_MonUsedWaterfall	{STR_VAR_1} used WATERFALL.		
-Text_CantDive	The sea is deep here. A POKéMON\nmay be able to go underwater.		
-Text_WantToDive	The sea is deep here.\nWould you like to use DIVE?		
-Text_MonUsedDive	{STR_VAR_1} used DIVE.		
-Text_CantSurface	Light is filtering down from above.\nA POKéMON may be able to surface.		
-Text_WantToSurface	Light is filtering down from above.\nWould you like to use DIVE?		
-Text_FailSweetScent	Looks like there's nothing here…		
+Text_WantToCut	This tree looks like it can be\nCUT down!\pWould you like to CUT it?	Deze boom kan worden\nomgehakt met CUT!\pWil je CUT gebruiken?	
+Text_MonUsedFieldMove	{STR_VAR_1} used {STR_VAR_2}!	{STR_VAR_1} gebruikte {STR_VAR_2}!	
+Text_CantCut	This tree looks like it can be\nCUT down!	Deze boom kan worden\nomgehakt met CUT!	
+Text_WantToSmash	This rock appears to be breakable.\nWould you like to use ROCK SMASH?	Deze rots lijkt breekbaar.\nWil je STEENBREKER gebruiken?	
+Text_CantSmash	It's a rugged rock, but a POKéMON\nmay be able to smash it.	Het is een stevige rots, maar een\nPOKéMON kan hem misschien breken.	
+Text_WantToStrength	It's a big boulder, but a POKéMON\nmay be able to push it aside.\pWould you like to use STRENGTH?	Dit is een grote kei, maar een\nPOKéMON kan hem misschien duwen.\pWil je KRACHT gebruiken?	
+Text_MonUsedStrength	{STR_VAR_1} used STRENGTH!\p{STR_VAR_1}'s STRENGTH made it\npossible to move boulders around!	{STR_VAR_1} gebruikte KRACHT!\p{STR_VAR_1} kan nu keien\nverschuiven met KRACHT!	
+Text_CantStrength	It's a big boulder, but a POKéMON\nmay be able to push it aside.	Dit is een grote kei, maar een\nPOKéMON kan hem misschien duwen.	
+Text_StrengthActivated	STRENGTH made it possible to move\nboulders around.	Met KRACHT kun je keien\nverschuiven.	
+Text_CantWaterfall	A wall of water is crashing down with\na mighty roar.	Een muur van water stort met\ngeweld naar beneden.	
+Text_WantToWaterfall	It's a large waterfall.\nWould you like to use WATERFALL?	Dit is een grote waterval.\nWil je WATERVAL gebruiken?	
+Text_MonUsedWaterfall	{STR_VAR_1} used WATERFALL.	{STR_VAR_1} gebruikte WATERVAL.	
+Text_CantDive	The sea is deep here. A POKéMON\nmay be able to go underwater.	De zee is hier diep. Een POKéMON\nkan misschien onderwater gaan.	
+Text_WantToDive	The sea is deep here.\nWould you like to use DIVE?	De zee is hier diep.\nWil je DUIKEN gebruiken?	
+Text_MonUsedDive	{STR_VAR_1} used DIVE.	{STR_VAR_1} gebruikte DUIKEN.	
+Text_CantSurface	Light is filtering down from above.\nA POKéMON may be able to surface.	Er schijnt licht van boven.\nEen POKéMON kan misschien omhoog.	
+Text_WantToSurface	Light is filtering down from above.\nWould you like to use DIVE?	Er schijnt licht van boven.\nWil je DUIKEN gebruiken?	
+Text_FailSweetScent	Looks like there's nothing here…	Hier is niets te vinden…	

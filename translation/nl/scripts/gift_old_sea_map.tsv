@@ -1,5 +1,5 @@
 key	english	dutch	notes
-sText_MysteryGiftOldSeaMapForYou	Thank you for using the MYSTERY\nGIFT System.\pLet me confirm--you are {PLAYER}?\pWe received this OLD SEA MAP\naddressed to you.		
-sText_MysteryGiftOldSeaMapUseAtPort	It appears to be for use at the\nLILYCOVE CITY port.\pWhy not give it a try and see what\nit is about?		
-sText_MysteryGiftOldSeaMapThankYou	Thank you for using the MYSTERY\nGIFT System.		
-sText_MysteryGiftOldSeaMapBagFull	Oh, I'm sorry, {PLAYER}.\nYour BAG's KEY ITEMS POCKET is full.\pPlease store something on your PC,\nthen come back for this.		
+sText_MysteryGiftOldSeaMapForYou	Thank you for using the MYSTERY\nGIFT System.\pLet me confirm--you are {PLAYER}?\pWe received this OLD SEA MAP\naddressed to you.	Bedankt voor het gebruik van het\nGEHEIM CADEAU-systeem.\pLaat me even kijken: ben jij {PLAYER}?\pWe kregen deze ZEEKAART\nvoor je.	
+sText_MysteryGiftOldSeaMapUseAtPort	It appears to be for use at the\nLILYCOVE CITY port.\pWhy not give it a try and see what\nit is about?	Hij lijkt bedoeld voor de haven\nvan LILYCOVE CITY.\pProbeer het eens en kijk wat\nhet is!	
+sText_MysteryGiftOldSeaMapThankYou	Thank you for using the MYSTERY\nGIFT System.	Bedankt voor het gebruik van het\nGEHEIM CADEAU-systeem.	
+sText_MysteryGiftOldSeaMapBagFull	Oh, I'm sorry, {PLAYER}.\nYour BAG's KEY ITEMS POCKET is full.\pPlease store something on your PC,\nthen come back for this.	Oh, sorry, {PLAYER}.\nHet BELANGRIJK-vak van je TAS is vol.\pLeg iets op je PC en kom dan\nterug hiervoor.	

@@ -23,44 +23,44 @@ Roulette_EventScript_Play::
 	end
 
 Roulette_Text_PlayMinimumWagerIsX::
-	.string "The minimum wager at this table\n"
-	.string "is {STR_VAR_1}. Do you want to play?$"
+	.string "De minimale inzet aan deze tafel\n"
+	.string "is {STR_VAR_1}. Wil je spelen?$"
 
 Roulette_Text_NotEnoughCoins::
-	.string "You don't have enough COINS.$"
+	.string "Je hebt niet genoeg MUNTEN.$"
 
 Roulette_Text_SpecialRateTable::
-	.string "Special rate table right now!$"
+	.string "Nu een tafel met speciaal tarief!$"
 
 Roulette_Text_ControlsInstruction::
-	.string "Place your wager with the + Control\n"
-	.string "Pad, then press the A Button.$"
+	.string "Zet in met de + Control Pad\n"
+	.string "en druk dan op de A-knop.$"
 
 Roulette_Text_ItsAHit::
-	.string "It's a hit!$"
+	.string "Raak!$"
 
 Roulette_Text_Jackpot::
 	.string "Jackpot!$"
 
 Roulette_Text_NothingDoing::
-	.string "Nothing doing!$"
+	.string "Mis!$"
 
 Roulette_Text_YouveWonXCoins::
-	.string "You've won {STR_VAR_1} COINS!$"
+	.string "Je wint {STR_VAR_1} MUNTEN!$"
 
 Roulette_Text_NoCoinsLeft::
-	.string "No COINS left…$"
+	.string "Geen MUNTEN meer…$"
 
 Roulette_Text_KeepPlaying::
-	.string "Keep playing?$"
+	.string "Verder spelen?$"
 
 Roulette_Text_BoardWillBeCleared::
-	.string "The ROULETTE board will be cleared.$"
+	.string "Het ROULETTE-bord wordt leeggemaakt.$"
 
 @ Unused
 Roulette_Text_YouDontHaveACoinCase::
-	.string "You don't have a COIN CASE.$"
+	.string "Je hebt geen MUNTENDOOS.$"
 
 Roulette_Text_CoinCaseIsFull::
-	.string "Your COIN CASE is full!\n"
-	.string "Coins can be exchanged for prizes.$"
+	.string "Je MUNTENDOOS is vol!\n"
+	.string "MUNTEN kun je ruilen voor prijzen.$"
