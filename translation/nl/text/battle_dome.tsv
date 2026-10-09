@@ -1,115 +1,115 @@
 key	english	dutch	notes
-BattleDome_Text_Potential1	The best candidate to be a champ!		
-BattleDome_Text_Potential2	A sure-finalist team.		
-BattleDome_Text_Potential3	A likely top-three finisher.		
-BattleDome_Text_Potential4	A candidate to finish first.		
-BattleDome_Text_Potential5	A team with top-class potential.		
-BattleDome_Text_Potential6	The dark horse team this tournament.		
-BattleDome_Text_Potential7	A better-than-average team.		
-BattleDome_Text_Potential8	This tournament's average team.		
-BattleDome_Text_Potential9	A team with average potential.		
-BattleDome_Text_Potential10	A weaker-than-average team.		
-BattleDome_Text_Potential11	A team looking for its first win.		
-BattleDome_Text_Potential12	One win will make this team proud.		
-BattleDome_Text_Potential13	Overall, a weak team.		
-BattleDome_Text_Potential14	A team with very low potential.		
-BattleDome_Text_Potential15	A team unlikely to win the tournament.		
-BattleDome_Text_Potential16	The team most unlikely to win.		
-BattleDome_Text_PotentialDomeAceTucker	The perfect, invincible superstar!		
-BattleDome_Text_StyleRiskDisaster	Willing to risk total disaster at times.		
-BattleDome_Text_StyleEndureLongBattles	Skilled at enduring long battles.		
-BattleDome_Text_StyleVariesTactics	Varies tactics to suit the opponent.		
-BattleDome_Text_StyleToughWinningPattern	Has a tough winning pattern.		
-BattleDome_Text_StyleUsesVeryRareMove	Occasionally uses a very rare move.		
-BattleDome_Text_StyleUsesStartlingMoves	Uses startling and disruptive moves.		
-BattleDome_Text_StyleConstantlyWatchesHP	Constantly watches HP in battle.		
-BattleDome_Text_StyleStoresAndLoosesPower	Good at storing then loosing power.		
-BattleDome_Text_StyleEnfeeblesFoes	Skilled at enfeebling foes.		
-BattleDome_Text_StylePrefersLuckTactics	Prefers tactics that rely on luck.		
-BattleDome_Text_StyleRegalAtmosphere	Attacks with a regal atmosphere.		
-BattleDome_Text_StylePowerfulLowPPMoves	Attacks with powerful, low-PP moves.		
-BattleDome_Text_StyleEnfeebleThenAttack	Skilled at enfeebling, then attacking.		
-BattleDome_Text_StyleBattlesWhileEnduring	Battles while enduring all attacks.		
-BattleDome_Text_StyleUpsetsFoesEmotionally	Skilled at upsetting foes emotionally.		
-BattleDome_Text_StyleStrongAndStraightforward	Uses strong and straightforward moves.		
-BattleDome_Text_StyleAggressivelyStrongMoves	Aggressively uses strong moves.		
-BattleDome_Text_StyleCleverlyDodgesAttacks	Battles while cleverly dodging attacks.		
-BattleDome_Text_StyleUsesUpsettingMoves	Skilled at using upsetting attacks.		
-BattleDome_Text_StyleUsesPopularMoves	Uses many popular moves.		
-BattleDome_Text_StyleHasPowerfulComboMoves	Has moves for powerful combinations.		
-BattleDome_Text_StyleUsesHighProbabilityMoves	Uses high-probability attacks.		
-BattleDome_Text_StyleAggressivelySpectacularMoves	Aggressively uses spectacular moves.		
-BattleDome_Text_StyleEmphasizesOffenseOverDefense	Emphasizes offense over defense.		
-BattleDome_Text_StyleEmphasizesDefenseOverOffense	Emphasizes defense over offense.		
-BattleDome_Text_StyleAttacksQuicklyStrongMoves	Attacks quickly with strong moves.		
-BattleDome_Text_StyleUsesAddedEffectMoves	Often uses moves with added effects.		
-BattleDome_Text_StyleUsesBalancedMixOfMoves	Uses a well-balanced mix of moves.		
-BattleDome_Text_StyleSampleMessage1	This is sample message 1.		
-BattleDome_Text_StyleSampleMessage2	This is sample message 2.		
-BattleDome_Text_StyleSampleMessage3	This is sample message 3.		
-BattleDome_Text_StyleSampleMessage4	This is sample message 4.		
-BattleDome_Text_EmphasizesHPAndAtk	Emphasizes HP and ATTACK.		
-BattleDome_Text_EmphasizesHPAndDef	Emphasizes HP and DEFENSE.		
-BattleDome_Text_EmphasizesHPAndSpeed	Emphasizes HP and SPEED.		
-BattleDome_Text_EmphasizesHPAndSpAtk	Emphasizes HP and SP. ATTACK.		
-BattleDome_Text_EmphasizesHPAndSpDef	Emphasizes HP and SP. DEFENSE.		
-BattleDome_Text_EmphasizesAtkAndDef	Emphasizes ATTACK and DEFENSE.		
-BattleDome_Text_EmphasizesAtkAndSpeed	Emphasizes ATTACK and SPEED.		
-BattleDome_Text_EmphasizesAtkAndSpAtk	Emphasizes ATTACK and SP. ATTACK.		
-BattleDome_Text_EmphasizesAtkAndSpDef	Emphasizes ATTACK and SP. DEFENSE.		
-BattleDome_Text_EmphasizesDefAndSpeed	Emphasizes DEFENSE and SPEED.		
-BattleDome_Text_EmphasizesDefAndSpAtk	Emphasizes DEFENSE and SP. ATTACK.		
-BattleDome_Text_EmphasizesDefAndSpDef	Emphasizes DEFENSE and SP. DEFENSE.		
-BattleDome_Text_EmphasizesSpeedAndSpAtk	Emphasizes SPEED and SP. ATTACK.		
-BattleDome_Text_EmphasizesSpeedAndSpDef	Emphasizes SPEED and SP. DEFENSE.		
-BattleDome_Text_EmphasizesSpAtkAndSpDef	Emphasizes SP. ATTACK and SP. DEFENSE.		
-BattleDome_Text_EmphasizesHP	Emphasizes HP.		
-BattleDome_Text_EmphasizesAtk	Emphasizes ATTACK.		
-BattleDome_Text_EmphasizesDef	Emphasizes DEFENSE.		
-BattleDome_Text_EmphasizesSpeed	Emphasizes SPEED.		
-BattleDome_Text_EmphasizesSpAtk	Emphasizes SP. ATTACK.		
-BattleDome_Text_EmphasizesSpDef	Emphasizes SP. DEFENSE.		
-BattleDome_Text_NeglectsHPAndAtk	Neglects HP and ATTACK.		
-BattleDome_Text_NeglectsHPAndDef	Neglects HP and DEFENSE.		
-BattleDome_Text_NeglectsHPAndSpeed	Neglects HP and SPEED.		
-BattleDome_Text_NeglectsHPAndSpAtk	Neglects HP and SP. ATTACK.		
-BattleDome_Text_NeglectsHPAndSpDef	Neglects HP and SP. DEFENSE.		
-BattleDome_Text_NeglectsAtkAndDef	Neglects ATTACK and DEFENSE.		
-BattleDome_Text_NeglectsAtkAndSpeed	Neglects ATTACK and SPEED.		
-BattleDome_Text_NeglectsAtkAndSpAtk	Neglects ATTACK and SP. ATTACK.		
-BattleDome_Text_NeglectsAtkAndSpDef	Neglects ATTACK and SP. DEFENSE.		
-BattleDome_Text_NeglectsDefAndSpeed	Neglects DEFENSE and SPEED.		
-BattleDome_Text_NeglectsDefAndSpAtk	Neglects DEFENSE and SP. ATTACK.		
-BattleDome_Text_NeglectsDefAndSpDef	Neglects DEFENSE and SP. DEFENSE.		
-BattleDome_Text_NeglectsSpeedAndSpAtk	Neglects SPEED and SP. ATTACK.		
-BattleDome_Text_NeglectsSpeedAndSpDef	Neglects SPEED and SP. DEFENSE.		
-BattleDome_Text_NeglectsSpAtkAndSpDef	Neglects SP. ATTACK and SP. DEFENSE.		
-BattleDome_Text_NeglectsHP	Neglects HP.		
-BattleDome_Text_NeglectsAtk	Neglects ATTACK.		
-BattleDome_Text_NeglectsDef	Neglects DEFENSE.		
-BattleDome_Text_NeglectsSpeed	Neglects SPEED.		
-BattleDome_Text_NeglectsSpAtk	Neglects SP. ATTACK.		
-BattleDome_Text_NeglectsSpDef	Neglects SP. DEFENSE.		
-BattleDome_Text_RaisesMonsWellBalanced	Raises POKéMON in a well-balanced way.		
-BattleDome_Text_LetTheBattleBegin	Let the battle begin!		
-BattleDome_Text_TrainerWonUsingMove	{STR_VAR_1} won using {STR_VAR_2}!		
-BattleDome_Text_TrainerBecameChamp	{STR_VAR_1} became the champ!		
-BattleDome_Text_TrainerWonByDefault	{STR_VAR_1} won by default!		
-BattleDome_Text_TrainerWonOutrightByDefault	{STR_VAR_1} won outright by default!		
-BattleDome_Text_TrainerWonNoMoves	{STR_VAR_1} won without using a move!		
-BattleDome_Text_TrainerWonOutrightNoMoves	{STR_VAR_1} won outright with no moves!		
-BattleDome_Text_Round1Match1	Round 1, Match 1		
-BattleDome_Text_Round1Match2	Round 1, Match 2		
-BattleDome_Text_Round1Match3	Round 1, Match 3		
-BattleDome_Text_Round1Match4	Round 1, Match 4		
-BattleDome_Text_Round1Match5	Round 1, Match 5		
-BattleDome_Text_Round1Match6	Round 1, Match 6		
-BattleDome_Text_Round1Match7	Round 1, Match 7		
-BattleDome_Text_Round1Match8	Round 1, Match 8		
-BattleDome_Text_Round2Match1	Round 2, Match 1		
-BattleDome_Text_Round2Match2	Round 2, Match 2		
-BattleDome_Text_Round2Match3	Round 2, Match 3		
-BattleDome_Text_Round2Match4	Round 2, Match 4		
-BattleDome_Text_SemifinalMatch1	Semifinal Match 1		
-BattleDome_Text_SemifinalMatch2	Semifinal Match 2		
-BattleDome_Text_FinalMatch	Final Match		
+BattleDome_Text_Potential1	The best candidate to be a champ!	De beste kandidaat voor kampioen!	
+BattleDome_Text_Potential2	A sure-finalist team.	Een zeker finaleteam.	
+BattleDome_Text_Potential3	A likely top-three finisher.	Waarschijnlijk in de top drie.	
+BattleDome_Text_Potential4	A candidate to finish first.	Kan als eerste eindigen.	
+BattleDome_Text_Potential5	A team with top-class potential.	Een team met topkwaliteit.	
+BattleDome_Text_Potential6	The dark horse team this tournament.	De verrassing van dit toernooi.	
+BattleDome_Text_Potential7	A better-than-average team.	Een beter dan gemiddeld team.	
+BattleDome_Text_Potential8	This tournament's average team.	Het gemiddelde team van dit toernooi.	
+BattleDome_Text_Potential9	A team with average potential.	Een team met gemiddelde kansen.	
+BattleDome_Text_Potential10	A weaker-than-average team.	Een zwakker dan gemiddeld team.	
+BattleDome_Text_Potential11	A team looking for its first win.	Een team op zoek naar een eerste winst.	
+BattleDome_Text_Potential12	One win will make this team proud.	Eén winst maakt dit team trots.	
+BattleDome_Text_Potential13	Overall, a weak team.	Al met al een zwak team.	
+BattleDome_Text_Potential14	A team with very low potential.	Een team met heel weinig kans.	
+BattleDome_Text_Potential15	A team unlikely to win the tournament.	Dit team wint het toernooi vast niet.	
+BattleDome_Text_Potential16	The team most unlikely to win.	Het team met de minste kans.	
+BattleDome_Text_PotentialDomeAceTucker	The perfect, invincible superstar!	De perfecte, onverslaanbare superster!	
+BattleDome_Text_StyleRiskDisaster	Willing to risk total disaster at times.	Neemt soms grote risico's.	
+BattleDome_Text_StyleEndureLongBattles	Skilled at enduring long battles.	Goed in lange gevechten.	
+BattleDome_Text_StyleVariesTactics	Varies tactics to suit the opponent.	Past zijn tactiek aan de vijand aan.	
+BattleDome_Text_StyleToughWinningPattern	Has a tough winning pattern.	Heeft een sterk winnend patroon.	
+BattleDome_Text_StyleUsesVeryRareMove	Occasionally uses a very rare move.	Gebruikt soms een heel zeldzame aanval.	
+BattleDome_Text_StyleUsesStartlingMoves	Uses startling and disruptive moves.	Verrast met storende aanvallen.	
+BattleDome_Text_StyleConstantlyWatchesHP	Constantly watches HP in battle.	Let steeds op HP in het gevecht.	
+BattleDome_Text_StyleStoresAndLoosesPower	Good at storing then loosing power.	Goed in kracht sparen en loslaten.	
+BattleDome_Text_StyleEnfeeblesFoes	Skilled at enfeebling foes.	Goed in het verzwakken van vijanden.	
+BattleDome_Text_StylePrefersLuckTactics	Prefers tactics that rely on luck.	Houdt van tactieken met geluk.	
+BattleDome_Text_StyleRegalAtmosphere	Attacks with a regal atmosphere.	Valt aan met een koninklijke sfeer.	
+BattleDome_Text_StylePowerfulLowPPMoves	Attacks with powerful, low-PP moves.	Valt aan met sterke aanvallen, lage PP.	
+BattleDome_Text_StyleEnfeebleThenAttack	Skilled at enfeebling, then attacking.	Eerst verzwakken, dan aanvallen.	
+BattleDome_Text_StyleBattlesWhileEnduring	Battles while enduring all attacks.	Vecht en houdt alle aanvallen vol.	
+BattleDome_Text_StyleUpsetsFoesEmotionally	Skilled at upsetting foes emotionally.	Brengt vijanden van slag.	
+BattleDome_Text_StyleStrongAndStraightforward	Uses strong and straightforward moves.	Gebruikt sterke, rechttoe aanvallen.	
+BattleDome_Text_StyleAggressivelyStrongMoves	Aggressively uses strong moves.	Valt fel aan met sterke aanvallen.	
+BattleDome_Text_StyleCleverlyDodgesAttacks	Battles while cleverly dodging attacks.	Ontwijkt aanvallen slim.	
+BattleDome_Text_StyleUsesUpsettingMoves	Skilled at using upsetting attacks.	Goed in aanvallen die storen.	
+BattleDome_Text_StyleUsesPopularMoves	Uses many popular moves.	Gebruikt veel populaire aanvallen.	
+BattleDome_Text_StyleHasPowerfulComboMoves	Has moves for powerful combinations.	Heeft aanvallen voor sterke combo's.	
+BattleDome_Text_StyleUsesHighProbabilityMoves	Uses high-probability attacks.	Gebruikt aanvallen met grote kans.	
+BattleDome_Text_StyleAggressivelySpectacularMoves	Aggressively uses spectacular moves.	Valt fel aan met mooie aanvallen.	
+BattleDome_Text_StyleEmphasizesOffenseOverDefense	Emphasizes offense over defense.	Let meer op aanval dan op verdediging.	
+BattleDome_Text_StyleEmphasizesDefenseOverOffense	Emphasizes defense over offense.	Let meer op verdediging dan op aanval.	
+BattleDome_Text_StyleAttacksQuicklyStrongMoves	Attacks quickly with strong moves.	Valt snel aan met sterke aanvallen.	
+BattleDome_Text_StyleUsesAddedEffectMoves	Often uses moves with added effects.	Gebruikt vaak aanvallen met bijeffect.	
+BattleDome_Text_StyleUsesBalancedMixOfMoves	Uses a well-balanced mix of moves.	Gebruikt een goede mix van aanvallen.	
+BattleDome_Text_StyleSampleMessage1	This is sample message 1.	Dit is voorbeeldbericht 1.	
+BattleDome_Text_StyleSampleMessage2	This is sample message 2.	Dit is voorbeeldbericht 2.	
+BattleDome_Text_StyleSampleMessage3	This is sample message 3.	Dit is voorbeeldbericht 3.	
+BattleDome_Text_StyleSampleMessage4	This is sample message 4.	Dit is voorbeeldbericht 4.	
+BattleDome_Text_EmphasizesHPAndAtk	Emphasizes HP and ATTACK.	Let op HP en AANVAL.	
+BattleDome_Text_EmphasizesHPAndDef	Emphasizes HP and DEFENSE.	Let op HP en VERDEDIGING.	
+BattleDome_Text_EmphasizesHPAndSpeed	Emphasizes HP and SPEED.	Let op HP en SNELHEID.	
+BattleDome_Text_EmphasizesHPAndSpAtk	Emphasizes HP and SP. ATTACK.	Let op HP en SP. AANV.	
+BattleDome_Text_EmphasizesHPAndSpDef	Emphasizes HP and SP. DEFENSE.	Let op HP en SP. VERD.	
+BattleDome_Text_EmphasizesAtkAndDef	Emphasizes ATTACK and DEFENSE.	Let op AANVAL en VERDEDIGING.	
+BattleDome_Text_EmphasizesAtkAndSpeed	Emphasizes ATTACK and SPEED.	Let op AANVAL en SNELHEID.	
+BattleDome_Text_EmphasizesAtkAndSpAtk	Emphasizes ATTACK and SP. ATTACK.	Let op AANVAL en SP. AANV.	
+BattleDome_Text_EmphasizesAtkAndSpDef	Emphasizes ATTACK and SP. DEFENSE.	Let op AANVAL en SP. VERD.	
+BattleDome_Text_EmphasizesDefAndSpeed	Emphasizes DEFENSE and SPEED.	Let op VERDEDIGING en SNELHEID.	
+BattleDome_Text_EmphasizesDefAndSpAtk	Emphasizes DEFENSE and SP. ATTACK.	Let op VERDEDIGING en SP. AANV.	
+BattleDome_Text_EmphasizesDefAndSpDef	Emphasizes DEFENSE and SP. DEFENSE.	Let op VERDEDIGING en SP. VERD.	
+BattleDome_Text_EmphasizesSpeedAndSpAtk	Emphasizes SPEED and SP. ATTACK.	Let op SNELHEID en SP. AANV.	
+BattleDome_Text_EmphasizesSpeedAndSpDef	Emphasizes SPEED and SP. DEFENSE.	Let op SNELHEID en SP. VERD.	
+BattleDome_Text_EmphasizesSpAtkAndSpDef	Emphasizes SP. ATTACK and SP. DEFENSE.	Let op SP. AANV en SP. VERD.	
+BattleDome_Text_EmphasizesHP	Emphasizes HP.	Let op HP.	
+BattleDome_Text_EmphasizesAtk	Emphasizes ATTACK.	Let op AANVAL.	
+BattleDome_Text_EmphasizesDef	Emphasizes DEFENSE.	Let op VERDEDIGING.	
+BattleDome_Text_EmphasizesSpeed	Emphasizes SPEED.	Let op SNELHEID.	
+BattleDome_Text_EmphasizesSpAtk	Emphasizes SP. ATTACK.	Let op SP. AANV.	
+BattleDome_Text_EmphasizesSpDef	Emphasizes SP. DEFENSE.	Let op SP. VERD.	
+BattleDome_Text_NeglectsHPAndAtk	Neglects HP and ATTACK.	Let niet op HP en AANVAL.	
+BattleDome_Text_NeglectsHPAndDef	Neglects HP and DEFENSE.	Let niet op HP en VERDEDIGING.	
+BattleDome_Text_NeglectsHPAndSpeed	Neglects HP and SPEED.	Let niet op HP en SNELHEID.	
+BattleDome_Text_NeglectsHPAndSpAtk	Neglects HP and SP. ATTACK.	Let niet op HP en SP. AANV.	
+BattleDome_Text_NeglectsHPAndSpDef	Neglects HP and SP. DEFENSE.	Let niet op HP en SP. VERD.	
+BattleDome_Text_NeglectsAtkAndDef	Neglects ATTACK and DEFENSE.	Let niet op AANVAL en VERDEDIGING.	
+BattleDome_Text_NeglectsAtkAndSpeed	Neglects ATTACK and SPEED.	Let niet op AANVAL en SNELHEID.	
+BattleDome_Text_NeglectsAtkAndSpAtk	Neglects ATTACK and SP. ATTACK.	Let niet op AANVAL en SP. AANV.	
+BattleDome_Text_NeglectsAtkAndSpDef	Neglects ATTACK and SP. DEFENSE.	Let niet op AANVAL en SP. VERD.	
+BattleDome_Text_NeglectsDefAndSpeed	Neglects DEFENSE and SPEED.	Let niet op VERDEDIGING en SNELHEID.	
+BattleDome_Text_NeglectsDefAndSpAtk	Neglects DEFENSE and SP. ATTACK.	Let niet op VERDEDIGING en SP. AANV.	
+BattleDome_Text_NeglectsDefAndSpDef	Neglects DEFENSE and SP. DEFENSE.	Let niet op VERDEDIGING en SP. VERD.	
+BattleDome_Text_NeglectsSpeedAndSpAtk	Neglects SPEED and SP. ATTACK.	Let niet op SNELHEID en SP. AANV.	
+BattleDome_Text_NeglectsSpeedAndSpDef	Neglects SPEED and SP. DEFENSE.	Let niet op SNELHEID en SP. VERD.	
+BattleDome_Text_NeglectsSpAtkAndSpDef	Neglects SP. ATTACK and SP. DEFENSE.	Let niet op SP. AANV en SP. VERD.	
+BattleDome_Text_NeglectsHP	Neglects HP.	Let niet op HP.	
+BattleDome_Text_NeglectsAtk	Neglects ATTACK.	Let niet op AANVAL.	
+BattleDome_Text_NeglectsDef	Neglects DEFENSE.	Let niet op VERDEDIGING.	
+BattleDome_Text_NeglectsSpeed	Neglects SPEED.	Let niet op SNELHEID.	
+BattleDome_Text_NeglectsSpAtk	Neglects SP. ATTACK.	Let niet op SP. AANV.	
+BattleDome_Text_NeglectsSpDef	Neglects SP. DEFENSE.	Let niet op SP. VERD.	
+BattleDome_Text_RaisesMonsWellBalanced	Raises POKéMON in a well-balanced way.	Traint POKéMON in balans.	
+BattleDome_Text_LetTheBattleBegin	Let the battle begin!	Laat het gevecht beginnen!	
+BattleDome_Text_TrainerWonUsingMove	{STR_VAR_1} won using {STR_VAR_2}!	{STR_VAR_1} won met {STR_VAR_2}!	
+BattleDome_Text_TrainerBecameChamp	{STR_VAR_1} became the champ!	{STR_VAR_1} is de kampioen!	
+BattleDome_Text_TrainerWonByDefault	{STR_VAR_1} won by default!	{STR_VAR_1} won door opgave!	
+BattleDome_Text_TrainerWonOutrightByDefault	{STR_VAR_1} won outright by default!	{STR_VAR_1} won helemaal door opgave!	
+BattleDome_Text_TrainerWonNoMoves	{STR_VAR_1} won without using a move!	{STR_VAR_1} won zonder aanval!	
+BattleDome_Text_TrainerWonOutrightNoMoves	{STR_VAR_1} won outright with no moves!	{STR_VAR_1} won zonder aanvallen!	
+BattleDome_Text_Round1Match1	Round 1, Match 1	Ronde 1, gevecht 1	
+BattleDome_Text_Round1Match2	Round 1, Match 2	Ronde 1, gevecht 2	
+BattleDome_Text_Round1Match3	Round 1, Match 3	Ronde 1, gevecht 3	
+BattleDome_Text_Round1Match4	Round 1, Match 4	Ronde 1, gevecht 4	
+BattleDome_Text_Round1Match5	Round 1, Match 5	Ronde 1, gevecht 5	
+BattleDome_Text_Round1Match6	Round 1, Match 6	Ronde 1, gevecht 6	
+BattleDome_Text_Round1Match7	Round 1, Match 7	Ronde 1, gevecht 7	
+BattleDome_Text_Round1Match8	Round 1, Match 8	Ronde 1, gevecht 8	
+BattleDome_Text_Round2Match1	Round 2, Match 1	Ronde 2, gevecht 1	
+BattleDome_Text_Round2Match2	Round 2, Match 2	Ronde 2, gevecht 2	
+BattleDome_Text_Round2Match3	Round 2, Match 3	Ronde 2, gevecht 3	
+BattleDome_Text_Round2Match4	Round 2, Match 4	Ronde 2, gevecht 4	
+BattleDome_Text_SemifinalMatch1	Semifinal Match 1	Halve finale 1	
+BattleDome_Text_SemifinalMatch2	Semifinal Match 2	Halve finale 2	
+BattleDome_Text_FinalMatch	Final Match	Finale	

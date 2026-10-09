@@ -53,13 +53,13 @@ gTrickHouse_Mechadoll_Carvanha::
 	.string "CARVANHA$"
 
 gTrickHouse_Mechadoll_BurnHeal::
-	.string "BURN HEAL$"
+	.string "BRANDZALF$"
 
 gTrickHouse_Mechadoll_HarborMail::
-	.string "HARBOR MAIL$"
+	.string "HAVENBRIEF$"
 
 gTrickHouse_Mechadoll_SamePrice::
-	.string "Same price$"
+	.string "Zelfde prijs$"
 
 gTrickHouse_Mechadoll_60Yen::
 	.string "¥60$"
@@ -68,37 +68,37 @@ gTrickHouse_Mechadoll_55Yen::
 	.string "¥55$"
 
 gTrickHouse_Mechadoll_Nothing::
-	.string "Nothing$"
+	.string "Niets$"
 
 gTrickHouse_Mechadoll_CostMore::
-	.string "They will cost more.$"
+	.string "Ze kosten meer.$"
 
 gTrickHouse_Mechadoll_CostLess::
-	.string "They will cost less.$"
+	.string "Ze kosten minder.$"
 
 gTrickHouse_Mechadoll_SamePrice2::
-	.string "Same price$"
+	.string "Zelfde prijs$"
 
 gTrickHouse_Mechadoll_Male::
-	.string "Male$"
+	.string "Man$"
 
 gTrickHouse_Mechadoll_Female::
-	.string "Female$"
+	.string "Vrouw$"
 
 gTrickHouse_Mechadoll_Neither::
-	.string "Neither$"
+	.string "Geen van beide$"
 
 gTrickHouse_Mechadoll_ElderlyMen::
-	.string "Elderly men$"
+	.string "Oude mannen$"
 
 gTrickHouse_Mechadoll_ElderlyLadies::
-	.string "Elderly ladies$"
+	.string "Oude vrouwen$"
 
 gTrickHouse_Mechadoll_SameNumber::
-	.string "Same number$"
+	.string "Even veel$"
 
 gTrickHouse_Mechadoll_None::
-	.string "None$"
+	.string "Geen$"
 
 gTrickHouse_Mechadoll_One::
 	.string "1$"

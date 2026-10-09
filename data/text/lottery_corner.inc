@@ -1,77 +1,77 @@
 LilycoveCity_DepartmentStore_1F_Text_LotteryCornerDrawTicket:
-	.string "This is the POKéMON LOTTERY CORNER.\p"
-	.string "All shoppers at our DEPARTMENT STORE\n"
-	.string "get to draw a POKéMON LOTO TICKET.\p"
-	.string "If the LOTO TICKET's number matches\n"
-	.string "the ID number of any of your POKéMON,\l"
-	.string "you will receive a fabulous gift.\p"
-	.string "Would you like to draw a POKéMON\n"
-	.string "LOTO TICKET?$"
+	.string "Dit is de POKéMON LOTTERY CORNER.\p"
+	.string "Alle klanten van ons WARENHUIS\n"
+	.string "mogen een POKéMON LOTO-LOT trekken.\p"
+	.string "Als het nummer van het LOTO-LOT\n"
+	.string "hetzelfde is als het ID-nummer van een\l"
+	.string "van je POKéMON, win je een mooi cadeau.\p"
+	.string "Wil je een POKéMON\n"
+	.string "LOTO-LOT trekken?$"
 
 LilycoveCity_DepartmentStore_1F_Text_ComeBackTomorrow:
-	.string "Please come back tomorrow.$"
+	.string "Kom morgen terug.$"
 
 LilycoveCity_DepartmentStore_1F_Text_PleaseVisitAgain:
-	.string "Please do visit again.$"
+	.string "Kom gerust weer eens langs.$"
 
 LilycoveCity_DepartmentStore_1F_Text_PleasePickTicket:
-	.string "Please pick a LOTO TICKET.\n"
+	.string "Kies een LOTO-LOT.\n"
 	.string "…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 LilycoveCity_DepartmentStore_1F_Text_TicketNumberIsXPleaseWait:
-	.string "The LOTO TICKET number is {STR_VAR_1}.\p"
-	.string "I need to run a check on this number\n"
-	.string "to see if it matches any of your\l"
-	.string "POKéMON's ID numbers. Please wait.$"
+	.string "Het LOTO-LOT heeft nummer {STR_VAR_1}.\p"
+	.string "Ik kijk of dit nummer overeenkomt met\n"
+	.string "het ID-nummer van een van je\l"
+	.string "POKéMON. Wacht even.$"
 
 LilycoveCity_DepartmentStore_1F_Text_TicketMatchesPartyMon:
-	.string "Congratulations!\p"
-	.string "The ID number of your team's\n"
-	.string "{STR_VAR_1} matches your\l"
-	.string "LOTO TICKET's number!$"
+	.string "Gefeliciteerd!\p"
+	.string "Het ID-nummer van de {STR_VAR_1}\n"
+	.string "in je team is gelijk aan het\l"
+	.string "nummer van je LOTO-LOT!$"
 
 LilycoveCity_DepartmentStore_1F_Text_TicketMatchesPCMon:
-	.string "Congratulations!\p"
-	.string "The ID number of your PC-boxed\n"
-	.string "{STR_VAR_1} matches your\l"
-	.string "LOTO TICKET's number!$"
+	.string "Gefeliciteerd!\p"
+	.string "Het ID-nummer van de {STR_VAR_1}\n"
+	.string "in je PC is gelijk aan het\l"
+	.string "nummer van je LOTO-LOT!$"
 
 LilycoveCity_DepartmentStore_1F_Text_NoNumbersMatched:
-	.string "I'm sorry.\n"
-	.string "None of the numbers matched.$"
+	.string "Helaas.\n"
+	.string "Geen enkel nummer klopte.$"
 
 LilycoveCity_DepartmentStore_1F_Text_TwoDigitsMatched:
-	.string "Two digits matched, so you win the\n"
-	.string "third prize!\l"
-	.string "You've won the {STR_VAR_1}!$"
+	.string "Twee cijfers kloppen, dus je wint\n"
+	.string "de derde prijs!\l"
+	.string "Je hebt de {STR_VAR_1} gewonnen!$"
 
 LilycoveCity_DepartmentStore_1F_Text_ThreeDigitsMatched:
-	.string "Three digits matched, so you win the\n"
-	.string "second prize!\l"
-	.string "You've won the {STR_VAR_1}!$"
+	.string "Drie cijfers kloppen, dus je wint\n"
+	.string "de tweede prijs!\l"
+	.string "Je hebt de {STR_VAR_1} gewonnen!$"
 
 LilycoveCity_DepartmentStore_1F_Text_FourDigitsMatched:
-	.string "Four digits matched, so you win the\n"
-	.string "first prize!\l"
-	.string "You've won the {STR_VAR_1}!$"
+	.string "Vier cijfers kloppen, dus je wint\n"
+	.string "de eerste prijs!\l"
+	.string "Je hebt de {STR_VAR_1} gewonnen!$"
 
 LilycoveCity_DepartmentStore_1F_Text_AllFiveDigitsMatched:
-	.string "Oh, my goodness, all five digits\n"
-	.string "matched!\p"
-	.string "You've won the jackpot prize!\n"
-	.string "You've won the {STR_VAR_1}!$"
+	.string "Oh jee, alle vijf cijfers\n"
+	.string "kloppen!\p"
+	.string "Je hebt de hoofdprijs gewonnen!\n"
+	.string "Je hebt de {STR_VAR_1} gewonnen!$"
 
 LilycoveCity_DepartmentStore_1F_Text_NoRoomForThis:
 	.string "Oh?\n"
-	.string "You seem to have no room for this.\p"
-	.string "Please make room in your BAG and\n"
-	.string "let me know.$"
+	.string "Je hebt hier geen ruimte voor.\p"
+	.string "Maak ruimte in je TAS en\n"
+	.string "laat het me weten.$"
 
 LilycoveCity_DepartmentStore_1F_Text_PrizeWeveBeenHolding:
 	.string "{PLAYER}?\n"
-	.string "Yes, I've been expecting you.\p"
-	.string "This is the prize we've been holding\n"
-	.string "for you.$"
+	.string "Ja, ik had je al verwacht.\p"
+	.string "Dit is de prijs die we voor\n"
+	.string "je bewaarden.$"
 
 LilycoveCity_DepartmentStore_1F_Text_PleaseVisitAgain2:
-	.string "Please do visit again.$"
+	.string "Kom gerust weer eens langs.$"

@@ -1,28 +1,28 @@
 key	english	dutch	notes
-gContestHallPaintingCaption	{STR_VAR_1}\n{STR_VAR_2}'s {STR_VAR_3}		
-gContestPaintingContest	CONTEST		
-gContestRankNormal	NORMAL RANK		
-gContestRankSuper	SUPER RANK		
-gContestRankHyper	HYPER RANK		
-gContestRankMaster	MASTER RANK		
-gContestLink	LINK		
-gContestCoolness	COOLNESS		
-gContestBeauty	BEAUTY		
-gContestCuteness	CUTENESS		
-gContestSmartness	SMARTNESS		
-gContestToughness	TOUGHNESS		
-gContestPaintingCool1	Nonstop supercool--\nthe inestimable {STR_VAR_1}		
-gContestPaintingCool2	Hey, there!\nThe good-looking POKéMON {STR_VAR_1}		
-gContestPaintingCool3	The marvelous, wonderful, and\nvery great {STR_VAR_1}		
-gContestPaintingBeauty1	This century's last Venus--\nthe beautiful {STR_VAR_1}		
-gContestPaintingBeauty2	{STR_VAR_1}'s dazzling,\nglittering smile		
-gContestPaintingBeauty3	POKéMON CENTER's super idol--\nthe incomparable {STR_VAR_1}		
-gContestPaintingCute1	The lovely and sweet {STR_VAR_1}		
-gContestPaintingCute2	The pretty {STR_VAR_1}'s\nwinning portrait		
-gContestPaintingCute3	Give us a wink!\nThe cutie POKéMON {STR_VAR_1}		
-gContestPaintingSmart1	The smartness maestro--\nthe wise POKéMON {STR_VAR_1}		
-gContestPaintingSmart2	{STR_VAR_1}--the one chosen\nabove all POKéMON		
-gContestPaintingSmart3	The excellent {STR_VAR_1}'s\nmoment of elegance		
-gContestPaintingTough1	The powerfully muscular\nspeedster {STR_VAR_1}		
-gContestPaintingTough2	The strong, stronger, and\nstrongest {STR_VAR_1}		
-gContestPaintingTough3	The mighty tough\nhyper POKéMON {STR_VAR_1}		
+gContestHallPaintingCaption	{STR_VAR_1}\n{STR_VAR_2}'s {STR_VAR_3}	{STR_VAR_1}\n{STR_VAR_3} van {STR_VAR_2}	
+gContestPaintingContest	CONTEST	WEDSTRIJD	
+gContestRankNormal	NORMAL RANK	NORMAAL NIVEAU	
+gContestRankSuper	SUPER RANK	SUPER NIVEAU	
+gContestRankHyper	HYPER RANK	HYPER NIVEAU	
+gContestRankMaster	MASTER RANK	MASTER NIVEAU	
+gContestLink	LINK	LINK	
+gContestCoolness	COOLNESS	STOER	
+gContestBeauty	BEAUTY	MOOI	
+gContestCuteness	CUTENESS	SCHATTIG	
+gContestSmartness	SMARTNESS	SLIM	
+gContestToughness	TOUGHNESS	STERK	
+gContestPaintingCool1	Nonstop supercool--\nthe inestimable {STR_VAR_1}	Non-stop supercool--\nde onschatbare {STR_VAR_1}	
+gContestPaintingCool2	Hey, there!\nThe good-looking POKéMON {STR_VAR_1}	Hé, hallo!\nDe knappe POKéMON {STR_VAR_1}	
+gContestPaintingCool3	The marvelous, wonderful, and\nvery great {STR_VAR_1}	De prachtige, wonderlijke en\nheel grote {STR_VAR_1}	
+gContestPaintingBeauty1	This century's last Venus--\nthe beautiful {STR_VAR_1}	De laatste Venus van deze eeuw--\nde mooie {STR_VAR_1}	
+gContestPaintingBeauty2	{STR_VAR_1}'s dazzling,\nglittering smile	De stralende, glinsterende\nlach van {STR_VAR_1}	
+gContestPaintingBeauty3	POKéMON CENTER's super idol--\nthe incomparable {STR_VAR_1}	De superster van het POKéMON CENTER--\nde onvergelijkbare {STR_VAR_1}	
+gContestPaintingCute1	The lovely and sweet {STR_VAR_1}	De lieve en schattige {STR_VAR_1}	
+gContestPaintingCute2	The pretty {STR_VAR_1}'s\nwinning portrait	Het winnende portret van\nde mooie {STR_VAR_1}	
+gContestPaintingCute3	Give us a wink!\nThe cutie POKéMON {STR_VAR_1}	Knipoog even!\nDe schattige POKéMON {STR_VAR_1}	
+gContestPaintingSmart1	The smartness maestro--\nthe wise POKéMON {STR_VAR_1}	De meester van slimheid--\nde wijze POKéMON {STR_VAR_1}	
+gContestPaintingSmart2	{STR_VAR_1}--the one chosen\nabove all POKéMON	{STR_VAR_1}--de uitverkorene\nboven alle POKéMON	
+gContestPaintingSmart3	The excellent {STR_VAR_1}'s\nmoment of elegance	Het elegante moment van\nde uitstekende {STR_VAR_1}	
+gContestPaintingTough1	The powerfully muscular\nspeedster {STR_VAR_1}	De krachtig gespierde\nsnelheidsduivel {STR_VAR_1}	
+gContestPaintingTough2	The strong, stronger, and\nstrongest {STR_VAR_1}	De sterke, sterkere en\nsterkste {STR_VAR_1}	
+gContestPaintingTough3	The mighty tough\nhyper POKéMON {STR_VAR_1}	De machtig taaie\nhyper-POKéMON {STR_VAR_1}	

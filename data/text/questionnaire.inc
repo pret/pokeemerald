@@ -1,43 +1,43 @@
 Questionnaire_Text_FillOut::
-	.string "There is a questionnaire.\n"
-	.string "Would you like to fill it out?$"
+	.string "Er ligt een vragenlijst.\n"
+	.string "Wil je hem invullen?$"
 
 Questionnaire_Text_ThankYou::
-	.string "Thank you for taking the time to\n"
-	.string "fill out our questionnaire.\p"
-	.string "Your feedback will be used for\n"
-	.string "future reference.$"
+	.string "Bedankt dat je de tijd nam om\n"
+	.string "onze vragenlijst in te vullen.\p"
+	.string "Je antwoorden gebruiken we\n"
+	.string "voor de toekomst.$"
 
 Questionnaire_Text_YouKnowThoseWordsGift::
-	.string "Oh, hello!\n"
-	.string "You know those words?\p"
-	.string "That means you must know about\n"
-	.string "the MYSTERY GIFT.\p"
-	.string "From now on, you should be\n"
-	.string "receiving MYSTERY GIFTS!$"
+	.string "Oh, hallo!\n"
+	.string "Ken je die woorden?\p"
+	.string "Dan weet je vast van het\n"
+	.string "GEHEIM CADEAU.\p"
+	.string "Vanaf nu krijg je vast\n"
+	.string "GEHEIME CADEAUS!$"
 
 Questionnaire_Text_YouCanAccessMysteryGift::
-	.string "Once you save your game, you can\n"
-	.string "access the MYSTERY GIFT.$"
+	.string "Als je je spel opslaat, kun je\n"
+	.string "het GEHEIM CADEAU gebruiken.$"
 
 Questionnaire_Text_YouKnowThoseWordsEvent::
-	.string "Oh, hello!\n"
-	.string "You know those words?\p"
-	.string "That means you must know about\n"
-	.string "the MYSTERY EVENT.$"
+	.string "Oh, hallo!\n"
+	.string "Ken je die woorden?\p"
+	.string "Dan weet je vast van het\n"
+	.string "GEHEIME EVENT.$"
 
 Questionnaire_Text_YouCanAccessMysteryEvent::
-	.string "Once you save your game, you can\n"
-	.string "access the MYSTERY EVENT.$"
+	.string "Als je je spel opslaat, kun je\n"
+	.string "het GEHEIME EVENT gebruiken.$"
 
 MysteryGift_Text_TheresATicketForYou::
-	.string "Thank you for using the MYSTERY\n"
-	.string "EVENT System.\p"
-	.string "You must be {PLAYER}.\n"
-	.string "There is a ticket here for you.$"
+	.string "Bedankt voor het gebruik van het\n"
+	.string "GEHEIME EVENT-systeem.\p"
+	.string "Jij bent vast {PLAYER}.\n"
+	.string "Er ligt hier een kaartje voor je.$"
 
 MysteryGift_Text_TryUsingItAtLilycovePort::
-	.string "It appears to be for use at\n"
-	.string "the LILYCOVE CITY port.\p"
-	.string "Why not give it a try and see what\n"
-	.string "it is about?$"
+	.string "Het lijkt voor de haven van\n"
+	.string "LILYCOVE CITY te zijn.\p"
+	.string "Probeer het eens en kijk\n"
+	.string "waar het over gaat?$"

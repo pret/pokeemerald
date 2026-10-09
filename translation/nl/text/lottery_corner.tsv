@@ -1,16 +1,16 @@
 key	english	dutch	notes
-LilycoveCity_DepartmentStore_1F_Text_LotteryCornerDrawTicket	This is the POKéMON LOTTERY CORNER.\pAll shoppers at our DEPARTMENT STORE\nget to draw a POKéMON LOTO TICKET.\pIf the LOTO TICKET's number matches\nthe ID number of any of your POKéMON,\lyou will receive a fabulous gift.\pWould you like to draw a POKéMON\nLOTO TICKET?		
-LilycoveCity_DepartmentStore_1F_Text_ComeBackTomorrow	Please come back tomorrow.		
-LilycoveCity_DepartmentStore_1F_Text_PleaseVisitAgain	Please do visit again.		
-LilycoveCity_DepartmentStore_1F_Text_PleasePickTicket	Please pick a LOTO TICKET.\n…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}		
-LilycoveCity_DepartmentStore_1F_Text_TicketNumberIsXPleaseWait	The LOTO TICKET number is {STR_VAR_1}.\pI need to run a check on this number\nto see if it matches any of your\lPOKéMON's ID numbers. Please wait.		
-LilycoveCity_DepartmentStore_1F_Text_TicketMatchesPartyMon	Congratulations!\pThe ID number of your team's\n{STR_VAR_1} matches your\lLOTO TICKET's number!		
-LilycoveCity_DepartmentStore_1F_Text_TicketMatchesPCMon	Congratulations!\pThe ID number of your PC-boxed\n{STR_VAR_1} matches your\lLOTO TICKET's number!		
-LilycoveCity_DepartmentStore_1F_Text_NoNumbersMatched	I'm sorry.\nNone of the numbers matched.		
-LilycoveCity_DepartmentStore_1F_Text_TwoDigitsMatched	Two digits matched, so you win the\nthird prize!\lYou've won the {STR_VAR_1}!		
-LilycoveCity_DepartmentStore_1F_Text_ThreeDigitsMatched	Three digits matched, so you win the\nsecond prize!\lYou've won the {STR_VAR_1}!		
-LilycoveCity_DepartmentStore_1F_Text_FourDigitsMatched	Four digits matched, so you win the\nfirst prize!\lYou've won the {STR_VAR_1}!		
-LilycoveCity_DepartmentStore_1F_Text_AllFiveDigitsMatched	Oh, my goodness, all five digits\nmatched!\pYou've won the jackpot prize!\nYou've won the {STR_VAR_1}!		
-LilycoveCity_DepartmentStore_1F_Text_NoRoomForThis	Oh?\nYou seem to have no room for this.\pPlease make room in your BAG and\nlet me know.		
-LilycoveCity_DepartmentStore_1F_Text_PrizeWeveBeenHolding	{PLAYER}?\nYes, I've been expecting you.\pThis is the prize we've been holding\nfor you.		
-LilycoveCity_DepartmentStore_1F_Text_PleaseVisitAgain2	Please do visit again.		
+LilycoveCity_DepartmentStore_1F_Text_LotteryCornerDrawTicket	This is the POKéMON LOTTERY CORNER.\pAll shoppers at our DEPARTMENT STORE\nget to draw a POKéMON LOTO TICKET.\pIf the LOTO TICKET's number matches\nthe ID number of any of your POKéMON,\lyou will receive a fabulous gift.\pWould you like to draw a POKéMON\nLOTO TICKET?	Dit is de POKéMON LOTTERY CORNER.\pAlle klanten van ons WARENHUIS\nmogen een POKéMON LOTO-LOT trekken.\pAls het nummer van het LOTO-LOT\nhetzelfde is als het ID-nummer van een\lvan je POKéMON, win je een mooi cadeau.\pWil je een POKéMON\nLOTO-LOT trekken?	
+LilycoveCity_DepartmentStore_1F_Text_ComeBackTomorrow	Please come back tomorrow.	Kom morgen terug.	
+LilycoveCity_DepartmentStore_1F_Text_PleaseVisitAgain	Please do visit again.	Kom gerust weer eens langs.	
+LilycoveCity_DepartmentStore_1F_Text_PleasePickTicket	Please pick a LOTO TICKET.\n…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}	Kies een LOTO-LOT.\n…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}	
+LilycoveCity_DepartmentStore_1F_Text_TicketNumberIsXPleaseWait	The LOTO TICKET number is {STR_VAR_1}.\pI need to run a check on this number\nto see if it matches any of your\lPOKéMON's ID numbers. Please wait.	Het LOTO-LOT heeft nummer {STR_VAR_1}.\pIk kijk of dit nummer overeenkomt met\nhet ID-nummer van een van je\lPOKéMON. Wacht even.	
+LilycoveCity_DepartmentStore_1F_Text_TicketMatchesPartyMon	Congratulations!\pThe ID number of your team's\n{STR_VAR_1} matches your\lLOTO TICKET's number!	Gefeliciteerd!\pHet ID-nummer van de {STR_VAR_1}\nin je team is gelijk aan het\lnummer van je LOTO-LOT!	
+LilycoveCity_DepartmentStore_1F_Text_TicketMatchesPCMon	Congratulations!\pThe ID number of your PC-boxed\n{STR_VAR_1} matches your\lLOTO TICKET's number!	Gefeliciteerd!\pHet ID-nummer van de {STR_VAR_1}\nin je PC is gelijk aan het\lnummer van je LOTO-LOT!	
+LilycoveCity_DepartmentStore_1F_Text_NoNumbersMatched	I'm sorry.\nNone of the numbers matched.	Helaas.\nGeen enkel nummer klopte.	
+LilycoveCity_DepartmentStore_1F_Text_TwoDigitsMatched	Two digits matched, so you win the\nthird prize!\lYou've won the {STR_VAR_1}!	Twee cijfers kloppen, dus je wint\nde derde prijs!\lJe hebt de {STR_VAR_1} gewonnen!	
+LilycoveCity_DepartmentStore_1F_Text_ThreeDigitsMatched	Three digits matched, so you win the\nsecond prize!\lYou've won the {STR_VAR_1}!	Drie cijfers kloppen, dus je wint\nde tweede prijs!\lJe hebt de {STR_VAR_1} gewonnen!	
+LilycoveCity_DepartmentStore_1F_Text_FourDigitsMatched	Four digits matched, so you win the\nfirst prize!\lYou've won the {STR_VAR_1}!	Vier cijfers kloppen, dus je wint\nde eerste prijs!\lJe hebt de {STR_VAR_1} gewonnen!	
+LilycoveCity_DepartmentStore_1F_Text_AllFiveDigitsMatched	Oh, my goodness, all five digits\nmatched!\pYou've won the jackpot prize!\nYou've won the {STR_VAR_1}!	Oh jee, alle vijf cijfers\nkloppen!\pJe hebt de hoofdprijs gewonnen!\nJe hebt de {STR_VAR_1} gewonnen!	
+LilycoveCity_DepartmentStore_1F_Text_NoRoomForThis	Oh?\nYou seem to have no room for this.\pPlease make room in your BAG and\nlet me know.	Oh?\nJe hebt hier geen ruimte voor.\pMaak ruimte in je TAS en\nlaat het me weten.	
+LilycoveCity_DepartmentStore_1F_Text_PrizeWeveBeenHolding	{PLAYER}?\nYes, I've been expecting you.\pThis is the prize we've been holding\nfor you.	{PLAYER}?\nJa, ik had je al verwacht.\pDit is de prijs die we voor\nje bewaarden.	
+LilycoveCity_DepartmentStore_1F_Text_PleaseVisitAgain2	Please do visit again.	Kom gerust weer eens langs.	

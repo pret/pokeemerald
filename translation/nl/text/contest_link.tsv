@@ -1,12 +1,12 @@
 key	english	dutch	notes
-gTest_MissedTurn	Missed turn		
-gText_LinkStandby4	Link standby!		
-gText_WinnerIsPlayersMonCongrats	The winner is {STR_VAR_1}'s {STR_VAR_2}!\nCongratulations!		
-gText_WinnerIsPlayersMon	The winner is {STR_VAR_1}'s {STR_VAR_2}!{PAUSE_UNTIL_PRESS}		
-gText_PrimaryJudgingNumX	Primary judging: No. {STR_VAR_1}{PAUSE_UNTIL_PRESS}		
-gText_SecondaryJudgingNumX	Secondary judging: No. {STR_VAR_1}{PAUSE_UNTIL_PRESS}		
-gText_SetEventNumX	Set event: No. {STR_VAR_1}{PAUSE_UNTIL_PRESS}		
-gText_MoveUsedMostOften	The move used most often:\n{STR_VAR_1}{PAUSE_UNTIL_PRESS}		
-gText_MostImpressiveMon	The most impressive POKéMON:\n{STR_VAR_1}'s {STR_VAR_2}{PAUSE_UNTIL_PRESS}		
-gText_SetEventNumX2	Set event: No. {STR_VAR_1}{PAUSE_UNTIL_PRESS}		
-gText_LinkTVProgramWillNotBeMadeTrainerLost	A link TV program will not be made\nbecause the TRAINER lost.{PAUSE_UNTIL_PRESS}		
+gTest_MissedTurn	Missed turn	Beurt gemist	
+gText_LinkStandby4	Link standby!	Wachten op link!	
+gText_WinnerIsPlayersMonCongrats	The winner is {STR_VAR_1}'s {STR_VAR_2}!\nCongratulations!	De winnaar is {STR_VAR_2}\nvan {STR_VAR_1}! Gefeliciteerd!	
+gText_WinnerIsPlayersMon	The winner is {STR_VAR_1}'s {STR_VAR_2}!{PAUSE_UNTIL_PRESS}	De winnaar is {STR_VAR_2}\nvan {STR_VAR_1}!{PAUSE_UNTIL_PRESS}	
+gText_PrimaryJudgingNumX	Primary judging: No. {STR_VAR_1}{PAUSE_UNTIL_PRESS}	Eerste jurering: nr. {STR_VAR_1}{PAUSE_UNTIL_PRESS}	
+gText_SecondaryJudgingNumX	Secondary judging: No. {STR_VAR_1}{PAUSE_UNTIL_PRESS}	Tweede jurering: nr. {STR_VAR_1}{PAUSE_UNTIL_PRESS}	
+gText_SetEventNumX	Set event: No. {STR_VAR_1}{PAUSE_UNTIL_PRESS}	Vaste ronde: nr. {STR_VAR_1}{PAUSE_UNTIL_PRESS}	
+gText_MoveUsedMostOften	The move used most often:\n{STR_VAR_1}{PAUSE_UNTIL_PRESS}	De meest gebruikte aanval:\n{STR_VAR_1}{PAUSE_UNTIL_PRESS}	
+gText_MostImpressiveMon	The most impressive POKéMON:\n{STR_VAR_1}'s {STR_VAR_2}{PAUSE_UNTIL_PRESS}	De meest indrukwekkende POKéMON:\n{STR_VAR_2} van {STR_VAR_1}{PAUSE_UNTIL_PRESS}	
+gText_SetEventNumX2	Set event: No. {STR_VAR_1}{PAUSE_UNTIL_PRESS}	Vaste ronde: nr. {STR_VAR_1}{PAUSE_UNTIL_PRESS}	
+gText_LinkTVProgramWillNotBeMadeTrainerLost	A link TV program will not be made\nbecause the TRAINER lost.{PAUSE_UNTIL_PRESS}	Er komt geen link-tv-programma,\nwant de TRAINER verloor.{PAUSE_UNTIL_PRESS}	

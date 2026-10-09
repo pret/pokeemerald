@@ -1,26 +1,26 @@
 key	english	dutch	notes
-gBirchDexRatingText_AreYouCurious	PROF. BIRCH: Ah, {PLAYER}{KUN}!\pAre you curious about how your\nPOKéDEX is coming along?		
-gBirchDexRatingText_Cancel	Hm? Oh, you haven't caught enough\nPOKéMON to make it worthwhile.		
-gBirchDexRatingText_SoYouveSeenAndCaught	Hmhm…\pSo, you've seen {STR_VAR_1} POKéMON,\nand you've caught {STR_VAR_2} POKéMON…		
-gBirchDexRatingText_LessThan10	Go into grassy areas more and look\nfor POKéMON more carefully.		
-gBirchDexRatingText_LessThan20	I guess you're getting the hang\nof it. But, it gets harder from here.		
-gBirchDexRatingText_LessThan30	Some POKéMON only appear in\ncertain areas.\lYou must be persistent.		
-gBirchDexRatingText_LessThan40	Well, it could use more quantity,\nbut this is looking more like\la POKéDEX now.		
-gBirchDexRatingText_LessThan50	This is coming along pretty good.\nKeep up the effort.		
-gBirchDexRatingText_LessThan60	Are you using any RODS?\nThere are many POKéMON in the sea.		
-gBirchDexRatingText_LessThan70	Instead of just catching POKéMON,\nhow about making them evolve, too?		
-gBirchDexRatingText_LessThan80	This is going to be a fantastic\nPOKéDEX.\lThat's the feeling I'm getting.		
-gBirchDexRatingText_LessThan90	You've collected this many…\nYour talent is remarkable!		
-gBirchDexRatingText_LessThan100	Have you visited the SAFARI ZONE?\pI hear there are some POKéMON that\ncan only be caught there.		
-gBirchDexRatingText_LessThan110	You've finally reached\nthe 100-kind mark.\pThis is an impressive POKéDEX!		
-gBirchDexRatingText_LessThan120	There might be POKéMON that can be\nfound using ROCK SMASH.		
-gBirchDexRatingText_LessThan130	You should get some more POKéMON\nby trading with others.		
-gBirchDexRatingText_LessThan140	I've heard of POKéMON that evolve\nwhen they come to fully love their\lTRAINERS.		
-gBirchDexRatingText_LessThan150	I had no idea that there were so\nmany POKéMON species in the HOENN\lregion.		
-gBirchDexRatingText_LessThan160	On occasion, some POKéMON appear\nin large numbers like outbreaks.\pDon't miss opportunities like\nthose.		
-gBirchDexRatingText_LessThan170	One can get a very good idea about\nthe POKéMON of the HOENN region\lby looking through your POKéDEX.		
-gBirchDexRatingText_LessThan180	I would say you already qualify as\na POKéMON PROFESSOR, and a good\lone, too!		
-gBirchDexRatingText_LessThan190	With a POKéDEX this complete,\nyou're a real professional at this!		
-gBirchDexRatingText_LessThan200	You're very close to completing\nthis POKéDEX.\lI can feel it in my bones!		
-gBirchDexRatingText_DexCompleted	Congratulations!\nYour POKéDEX is complete!		
-gBirchDexRatingText_OnANationwideBasis	Hmhm…\nOn a nationwide basis…\pYou've seen {STR_VAR_1} POKéMON,\nand you've caught {STR_VAR_2} POKéMON…		
+gBirchDexRatingText_AreYouCurious	PROF. BIRCH: Ah, {PLAYER}{KUN}!\pAre you curious about how your\nPOKéDEX is coming along?	PROF. BIRCH: Ah, {PLAYER}{KUN}!\pBen je nieuwsgierig hoe het gaat\nmet je POKéDEX?	
+gBirchDexRatingText_Cancel	Hm? Oh, you haven't caught enough\nPOKéMON to make it worthwhile.	Hm? Oh, je hebt nog niet genoeg\nPOKéMON gevangen. Dat is niet\lde moeite waard.	
+gBirchDexRatingText_SoYouveSeenAndCaught	Hmhm…\pSo, you've seen {STR_VAR_1} POKéMON,\nand you've caught {STR_VAR_2} POKéMON…	Hmhm…\pDus je hebt {STR_VAR_1} POKéMON gezien\nen {STR_VAR_2} POKéMON gevangen…	
+gBirchDexRatingText_LessThan10	Go into grassy areas more and look\nfor POKéMON more carefully.	Ga vaker naar grasgebieden en zoek\nPOKéMON zorgvuldiger.	
+gBirchDexRatingText_LessThan20	I guess you're getting the hang\nof it. But, it gets harder from here.	Ik denk dat je het door begint\nte krijgen. Maar nu wordt\lhet lastiger.	
+gBirchDexRatingText_LessThan30	Some POKéMON only appear in\ncertain areas.\lYou must be persistent.	Sommige POKéMON komen alleen\nin bepaalde gebieden voor.\lJe moet volhouden.	
+gBirchDexRatingText_LessThan40	Well, it could use more quantity,\nbut this is looking more like\la POKéDEX now.	Nou, het kunnen er meer zijn,\nmaar het begint al meer op\leen POKéDEX te lijken.	
+gBirchDexRatingText_LessThan50	This is coming along pretty good.\nKeep up the effort.	Dit gaat best goed.\nBlijf je best doen.	
+gBirchDexRatingText_LessThan60	Are you using any RODS?\nThere are many POKéMON in the sea.	Gebruik je HENGELS?\nEr zijn veel POKéMON in de zee.	
+gBirchDexRatingText_LessThan70	Instead of just catching POKéMON,\nhow about making them evolve, too?	Waarom vang je POKéMON niet alleen,\nmaar laat je ze ook evolueren?	
+gBirchDexRatingText_LessThan80	This is going to be a fantastic\nPOKéDEX.\lThat's the feeling I'm getting.	Dit wordt een fantastische\nPOKéDEX.\lDat gevoel krijg ik.	
+gBirchDexRatingText_LessThan90	You've collected this many…\nYour talent is remarkable!	Zo veel heb je verzameld…\nJe talent is opmerkelijk!	
+gBirchDexRatingText_LessThan100	Have you visited the SAFARI ZONE?\pI hear there are some POKéMON that\ncan only be caught there.	Ben je al in de SAFARI ZONE geweest?\pIk hoor dat sommige POKéMON alleen\ndaar te vangen zijn.	
+gBirchDexRatingText_LessThan110	You've finally reached\nthe 100-kind mark.\pThis is an impressive POKéDEX!	Je hebt eindelijk de\n100 soorten bereikt.\pDit is een indrukwekkende POKéDEX!	
+gBirchDexRatingText_LessThan120	There might be POKéMON that can be\nfound using ROCK SMASH.	Er zijn misschien POKéMON te vinden\nmet ROCK SMASH.	
+gBirchDexRatingText_LessThan130	You should get some more POKéMON\nby trading with others.	Je moet nog meer POKéMON krijgen\ndoor te ruilen met anderen.	
+gBirchDexRatingText_LessThan140	I've heard of POKéMON that evolve\nwhen they come to fully love their\lTRAINERS.	Ik heb gehoord van POKéMON die\nevolueren als ze heel veel van hun\lTRAINER gaan houden.	
+gBirchDexRatingText_LessThan150	I had no idea that there were so\nmany POKéMON species in the HOENN\lregion.	Ik wist niet dat er zo veel\nPOKéMON-soorten in de regio HOENN\lzijn.	
+gBirchDexRatingText_LessThan160	On occasion, some POKéMON appear\nin large numbers like outbreaks.\pDon't miss opportunities like\nthose.	Soms komen sommige POKéMON in grote\naantallen voor, als een uitbraak.\pMis zulke kansen niet.	
+gBirchDexRatingText_LessThan170	One can get a very good idea about\nthe POKéMON of the HOENN region\lby looking through your POKéDEX.	Je krijgt een goed beeld van de\nPOKéMON van de regio HOENN\ldoor je POKéDEX te bekijken.	
+gBirchDexRatingText_LessThan180	I would say you already qualify as\na POKéMON PROFESSOR, and a good\lone, too!	Ik zou zeggen dat je al een\nPOKéMON PROFESSOR bent, en een\lgoede ook!	
+gBirchDexRatingText_LessThan190	With a POKéDEX this complete,\nyou're a real professional at this!	Met zo'n complete POKéDEX\nben je echt een professional!	
+gBirchDexRatingText_LessThan200	You're very close to completing\nthis POKéDEX.\lI can feel it in my bones!	Je bent heel dicht bij het\nvoltooien van deze POKéDEX.\lIk voel het in mijn botten!	
+gBirchDexRatingText_DexCompleted	Congratulations!\nYour POKéDEX is complete!	Gefeliciteerd!\nJe POKéDEX is compleet!	
+gBirchDexRatingText_OnANationwideBasis	Hmhm…\nOn a nationwide basis…\pYou've seen {STR_VAR_1} POKéMON,\nand you've caught {STR_VAR_2} POKéMON…	Hmhm…\nIn het hele land…\pJe hebt {STR_VAR_1} POKéMON gezien\nen {STR_VAR_2} POKéMON gevangen…	

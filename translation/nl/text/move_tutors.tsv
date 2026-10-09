@@ -1,42 +1,42 @@
 key	english	dutch	notes
-MoveTutor_Text_ThisMoveCanOnlyBeLearnedOnce	This move can be learned only\nonce. Is that okay?		
-MoveTutor_Text_SwaggerTeach	Heh! My POKéMON totally rules!\nIt's cooler than any POKéMON!\pI was lipping off with a swagger in\nmy step like that when the CHAIRMAN\lchewed me out.\pThat took the swagger out of my step.\pIf you'd like, I'll teach the move\nSWAGGER to a POKéMON of yours.		
-MoveTutor_Text_SwaggerDeclined	What, no? Can't you get into\nthe spirit of things?		
-MoveTutor_Text_SwaggerWhichMon	All right, which POKéMON wants to\nlearn how to SWAGGER?		
-MoveTutor_Text_SwaggerTaught	I'll just praise my POKéMON from now\non without the swagger.		
-MoveTutor_Text_RolloutTeach	Did you know that you can go from\nhere a long way in that direction\lwithout changing direction?\pI might even be able to roll\nthat way.\pDo you think your POKéMON will\nwant to roll, too?\pI can teach one the move ROLLOUT\nif you'd like.		
-MoveTutor_Text_RolloutDeclined	You don't need to be shy about it.\nLet's roll!		
-MoveTutor_Text_RolloutWhichMon	Ehehe, sure thing! It'd be great if\nthe POKéMON looked like me.		
-MoveTutor_Text_RolloutTaught	Rolling around in the grass makes me\nhappy. Come on, let's roll!		
-MoveTutor_Text_FuryCutterTeach	There's a move that gets stronger\nwhen you keep using it in a row.\pIt's a BUG-type move, and it is\nwickedly cool.\pIt's called FURY CUTTER.\nWant me to teach it to a POKéMON?		
-MoveTutor_Text_FuryCutterDeclined	We're not on the same wavelength.		
-MoveTutor_Text_FuryCutterWhichMon	Yay!\nShow me which POKéMON I should teach.		
-MoveTutor_Text_FuryCutterTaught	I get a thrill watching to see if\nthe move keeps hitting in succession!		
-MoveTutor_MimicTeach	Ah, young one!\pI am also a young one, but I mimic\nthe styles and speech of the elderly\lfolks of this town.\pWhat do you say, young one?\nWould you agree to it if I were to\loffer to teach the move MIMIC?		
-MoveTutor_MimicDeclined	Oh, boo! I wanted to teach MIMIC\nto your POKéMON!		
-MoveTutor_Text_MimicWhichMon	Fwofwo! And so I shall!\nLet me see the POKéMON\lyou wish me to teach.		
-MoveTutor_Text_MimicTaught	MIMIC is a move of great depth.\pCould you execute it to perfection\nas well as me…?		
-MoveTutor_Text_MetronomeTeach	I want all sorts of things!\nBut I used up my allowance…\pWouldn't it be nice if there were\na spell that made money appear when\lyou waggle a finger?\pIf you want, I can teach your POKéMON\nthe move METRONOME.\pMoney won't appear, but your POKéMON\nwill waggle a finger. Yes?		
-MoveTutor_Text_MetronomeDeclined	Okay. I'll be here if you change\nyour mind.		
-MoveTutor_Text_MetronomeWhichMon	Okay! I'll teach it!\nWhich POKéMON should I teach?		
-MoveTutor_Text_MetronomeTaught	When a POKéMON waggles its finger\nlike a METRONOME, all sorts of nice\lthings happen.\pWouldn't it be nice if we could\nuse it, too?		
-MoveTutor_Text_SleepTalkTeach	Humph! My wife relies on HIDDEN\nPOWER to stay awake.\pShe should just take a nap like I do,\nand SLEEP TALK.\pI can teach your POKéMON how to\nSLEEP TALK instead. Interested?		
-MoveTutor_Text_SleepTalkDeclined	Oh, fine, fine. You want to stay awake\nwith HIDDEN POWER, too…		
-MoveTutor_Text_SleepTalkWhichMon	Ah, an appreciative child!\nWhich POKéMON should I teach?		
-MoveTutor_Text_SleepTalkTaught	I've never once gotten my wife's\ncoin trick right.\pI would be happy if I got it right\neven as I SLEEP TALK…		
-MoveTutor_Text_SubstituteTeach	When I see the wide world from up\nhere on the roof…\pI think about how nice it would be\nif there were more than just one me\lso I could enjoy all sorts of lives.\pOf course it's not possible.\nGiggle…\pI know! Would you be interested in\nhaving a POKéMON learn SUBSTITUTE?		
-MoveTutor_Text_SubstituteDeclined	Oh, no?\pA POKéMON can make a copy of\nitself using it, you know.		
-MoveTutor_Text_SubstituteWhichMon	Giggle…\nWhich POKéMON do you want me to\lteach SUBSTITUTE?		
-MoveTutor_Text_SubstituteTaught	We human beings should enjoy our\nown lives to the utmost!\pI hope you'll get that way, too!		
-MoveTutor_Text_DynamicPunchTeach	I can't do this anymore!\pIt's utterly hopeless!\pI'm a FIGHTING-type TRAINER,\nso I can't win at the MOSSDEEP GYM\lno matter how hard I try!\pArgh! Punch! Punch! Punch!\nPunch! Punch! Punch!\pWhat, don't look at me that way!\nI'm only hitting the ground!\pOr do you want me to teach your\nPOKéMON DYNAMICPUNCH?		
-MoveTutor_Text_DynamicPunchDeclined	Darn! You're even making fun of me?\nPunch! Punch! Punch!		
-MoveTutor_Text_DynamicPunchWhichMon	What? You do? You're a good person!\nWhich POKéMON should I teach?		
-MoveTutor_Text_DynamicPunchTaught	I want you to win at the MOSSDEEP GYM\nusing that DYNAMICPUNCH!		
-MoveTutor_Text_DoubleEdgeTeach	Sigh…\pSOOTOPOLIS's GYM LEADER is really\nlovably admirable.\pBut that also means I have many\nrivals for his attention.\pHe's got appeal with a DOUBLE-EDGE.\nI couldn't even catch his eye.\pPlease, let me teach your POKéMON\nthe move DOUBLE-EDGE!		
-MoveTutor_Text_DoubleEdgeDeclined	Oh…\nEven you rejected me…		
-MoveTutor_Text_DoubleEdgeWhichMon	Okay, which POKéMON should I teach\nDOUBLE-EDGE?		
-MoveTutor_Text_DoubleEdgeTaught	I won't live for love anymore!\nI'll become tough!		
-MoveTutor_Text_ExplosionTeach	I don't intend to be going nowhere\nfast in the sticks like this forever.\pYou watch me, I'll get out to the city\nand become a huge hit.\pSeriously, I'm going to cause\na huge EXPLOSION of popularity!\pIf you overheard that, I'll happily\nteach EXPLOSION to your POKéMON!		
-MoveTutor_Text_ExplosionDeclined	Gaah! You're turning me down because\nI live in the country?		
-MoveTutor_Text_ExplosionWhichMon	Fine! An EXPLOSION it is!\nWhich POKéMON wants to blow up?		
-MoveTutor_Text_ExplosionTaught	For a long time, I've taught POKéMON\nhow to use EXPLOSION, but I've yet\lto ignite my own EXPLOSION…\pMaybe it's because deep down,\nI would rather stay here…		
+MoveTutor_Text_ThisMoveCanOnlyBeLearnedOnce	This move can be learned only\nonce. Is that okay?	Deze aanval kun je maar één\nkeer leren. Is dat goed?	
+MoveTutor_Text_SwaggerTeach	Heh! My POKéMON totally rules!\nIt's cooler than any POKéMON!\pI was lipping off with a swagger in\nmy step like that when the CHAIRMAN\lchewed me out.\pThat took the swagger out of my step.\pIf you'd like, I'll teach the move\nSWAGGER to a POKéMON of yours.	Hehe! Mijn POKéMON is de beste!\nHij is stoerder dan elke POKéMON!\pIk liep zo te pochen toen de\nVOORZITTER me uitschold.\pDaar verdween mijn branie van.\pAls je wilt, leer ik een POKéMON\nvan jou de aanval OPSCHEPPEN.	
+MoveTutor_Text_SwaggerDeclined	What, no? Can't you get into\nthe spirit of things?	Wat, nee? Kun je niet meedoen\nmet het plezier?	
+MoveTutor_Text_SwaggerWhichMon	All right, which POKéMON wants to\nlearn how to SWAGGER?	Goed, welke POKéMON wil leren\nom OP TE SCHEPPEN?	
+MoveTutor_Text_SwaggerTaught	I'll just praise my POKéMON from now\non without the swagger.	Ik prijs mijn POKéMON voortaan\ngewoon zonder opscheppen.	
+MoveTutor_Text_RolloutTeach	Did you know that you can go from\nhere a long way in that direction\lwithout changing direction?\pI might even be able to roll\nthat way.\pDo you think your POKéMON will\nwant to roll, too?\pI can teach one the move ROLLOUT\nif you'd like.	Wist je dat je van hier ver die\nkant op kunt gaan zonder van\lrichting te veranderen?\pMisschien kan ik zelfs die kant\nop rollen.\pDenk je dat jouw POKéMON ook\nwil rollen?\pIk kan er een de aanval ROLLEN\nleren als je wilt.	
+MoveTutor_Text_RolloutDeclined	You don't need to be shy about it.\nLet's roll!	Je hoeft niet verlegen te zijn.\nLaten we rollen!	
+MoveTutor_Text_RolloutWhichMon	Ehehe, sure thing! It'd be great if\nthe POKéMON looked like me.	Hehe, tuurlijk! Het zou mooi zijn\nals de POKéMON op mij leek.	
+MoveTutor_Text_RolloutTaught	Rolling around in the grass makes me\nhappy. Come on, let's roll!	Rollen in het gras maakt me\nblij. Kom op, laten we rollen!	
+MoveTutor_Text_FuryCutterTeach	There's a move that gets stronger\nwhen you keep using it in a row.\pIt's a BUG-type move, and it is\nwickedly cool.\pIt's called FURY CUTTER.\nWant me to teach it to a POKéMON?	Er is een aanval die sterker\nwordt als je hem steeds gebruikt.\pHet is een INSECT-aanval en hij is\nbelachelijk gaaf.\pHij heet WILDE SNEDE.\nZal ik hem een POKéMON leren?	
+MoveTutor_Text_FuryCutterDeclined	We're not on the same wavelength.	We zitten niet op dezelfde golflengte.	
+MoveTutor_Text_FuryCutterWhichMon	Yay!\nShow me which POKéMON I should teach.	Joepie!\nLaat zien welke POKéMON ik moet leren.	
+MoveTutor_Text_FuryCutterTaught	I get a thrill watching to see if\nthe move keeps hitting in succession!	Ik krijg kippenvel als ik zie of\nde aanval steeds blijft raken!	
+MoveTutor_MimicTeach	Ah, young one!\pI am also a young one, but I mimic\nthe styles and speech of the elderly\lfolks of this town.\pWhat do you say, young one?\nWould you agree to it if I were to\loffer to teach the move MIMIC?	Ah, jongere!\pIk ben zelf ook een jongere, maar ik\nneem de stijl en spraak van de oudjes\lvan dit dorp over.\pWat zeg je, jongere?\nZou je ja zeggen als ik aanbood\lde aanval NADOEN te leren?	
+MoveTutor_MimicDeclined	Oh, boo! I wanted to teach MIMIC\nto your POKéMON!	Oh, jammer! Ik wilde jouw POKéMON\nNADOEN leren!	
+MoveTutor_Text_MimicWhichMon	Fwofwo! And so I shall!\nLet me see the POKéMON\lyou wish me to teach.	Fwofwo! En dat doe ik dan!\nLaat me de POKéMON zien\ldie ik moet leren.	
+MoveTutor_Text_MimicTaught	MIMIC is a move of great depth.\pCould you execute it to perfection\nas well as me…?	NADOEN is een aanval met veel diepte.\pKun jij hem net zo perfect als ik\nuitvoeren…?	
+MoveTutor_Text_MetronomeTeach	I want all sorts of things!\nBut I used up my allowance…\pWouldn't it be nice if there were\na spell that made money appear when\lyou waggle a finger?\pIf you want, I can teach your POKéMON\nthe move METRONOME.\pMoney won't appear, but your POKéMON\nwill waggle a finger. Yes?	Ik wil allerlei dingen!\nMaar mijn zakgeld is op…\pZou het niet fijn zijn als er een\ntoverspreuk was die geld liet komen\lals je met je vinger zwaait?\pAls je wilt, leer ik je POKéMON\nde aanval METRONOOM.\pGeld komt er niet, maar je POKéMON\nzwaait met een vinger. Ja?	
+MoveTutor_Text_MetronomeDeclined	Okay. I'll be here if you change\nyour mind.	Oké. Ik ben hier als je\nzin krijgt.	
+MoveTutor_Text_MetronomeWhichMon	Okay! I'll teach it!\nWhich POKéMON should I teach?	Oké! Ik leer het!\nWelke POKéMON moet ik het leren?	
+MoveTutor_Text_MetronomeTaught	When a POKéMON waggles its finger\nlike a METRONOME, all sorts of nice\lthings happen.\pWouldn't it be nice if we could\nuse it, too?	Als een POKéMON met zijn vinger\nzwaait als een METRONOOM, gebeuren\lallerlei leuke dingen.\pZou het niet fijn zijn als wij\nhet ook konden?	
+MoveTutor_Text_SleepTalkTeach	Humph! My wife relies on HIDDEN\nPOWER to stay awake.\pShe should just take a nap like I do,\nand SLEEP TALK.\pI can teach your POKéMON how to\nSLEEP TALK instead. Interested?	Hmpf! Mijn vrouw gebruikt BINNENKRACHT\nom wakker te blijven.\pZe kan beter een dutje doen zoals\nik, en SLAAPPRATEN.\pIk kan jouw POKéMON in plaats daarvan\nSLAAPPRATEN leren. Interesse?	
+MoveTutor_Text_SleepTalkDeclined	Oh, fine, fine. You want to stay awake\nwith HIDDEN POWER, too…	Oh, goed, goed. Je wilt ook wakker\nblijven met BINNENKRACHT…	
+MoveTutor_Text_SleepTalkWhichMon	Ah, an appreciative child!\nWhich POKéMON should I teach?	Ah, een dankbaar kind!\nWelke POKéMON moet ik het leren?	
+MoveTutor_Text_SleepTalkTaught	I've never once gotten my wife's\ncoin trick right.\pI would be happy if I got it right\neven as I SLEEP TALK…	Ik heb nooit het muntentrucje\nvan mijn vrouw goed gekund.\pIk zou blij zijn als ik het goed\ndeed terwijl ik SLAAPPRAAT…	
+MoveTutor_Text_SubstituteTeach	When I see the wide world from up\nhere on the roof…\pI think about how nice it would be\nif there were more than just one me\lso I could enjoy all sorts of lives.\pOf course it's not possible.\nGiggle…\pI know! Would you be interested in\nhaving a POKéMON learn SUBSTITUTE?	Als ik vanaf het dak de wijde\nwereld zie…\pDenk ik hoe fijn het zou zijn als er\nmeer dan één van mij was, zodat ik\lallerlei levens kon beleven.\pNatuurlijk kan dat niet.\nGniffel…\pIk weet het! Zou je willen dat\neen POKéMON SUBSTITUUT leert?	
+MoveTutor_Text_SubstituteDeclined	Oh, no?\pA POKéMON can make a copy of\nitself using it, you know.	Oh, nee?\pMet SUBSTITUUT kan een POKéMON\neen kopie van zichzelf maken, weet je.	
+MoveTutor_Text_SubstituteWhichMon	Giggle…\nWhich POKéMON do you want me to\lteach SUBSTITUTE?	Gniffel…\nWelke POKéMON wil je dat ik\lSUBSTITUUT leer?	
+MoveTutor_Text_SubstituteTaught	We human beings should enjoy our\nown lives to the utmost!\pI hope you'll get that way, too!	Wij mensen moeten ons eigen\nleven volop genieten!\pIk hoop dat jij dat ook gaat doen!	
+MoveTutor_Text_DynamicPunchTeach	I can't do this anymore!\pIt's utterly hopeless!\pI'm a FIGHTING-type TRAINER,\nso I can't win at the MOSSDEEP GYM\lno matter how hard I try!\pArgh! Punch! Punch! Punch!\nPunch! Punch! Punch!\pWhat, don't look at me that way!\nI'm only hitting the ground!\pOr do you want me to teach your\nPOKéMON DYNAMICPUNCH?	Ik kan dit niet meer!\pHet is totaal hopeloos!\pIk ben een VECHT-TRAINER, dus ik\nkan de MOSSDEEP GYM niet winnen,\lhoe hard ik ook mijn best doe!\pArgh! Stoot! Stoot! Stoot!\nStoot! Stoot! Stoot!\pWat, kijk me niet zo aan!\nIk sla alleen op de grond!\pOf wil je dat ik je POKéMON\nDYNAMOVUIST leer?	
+MoveTutor_Text_DynamicPunchDeclined	Darn! You're even making fun of me?\nPunch! Punch! Punch!	Verdorie! Maak je me zelfs belachelijk?\nStoot! Stoot! Stoot!	
+MoveTutor_Text_DynamicPunchWhichMon	What? You do? You're a good person!\nWhich POKéMON should I teach?	Wat? Wil je dat? Je bent een goed mens!\nWelke POKéMON moet ik het leren?	
+MoveTutor_Text_DynamicPunchTaught	I want you to win at the MOSSDEEP GYM\nusing that DYNAMICPUNCH!	Ik wil dat je de MOSSDEEP GYM wint\nmet die DYNAMOVUIST!	
+MoveTutor_Text_DoubleEdgeTeach	Sigh…\pSOOTOPOLIS's GYM LEADER is really\nlovably admirable.\pBut that also means I have many\nrivals for his attention.\pHe's got appeal with a DOUBLE-EDGE.\nI couldn't even catch his eye.\pPlease, let me teach your POKéMON\nthe move DOUBLE-EDGE!	Zucht…\pDe GYMLEIDER van SOOTOPOLIS is echt\nlief en bewonderenswaardig.\pMaar dat betekent ook dat ik veel\nrivalen heb voor zijn aandacht.\pHij heeft een dubbelsnijdende\naantrekkingskracht.\lIk kon zijn oog niet vangen.\pLaat me alsjeblieft je POKéMON\nde aanval DUBBELSNIJD leren!	
+MoveTutor_Text_DoubleEdgeDeclined	Oh…\nEven you rejected me…	Oh…\nOok jij wijst me af…	
+MoveTutor_Text_DoubleEdgeWhichMon	Okay, which POKéMON should I teach\nDOUBLE-EDGE?	Oké, welke POKéMON moet ik\nDUBBELSNIJD leren?	
+MoveTutor_Text_DoubleEdgeTaught	I won't live for love anymore!\nI'll become tough!	Ik leef niet meer voor de liefde!\nIk word stoer!	
+MoveTutor_Text_ExplosionTeach	I don't intend to be going nowhere\nfast in the sticks like this forever.\pYou watch me, I'll get out to the city\nand become a huge hit.\pSeriously, I'm going to cause\na huge EXPLOSION of popularity!\pIf you overheard that, I'll happily\nteach EXPLOSION to your POKéMON!	Ik ben niet van plan eeuwig in\nde bush te blijven zitten.\pJe zult zien, ik ga naar de stad\nen word een grote hit.\pSerieus, ik ga een enorme\nONTPLOFFING van populariteit\lveroorzaken!\pAls je dat hebt gehoord, leer ik je\nPOKéMON graag ONTPLOFFING!	
+MoveTutor_Text_ExplosionDeclined	Gaah! You're turning me down because\nI live in the country?	Gaah! Je wijst me af omdat\nik op het platteland woon?	
+MoveTutor_Text_ExplosionWhichMon	Fine! An EXPLOSION it is!\nWhich POKéMON wants to blow up?	Goed! Een ONTPLOFFING dus!\nWelke POKéMON wil ontploffen?	
+MoveTutor_Text_ExplosionTaught	For a long time, I've taught POKéMON\nhow to use EXPLOSION, but I've yet\lto ignite my own EXPLOSION…\pMaybe it's because deep down,\nI would rather stay here…	Ik leer POKéMON al lang\nONTPLOFFING, maar mijn eigen\lONTPLOFFING moet nog komen…\pMisschien omdat ik diep van binnen\nliever hier blijf…	

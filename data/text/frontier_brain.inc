@@ -1,90 +1,91 @@
 @ Battle Tower
 gText_AnabelWonSilver::
-	.string "It's very disappointing…$"
+	.string "Wat jammer…$"
 
 gText_AnabelDefeatSilver::
-	.string "Okay, I understand…$"
+	.string "Oké, ik begrijp het…$"
 
 gText_AnabelWonGold::
-	.string "I'm terribly sorry…$"
+	.string "Het spijt me heel erg…$"
 
 gText_AnabelDefeatGold::
-	.string "Thank you…$"
+	.string "Bedankt…$"
 
 @ Battle Dome
 gText_TuckerWonSilver::
-	.string "Ahahaha! Aren't you embarrassed?\n"
-	.string "Everyone's watching!$"
+	.string "Hahaha! Schaam je je niet?\n"
+	.string "Iedereen kijkt!$"
 
 gText_TuckerDefeatSilver::
 	.string "Grr…\n"
-	.string "What the…$"
+	.string "Wat nou…$"
 
 gText_TuckerWonGold::
-	.string "My DOME ACE title isn't just for show!$"
+	.string "Mijn titel DOME ACE is niet\n"
+	.string "zomaar voor de show!$"
 
 gText_TuckerDefeatGold::
-	.string "Ahahaha!\n"
-	.string "You're inspiring!$"
+	.string "Hahaha!\n"
+	.string "Jij inspireert!$"
 
 @ Battle Factory
 gText_NolandWonSilver::
-	.string "Way to work!\n"
-	.string "That was a good lesson, eh?$"
+	.string "Goed gedaan!\n"
+	.string "Dat was een goede les, hè?$"
 
 gText_NolandDefeatSilver::
-	.string "Good job!\n"
-	.string "You know what you're doing!$"
+	.string "Goed gedaan!\n"
+	.string "Jij weet wat je doet!$"
 
 gText_NolandWonGold::
-	.string "Hey, hey, hey!\n"
-	.string "You're finished already?$"
+	.string "Hé, hé, hé!\n"
+	.string "Al klaar?$"
 
 gText_NolandDefeatGold::
-	.string "What happened here?$"
+	.string "Wat gebeurde hier?$"
 
 @ Battle Pike
 gText_LucyWonSilver::
-	.string "Humph…$"
+	.string "Hmpf…$"
 
 gText_LucyDefeatSilver::
-	.string "Urk…$"
+	.string "Auw…$"
 
 gText_LucyWonGold::
 	.string "Hah!$"
 
 gText_LucyDefeatGold::
-	.string "Darn!$"
+	.string "Verdorie!$"
 
 @ Battle Arena
 gText_GretaWonSilver::
-	.string "Oh, come on!\n"
-	.string "You have to try harder than that!$"
+	.string "Kom op!\n"
+	.string "Je moet harder je best doen!$"
 
 gText_GretaDefeatSilver::
-	.string "No way!\n"
-	.string "Good job!$"
+	.string "Echt niet!\n"
+	.string "Goed gedaan!$"
 
 gText_GretaWonGold::
-	.string "Heheh!\n"
-	.string "What did you expect?$"
+	.string "Hehe!\n"
+	.string "Wat had je verwacht?$"
 
 gText_GretaDefeatGold::
 	.string "Huh?\n"
-	.string "Are you serious?!$"
+	.string "Meen je dat?!$"
 
 @ Battle Palace
 gText_SpenserWonSilver::
-	.string "Your POKéMON are wimpy because\n"
-	.string "you're wimpy as a TRAINER!$"
+	.string "Je POKéMON zijn watjes omdat\n"
+	.string "je zelf een watje van een TRAINER bent!$"
 
 gText_SpenserDefeatSilver::
 	.string "Ah…\n"
-	.string "Now this is something else…$"
+	.string "Dit is andere koek…$"
 
 gText_SpenserWonGold::
 	.string "Gwahahaha!\n"
-	.string "My brethren, we have nothing to fear!$"
+	.string "Broeders, we hebben niets te vrezen!$"
 
 gText_SpenserDefeatGold::
 	.string "Gwah!\n"
@@ -92,17 +93,17 @@ gText_SpenserDefeatGold::
 
 @ Battle Pyramid
 gText_BrandonWonSilver::
-	.string "Hey! What's wrong with you!\n"
-	.string "Let's see some effort! Get up!$"
+	.string "Hé! Wat is er met je!\n"
+	.string "Laat eens wat inzet zien! Sta op!$"
 
 gText_BrandonDefeatSilver::
-	.string "That's it! You've done great!\n"
-	.string "You've worked hard for this!$"
+	.string "Dat is het! Je hebt het geweldig\n"
+	.string "gedaan! Je hebt hier hard voor gewerkt!$"
 
 gText_BrandonWonGold::
-	.string "Hey! Don't you give up now!\n"
-	.string "Get up! Don't lose faith in yourself!$"
+	.string "Hé! Geef nu niet op!\n"
+	.string "Sta op! Verlies je geloof in jezelf niet!$"
 
 gText_BrandonDefeatGold::
-	.string "That's it! You've done it!\n"
-	.string "You kept working for this!$"
+	.string "Dat is het! Je hebt het gedaan!\n"
+	.string "Je bleef ervoor werken!$"

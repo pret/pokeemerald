@@ -1,9 +1,9 @@
 key	english	dutch	notes
-Questionnaire_Text_FillOut	There is a questionnaire.\nWould you like to fill it out?		
-Questionnaire_Text_ThankYou	Thank you for taking the time to\nfill out our questionnaire.\pYour feedback will be used for\nfuture reference.		
-Questionnaire_Text_YouKnowThoseWordsGift	Oh, hello!\nYou know those words?\pThat means you must know about\nthe MYSTERY GIFT.\pFrom now on, you should be\nreceiving MYSTERY GIFTS!		
-Questionnaire_Text_YouCanAccessMysteryGift	Once you save your game, you can\naccess the MYSTERY GIFT.		
-Questionnaire_Text_YouKnowThoseWordsEvent	Oh, hello!\nYou know those words?\pThat means you must know about\nthe MYSTERY EVENT.		
-Questionnaire_Text_YouCanAccessMysteryEvent	Once you save your game, you can\naccess the MYSTERY EVENT.		
-MysteryGift_Text_TheresATicketForYou	Thank you for using the MYSTERY\nEVENT System.\pYou must be {PLAYER}.\nThere is a ticket here for you.		
-MysteryGift_Text_TryUsingItAtLilycovePort	It appears to be for use at\nthe LILYCOVE CITY port.\pWhy not give it a try and see what\nit is about?		
+Questionnaire_Text_FillOut	There is a questionnaire.\nWould you like to fill it out?	Er ligt een vragenlijst.\nWil je hem invullen?	
+Questionnaire_Text_ThankYou	Thank you for taking the time to\nfill out our questionnaire.\pYour feedback will be used for\nfuture reference.	Bedankt dat je de tijd nam om\nonze vragenlijst in te vullen.\pJe antwoorden gebruiken we\nvoor de toekomst.	
+Questionnaire_Text_YouKnowThoseWordsGift	Oh, hello!\nYou know those words?\pThat means you must know about\nthe MYSTERY GIFT.\pFrom now on, you should be\nreceiving MYSTERY GIFTS!	Oh, hallo!\nKen je die woorden?\pDan weet je vast van het\nGEHEIM CADEAU.\pVanaf nu krijg je vast\nGEHEIME CADEAUS!	
+Questionnaire_Text_YouCanAccessMysteryGift	Once you save your game, you can\naccess the MYSTERY GIFT.	Als je je spel opslaat, kun je\nhet GEHEIM CADEAU gebruiken.	
+Questionnaire_Text_YouKnowThoseWordsEvent	Oh, hello!\nYou know those words?\pThat means you must know about\nthe MYSTERY EVENT.	Oh, hallo!\nKen je die woorden?\pDan weet je vast van het\nGEHEIME EVENT.	
+Questionnaire_Text_YouCanAccessMysteryEvent	Once you save your game, you can\naccess the MYSTERY EVENT.	Als je je spel opslaat, kun je\nhet GEHEIME EVENT gebruiken.	
+MysteryGift_Text_TheresATicketForYou	Thank you for using the MYSTERY\nEVENT System.\pYou must be {PLAYER}.\nThere is a ticket here for you.	Bedankt voor het gebruik van het\nGEHEIME EVENT-systeem.\pJij bent vast {PLAYER}.\nEr ligt hier een kaartje voor je.	
+MysteryGift_Text_TryUsingItAtLilycovePort	It appears to be for use at\nthe LILYCOVE CITY port.\pWhy not give it a try and see what\nit is about?	Het lijkt voor de haven van\nLILYCOVE CITY te zijn.\pProbeer het eens en kijk\nwaar het over gaat?	

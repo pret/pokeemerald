@@ -1,16 +1,16 @@
 key	english	dutch	notes
-BerryBlender_Text_BlendWithTheBlendMaster	BLEND MASTER: Indeed I am!\nThe BLEND MASTER am I!\pBlend with me, and you shall witness\nthe mastery I bring to blending!		
-BerryBlender_Text_SeeMyMasteryInAction	BLEND MASTER: Hmmm! So, you wish to\nsee my mastery in action?		
-BerryBlender_Text_TooBusyNowIsee	Hmmm!\pSo, you are too busy now, I see!\pBut fear not!\nI shall be here all day!\lHurry back from your errand!		
-BerryBlender_Text_BlendMasterNoBerries	Hmmm!\pYou haven't got a single BERRY!\pI shall be here all day!\nHurry back with some BERRIES!		
-BerryBlender_Text_BlendMasterKnowHowToMakePokeblocks	Of course!\nOf course!\pIncidentally…\nYou do know how to blend {POKEBLOCK}S\lfrom BERRIES?		
-BerryBlender_Text_BlendMasterExplainBerryBlending	Hmmm!\pAh, but it is a simple process!\pWhen the BLENDER's arrow comes to\nyour marker, just press the A Button.\pThat's all you have to do.\pWhen you see how precisely I press\nthe A Button, you will understand.		
-BerryBlender_Text_BlendMasterLetsBerryBlender	Fine!\pLet's get started, then!\pAll together with the BLEND MASTER,\nlet's BERRY BLENDER!		
-BerryBlender_Text_BlendMasterNoPokeblockCase	Hmmm!\pYou don't appear to have gotten\nthe {POKEBLOCK} CASE!\pI shall be here all day!\nObtain the {POKEBLOCK} CASE and hurry back!		
-BerryBlender_Text_BlendMasterPokeblockCaseFull	Hmmm!\pYour {POKEBLOCK} CASE appears to be full!\pI shall be here all day!\nUse some {POKEBLOCK}S and hurry back!		
-BerryBlender_Text_WhoaAwesome	Whoa!\nAwesome!		
-BerryBlender_Text_WickedlyFast	Wickedly fast!		
-BerryBlender_Text_WhatAnExpert	What an expert!		
-BerryBlender_Text_MadeAmazingPokeblocksWithMaster	When I blended with the MASTER,\nwe made amazing {POKEBLOCK}S!		
-BerryBlender_Text_QualitiesOfBlendMaster	Eyes that track the arrow with\nmachinelike intensity…\pA hand that taps the A Button\nwith clockwork-like precision…\pPossessing these qualities makes\nthe BLEND MASTER truly great.		
-BerryBlender_Text_MasterWorksOnSkillsInMountains	The BLEND MASTER's supposed to work\non his skills deep in the mountains.\pSometimes, he comes to LILYCOVE\nto blend BERRIES all day long.		
+BerryBlender_Text_BlendWithTheBlendMaster	BLEND MASTER: Indeed I am!\nThe BLEND MASTER am I!\pBlend with me, and you shall witness\nthe mastery I bring to blending!	MIXMEESTER: Inderdaad!\nDe MIXMEESTER ben ik!\pMix met mij en zie de meesterschap\ndie ik in het mixen breng!	
+BerryBlender_Text_SeeMyMasteryInAction	BLEND MASTER: Hmmm! So, you wish to\nsee my mastery in action?	MIXMEESTER: Hmmm! Dus je wilt mijn\nmeesterschap in actie zien?	
+BerryBlender_Text_TooBusyNowIsee	Hmmm!\pSo, you are too busy now, I see!\pBut fear not!\nI shall be here all day!\lHurry back from your errand!	Hmmm!\pJe hebt het nu te druk, zie ik!\pMaar geen zorgen!\nIk ben hier de hele dag!\lKom snel terug van je klusje!	
+BerryBlender_Text_BlendMasterNoBerries	Hmmm!\pYou haven't got a single BERRY!\pI shall be here all day!\nHurry back with some BERRIES!	Hmmm!\pJe hebt geen enkele BES!\pIk ben hier de hele dag!\nKom snel terug met BESSEN!	
+BerryBlender_Text_BlendMasterKnowHowToMakePokeblocks	Of course!\nOf course!\pIncidentally…\nYou do know how to blend {POKEBLOCK}S\lfrom BERRIES?	Natuurlijk!\nNatuurlijk!\pTrouwens…\nWeet je hoe je {POKEBLOCK}S\lmaakt van BESSEN?	
+BerryBlender_Text_BlendMasterExplainBerryBlending	Hmmm!\pAh, but it is a simple process!\pWhen the BLENDER's arrow comes to\nyour marker, just press the A Button.\pThat's all you have to do.\pWhen you see how precisely I press\nthe A Button, you will understand.	Hmmm!\pAh, maar het is heel simpel!\pAls de pijl van de MIXER bij jouw\nmarkering komt, druk je op de A-knop.\pMeer hoef je niet te doen.\pAls je ziet hoe precies ik op de\nA-knop druk, begrijp je het.	
+BerryBlender_Text_BlendMasterLetsBerryBlender	Fine!\pLet's get started, then!\pAll together with the BLEND MASTER,\nlet's BERRY BLENDER!	Goed!\pLaten we beginnen!\pSamen met de MIXMEESTER,\nlaten we BESSENMIXEN!	
+BerryBlender_Text_BlendMasterNoPokeblockCase	Hmmm!\pYou don't appear to have gotten\nthe {POKEBLOCK} CASE!\pI shall be here all day!\nObtain the {POKEBLOCK} CASE and hurry back!	Hmmm!\pJe hebt de {POKEBLOCK}-DOOS\nnog niet gekregen!\pIk ben hier de hele dag!\nHaal de {POKEBLOCK}-DOOS en kom snel terug!	
+BerryBlender_Text_BlendMasterPokeblockCaseFull	Hmmm!\pYour {POKEBLOCK} CASE appears to be full!\pI shall be here all day!\nUse some {POKEBLOCK}S and hurry back!	Hmmm!\pJe {POKEBLOCK}-DOOS is vol!\pIk ben hier de hele dag!\nGebruik wat {POKEBLOCK}S en kom snel terug!	
+BerryBlender_Text_WhoaAwesome	Whoa!\nAwesome!	Wauw!\nGaaf!	
+BerryBlender_Text_WickedlyFast	Wickedly fast!	Waanzinnig snel!	
+BerryBlender_Text_WhatAnExpert	What an expert!	Wat een expert!	
+BerryBlender_Text_MadeAmazingPokeblocksWithMaster	When I blended with the MASTER,\nwe made amazing {POKEBLOCK}S!	Samen met de MEESTER maakten we\nsuper {POKEBLOCK}S!	
+BerryBlender_Text_QualitiesOfBlendMaster	Eyes that track the arrow with\nmachinelike intensity…\pA hand that taps the A Button\nwith clockwork-like precision…\pPossessing these qualities makes\nthe BLEND MASTER truly great.	Ogen die de pijl volgen met\nmachine-achtige kracht…\pEen hand die de A-knop drukt met\nprecisie als een klok…\pMet deze eigenschappen is de\nMIXMEESTER echt geweldig.	
+BerryBlender_Text_MasterWorksOnSkillsInMountains	The BLEND MASTER's supposed to work\non his skills deep in the mountains.\pSometimes, he comes to LILYCOVE\nto blend BERRIES all day long.	De MIXMEESTER oefent zijn kunsten\nin de diepe bergen.\pSoms komt hij naar LILYCOVE om de\nhele dag BESSEN te mixen.	
