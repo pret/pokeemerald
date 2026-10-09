@@ -275,7 +275,7 @@ BattleFrontier_BattlePikeLobby_Text_TakeChallenge:
 
 BattleFrontier_BattlePikeLobby_Text_ExplainBattlePike:
 	.string "Hier doen we een toernooi dat we\n"
-	.string "Battle Choice noemen.\p"
+	.string "KEUZEGEVECHT noemen.\p"
 	.string "De regels zijn heel simpel…\p"
 	.string "Kies een van drie paden en ga naar\n"
 	.string "de eindkamer aan het eind van de\l"
@@ -302,7 +302,7 @@ BattleFrontier_BattlePikeLobby_Text_WhichChallengeMode:
 BattleFrontier_BattlePikeLobby_Text_NotEnoughValidMonsLv50:
 	.string "Het spijt me, maar…\p"
 	.string "Je hebt geen drie POKéMON die mee\n"
-	.string "mogen doen aan Battle Choice.\p"
+	.string "mogen doen aan KEUZEGEVECHT.\p"
 	.string "Je hebt drie verschillende POKéMON\n"
 	.string "van Level 50 of lager nodig.\p"
 	.string "Ze moeten ook verschillende\n"
@@ -313,7 +313,7 @@ BattleFrontier_BattlePikeLobby_Text_NotEnoughValidMonsLv50:
 BattleFrontier_BattlePikeLobby_Text_NotEnoughValidMonsLvOpen:
 	.string "Het spijt me, maar…\p"
 	.string "Je hebt geen drie POKéMON die mee\n"
-	.string "mogen doen aan Battle Choice.\p"
+	.string "mogen doen aan KEUZEGEVECHT.\p"
 	.string "Je hebt drie verschillende\n"
 	.string "POKéMON nodig.\p"
 	.string "Ze moeten ook verschillende\n"
@@ -326,7 +326,7 @@ BattleFrontier_BattlePikeLobby_Text_PleaseChooseThreeMons:
 	.string "meedoen aan de uitdaging…$"
 
 BattleFrontier_BattlePikeLobby_Text_SaveBeforeChallenge:
-	.string "Voor je Battle Choice-uitdaging\n"
+	.string "Voor je KEUZEGEVECHT-uitdaging\n"
 	.string "begint, moet ik opslaan.\l"
 	.string "Is dat goed?$"
 
@@ -348,7 +348,7 @@ BattleFrontier_BattlePikeLobby_Text_ShallRecordResults:
 
 @ Unused
 BattleFrontier_BattlePikeLobby_Text_AwardYouTheseBattlePoints2:
-	.string "Omdat je Battle Choice hebt\n"
+	.string "Omdat je KEUZEGEVECHT hebt\n"
 	.string "voltooid, krijg je deze\l"
 	.string "GEVECHTSPUNTEN…$"
 
@@ -400,7 +400,7 @@ BattleFrontier_BattlePikeLobby_Text_TrainersWhicheverPathIChoose:
 	.string "welk pad ik ook kies.$"
 
 BattleFrontier_BattlePikeLobby_Text_RulesAreListed:
-	.string "De regels van Battle Choice\n"
+	.string "De regels van KEUZEGEVECHT\n"
 	.string "staan hier.$"
 
 BattleFrontier_BattlePikeLobby_Text_ReadWhichHeading:
@@ -408,15 +408,15 @@ BattleFrontier_BattlePikeLobby_Text_ReadWhichHeading:
 
 BattleFrontier_BattlePikeLobby_Text_ExplainPokenavBagRules:
 	.string "De TAS en POKéNAV mag je niet\n"
-	.string "gebruiken tijdens Battle Choice.$"
+	.string "gebruiken tijdens KEUZEGEVECHT.$"
 
 BattleFrontier_BattlePikeLobby_Text_ExplainHeldItemRules:
-	.string "Bij Battle Choice werkt elke BES of\n"
+	.string "Bij KEUZEGEVECHT werkt elke BES of\n"
 	.string "KRUID die POKéMON vasthouden\l"
 	.string "maar één keer.$"
 
 BattleFrontier_BattlePikeLobby_Text_ExplainMonOrderRules:
-	.string "Bij Battle Choice kun je de\n"
+	.string "Bij KEUZEGEVECHT kun je de\n"
 	.string "volgorde van je POKéMON niet\l"
 	.string "veranderen.\p"
 	.string "Stel de volgorde in voor je\n"

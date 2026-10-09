@@ -243,7 +243,7 @@ BattleFrontier_OutsideEast_Text_BattleArenaSign:
 
 BattleFrontier_OutsideEast_Text_BattlePyramidSign:
 	.string "Dit is de BATTLE PYRAMID!\n"
-	.string "Ga vooruit met de Battle Quest!$"
+	.string "Ga vooruit met de GEVECHTSTOCHT!$"
 
 BattleFrontier_OutsideEast_Text_RankingHallSign:
 	.string "BATTLE FRONTIER RANKING HALL\n"

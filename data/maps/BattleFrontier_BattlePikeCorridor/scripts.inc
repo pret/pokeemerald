@@ -54,6 +54,6 @@ BattleFrontier_BattlePikeCorridor_Movement_AttendantEnterCorridor:
 	step_end
 
 BattleFrontier_BattlePikeCorridor_Text_YourChallengeHasBegun:
-	.string "Je Battle Choice-uitdaging\n"
+	.string "Je KEUZEGEVECHT-uitdaging\n"
 	.string "is nu begonnen…$"
 

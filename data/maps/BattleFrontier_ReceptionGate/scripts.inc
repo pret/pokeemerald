@@ -371,20 +371,20 @@ BattleFrontier_ReceptionGate_Text_BattleArenaInfo:
 BattleFrontier_ReceptionGate_Text_BattleFactoryInfo:
 	.string "De BATTLE FACTORY is het grote\n"
 	.string "gebouw dat het dichtst bij ons is.\p"
-	.string "Daar wordt Battle Swap gedaan.\p"
-	.string "Battle Swap heeft twee routes\n"
+	.string "Daar wordt WISSELGEVECHT gedaan.\p"
+	.string "WISSELGEVECHT heeft twee routes\n"
 	.string "voor ENKELE en DUBBELE GEVECHTEN.$"
 
 BattleFrontier_ReceptionGate_Text_BattlePikeInfo:
 	.string "De BATTLE PIKE is het gebouw in de\n"
 	.string "vorm van een POKéMON, links van het\l"
 	.string "midden van de BATTLE FRONTIER.\p"
-	.string "Daar wordt Battle Choice gedaan.$"
+	.string "Daar wordt KEUZEGEVECHT gedaan.$"
 
 BattleFrontier_ReceptionGate_Text_BattlePyramidInfo:
 	.string "De BATTLE PYRAMID is de enorme\n"
 	.string "piramide.\p"
-	.string "Daar wordt Battle Quest gedaan.$"
+	.string "Daar wordt GEVECHTSTOCHT gedaan.$"
 
 BattleFrontier_ReceptionGate_Text_RankingHallInfo:
 	.string "De RANKING HALL ligt bij de\n"

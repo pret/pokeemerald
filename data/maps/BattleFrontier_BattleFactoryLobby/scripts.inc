@@ -323,7 +323,7 @@ BattleFrontier_BattleFactoryLobby_Text_WelcomeForSingleBattle:
 	.string "Waar het verstand van TRAINERS\n"
 	.string "wordt getest!\p"
 	.string "Welkom bij de BATTLE FACTORY!\p"
-	.string "Ik leg je het Battle Swap\n"
+	.string "Ik leg je het WISSELGEVECHT\n"
 	.string "Enkel-toernooi uit.$"
 
 BattleFrontier_BattleFactoryLobby_Text_TakeSinglesChallenge:
@@ -331,7 +331,7 @@ BattleFrontier_BattleFactoryLobby_Text_TakeSinglesChallenge:
 	.string "Swap Enkel-uitdaging?$"
 
 BattleFrontier_BattleFactoryLobby_Text_ExplainSinglesChallenge:
-	.string "De Battle Swap Enkel-uitdaging\n"
+	.string "De WISSELGEVECHT Enkel-uitdaging\n"
 	.string "is een ENKEL GEVECHT met\l"
 	.string "alleen leen-POKéMON.\p"
 	.string "Eerst leen je drie POKéMON\n"
@@ -381,7 +381,8 @@ BattleFrontier_BattleFactoryLobby_Text_ReturnMons:
 
 BattleFrontier_BattleFactoryLobby_Text_CongratsSevenWins:
 	.string "Gefeliciteerd! Je hebt zeven\n"
-	.string "Battle Swap-gevechten achter elkaar!$"
+	.string "WISSELGEVECHTEN achter\l"
+	.string "elkaar gewonnen!$"
 
 @ Unused
 BattleFrontier_BattleFactoryLobby_Text_AwardBattlePointsForStreak:
@@ -419,7 +420,7 @@ BattleFrontier_BattleFactoryLobby_Text_WelcomeForDoubleBattle:
 	.string "Waar het verstand van TRAINERS\n"
 	.string "wordt getest!\p"
 	.string "Welkom bij de BATTLE FACTORY!\p"
-	.string "Ik leg je het Battle Swap\n"
+	.string "Ik leg je het WISSELGEVECHT\n"
 	.string "Dubbel-toernooi uit.$"
 
 BattleFrontier_BattleFactoryLobby_Text_TakeDoublesChallenge:
@@ -427,7 +428,7 @@ BattleFrontier_BattleFactoryLobby_Text_TakeDoublesChallenge:
 	.string "Swap Dubbel-uitdaging?$"
 
 BattleFrontier_BattleFactoryLobby_Text_ExplainDoublesChallenge:
-	.string "De Battle Swap Dubbel-uitdaging\n"
+	.string "De WISSELGEVECHT Dubbel-uitdaging\n"
 	.string "is een DUBBEL GEVECHT met\l"
 	.string "alleen leen-POKéMON.\p"
 	.string "Eerst leen je drie POKéMON\n"
@@ -504,14 +505,14 @@ BattleFrontier_BattleFactoryLobby_Text_RentalMonsAreVaried:
 	.string "verschillend zijn.$"
 
 BattleFrontier_BattleFactoryLobby_Text_RulesAreListed:
-	.string "De regels van Battle Swap\n"
+	.string "De regels van WISSELGEVECHT\n"
 	.string "staan hier.$"
 
 BattleFrontier_BattleFactoryLobby_Text_ReadWhichHeading:
 	.string "Welk kopje wil je lezen?$"
 
 BattleFrontier_BattleFactoryLobby_Text_ExplainBasicRules:
-	.string "Bij Battle Swap mag je maar drie\n"
+	.string "Bij WISSELGEVECHT mag je maar drie\n"
 	.string "POKéMON gebruiken.\p"
 	.string "Of je nu leent of ruilt, je team mag\n"
 	.string "niet twee of meer dezelfde\l"

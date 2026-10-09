@@ -1180,7 +1180,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_Text_GuitaristReject::
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_GentlemanIntro::
 	.string "Aangenaam.\n"
-	.string "Ik ben {STR_VAR_1}, een GENTLEMAN.$"
+	.string "Ik ben {STR_VAR_1}, een HEER.$"
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_GentlemanMon1::
 	.string "Ik word vergezeld door mijn trouwe\n"

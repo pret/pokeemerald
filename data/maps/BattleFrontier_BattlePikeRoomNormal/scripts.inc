@@ -619,7 +619,7 @@ BattleFrontier_BattlePikeRoomNormal_Text_WillRestoreToFullHealth:
 
 BattleFrontier_BattlePikeRoomNormal_Text_EnjoyRestOfChallenge:
 	.string "Geniet van de rest van je\n"
-	.string "Battle Choice-uitdaging…$"
+	.string "KEUZEGEVECHT-uitdaging…$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_WillRestoreOneMon:
 	.string "Ah, jij hebt geluk.\n"
@@ -728,7 +728,7 @@ BattleFrontier_BattlePikeRoomNormal_Text_RestoreToFullHealth:
 
 BattleFrontier_BattlePikeRoomNormal_Text_EnjoyRestOfChallenge2:
 	.string "Geniet van de rest van je\n"
-	.string "Battle Choice-uitdaging…$"
+	.string "KEUZEGEVECHT-uitdaging…$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_ImThePikeQueen:
 	.string "Ik ben LUCY…\n"

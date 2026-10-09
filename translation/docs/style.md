@@ -27,3 +27,8 @@ The player is a Dutch kid (about 8-10 years old). Every Dutch string must be eas
 - Inside descriptions and dialogue, the words POKéMON and stat names are also in capitals, like the English.
 - One Dutch term per concept, everywhere. The glossary is `translation/nl/misc.tsv` (stats, types, status effects, common words). Check it before inventing a new word and add new recurring terms to it.
 - When a name doesn't fit: choose a shorter synonym, else use a clear abbreviation (SP. AANV), never cut a word silently.
+
+## Loan words and Pokémon names
+- Pokémon names are never translated, in any text (including Pokédex-style category hints like "FANG SNAKE POKéMON", which are descriptions, not names).
+- Common English loan words are fine when kids know them: Ranger, Trainer, Fan, Expert, Pokéfan. Use a Dutch word only when it is clearly better (GENTLEMAN is translated to HEER).
+- Battle Frontier modes have one Dutch term each, always in capitals in dialogue: Battle Swap = WISSELGEVECHT, Battle Choice = KEUZEGEVECHT, Battle Quest = GEVECHTSTOCHT. Facility names (BATTLE TOWER, FACTORY, PIKE, PYRAMID, ...) stay English.

@@ -520,17 +520,17 @@ BattleFrontier_BattlePyramidLobby_Text_WelcomeToBattlePyramid:
 	.string "wordt getest!\p"
 	.string "Welkom bij de BATTLE PYRAMID!\p"
 	.string "Ik ben je gids bij\n"
-	.string "de Battle Quest.$"
+	.string "de GEVECHTSTOCHT.$"
 
 BattleFrontier_BattlePyramidLobby_Text_EmbarkOnChallenge:
-	.string "Durf je de Battle Quest-\n"
+	.string "Durf je de GEVECHTSTOCHT-\n"
 	.string "uitdaging aan?$"
 
 BattleFrontier_BattlePyramidLobby_Text_AwaitFutureChallenge:
 	.string "We wachten op je uitdaging!$"
 
 BattleFrontier_BattlePyramidLobby_Text_ExplainBattlePyramid:
-	.string "De Battle Quest is een gevecht\n"
+	.string "De GEVECHTSTOCHT is een gevecht\n"
 	.string "waarbij je de PYRAMID verkent\l"
 	.string "en naar de top probeert te gaan.\p"
 	.string "In de PYRAMID zijn zeven\n"
@@ -850,7 +850,7 @@ BattleFrontier_BattlePyramidLobby_Text_GiveYouTheseBattlePoints:
 	.string "deze GEVECHTSPUNTEN!$"
 
 BattleFrontier_BattlePyramidLobby_Text_RulesAreListed:
-	.string "De regels van Battle Quest\n"
+	.string "De regels van GEVECHTSTOCHT\n"
 	.string "staan hier.$"
 
 BattleFrontier_BattlePyramidLobby_Text_ReadWhichHeading:

@@ -485,7 +485,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_Text_SaveAndQuitGame:
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_RetireFromChallenge:
 	.string "Wil je stoppen met je\n"
-	.string "Battle Swap-uitdaging?$"
+	.string "WISSELGEVECHT-uitdaging?$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_InvestigatedUpcomingOpponent:
 	.string "Ik heb een beetje onderzoek gedaan\n"

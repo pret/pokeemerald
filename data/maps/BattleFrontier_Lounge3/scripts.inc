@@ -258,14 +258,14 @@ BattleFrontier_Lounge3_Text_ChallengeBattleDomeDouble::
 
 BattleFrontier_Lounge3_Text_ChallengeBattleFactorySingle::
 	.string "Ik zoek een TRAINER die meedoet aan\n"
-	.string "het Battle Swap Enkel-toernooi van\l"
+	.string "het WISSELGEVECHT Enkel-toernooi van\l"
 	.string "de BATTLE FACTORY.\p"
 	.string "Maar tot nu toe heb ik geen TRAINER\n"
 	.string "gezien die wil winnen.$"
 
 BattleFrontier_Lounge3_Text_ChallengeBattleFactoryDouble::
 	.string "Ik zoek een TRAINER die meedoet aan\n"
-	.string "het Battle Swap Dubbel-toernooi van\l"
+	.string "het WISSELGEVECHT Dubbel-toernooi van\l"
 	.string "de BATTLE FACTORY.\p"
 	.string "Maar tot nu toe heb ik geen TRAINER\n"
 	.string "gezien die wil winnen.$"
@@ -293,13 +293,13 @@ BattleFrontier_Lounge3_Text_ChallengeBattleArena::
 
 BattleFrontier_Lounge3_Text_ChallengeBattlePike::
 	.string "Ik zoek een TRAINER die meedoet aan\n"
-	.string "Battle Choice van de BATTLE PIKE.\p"
+	.string "KEUZEGEVECHT van de BATTLE PIKE.\p"
 	.string "Maar tot nu toe heb ik geen TRAINER\n"
 	.string "gezien die wil winnen.$"
 
 BattleFrontier_Lounge3_Text_ChallengeBattlePyramid::
 	.string "Ik zoek een TRAINER die meedoet aan\n"
-	.string "Battle Quest van de\l"
+	.string "GEVECHTSTOCHT van de\l"
 	.string "BATTLE PYRAMID.\p"
 	.string "Maar tot nu toe heb ik geen TRAINER\n"
 	.string "gezien die wil winnen.$"
@@ -366,14 +366,14 @@ BattleFrontier_Lounge3_Text_GetToBattleDomeDouble::
 	.string "Onze toekomst hangt van je af!$"
 
 BattleFrontier_Lounge3_Text_GetToBattleFactorySingle::
-	.string "Ga snel naar het Battle Swap Enkel-\n"
+	.string "Ga snel naar het WISSELGEVECHT Enkel-\n"
 	.string "toernooi van de BATTLE FACTORY!\p"
 	.string "Je moet winnen!\n"
 	.string "Verpest je kans niet!\l"
 	.string "Onze toekomst hangt van je af!$"
 
 BattleFrontier_Lounge3_Text_GetToBattleFactoryDouble::
-	.string "Ga snel naar het Battle Swap Dubbel-\n"
+	.string "Ga snel naar het WISSELGEVECHT Dubbel-\n"
 	.string "toernooi van de BATTLE FACTORY!\p"
 	.string "Je moet winnen!\n"
 	.string "Verpest je kans niet!\l"
@@ -401,14 +401,14 @@ BattleFrontier_Lounge3_Text_GetToBattleArena::
 	.string "Onze toekomst hangt van je af!$"
 
 BattleFrontier_Lounge3_Text_GetToBattlePike::
-	.string "Ga snel naar Battle Choice\n"
+	.string "Ga snel naar KEUZEGEVECHT\n"
 	.string "van de BATTLE PIKE!\p"
 	.string "Je moet winnen!\n"
 	.string "Verpest je kans niet!\l"
 	.string "Onze toekomst hangt van je af!$"
 
 BattleFrontier_Lounge3_Text_GetToBattlePyramid::
-	.string "Ga snel naar Battle Quest\n"
+	.string "Ga snel naar GEVECHTSTOCHT\n"
 	.string "van de BATTLE PYRAMID!\p"
 	.string "Je moet winnen!\n"
 	.string "Verpest je kans niet!\l"

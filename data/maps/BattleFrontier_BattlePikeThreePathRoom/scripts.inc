@@ -297,15 +297,15 @@ BattleFrontier_BattlePikeThreePathRoom_Text_SaveChallengeAndQuit:
 
 BattleFrontier_BattlePikeThreePathRoom_Text_RetireFromChallenge:
 	.string "Wil je stoppen met je\n"
-	.string "Battle Choice-uitdaging?$"
+	.string "KEUZEGEVECHT-uitdaging?$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_AwaitingReturnSaveBeforeResume:
 	.string "We wachtten op je terugkeer…\p"
-	.string "Voor je Battle Choice-uitdaging\n"
+	.string "Voor je KEUZEGEVECHT-uitdaging\n"
 	.string "verdergaat, sla ik het spel op…$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_PleaseEnjoyChallenge:
-	.string "Geniet van je Battle Choice-\n"
+	.string "Geniet van je KEUZEGEVECHT-\n"
 	.string "uitdaging…$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_SavingYourData:

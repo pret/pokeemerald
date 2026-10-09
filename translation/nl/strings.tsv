@@ -1365,9 +1365,9 @@ gText_SingleBattleHallResults	{PLAYER}'s Single Battle Hall Results	Enkel-zaalui
 gText_DoubleBattleHallResults	{PLAYER}'s Double Battle Hall Results	Dubbel-zaaluitslag van {PLAYER}	
 gText_BattleChoiceResults	{PLAYER}'s Battle Choice Results	Keuzegevecht-uitslag van {PLAYER}	
 gText_SetKOTourneyResults	{PLAYER}'s Set KO Tourney Results	KO-toernooiuitslag van {PLAYER}	
-gText_BattleSwapSingleResults	{PLAYER}'s Battle Swap Single Results	Ruilgevecht enkel van {PLAYER}	
-gText_BattleSwapDoubleResults	{PLAYER}'s Battle Swap Double Results	Ruilgevecht dubbel van {PLAYER}	
-gText_BattleQuestResults	{PLAYER}'s Battle Quest Results	Speurtocht-uitslag van {PLAYER}	
+gText_BattleSwapSingleResults	{PLAYER}'s Battle Swap Single Results	Wisselgevecht enkel van {PLAYER}	
+gText_BattleSwapDoubleResults	{PLAYER}'s Battle Swap Double Results	Wisselgevecht dubbel van {PLAYER}	
+gText_BattleQuestResults	{PLAYER}'s Battle Quest Results	Gevechtstocht-uitslag van {PLAYER}	
 gText_Lv502	LV. 50		
 gText_OpenLv	OPEN LV.	OPEN NIV.	label-ok: reviewed
 gText_WinStreak	Win streak: {STR_VAR_1}	Reeks: {STR_VAR_1}	

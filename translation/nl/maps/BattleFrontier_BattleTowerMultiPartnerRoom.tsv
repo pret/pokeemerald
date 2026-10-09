@@ -193,7 +193,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_Text_GuitaristMon1	Check out my entou
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_GuitaristMon2Ask	one {STR_VAR_2} with {STR_VAR_1}!\pYay-hey! Pretty wild, huh?\nWe'll have to do a duet in a tag team!	een {STR_VAR_2} met {STR_VAR_1}!\pYay-hee! Best wild, hè?\nWe moeten een duet doen als team!	
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_GuitaristAccept	Yay-hey! Right on!\nI'll do that registration stuff now!	Yay-hee! Top!\nIk ga me nu aanmelden!	
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_GuitaristReject	My POKéMON rock hard!\nYou'll be sorry, I tell you!	Mijn POKéMON rocken hard!\nJe krijgt er spijt van, echt waar!	
-BattleFrontier_BattleTowerMultiPartnerRoom_Text_GentlemanIntro	Pleased to meet you.\nI am {STR_VAR_1}, a GENTLEMAN.	Aangenaam.\nIk ben {STR_VAR_1}, een GENTLEMAN.	
+BattleFrontier_BattleTowerMultiPartnerRoom_Text_GentlemanIntro	Pleased to meet you.\nI am {STR_VAR_1}, a GENTLEMAN.	Aangenaam.\nIk ben {STR_VAR_1}, een HEER.	
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_GentlemanMon1	I am accompanied by my trusted\n{STR_VAR_1}-using {STR_VAR_2} and	Ik word vergezeld door mijn trouwe\n{STR_VAR_2} met {STR_VAR_1} en	
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_GentlemanMon2Ask	one {STR_VAR_1}-using {STR_VAR_2}.\pMay I ask you to join me in a tag-team\npartnership arrangement?	een {STR_VAR_2} met {STR_VAR_1}.\pMag ik je vragen om samen een\nteam te vormen?	
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_GentlemanAccept	Ah, I thank you for your trust.\nI shall be done with the registration.	Ah, ik dank je voor je vertrouwen.\nIk regel de aanmelding.	
