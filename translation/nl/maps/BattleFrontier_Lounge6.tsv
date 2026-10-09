@@ -1,6 +1,6 @@
 key	english	dutch	notes
-BattleFrontier_Lounge6_Text_WouldYouLikeToTrade	My POKéMON is a {STR_VAR_2}.\nDo you know it?\lIt's quite cute and rather nice.\pThis little one, I could trade with\npride!\pWould you like to trade me a {STR_VAR_1}\nfor my {STR_VAR_2}?		
-BattleFrontier_Lounge6_Text_PromiseIllBeGoodToIt	Oh, it's adorable!\nThank you!\lI promise I'll be good to it!\pOh! I hope you'll be good to\nmy {STR_VAR_2}, too!		
-BattleFrontier_Lounge6_Text_DontTradeForAnythingButMon	Oh, I'm sorry!\nI don't intend to trade for anything\lbut a {STR_VAR_1}.		
-BattleFrontier_Lounge6_Text_WellThatsFineToo	Oh, you won't?\nWell, that's fine, too.\lPlease come visit us again.		
-BattleFrontier_Lounge6_Text_SkittySoMuchCuterThanImagined	Giggle!\nA SKITTY is so much cuter than I had\limagined. I'm delighted!		
+BattleFrontier_Lounge6_Text_WouldYouLikeToTrade	My POKéMON is a {STR_VAR_2}.\nDo you know it?\lIt's quite cute and rather nice.\pThis little one, I could trade with\npride!\pWould you like to trade me a {STR_VAR_1}\nfor my {STR_VAR_2}?	Mijn POKéMON is een {STR_VAR_2}.\nKen je die?\lHij is best schattig en aardig.\pDeze kleine ruil ik met trots!\pWil je me een {STR_VAR_1} ruilen\nvoor mijn {STR_VAR_2}?	
+BattleFrontier_Lounge6_Text_PromiseIllBeGoodToIt	Oh, it's adorable!\nThank you!\lI promise I'll be good to it!\pOh! I hope you'll be good to\nmy {STR_VAR_2}, too!	Oh, wat schattig!\nBedankt!\lIk beloof dat ik goed voor hem zorg!\pOh! Ik hoop dat jij ook goed\nvoor mijn {STR_VAR_2} zorgt!	
+BattleFrontier_Lounge6_Text_DontTradeForAnythingButMon	Oh, I'm sorry!\nI don't intend to trade for anything\lbut a {STR_VAR_1}.	Oh, sorry!\nIk ruil alleen voor een\l{STR_VAR_1}.	
+BattleFrontier_Lounge6_Text_WellThatsFineToo	Oh, you won't?\nWell, that's fine, too.\lPlease come visit us again.	Oh, wil je niet?\nNou, dat is ook goed.\lKom ons gerust weer opzoeken.	
+BattleFrontier_Lounge6_Text_SkittySoMuchCuterThanImagined	Giggle!\nA SKITTY is so much cuter than I had\limagined. I'm delighted!	Hihi!\nEen SKITTY is veel schattiger dan ik\ldacht. Wat ben ik blij!	

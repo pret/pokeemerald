@@ -1,130 +1,130 @@
 key	english	dutch	notes
-BattleFacility_TrainerBattle_PlaceholderText	This is a sample message.		
-gText_BattlePyramidConfirmRest	Your BATTLE PYRAMID quest will be\nsaved so that you may quit for now.\lIs that okay?		
-gText_BattlePyramidConfirmRetire	Are you sure you want to quit your\nPYRAMID quest?		
-BattlePyramid_Text_ExitHintUp1	This floor's exit is in\nthat direction: {UP_ARROW}		
-BattlePyramid_Text_ExitHintLeft1	This floor's exit is in\nthat direction: {LEFT_ARROW}		
-BattlePyramid_Text_ExitHintRight1	This floor's exit is in\nthat direction: {RIGHT_ARROW}		
-BattlePyramid_Text_ExitHintDown1	This floor's exit is in\nthat direction: {DOWN_ARROW}		
-BattlePyramid_Text_ExitHintUp2	The exit on this floor is in\nthe {UP_ARROW} direction.		
-BattlePyramid_Text_ExitHintLeft2	The exit on this floor is in\nthe {LEFT_ARROW} direction.		
-BattlePyramid_Text_ExitHintRight2	The exit on this floor is in\nthe {RIGHT_ARROW} direction.		
-BattlePyramid_Text_ExitHintDown2	The exit on this floor is in\nthe {DOWN_ARROW} direction.		
-BattlePyramid_Text_ExitHintUp3	The exit is over\nthat {UP_ARROW} way.		
-BattlePyramid_Text_ExitHintLeft3	The exit is over\nthat {LEFT_ARROW} way.		
-BattlePyramid_Text_ExitHintRight3	The exit is over\nthat {RIGHT_ARROW} way.		
-BattlePyramid_Text_ExitHintDown3	The exit is over\nthat {DOWN_ARROW} way.		
-BattlePyramid_Text_ExitHintUp4	On this floor, the exit is somewhere\nin the {UP_ARROW} direction.		
-BattlePyramid_Text_ExitHintLeft4	On this floor, the exit is somewhere\nin the {LEFT_ARROW} direction.		
-BattlePyramid_Text_ExitHintRight4	On this floor, the exit is somewhere\nin the {RIGHT_ARROW} direction.		
-BattlePyramid_Text_ExitHintDown4	On this floor, the exit is somewhere\nin the {DOWN_ARROW} direction.		
-BattlePyramid_Text_ExitHintUp5	The exit?\nIt's that {UP_ARROW} way.		
-BattlePyramid_Text_ExitHintLeft5	The exit?\nIt's that {LEFT_ARROW} way.		
-BattlePyramid_Text_ExitHintRight5	The exit?\nIt's that {RIGHT_ARROW} way.		
-BattlePyramid_Text_ExitHintDown5	The exit?\nIt's that {DOWN_ARROW} way.		
-BattlePyramid_Text_ExitHintUp6	The exit happens to be in\nthe {UP_ARROW} direction.		
-BattlePyramid_Text_ExitHintLeft6	The exit happens to be in\nthe {LEFT_ARROW} direction.		
-BattlePyramid_Text_ExitHintRight6	The exit happens to be in\nthe {RIGHT_ARROW} direction.		
-BattlePyramid_Text_ExitHintDown6	The exit happens to be in\nthe {DOWN_ARROW} direction.		
-BattlePyramid_Text_EightItemsRemaining1	Are you looking for items?\pThere are eight items left to\nbe found.		
-BattlePyramid_Text_SevenItemsRemaining1	Are you looking for items?\pThere are seven items left to\nbe found.		
-BattlePyramid_Text_SixItemsRemaining1	Are you looking for items?\pThere are six items left to\nbe found.		
-BattlePyramid_Text_FiveItemsRemaining1	Are you looking for items?\pThere are five items left to\nbe found.		
-BattlePyramid_Text_FourItemsRemaining1	Are you looking for items?\pThere are four items left to\nbe found.		
-BattlePyramid_Text_ThreeItemsRemaining1	Are you looking for items?\pThere are three items left to\nbe found.		
-BattlePyramid_Text_TwoItemsRemaining1	Are you looking for items?\pThere are two items left to\nbe found.		
-BattlePyramid_Text_OneItemRemaining1	Are you looking for items?\pThere is one item left to\nbe found.		
-BattlePyramid_Text_ZeroItemsRemaining1	Are you looking for items?\pThere isn't anything left to\nbe found!		
-BattlePyramid_Text_EightItemsRemaining2	Because you won, I'll tell you\na little secret!\pThere are eight items\nlying around here.		
-BattlePyramid_Text_SevenItemsRemaining2	Because you won, I'll tell you\na little secret!\pThere are seven items left\nlying around here.		
-BattlePyramid_Text_SixItemsRemaining2	Because you won, I'll tell you\na little secret!\pThere are six items left\nlying around here.		
-BattlePyramid_Text_FiveItemsRemaining2	Because you won, I'll tell you\na little secret!\pThere are five items left\nlying around here.		
-BattlePyramid_Text_FourItemsRemaining2	Because you won, I'll tell you\na little secret!\pThere are four items left\nlying around here.		
-BattlePyramid_Text_ThreeItemsRemaining2	Because you won, I'll tell you\na little secret!\pThere are three items left\nlying around here.		
-BattlePyramid_Text_TwoItemsRemaining2	Because you won, I'll tell you\na little secret!\pThere are two items left\nlying around here.		
-BattlePyramid_Text_OneItemRemaining2	Because you won, I'll tell you\na little secret!\pThere is just one item\nlying around here.		
-BattlePyramid_Text_ZeroItemsRemaining2	Because you won, I'll tell you\na little secret!\pThere isn't anything left\nlying around here.		
-BattlePyramid_Text_EightItemsRemaining3	How's your stock of items holding up?\pI reckon there are eight items left\nwaiting to be found on this floor.		
-BattlePyramid_Text_SevenItemsRemaining3	How's your stock of items holding up?\pI reckon there are seven items left\nwaiting to be found on this floor.		
-BattlePyramid_Text_SixItemsRemaining3	How's your stock of items holding up?\pI reckon there are six items left\nwaiting to be found on this floor.		
-BattlePyramid_Text_FiveItemsRemaining3	How's your stock of items holding up?\pI reckon there are five items left\nwaiting to be found on this floor.		
-BattlePyramid_Text_FourItemsRemaining3	How's your stock of items holding up?\pI reckon there are four items left\nwaiting to be found on this floor.		
-BattlePyramid_Text_ThreeItemsRemaining3	How's your stock of items holding up?\pI reckon there are three items left\nwaiting to be found on this floor.		
-BattlePyramid_Text_TwoItemsRemaining3	How's your stock of items holding up?\pI reckon there are two items left\nwaiting to be found on this floor.		
-BattlePyramid_Text_OneItemRemaining3	How's your stock of items holding up?\pI reckon there's but one item left\nwaiting to be found on this floor.		
-BattlePyramid_Text_ZeroItemsRemaining3	How's your stock of items holding up?\pI reckon there are no more items\nwaiting to be found on this floor.\lYou take care now!		
-BattlePyramid_Text_EightItemsRemaining4	You're strong, so you've earned\na hint!\pThere appear to be eight more\nitems on the ground.		
-BattlePyramid_Text_SevenItemsRemaining4	You're strong, so you've earned\na hint!\pThere appear to be seven more\nitems on the ground.		
-BattlePyramid_Text_SixItemsRemaining4	You're strong, so you've earned\na hint!\pThere appear to be six more\nitems on the ground.		
-BattlePyramid_Text_FiveItemsRemaining4	You're strong, so you've earned\na hint!\pThere appear to be five more\nitems on the ground.		
-BattlePyramid_Text_FourItemsRemaining4	You're strong, so you've earned\na hint!\pThere appear to be four more\nitems on the ground.		
-BattlePyramid_Text_ThreeItemsRemaining4	You're strong, so you've earned\na hint!\pThere appear to be three more\nitems on the ground.		
-BattlePyramid_Text_TwoItemsRemaining4	You're strong, so you've earned\na hint!\pThere appear to be two more\nitems on the ground.		
-BattlePyramid_Text_OneItemRemaining4	You're strong, so you've earned\na hint!\pThere appears to be only one more\nitem on the ground.		
-BattlePyramid_Text_ZeroItemsRemaining4	You're strong, so you've earned\na hint!\pThere appear to be no more\nitems on the ground.		
-BattlePyramid_Text_EightItemsRemaining5	On this floor of the PYRAMID,\nI hear there are eight items…		
-BattlePyramid_Text_SevenItemsRemaining5	On this floor of the PYRAMID,\nI hear there are seven items…		
-BattlePyramid_Text_SixItemsRemaining5	On this floor of the PYRAMID,\nI hear there are six items…		
-BattlePyramid_Text_FiveItemsRemaining5	On this floor of the PYRAMID,\nI hear there are five items…		
-BattlePyramid_Text_FourItemsRemaining5	On this floor of the PYRAMID,\nI hear there are four items…		
-BattlePyramid_Text_ThreeItemsRemaining5	On this floor of the PYRAMID,\nI hear there are three items…		
-BattlePyramid_Text_TwoItemsRemaining5	On this floor of the PYRAMID,\nI hear there are two items…		
-BattlePyramid_Text_OneItemRemaining5	On this floor of the PYRAMID,\nI hear there is one item…		
-BattlePyramid_Text_ZeroItemsRemaining5	On this floor of the PYRAMID,\nI hear there are no items…		
-BattlePyramid_Text_EightItemsRemaining6	Have you collected any items?\pI believe there are eight more\nitems on this floor.		
-BattlePyramid_Text_SevenItemsRemaining6	Have you collected any items?\pI believe there are seven more\nitems on this floor.		
-BattlePyramid_Text_SixItemsRemaining6	Have you collected any items?\pI believe there are six more\nitems on this floor.		
-BattlePyramid_Text_FiveItemsRemaining6	Have you collected any items?\pI believe there are five more\nitems on this floor.		
-BattlePyramid_Text_FourItemsRemaining6	Have you collected any items?\pI believe there are four more\nitems on this floor.		
-BattlePyramid_Text_ThreeItemsRemaining6	Have you collected any items?\pI believe there are three more\nitems on this floor.		
-BattlePyramid_Text_TwoItemsRemaining6	Have you collected any items?\pI believe there are two more\nitems on this floor.		
-BattlePyramid_Text_OneItemRemaining6	Have you collected any items?\pI believe there is one more\nitem on this floor.		
-BattlePyramid_Text_ZeroItemsRemaining6	Have you collected any items?\pI believe there are no more\nitems on this floor.		
-BattlePyramid_Text_SevenTrainersRemaining1	You were really awesome!\pBut there are still seven tough\nTRAINERS other than me!		
-BattlePyramid_Text_SixTrainersRemaining1	You were really awesome!\pBut there are still six tough\nTRAINERS other than me!		
-BattlePyramid_Text_FiveTrainersRemaining1	You were really awesome!\pBut there are still five tough\nTRAINERS other than me!		
-BattlePyramid_Text_FourTrainersRemaining1	You were really awesome!\pBut there are still four tough\nTRAINERS other than me!		
-BattlePyramid_Text_ThreeTrainersRemaining1	You were really awesome!\pBut there are still three tough\nTRAINERS other than me!		
-BattlePyramid_Text_TwoTrainersRemaining1	You were really awesome!\pBut there are still two tough\nTRAINERS other than me!		
-BattlePyramid_Text_OneTrainersRemaining1	You were really awesome!\pBut there's still one tough\nTRAINER other than me!		
-BattlePyramid_Text_ZeroTrainersRemaining1	You were really awesome!\pThere's no one left that\ncan beat you!		
-BattlePyramid_Text_SevenTrainersRemaining2	This is so upsetting!\pBut there are seven TRAINERS left!\nSomeone will humble you!		
-BattlePyramid_Text_SixTrainersRemaining2	This is so upsetting!\pBut there are six TRAINERS left!\nSomeone will humble you!		
-BattlePyramid_Text_FiveTrainersRemaining2	This is so upsetting!\pBut there are five TRAINERS left!\nSomeone will humble you!		
-BattlePyramid_Text_FourTrainersRemaining2	This is so upsetting!\pBut there are four TRAINERS left!\nSomeone will humble you!		
-BattlePyramid_Text_ThreeTrainersRemaining2	This is so upsetting!\pBut there are three TRAINERS left!\nSomeone will humble you!		
-BattlePyramid_Text_TwoTrainersRemaining2	This is so upsetting!\pBut there are two TRAINERS left!\nSomeone will humble you!		
-BattlePyramid_Text_OneTrainersRemaining2	This is so upsetting!\pBut there's one TRAINER left!\nI'm sure you will be humbled!		
-BattlePyramid_Text_ZeroTrainersRemaining2	This is so upsetting!\pBut there are no more TRAINERS\nwho can engage you!		
-BattlePyramid_Text_SevenTrainersRemaining3	That's pretty impressive!\pBut there are seven more TRAINERS\non this floor. Can you beat them all?		
-BattlePyramid_Text_SixTrainersRemaining3	That's pretty impressive!\pBut there are six more TRAINERS\non this floor. Can you beat them all?		
-BattlePyramid_Text_FiveTrainersRemaining3	That's pretty impressive!\pBut there are five more TRAINERS\non this floor. Can you beat them all?		
-BattlePyramid_Text_FourTrainersRemaining3	That's pretty impressive!\pBut there are four more TRAINERS\non this floor. Can you beat them all?		
-BattlePyramid_Text_ThreeTrainersRemaining3	That's pretty impressive!\pBut there are three more TRAINERS\non this floor. Can you beat them all?		
-BattlePyramid_Text_TwoTrainersRemaining3	That's pretty impressive!\pBut there are two more TRAINERS\non this floor. Can you beat them both?		
-BattlePyramid_Text_OneTrainersRemaining3	That's pretty impressive!\pBut there's still one more TRAINER\non this floor. Can you prevail?		
-BattlePyramid_Text_ZeroTrainersRemaining3	That's pretty impressive!\pYou've gone through all the TRAINERS\non this floor.		
-BattlePyramid_Text_SevenTrainersRemaining4	Maybe you could sweep through\nthe seven TRAINERS left on this floor.		
-BattlePyramid_Text_SixTrainersRemaining4	Maybe you could sweep through\nthe six TRAINERS left on this floor.		
-BattlePyramid_Text_FiveTrainersRemaining4	Maybe you could sweep through\nthe five TRAINERS left on this floor.		
-BattlePyramid_Text_FourTrainersRemaining4	Maybe you could sweep through\nthe four TRAINERS left on this floor.		
-BattlePyramid_Text_ThreeTrainersRemaining4	Maybe you could sweep through\nthe three TRAINERS left on this floor.		
-BattlePyramid_Text_TwoTrainersRemaining4	Maybe you could sweep through\nthe two TRAINERS left on this floor.		
-BattlePyramid_Text_OneTrainersRemaining4	Maybe you could complete your sweep\nwith the one TRAINER left on this floor.		
-BattlePyramid_Text_ZeroTrainersRemaining4	There isn't a single person left who\ncan defeat you now…		
-BattlePyramid_Text_SevenTrainersRemaining5	You may have what it takes to beat\nthe seven expert TRAINERS who remain.		
-BattlePyramid_Text_SixTrainersRemaining5	You may have what it takes to beat\nthe six expert TRAINERS who remain.		
-BattlePyramid_Text_FiveTrainersRemaining5	You may have what it takes to beat\nthe five expert TRAINERS who remain.		
-BattlePyramid_Text_FourTrainersRemaining5	You may have what it takes to beat\nthe four expert TRAINERS who remain.		
-BattlePyramid_Text_ThreeTrainersRemaining5	You may have what it takes to beat\nthe three expert TRAINERS who remain.		
-BattlePyramid_Text_TwoTrainersRemaining5	You may have what it takes to beat\nthe two expert TRAINERS who remain.		
-BattlePyramid_Text_OneTrainersRemaining5	You may have what it takes to beat\nthe one expert TRAINER who remains.		
-BattlePyramid_Text_ZeroTrainersRemaining5	Your skills are beyond reproach.\pThere are no more TRAINERS here\nwho have any chance of beating you.		
-BattlePyramid_Text_SevenTrainersRemaining6	Can you keep winning against\nthe seven remaining TRAINERS?		
-BattlePyramid_Text_SixTrainersRemaining6	Can you keep winning against\nthe six remaining TRAINERS?		
-BattlePyramid_Text_FiveTrainersRemaining6	Can you keep winning against\nthe five remaining TRAINERS?		
-BattlePyramid_Text_FourTrainersRemaining6	Can you keep winning against\nthe four remaining TRAINERS?		
-BattlePyramid_Text_ThreeTrainersRemaining6	Can you keep winning against\nthe three remaining TRAINERS?		
-BattlePyramid_Text_TwoTrainersRemaining6	Can you keep winning against\nthe two remaining TRAINERS?		
-BattlePyramid_Text_OneTrainersRemaining6	Can you keep winning against\nthe last remaining TRAINER?		
-BattlePyramid_Text_ZeroTrainersRemaining6	There aren't any TRAINERS left that\ncan take you on now…		
+BattleFacility_TrainerBattle_PlaceholderText	This is a sample message.	Dit is een voorbeeldbericht.	
+gText_BattlePyramidConfirmRest	Your BATTLE PYRAMID quest will be\nsaved so that you may quit for now.\lIs that okay?	Je BATTLE PYRAMID-tocht wordt\nopgeslagen, zodat je kunt stoppen.\lIs dat goed?	
+gText_BattlePyramidConfirmRetire	Are you sure you want to quit your\nPYRAMID quest?	Weet je zeker dat je wilt stoppen\nmet je PYRAMID-tocht?	
+BattlePyramid_Text_ExitHintUp1	This floor's exit is in\nthat direction: {UP_ARROW}	De uitgang van deze verdieping\nis die kant op: {UP_ARROW}	
+BattlePyramid_Text_ExitHintLeft1	This floor's exit is in\nthat direction: {LEFT_ARROW}	De uitgang van deze verdieping\nis die kant op: {LEFT_ARROW}	
+BattlePyramid_Text_ExitHintRight1	This floor's exit is in\nthat direction: {RIGHT_ARROW}	De uitgang van deze verdieping\nis die kant op: {RIGHT_ARROW}	
+BattlePyramid_Text_ExitHintDown1	This floor's exit is in\nthat direction: {DOWN_ARROW}	De uitgang van deze verdieping\nis die kant op: {DOWN_ARROW}	
+BattlePyramid_Text_ExitHintUp2	The exit on this floor is in\nthe {UP_ARROW} direction.	De uitgang van deze verdieping\nis in de richting {UP_ARROW}.	
+BattlePyramid_Text_ExitHintLeft2	The exit on this floor is in\nthe {LEFT_ARROW} direction.	De uitgang van deze verdieping\nis in de richting {LEFT_ARROW}.	
+BattlePyramid_Text_ExitHintRight2	The exit on this floor is in\nthe {RIGHT_ARROW} direction.	De uitgang van deze verdieping\nis in de richting {RIGHT_ARROW}.	
+BattlePyramid_Text_ExitHintDown2	The exit on this floor is in\nthe {DOWN_ARROW} direction.	De uitgang van deze verdieping\nis in de richting {DOWN_ARROW}.	
+BattlePyramid_Text_ExitHintUp3	The exit is over\nthat {UP_ARROW} way.	De uitgang is die\nkant op: {UP_ARROW}	
+BattlePyramid_Text_ExitHintLeft3	The exit is over\nthat {LEFT_ARROW} way.	De uitgang is die\nkant op: {LEFT_ARROW}	
+BattlePyramid_Text_ExitHintRight3	The exit is over\nthat {RIGHT_ARROW} way.	De uitgang is die\nkant op: {RIGHT_ARROW}	
+BattlePyramid_Text_ExitHintDown3	The exit is over\nthat {DOWN_ARROW} way.	De uitgang is die\nkant op: {DOWN_ARROW}	
+BattlePyramid_Text_ExitHintUp4	On this floor, the exit is somewhere\nin the {UP_ARROW} direction.	Op deze verdieping is de uitgang\nergens in de richting {UP_ARROW}.	
+BattlePyramid_Text_ExitHintLeft4	On this floor, the exit is somewhere\nin the {LEFT_ARROW} direction.	Op deze verdieping is de uitgang\nergens in de richting {LEFT_ARROW}.	
+BattlePyramid_Text_ExitHintRight4	On this floor, the exit is somewhere\nin the {RIGHT_ARROW} direction.	Op deze verdieping is de uitgang\nergens in de richting {RIGHT_ARROW}.	
+BattlePyramid_Text_ExitHintDown4	On this floor, the exit is somewhere\nin the {DOWN_ARROW} direction.	Op deze verdieping is de uitgang\nergens in de richting {DOWN_ARROW}.	
+BattlePyramid_Text_ExitHintUp5	The exit?\nIt's that {UP_ARROW} way.	De uitgang?\nDie is die kant op: {UP_ARROW}	
+BattlePyramid_Text_ExitHintLeft5	The exit?\nIt's that {LEFT_ARROW} way.	De uitgang?\nDie is die kant op: {LEFT_ARROW}	
+BattlePyramid_Text_ExitHintRight5	The exit?\nIt's that {RIGHT_ARROW} way.	De uitgang?\nDie is die kant op: {RIGHT_ARROW}	
+BattlePyramid_Text_ExitHintDown5	The exit?\nIt's that {DOWN_ARROW} way.	De uitgang?\nDie is die kant op: {DOWN_ARROW}	
+BattlePyramid_Text_ExitHintUp6	The exit happens to be in\nthe {UP_ARROW} direction.	De uitgang is toevallig\nin de richting {UP_ARROW}.	
+BattlePyramid_Text_ExitHintLeft6	The exit happens to be in\nthe {LEFT_ARROW} direction.	De uitgang is toevallig\nin de richting {LEFT_ARROW}.	
+BattlePyramid_Text_ExitHintRight6	The exit happens to be in\nthe {RIGHT_ARROW} direction.	De uitgang is toevallig\nin de richting {RIGHT_ARROW}.	
+BattlePyramid_Text_ExitHintDown6	The exit happens to be in\nthe {DOWN_ARROW} direction.	De uitgang is toevallig\nin de richting {DOWN_ARROW}.	
+BattlePyramid_Text_EightItemsRemaining1	Are you looking for items?\pThere are eight items left to\nbe found.	Zoek je voorwerpen?\pEr zijn nog acht voorwerpen\nte vinden.	
+BattlePyramid_Text_SevenItemsRemaining1	Are you looking for items?\pThere are seven items left to\nbe found.	Zoek je voorwerpen?\pEr zijn nog zeven voorwerpen\nte vinden.	
+BattlePyramid_Text_SixItemsRemaining1	Are you looking for items?\pThere are six items left to\nbe found.	Zoek je voorwerpen?\pEr zijn nog zes voorwerpen\nte vinden.	
+BattlePyramid_Text_FiveItemsRemaining1	Are you looking for items?\pThere are five items left to\nbe found.	Zoek je voorwerpen?\pEr zijn nog vijf voorwerpen\nte vinden.	
+BattlePyramid_Text_FourItemsRemaining1	Are you looking for items?\pThere are four items left to\nbe found.	Zoek je voorwerpen?\pEr zijn nog vier voorwerpen\nte vinden.	
+BattlePyramid_Text_ThreeItemsRemaining1	Are you looking for items?\pThere are three items left to\nbe found.	Zoek je voorwerpen?\pEr zijn nog drie voorwerpen\nte vinden.	
+BattlePyramid_Text_TwoItemsRemaining1	Are you looking for items?\pThere are two items left to\nbe found.	Zoek je voorwerpen?\pEr zijn nog twee voorwerpen\nte vinden.	
+BattlePyramid_Text_OneItemRemaining1	Are you looking for items?\pThere is one item left to\nbe found.	Zoek je voorwerpen?\pEr is nog één voorwerp\nte vinden.	
+BattlePyramid_Text_ZeroItemsRemaining1	Are you looking for items?\pThere isn't anything left to\nbe found!	Zoek je voorwerpen?\pEr is niets meer\nte vinden!	
+BattlePyramid_Text_EightItemsRemaining2	Because you won, I'll tell you\na little secret!\pThere are eight items\nlying around here.	Omdat je won, vertel ik je\neen geheimpje!\pEr liggen hier nog acht\nvoorwerpen.	
+BattlePyramid_Text_SevenItemsRemaining2	Because you won, I'll tell you\na little secret!\pThere are seven items left\nlying around here.	Omdat je won, vertel ik je\neen geheimpje!\pEr liggen hier nog zeven\nvoorwerpen.	
+BattlePyramid_Text_SixItemsRemaining2	Because you won, I'll tell you\na little secret!\pThere are six items left\nlying around here.	Omdat je won, vertel ik je\neen geheimpje!\pEr liggen hier nog zes\nvoorwerpen.	
+BattlePyramid_Text_FiveItemsRemaining2	Because you won, I'll tell you\na little secret!\pThere are five items left\nlying around here.	Omdat je won, vertel ik je\neen geheimpje!\pEr liggen hier nog vijf\nvoorwerpen.	
+BattlePyramid_Text_FourItemsRemaining2	Because you won, I'll tell you\na little secret!\pThere are four items left\nlying around here.	Omdat je won, vertel ik je\neen geheimpje!\pEr liggen hier nog vier\nvoorwerpen.	
+BattlePyramid_Text_ThreeItemsRemaining2	Because you won, I'll tell you\na little secret!\pThere are three items left\nlying around here.	Omdat je won, vertel ik je\neen geheimpje!\pEr liggen hier nog drie\nvoorwerpen.	
+BattlePyramid_Text_TwoItemsRemaining2	Because you won, I'll tell you\na little secret!\pThere are two items left\nlying around here.	Omdat je won, vertel ik je\neen geheimpje!\pEr liggen hier nog twee\nvoorwerpen.	
+BattlePyramid_Text_OneItemRemaining2	Because you won, I'll tell you\na little secret!\pThere is just one item\nlying around here.	Omdat je won, vertel ik je\neen geheimpje!\pEr ligt hier nog één\nvoorwerp.	
+BattlePyramid_Text_ZeroItemsRemaining2	Because you won, I'll tell you\na little secret!\pThere isn't anything left\nlying around here.	Omdat je won, vertel ik je\neen geheimpje!\pEr ligt hier niets\nmeer.	
+BattlePyramid_Text_EightItemsRemaining3	How's your stock of items holding up?\pI reckon there are eight items left\nwaiting to be found on this floor.	Hoe staat het met je voorraad?\pIk denk dat er op deze verdieping\nnog acht voorwerpen liggen.	
+BattlePyramid_Text_SevenItemsRemaining3	How's your stock of items holding up?\pI reckon there are seven items left\nwaiting to be found on this floor.	Hoe staat het met je voorraad?\pIk denk dat er op deze verdieping\nnog zeven voorwerpen liggen.	
+BattlePyramid_Text_SixItemsRemaining3	How's your stock of items holding up?\pI reckon there are six items left\nwaiting to be found on this floor.	Hoe staat het met je voorraad?\pIk denk dat er op deze verdieping\nnog zes voorwerpen liggen.	
+BattlePyramid_Text_FiveItemsRemaining3	How's your stock of items holding up?\pI reckon there are five items left\nwaiting to be found on this floor.	Hoe staat het met je voorraad?\pIk denk dat er op deze verdieping\nnog vijf voorwerpen liggen.	
+BattlePyramid_Text_FourItemsRemaining3	How's your stock of items holding up?\pI reckon there are four items left\nwaiting to be found on this floor.	Hoe staat het met je voorraad?\pIk denk dat er op deze verdieping\nnog vier voorwerpen liggen.	
+BattlePyramid_Text_ThreeItemsRemaining3	How's your stock of items holding up?\pI reckon there are three items left\nwaiting to be found on this floor.	Hoe staat het met je voorraad?\pIk denk dat er op deze verdieping\nnog drie voorwerpen liggen.	
+BattlePyramid_Text_TwoItemsRemaining3	How's your stock of items holding up?\pI reckon there are two items left\nwaiting to be found on this floor.	Hoe staat het met je voorraad?\pIk denk dat er op deze verdieping\nnog twee voorwerpen liggen.	
+BattlePyramid_Text_OneItemRemaining3	How's your stock of items holding up?\pI reckon there's but one item left\nwaiting to be found on this floor.	Hoe staat het met je voorraad?\pIk denk dat er op deze verdieping\nnog maar één voorwerp ligt.	
+BattlePyramid_Text_ZeroItemsRemaining3	How's your stock of items holding up?\pI reckon there are no more items\nwaiting to be found on this floor.\lYou take care now!	Hoe staat het met je voorraad?\pIk denk dat er op deze verdieping\ngeen voorwerpen meer liggen.\lTot ziens!	
+BattlePyramid_Text_EightItemsRemaining4	You're strong, so you've earned\na hint!\pThere appear to be eight more\nitems on the ground.	Je bent sterk, dus je krijgt\neen hint!\pEr liggen nog acht\nvoorwerpen op de grond.	
+BattlePyramid_Text_SevenItemsRemaining4	You're strong, so you've earned\na hint!\pThere appear to be seven more\nitems on the ground.	Je bent sterk, dus je krijgt\neen hint!\pEr liggen nog zeven\nvoorwerpen op de grond.	
+BattlePyramid_Text_SixItemsRemaining4	You're strong, so you've earned\na hint!\pThere appear to be six more\nitems on the ground.	Je bent sterk, dus je krijgt\neen hint!\pEr liggen nog zes\nvoorwerpen op de grond.	
+BattlePyramid_Text_FiveItemsRemaining4	You're strong, so you've earned\na hint!\pThere appear to be five more\nitems on the ground.	Je bent sterk, dus je krijgt\neen hint!\pEr liggen nog vijf\nvoorwerpen op de grond.	
+BattlePyramid_Text_FourItemsRemaining4	You're strong, so you've earned\na hint!\pThere appear to be four more\nitems on the ground.	Je bent sterk, dus je krijgt\neen hint!\pEr liggen nog vier\nvoorwerpen op de grond.	
+BattlePyramid_Text_ThreeItemsRemaining4	You're strong, so you've earned\na hint!\pThere appear to be three more\nitems on the ground.	Je bent sterk, dus je krijgt\neen hint!\pEr liggen nog drie\nvoorwerpen op de grond.	
+BattlePyramid_Text_TwoItemsRemaining4	You're strong, so you've earned\na hint!\pThere appear to be two more\nitems on the ground.	Je bent sterk, dus je krijgt\neen hint!\pEr liggen nog twee\nvoorwerpen op de grond.	
+BattlePyramid_Text_OneItemRemaining4	You're strong, so you've earned\na hint!\pThere appears to be only one more\nitem on the ground.	Je bent sterk, dus je krijgt\neen hint!\pEr ligt nog maar één\nvoorwerp op de grond.	
+BattlePyramid_Text_ZeroItemsRemaining4	You're strong, so you've earned\na hint!\pThere appear to be no more\nitems on the ground.	Je bent sterk, dus je krijgt\neen hint!\pEr liggen geen voorwerpen\nmeer op de grond.	
+BattlePyramid_Text_EightItemsRemaining5	On this floor of the PYRAMID,\nI hear there are eight items…	Op deze verdieping van de\nPYRAMID liggen acht voorwerpen…	
+BattlePyramid_Text_SevenItemsRemaining5	On this floor of the PYRAMID,\nI hear there are seven items…	Op deze verdieping van de\nPYRAMID liggen zeven voorwerpen…	
+BattlePyramid_Text_SixItemsRemaining5	On this floor of the PYRAMID,\nI hear there are six items…	Op deze verdieping van de\nPYRAMID liggen zes voorwerpen…	
+BattlePyramid_Text_FiveItemsRemaining5	On this floor of the PYRAMID,\nI hear there are five items…	Op deze verdieping van de\nPYRAMID liggen vijf voorwerpen…	
+BattlePyramid_Text_FourItemsRemaining5	On this floor of the PYRAMID,\nI hear there are four items…	Op deze verdieping van de\nPYRAMID liggen vier voorwerpen…	
+BattlePyramid_Text_ThreeItemsRemaining5	On this floor of the PYRAMID,\nI hear there are three items…	Op deze verdieping van de\nPYRAMID liggen drie voorwerpen…	
+BattlePyramid_Text_TwoItemsRemaining5	On this floor of the PYRAMID,\nI hear there are two items…	Op deze verdieping van de\nPYRAMID liggen twee voorwerpen…	
+BattlePyramid_Text_OneItemRemaining5	On this floor of the PYRAMID,\nI hear there is one item…	Op deze verdieping van de\nPYRAMID ligt één voorwerp…	
+BattlePyramid_Text_ZeroItemsRemaining5	On this floor of the PYRAMID,\nI hear there are no items…	Op deze verdieping van de\nPYRAMID liggen geen voorwerpen…	
+BattlePyramid_Text_EightItemsRemaining6	Have you collected any items?\pI believe there are eight more\nitems on this floor.	Heb je al voorwerpen gevonden?\pIk denk dat hier nog acht\nvoorwerpen liggen.	
+BattlePyramid_Text_SevenItemsRemaining6	Have you collected any items?\pI believe there are seven more\nitems on this floor.	Heb je al voorwerpen gevonden?\pIk denk dat hier nog zeven\nvoorwerpen liggen.	
+BattlePyramid_Text_SixItemsRemaining6	Have you collected any items?\pI believe there are six more\nitems on this floor.	Heb je al voorwerpen gevonden?\pIk denk dat hier nog zes\nvoorwerpen liggen.	
+BattlePyramid_Text_FiveItemsRemaining6	Have you collected any items?\pI believe there are five more\nitems on this floor.	Heb je al voorwerpen gevonden?\pIk denk dat hier nog vijf\nvoorwerpen liggen.	
+BattlePyramid_Text_FourItemsRemaining6	Have you collected any items?\pI believe there are four more\nitems on this floor.	Heb je al voorwerpen gevonden?\pIk denk dat hier nog vier\nvoorwerpen liggen.	
+BattlePyramid_Text_ThreeItemsRemaining6	Have you collected any items?\pI believe there are three more\nitems on this floor.	Heb je al voorwerpen gevonden?\pIk denk dat hier nog drie\nvoorwerpen liggen.	
+BattlePyramid_Text_TwoItemsRemaining6	Have you collected any items?\pI believe there are two more\nitems on this floor.	Heb je al voorwerpen gevonden?\pIk denk dat hier nog twee\nvoorwerpen liggen.	
+BattlePyramid_Text_OneItemRemaining6	Have you collected any items?\pI believe there is one more\nitem on this floor.	Heb je al voorwerpen gevonden?\pIk denk dat hier nog één\nvoorwerp ligt.	
+BattlePyramid_Text_ZeroItemsRemaining6	Have you collected any items?\pI believe there are no more\nitems on this floor.	Heb je al voorwerpen gevonden?\pIk denk dat hier geen\nvoorwerpen meer liggen.	
+BattlePyramid_Text_SevenTrainersRemaining1	You were really awesome!\pBut there are still seven tough\nTRAINERS other than me!	Wat was jij goed!\pMaar er zijn nog zeven sterke\nTRAINERS behalve ik!	
+BattlePyramid_Text_SixTrainersRemaining1	You were really awesome!\pBut there are still six tough\nTRAINERS other than me!	Wat was jij goed!\pMaar er zijn nog zes sterke\nTRAINERS behalve ik!	
+BattlePyramid_Text_FiveTrainersRemaining1	You were really awesome!\pBut there are still five tough\nTRAINERS other than me!	Wat was jij goed!\pMaar er zijn nog vijf sterke\nTRAINERS behalve ik!	
+BattlePyramid_Text_FourTrainersRemaining1	You were really awesome!\pBut there are still four tough\nTRAINERS other than me!	Wat was jij goed!\pMaar er zijn nog vier sterke\nTRAINERS behalve ik!	
+BattlePyramid_Text_ThreeTrainersRemaining1	You were really awesome!\pBut there are still three tough\nTRAINERS other than me!	Wat was jij goed!\pMaar er zijn nog drie sterke\nTRAINERS behalve ik!	
+BattlePyramid_Text_TwoTrainersRemaining1	You were really awesome!\pBut there are still two tough\nTRAINERS other than me!	Wat was jij goed!\pMaar er zijn nog twee sterke\nTRAINERS behalve ik!	
+BattlePyramid_Text_OneTrainersRemaining1	You were really awesome!\pBut there's still one tough\nTRAINER other than me!	Wat was jij goed!\pMaar er is nog één sterke\nTRAINER behalve ik!	
+BattlePyramid_Text_ZeroTrainersRemaining1	You were really awesome!\pThere's no one left that\ncan beat you!	Wat was jij goed!\pEr is niemand meer die\njou kan verslaan!	
+BattlePyramid_Text_SevenTrainersRemaining2	This is so upsetting!\pBut there are seven TRAINERS left!\nSomeone will humble you!	Wat vervelend!\pMaar er zijn nog zeven TRAINERS!\nIemand maakt je klein!	
+BattlePyramid_Text_SixTrainersRemaining2	This is so upsetting!\pBut there are six TRAINERS left!\nSomeone will humble you!	Wat vervelend!\pMaar er zijn nog zes TRAINERS!\nIemand maakt je klein!	
+BattlePyramid_Text_FiveTrainersRemaining2	This is so upsetting!\pBut there are five TRAINERS left!\nSomeone will humble you!	Wat vervelend!\pMaar er zijn nog vijf TRAINERS!\nIemand maakt je klein!	
+BattlePyramid_Text_FourTrainersRemaining2	This is so upsetting!\pBut there are four TRAINERS left!\nSomeone will humble you!	Wat vervelend!\pMaar er zijn nog vier TRAINERS!\nIemand maakt je klein!	
+BattlePyramid_Text_ThreeTrainersRemaining2	This is so upsetting!\pBut there are three TRAINERS left!\nSomeone will humble you!	Wat vervelend!\pMaar er zijn nog drie TRAINERS!\nIemand maakt je klein!	
+BattlePyramid_Text_TwoTrainersRemaining2	This is so upsetting!\pBut there are two TRAINERS left!\nSomeone will humble you!	Wat vervelend!\pMaar er zijn nog twee TRAINERS!\nIemand maakt je klein!	
+BattlePyramid_Text_OneTrainersRemaining2	This is so upsetting!\pBut there's one TRAINER left!\nI'm sure you will be humbled!	Wat vervelend!\pMaar er is nog één TRAINER!\nDie maakt je vast klein!	
+BattlePyramid_Text_ZeroTrainersRemaining2	This is so upsetting!\pBut there are no more TRAINERS\nwho can engage you!	Wat vervelend!\pMaar er zijn geen TRAINERS meer\ndie tegen je kunnen vechten!	
+BattlePyramid_Text_SevenTrainersRemaining3	That's pretty impressive!\pBut there are seven more TRAINERS\non this floor. Can you beat them all?	Best indrukwekkend!\pMaar er zijn nog zeven TRAINERS\nop deze verdieping. Pak je ze allemaal?	
+BattlePyramid_Text_SixTrainersRemaining3	That's pretty impressive!\pBut there are six more TRAINERS\non this floor. Can you beat them all?	Best indrukwekkend!\pMaar er zijn nog zes TRAINERS\nop deze verdieping. Pak je ze allemaal?	
+BattlePyramid_Text_FiveTrainersRemaining3	That's pretty impressive!\pBut there are five more TRAINERS\non this floor. Can you beat them all?	Best indrukwekkend!\pMaar er zijn nog vijf TRAINERS\nop deze verdieping. Pak je ze allemaal?	
+BattlePyramid_Text_FourTrainersRemaining3	That's pretty impressive!\pBut there are four more TRAINERS\non this floor. Can you beat them all?	Best indrukwekkend!\pMaar er zijn nog vier TRAINERS\nop deze verdieping. Pak je ze allemaal?	
+BattlePyramid_Text_ThreeTrainersRemaining3	That's pretty impressive!\pBut there are three more TRAINERS\non this floor. Can you beat them all?	Best indrukwekkend!\pMaar er zijn nog drie TRAINERS\nop deze verdieping. Pak je ze allemaal?	
+BattlePyramid_Text_TwoTrainersRemaining3	That's pretty impressive!\pBut there are two more TRAINERS\non this floor. Can you beat them both?	Best indrukwekkend!\pMaar er zijn nog twee TRAINERS\nop deze verdieping. Pak je ze allebei?	
+BattlePyramid_Text_OneTrainersRemaining3	That's pretty impressive!\pBut there's still one more TRAINER\non this floor. Can you prevail?	Best indrukwekkend!\pMaar er is nog één TRAINER\nop deze verdieping. Lukt het?	
+BattlePyramid_Text_ZeroTrainersRemaining3	That's pretty impressive!\pYou've gone through all the TRAINERS\non this floor.	Best indrukwekkend!\pJe hebt alle TRAINERS op\ndeze verdieping verslagen.	
+BattlePyramid_Text_SevenTrainersRemaining4	Maybe you could sweep through\nthe seven TRAINERS left on this floor.	Misschien kun je alle zeven\nTRAINERS op deze verdieping aan.	
+BattlePyramid_Text_SixTrainersRemaining4	Maybe you could sweep through\nthe six TRAINERS left on this floor.	Misschien kun je alle zes\nTRAINERS op deze verdieping aan.	
+BattlePyramid_Text_FiveTrainersRemaining4	Maybe you could sweep through\nthe five TRAINERS left on this floor.	Misschien kun je alle vijf\nTRAINERS op deze verdieping aan.	
+BattlePyramid_Text_FourTrainersRemaining4	Maybe you could sweep through\nthe four TRAINERS left on this floor.	Misschien kun je alle vier\nTRAINERS op deze verdieping aan.	
+BattlePyramid_Text_ThreeTrainersRemaining4	Maybe you could sweep through\nthe three TRAINERS left on this floor.	Misschien kun je alle drie\nTRAINERS op deze verdieping aan.	
+BattlePyramid_Text_TwoTrainersRemaining4	Maybe you could sweep through\nthe two TRAINERS left on this floor.	Misschien kun je alle twee\nTRAINERS op deze verdieping aan.	
+BattlePyramid_Text_OneTrainersRemaining4	Maybe you could complete your sweep\nwith the one TRAINER left on this floor.	Misschien maak je het af met de\nlaatste TRAINER op deze verdieping.	
+BattlePyramid_Text_ZeroTrainersRemaining4	There isn't a single person left who\ncan defeat you now…	Er is niemand meer die je nu\nkan verslaan…	
+BattlePyramid_Text_SevenTrainersRemaining5	You may have what it takes to beat\nthe seven expert TRAINERS who remain.	Misschien kun je de zeven sterke\nTRAINERS die over zijn verslaan.	
+BattlePyramid_Text_SixTrainersRemaining5	You may have what it takes to beat\nthe six expert TRAINERS who remain.	Misschien kun je de zes sterke\nTRAINERS die over zijn verslaan.	
+BattlePyramid_Text_FiveTrainersRemaining5	You may have what it takes to beat\nthe five expert TRAINERS who remain.	Misschien kun je de vijf sterke\nTRAINERS die over zijn verslaan.	
+BattlePyramid_Text_FourTrainersRemaining5	You may have what it takes to beat\nthe four expert TRAINERS who remain.	Misschien kun je de vier sterke\nTRAINERS die over zijn verslaan.	
+BattlePyramid_Text_ThreeTrainersRemaining5	You may have what it takes to beat\nthe three expert TRAINERS who remain.	Misschien kun je de drie sterke\nTRAINERS die over zijn verslaan.	
+BattlePyramid_Text_TwoTrainersRemaining5	You may have what it takes to beat\nthe two expert TRAINERS who remain.	Misschien kun je de twee sterke\nTRAINERS die over zijn verslaan.	
+BattlePyramid_Text_OneTrainersRemaining5	You may have what it takes to beat\nthe one expert TRAINER who remains.	Misschien kun je de laatste sterke\nTRAINER die over is verslaan.	
+BattlePyramid_Text_ZeroTrainersRemaining5	Your skills are beyond reproach.\pThere are no more TRAINERS here\nwho have any chance of beating you.	Je bent onverslaanbaar.\pEr zijn hier geen TRAINERS meer\ndie je kunnen verslaan.	
+BattlePyramid_Text_SevenTrainersRemaining6	Can you keep winning against\nthe seven remaining TRAINERS?	Blijf je winnen van de zeven\nTRAINERS die over zijn?	
+BattlePyramid_Text_SixTrainersRemaining6	Can you keep winning against\nthe six remaining TRAINERS?	Blijf je winnen van de zes\nTRAINERS die over zijn?	
+BattlePyramid_Text_FiveTrainersRemaining6	Can you keep winning against\nthe five remaining TRAINERS?	Blijf je winnen van de vijf\nTRAINERS die over zijn?	
+BattlePyramid_Text_FourTrainersRemaining6	Can you keep winning against\nthe four remaining TRAINERS?	Blijf je winnen van de vier\nTRAINERS die over zijn?	
+BattlePyramid_Text_ThreeTrainersRemaining6	Can you keep winning against\nthe three remaining TRAINERS?	Blijf je winnen van de drie\nTRAINERS die over zijn?	
+BattlePyramid_Text_TwoTrainersRemaining6	Can you keep winning against\nthe two remaining TRAINERS?	Blijf je winnen van de twee\nTRAINERS die over zijn?	
+BattlePyramid_Text_OneTrainersRemaining6	Can you keep winning against\nthe last remaining TRAINER?	Blijf je winnen van de laatste\nTRAINER die over is?	
+BattlePyramid_Text_ZeroTrainersRemaining6	There aren't any TRAINERS left that\ncan take you on now…	Er is geen TRAINER meer die\nhet tegen je opneemt…	

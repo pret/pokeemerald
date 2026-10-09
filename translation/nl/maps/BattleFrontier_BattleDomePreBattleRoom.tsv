@@ -1,27 +1,27 @@
 key	english	dutch	notes
-BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForRound1	Your 1st-round match is next.\nAre you ready?		
-BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForRound2	Your 2nd-round match is next.\nAre you ready?		
-BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForSemifinals	Your semifinal match is next.\nAre you ready?		
-BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForFinals	Your final match is next.\nAre you ready?		
-BattleFrontier_BattleDomePreBattleRoom_Text_ChooseTwoMons	Please choose the two POKéMON\nthat are to appear in battle.		
-BattleFrontier_BattleDomePreBattleRoom_Text_RightThisWay	Right this way, please.		
-BattleFrontier_BattleDomePreBattleRoom_Text_RestoreMonsToFullHealth	Thank you for competing!\pI'll restore your POKéMON to\nfull health.		
-BattleFrontier_BattleDomePreBattleRoom_Text_Round1Complete	All 1st-round matches have been\ncompleted.\pThese are the teams that advanced!		
-BattleFrontier_BattleDomePreBattleRoom_Text_Round2Complete	All 2nd-round matches have been\ncompleted.\pThese are the teams that advanced!		
-BattleFrontier_BattleDomePreBattleRoom_Text_SemifinalsComplete	All semifinal matches have been\ncompleted.\pThese are the teams that advanced!		
-BattleFrontier_BattleDomePreBattleRoom_Text_CongratsReadyForRound2	Congratulations for getting through\nthe 1st round.\pThe 2nd round is next.\nAre you ready?		
-BattleFrontier_BattleDomePreBattleRoom_Text_CongratsReadyForSemifinals	Congratulations for advancing\nto the semifinals.\pThe best four teams meet in this round.\nAre you ready?		
-BattleFrontier_BattleDomePreBattleRoom_Text_CongratsReadyForFinals	Congratulations for advancing\nto the final match.\pYou're one win from the championship.\nAre you ready?		
-BattleFrontier_BattleDomePreBattleRoom_Text_PlayersNextOpponentIsTrainer	{PLAYER}'s next opponent\nis this TRAINER.		
-BattleFrontier_BattleDomePreBattleRoom_Text_TourneyInRound1	The tournament is in the 1st round.		
-BattleFrontier_BattleDomePreBattleRoom_Text_TourneyInRound2	The tournament is in the 2nd round.		
-BattleFrontier_BattleDomePreBattleRoom_Text_TourneyInSemifinals	The tournament is in the semifinals.		
-BattleFrontier_BattleDomePreBattleRoom_Text_TourneyInFinals	The tournament is up to the final.		
-BattleFrontier_BattleDomePreBattleRoom_Text_SaveAndQuitGame	Would you like to save and\nquit the game?		
-BattleFrontier_BattleDomePreBattleRoom_Text_RetireYourChallenge	Would you like to retire from your\nBattle Tournament challenge?		
-BattleFrontier_BattleDomePreBattleRoom_Text_SavingDataPleaseWait	I am saving your data.\nPlease wait.		
-BattleFrontier_BattleDomePreBattleRoom_Text_RecordLastMatch	Should I record your last match\non your FRONTIER PASS?		
-BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerSilver	Congratulations for advancing\nto the final match.\pFor the final match, you will challenge\nthe DOME ACE TUCKER.\pAre you ready?		
-BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerGold	Congratulations for advancing\nto the final match.\pFor the final match, you will challenge\nthe DOME ACE TUCKER.\pAre you ready?		
-BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerSilverShort	Your final battle against TUCKER is\nnext. Are you ready?		
-BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerGoldShort	Your final battle against TUCKER is\nnext. Are you ready?		
+BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForRound1	Your 1st-round match is next.\nAre you ready?	Je gevecht in ronde 1 is nu.\nBen je klaar?	
+BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForRound2	Your 2nd-round match is next.\nAre you ready?	Je gevecht in ronde 2 is nu.\nBen je klaar?	
+BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForSemifinals	Your semifinal match is next.\nAre you ready?	Je halve finale is nu.\nBen je klaar?	
+BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForFinals	Your final match is next.\nAre you ready?	Je finale is nu.\nBen je klaar?	
+BattleFrontier_BattleDomePreBattleRoom_Text_ChooseTwoMons	Please choose the two POKéMON\nthat are to appear in battle.	Kies de twee POKéMON\ndie gaan vechten.	
+BattleFrontier_BattleDomePreBattleRoom_Text_RightThisWay	Right this way, please.	Deze kant op, alsjeblieft.	
+BattleFrontier_BattleDomePreBattleRoom_Text_RestoreMonsToFullHealth	Thank you for competing!\pI'll restore your POKéMON to\nfull health.	Bedankt voor het meedoen!\pIk genees je POKéMON helemaal.	
+BattleFrontier_BattleDomePreBattleRoom_Text_Round1Complete	All 1st-round matches have been\ncompleted.\pThese are the teams that advanced!	Alle gevechten van ronde 1 zijn\nafgelopen.\pDit zijn de teams die door zijn!	
+BattleFrontier_BattleDomePreBattleRoom_Text_Round2Complete	All 2nd-round matches have been\ncompleted.\pThese are the teams that advanced!	Alle gevechten van ronde 2 zijn\nafgelopen.\pDit zijn de teams die door zijn!	
+BattleFrontier_BattleDomePreBattleRoom_Text_SemifinalsComplete	All semifinal matches have been\ncompleted.\pThese are the teams that advanced!	Alle halve finales zijn\nafgelopen.\pDit zijn de teams die door zijn!	
+BattleFrontier_BattleDomePreBattleRoom_Text_CongratsReadyForRound2	Congratulations for getting through\nthe 1st round.\pThe 2nd round is next.\nAre you ready?	Gefeliciteerd, je bent door\nronde 1.\pNu komt ronde 2.\nBen je klaar?	
+BattleFrontier_BattleDomePreBattleRoom_Text_CongratsReadyForSemifinals	Congratulations for advancing\nto the semifinals.\pThe best four teams meet in this round.\nAre you ready?	Gefeliciteerd, je bent in\nde halve finale.\pDe beste vier teams strijden\nin deze ronde. Ben je klaar?	
+BattleFrontier_BattleDomePreBattleRoom_Text_CongratsReadyForFinals	Congratulations for advancing\nto the final match.\pYou're one win from the championship.\nAre you ready?	Gefeliciteerd, je bent in\nde finale.\pJe bent één winst van\nhet kampioenschap. Ben je klaar?	
+BattleFrontier_BattleDomePreBattleRoom_Text_PlayersNextOpponentIsTrainer	{PLAYER}'s next opponent\nis this TRAINER.	De volgende tegenstander van\n{PLAYER} is deze TRAINER.	
+BattleFrontier_BattleDomePreBattleRoom_Text_TourneyInRound1	The tournament is in the 1st round.	Het toernooi is in ronde 1.	
+BattleFrontier_BattleDomePreBattleRoom_Text_TourneyInRound2	The tournament is in the 2nd round.	Het toernooi is in ronde 2.	
+BattleFrontier_BattleDomePreBattleRoom_Text_TourneyInSemifinals	The tournament is in the semifinals.	Het toernooi is in de halve finale.	
+BattleFrontier_BattleDomePreBattleRoom_Text_TourneyInFinals	The tournament is up to the final.	Het toernooi is bij de finale.	
+BattleFrontier_BattleDomePreBattleRoom_Text_SaveAndQuitGame	Would you like to save and\nquit the game?	Wil je opslaan en\nstoppen met het spel?	
+BattleFrontier_BattleDomePreBattleRoom_Text_RetireYourChallenge	Would you like to retire from your\nBattle Tournament challenge?	Wil je stoppen met je\nToernooi?	
+BattleFrontier_BattleDomePreBattleRoom_Text_SavingDataPleaseWait	I am saving your data.\nPlease wait.	Ik sla je gegevens op.\nWacht even.	
+BattleFrontier_BattleDomePreBattleRoom_Text_RecordLastMatch	Should I record your last match\non your FRONTIER PASS?	Zal ik je laatste gevecht opslaan\nop je FRONTIER PASS?	
+BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerSilver	Congratulations for advancing\nto the final match.\pFor the final match, you will challenge\nthe DOME ACE TUCKER.\pAre you ready?	Gefeliciteerd, je bent in\nde finale.\pIn de finale strijd je tegen\nde DOME ACE TUCKER.\pBen je klaar?	
+BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerGold	Congratulations for advancing\nto the final match.\pFor the final match, you will challenge\nthe DOME ACE TUCKER.\pAre you ready?	Gefeliciteerd, je bent in\nde finale.\pIn de finale strijd je tegen\nde DOME ACE TUCKER.\pBen je klaar?	
+BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerSilverShort	Your final battle against TUCKER is\nnext. Are you ready?	Je laatste gevecht tegen TUCKER\nis nu. Ben je klaar?	
+BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerGoldShort	Your final battle against TUCKER is\nnext. Are you ready?	Je laatste gevecht tegen TUCKER\nis nu. Ben je klaar?	

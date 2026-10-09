@@ -1,33 +1,33 @@
 key	english	dutch	notes
-BattleFrontier_Lounge7_Text_LeftTutorIntro	Buhahaha!\pYou couldn't tell it from looking now,\nbut I used to be one tough TRAINER.\pI had a reputation as the toughest\nBEAUTY around, I tell you!\p… … … … … …\pWhat is it now?\nYou don't believe me.\pI'm not like that blowhard woman over\nthere. I'm actually talented!\pLet me prove it to you.\nI can teach your POKéMON special and\lyet cute moves.\pBut my lessons don't come free.\nHow about paying for the moves I teach\lwith a wee bit of Battle Points?		
-BattleFrontier_Lounge7_Text_LeftTutorWelcomeBack	Buhahaha!\pAre you back to learn special and\nyet cute POKéMON moves?		
-BattleFrontier_Lounge7_Text_TeachWhichMove	Fine, fine, look here!\nWhich move should I teach?		
-BattleFrontier_Lounge7_Text_MoveWillBeXBattlePoints	The move {STR_VAR_1}, is it?\nThat will be {STR_VAR_2} Battle Points, okay?		
-BattleFrontier_Lounge7_Text_TeachMoveToWhichMon	Fine, fine, now pick the POKéMON\nI should teach the move to.		
-BattleFrontier_Lounge7_Text_HaventGotEnoughPoints	What the…\nYou haven't got enough Battle Points!		
-BattleFrontier_Lounge7_Text_IllTakeBattlePoints	Do you see how skilled I am now?\nI'll take your Battle Points, thanks!		
-BattleFrontier_Lounge7_Text_YouDontWantTo	What's that?\nYou don't want to…\pIf you want to see how skilled I am,\nyou come see me anytime!		
-BattleFrontier_Lounge7_Text_RightTutorIntro	Ihihihi!\pI know it's hard to see now, but I used\nto be one fantastic TRAINER.\pI had a reputation as the most\ninvincible SWIMMER around, I tell you!\p… … … … … …\pWhat's wrong?\nYou don't believe me.\pI'm not like that buffoonish woman over\nthere. I'm actually experienced!\pI can prove it to you.\nI can teach your POKéMON hard and\lyet pretty moves.\pBut my lessons don't come free.\nHow about paying for the moves I teach\lwith a wee bit of Battle Points?		
-BattleFrontier_Lounge7_Text_RightTutorWelcomeBack	Ihihihi!\pHave you come to learn hard and\nyet pretty POKéMON moves?		
-BattleFrontier_Lounge7_Text_ThinkLadiesDontGetAlong	Those ladies, the way they bad-mouth\neach other, you probably think that\lthey don't get along.\pBut if that were true, they wouldn't\nstay out here together, would they?		
-BattleFrontier_Lounge7_Text_LadiesWereStrongAndBeautiful	When I was just a wee YOUNGSTER,\nthose ladies were strong and beautiful.\pThey were idols among us TRAINERS.\pEven now, age hasn't dulled their\nabilities.\pIn fact, their POKéMON moves have\ngrown even more polished.\pBut… For some reason, I can't help\nbut feel this…\pTime is so cruel…		
-BattleFrontier_Lounge7_Text_SoftboiledDesc	Recovers up to\nhalf the user's\nmaximum HP.		
-BattleFrontier_Lounge7_Text_SeismicTossDesc	Inflicts damage\nidentical to the\nuser's level.		
-BattleFrontier_Lounge7_Text_DreamEaterDesc	Recovers half the\ndamage inflicted\non a sleeping foe.		
-BattleFrontier_Lounge7_Text_MegaPunchDesc	A strong punch\nthrown with\nincredible power.		
-BattleFrontier_Lounge7_Text_MegaKickDesc	An extremely\npowerful kick with\nintense force.		
-BattleFrontier_Lounge7_Text_BodySlamDesc	A full-body slam\nthat may cause\nparalysis.		
-BattleFrontier_Lounge7_Text_RockSlideDesc	Large boulders\nare hurled. May\ncause flinching.		
-BattleFrontier_Lounge7_Text_CounterDesc	Retaliates any\nphysical hit with\ndouble the power.		
-BattleFrontier_Lounge7_Text_ThunderWaveDesc	A weak jolt of\nelectricity that\nparalyzes the foe.		
-BattleFrontier_Lounge7_Text_SwordsDanceDesc	A fighting dance\nthat sharply\nraises ATTACK.		
-BattleFrontier_Lounge7_Text_DefenseCurlDesc	Curls up to con-\nceal weak spots\nand raise DEFENSE.		
-BattleFrontier_Lounge7_Text_SnoreDesc	A loud attack\nthat can be used\nonly while asleep.		
-BattleFrontier_Lounge7_Text_MudSlapDesc	Hurls mud in the\nfoe's face to re-\nduce its accuracy.		
-BattleFrontier_Lounge7_Text_SwiftDesc	Sprays star-\nshaped rays\nthat never miss.		
-BattleFrontier_Lounge7_Text_IcyWindDesc	A chilling attack\nthat lowers the\nfoe's SPEED.		
-BattleFrontier_Lounge7_Text_EndureDesc	Endures any at-\ntack for 1 turn,\nleaving 1HP.		
-BattleFrontier_Lounge7_Text_PsychUpDesc	Copies the foe's\neffect(s) and\ngives to the user.		
-BattleFrontier_Lounge7_Text_IcePunchDesc	An icy punch\nthat may\nfreeze the foe.		
-BattleFrontier_Lounge7_Text_ThunderPunchDesc	An electrified\npunch that may\nparalyze the foe.		
-BattleFrontier_Lounge7_Text_FirePunchDesc	A fiery punch\nthat may burn\nthe foe.		
+BattleFrontier_Lounge7_Text_LeftTutorIntro	Buhahaha!\pYou couldn't tell it from looking now,\nbut I used to be one tough TRAINER.\pI had a reputation as the toughest\nBEAUTY around, I tell you!\p… … … … … …\pWhat is it now?\nYou don't believe me.\pI'm not like that blowhard woman over\nthere. I'm actually talented!\pLet me prove it to you.\nI can teach your POKéMON special and\lyet cute moves.\pBut my lessons don't come free.\nHow about paying for the moves I teach\lwith a wee bit of Battle Points?	Buhahaha!\pJe ziet het nu niet meer, maar ik was\nvroeger een sterke TRAINER.\pIk stond bekend als de sterkste\nSCHOONHEID van allemaal!\p… … … … … …\pWat is er?\nJe gelooft me niet.\pIk ben niet zoals die opschepper\ndaar. Ik kan echt iets!\pIk bewijs het je.\nIk leer je POKéMON speciale en\ltoch schattige AANVALLEN.\pMaar mijn lessen zijn niet gratis.\nWat dacht je van een beetje\lGEVECHTSPUNTEN voor elke AANVAL?	
+BattleFrontier_Lounge7_Text_LeftTutorWelcomeBack	Buhahaha!\pAre you back to learn special and\nyet cute POKéMON moves?	Buhahaha!\pKom je speciale en toch schattige\nPOKéMON-AANVALLEN leren?	
+BattleFrontier_Lounge7_Text_TeachWhichMove	Fine, fine, look here!\nWhich move should I teach?	Goed, goed, kijk maar!\nWelke AANVAL moet ik leren?	
+BattleFrontier_Lounge7_Text_MoveWillBeXBattlePoints	The move {STR_VAR_1}, is it?\nThat will be {STR_VAR_2} Battle Points, okay?	De AANVAL {STR_VAR_1}, is het die?\nDat kost {STR_VAR_2} GEVECHTSPUNTEN, oké?	
+BattleFrontier_Lounge7_Text_TeachMoveToWhichMon	Fine, fine, now pick the POKéMON\nI should teach the move to.	Goed, goed, kies nu de POKéMON\ndie de AANVAL moet leren.	
+BattleFrontier_Lounge7_Text_HaventGotEnoughPoints	What the…\nYou haven't got enough Battle Points!	Wat nou…\nJe hebt niet genoeg GEVECHTSPUNTEN!	
+BattleFrontier_Lounge7_Text_IllTakeBattlePoints	Do you see how skilled I am now?\nI'll take your Battle Points, thanks!	Zie je nu hoe goed ik ben?\nIk neem je GEVECHTSPUNTEN, bedankt!	
+BattleFrontier_Lounge7_Text_YouDontWantTo	What's that?\nYou don't want to…\pIf you want to see how skilled I am,\nyou come see me anytime!	Wat zeg je?\nJe wilt niet…\pWil je zien hoe goed ik ben,\nkom dan altijd langs!	
+BattleFrontier_Lounge7_Text_RightTutorIntro	Ihihihi!\pI know it's hard to see now, but I used\nto be one fantastic TRAINER.\pI had a reputation as the most\ninvincible SWIMMER around, I tell you!\p… … … … … …\pWhat's wrong?\nYou don't believe me.\pI'm not like that buffoonish woman over\nthere. I'm actually experienced!\pI can prove it to you.\nI can teach your POKéMON hard and\lyet pretty moves.\pBut my lessons don't come free.\nHow about paying for the moves I teach\lwith a wee bit of Battle Points?	Ihihihi!\pJe ziet het nu niet meer, maar ik was\nvroeger een fantastische TRAINER.\pIk stond bekend als de meest\nonverslaanbare ZWEMSTER van allemaal!\p… … … … … …\pWat is er?\nJe gelooft me niet.\pIk ben niet zoals die rare vrouw\ndaar. Ik heb echt ervaring!\pIk bewijs het je.\nIk leer je POKéMON stoere en\ltoch mooie AANVALLEN.\pMaar mijn lessen zijn niet gratis.\nWat dacht je van een beetje\lGEVECHTSPUNTEN voor elke AANVAL?	
+BattleFrontier_Lounge7_Text_RightTutorWelcomeBack	Ihihihi!\pHave you come to learn hard and\nyet pretty POKéMON moves?	Ihihihi!\pKom je stoere en toch mooie\nPOKéMON-AANVALLEN leren?	
+BattleFrontier_Lounge7_Text_ThinkLadiesDontGetAlong	Those ladies, the way they bad-mouth\neach other, you probably think that\lthey don't get along.\pBut if that were true, they wouldn't\nstay out here together, would they?	Zoals die dames over elkaar praten,\ndenk je vast dat ze het niet met\lelkaar kunnen vinden.\pMaar dan zouden ze hier niet samen\nblijven zitten, toch?	
+BattleFrontier_Lounge7_Text_LadiesWereStrongAndBeautiful	When I was just a wee YOUNGSTER,\nthose ladies were strong and beautiful.\pThey were idols among us TRAINERS.\pEven now, age hasn't dulled their\nabilities.\pIn fact, their POKéMON moves have\ngrown even more polished.\pBut… For some reason, I can't help\nbut feel this…\pTime is so cruel…	Toen ik nog een kleine JONGEN was,\nwaren die dames sterk en mooi.\pZe waren onze idolen als TRAINERS.\pZelfs nu zijn ze nog steeds\nzo goed.\pZe AANVALLEN zijn zelfs nog\nbeter geworden.\pMaar… Om de een of andere reden\nvoel ik dit toch…\pDe tijd is zo wreed…	
+BattleFrontier_Lounge7_Text_SoftboiledDesc	Recovers up to\nhalf the user's\nmaximum HP.	Geneest de helft\nvan de HP van\nde gebruiker.	
+BattleFrontier_Lounge7_Text_SeismicTossDesc	Inflicts damage\nidentical to the\nuser's level.	Doet schade\ngelijk aan het\nlevel van de gebruiker.	
+BattleFrontier_Lounge7_Text_DreamEaterDesc	Recovers half the\ndamage inflicted\non a sleeping foe.	Geneest de helft\nvan de schade\naan een slapende vijand.	
+BattleFrontier_Lounge7_Text_MegaPunchDesc	A strong punch\nthrown with\nincredible power.	Een sterke vuist\nmet ongelofelijke\nkracht.	
+BattleFrontier_Lounge7_Text_MegaKickDesc	An extremely\npowerful kick with\nintense force.	Een supersterke\ntrap met enorme\nkracht.	
+BattleFrontier_Lounge7_Text_BodySlamDesc	A full-body slam\nthat may cause\nparalysis.	Een zware botsing\ndie kan\nverlammen.	
+BattleFrontier_Lounge7_Text_RockSlideDesc	Large boulders\nare hurled. May\ncause flinching.	Grote rotsen\nworden gegooid.\nKan terugdeinzen.	
+BattleFrontier_Lounge7_Text_CounterDesc	Retaliates any\nphysical hit with\ndouble the power.	Slaat elke klap\nterug met dubbele\nkracht.	
+BattleFrontier_Lounge7_Text_ThunderWaveDesc	A weak jolt of\nelectricity that\nparalyzes the foe.	Een zwakke schok\ndie de vijand\nverlamt.	
+BattleFrontier_Lounge7_Text_SwordsDanceDesc	A fighting dance\nthat sharply\nraises ATTACK.	Een vechtdans die\nAANVAL flink\nverhoogt.	
+BattleFrontier_Lounge7_Text_DefenseCurlDesc	Curls up to con-\nceal weak spots\nand raise DEFENSE.	Rolt zich op om\nzwakke plekken\nte beschermen.	
+BattleFrontier_Lounge7_Text_SnoreDesc	A loud attack\nthat can be used\nonly while asleep.	Een luide aanval\ndie alleen in je\nslaap werkt.	
+BattleFrontier_Lounge7_Text_MudSlapDesc	Hurls mud in the\nfoe's face to re-\nduce its accuracy.	Gooit modder in\nhet gezicht om\nde raakkans te\lverlagen.	
+BattleFrontier_Lounge7_Text_SwiftDesc	Sprays star-\nshaped rays\nthat never miss.	Schiet sterren\ndie nooit\nmissen.	
+BattleFrontier_Lounge7_Text_IcyWindDesc	A chilling attack\nthat lowers the\nfoe's SPEED.	Een ijzige aanval\ndie de SNELHEID\nvan de vijand\lverlaagt.	
+BattleFrontier_Lounge7_Text_EndureDesc	Endures any at-\ntack for 1 turn,\nleaving 1HP.	Houdt elke aanval\neen beurt vol\nmet 1 HP over.	
+BattleFrontier_Lounge7_Text_PsychUpDesc	Copies the foe's\neffect(s) and\ngives to the user.	Kopieert de\nverbeteringen van\nde vijand.	
+BattleFrontier_Lounge7_Text_IcePunchDesc	An icy punch\nthat may\nfreeze the foe.	Een ijskoude vuist\ndie de vijand\nkan bevriezen.	
+BattleFrontier_Lounge7_Text_ThunderPunchDesc	An electrified\npunch that may\nparalyze the foe.	Een vuist vol\nstroom die kan\nverlammen.	
+BattleFrontier_Lounge7_Text_FirePunchDesc	A fiery punch\nthat may burn\nthe foe.	Een vurige vuist\ndie de vijand\nkan verbranden.	

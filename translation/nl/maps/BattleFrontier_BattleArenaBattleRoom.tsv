@@ -1,34 +1,34 @@
 key	english	dutch	notes
-BattleFrontier_BattleArenaBattleRoom_Text_PlayerStepForward	REFEREE: TRAINER {PLAYER}!\nStep forward, please!		
-BattleFrontier_BattleArenaBattleRoom_Text_OpponentStepForward	REFEREE: TRAINER {STR_VAR_1}!\nStep forward, please!		
-BattleFrontier_BattleArenaBattleRoom_Text_SetKOTourneyBegin	REFEREE: Set KO Tourney!\nBegin!		
-BattleFrontier_BattleArenaBattleRoom_Text_WinnerIsPlayer	REFEREE: The winner is {PLAYER}!		
-BattleFrontier_BattleArenaBattleRoom_Text_WinnerIsOpponent	REFEREE: The winner is {STR_VAR_1}!		
-BattleFrontier_BattleArenaBattleRoom_Text_MonsWillBeRestored	Your POKéMON will be restored to\nfull health.		
-BattleFrontier_BattleArenaBattleRoom_Text_ReadyFor2ndOpponent	Next up, your second opponent!\nAre you ready to move on?		
-BattleFrontier_BattleArenaBattleRoom_Text_ReadyFor3rdOpponent	Next up, your third opponent!\nAre you ready to move on?		
-BattleFrontier_BattleArenaBattleRoom_Text_ReadyFor4thOpponent	Next up, your fourth opponent!\nAre you ready to move on?		
-BattleFrontier_BattleArenaBattleRoom_Text_ReadyFor5thOpponent	Next up, your fifth opponent!\nAre you ready to move on?		
-BattleFrontier_BattleArenaBattleRoom_Text_ReadyFor6thOpponent	Next up, your sixth opponent!\nAre you ready to move on?		
-BattleFrontier_BattleArenaBattleRoom_Text_ReadyFor7thOpponent	Next up, your seventh opponent!\nAre you ready to move on?		
-BattleFrontier_BattleArenaBattleRoom_Text_SaveAndShutDown	Would you like to save the game and\nshut down now?		
-BattleFrontier_BattleArenaBattleRoom_Text_RetireFromChallenge	Would you like to retire from your\nSet KO Tourney challenge?		
-BattleFrontier_BattleArenaBattleRoom_Text_SavingPleaseWait	I am saving your game data.\nPlease wait.		
-BattleFrontier_BattleArenaBattleRoom_Text_RecordLastBattle	Would you like to record your last\nbattle on your FRONTIER PASS?		
-BattleFrontier_BattleArenaBattleRoom_Text_NowFaceTycoon	My dear challenger!\pYour skill level is truly astounding!\pWe now would like you to face our\nleader, the ARENA TYCOON!		
-BattleFrontier_BattleArenaBattleRoom_Text_PreparedForTycoon	A battle with the ARENA TYCOON!\nAre you prepared?		
-BattleFrontier_BattleArenaBattleRoom_Text_MakeWayForGreta	REFEREE: The ARENA TYCOON!\nMake way for GRETA!		
-BattleFrontier_BattleArenaBattleRoom_Text_GretaYoureChallenger	GRETA: Hey!\nHowdy!\p…Wait, are you the challenger?		
-BattleFrontier_BattleArenaBattleRoom_Text_IsThatRight	Is that right? Hmm…\nHmhm…		
-BattleFrontier_BattleArenaBattleRoom_Text_YouLookWeakTakeThingsEasy	I don't know how to say it, but…\nTo put it bluntly, you look pretty weak.\lAre you sure you're up for me?\pHmm…\pWell, all right!\nWe'll take things easy to start with!		
-BattleFrontier_BattleArenaBattleRoom_Text_IgniteMyPassionForBattle	Okay! Let's see you ignite my passion\nfor battle!		
-BattleFrontier_BattleArenaBattleRoom_Text_GretaYoureToughAfterAll	GRETA: Ow, wait a second!\nYou are tough after all!\pI like you!\nLet's see your FRONTIER PASS.		
-BattleFrontier_BattleArenaBattleRoom_Text_ReceivedGutsSymbol	The Guts Symbol was embossed on\nthe FRONTIER PASS!		
-BattleFrontier_BattleArenaBattleRoom_Text_GoingToBeFunNextTime	Hmm…\pIt's going to be fun the next time!\nI'm looking forward to it!		
-BattleFrontier_BattleArenaBattleRoom_Text_GretaLookingForwardToSeeingAgain	GRETA: Hey! Howdy!\nYou finally won your way up to me!\pI was getting worried waiting for you!\nI was really looking forward to seeing\lyou again!		
-BattleFrontier_BattleArenaBattleRoom_Text_SoAreYouReady	… … …\nSo, are you ready?		
-BattleFrontier_BattleArenaBattleRoom_Text_WontAllowHalfheartedEffort	I won't allow a halfhearted effort!\nBe ready for a thrashing!		
-BattleFrontier_BattleArenaBattleRoom_Text_LetsGetThisStarted	Come on, REFEREE!\nLet's get this started!		
-BattleFrontier_BattleArenaBattleRoom_Text_GretaBlownAway	GRETA: Gaaah! Blown away!\nLet's see your FRONTIER PASS!		
-BattleFrontier_BattleArenaBattleRoom_Text_GutsSymbolTookGoldenShine	The Guts Symbol took on\na golden shine!		
-BattleFrontier_BattleArenaBattleRoom_Text_IfWeBattleAgainWontLose	Arrrgh!\nThis is so infuriating!\pIf we ever battle again, I won't lose!\nDon't you forget it! Bye-bye!		
+BattleFrontier_BattleArenaBattleRoom_Text_PlayerStepForward	REFEREE: TRAINER {PLAYER}!\nStep forward, please!	SCHEIDS: TRAINER {PLAYER}!\nKom naar voren, alsjeblieft!	
+BattleFrontier_BattleArenaBattleRoom_Text_OpponentStepForward	REFEREE: TRAINER {STR_VAR_1}!\nStep forward, please!	SCHEIDS: TRAINER {STR_VAR_1}!\nKom naar voren, alsjeblieft!	
+BattleFrontier_BattleArenaBattleRoom_Text_SetKOTourneyBegin	REFEREE: Set KO Tourney!\nBegin!	SCHEIDS: KO-toernooi!\nBegin!	
+BattleFrontier_BattleArenaBattleRoom_Text_WinnerIsPlayer	REFEREE: The winner is {PLAYER}!	SCHEIDS: {PLAYER} wint!	
+BattleFrontier_BattleArenaBattleRoom_Text_WinnerIsOpponent	REFEREE: The winner is {STR_VAR_1}!	SCHEIDS: {STR_VAR_1} wint!	
+BattleFrontier_BattleArenaBattleRoom_Text_MonsWillBeRestored	Your POKéMON will be restored to\nfull health.	Je POKéMON worden helemaal\ngenezen.	
+BattleFrontier_BattleArenaBattleRoom_Text_ReadyFor2ndOpponent	Next up, your second opponent!\nAre you ready to move on?	Nu komt je tweede tegenstander!\nBen je klaar om door te gaan?	
+BattleFrontier_BattleArenaBattleRoom_Text_ReadyFor3rdOpponent	Next up, your third opponent!\nAre you ready to move on?	Nu komt je derde tegenstander!\nBen je klaar om door te gaan?	
+BattleFrontier_BattleArenaBattleRoom_Text_ReadyFor4thOpponent	Next up, your fourth opponent!\nAre you ready to move on?	Nu komt je vierde tegenstander!\nBen je klaar om door te gaan?	
+BattleFrontier_BattleArenaBattleRoom_Text_ReadyFor5thOpponent	Next up, your fifth opponent!\nAre you ready to move on?	Nu komt je vijfde tegenstander!\nBen je klaar om door te gaan?	
+BattleFrontier_BattleArenaBattleRoom_Text_ReadyFor6thOpponent	Next up, your sixth opponent!\nAre you ready to move on?	Nu komt je zesde tegenstander!\nBen je klaar om door te gaan?	
+BattleFrontier_BattleArenaBattleRoom_Text_ReadyFor7thOpponent	Next up, your seventh opponent!\nAre you ready to move on?	Nu komt je zevende tegenstander!\nBen je klaar om door te gaan?	
+BattleFrontier_BattleArenaBattleRoom_Text_SaveAndShutDown	Would you like to save the game and\nshut down now?	Wil je het spel opslaan en\nnu stoppen?	
+BattleFrontier_BattleArenaBattleRoom_Text_RetireFromChallenge	Would you like to retire from your\nSet KO Tourney challenge?	Wil je stoppen met je\nKO-toernooi?	
+BattleFrontier_BattleArenaBattleRoom_Text_SavingPleaseWait	I am saving your game data.\nPlease wait.	Ik sla je spel op.\nWacht even.	
+BattleFrontier_BattleArenaBattleRoom_Text_RecordLastBattle	Would you like to record your last\nbattle on your FRONTIER PASS?	Wil je je laatste gevecht opslaan\nop je FRONTIER PASS?	
+BattleFrontier_BattleArenaBattleRoom_Text_NowFaceTycoon	My dear challenger!\pYour skill level is truly astounding!\pWe now would like you to face our\nleader, the ARENA TYCOON!	Beste uitdager!\pJe bent echt supersterk!\pNu mag je tegen onze leider,\nde ARENA TYCOON!	
+BattleFrontier_BattleArenaBattleRoom_Text_PreparedForTycoon	A battle with the ARENA TYCOON!\nAre you prepared?	Een gevecht met de ARENA TYCOON!\nBen je er klaar voor?	
+BattleFrontier_BattleArenaBattleRoom_Text_MakeWayForGreta	REFEREE: The ARENA TYCOON!\nMake way for GRETA!	SCHEIDS: De ARENA TYCOON!\nMaak plaats voor GRETA!	
+BattleFrontier_BattleArenaBattleRoom_Text_GretaYoureChallenger	GRETA: Hey!\nHowdy!\p…Wait, are you the challenger?	GRETA: Hé!\nHoi hoi!\p…Wacht, ben jij de uitdager?	
+BattleFrontier_BattleArenaBattleRoom_Text_IsThatRight	Is that right? Hmm…\nHmhm…	Echt waar? Hmm…\nHmhm…	
+BattleFrontier_BattleArenaBattleRoom_Text_YouLookWeakTakeThingsEasy	I don't know how to say it, but…\nTo put it bluntly, you look pretty weak.\lAre you sure you're up for me?\pHmm…\pWell, all right!\nWe'll take things easy to start with!	Hoe zeg ik dit… Je ziet er\nnogal zwak uit.\lWeet je zeker dat je tegen mij wilt?\pHmm…\pNou, goed dan!\nWe beginnen rustig!	
+BattleFrontier_BattleArenaBattleRoom_Text_IgniteMyPassionForBattle	Okay! Let's see you ignite my passion\nfor battle!	Oké! Laat maar zien of je mijn\nvechtlust kunt aanwakkeren!	
+BattleFrontier_BattleArenaBattleRoom_Text_GretaYoureToughAfterAll	GRETA: Ow, wait a second!\nYou are tough after all!\pI like you!\nLet's see your FRONTIER PASS.	GRETA: Au, wacht even!\nJe bent toch best sterk!\pIk vind je leuk!\nLaat je FRONTIER PASS maar zien.	
+BattleFrontier_BattleArenaBattleRoom_Text_ReceivedGutsSymbol	The Guts Symbol was embossed on\nthe FRONTIER PASS!	Het Guts-symbool staat nu op\nde FRONTIER PASS!	
+BattleFrontier_BattleArenaBattleRoom_Text_GoingToBeFunNextTime	Hmm…\pIt's going to be fun the next time!\nI'm looking forward to it!	Hmm…\pDe volgende keer wordt het leuk!\nIk kijk er al naar uit!	
+BattleFrontier_BattleArenaBattleRoom_Text_GretaLookingForwardToSeeingAgain	GRETA: Hey! Howdy!\nYou finally won your way up to me!\pI was getting worried waiting for you!\nI was really looking forward to seeing\lyou again!	GRETA: Hé! Hoi hoi!\nJe bent eindelijk bij mij!\pIk werd al ongeduldig!\nIk wilde je zo graag weer zien!	
+BattleFrontier_BattleArenaBattleRoom_Text_SoAreYouReady	… … …\nSo, are you ready?	… … …\nNou, ben je klaar?	
+BattleFrontier_BattleArenaBattleRoom_Text_WontAllowHalfheartedEffort	I won't allow a halfhearted effort!\nBe ready for a thrashing!	Ik ga niet half werk doen!\nWees maar klaar voor een pak slaag!	
+BattleFrontier_BattleArenaBattleRoom_Text_LetsGetThisStarted	Come on, REFEREE!\nLet's get this started!	Kom op, SCHEIDS!\nLaten we beginnen!	
+BattleFrontier_BattleArenaBattleRoom_Text_GretaBlownAway	GRETA: Gaaah! Blown away!\nLet's see your FRONTIER PASS!	GRETA: Gaaah! Weggeblazen!\nLaat je FRONTIER PASS maar zien!	
+BattleFrontier_BattleArenaBattleRoom_Text_GutsSymbolTookGoldenShine	The Guts Symbol took on\na golden shine!	Het Guts-symbool is nu\ngoud!	
+BattleFrontier_BattleArenaBattleRoom_Text_IfWeBattleAgainWontLose	Arrrgh!\nThis is so infuriating!\pIf we ever battle again, I won't lose!\nDon't you forget it! Bye-bye!	Aaargh!\nWat een ergernis!\pAls we weer vechten, verlies ik niet!\nVergeet dat niet! Doei!	

@@ -157,6 +157,6 @@ Until then dialogue is English text with Dutch names inserted where the game fil
 - [x] Volcano area: `^(FallarborTown|MeteorFalls|MtChimney|JaggedPass|FieryPath|LavaridgeTown|DesertRuins|DesertUnderpass|MirageTower|ScorchedSlab|Route11[89]|Route12[01]|WeatherInstitute)`
 - [x] Fortree/Lilycove: `^(FortreeCity|LilycoveCity|MtPyre|Route12[23]|SafariZone|AquaHideout|MagmaHideout|ShoalCave)`
 - [x] Mossdeep to the League: `^(MossdeepCity|Route12[4-9]|Route13\d|SootopolisCity|CaveOfOrigin|SeafloorCavern|SkyPillar|PacifidlogTown|SealedChamber|EverGrandeCity|VictoryRoad|Underwater|AbandonedShip)`
-- [ ] Post-game maps: `^(BattleFrontier|TrainerHill|SouthernIsland|FarawayIsland|BirthIsland|NavelRock|ArtisanCave|IslandCave|AncientTomb|MarineCave|TerraCave|AlteringCave)`
+- [x] Post-game maps: `^(BattleFrontier|TrainerHill|SouthernIsland|FarawayIsland|BirthIsland|NavelRock|ArtisanCave|IslandCave|AncientTomb|MarineCave|TerraCave|AlteringCave)`
 - [x] Shared texts, one TSV each: `text/tv`, `text/match_call`, `text/apprentice`, other `text/*`, `scripts/*` (see `next_package.py --summary`)
-- [ ] Leftover maps: run `next_package.py --summary` and do what's left
+- [x] Leftover maps: run `next_package.py --summary` and do what's left

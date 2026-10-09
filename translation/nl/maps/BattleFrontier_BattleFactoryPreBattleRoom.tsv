@@ -1,49 +1,49 @@
 key	english	dutch	notes
-BattleFrontier_BattleFactoryPreBattleRoom_Text_HoldMonsChooseFromSelection	First, we will hold your POKéMON for\nsafekeeping.\pYou may then choose from our\nselection of POKéMON.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_LetUsRestoreMons	Thank you for competing!\nLet us restore your POKéMON!		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_ReadyFor2ndOpponent	The 2nd match is next!\nAre you ready?		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_ReadyFor3rdOpponent	The 3rd match is next!\nAre you ready?		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_ReadyFor4thOpponent	The 4th match is next!\nAre you ready?		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_ReadyFor5thOpponent	The 5th match is next!\nAre you ready?		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_ReadyFor6thOpponent	The 6th match is next!\nAre you ready?		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_ReadyFor7thOpponent	Finally, the 7th match is next!\nAre you ready?		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_SaveAndQuitGame	Would you like to save and quit\nthe game?		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_RetireFromChallenge	Would you like to retire from your\nBattle Swap challenge?		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_InvestigatedUpcomingOpponent	I've conducted a little investigation\nabout your upcoming opponent.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInNormalType	The TRAINER is apparently skilled\nin the handling of the NORMAL type.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInFireType	The TRAINER is apparently skilled\nin the handling of the FIRE type.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInWaterType	The TRAINER is apparently skilled\nin the handling of the WATER type.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInElectricType	The TRAINER is apparently skilled\nin the handling of the ELECTRIC type.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInGrassType	The TRAINER is apparently skilled\nin the handling of the GRASS type.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInIceType	The TRAINER is apparently skilled\nin the handling of the ICE type.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInFightingType	The TRAINER is apparently skilled\nin the handling of the FIGHTING type.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInPoisonType	The TRAINER is apparently skilled\nin the handling of the POISON type.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInGroundType	The TRAINER is apparently skilled\nin the handling of the GROUND type.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInFlyingType	The TRAINER is apparently skilled\nin the handling of the FLYING type.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInPsychicType	The TRAINER is apparently skilled\nin the handling of the PSYCHIC type.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInBugType	The TRAINER is apparently skilled\nin the handling of the BUG type.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInRockType	The TRAINER is apparently skilled\nin the handling of the ROCK type.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInGhostType	The TRAINER is apparently skilled\nin the handling of the GHOST type.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInDragonType	The TRAINER is apparently skilled\nin the handling of the DRAGON type.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInDarkType	The TRAINER is apparently skilled\nin the handling of the DARK type.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInSteelType	The TRAINER is apparently skilled\nin the handling of the STEEL type.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerHasNoClearFavorite	The TRAINER appears to have no clear\nfavorites when it comes to type.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleSlowAndSteady	The favorite battle style appears to\nbe slow and steady.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleEndurance	The favorite battle style appears to\nbe one of endurance.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleHighRisk	The favorite battle style appears to\nbe high risk, high return.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleDependsOnFlow	The favorite battle style appears to\ndepend on the battle's flow.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleTotalPreparation	The favorite battle style appears to\nbe one based on total preparation.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleWeakenFoe	The favorite battle style appears\nto be weakening the foe to start.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleFlexible	The favorite battle style appears to\nbe flexibly adaptable to the situation.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleImpossibleToPredict	The favorite battle style appears to\nbe impossible to predict.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleUnrestrained	The favorite battle style appears to\nbe free-spirited and unrestrained.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_LikeToSwapMon	Before starting the battle, would you\nlike to swap a POKéMON?		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_YourSwapIsComplete	Thank you!\nYour POKéMON swap is complete.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_RightThisWay	Right this way, please!		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_SavingDataPleaseWait	I am saving your data.\nPlease wait.		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_RecordLatestBattle	Would you like to record your latest\nbattle on your FRONTIER PASS?		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_WaitFewMoments	Excuse me! Excuse me, please!\nMay I get you to wait a few moments?		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_UnderstoodSirWillDo	…Uh-huh? What?! …Whoa!\nUnderstood, sir! Will do!		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_MessageFromHeadComeRightNow	Oh, my…\nSorry to keep you waiting!\pI have a message from this facility's\nboss, the FACTORY HEAD.\pHe says, “We're going to do it!\nCome here right now!”		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_PreparedToFaceHead	The FACTORY HEAD is demanding you.\nAre you prepared to face him?		
-BattleFrontier_BattleFactoryPreBattleRoom_Text_CantTellAnythingAboutHead	I'm terribly sorry, but I can't tell you\nanything about the FACTORY HEAD.		
+BattleFrontier_BattleFactoryPreBattleRoom_Text_HoldMonsChooseFromSelection	First, we will hold your POKéMON for\nsafekeeping.\pYou may then choose from our\nselection of POKéMON.	Eerst bewaren we je POKéMON\nveilig.\pDaarna mag je kiezen uit\nonze POKéMON.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_LetUsRestoreMons	Thank you for competing!\nLet us restore your POKéMON!	Bedankt voor het meedoen!\nWe genezen je POKéMON!	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_ReadyFor2ndOpponent	The 2nd match is next!\nAre you ready?	Het 2e gevecht is nu.\nBen je klaar?	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_ReadyFor3rdOpponent	The 3rd match is next!\nAre you ready?	Het 3e gevecht is nu.\nBen je klaar?	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_ReadyFor4thOpponent	The 4th match is next!\nAre you ready?	Het 4e gevecht is nu.\nBen je klaar?	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_ReadyFor5thOpponent	The 5th match is next!\nAre you ready?	Het 5e gevecht is nu.\nBen je klaar?	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_ReadyFor6thOpponent	The 6th match is next!\nAre you ready?	Het 6e gevecht is nu.\nBen je klaar?	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_ReadyFor7thOpponent	Finally, the 7th match is next!\nAre you ready?	Eindelijk, het 7e gevecht is nu!\nBen je klaar?	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_SaveAndQuitGame	Would you like to save and quit\nthe game?	Wil je opslaan en\nstoppen met het spel?	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_RetireFromChallenge	Would you like to retire from your\nBattle Swap challenge?	Wil je stoppen met je\nBattle Swap-uitdaging?	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_InvestigatedUpcomingOpponent	I've conducted a little investigation\nabout your upcoming opponent.	Ik heb een beetje onderzoek gedaan\nnaar je volgende tegenstander.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInNormalType	The TRAINER is apparently skilled\nin the handling of the NORMAL type.	Deze TRAINER is blijkbaar goed\nin het NORMAAL-type.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInFireType	The TRAINER is apparently skilled\nin the handling of the FIRE type.	Deze TRAINER is blijkbaar goed\nin het VUUR-type.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInWaterType	The TRAINER is apparently skilled\nin the handling of the WATER type.	Deze TRAINER is blijkbaar goed\nin het WATER-type.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInElectricType	The TRAINER is apparently skilled\nin the handling of the ELECTRIC type.	Deze TRAINER is blijkbaar goed\nin het ELEKTRISCH-type.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInGrassType	The TRAINER is apparently skilled\nin the handling of the GRASS type.	Deze TRAINER is blijkbaar goed\nin het GRAS-type.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInIceType	The TRAINER is apparently skilled\nin the handling of the ICE type.	Deze TRAINER is blijkbaar goed\nin het IJS-type.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInFightingType	The TRAINER is apparently skilled\nin the handling of the FIGHTING type.	Deze TRAINER is blijkbaar goed\nin het VECHT-type.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInPoisonType	The TRAINER is apparently skilled\nin the handling of the POISON type.	Deze TRAINER is blijkbaar goed\nin het GIF-type.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInGroundType	The TRAINER is apparently skilled\nin the handling of the GROUND type.	Deze TRAINER is blijkbaar goed\nin het GROND-type.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInFlyingType	The TRAINER is apparently skilled\nin the handling of the FLYING type.	Deze TRAINER is blijkbaar goed\nin het VLIEG-type.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInPsychicType	The TRAINER is apparently skilled\nin the handling of the PSYCHIC type.	Deze TRAINER is blijkbaar goed\nin het PSYCHISCH-type.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInBugType	The TRAINER is apparently skilled\nin the handling of the BUG type.	Deze TRAINER is blijkbaar goed\nin het INSECT-type.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInRockType	The TRAINER is apparently skilled\nin the handling of the ROCK type.	Deze TRAINER is blijkbaar goed\nin het STEEN-type.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInGhostType	The TRAINER is apparently skilled\nin the handling of the GHOST type.	Deze TRAINER is blijkbaar goed\nin het GEEST-type.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInDragonType	The TRAINER is apparently skilled\nin the handling of the DRAGON type.	Deze TRAINER is blijkbaar goed\nin het DRAAK-type.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInDarkType	The TRAINER is apparently skilled\nin the handling of the DARK type.	Deze TRAINER is blijkbaar goed\nin het DUISTER-type.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInSteelType	The TRAINER is apparently skilled\nin the handling of the STEEL type.	Deze TRAINER is blijkbaar goed\nin het STAAL-type.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerHasNoClearFavorite	The TRAINER appears to have no clear\nfavorites when it comes to type.	Deze TRAINER heeft geen duidelijke\nfavoriete types.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleSlowAndSteady	The favorite battle style appears to\nbe slow and steady.	Hij vecht het liefst langzaam\nen rustig.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleEndurance	The favorite battle style appears to\nbe one of endurance.	Hij vecht het liefst met\nvolle uithouding.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleHighRisk	The favorite battle style appears to\nbe high risk, high return.	Hij vecht het liefst met\ngrote risico's en grote winst.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleDependsOnFlow	The favorite battle style appears to\ndepend on the battle's flow.	Hij vecht het liefst op het\ngevoel, zoals het gevecht loopt.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleTotalPreparation	The favorite battle style appears to\nbe one based on total preparation.	Hij vecht het liefst met een\nplan dat tot in detail klaarligt.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleWeakenFoe	The favorite battle style appears\nto be weakening the foe to start.	Hij vecht het liefst door de\nvijand eerst te verzwakken.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleFlexible	The favorite battle style appears to\nbe flexibly adaptable to the situation.	Hij vecht het liefst door zich\naan te passen aan het gevecht.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleImpossibleToPredict	The favorite battle style appears to\nbe impossible to predict.	Hij vecht op een manier die\nniemand kan voorspellen.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleUnrestrained	The favorite battle style appears to\nbe free-spirited and unrestrained.	Hij vecht het liefst vrij en\nzonder regels.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_LikeToSwapMon	Before starting the battle, would you\nlike to swap a POKéMON?	Wil je voor het gevecht\neen POKéMON ruilen?	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_YourSwapIsComplete	Thank you!\nYour POKéMON swap is complete.	Bedankt!\nJe POKéMON is geruild.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_RightThisWay	Right this way, please!	Deze kant op, alsjeblieft!	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_SavingDataPleaseWait	I am saving your data.\nPlease wait.	Ik sla je gegevens op.\nWacht even.	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_RecordLatestBattle	Would you like to record your latest\nbattle on your FRONTIER PASS?	Wil je je laatste gevecht opslaan\nop je FRONTIER PASS?	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_WaitFewMoments	Excuse me! Excuse me, please!\nMay I get you to wait a few moments?	Pardon! Pardon!\nWil je even wachten?	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_UnderstoodSirWillDo	…Uh-huh? What?! …Whoa!\nUnderstood, sir! Will do!	…Ja? Wat?! …Wat!\nBegrepen, meneer! Komt voor elkaar!	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_MessageFromHeadComeRightNow	Oh, my…\nSorry to keep you waiting!\pI have a message from this facility's\nboss, the FACTORY HEAD.\pHe says, “We're going to do it!\nCome here right now!”	Oh jee…\nSorry dat je moest wachten!\pIk heb een bericht van de baas\nhier, de FACTORY HEAD.\pHij zegt: “We gaan het doen!\nKom nu meteen hierheen!”	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_PreparedToFaceHead	The FACTORY HEAD is demanding you.\nAre you prepared to face him?	De FACTORY HEAD wil je spreken.\nBen je klaar om hem te zien?	
+BattleFrontier_BattleFactoryPreBattleRoom_Text_CantTellAnythingAboutHead	I'm terribly sorry, but I can't tell you\nanything about the FACTORY HEAD.	Het spijt me heel erg, maar ik kan\nje niets over de FACTORY HEAD\lvertellen.	

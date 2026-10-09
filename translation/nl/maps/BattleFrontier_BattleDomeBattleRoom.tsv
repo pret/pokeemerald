@@ -1,47 +1,47 @@
 key	english	dutch	notes
-BattleFrontier_BattleDomeBattleRoom_Text_PlayerHasEnteredDome	{PLAYER} has entered the BATTLE DOME!		
-BattleFrontier_BattleDomeBattleRoom_Text_PlayerVersusTrainer	{STR_VAR_1}\nmatch!\p{PLAYER} versus {STR_VAR_2}!\pLet the battle begin!		
-BattleFrontier_BattleDomeBattleRoom_Text_PlayerIsWinner	{PLAYER} is the winner!\nCongratulations!		
-BattleFrontier_BattleDomeBattleRoom_Text_TrainerIsWinner	{STR_VAR_2} is the winner!\nCongratulations!		
-BattleFrontier_BattleDomeBattleRoom_Text_PlayerIsLv50Champ	{PLAYER} is the Level 50\nBattle Tournament Champion!\pCongratulations!		
-BattleFrontier_BattleDomeBattleRoom_Text_PlayerIsLvOpenChamp	{PLAYER} is the Open Level\nBattle Tournament Champion!\pCongratulations!		
-BattleFrontier_BattleDomeBattleRoom_Text_RefereeDecisionPleaseWait	What an unbelievable finish!\nWe have a double knockout!\pIn this event, the Battle Tournament\nrules call for a REFEREE'S decision.\pPlease wait while the judging\nis under way.		
-BattleFrontier_BattleDomeBattleRoom_Text_RefereesDecidedWinnerTrainer	The REFEREES have reached\na decision!\pThe winner is…\nOh, my goodness!\lThe winner is {STR_VAR_1}!\lCongratulations!		
-BattleFrontier_BattleDomeBattleRoom_Text_RefereesDecidedWinnerPlayer	The REFEREES have reached\na decision!\pThe winner is…\nOh, my goodness!\lThe winner is {PLAYER}!\lCongratulations!		
-BattleFrontier_BattleDomeBattleRoom_Text_BrightNewHope	The bright new hope!\p		
-BattleFrontier_BattleDomeBattleRoom_Text_RisingStar	The rising star!\p		
-BattleFrontier_BattleDomeBattleRoom_Text_WillTheyRaceToChampionship	Will this TRAINER race to\nthe championship?\p		
-BattleFrontier_BattleDomeBattleRoom_Text_CanAchieveChampionFirstTry	Can the feat of a championship\non the first try be achieved?\p		
-BattleFrontier_BattleDomeBattleRoom_Text_CanLossBeAvenged	Can the loss of the last match\nbe avenged?\p		
-BattleFrontier_BattleDomeBattleRoom_Text_OnFireForChampionship	The TRAINER is on fire for\nthe first championship try!\p		
-BattleFrontier_BattleDomeBattleRoom_Text_WinHereAdvancesToFinal	A win here means this TRAINER\nadvances to the final!\p		
-BattleFrontier_BattleDomeBattleRoom_Text_WillLongHeldDreamComeTrue	Will the long-held dream of\na championship finally come true?\p		
-BattleFrontier_BattleDomeBattleRoom_Text_TheInvincibleChampion	The invincible champion!\p		
-BattleFrontier_BattleDomeBattleRoom_Text_CanAnyoneHopeToBeatTrainer	Can anyone hope to beat this\nTRAINER?\p		
-BattleFrontier_BattleDomeBattleRoom_Text_DoBattlesExistSolelyForTrainer	Do battles exist solely for\nthis TRAINER?\p		
-BattleFrontier_BattleDomeBattleRoom_Text_CurrentChampAimingToRetainTitle	The current champion aiming to\nretain the title!\p		
-BattleFrontier_BattleDomeBattleRoom_Text_FormerChampHasReturned	The former champion has returned!\p		
-BattleFrontier_BattleDomeBattleRoom_Text_FormerToughnessReturned	The former toughness has returned!\p		
-BattleFrontier_BattleDomeBattleRoom_Text_WillDoExpectedAdvanceToFinals	Will this TRAINER do as expected\nand advance to the finals?\p		
-BattleFrontier_BattleDomeBattleRoom_Text_WillFormerChampRegainGlory	Will the former champ regain\nlost glory?\p		
-BattleFrontier_BattleDomeBattleRoom_Text_FeelGlowOfTrueMaster	Feel the glow of a true master!		
-BattleFrontier_BattleDomeBattleRoom_Text_MakeWayForDomeAceTucker	And now… The TRAINER standing in\n{PLAYER}'s record-setting path…\pYes! The one and only!\nThe BATTLE DOME COMMISSIONER!\lOur very own DOME ACE!\lMake way for TUCKER!		
-BattleFrontier_BattleDomeBattleRoom_Text_SpectatorTuckerChant	Spectators: TUCKER! TUCKER!\nTUCKER! TUCKER! TUCKER!		
-BattleFrontier_BattleDomeBattleRoom_Text_TuckerSilverIntro	TUCKER: Ahahah!\pDo you hear it? This crowd!\nThey're all itching to see our match!\pAhahah!\pI bet you're twitching all over from\nthe tension of getting to battle me!\pBut don't you worry about a thing!\pI'm the no. 1 star of the BATTLE DOME!\nI, TUCKER the DOME ACE, will bathe you\lin my brilliant glow!		
-BattleFrontier_BattleDomeBattleRoom_Text_LetsSeeYourStrategy	Your strategy!\nLet's see it!		
-BattleFrontier_BattleDomeBattleRoom_Text_IncredibleVictorIsPlayer	Unbelievable! It's incredible!\nThe victor is {PLAYER}!		
-BattleFrontier_BattleDomeBattleRoom_Text_WinnerIsTucker	The winner is TUCKER!\nThe DOME ACE has prevailed!\pCongratulations, TUCKER!		
-BattleFrontier_BattleDomeBattleRoom_Text_SeeYourFrontierPass	TUCKER: Rules are rules!\nLet me see your FRONTIER PASS.		
-BattleFrontier_BattleDomeBattleRoom_Text_ReceivedTacticsSymbol	The Tactics Symbol was embossed on\nthe FRONTIER PASS!		
-BattleFrontier_BattleDomeBattleRoom_Text_WontUnderestimateYouNextTime	… … … … … …\pI sorely underestimated you. I won't\nmake the same mistake next time…		
-BattleFrontier_BattleDomeBattleRoom_Text_CanWinStreakBeStretched	Can the win streak be stretched?\nThe confidence is there!		
-BattleFrontier_BattleDomeBattleRoom_Text_LegendHasReturnedDomeAceTucker	Ladies and gentlemen!\nBoys, girls, and POKéMON!\pFinally!\nFinally, the legend has returned!\pYes, the name of that legend!\nOur very own DOME ACE!\lIt's none other than TUCKER!		
-BattleFrontier_BattleDomeBattleRoom_Text_TuckerGoldIntro	TUCKER: Ah…\nThe pummeling roar of the crowd…\lTheir furnace-like heat of excitement…\lThis is a wonderful place…\pTo the crowd, I am the DOME ACE…\nI represent their hopes and dreams…\lI must never fade from their sight…\pI must burn!\nBrighter and more brilliant!\lI must light all that gather here!		
-BattleFrontier_BattleDomeBattleRoom_Text_UnleashAllPowerIPossess	I will unleash all the power that\nI possess! Right here and now!		
-BattleFrontier_BattleDomeBattleRoom_Text_NeverLostWhenPowerUnleashed	TUCKER: You're genuinely fantastic!\pNever before! I haven't ever lost in the\ntimes I've had to unleash my power.\pYes, quite fantastic!\nYour FRONTIER PASS, please?		
-BattleFrontier_BattleDomeBattleRoom_Text_TacticsSymbolTookGoldenShine	The Tactics Symbol took on\na golden shine!		
-BattleFrontier_BattleDomeBattleRoom_Text_LookForwardToNextEncounter	You're strong, but above all,\nyou have a unique charm!\pIn you, I see a definite potential for\na superstar like me.\pI will very much look forward to\nour next encounter!		
-BattleFrontier_BattleDomeBattleRoom_Text_PlayerIsLv50Champ2	{PLAYER} is the Level 50\nBattle Tournament Champion!\pCongratulations!		
-BattleFrontier_BattleDomeBattleRoom_Text_PlayerIsLvOpenChamp2	{PLAYER} is the Open Level\nBattle Tournament Champion!\pCongratulations!		
-BattleFrontier_BattleDomeBattleRoom_Text_PlayerVersusTucker	The final match!\p{PLAYER} versus the DOME ACE, TUCKER!\pLet the battle begin!		
-BattleFrontier_BattleDomeBattleRoom_Text_RefereesDecidedWinnerTucker	The REFEREES have reached\na decision!\pThe winner is…\nOh, my goodness!\lThe winner is our very own DOME ACE!\lIt's TUCKER!\pCongratulations! And thank you!\nLet's hear it for the DOME ACE, TUCKER!		
+BattleFrontier_BattleDomeBattleRoom_Text_PlayerHasEnteredDome	{PLAYER} has entered the BATTLE DOME!	{PLAYER} is nu in de BATTLE DOME!	
+BattleFrontier_BattleDomeBattleRoom_Text_PlayerVersusTrainer	{STR_VAR_1}\nmatch!\p{PLAYER} versus {STR_VAR_2}!\pLet the battle begin!	{STR_VAR_1}\ngevecht!\p{PLAYER} tegen {STR_VAR_2}!\pLaat het gevecht beginnen!	
+BattleFrontier_BattleDomeBattleRoom_Text_PlayerIsWinner	{PLAYER} is the winner!\nCongratulations!	{PLAYER} wint!\nGefeliciteerd!	
+BattleFrontier_BattleDomeBattleRoom_Text_TrainerIsWinner	{STR_VAR_2} is the winner!\nCongratulations!	{STR_VAR_2} wint!\nGefeliciteerd!	
+BattleFrontier_BattleDomeBattleRoom_Text_PlayerIsLv50Champ	{PLAYER} is the Level 50\nBattle Tournament Champion!\pCongratulations!	{PLAYER} is de kampioen van\nhet Level 50 Toernooi!\pGefeliciteerd!	
+BattleFrontier_BattleDomeBattleRoom_Text_PlayerIsLvOpenChamp	{PLAYER} is the Open Level\nBattle Tournament Champion!\pCongratulations!	{PLAYER} is de kampioen van\nhet Open Level Toernooi!\pGefeliciteerd!	
+BattleFrontier_BattleDomeBattleRoom_Text_RefereeDecisionPleaseWait	What an unbelievable finish!\nWe have a double knockout!\pIn this event, the Battle Tournament\nrules call for a REFEREE'S decision.\pPlease wait while the judging\nis under way.	Wat een ongelofelijk einde!\nBeide zijn verslagen!\pBij dit toernooi beslissen de\nSCHEIDSRECHTERS dan.\pWacht even terwijl er\nbeslist wordt.	
+BattleFrontier_BattleDomeBattleRoom_Text_RefereesDecidedWinnerTrainer	The REFEREES have reached\na decision!\pThe winner is…\nOh, my goodness!\lThe winner is {STR_VAR_1}!\lCongratulations!	De SCHEIDSRECHTERS hebben\nbeslist!\pDe winnaar is…\nOh jee!\lDe winnaar is {STR_VAR_1}!\lGefeliciteerd!	
+BattleFrontier_BattleDomeBattleRoom_Text_RefereesDecidedWinnerPlayer	The REFEREES have reached\na decision!\pThe winner is…\nOh, my goodness!\lThe winner is {PLAYER}!\lCongratulations!	De SCHEIDSRECHTERS hebben\nbeslist!\pDe winnaar is…\nOh jee!\lDe winnaar is {PLAYER}!\lGefeliciteerd!	
+BattleFrontier_BattleDomeBattleRoom_Text_BrightNewHope	The bright new hope!\p	De stralende nieuwe hoop!\p	
+BattleFrontier_BattleDomeBattleRoom_Text_RisingStar	The rising star!\p	De rijzende ster!\p	
+BattleFrontier_BattleDomeBattleRoom_Text_WillTheyRaceToChampionship	Will this TRAINER race to\nthe championship?\p	Rent deze TRAINER naar\nhet kampioenschap?\p	
+BattleFrontier_BattleDomeBattleRoom_Text_CanAchieveChampionFirstTry	Can the feat of a championship\non the first try be achieved?\p	Lukt het om meteen de eerste\nkeer kampioen te worden?\p	
+BattleFrontier_BattleDomeBattleRoom_Text_CanLossBeAvenged	Can the loss of the last match\nbe avenged?\p	Kan de verloren wedstrijd van\nlaatst worden gewroken?\p	
+BattleFrontier_BattleDomeBattleRoom_Text_OnFireForChampionship	The TRAINER is on fire for\nthe first championship try!\p	De TRAINER brandt van verlangen\nnaar het eerste kampioenschap!\p	
+BattleFrontier_BattleDomeBattleRoom_Text_WinHereAdvancesToFinal	A win here means this TRAINER\nadvances to the final!\p	Bij winst gaat deze TRAINER\nnaar de finale!\p	
+BattleFrontier_BattleDomeBattleRoom_Text_WillLongHeldDreamComeTrue	Will the long-held dream of\na championship finally come true?\p	Komt de oude droom van een\nkampioenschap eindelijk uit?\p	
+BattleFrontier_BattleDomeBattleRoom_Text_TheInvincibleChampion	The invincible champion!\p	De onverslaanbare kampioen!\p	
+BattleFrontier_BattleDomeBattleRoom_Text_CanAnyoneHopeToBeatTrainer	Can anyone hope to beat this\nTRAINER?\p	Kan iemand deze TRAINER\nverslaan?\p	
+BattleFrontier_BattleDomeBattleRoom_Text_DoBattlesExistSolelyForTrainer	Do battles exist solely for\nthis TRAINER?\p	Bestaan gevechten alleen\nvoor deze TRAINER?\p	
+BattleFrontier_BattleDomeBattleRoom_Text_CurrentChampAimingToRetainTitle	The current champion aiming to\nretain the title!\p	De huidige kampioen wil zijn\ntitel houden!\p	
+BattleFrontier_BattleDomeBattleRoom_Text_FormerChampHasReturned	The former champion has returned!\p	De oude kampioen is terug!\p	
+BattleFrontier_BattleDomeBattleRoom_Text_FormerToughnessReturned	The former toughness has returned!\p	De oude kracht is terug!\p	
+BattleFrontier_BattleDomeBattleRoom_Text_WillDoExpectedAdvanceToFinals	Will this TRAINER do as expected\nand advance to the finals?\p	Doet deze TRAINER wat iedereen\nverwacht en haalt de finale?\p	
+BattleFrontier_BattleDomeBattleRoom_Text_WillFormerChampRegainGlory	Will the former champ regain\nlost glory?\p	Krijgt de oude kampioen zijn\nroem terug?\p	
+BattleFrontier_BattleDomeBattleRoom_Text_FeelGlowOfTrueMaster	Feel the glow of a true master!	Voel de gloed van een echte meester!	
+BattleFrontier_BattleDomeBattleRoom_Text_MakeWayForDomeAceTucker	And now… The TRAINER standing in\n{PLAYER}'s record-setting path…\pYes! The one and only!\nThe BATTLE DOME COMMISSIONER!\lOur very own DOME ACE!\lMake way for TUCKER!	En nu… De TRAINER die {PLAYER}\nin de weg staat…\pJa! De enige echte!\nDe BAAS van de BATTLE DOME!\lOnze eigen DOME ACE!\lMaak plaats voor TUCKER!	
+BattleFrontier_BattleDomeBattleRoom_Text_SpectatorTuckerChant	Spectators: TUCKER! TUCKER!\nTUCKER! TUCKER! TUCKER!	Publiek: TUCKER! TUCKER!\nTUCKER! TUCKER! TUCKER!	
+BattleFrontier_BattleDomeBattleRoom_Text_TuckerSilverIntro	TUCKER: Ahahah!\pDo you hear it? This crowd!\nThey're all itching to see our match!\pAhahah!\pI bet you're twitching all over from\nthe tension of getting to battle me!\pBut don't you worry about a thing!\pI'm the no. 1 star of the BATTLE DOME!\nI, TUCKER the DOME ACE, will bathe you\lin my brilliant glow!	TUCKER: Ahahah!\pHoor je dat? Dit publiek!\nHet kan niet wachten op ons gevecht!\pAhahah!\pIk wed dat je trilt van de spanning\nom tegen mij te vechten!\pMaar maak je geen zorgen!\pIk ben de nummer 1 ster van de\nBATTLE DOME! Ik, TUCKER de DOME ACE,\lbad je in mijn stralende gloed!	
+BattleFrontier_BattleDomeBattleRoom_Text_LetsSeeYourStrategy	Your strategy!\nLet's see it!	Laat je strategie zien!\nKom maar op!	
+BattleFrontier_BattleDomeBattleRoom_Text_IncredibleVictorIsPlayer	Unbelievable! It's incredible!\nThe victor is {PLAYER}!	Ongelofelijk! Niet te geloven!\nDe winnaar is {PLAYER}!	
+BattleFrontier_BattleDomeBattleRoom_Text_WinnerIsTucker	The winner is TUCKER!\nThe DOME ACE has prevailed!\pCongratulations, TUCKER!	De winnaar is TUCKER!\nDe DOME ACE heeft gewonnen!\pGefeliciteerd, TUCKER!	
+BattleFrontier_BattleDomeBattleRoom_Text_SeeYourFrontierPass	TUCKER: Rules are rules!\nLet me see your FRONTIER PASS.	TUCKER: Regels zijn regels!\nLaat je FRONTIER PASS maar zien.	
+BattleFrontier_BattleDomeBattleRoom_Text_ReceivedTacticsSymbol	The Tactics Symbol was embossed on\nthe FRONTIER PASS!	Het Tactics-symbool staat nu op\nde FRONTIER PASS!	
+BattleFrontier_BattleDomeBattleRoom_Text_WontUnderestimateYouNextTime	… … … … … …\pI sorely underestimated you. I won't\nmake the same mistake next time…	… … … … … …\pIk onderschatte je enorm. Dat doe ik\nde volgende keer niet meer…	
+BattleFrontier_BattleDomeBattleRoom_Text_CanWinStreakBeStretched	Can the win streak be stretched?\nThe confidence is there!	Houdt de winstreeks aan?\nHet vertrouwen is er!	
+BattleFrontier_BattleDomeBattleRoom_Text_LegendHasReturnedDomeAceTucker	Ladies and gentlemen!\nBoys, girls, and POKéMON!\pFinally!\nFinally, the legend has returned!\pYes, the name of that legend!\nOur very own DOME ACE!\lIt's none other than TUCKER!	Dames en heren!\nJongens, meisjes en POKéMON!\pEindelijk!\nEindelijk is de legende terug!\pJa, de naam van die legende!\nOnze eigen DOME ACE!\lHet is niemand minder dan TUCKER!	
+BattleFrontier_BattleDomeBattleRoom_Text_TuckerGoldIntro	TUCKER: Ah…\nThe pummeling roar of the crowd…\lTheir furnace-like heat of excitement…\lThis is a wonderful place…\pTo the crowd, I am the DOME ACE…\nI represent their hopes and dreams…\lI must never fade from their sight…\pI must burn!\nBrighter and more brilliant!\lI must light all that gather here!	TUCKER: Ah…\nHet bulderende gejuich van de zaal…\lDe hete gloed van hun spanning…\lWat een prachtige plek…\pVoor het publiek ben ik de DOME ACE…\nIk ben hun hoop en dromen…\lIk mag nooit uit hun zicht verdwijnen…\pIk moet branden!\nHelderder en schitterender!\lIk moet iedereen hier verlichten!	
+BattleFrontier_BattleDomeBattleRoom_Text_UnleashAllPowerIPossess	I will unleash all the power that\nI possess! Right here and now!	Ik laat al mijn kracht los!\nHier en nu!	
+BattleFrontier_BattleDomeBattleRoom_Text_NeverLostWhenPowerUnleashed	TUCKER: You're genuinely fantastic!\pNever before! I haven't ever lost in the\ntimes I've had to unleash my power.\pYes, quite fantastic!\nYour FRONTIER PASS, please?	TUCKER: Je bent echt fantastisch!\pNog nooit! Ik heb nog nooit verloren\nals ik mijn kracht losliet.\pJa, echt fantastisch!\nJe FRONTIER PASS, alsjeblieft?	
+BattleFrontier_BattleDomeBattleRoom_Text_TacticsSymbolTookGoldenShine	The Tactics Symbol took on\na golden shine!	Het Tactics-symbool is nu\ngoud!	
+BattleFrontier_BattleDomeBattleRoom_Text_LookForwardToNextEncounter	You're strong, but above all,\nyou have a unique charm!\pIn you, I see a definite potential for\na superstar like me.\pI will very much look forward to\nour next encounter!	Je bent sterk, maar vooral\nheb je een eigen charme!\pIk zie in jou een echte superster,\nnet als ik.\pIk kijk er erg naar uit om\nje weer te ontmoeten!	
+BattleFrontier_BattleDomeBattleRoom_Text_PlayerIsLv50Champ2	{PLAYER} is the Level 50\nBattle Tournament Champion!\pCongratulations!	{PLAYER} is de kampioen van\nhet Level 50 Toernooi!\pGefeliciteerd!	
+BattleFrontier_BattleDomeBattleRoom_Text_PlayerIsLvOpenChamp2	{PLAYER} is the Open Level\nBattle Tournament Champion!\pCongratulations!	{PLAYER} is de kampioen van\nhet Open Level Toernooi!\pGefeliciteerd!	
+BattleFrontier_BattleDomeBattleRoom_Text_PlayerVersusTucker	The final match!\p{PLAYER} versus the DOME ACE, TUCKER!\pLet the battle begin!	De finale!\p{PLAYER} tegen de DOME ACE, TUCKER!\pLaat het gevecht beginnen!	
+BattleFrontier_BattleDomeBattleRoom_Text_RefereesDecidedWinnerTucker	The REFEREES have reached\na decision!\pThe winner is…\nOh, my goodness!\lThe winner is our very own DOME ACE!\lIt's TUCKER!\pCongratulations! And thank you!\nLet's hear it for the DOME ACE, TUCKER!	De SCHEIDSRECHTERS hebben\nbeslist!\pDe winnaar is…\nOh jee!\lDe winnaar is onze eigen DOME ACE!\lHet is TUCKER!\pGefeliciteerd! En bedankt!\nEen applaus voor de DOME ACE, TUCKER!	

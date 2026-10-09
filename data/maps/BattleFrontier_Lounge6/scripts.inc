@@ -44,32 +44,31 @@ BattleFrontier_Lounge6_EventScript_TradeCompleted::
 	end
 
 BattleFrontier_Lounge6_Text_WouldYouLikeToTrade:
-	.string "My POKéMON is a {STR_VAR_2}.\n"
-	.string "Do you know it?\l"
-	.string "It's quite cute and rather nice.\p"
-	.string "This little one, I could trade with\n"
-	.string "pride!\p"
-	.string "Would you like to trade me a {STR_VAR_1}\n"
-	.string "for my {STR_VAR_2}?$"
+	.string "Mijn POKéMON is een {STR_VAR_2}.\n"
+	.string "Ken je die?\l"
+	.string "Hij is best schattig en aardig.\p"
+	.string "Deze kleine ruil ik met trots!\p"
+	.string "Wil je me een {STR_VAR_1} ruilen\n"
+	.string "voor mijn {STR_VAR_2}?$"
 
 BattleFrontier_Lounge6_Text_PromiseIllBeGoodToIt:
-	.string "Oh, it's adorable!\n"
-	.string "Thank you!\l"
-	.string "I promise I'll be good to it!\p"
-	.string "Oh! I hope you'll be good to\n"
-	.string "my {STR_VAR_2}, too!$"
+	.string "Oh, wat schattig!\n"
+	.string "Bedankt!\l"
+	.string "Ik beloof dat ik goed voor hem zorg!\p"
+	.string "Oh! Ik hoop dat jij ook goed\n"
+	.string "voor mijn {STR_VAR_2} zorgt!$"
 
 BattleFrontier_Lounge6_Text_DontTradeForAnythingButMon:
-	.string "Oh, I'm sorry!\n"
-	.string "I don't intend to trade for anything\l"
-	.string "but a {STR_VAR_1}.$"
+	.string "Oh, sorry!\n"
+	.string "Ik ruil alleen voor een\l"
+	.string "{STR_VAR_1}.$"
 
 BattleFrontier_Lounge6_Text_WellThatsFineToo:
-	.string "Oh, you won't?\n"
-	.string "Well, that's fine, too.\l"
-	.string "Please come visit us again.$"
+	.string "Oh, wil je niet?\n"
+	.string "Nou, dat is ook goed.\l"
+	.string "Kom ons gerust weer opzoeken.$"
 
 BattleFrontier_Lounge6_Text_SkittySoMuchCuterThanImagined:
-	.string "Giggle!\n"
-	.string "A SKITTY is so much cuter than I had\l"
-	.string "imagined. I'm delighted!$"
+	.string "Hihi!\n"
+	.string "Een SKITTY is veel schattiger dan ik\l"
+	.string "dacht. Wat ben ik blij!$"

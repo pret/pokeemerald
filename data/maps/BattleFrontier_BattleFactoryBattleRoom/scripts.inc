@@ -239,71 +239,71 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_ScientistsFaceBattle::
 	return
 
 BattleFrontier_BattleFactoryBattleRoom_Text_GetAMoveOn:
-	.string "Hey, hey!\n"
-	.string "Get a move on!$"
+	.string "Hé, hé!\n"
+	.string "Tempo, tempo!$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_NolandImFactoryHead:
-	.string "Hey, my name's NOLAND!\n"
-	.string "I'm basically in charge of this place,\l"
-	.string "which is why I'm the FACTORY HEAD!\p"
-	.string "I had a look at your Battle Swap data.\p"
-	.string "You seem to have the right idea,\n"
-	.string "but you're still square in your head!\p"
-	.string "Listen up, okay? Knowledge isn't only\n"
-	.string "about reading books or doing desk work.\p"
-	.string "Just doing that sort of thing…\n"
-	.string "It may as well be useless!\p"
-	.string "You have to experience things with\n"
-	.string "your heart and your body, understand?\p"
-	.string "I'll take you on under the same\n"
-	.string "conditions as you.\p"
-	.string "I'll be using rental POKéMON, too!$"
+	.string "Hé, ik ben NOLAND!\n"
+	.string "Ik ben hier de baas,\l"
+	.string "daarom ben ik de FACTORY HEAD!\p"
+	.string "Ik keek naar je Battle Swap-gegevens.\p"
+	.string "Je hebt het goede idee,\n"
+	.string "maar je denkt nog te netjes!\p"
+	.string "Luister goed! Kennis zit niet alleen\n"
+	.string "in boeken of aan een bureau.\p"
+	.string "Als je alleen dat doet…\n"
+	.string "is het net zo goed nutteloos!\p"
+	.string "Je moet dingen beleven met\n"
+	.string "je hart en je lijf, snap je?\p"
+	.string "Ik vecht onder dezelfde\n"
+	.string "voorwaarden als jij.\p"
+	.string "Ik gebruik ook leen-POKéMON!$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_ShakeOutKnowledgeBringItOn:
-	.string "Shake out every last bit of your\n"
-	.string "knowledge and bring it on!$"
+	.string "Schud al je kennis uit je mouw\n"
+	.string "en kom maar op!$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_NolandLetsSeeFrontierPass:
-	.string "NOLAND: Smart going!\n"
-	.string "Let's see your FRONTIER PASS.$"
+	.string "NOLAND: Slim gedaan!\n"
+	.string "Laat je FRONTIER PASS maar zien.$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_ReceivedKnowledgeSymbol:
-	.string "The Knowledge Symbol was embossed\n"
-	.string "on the FRONTIER PASS!$"
+	.string "Het Knowledge-symbool staat nu\n"
+	.string "op de FRONTIER PASS!$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_NextTimeNoHoldsBarred:
 	.string "Heh…\n"
-	.string "You're a pretty bright spark…\p"
-	.string "Next time, I'll come after you hard.\n"
-	.string "No holds barred, understand?\p"
-	.string "You keep up your studies!$"
+	.string "Jij bent best slim…\p"
+	.string "De volgende keer ga ik er vol\n"
+	.string "voor. Geen genade, snap je?\p"
+	.string "Blijf lekker studeren!$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_HarderLookThanLastTime:
-	.string "NOLAND: Hey, hey! How's it going?\n"
-	.string "You keeping up with your studies?\p"
+	.string "NOLAND: Hé, hé! Hoe gaat het?\n"
+	.string "Blijf je studeren?\p"
 	.string "…Oh?\p"
-	.string "You've taken on a harder look than\n"
-	.string "the last time I saw you.\p"
-	.string "Now, this should be fun!\n"
-	.string "I'm getting excited, hey!$"
+	.string "Je ziet er sterker uit dan\n"
+	.string "de vorige keer.\p"
+	.string "Dit wordt leuk!\n"
+	.string "Ik word er helemaal opgewonden van!$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_AllRightBringItOn:
-	.string "All right!\n"
-	.string "Bring it on!$"
+	.string "Goed zo!\n"
+	.string "Kom maar op!$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_OutOfMyLeagueLetsSeePass:
-	.string "NOLAND: What the…\n"
-	.string "You're getting out of my league!\p"
-	.string "Sheesh!\n"
-	.string "Let's see that FRONTIER PASS!$"
+	.string "NOLAND: Wat…\n"
+	.string "Je wordt te sterk voor mij!\p"
+	.string "Pfff!\n"
+	.string "Laat die FRONTIER PASS maar zien!$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_KnowledgeSymbolTookGoldenShine:
-	.string "The Knowledge Symbol took on\n"
-	.string "a golden shine!$"
+	.string "Het Knowledge-symbool is nu\n"
+	.string "goud!$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_LastTimeILoseToYou:
-	.string "Pfft, man!\p"
-	.string "That's absolutely the last time\n"
-	.string "I lose to you!\p"
-	.string "We have to do this again, hey?$"
+	.string "Pfff, man!\p"
+	.string "Dit is echt de laatste keer\n"
+	.string "dat ik van je verlies!\p"
+	.string "We moeten dit nog eens doen, hè?$"
 

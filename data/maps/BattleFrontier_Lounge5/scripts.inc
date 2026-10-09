@@ -42,161 +42,161 @@ BattleFrontier_Lounge5_EventScript_LittleBoy::
 
 BattleFrontier_Lounge5_Text_NatureGirlGreeting::
 	.string "Ehehe!\n"
-	.string "I can tell what POKéMON are thinking!\p"
-	.string "Please!\n"
-	.string "Can I see your POKéMON?$"
+	.string "Ik weet wat POKéMON denken!\p"
+	.string "Alsjeblieft!\n"
+	.string "Mag ik je POKéMON zien?$"
 
 BattleFrontier_Lounge5_Text_NatureGirlNoneShown::
-	.string "Boo!\n"
-	.string "Cheapie!$"
+	.string "Boe!\n"
+	.string "Wat flauw!$"
 
 BattleFrontier_Lounge5_Text_NatureGirlHardy::
 	.string "Hmhm…\p"
-	.string "This one says it likes to battle!\n"
-	.string "It will battle even if it has a lot\l"
-	.string "of ouchies!$"
+	.string "Deze zegt dat hij graag vecht!\n"
+	.string "Hij vecht ook als hij veel\l"
+	.string "auwtjes heeft!$"
 
 BattleFrontier_Lounge5_Text_NatureGirlLonely::
 	.string "Hmhm…\p"
-	.string "This one says it likes to be sneaky!\n"
-	.string "But if it gets enough ouchies,\l"
-	.string "it will hit back!$"
+	.string "Deze zegt dat hij graag stiekem is!\n"
+	.string "Maar met genoeg auwtjes\l"
+	.string "slaat hij terug!$"
 
 BattleFrontier_Lounge5_Text_NatureGirlBrave::
 	.string "Hmhm…\p"
-	.string "This one says it likes to battle!\n"
-	.string "But if it gets enough ouchies,\l"
-	.string "it will worry about itself!$"
+	.string "Deze zegt dat hij graag vecht!\n"
+	.string "Maar met genoeg auwtjes\l"
+	.string "gaat hij aan zichzelf denken!$"
 
 BattleFrontier_Lounge5_Text_NatureGirlAdamant::
 	.string "Hmhm…\p"
-	.string "This one says it likes to battle!\n"
-	.string "It will battle even if it has a lot\l"
-	.string "of ouchies!$"
+	.string "Deze zegt dat hij graag vecht!\n"
+	.string "Hij vecht ook als hij veel\l"
+	.string "auwtjes heeft!$"
 
 BattleFrontier_Lounge5_Text_NatureGirlNaughty::
 	.string "Hmhm…\p"
-	.string "This one says it looks after itself!\n"
-	.string "But if it gets enough ouchies,\l"
-	.string "it will hit back!$"
+	.string "Deze zegt dat hij op zichzelf let!\n"
+	.string "Maar met genoeg auwtjes\l"
+	.string "slaat hij terug!$"
 
 BattleFrontier_Lounge5_Text_NatureGirlBold::
 	.string "Hmhm…\p"
-	.string "This one says it likes to be sneaky!\n"
-	.string "But if it gets enough ouchies,\l"
-	.string "it will worry about itself!$"
+	.string "Deze zegt dat hij graag stiekem is!\n"
+	.string "Maar met genoeg auwtjes\l"
+	.string "gaat hij aan zichzelf denken!$"
 
 BattleFrontier_Lounge5_Text_NatureGirlDocileNaiveQuietQuirky::
 	.string "Hmhm…\p"
-	.string "This one says it likes to battle!\n"
-	.string "It will battle even if it has a lot\l"
-	.string "of ouchies!$"
+	.string "Deze zegt dat hij graag vecht!\n"
+	.string "Hij vecht ook als hij veel\l"
+	.string "auwtjes heeft!$"
 
 BattleFrontier_Lounge5_Text_NatureGirlRelaxed::
 	.string "Hmhm…\p"
-	.string "This one says it likes to be sneaky!\n"
-	.string "But if it gets enough ouchies,\l"
-	.string "it will hit back!$"
+	.string "Deze zegt dat hij graag stiekem is!\n"
+	.string "Maar met genoeg auwtjes\l"
+	.string "slaat hij terug!$"
 
 BattleFrontier_Lounge5_Text_NatureGirlImpish::
 	.string "Hmhm…\p"
-	.string "This one says it likes to battle!\n"
-	.string "But if it gets enough ouchies,\l"
-	.string "it will worry about itself!$"
+	.string "Deze zegt dat hij graag vecht!\n"
+	.string "Maar met genoeg auwtjes\l"
+	.string "gaat hij aan zichzelf denken!$"
 
 BattleFrontier_Lounge5_Text_NatureGirlLax::
 	.string "Hmhm…\p"
-	.string "This one says it likes to be sneaky!\n"
-	.string "It says it likes to be sneaky even\l"
-	.string "if it has a lot of ouchies!$"
+	.string "Deze zegt dat hij graag stiekem is!\n"
+	.string "Hij is ook stiekem als hij veel\l"
+	.string "auwtjes heeft!$"
 
 BattleFrontier_Lounge5_Text_NatureGirlTimid::
 	.string "Hmhm…\p"
-	.string "This one says it likes to battle!\n"
-	.string "But if it gets enough ouchies,\l"
-	.string "it will turn sneaky!$"
+	.string "Deze zegt dat hij graag vecht!\n"
+	.string "Maar met genoeg auwtjes\l"
+	.string "wordt hij stiekem!$"
 
 BattleFrontier_Lounge5_Text_NatureGirlHasty::
 	.string "Hmhm…\p"
-	.string "This one says it likes to battle!\n"
-	.string "It will battle even if it has a lot\l"
-	.string "of ouchies!$"
+	.string "Deze zegt dat hij graag vecht!\n"
+	.string "Hij vecht ook als hij veel\l"
+	.string "auwtjes heeft!$"
 
 BattleFrontier_Lounge5_Text_NatureGirlSerious::
 	.string "Hmhm…\p"
-	.string "This one says it likes to be sneaky!\n"
-	.string "It says it likes to be sneaky even\l"
-	.string "if it has a lot of ouchies!$"
+	.string "Deze zegt dat hij graag stiekem is!\n"
+	.string "Hij is ook stiekem als hij veel\l"
+	.string "auwtjes heeft!$"
 
 BattleFrontier_Lounge5_Text_NatureGirlJolly::
 	.string "Hmhm…\p"
-	.string "This one says it likes to be sneaky!\n"
-	.string "But if it gets enough ouchies,\l"
-	.string "it will worry about itself!$"
+	.string "Deze zegt dat hij graag stiekem is!\n"
+	.string "Maar met genoeg auwtjes\l"
+	.string "gaat hij aan zichzelf denken!$"
 
 BattleFrontier_Lounge5_Text_NatureGirlModest::
 	.string "Hmhm…\p"
-	.string "This one says it looks after itself!\n"
-	.string "It says it worries about itself whether\l"
-	.string "or not it has a lot of ouchies!$"
+	.string "Deze zegt dat hij op zichzelf let!\n"
+	.string "Hij denkt ook aan zichzelf als hij\l"
+	.string "veel auwtjes heeft!$"
 
 BattleFrontier_Lounge5_Text_NatureGirlMild::
 	.string "Hmhm…\p"
-	.string "This one says it looks after itself!\n"
-	.string "But if it gets enough ouchies,\l"
-	.string "it will turn sneaky!$"
+	.string "Deze zegt dat hij op zichzelf let!\n"
+	.string "Maar met genoeg auwtjes\l"
+	.string "wordt hij stiekem!$"
 
 BattleFrontier_Lounge5_Text_NatureGirlBashful::
 	.string "Hmhm…\p"
-	.string "This one says it looks after itself!\n"
-	.string "It says it worries about itself even\l"
-	.string "if it has a lot of ouchies!$"
+	.string "Deze zegt dat hij op zichzelf let!\n"
+	.string "Hij denkt ook aan zichzelf als hij\l"
+	.string "veel auwtjes heeft!$"
 
 BattleFrontier_Lounge5_Text_NatureGirlRash::
 	.string "Hmhm…\p"
-	.string "This one says it likes to be sneaky!\n"
-	.string "It says it likes to be sneaky even\l"
-	.string "if it has a lot of ouchies!$"
+	.string "Deze zegt dat hij graag stiekem is!\n"
+	.string "Hij is ook stiekem als hij veel\l"
+	.string "auwtjes heeft!$"
 
 BattleFrontier_Lounge5_Text_NatureGirlCalm::
 	.string "Hmhm…\p"
-	.string "This one says it looks after itself!\n"
-	.string "It says it worries about itself even\l"
-	.string "if it has a lot of ouchies!$"
+	.string "Deze zegt dat hij op zichzelf let!\n"
+	.string "Hij denkt ook aan zichzelf als hij\l"
+	.string "veel auwtjes heeft!$"
 
 BattleFrontier_Lounge5_Text_NatureGirlGentle::
 	.string "Hmhm…\p"
-	.string "This one says it looks after itself!\n"
-	.string "But if it gets enough ouchies,\l"
-	.string "it will hit back!$"
+	.string "Deze zegt dat hij op zichzelf let!\n"
+	.string "Maar met genoeg auwtjes\l"
+	.string "slaat hij terug!$"
 
 BattleFrontier_Lounge5_Text_NatureGirlSassy::
 	.string "Hmhm…\p"
-	.string "This one says it likes to battle!\n"
-	.string "But if it gets enough ouchies,\l"
-	.string "it will turn sneaky!$"
+	.string "Deze zegt dat hij graag vecht!\n"
+	.string "Maar met genoeg auwtjes\l"
+	.string "wordt hij stiekem!$"
 
 BattleFrontier_Lounge5_Text_NatureGirlCareful::
 	.string "Hmhm…\p"
-	.string "This one says it looks after itself!\n"
-	.string "But if it gets enough ouchies,\l"
-	.string "it will turn sneaky!$"
+	.string "Deze zegt dat hij op zichzelf let!\n"
+	.string "Maar met genoeg auwtjes\l"
+	.string "wordt hij stiekem!$"
 
 BattleFrontier_Lounge5_Text_NatureGirlEgg::
-	.string "That's silly! An EGG is asleep!\n"
-	.string "I can't talk to it!$"
+	.string "Dat is gek! Een EI slaapt!\n"
+	.string "Ik kan er niet mee praten!$"
 
 BattleFrontier_Lounge5_Text_LadyClaimsSheUnderstandsPokemon::
-	.string "How charming!\n"
-	.string "That little lady claims she can\l"
-	.string "understand POKéMON!$"
+	.string "Wat schattig!\n"
+	.string "Dat meisje beweert dat ze\l"
+	.string "POKéMON kan verstaan!$"
 
 BattleFrontier_Lounge5_Text_GirlSayingSomethingProfound::
-	.string "I have this feeling that the little girl\n"
-	.string "is saying something profound.$"
+	.string "Ik heb het gevoel dat het meisje\n"
+	.string "ietsbetekenends zegt.$"
 
 BattleFrontier_Lounge5_Text_GirlPlaysAtRedHouseALot::
-	.string "I know something!\p"
-	.string "That little girl plays at the red house\n"
-	.string "a lot!$"
+	.string "Ik weet iets!\p"
+	.string "Dat meisje speelt vaak bij het\n"
+	.string "rode huis!$"
 
