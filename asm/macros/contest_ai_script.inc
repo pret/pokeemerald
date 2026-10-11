@@ -296,7 +296,8 @@
 
 	.macro if_most_jamming_move destination:req
 	.byte 0x30
-	.4bye \destination
+	.byte 0 @ padding, ContestAICmd_if_most_jamming_move reads the destination at offset 2
+	.4byte \destination
 	.endm
 
 @ number of hearts the current move's appeal would provide
