@@ -2051,7 +2051,12 @@ static void Cmd_get_hold_effect(void)
         battler = gBattlerTarget;
 
     if (gActiveBattler != battler)
+        // bug: itemEffects already stores the hold effect, not the item ID
+        #ifndef BUGFIX
         AI_THINKING_STRUCT->funcResult = GetItemHoldEffect(BATTLE_HISTORY->itemEffects[battler]);
+        #else
+        AI_THINKING_STRUCT->funcResult = BATTLE_HISTORY->itemEffects[battler];
+        #endif
     else
         AI_THINKING_STRUCT->funcResult = GetItemHoldEffect(gBattleMons[battler].item);
 
