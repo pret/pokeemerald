@@ -6,11 +6,15 @@
 
 #define LIBRFU_VERSION 1026
 
-/* TODOs:
- * - documentation
- * - check if any field needs to be volatile
- * - check if field names make sense
- */
+// The API buffer is shared by the RFU structures and raw packet accesses.
+#if MODERN
+#define RFU_MAY_ALIAS __attribute__((may_alias))
+#else
+#define RFU_MAY_ALIAS
+#endif
+
+// Halfword accesses into the word-based packet buffers need the same aliasing rule.
+typedef u16 u16alias RFU_MAY_ALIAS;
 
 // --------------------------------------------------------------------------
 //
@@ -79,6 +83,7 @@
 #define ID_DISCONNECTED_AND_CHANGE_REQ              0x0029
 #define ID_DATA_READY_AND_CHANGE_REQ                0x0028
 #define ID_DRAC_REQ_WITH_ACK_FLAG                   0x0128
+#define ID_UNK36_REQ_WITH_ACK_FLAG                  0x0136    // not defined in SDK header
 
 // --------------------------------------------------------------------------
 //
@@ -137,20 +142,18 @@
 // Definition Data Returned by Return Values for Library Functions
 // *******************************************************
 
-// The function doesn't have return value.
-// Value of u8 *status for rfu_REQ_pollConnectParent (Connection Trial Status)
-// #define CP_STATUS_DONE                  0x00               // Connection successful
-// #define CP_STATUS_IN_PROCESS            0x01               // Connecting
-// #define CP_STATUS_SLOT_CLOSED           0x02               // Parent device is not in connection mode with child device
-// #define CP_STATUS_DISCONNECTED          0x03               // Disconnected by parent device while connecting
-// #define CP_STATUS_UNKNOWN               0xff               // Cannot read status due to REQ-API execution error
+// Values written to *status by rfu_getConnectParentStatus.
+#define CP_STATUS_DONE                  0x00               // Connection successful
+#define CP_STATUS_IN_PROCESS            0x01               // Connecting
+#define CP_STATUS_SLOT_CLOSED           0x02               // Parent device is not in connection mode with child device
+#define CP_STATUS_DISCONNECTED          0x03               // Disconnected by parent device while connecting
+#define CP_STATUS_UNKNOWN               0xff               // Cannot read status due to REQ-API execution error
 
-// The function doesn't exist.
-// Value of u8 *status argument for rfu_REQ_pollRecoveryConnect (Link Restore Status)
-// #define RC_STATUS_DONE                  0x00               // Connection restore successful
-// #define RC_STATUS_FAILED                0x01               // Connection restore failure (meaningless to try anymore)
-// #define RC_STATUS_SEARCHING_PARENT      0x02               // Searching for parent device
-// #define RC_STATUS_UNKNOWN               0xff               // Cannot read status due to REQ-API execution error
+// Values written to *status by rfu_CHILD_getConnectRecoveryStatus.
+#define RC_STATUS_DONE                  0x00               // Connection restore successful
+#define RC_STATUS_FAILED                0x01               // Connection restore failure (meaningless to try anymore)
+#define RC_STATUS_SEARCHING_PARENT      0x02               // Searching for parent device
+#define RC_STATUS_UNKNOWN               0xff               // Cannot read status due to REQ-API execution error
 
 // Value of u8 *linkLossReason argument for rfu_REQBN_watchLink (Reason for Link Loss)
 #define REASON_DISCONNECTED             0x00               // State of complete disconnection with rfuLL_disconnect and no possibility of restoring the link (can detect only child device)
@@ -275,70 +278,8 @@
 // Status data for UNI-type communication (refer to gRfuSlotStatusUNI[x]->send.state)
 #define SLOT_STATE_SEND_UNI             (SLOT_BUSY_FLAG | SLOT_SEND_FLAG | LCOM_UNI)        // Transmitting
 
-// the following structs are not documented in SDK
-struct RfuPacket8
-{
-    u8 data[0x74];
-};
-
-struct RfuPacket32
-{
-    u32 command;
-    u32 data[0x1C];
-};
-
-union RfuPacket
-{
-    struct RfuPacket32 rfuPacket32;
-    struct RfuPacket8 rfuPacket8;
-};
-
-struct STWIStatus
-{
-    vs32 state;
-    u8 reqLength;
-    u8 reqNext;
-    u8 reqActiveCommand;
-    u8 ackLength;
-    u8 ackNext;
-    u8 ackActiveCommand;
-    u8 timerSelect;
-    u8 unk_b;
-#if LIBRFU_VERSION >= 1026
-    s32 timerState;
-#else
-    u32 timerState;
-#endif
-    vu8 timerActive;
-    u8 unk_11;
-    vu16 error;
-    vu8 msMode;
-    u8 recoveryCount;
-    u8 unk_16;
-    u8 unk_17;
-#if __STDC_VERSION__ < 202311L
-    void (*callbackM)();
-#else
-    void (*callbackM)(...);
-#endif
-    void (*callbackS)(u16);
-    void (*callbackID)(void);
-    union RfuPacket *txPacket;
-    union RfuPacket *rxPacket;
-    vu8 sending;
-};
-
-// This struct is used as u8 array in SDK.
-struct RfuIntrStruct
-{
-    union RfuPacket rxPacketAlloc;
-    union RfuPacket txPacketAlloc;
-    u8 ALIGNED(2) block1[0x960]; // size of librfu_intr.s binary
-    struct STWIStatus block2;
-};
-
 // Data Structure for Transmitting UNI-Type Data
-struct UNISend
+struct RFU_MAY_ALIAS UNISend
 {
     u16 state;         // Slot communication state (SLOT_STATE_READY, SLOT_STATE_SEND_UNI)
     u8 dataReadyFlag;  // Flag indicating transmission data is prepared (0: data sent; 1: transmission data ready)
@@ -349,7 +290,7 @@ struct UNISend
 };
 
 // Data Structure for Receiving UNI Data
-struct UNIRecv
+struct RFU_MAY_ALIAS UNIRecv
 {
     u16 state;         // Slot communication state (SLOT_STATE_READY, SLOT_STATE_RECEIVING, SLOT_STATE_RECV_IGNORE)
     u16 errorCode;     // Error code during reception
@@ -360,7 +301,7 @@ struct UNIRecv
 };
 
 // Slot Status Data Structure for UNI-Type Communication
-struct RfuSlotStatusUNI
+struct RFU_MAY_ALIAS RfuSlotStatusUNI
 {
     struct UNISend send;    // Transmission Status
     struct UNIRecv recv;    // Reception Status
@@ -370,11 +311,11 @@ struct RfuSlotStatusUNI
 
 #define WINDOW_COUNT    4
 
-struct NIComm
+struct RFU_MAY_ALIAS NIComm
 {
     u16 state;                     // Communication state of slot
     u16 failCounter;               // Count of failed transmissions/receptions (Count is increased when transmission/reception of data does not succeed within 1PF=16.7 ms)
-    const u8 *now_p[WINDOW_COUNT]; // Address of current send/receive (The data is divided into WINDOW_COUNT blocks and sent in payloadSize units.)
+    u8 *now_p[WINDOW_COUNT];       // Address of current send/receive (The data is divided into WINDOW_COUNT blocks and sent in payloadSize units.)
     u32 remainSize;                // Size of remaining communication data
     u16 errorCode;                 // Error code
     u8 bmSlot;                     // Expresses the current communication slot in bits
@@ -388,12 +329,11 @@ struct NIComm
     const void *src;               // Start address transmission data (valid only for transmitting device)
     u8 bmSlotOrg;                  // Expresses the communication source slot at the beginning of the transmission in bits (valid only for transmitting device)
     u8 dataType;                   // Transmission/reception data type (0: User data; 1: Game identification information)
-    u16 payloadSize;               // Payload size for one transmission
+    u16 payloadSize;               // Subframe size minus the link-layer header size
     u32 dataSize;                  // Size of transmission/reception data
-                                   //   Calculated by subtracting link layer header size from subFrameSize specified by the rfu_NI_setSendData function
 };
 
-struct RfuSlotStatusNI
+struct RFU_MAY_ALIAS RfuSlotStatusNI
 {
     struct NIComm send;              // Transmission Status
     struct NIComm recv;              // Reception Status
@@ -402,7 +342,7 @@ struct RfuSlotStatusNI
 };
 
 // Game Identification Information Data Structure
-struct RfuTgtData
+struct RFU_MAY_ALIAS RfuTgtData
 {
     u16 id;                                    // ID of parent candidate                                 ID of connection partner
     u8  slot;                                  // Slot number where parent candidate can enter           Connection slot number
@@ -411,9 +351,10 @@ struct RfuTgtData
     u16 serialNo;                              // Game serial number of parent candidate                 Game serial number of connection partner
     u8  gname[RFU_GAME_NAME_LENGTH + 2];       // Game name of parent candidate                          Game name of connection partner
     u8  uname[RFU_USER_NAME_LENGTH + 1];       // User name for parent candidate                         User name for connection partner
+    u8 padding[2];
 };
 
-struct RfuLinkStatus
+struct RFU_MAY_ALIAS RfuLinkStatus
 {
     u8  parentChild;                            // Connection status (0x01:MODE_PARENT  0x00:MODE_CHILD  0xff:MODE_NEUTRAL)
     u8  connCount;                              // Number of connections
@@ -436,48 +377,9 @@ struct RfuLinkStatus
     struct RfuTgtData my;                       // The device's own game identification information (unrelated to the element slot value)
 };
 
-// the following structs are not documented in SDK
-struct RfuFixed
-{
-    void (*reqCallback)(u16, u16);
-    void (*fastCopyPtr)(const u8 **, u8 **, s32);
-    u16 fastCopyBuffer[24];
-    u32 fastCopyBuffer2[12];
-    u32 LLFBuffer[29];
-    struct RfuIntrStruct *STWIBuffer;
-};
-
-struct RfuStatic
-{
-    u8 flags;
-    u8 NIEndRecvFlag;
-    u8 recvRenewalFlag;
-    u8 commExistFlag;
-    u8 recvErrorFlag;
-    u8 recoveryBmSlot;
-    u8 nowWatchInterval;
-    u8 nullFrameCount;
-    u8 emberCount;
-    u8 SCStartFlag;
-    u8 linkEmergencyFlag[RFU_CHILD_MAX];
-    u8 lsFixedCount[RFU_CHILD_MAX];
-    u16 cidBak[RFU_CHILD_MAX];
-    u16 linkEmergencyLimit;
-    u16 reqResult;
-    u16 tryPid;
-    u16 watchdogTimer;
-    u32 totalPacketSize;
-};
-
-extern struct STWIStatus *gSTWIStatus;
 extern struct RfuLinkStatus *gRfuLinkStatus;
-extern struct RfuStatic *gRfuStatic;
-extern struct RfuFixed *gRfuFixed;
 extern struct RfuSlotStatusNI *gRfuSlotStatusNI[RFU_CHILD_MAX];
 extern struct RfuSlotStatusUNI *gRfuSlotStatusUNI[RFU_CHILD_MAX];
-
-// librfu_sio32id
-s32 AgbRFU_checkID(u8 maxTries);
 
 // Arguments with "bm..." specify slots of the form (0x01 << slot number) that are the object of a function operation.
 
@@ -591,51 +493,5 @@ void rfu_REQ_RFUStatus(void);
 u16 rfu_getRFUStatus(u8 *rfuState);
     // Using RFU, generate noise (jamming radio waves) for other RFUs
 void rfu_REQ_noise(void);
-
-// librfu_intr
-void IntrSIO32(void);
-
-// librfu_stwi
-void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, bool8 copyInterruptToRam);
-void STWI_set_MS_mode(u8 mode);
-void STWI_init_Callback_M(void);
-void STWI_init_Callback_S(void);
-void STWI_set_Callback_M(void *callbackM);
-void STWI_set_Callback_S(void (*callbackS)(u16));
-void STWI_init_timer(IntrFunc *interrupt, s32 timerSelect);
-void AgbRFU_SoftReset(void);
-void STWI_set_Callback_ID(void (*func)(void));
-u16 STWI_read_status(u8 index);
-u16 STWI_poll_CommandEnd(void);
-void STWI_send_DataRxREQ(void);
-void STWI_send_MS_ChangeREQ(void);
-void STWI_send_StopModeREQ(void);
-void STWI_send_SystemStatusREQ(void);
-void STWI_send_GameConfigREQ(const u8 *serial_gname, const u8 *uname);
-void STWI_send_ResetREQ(void);
-void STWI_send_LinkStatusREQ(void);
-void STWI_send_VersionStatusREQ(void);
-void STWI_send_SlotStatusREQ(void);
-void STWI_send_ConfigStatusREQ(void);
-void STWI_send_ResumeRetransmitAndChangeREQ(void);
-void STWI_send_SystemConfigREQ(u16 availSlotFlag, u8 maxMFrame, u8 mcTimer);
-void STWI_send_SC_StartREQ(void);
-void STWI_send_SC_PollingREQ(void);
-void STWI_send_SC_EndREQ(void);
-void STWI_send_SP_StartREQ(void);
-void STWI_send_SP_PollingREQ(void);
-void STWI_send_SP_EndREQ(void);
-void STWI_send_CP_StartREQ(u16 unk1);
-void STWI_send_CP_PollingREQ(void);
-void STWI_send_CP_EndREQ(void);
-void STWI_send_DataTxREQ(const void *in, u8 size);
-void STWI_send_DataTxAndChangeREQ(const void *in, u8 size);
-void STWI_send_DataReadyAndChangeREQ(u8 unk);
-void STWI_send_DisconnectedAndChangeREQ(u8 unk0, u8 unk1);
-void STWI_send_DisconnectREQ(u8 unk);
-void STWI_send_TestModeREQ(u8 unk0, u8 unk1);
-void STWI_send_CPR_StartREQ(u16 unk0, u16 unk1, u8 unk2);
-void STWI_send_CPR_PollingREQ(void);
-void STWI_send_CPR_EndREQ(void);
 
 #endif // GUARD_LIBRFU_H
