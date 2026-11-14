@@ -5913,6 +5913,7 @@
 08098e0c g 00000016 ScriptReadHalfword
 08098e24 g 00000030 ScriptReadWord
 08098e54 g 0000000c LockPlayerFieldControls
+08098e54 l 00000000 .gcc2_compiled.
 08098e60 g 0000000c UnlockPlayerFieldControls
 08098e6c g 0000000c ArePlayerFieldControlsLocked
 08098e78 g 0000001a ScriptContext_IsEnabled
