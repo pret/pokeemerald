@@ -3,7 +3,7 @@
 static void STWI_intr_timer(void);
 static u16 STWI_init(u8 request);
 static s32 STWI_start_Command(void);
-static void STWI_set_timer(u8 unk);
+static void STWI_set_timer(u8 timerCount);
 static void STWI_stop_timer(void);
 static s32 STWI_restart_Command(void);
 static s32 STWI_reset_ClockCounter(void);
@@ -26,8 +26,8 @@ void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, b
         *interrupt = IntrSIO32;
         gSTWIStatus = (struct STWIStatus *)interruptStruct->block1;
     }
-    gSTWIStatus->rxPacket = &interruptStruct->rxPacketAlloc;
-    gSTWIStatus->txPacket = &interruptStruct->txPacketAlloc;
+    gSTWIStatus->rxPacket = interruptStruct->rxPacketAlloc;
+    gSTWIStatus->txPacket = interruptStruct->txPacketAlloc;
     gSTWIStatus->msMode = AGB_CLK_MASTER;
     gSTWIStatus->state = 0; // master send req
     gSTWIStatus->reqLength = 0;
@@ -47,7 +47,7 @@ void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, b
     IntrEnable(INTR_FLAG_SERIAL);
 }
 
-void STWI_init_timer(IntrFunc *interrupt, s32 timerSelect)
+void STWI_init_timer(IntrFunc *interrupt, u8 timerSelect)
 {
     *interrupt = STWI_intr_timer;
     gSTWIStatus->timerSelect = timerSelect;
@@ -118,8 +118,7 @@ void STWI_init_Callback_S(void)
     STWI_set_Callback_S(NULL);
 }
 
-// The callback can take 2 or 3 arguments.
-void STWI_set_Callback_M(void *callbackM)
+void STWI_set_Callback_M(void (*callbackM)(u8, u16))
 {
     gSTWIStatus->callbackM = callbackM;
 }
@@ -203,7 +202,7 @@ void STWI_send_GameConfigREQ(const u8 *serial_gname, const u8 *uname)
     if (!STWI_init(ID_GAME_CONFIG_REQ))
     {
         gSTWIStatus->reqLength = 6;
-        packetBytes = gSTWIStatus->txPacket->rfuPacket8.data;
+        packetBytes = (u8 *)gSTWIStatus->txPacket;
         packetBytes += sizeof(u32);
         *(u16 *)packetBytes = *(u16 *)serial_gname;
         packetBytes += sizeof(u16);
@@ -231,7 +230,7 @@ void STWI_send_SystemConfigREQ(u16 availSlotFlag, u8 maxMFrame, u8 mcTimer)
         u8 *packetBytes;
 
         gSTWIStatus->reqLength = 1;
-        packetBytes = gSTWIStatus->txPacket->rfuPacket8.data;
+        packetBytes = (u8 *)gSTWIStatus->txPacket;
         packetBytes += sizeof(u32);
         *packetBytes++ = mcTimer;
         *packetBytes++ = maxMFrame;
@@ -294,12 +293,12 @@ void STWI_send_SP_EndREQ(void)
     }
 }
 
-void STWI_send_CP_StartREQ(u16 unk1)
+void STWI_send_CP_StartREQ(u16 pid)
 {
     if (!STWI_init(ID_CP_START_REQ))
     {
         gSTWIStatus->reqLength = 1;
-        gSTWIStatus->txPacket->rfuPacket32.data[0] = unk1;
+        gSTWIStatus->txPacket[1] = pid;
         STWI_start_Command();
     }
 }
@@ -330,7 +329,7 @@ void STWI_send_DataTxREQ(const void *in, u8 size)
         if (size & (sizeof(u32) - 1))
             reqLength += 1;
         gSTWIStatus->reqLength = reqLength;
-        CpuCopy32(in, gSTWIStatus->txPacket->rfuPacket32.data, gSTWIStatus->reqLength * sizeof(u32));
+        CpuCopy32(in, &gSTWIStatus->txPacket[1], gSTWIStatus->reqLength * sizeof(u32));
         STWI_start_Command();
     }
 }
@@ -343,7 +342,7 @@ void STWI_send_DataTxAndChangeREQ(const void *in, u8 size)
         if (size & (sizeof(u32) - 1))
             reqLength += 1;
         gSTWIStatus->reqLength = reqLength;
-        CpuCopy32(in, gSTWIStatus->txPacket->rfuPacket32.data, gSTWIStatus->reqLength * sizeof(u32));
+        CpuCopy32(in, &gSTWIStatus->txPacket[1], gSTWIStatus->reqLength * sizeof(u32));
         STWI_start_Command();
     }
 }
@@ -366,11 +365,11 @@ void STWI_send_MS_ChangeREQ(void)
     }
 }
 
-void STWI_send_DataReadyAndChangeREQ(u8 unk)
+void STWI_send_DataReadyAndChangeREQ(u8 bmSlot)
 {
     if (!STWI_init(ID_DATA_READY_AND_CHANGE_REQ))
     {
-        if (!unk)
+        if (!bmSlot)
         {
             gSTWIStatus->reqLength = 0;
         }
@@ -379,9 +378,9 @@ void STWI_send_DataReadyAndChangeREQ(u8 unk)
             u8 *packetBytes;
 
             gSTWIStatus->reqLength = 1;
-            packetBytes = gSTWIStatus->txPacket->rfuPacket8.data;
+            packetBytes = (u8 *)gSTWIStatus->txPacket;
             packetBytes += sizeof(u32);
-            *packetBytes++ = unk;
+            *packetBytes++ = bmSlot;
             *packetBytes++ = 0;
             *packetBytes++ = 0;
             *packetBytes = 0;
@@ -390,17 +389,17 @@ void STWI_send_DataReadyAndChangeREQ(u8 unk)
     }
 }
 
-void STWI_send_DisconnectedAndChangeREQ(u8 unk0, u8 unk1)
+void STWI_send_DisconnectedAndChangeREQ(u8 slotStatus, u8 changeFlags)
 {
     if (!STWI_init(ID_DISCONNECTED_AND_CHANGE_REQ))
     {
         u8 *packetBytes;
 
         gSTWIStatus->reqLength = 1;
-        packetBytes = gSTWIStatus->txPacket->rfuPacket8.data;
+        packetBytes = (u8 *)gSTWIStatus->txPacket;
         packetBytes += sizeof(u32);
-        *packetBytes++ = unk0;
-        *packetBytes++ = unk1;
+        *packetBytes++ = slotStatus;
+        *packetBytes++ = changeFlags;
         *packetBytes++ = 0;
         *packetBytes = 0;
         STWI_start_Command();
@@ -416,38 +415,38 @@ void STWI_send_ResumeRetransmitAndChangeREQ(void)
     }
 }
 
-void STWI_send_DisconnectREQ(u8 unk)
+void STWI_send_DisconnectREQ(u8 bmDisconnectSlot)
 {
     if (!STWI_init(ID_DISCONNECT_REQ))
     {
         gSTWIStatus->reqLength = 1;
-        gSTWIStatus->txPacket->rfuPacket32.data[0] = unk;
+        gSTWIStatus->txPacket[1] = bmDisconnectSlot;
         STWI_start_Command();
     }
 }
 
-void STWI_send_TestModeREQ(u8 unk0, u8 unk1)
+void STWI_send_TestModeREQ(u8 mode, u8 submode)
 {
     if (!STWI_init(ID_TEST_MODE_REQ))
     {
         gSTWIStatus->reqLength = 1;
-        gSTWIStatus->txPacket->rfuPacket32.data[0] = unk0 | (unk1 << 8);
+        gSTWIStatus->txPacket[1] = mode | (submode << 8);
         STWI_start_Command();
     }
 }
 
-void STWI_send_CPR_StartREQ(u16 unk0, u16 unk1, u8 unk2)
+void STWI_send_CPR_StartREQ(u16 partnerId, u16 myId, u8 bmRecoverySlot)
 {
     u32 *packetData;
-    u32 arg1;
+    u32 ids;
 
     if (!STWI_init(ID_CPR_START_REQ))
     {
         gSTWIStatus->reqLength = 2;
-        arg1 = unk1 | (unk0 << 16);
-        packetData = gSTWIStatus->txPacket->rfuPacket32.data;
-        packetData[0] = arg1;
-        packetData[1] = unk2;
+        ids = myId | (partnerId << 16);
+        packetData = &gSTWIStatus->txPacket[1];
+        packetData[0] = ids;
+        packetData[1] = bmRecoverySlot;
         STWI_start_Command();
     }
 }
@@ -566,7 +565,7 @@ static u16 STWI_init(u8 request)
         // Can't send if clock slave
         gSTWIStatus->error = ERR_REQ_CMD_CLOCK_SLAVE;
         if (gSTWIStatus->callbackM != NULL)
-            gSTWIStatus->callbackM(request, gSTWIStatus->error, gSTWIStatus);
+            gSTWIStatus->callbackM(request, gSTWIStatus->error);
         return TRUE;
     }
     else
@@ -594,10 +593,8 @@ static s32 STWI_start_Command(void)
 {
     u16 imeTemp;
 
-    // equivalent to gSTWIStatus->txPacket->rfuPacket32.command,
-    // but the cast here is required to avoid register issue
-    *(u32 *)gSTWIStatus->txPacket->rfuPacket8.data = 0x99660000 | (gSTWIStatus->reqLength << 8) | gSTWIStatus->reqActiveCommand;
-    REG_SIODATA32 = gSTWIStatus->txPacket->rfuPacket32.command;
+    gSTWIStatus->txPacket[0] = 0x99660000 | (gSTWIStatus->reqLength << 8) | gSTWIStatus->reqActiveCommand;
+    REG_SIODATA32 = gSTWIStatus->txPacket[0];
     gSTWIStatus->state = 0; // master send req
     gSTWIStatus->reqNext = 1;
     imeTemp = REG_IME;
