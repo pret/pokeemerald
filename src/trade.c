@@ -2615,14 +2615,13 @@ int CanSpinTradeMon(struct Pokemon *mon, u16 monIdx)
         struct LinkPlayer *player = &gLinkPlayers[i];
 
         // Does player not have National Dex
-        do
-        {
-            if (!(player->progressFlags & 0xF))
-                canTradeAnyMon = FALSE;
+        if (player->progressFlags & 0xF)
+            canTradeAnyMon &= TRUE;
+        else
+            canTradeAnyMon = FALSE;
 
-            if (versions && (player->progressFlags / 16))
-                canTradeAnyMon = FALSE;
-        } while (0);
+        if (versions && (player->progressFlags >> 4))
+            canTradeAnyMon = FALSE;
     }
 
     if (canTradeAnyMon == FALSE)
