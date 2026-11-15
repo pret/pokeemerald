@@ -37,6 +37,19 @@ static void AnimShockWaveProgressingBolt(struct Sprite *);
 static bool8 CreateShockWaveLightningSprite(struct Task *task, u8 taskId);
 static void AnimShockWaveLightning(struct Sprite *sprite);
 
+// Directions for shaking up/down or left/right in AnimTask_ShakeTargetInPattern
+// Only first 10 values are ever accessed.
+// First pattern results in larger shakes, second results in faster oscillation
+static const s8 sShakeDirsPattern0[16] =
+{
+    -1, -1, 0, 1, 1, 0, 0, -1, -1, 1, 1, 0, 0, -1, 0, 1,
+};
+
+static const s8 sShakeDirsPattern1[16] =
+{
+    -1, 0, 1, 0, -1, 1, 0, -1, 0, 1, 0, -1, 0, 1, 0, 1,
+};
+
 static const union AnimCmd sAnim_Lightning[] =
 {
     ANIMCMD_FRAME(0, 5),
@@ -455,6 +468,48 @@ const struct SpriteTemplate gShockWaveProgressingBoltSpriteTemplate =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimShockWaveProgressingBolt,
 };
+
+
+#define tShakeNum    data[0]
+#define tMaxShakes   data[1]
+#define tShakeOffset data[2] // Never read, gBattleAnimArgs[1] is used directly instead
+#define tVertical    data[3]
+#define tPatternId   data[4]
+
+// Shakes target horizontally or vertically tMaxShakes times, following a set pattern of alternations
+void AnimTask_ShakeTargetInPattern(u8 taskId)
+{
+    s8 dir;
+    u8 spriteId;
+
+    if (gTasks[taskId].tShakeNum == 0)
+    {
+        gTasks[taskId].tMaxShakes = gBattleAnimArgs[0];
+        gTasks[taskId].tShakeOffset = gBattleAnimArgs[1];
+        gTasks[taskId].tVertical = gBattleAnimArgs[2];
+        gTasks[taskId].tPatternId = gBattleAnimArgs[3];
+    }
+    gTasks[taskId].tShakeNum++;
+
+    spriteId = gBattlerSpriteIds[gBattleAnimTarget];
+
+    if (gTasks[taskId].tPatternId == 0)
+        dir = sShakeDirsPattern0[gTasks[taskId].tShakeNum % 10];
+    else
+        dir = sShakeDirsPattern1[gTasks[taskId].tShakeNum % 10];
+
+    if (gTasks[taskId].tVertical == TRUE)
+        gSprites[spriteId].y2 = abs(gBattleAnimArgs[1] * dir);
+    else
+        gSprites[spriteId].x2 = gBattleAnimArgs[1] * dir;
+
+    if (gTasks[taskId].tShakeNum == gTasks[taskId].tMaxShakes)
+    {
+        gSprites[spriteId].x2 = 0;
+        gSprites[spriteId].y2 = 0;
+        DestroyAnimVisualTask(taskId);
+    }
+}
 
 static void AnimLightning(struct Sprite *sprite)
 {
