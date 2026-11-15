@@ -2,6 +2,7 @@
 #define GUARD_GBA_TYPES_H
 
 #include <stdint.h>
+#include "gba/defines.h"
 
 typedef uint8_t   u8;
 typedef uint16_t u16;
@@ -69,7 +70,7 @@ struct OamData
              u16 priority:2;    // 0x400, 0x800 -> 0xC00
              u16 paletteNum:4;
     /*0x06*/ u16 affineParam;
-};
+} ALIGNED(4); // Modern compilers will use wrong align-of sometimes.
 
 #define ST_OAM_HFLIP     0x08
 #define ST_OAM_VFLIP     0x10
