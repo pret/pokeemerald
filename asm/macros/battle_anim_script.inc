@@ -524,9 +524,58 @@
 	createsprite gFistFootSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \duration, \initPosition, 1
 	.endm
 
+	@ battle_anim_electric
+	.macro create_electricity_sprite anim_battler:req, subpriority_offset:req, x:req, y:req, duration:req, tile_offset:req
+	createsprite gElectricitySpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \duration, \tile_offset
+	.endm
+
 	.macro create_electric_puff_sprite anim_battler:req, subpriority_offset:req, relative_to:req, x:req, y:req
 	createsprite gElectricPuffSpriteTemplate, \anim_battler, \subpriority_offset, \relative_to, \x, \y
 	.endm
+
+	.macro create_growing_charge_orb_sprite anim_battler:req, subpriority_offset:req, relative_to:req
+	createsprite gGrowingChargeOrbSpriteTemplate, \anim_battler, \subpriority_offset, \relative_to
+	.endm
+
+	.macro create_growing_shock_wave_orb_sprite anim_battler:req, subpriority_offset:req
+	createsprite gGrowingShockWaveOrbSpriteTemplate, \anim_battler, \subpriority_offset
+	.endm
+
+	.macro create_lightning_sprite anim_battler:req, subpriority_offset:req, x:req, y:req
+	createsprite gLightningSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y
+	.endm
+
+	.macro create_spark_electricity_sprite anim_battler:req, subpriority_offset:req, sine1:req, wave_amplitude:req, sine2:req, duration:req, relative_to:req, useAltCoords=TRUE, priority:req
+	createsprite gSparkElectricitySpriteTemplate, \anim_battler, \subpriority_offset, \sine1, \wave_amplitude, \sine2, \duration, \relative_to, \useAltCoords, \priority
+	.endm
+
+	.macro create_spark_electricity_flashing_sprite anim_battler:req, subpriority_offset:req, x:req, y:req, wave_amplitude:req, duration:req, wave_offset:req, wave_period:req, tile_offset:req, unk7:req
+	createsprite gSparkElectricityFlashingSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \wave_amplitude, \duration, \wave_offset, \wave_period, \tile_offset, \unk7
+	.endm
+
+	.macro create_thunderbolt_orb_sprite anim_battler:req, subpriority_offset:req, duration:req, x:req, y:req, visibility_duration:req
+	createsprite gThunderboltOrbSpriteTemplate, \anim_battler, \subpriority_offset, \duration, \x, \y, \visibility_duration
+	.endm
+
+	.macro create_thunder_wave_sprite anim_battler:req, subpriority_offset:req, x:req, y:req
+	createsprite gThunderWaveSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y
+	.endm
+
+	.macro create_volt_tackle_orb_slide_sprite anim_battler:req, subpriority_offset:req
+	createsprite gVoltTackleOrbSlideSpriteTemplate, \anim_battler, \subpriority_offset
+	.endm
+
+	.macro create_zap_cannon_ball_sprite anim_battler:req, subpriority_offset:req, initial_x:req, initial_y:req, target_x:req, target_y:req, duration:req, location:req
+	createsprite gZapCannonBallSpriteTemplate, \anim_battler, \subpriority_offset, \initial_x, \initial_y, \target_x, \target_y, \duration, \location
+	.endm
+
+	.macro create_zap_cannon_spark_sprite anim_battler:req, subpriority_offset:req, x:req, y:req, wave_amplitude:req, duration:req, wave_offset:req, wave_period:req, tile_offset:req
+	createsprite gZapCannonSparkSpriteTemplate, \anim_battler, \subpriority_offset, \x, \y, \wave_amplitude, \duration, \wave_offset, \wave_period, \tile_offset
+	.endm
+
+	@.macro create_sprite anim_battler:req, subpriority_offset:req
+	@createsprite gSpriteTemplate, \anim_battler, \subpriority_offset
+	@.endm
 
 @ createvisualtask wrappers
 @ The arguments are based on the CMD_ARGS of the task.
@@ -594,4 +643,29 @@
 
 	.macro create_surf_wave priority=2, palette:req
 	createvisualtask AnimTask_CreateSurfWave, \priority, \palette
+	.endm
+
+	@ battle_anim_electric
+	.macro electric_bolt priority=5, x:req, y:req, big_bolt:req
+	createvisualtask AnimTask_ElectricBolt, \priority, \x, \y, \big_bolt
+	.endm
+
+	.macro electric_charging_particles priority=2, relative_to:req, amount:req, duration:req, compaction:req
+	createvisualtask AnimTask_ElectricChargingParticles, \priority, \relative_to, \amount, \duration, \compaction
+	.endm
+
+	.macro shock_wave_lightning priority=5
+	createvisualtask AnimTask_ShockWaveLightning, \priority
+	.endm
+
+	.macro shock_wave_progressing_bolt priority=5
+	createvisualtask AnimTask_ShockWaveProgressingBolt, \priority
+	.endm
+
+	.macro volt_tackle_attacker_reappear priority=5
+	createvisualtask AnimTask_VoltTackleAttackerReappear, \priority
+	.endm
+
+	.macro volt_tackle_bolt priority=5, y:req
+	createvisualtask AnimTask_VoltTackleBolt, \priority, \y
 	.endm
