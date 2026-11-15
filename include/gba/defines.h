@@ -85,6 +85,9 @@
 #define TILE_SIZE_4BPP TILE_SIZE(4) // 32
 #define TILE_SIZE_8BPP TILE_SIZE(8) // 64
 
+#define SCREEN_WIDTH 32
+#define SCREEN_HEIGHT 32
+
 #define TILE_OFFSET_4BPP(n) ((n) * TILE_SIZE_4BPP)
 #define TILE_OFFSET_8BPP(n) ((n) * TILE_SIZE_8BPP)
 
