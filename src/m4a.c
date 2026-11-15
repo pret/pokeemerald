@@ -77,8 +77,8 @@ void m4aSoundInit(void)
     MPlayExtender(gCgbChans);
     m4aSoundMode(SOUND_MODE_DA_BIT_8
                | SOUND_MODE_FREQ_13379
-               | (12 << SOUND_MODE_MASVOL_SHIFT)
-               | (5 << SOUND_MODE_MAXCHN_SHIFT));
+               | (CHANNEL_MASTER_VOLUME << SOUND_MODE_MASVOL_SHIFT)
+               | (NUM_DIRECTSOUND_CHANNELS << SOUND_MODE_MAXCHN_SHIFT));
 
     for (i = 0; i < NUM_MUSIC_PLAYERS; i++)
     {
