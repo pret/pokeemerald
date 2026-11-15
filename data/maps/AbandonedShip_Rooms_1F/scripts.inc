@@ -1,5 +1,5 @@
 AbandonedShip_Rooms_1F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 AbandonedShip_Rooms_1F_EventScript_Gentleman::
 	msgbox AbandonedShip_Rooms_1F_Text_TakingALookAround, MSGBOX_NPC

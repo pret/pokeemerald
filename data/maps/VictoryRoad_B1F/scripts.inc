@@ -1,5 +1,5 @@
 VictoryRoad_B1F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 VictoryRoad_B1F_EventScript_Samuel::
 	trainerbattle_single TRAINER_SAMUEL, VictoryRoad_B1F_Text_SamuelIntro, VictoryRoad_B1F_Text_SamuelDefeat

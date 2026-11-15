@@ -1,3 +1,3 @@
 SeafloorCavern_Room8_MapScripts::
-	.byte 0
+	end_map_scripts
 

@@ -1,5 +1,5 @@
 LilycoveCity_DepartmentStore_4F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 LilycoveCity_DepartmentStore_4F_EventScript_Gentleman::
 	msgbox LilycoveCity_DepartmentStore_4F_Text_AttackOrDefenseTM, MSGBOX_NPC

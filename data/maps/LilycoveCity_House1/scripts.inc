@@ -1,5 +1,5 @@
 LilycoveCity_House1_MapScripts::
-	.byte 0
+	end_map_scripts
 
 LilycoveCity_House1_EventScript_ExpertM::
 	msgbox LilycoveCity_House1_Text_PokemonPartnersNotTools, MSGBOX_NPC

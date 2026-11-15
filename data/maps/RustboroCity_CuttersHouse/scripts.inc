@@ -1,5 +1,5 @@
 RustboroCity_CuttersHouse_MapScripts::
-	.byte 0
+	end_map_scripts
 
 RustboroCity_CuttersHouse_EventScript_Cutter::
 	lock

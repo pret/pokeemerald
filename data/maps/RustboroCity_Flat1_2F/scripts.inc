@@ -1,5 +1,5 @@
 RustboroCity_Flat1_2F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 RustboroCity_Flat1_2F_EventScript_WaldasDad::
 	lock

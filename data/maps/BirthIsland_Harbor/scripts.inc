@@ -1,5 +1,5 @@
 BirthIsland_Harbor_MapScripts::
-	.byte 0
+	end_map_scripts
 
 BirthIsland_Harbor_EventScript_Sailor::
 	lock

@@ -1,6 +1,6 @@
 OldaleTown_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, OldaleTown_OnTransition
-	.byte 0
+	end_map_scripts
 
 OldaleTown_OnTransition:
 	call Common_EventScript_SetupRivalGfxId

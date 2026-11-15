@@ -1,5 +1,5 @@
 SootopolisCity_House7_MapScripts::
-	.byte 0
+	end_map_scripts
 
 SootopolisCity_House7_EventScript_OldMan::
 	msgbox SootopolisCity_House7_Text_CityFromEruptedVolcano, MSGBOX_NPC
