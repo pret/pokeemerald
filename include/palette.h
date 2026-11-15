@@ -35,20 +35,20 @@ enum
 struct PaletteFadeControl
 {
     u32 multipurpose1;
-    u8 delayCounter:6;
+    u16 delayCounter:6;
     u16 y:5; // blend coefficient
     u16 targetY:5; // target blend coefficient
     u16 blendColor:15;
     bool16 active:1;
-    u16 multipurpose2:6;
-    bool16 yDec:1; // whether blend coefficient is decreasing
-    bool16 bufferTransferDisabled:1;
-    u16 mode:2;
-    bool16 shouldResetBlendRegisters:1;
-    bool16 hardwareFadeFinishing:1;
-    u16 softwareFadeFinishingCounter:5;
-    bool16 softwareFadeFinishing:1;
-    bool16 objPaletteToggle:1;
+    u8 multipurpose2:6;
+    bool8 yDec:1; // whether blend coefficient is decreasing
+    bool8 bufferTransferDisabled:1;
+    u8 mode:2;
+    bool8 shouldResetBlendRegisters:1;
+    bool8 hardwareFadeFinishing:1;
+    u8 softwareFadeFinishingCounter:5;
+    bool8 softwareFadeFinishing:1;
+    bool8 objPaletteToggle:1;
     u8 deltaY:4; // rate of change of blend coefficient
 };
 
@@ -58,7 +58,7 @@ extern u8 ALIGNED(4) gPaletteDecompressionBuffer[];
 extern u16 ALIGNED(4) gPlttBufferUnfaded[PLTT_BUFFER_SIZE];
 extern u16 ALIGNED(4) gPlttBufferFaded[PLTT_BUFFER_SIZE];
 
-void LoadCompressedPalette(const u32 *src, u16 offset, u16 size);
+void LoadCompressedPalette(const void *src, u16 offset, u16 size);
 void LoadPalette(const void *src, u16 offset, u16 size);
 void FillPalette(u16 value, u16 offset, u16 size);
 void TransferPlttBuffer(void);
