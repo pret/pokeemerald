@@ -45,3 +45,8 @@ prefabs.json
 /pokeemerald-*.png
 /pokeemerald_modern-*.png
 .porydaw/
+
+# Emerald Island: never commit saves or patched builds
+*.sav
+*.srm
+*.bps
