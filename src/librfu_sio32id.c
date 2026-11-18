@@ -11,7 +11,7 @@ struct RfuSIO32Id
     u16 count;
     u16 send_id;
     u16 recv_id;
-    u16 unk8; // unused
+    u16 reserved; // unused
     u16 lastId;
 };
 
@@ -20,11 +20,11 @@ COMMON_DATA struct RfuSIO32Id gRfuSIO32Id = {0};
 static const u16 Sio32ConnectionData[] = { 0x494e, 0x544e, 0x4e45, 0x4f44 }; // NINTENDO
 static const char Sio32IDLib_Var[] = "Sio32ID_030820";
 
-s32 AgbRFU_checkID(u8 maxTries)
+u32 AgbRFU_checkID(u8 maxTries)
 {
     u16 ieBak;
     vu16 *regTMCNTL;
-    s32 id;
+    u32 id;
 
     // Interrupts must be enabled
     if (REG_IME == 0)
@@ -59,7 +59,7 @@ s32 AgbRFU_checkID(u8 maxTries)
 static void Sio32IDInit(void)
 {
     REG_IME = 0;
-    REG_IE &= ~((8 << gSTWIStatus->timerSelect) | INTR_FLAG_SERIAL);
+    REG_IE &= ~((INTR_FLAG_TIMER0 << gSTWIStatus->timerSelect) | INTR_FLAG_SERIAL);
     REG_IME = 1;
     REG_RCNT = 0;
     REG_SIOCNT = SIO_32BIT_MODE;
@@ -123,22 +123,22 @@ static void Sio32IDIntr(void)
 {
     u32 regSIODATA32;
     u16 delay;
-    u32 rfuSIO32IdUnk0_times_16;
+    u32 receivedHalfword;
 
     regSIODATA32 = REG_SIODATA32;
     if (gRfuSIO32Id.MS_mode != AGB_CLK_MASTER)
         REG_SIOCNT |= SIO_ENABLE;
-    rfuSIO32IdUnk0_times_16 = (regSIODATA32 << (16 * gRfuSIO32Id.MS_mode)) >> 16;
+    receivedHalfword = (regSIODATA32 << (16 * gRfuSIO32Id.MS_mode)) >> 16;
     regSIODATA32 = (regSIODATA32 << 16 * (1 - gRfuSIO32Id.MS_mode)) >> 16;
     if (gRfuSIO32Id.lastId == 0)
     {
-        u16 backup = rfuSIO32IdUnk0_times_16;
-        if (backup == gRfuSIO32Id.recv_id)
+        u16 receivedId = receivedHalfword;
+        if (receivedId == gRfuSIO32Id.recv_id)
         {
             if (gRfuSIO32Id.count < 4)
             {
-                backup = (u16)~gRfuSIO32Id.send_id;
-                if (gRfuSIO32Id.recv_id == backup)
+                u16 complementedSendId = (u16)~gRfuSIO32Id.send_id;
+                if (gRfuSIO32Id.recv_id == complementedSendId)
                 {
                     if (regSIODATA32 == (u16)~gRfuSIO32Id.recv_id)
                         ++gRfuSIO32Id.count;
