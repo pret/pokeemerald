@@ -5,6 +5,9 @@ on:
     branches: [ master ]
   pull_request:
 
+# Emerald Island changes the ROM, so the main job builds without the
+# rom.sha1 check (COMPARE=0). It never uploads the ROM (CONTRIBUTING.md R1).
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,20 +16,13 @@ jobs:
       GAME_REVISION: 0
       GAME_LANGUAGE: ENGLISH
       MODERN: 0
-      COMPARE: 1
+      COMPARE: 0
     steps:
       - name: Checkout
-        uses: actions/checkout@master
-
-      - name: Checkout syms
-        if: ${{ github.event_name == 'push' }}
-        uses: actions/checkout@master
-        with:
-          path: symbols
-          ref: symbols
+        uses: actions/checkout@v4
 
       - name: Checkout agbcc
-        uses: actions/checkout@master
+        uses: actions/checkout@v4
         with:
           path: agbcc
           repository: pret/agbcc
@@ -37,7 +33,6 @@ jobs:
           sudo apt install gcc-arm-none-eabi binutils-arm-none-eabi libpng-dev
         # build-essential and git are already installed
         # gcc-arm-none-eabi is only needed for the modern build
-        # as an alternative to dkP
 
       - name: Install agbcc
         run: |
@@ -45,26 +40,55 @@ jobs:
           ./install.sh ../
         working-directory: agbcc
 
-      - name: Compare
-        run: make -j${nproc} all syms
+      - name: Build (agbcc)
+        run: make -j$(nproc) all syms
 
-      - name: Modern
+      - name: Build (modern)
         env:
           MODERN: 1
-          COMPARE: 0
-        run: make -j${nproc} all
+        run: make -j$(nproc) all
 
-      - name: Move symfiles
-        if: ${{ github.event_name == 'push' }}
-        run: |
-          cp -v *.sym symbols/
-          echo "SYMBOLS_COMMIT_MSG=$( git log --format=%s ${GITHUB_SHA} )" >> $GITHUB_ENV
+  # Reports whether the build still matches vanilla Emerald (rom.sha1).
+  # Informational only: it is expected to fail once gameplay changes, and
+  # it does not block merging. Remove this job after the first gameplay PR.
+  vanilla-match:
+    runs-on: ubuntu-latest
+    env:
+      GAME_VERSION: EMERALD
+      GAME_REVISION: 0
+      GAME_LANGUAGE: ENGLISH
+      MODERN: 0
+      COMPARE: 1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Update symfiles
-        if: ${{ github.event_name == 'push' }}
-        uses: EndBug/add-and-commit@v7
+      - name: Checkout agbcc
+        uses: actions/checkout@v4
         with:
-          branch: symbols
-          cwd: "./symbols"
-          add: "*.sym"
-          message: ${{ env.SYMBOLS_COMMIT_MSG }}
+          path: agbcc
+          repository: pret/agbcc
+
+      - name: Install binutils
+        run: |
+          sudo apt update
+          sudo apt install binutils-arm-none-eabi libpng-dev
+
+      - name: Install agbcc
+        run: |
+          ./build.sh
+          ./install.sh ../
+        working-directory: agbcc
+
+      - name: Compare against rom.sha1
+        id: compare
+        continue-on-error: true
+        run: make -j$(nproc) compare
+
+      - name: Report result
+        run: |
+          if [ "${{ steps.compare.outcome }}" = "success" ]; then
+            echo "::notice::Build still matches vanilla Emerald (rom.sha1)."
+          else
+            echo "::warning::Build no longer matches vanilla Emerald. Expected once gameplay changes; remove this job then."
+          fi
