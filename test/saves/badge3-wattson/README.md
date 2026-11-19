@@ -17,22 +17,22 @@ Put the save here as **`badge3-wattson.sav`**.
 
 Fill this in when adding the save. #11's data check compares against it.
 
-- Emulator and version:
-- Map where saved:
-- Player name:
-- Gender:
-- Trainer ID:
+- Emulator and version: mGBA 0.10.2
+- Map where saved: ROUTE 109
+- Player name: ISLAND
+- Gender: Male
+- Trainer ID: 24099
 - Badges: Stone, Knuckle, Dynamo
-- Money:
-- Play time (hh:mm):
-- Pokédex seen / owned:
+- Money: 23,490
+- Play time (hh:mm): 01:55
+- Pokédex seen / owned: 42 / 3
 - Party:
 
   | Slot | Species | Nickname | Level |
   |---|---|---|---|
-  | 1 | | | |
-  | 2 | | | |
-  | 3 | | | |
+  | 1 | Combusken | COMBUSKEN | 25 |
+  | 2 | Togetic | TOGETIC | 25 |
+  | 3 | Mightyena | MIGHTYENA | 25 |
   | 4 | | | |
   | 5 | | | |
   | 6 | | | |
