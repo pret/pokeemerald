@@ -50,3 +50,5 @@ prefabs.json
 *.sav
 *.srm
 *.bps
+# Committed test saves (own play only, never cartridge dumps; see CONTRIBUTING.md R1)
+!test/saves/**/*.sav
