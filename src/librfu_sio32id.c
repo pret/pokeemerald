@@ -1,8 +1,8 @@
-#include "librfu.h"
+#include "librfu_stwi_private.h"
 
-static void Sio32IDIntr(void);
-static void Sio32IDInit(void);
-static s32 Sio32IDMain(void);
+void Sio32IDIntr(void);
+void Sio32IDInit(void);
+s32 Sio32IDMain(void);
 
 struct RfuSIO32Id
 {
@@ -11,7 +11,7 @@ struct RfuSIO32Id
     u16 count;
     u16 send_id;
     u16 recv_id;
-    u16 unk8; // unused
+    u16 reserved; // unused
     u16 lastId;
 };
 
@@ -20,25 +20,25 @@ COMMON_DATA struct RfuSIO32Id gRfuSIO32Id = {0};
 static const u16 Sio32ConnectionData[] = { 0x494e, 0x544e, 0x4e45, 0x4f44 }; // NINTENDO
 static const char Sio32IDLib_Var[] = "Sio32ID_030820";
 
-s32 AgbRFU_checkID(u8 maxTries)
+u32 AgbRFU_checkID(u8 maxTries)
 {
     u16 ieBak;
     vu16 *regTMCNTL;
-    s32 id;
+    u32 id;
 
     // Interrupts must be enabled
     if (REG_IME == 0)
         return -1;
     ieBak = REG_IE;
-    gSTWIStatus->state = 10;
+    gSTWIStatus->state = ID_CHECK;
     STWI_set_Callback_ID(Sio32IDIntr);
     Sio32IDInit();
     regTMCNTL = &REG_TMCNT_L(gSTWIStatus->timerSelect);
     maxTries *= 8;
-    while (--maxTries != 0xFF)
+    while (maxTries--)
     {
         id = Sio32IDMain();
-        if (id != 0)
+        if (id)
             break;
         regTMCNTL[1] = 0;
         regTMCNTL[0] = 0;
@@ -51,15 +51,15 @@ s32 AgbRFU_checkID(u8 maxTries)
     REG_IME = 0;
     REG_IE = ieBak;
     REG_IME = 1;
-    gSTWIStatus->state = 0;
+    gSTWIStatus->state = M_TxREQ;
     STWI_set_Callback_ID(NULL);
     return id;
 }
 
-static void Sio32IDInit(void)
+void Sio32IDInit(void)
 {
     REG_IME = 0;
-    REG_IE &= ~((8 << gSTWIStatus->timerSelect) | INTR_FLAG_SERIAL);
+    REG_IE &= ~((INTR_FLAG_TIMER0 << gSTWIStatus->timerSelect) | INTR_FLAG_SERIAL);
     REG_IME = 1;
     REG_RCNT = 0;
     REG_SIOCNT = SIO_32BIT_MODE;
@@ -68,7 +68,7 @@ static void Sio32IDInit(void)
     REG_IF = INTR_FLAG_SERIAL;
 }
 
-static s32 Sio32IDMain(void)
+s32 Sio32IDMain(void)
 {
     switch (gRfuSIO32Id.state)
     {
@@ -93,7 +93,7 @@ static s32 Sio32IDMain(void)
                     REG_IME = 1;
                 }
             }
-            else if (gRfuSIO32Id.send_id != RFU_ID && !gRfuSIO32Id.count)
+            else if (gRfuSIO32Id.send_id != RFU_ID && gRfuSIO32Id.count == 0)
             {
                 REG_IME = 0;
                 REG_IE &= ~INTR_FLAG_SERIAL;
@@ -119,29 +119,33 @@ static s32 Sio32IDMain(void)
     return 0;
 }
 
-static void Sio32IDIntr(void)
+void Sio32IDIntr(void)
 {
     u32 regSIODATA32;
-    u16 delay;
-    u32 rfuSIO32IdUnk0_times_16;
+#ifdef UBFIX
+    vu16 delay; // Modern compilers delete the empty delay loop below without volatile
+#else
+    u16 delay; // volatile here would not match
+#endif
+    u32 receivedHalfword;
 
     regSIODATA32 = REG_SIODATA32;
     if (gRfuSIO32Id.MS_mode != AGB_CLK_MASTER)
         REG_SIOCNT |= SIO_ENABLE;
-    rfuSIO32IdUnk0_times_16 = (regSIODATA32 << (16 * gRfuSIO32Id.MS_mode)) >> 16;
+    receivedHalfword = (regSIODATA32 << (16 * gRfuSIO32Id.MS_mode)) >> 16;
     regSIODATA32 = (regSIODATA32 << 16 * (1 - gRfuSIO32Id.MS_mode)) >> 16;
     if (gRfuSIO32Id.lastId == 0)
     {
-        u16 backup = rfuSIO32IdUnk0_times_16;
-        if (backup == gRfuSIO32Id.recv_id)
+        u16 receivedId = receivedHalfword;
+        if (receivedId == gRfuSIO32Id.recv_id)
         {
-            if (gRfuSIO32Id.count < 4)
+            if (gRfuSIO32Id.count < ARRAY_COUNT(Sio32ConnectionData))
             {
-                backup = (u16)~gRfuSIO32Id.send_id;
-                if (gRfuSIO32Id.recv_id == backup)
+                u16 complementedSendId = ~gRfuSIO32Id.send_id;
+                if (gRfuSIO32Id.recv_id == complementedSendId)
                 {
                     if (regSIODATA32 == (u16)~gRfuSIO32Id.recv_id)
-                        ++gRfuSIO32Id.count;
+                        gRfuSIO32Id.count++;
                 }
             }
             else
@@ -154,14 +158,14 @@ static void Sio32IDIntr(void)
             gRfuSIO32Id.count = 0;
         }
     }
-    if (gRfuSIO32Id.count < 4)
+    if (gRfuSIO32Id.count < ARRAY_COUNT(Sio32ConnectionData))
         gRfuSIO32Id.send_id = *(gRfuSIO32Id.count + Sio32ConnectionData);
     else
         gRfuSIO32Id.send_id = RFU_ID;
     gRfuSIO32Id.recv_id = ~regSIODATA32;
     REG_SIODATA32 = (gRfuSIO32Id.send_id << 16 * (1 - gRfuSIO32Id.MS_mode))
                   + (gRfuSIO32Id.recv_id << 16 * gRfuSIO32Id.MS_mode);
-    if (gRfuSIO32Id.MS_mode == AGB_CLK_MASTER && (gRfuSIO32Id.count != 0 || regSIODATA32 == 0x494e))
+    if (gRfuSIO32Id.MS_mode == AGB_CLK_MASTER && (gRfuSIO32Id.count != 0 || regSIODATA32 == 0x494e)) // "NI", the start of Sio32ConnectionData
     {
         for (delay = 0; delay < 600; ++delay)
             ;
