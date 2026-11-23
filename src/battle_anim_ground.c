@@ -734,7 +734,7 @@ static void SetBattlersXOffsetForShake(struct Task *task)
 void AnimTask_IsPowerOver99(u8 taskId)
 {
 #ifdef UBFIX
-    gBattleAnimArgs[7] = gAnimMovePower > 99;
+    gBattleAnimArgs[ARG_RET_ID] = gAnimMovePower > 99;
 #else
     gBattleAnimArgs[15] = gAnimMovePower > 99;
 #endif

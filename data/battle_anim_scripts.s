@@ -1,3 +1,4 @@
+#include "config.h"
 #include "constants/battle.h"
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
@@ -2076,7 +2077,7 @@ Move_LOCK_ON:
 	createsprite gLockOnMoveTargetSpriteTemplate, ANIM_ATTACKER, 40, 3
 	createsprite gLockOnMoveTargetSpriteTemplate, ANIM_ATTACKER, 40, 4  @ Also transitions to red target
 	delay 120
-	setarg 7, 0xFFFF  @ Signal target to flash/disappear
+	setarg ARG_RET_ID, ANIM_ARG_END  @ Signal target to flash/disappear
 	waitforvisualfinish
 	end
 
@@ -3318,13 +3319,13 @@ Move_MILK_DRINK:
 Move_MAGNITUDE:
 	createvisualtask AnimTask_IsPowerOver99, 2
 	waitforvisualfinish
-.ifdef UBFIX
-	jumpreteq FALSE, MagnitudeRegular
-	jumpreteq TRUE, MagnitudeIntense
-.else
+#ifdef UBFIX
+	jumpretfalse MagnitudeRegular
+	jumprettrue MagnitudeIntense
+#else
 	jumpargeq 15, FALSE, MagnitudeRegular
 	jumpargeq 15, TRUE, MagnitudeIntense
-.endif
+#endif
 
 MagnitudeEnd:
 	end
@@ -7611,7 +7612,7 @@ Move_MIMIC:
 	delay 15
 	create_mimic_orb_sprite ANIM_TARGET, 2, initial_x=-12, initial_y=24
 	delay 10
-	setarg 7, 0xFFFF
+	setarg ARG_RET_ID, ANIM_ARG_END
 	waitforvisualfinish
 	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_ATTACKER
 	blend_color_cycle priority=2, selector=F_PAL_ATTACKER, delay=0, num_blends=2, initial_blend_y=0, target_blend_y=11, color=RGB_WHITE
@@ -9737,7 +9738,7 @@ Move_MAGICAL_LEAF:
 	create_basic_hitsplat_sprite ANIM_TARGET, 4, x=10, y=4, relative_to=ANIM_TARGET, animation=2
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 8, 1
 	delay 20
-	setarg 7, 0xFFFF
+	setarg ARG_RET_ID, ANIM_ARG_END
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff

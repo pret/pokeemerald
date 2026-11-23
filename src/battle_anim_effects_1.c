@@ -2732,7 +2732,7 @@ static void AnimConstrictBinding_Step1(struct Sprite *sprite)
 {
     u8 UNUSED spriteId;
 
-    if ((u16)gBattleAnimArgs[7] == 0xFFFF)
+    if ((u16)gBattleAnimArgs[ARG_RET_ID] == (u16)ANIM_ARG_END)
     {
         sprite->affineAnimPaused = 0;
         spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
@@ -2809,8 +2809,7 @@ static void AnimTask_DuplicateAndShrinkToPos_Step1(u8 taskId)
 
 static void AnimTask_DuplicateAndShrinkToPos_Step2(u8 taskId)
 {
-    // TODO: gBattleAnimArgs[ARG_RET_ID]?
-    if ((u16)gBattleAnimArgs[7] == 0xFFFF)
+    if ((u16)gBattleAnimArgs[ARG_RET_ID] == (u16)ANIM_ARG_END)
     {
         if (gTasks[taskId].data[0] == 0)
         {
@@ -3615,8 +3614,7 @@ void AnimTask_CycleMagicalLeafPal(u8 taskId)
         break;
     }
 
-    // TODO: gBattleAnimArgs[ARG_RET_ID]?
-    if (gBattleAnimArgs[7] == -1)
+    if (gBattleAnimArgs[ARG_RET_ID] == ANIM_ARG_END)
         DestroyAnimVisualTask(taskId);
 }
 
@@ -4341,8 +4339,7 @@ static void AnimLockOnTarget_Step4(struct Sprite *sprite)
 
 static void AnimLockOnTarget_Step5(struct Sprite *sprite)
 {
-    // TODO: gBattleAnimArgs[ARG_RET_ID]?
-    if ((u16)gBattleAnimArgs[7] == 0xFFFF)
+    if ((u16)gBattleAnimArgs[ARG_RET_ID] == (u16)ANIM_ARG_END)
     {
         sprite->data[1] = 0;
         sprite->data[0] = 0;
@@ -4848,8 +4845,7 @@ static void AnimConversion(struct Sprite *sprite)
         sprite->data[0]++;
     }
 
-    // TODO: gBattleAnimArgs[ARG_RET_ID]?
-    if ((u16)gBattleAnimArgs[7] == 0xFFFF)
+    if ((u16)gBattleAnimArgs[ARG_RET_ID] == (u16)ANIM_ARG_END)
         DestroyAnimSprite(sprite);
 }
 
@@ -4857,8 +4853,7 @@ void AnimTask_ConversionAlphaBlend(u8 taskId)
 {
     if (gTasks[taskId].data[2] == 1)
     {
-        // TODO: gBattleAnimArgs[ARG_RET_ID]?
-        gBattleAnimArgs[7] = 0xFFFF;
+        gBattleAnimArgs[ARG_RET_ID] = ANIM_ARG_END;
         gTasks[taskId].data[2]++;
     }
     else if (gTasks[taskId].data[2] == 2)

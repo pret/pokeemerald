@@ -401,6 +401,7 @@
 
 // Tasks with return values often assign them to gBattleAnimArgs[7].
 #define ARG_RET_ID 7
+#define ANIM_ARG_END (-1) // Signals a running animation effect to finish.
 
 // For createsprite macro to use internally
 #define ANIMSPRITE_IS_TARGET (1 << 7)
