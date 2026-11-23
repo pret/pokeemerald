@@ -160,12 +160,9 @@ enum {
     COLORID_RED,
 };
 
-// Flags for the inputFlags field
-// Field is 16 bits; 3 bits for each player, last bit is unused
-// The first two bits are interchangeable
-// Needlessly complicated system, the inputState field is sufficient by itself
-#define F_INPUT_HIT_A (1 << 0)
-#define F_INPUT_HIT_B (1 << 1)
+// Each player uses three bits in the link packet. The low two encode the
+// impact position (0 for no hit, 1-3 for the entries in sImpactCoords).
+#define INPUT_IMPACT_POS_MASK 0x3
 #define F_INPUT_HIT_SYNC (1 << 2) // Input at same time as another player
 #define INPUT_FLAGS_PER_PLAYER 3
 #define INPUT_FLAG_MASK ((1 << INPUT_FLAGS_PER_PLAYER) - 1)
@@ -193,7 +190,7 @@ struct BerryCrushGame_Player
     u16 numAPresses;
     u16 numSyncedAPresses;
     u16 timePressingA;
-    u8 inputFlags;
+    u8 impactCoordIndex;
     u8 inputState;
 };
 
@@ -288,7 +285,7 @@ struct BerryCrushGame
     u8 taskId;
     u8 textSpeed;
     u8 cmdState;
-    u8 unused; // Never read
+    u8 debugAutoPressMode; // Used by the original debug build to simulate A presses.
     u8 nextCmd;
     u8 afterPalFadeCmd;
     u16 cmdTimer;
@@ -298,7 +295,7 @@ struct BerryCrushGame
     s16 targetAPresses;
     s16 totalAPresses;
     s32 powder;
-    s32 targetDepth;
+    s32 pressesPerPixel; // 24.8 fixed-point
     u8 newDepth;
     bool8 noRoomForPowder:1; // Never read
     bool8 newRecord:1;
@@ -1485,8 +1482,8 @@ static void UpdateInputEffects(struct BerryCrushGame *game, struct BerryCrushGam
 
             gfx->impactSprites[i]->invisible = FALSE;
             gfx->impactSprites[i]->animPaused = FALSE;
-            gfx->impactSprites[i]->x2 = sImpactCoords[(flags % (ARRAY_COUNT(sImpactCoords) + 1)) - 1][0];
-            gfx->impactSprites[i]->y2 = sImpactCoords[(flags % (ARRAY_COUNT(sImpactCoords) + 1)) - 1][1];
+            gfx->impactSprites[i]->x2 = sImpactCoords[(flags & INPUT_IMPACT_POS_MASK) - 1][0];
+            gfx->impactSprites[i]->y2 = sImpactCoords[(flags & INPUT_IMPACT_POS_MASK) - 1][1];
         }
 
         #undef flags
@@ -2394,7 +2391,7 @@ static u32 Cmd_WaitForOthersToPickBerries(struct BerryCrushGame *game, u8 *args)
         }
         game->cmdTimer = 0;
         ResetBlockReceivedFlags();
-        game->targetDepth = MathUtil_Div32(Q_24_8(game->targetAPresses), Q_24_8(32));
+        game->pressesPerPixel = MathUtil_Div32(Q_24_8(game->targetAPresses), Q_24_8(32));
         break;
     case 5:
         ClearDialogWindowAndFrame(0, TRUE);
@@ -2592,9 +2589,9 @@ static void HandlePartnerInput(struct BerryCrushGame *game)
             }
 
             game->players[i].inputTime = game->timer;
-            game->players[i].inputFlags++;
-            if (game->players[i].inputFlags > F_INPUT_HIT_B)
-                game->players[i].inputFlags = 0;
+            game->players[i].impactCoordIndex++;
+            if (game->players[i].impactCoordIndex >= ARRAY_COUNT(sImpactCoords))
+                game->players[i].impactCoordIndex = 0;
         }
         else
         {
@@ -2624,7 +2621,7 @@ static void HandlePartnerInput(struct BerryCrushGame *game)
     {
         temp = (s32)game->totalAPresses;
         temp = Q_24_8(temp);
-        temp = MathUtil_Div32(temp, game->targetDepth);
+        temp = MathUtil_Div32(temp, game->pressesPerPixel);
         temp = Q_24_8_TO_INT(temp);
         game->newDepth = (u8)temp;
         return;
@@ -2649,7 +2646,7 @@ static void UpdateLeaderGameState(struct BerryCrushGame *game)
         if (game->players[i].inputState != INPUT_STATE_NONE)
         {
             numPlayersPressed++;
-            flags = game->players[i].inputFlags + F_INPUT_HIT_A;
+            flags = game->players[i].impactCoordIndex + 1;
             if (game->players[i].inputState & INPUT_STATE_HIT_SYNC)
                 flags |= F_INPUT_HIT_SYNC;
             flags <<= INPUT_FLAGS_PER_PLAYER * i;
@@ -2746,25 +2743,24 @@ static void HandlePlayerInput(struct BerryCrushGame *game)
     {
         // BUG: The wrong field is used twice below
         // As a result, only a sparkleAmount of 0, 1, or 4 is attainable
-        #ifdef BUGFIX
-        #define field sparkleAmount
-        #else
-        #define field sparkleCounter
-        #endif
-
         if (game->sparkleCounter < sSparkleThresholds[game->playerCount - 2][0])
             game->sparkleAmount = 0;
         else if (game->sparkleCounter < sSparkleThresholds[game->playerCount - 2][1])
             game->sparkleAmount = 1;
+#ifdef BUGFIX
         else if (game->sparkleCounter < sSparkleThresholds[game->playerCount - 2][2])
-            game->field = 2;
+            game->sparkleAmount = 2;
         else if (game->sparkleCounter < sSparkleThresholds[game->playerCount - 2][3])
-            game->field = 3;
+            game->sparkleAmount = 3;
+#else
+        else if (game->sparkleCounter < sSparkleThresholds[game->playerCount - 2][2])
+            game->sparkleCounter = 2;
+        else if (game->sparkleCounter < sSparkleThresholds[game->playerCount - 2][3])
+            game->sparkleCounter = 3;
+#endif
         else
             game->sparkleAmount = 4;
         game->sparkleCounter = 0;
-
-        #undef field
     }
     else
     {
@@ -3447,14 +3443,14 @@ static void ResetGame(struct BerryCrushGame *game)
     u8 i = 0;
 
     IncrementGameStat(GAME_STAT_PLAYED_BERRY_CRUSH);
-    game->unused = 0;
+    game->debugAutoPressMode = 0;
     game->cmdTimer = 0;
     game->gameState = STATE_RESET;
     game->playAgainState = 0;
     game->powder = 0;
     game->targetAPresses = 0;
     game->totalAPresses = 0;
-    game->targetDepth = 0;
+    game->pressesPerPixel = 0;
     game->newDepth = 0;
     game->noRoomForPowder = FALSE;
     game->newRecord = FALSE;
@@ -3478,7 +3474,7 @@ static void ResetGame(struct BerryCrushGame *game)
         game->players[i].numAPresses = 0;
         game->players[i].numSyncedAPresses = 0;
         game->players[i].timePressingA = 0;
-        game->players[i].inputFlags = 0;
+        game->players[i].impactCoordIndex = 0;
         game->players[i].inputState = INPUT_STATE_NONE;
     }
 }
