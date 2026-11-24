@@ -114,7 +114,7 @@ void RunScriptImmediately(const u8 *ptr)
     while (RunScriptCommand(&sImmediateScriptContext) == TRUE);
 }
 
-u8 *MapHeaderGetScriptTable(u8 tag)
+static u8 *MapHeaderGetScriptTable(u8 tag)
 {
     const u8 *mapScripts = gMapHeader.mapScripts;
 
@@ -134,14 +134,14 @@ u8 *MapHeaderGetScriptTable(u8 tag)
     }
 }
 
-void MapHeaderRunScriptType(u8 tag)
+static void MapHeaderRunScriptType(u8 tag)
 {
     u8 *ptr = MapHeaderGetScriptTable(tag);
     if (ptr)
         RunScriptImmediately(ptr);
 }
 
-u8 *MapHeaderCheckScriptTable(u8 tag)
+static u8 *MapHeaderCheckScriptTable(u8 tag)
 {
     u8 *ptr = MapHeaderGetScriptTable(tag);
 
@@ -213,7 +213,7 @@ void TryRunOnWarpIntoMapScript(void)
         RunScriptImmediately(ptr);
 }
 
-u32 CalculateRamScriptChecksum(void)
+static u32 CalculateRamScriptChecksum(void)
 {
     return CalcCRC16WithTable((u8 *)(&gSaveBlock1Ptr->ramScript.data), sizeof(gSaveBlock1Ptr->ramScript.data));
 }
@@ -258,11 +258,9 @@ const u8 *GetRamScript(u8 localId, const u8 *script)
         ClearRamScript();
         return script;
     }
-    else
-    {
-        gRamScriptRetAddr = script;
-        return scriptData->script;
-    }
+
+    gRamScriptRetAddr = script;
+    return scriptData->script;
 }
 
 #define NO_OBJECT LOCALID_PLAYER

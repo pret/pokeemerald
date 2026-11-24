@@ -19,6 +19,9 @@
 extern ScrCmdFunc gMysteryEventScriptCmdTable[];
 extern ScrCmdFunc gMysteryEventScriptCmdTableEnd[];
 
+// 0x1 in English FRLG, 0x2 in English RS, 0x4 in German RS
+#define LANGUAGE_MASK 0x1
+
 // 0x1 in FireRed, 0x2 in LeafGreen, 0x80 in Ruby, 0x100 in Sapphire
 #define VERSION_MASK (1 << 9)
 
@@ -27,16 +30,14 @@ extern ScrCmdFunc gMysteryEventScriptCmdTableEnd[];
 #define mStatus data[2]
 #define mValid data[3]
 
-EWRAM_DATA static struct ScriptContext sMysteryEventScriptContext = {0};
+static EWRAM_DATA struct ScriptContext sMysteryEventScriptContext = {0};
 
 static bool32 CheckCompatibility(u16 unk0, u32 unk1, u16 unk2, u32 version)
 {
-    // 0x1 in English FRLG, 0x2 in English RS, 0x4 in German RS
-    if (!(unk0 & 0x1))
+    if (!(unk0 & LANGUAGE_MASK))
         return FALSE;
 
-    // Same as above
-    if (!(unk1 & 0x1))
+    if (!(unk1 & LANGUAGE_MASK))
         return FALSE;
 
     // 0x1 in FRLG, 0x4 in RS
