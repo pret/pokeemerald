@@ -69,8 +69,16 @@
 	.equ	TUNE,	0xc8		@ micro tuning (c_v+??)
 
 	.equ	XCMD,	0xcd		@ extend command  ***lib
+	 .equ	xWAVE,	0x01
+	 .equ	xTYPE,	0x02
+	 .equ	xATTA,	0x04
+	 .equ	xDECA,	0x05
+	 .equ	xSUST,	0x06
+	 .equ	xRELE,	0x07
 	 .equ	xIECV,	0x08		@  imi.echo vol   ***lib
 	 .equ	xIECL,	0x09		@  imi.echo len   ***lib
+	 .equ	xLENG,	0x0A
+	 .equ	xSWEE,	0x0B
 
 	.equ	EOT,	0xce		@ End of Tie
 	.equ	TIE,	0xcf		@

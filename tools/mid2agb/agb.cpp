@@ -330,15 +330,37 @@ void PrintMemAcc(const Event& event)
 
 void PrintExtendedOp(const Event& event)
 {
-    // TODO: support for other extended commands
-
     switch (s_extendedCommand)
     {
+    case 0x01:
+        PrintOp(event.time, "XCMD  ", "xWAVE , %u", event.param2);
+        break;
+    case 0x02:
+        PrintOp(event.time, "XCMD  ", "xTYPE , %u", event.param2);
+        break;
+    case 0x04:
+        PrintOp(event.time, "XCMD  ", "xATTA , %u", event.param2);
+        break;
+    case 0x05:
+        PrintOp(event.time, "XCMD  ", "xDECA , %u", event.param2);
+        break;
+    case 0x06:
+        PrintOp(event.time, "XCMD  ", "xSUST , %u", event.param2);
+        break;
+    case 0x07:
+        PrintOp(event.time, "XCMD  ", "xRELE , %u", event.param2);
+        break;
     case 0x08:
         PrintOp(event.time, "XCMD  ", "xIECV , %u", event.param2);
         break;
     case 0x09:
         PrintOp(event.time, "XCMD  ", "xIECL , %u", event.param2);
+        break;
+    case 0x0A:
+        PrintOp(event.time, "XCMD  ", "xLENG , %u", event.param2);
+        break;
+    case 0x0B:
+        PrintOp(event.time, "XCMD  ", "xSWEE , %u", event.param2);
         break;
     default:
         PrintWait(event.time);
@@ -348,7 +370,14 @@ void PrintExtendedOp(const Event& event)
 
 void PrintControllerOp(const Event& event)
 {
-    switch (event.param1)
+    int param1 = event.param1;
+
+    // Map alternate controller ranges (42-63) down by 30
+    // e.g. CC 63 -> 33 (PRIO)
+    if (param1 >= 42 && param1 < 64)
+        param1 -= 30;
+
+    switch (param1)
     {
     case 0x01:
         PrintOp(event.time, "MOD   ", "%u", event.param2);
@@ -401,7 +430,22 @@ void PrintControllerOp(const Event& event)
         break;
     case 0x1E:
         s_extendedCommand = event.param2;
-        // TODO: loop op
+        if (event.param2 == 100)
+        {
+            std::fprintf(g_outputFile, "%s_%u_LOOP:\n", g_asmLabel.c_str(), g_agbTrack);
+            PrintWait(event.time);
+            ResetTrackVars();
+        }
+        else if (event.param2 == 101)
+        {
+            PrintByte("GOTO");
+            PrintWord("%s_%u_LOOP", g_asmLabel.c_str(), g_agbTrack);
+            PrintWait(event.time);
+        }
+        else
+        {
+            PrintWait(event.time);
+        }
         break;
     case 0x21:
     case 0x27:
