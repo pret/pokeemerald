@@ -1,5 +1,5 @@
 PacifidlogTown_House1_MapScripts::
-	.byte 0
+	end_map_scripts
 
 PacifidlogTown_House1_EventScript_Man::
 	msgbox PacifidlogTown_House1_Text_RegiStory, MSGBOX_NPC

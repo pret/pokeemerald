@@ -1,5 +1,5 @@
 Route108_MapScripts::
-	.byte 0
+	end_map_scripts
 
 Route108_EventScript_Jerome::
 	trainerbattle_single TRAINER_JEROME, Route108_Text_JeromeIntro, Route108_Text_JeromeDefeated

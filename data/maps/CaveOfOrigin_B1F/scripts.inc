@@ -1,5 +1,5 @@
 CaveOfOrigin_B1F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 CaveOfOrigin_B1F_EventScript_Wallace::
 	lock

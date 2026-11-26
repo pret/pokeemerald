@@ -8,7 +8,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleTowerMultiBattleRoom_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleTowerMultiBattleRoom_OnWarp
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleTowerMultiBattleRoom_OnFrame
-	.byte 0
+	end_map_scripts
 
 BattleFrontier_BattleTowerMultiBattleRoom_OnTransition:
 	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_MULTIS, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_SetObjGfx
@@ -32,7 +32,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_SetLinkPlayerGfx::
 
 BattleFrontier_BattleTowerMultiBattleRoom_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_HidePlayerObj
-	.2byte 0
+	end_map_script_table
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_HidePlayerObj::
 	hideobjectat LOCALID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM
@@ -40,7 +40,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_HidePlayerObj::
 
 BattleFrontier_BattleTowerMultiBattleRoom_OnFrame:
 	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_EnterRoom
-	.2byte 0
+	end_map_script_table
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_EnterRoom::
 	setvar VAR_TEMP_0, 1

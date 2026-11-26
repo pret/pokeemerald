@@ -1,5 +1,5 @@
 LilycoveCity_DepartmentStore_2F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 LilycoveCity_DepartmentStore_2F_EventScript_Cook::
 	msgbox LilycoveCity_DepartmentStore_2F_Text_LearnToUseItemsProperly, MSGBOX_NPC

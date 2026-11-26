@@ -1,5 +1,5 @@
 MossdeepCity_House1_MapScripts::
-	.byte 0
+	end_map_scripts
 
 MossdeepCity_House1_EventScript_BlackBelt::
 	lock

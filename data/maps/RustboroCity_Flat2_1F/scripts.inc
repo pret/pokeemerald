@@ -1,5 +1,5 @@
 RustboroCity_Flat2_1F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 RustboroCity_Flat2_1F_EventScript_OldWoman::
 	msgbox RustboroCity_Flat2_1F_Text_DevonWorkersLiveHere, MSGBOX_NPC

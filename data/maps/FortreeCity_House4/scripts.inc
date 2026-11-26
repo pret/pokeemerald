@@ -1,5 +1,5 @@
 FortreeCity_House4_MapScripts::
-	.byte 0
+	end_map_scripts
 
 FortreeCity_House4_EventScript_Woman::
 	msgbox FortreeCity_House4_Text_BringsWorldCloserTogether, MSGBOX_NPC

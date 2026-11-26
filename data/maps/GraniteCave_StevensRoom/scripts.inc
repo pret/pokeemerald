@@ -1,5 +1,5 @@
 GraniteCave_StevensRoom_MapScripts::
-	.byte 0
+	end_map_scripts
 
 GraniteCave_StevensRoom_EventScript_Steven::
 	lock

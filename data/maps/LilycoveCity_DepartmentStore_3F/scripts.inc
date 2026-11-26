@@ -1,5 +1,5 @@
 LilycoveCity_DepartmentStore_3F_MapScripts::
-	.byte 0
+	end_map_scripts
 
 LilycoveCity_DepartmentStore_3F_EventScript_ClerkLeft::
 	lock
