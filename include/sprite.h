@@ -45,31 +45,35 @@ struct CompressedSpritePalette
     u16 tag;
 };
 
+// All three commands share one 4-byte layout: a halfword followed by a byte
+// of bitfields. Loop and jump commands reuse the duration bits for their
+// count/target and leave the flip bits unused.
 struct AnimFrameCmd
 {
     // If the sprite has an array of images, this is the array index.
     // If the sprite has a sheet, this is the tile offset.
-    u32 imageValue:16;
+    s16 imageValue;
 
-    u32 duration:6;
-    u32 hFlip:1;
-    u32 vFlip:1;
+    u8 duration:6;
+    u8 hFlip:1;
+    u8 vFlip:1;
 };
 
 struct AnimLoopCmd
 {
-    u32 type:16;
-    u32 count:6;
+    s16 type;
+    u8 count:6;
 };
 
 struct AnimJumpCmd
 {
-    u32 type:16;
-    u32 target:6;
+    s16 type;
+    u8 target:6;
 };
 
 // The first halfword of this union specifies the type of command.
-// If it -2, then it is a jump command. If it is -1, then it is the end of the script.
+// If it is -3, then it is a loop command. If it is -2, then it is a jump command.
+// If it is -1, then it is the end of the script.
 // Otherwise, it is the imageValue for a frame command.
 union AnimCmd
 {
