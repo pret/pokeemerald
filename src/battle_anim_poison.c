@@ -114,7 +114,7 @@ const struct SpriteTemplate gSludgeBombHitParticleSpriteTemplate =
     .tileTag = ANIM_TAG_POISON_BUBBLE,
     .paletteTag = ANIM_TAG_POISON_BUBBLE,
     .oam = &gOamData_AffineNormal_ObjNormal_16x16,
-    .anims = &sAnims_PoisonProjectile[2],
+    .anims = &sAnims_PoisonProjectile[ANIM_SLUDGE_BOMB_HIT],
     .images = NULL,
     .affineAnims = sAffineAnims_SludgeBombHit,
     .callback = AnimSludgeBombHitParticle,
@@ -137,7 +137,7 @@ const struct SpriteTemplate gAcidPoisonDropletSpriteTemplate =
     .tileTag = ANIM_TAG_POISON_BUBBLE,
     .paletteTag = ANIM_TAG_POISON_BUBBLE,
     .oam = &gOamData_AffineDouble_ObjNormal_16x16,
-    .anims = &sAnims_PoisonProjectile[1],
+    .anims = &sAnims_PoisonProjectile[ANIM_ACID_DROPLET],
     .images = NULL,
     .affineAnims = gAffineAnims_Droplet,
     .callback = AnimAcidPoisonDroplet,
@@ -180,7 +180,7 @@ const struct SpriteTemplate gWaterBubbleSpriteTemplate =
 static void AnimSludgeProjectile(struct Sprite *sprite)
 {
     if (!gBattleAnimArgs[3])
-        StartSpriteAnim(sprite, 2);
+        StartSpriteAnim(sprite, ANIM_SLUDGE_BOMB_HIT);
 
     InitSpritePosToAnimAttacker(sprite, TRUE);
 
@@ -204,7 +204,7 @@ static void AnimAcidPoisonBubble(struct Sprite *sprite)
 {
     s16 l1, l2;
     if (!gBattleAnimArgs[3])
-        StartSpriteAnim(sprite, 2);
+        StartSpriteAnim(sprite, ANIM_SLUDGE_BOMB_HIT);
 
     InitSpritePosToAnimAttacker(sprite, TRUE);
     SetAverageBattlerPositions(gBattleAnimTarget, TRUE, &l1, &l2);
